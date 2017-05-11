@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <snippet id="header" />
+  <!-- build:css css/index.css -->
+  <link rel="stylesheet" href="css/style.css" />
+  <!--<link rel="stylesheet" href="css/index.css" />-->
+  <!-- endbuild -->
+
+  <title>Light,为金融应用创新而生！</title>
+</head>
+<body>
+  <div id="main">
+    <view id="dashboard"/>
+    <view id="dashboard/container" parent="dashboard" />
+    <view id="dashboard/menu" parent="dashboard/container"/>
+    <view id="dashboard/menu/index" parent="dashboard/menu" home="true"/>
+  </div>
+  <component id="dialog" />
+  <snippet id="footer" />
+  <script type="text/javascript" src="https://res.lightyy.com/lighting/framework/light-1.2.min.js"></script>
+
+  <script type="text/javascript" src="config.js"></script>
+  <!-- build:js js/index.js -->
+  <script src="js/api/api.js"></script>
+  <script src="js/common/common.js"></script>
+  <script src="vue-components.js"></script>
+  <!--<script type="text/javascript" src="js/lib/underscore.js"></script>-->
+  <!-- inject:view -->
+  <!-- endinject -->
+
+  <!-- endbuild -->
+
+  <script type="text/javascript">
+    Light.start();
+  </script>
+</body>
+</html>
