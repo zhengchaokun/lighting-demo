@@ -1,0 +1,40 @@
+<html>
+<head>
+    <meta name="Keywords" content="关键词"/>
+    <meta name="description" content="描述"/>
+    <snippet id="header"/>
+    <meta name="Keywords" content="关键词"/>
+    <meta name="description" content="描述"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <meta name="Keywords" content="关键词"/>
+    <meta name="description" content="描述"/>
+    <title>打新神器</title>
+    <meta name="Keywords" content="关键词"/>
+    <meta name="description" content="描述"/>
+    <meta name="Keywords" content="关键词"/>
+    <meta name="description" content="描述"/>
+</head>
+<body>
+    <div id="main">
+        <!--view -->
+        <!--  <view id="start"  home="true"/> -->
+        <view id="list" home="true"/>
+        <view id="detail"/>
+    </div>
+
+    <!--build:js js/index.js-->
+    <script type="text/javascript" src="js/lib/zepto.js"></script>
+    <script type="text/javascript" src="js/lib/underscore.js"></script>
+    <script type="text/javascript" src="js/lib/backbone.js"></script>
+    <script type="text/javascript" src="js/lib/framework-mvc.js"></script>
+    <script type="text/javascript" src="js/lib/framework-tool.js"></script>
+    <script type="text/javascript" src="js/lib/framework-passport.js"></script>
+    <script type="text/javascript" src="https://light.hscloud.cn/auth.json?callback=App.OpenAPI.callback"></script>
+    <!-- inject:view-->
+    <!--endinject-->
+    <!--endbuild-->
+    <script type="text/javascript">
+        App.start();
+    </script>
+</body>
+</html>

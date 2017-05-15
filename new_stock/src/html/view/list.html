@@ -1,0 +1,179 @@
+<style type="text/css">
+   /* #list{
+    position:relative;
+    animation:mymove 2s;
+    animation-fill-mode:forwards;
+   }
+   @keyframes mymove
+   {
+   from {top:0px;}
+   to {top:-80px;}
+   } */
+    #list .title{
+         
+          padding-left: 3%;
+          background-color: #f0f3f5;
+          height: 40px;
+          line-height: 40px;
+          font-size: 15px;
+          color: #666666;
+
+    }
+    #list .top{
+          padding-left: 10%;
+          border-bottom: 1px solid #d7dfe6;
+          background-color: #ffffff;
+          height: 80px;
+          line-height: 80px;
+          font-size: 15px;
+          font-weight: 100%;
+          color: #666;
+    }
+    #list .content{
+        background-color:#ffffff;
+     border-bottom: 1px solid #d7dfe6;
+    border-top: 1px solid #d7dfe6;     
+    }
+    #list .content .fristLine{
+        height：40px;line-height: 40px;color:#27a4f3;font-size: 15px;padding:0 4%;
+    }
+    #list .content>div:nth-child(even){
+      background-color: #f5f5f5;
+    }
+
+    #list .content .common{
+        line-height: 40px;color:rgb(13, 114, 228);font-size: 15px;padding: 0 4%;
+    }
+    #list .content .common .fristDiv{
+font-size:14px;color:#777777;display:inline-block;width:50%;
+    }
+     #list .content .common .secondDiv{
+font-size:14px;display:inline-block;color:#393939;
+    }
+     .stockCode{
+          transform: scale(1,2);
+          transform:scale(1,2);
+        -ms-transform:scale(1,2);     /* IE 9 */
+        -moz-transform:scale(1,2);    /* Firefox */
+        -webkit-transform:scale(1,2); /* Safari 和 Chrome */
+        -o-transform:scale(1,2);  /* Opera */
+          display: inline-block;
+          float: right;
+          color: rgb(202, 200, 200);
+          font-size: 15px;
+     }
+
+</style>
+
+<div id="list" style="display:none;background-color:#f0f3f5;height:300px;">
+  <div class='top'><img src="images/xin.png" style="height:40px;width:40px;margin-top:20px;" />
+    &nbsp;&nbsp;<span style="position:absolute;font-size: 15px;color:#666666;">打新学堂<span style="color:#b4b4b4;font-size:15px;">(申请流程规划解读)</span></span>
+    <img src="images/app4.png" style="float: right;
+     height: 15px;padding-right: 15px;padding-top:30px;">
+  </div>
+  
+  <div class='title'><img src="images/app7.png" style="height:20px;width:20px;margin-top:10px;">
+    <span style="position:absolute;font-size: 15px;">&nbsp;&nbsp;今日可申购</span><span model-bind="num" style="display:inline-block;position:absolute;font-size: 15px;left:122px;"></span></div>
+    <div class="purchase_today">
+      <div class="content">
+           <div class="fristLine">白云电器</div>
+           <div class="common" >
+               <div class="fristDiv">中签公布日期</div>
+               <div class="secondDiv">2016.03.11</div>
+           </div>
+           <div class="common">
+               <div class="fristDiv">发行价(元)</div>
+               <div class="secondDiv">8.5</div>
+           </div>
+      </div>
+  </div>
+
+
+  <div class='title'><img src="images/app7.png" style="height:20px;width:20px;margin-top:10px;">
+    <span style="position:absolute;font-size: 15px;">&nbsp;&nbsp;正在申购</span><span model-bind="first" style="display:inline-block;position:absolute;font-size: 15px;left:105px;"></span></div>
+  <div class="issueing">
+      <div class="content">
+           <div class="fristLine">白云电器</div>
+           <div class="common" >
+               <div class="fristDiv">中签公布日期</div>
+               <div class="secondDiv">2016.03.11</div>
+           </div>
+           <div class="common">
+               <div class="fristDiv">发行价(元)</div>
+               <div class="secondDiv">8.5</div>
+           </div>
+      </div>
+      <div class="content">
+           <div class="fristLine">白云电器</div>
+           <div class="common" >
+               <div class="fristDiv">中签公布日期</div>
+               <div class="secondDiv">2016.03.11</div>
+           </div>
+           <div class="common">
+               <div class="fristDiv">发行价(元)</div>
+               <div class="secondDiv">8.5</div>
+           </div>
+      </div>
+  </div>
+  <div class='title'><img src="images/app3.png" style="height:20px;width:20px;margin-top:10px;"><span style="position:absolute;font-size: 15px;">&nbsp;&nbsp;即将申购</span>
+   <span model-bind="second" style="display:inline-block;position:absolute;font-size: 15px;left:105px;"></span>
+  </div>
+  <div class="issue">
+      <div class="content">
+           <div class="fristLine">白云电器<span>&nbsp;&nbsp;600535</span><span class="stockCode">></span></div>
+           <div class="common" >
+               <div class="fristDiv">申购价格(元)</div>
+               <div class="secondDiv">18.75</div>
+           </div>
+           <div class="common" >
+               <div class="fristDiv" >发行日期</div>
+               <div class="secondDiv">2016-03-11</div>
+           </div>
+            <div class="common">
+               <div  class="fristDiv">发行中签率</div>
+               <div class="secondDiv">10%</div>
+           </div>
+      </div>
+       <div class="content" style="margin-top:10px;">
+           <div class="fristLine">白云电器</div>
+           <div class="common" >
+               <div class="fristDiv">申购价格(元)</div>
+               <div class="secondDiv">18.75</div>
+           </div>
+           <div class="common" >
+               <div class="fristDiv" >发行日期</div>
+               <div class="secondDiv">2016-03-11</div>
+           </div>
+            <div class="common">
+               <div  class="fristDiv">发行中签率</div>
+               <div class="secondDiv">10%</div>
+           </div>
+      </div>
+</div>
+  
+
+  <div class='title'>
+    <img src="images/app8.png" style="height:20px;width:20px;margin-top:10px;">
+    <span style="position:absolute;font-size: 15px;">&nbsp;&nbsp;最新上市</span>
+     <span model-bind="third" style="display:inline-block;position:absolute;font-size: 15px;left:105px;">
+  </div>
+  <div class="issued">
+      <div class="content">
+           <div class="fristLine">白云电器</div>
+           <div class="common" >
+               <div class="fristDiv">发行价格(元)</div>
+               <div class="secondDiv">18.75</div>
+           </div>
+           <div class="common" >
+               <div class="fristDiv">当前价格(元)</div>
+               <div class="secondDiv">26.27</div>
+           </div>
+            <div class="common">
+               <div class="fristDiv">市盈率</div>
+               <div class="secondDiv">10%</div>
+           </div>
+      </div>
+    </div>
+ 
+  
+</div>
