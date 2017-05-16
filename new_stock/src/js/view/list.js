@@ -1,19 +1,19 @@
 
-/**
- * VIEW list
- * @param  {[type]} $ [description]
- * @return {[type]}   [description]
- */
 ;(function(){
-  App.listView.wrap({
-    beforeRender:function(){
-      //TODO
-      return true;
-    },
-    ready:function(){
-      //TODO
-    },
-    afterUnRender:function(){
-    }
+  App.defineViewModel("#list",{
+       data:{},
+       watch:{},
+       methods:{}
+     },{
+     ready:function(){
+     },
+     beforeRender:function (params) {
+     },
+     afterRender:function (params){
+     },
+     beforeUnRender:function (){
+     },
+     afterUnRender:function (){
+     }
   });
 })();

@@ -1,10 +1,12 @@
 
-App.registView("list",new App.View({
-  el:"#list",
-  model:new App.Model()
-}),true);
+App.registerView({
+    path:"/list",
+    el:"#list",
+    home:true
+});
 
-App.registView("detail",new App.View({
-  el:"#detail",
-  model:new App.Model()
-}),false);
+App.registerView({
+    path:"/detail",
+    el:"#detail",
+    home:false
+});
