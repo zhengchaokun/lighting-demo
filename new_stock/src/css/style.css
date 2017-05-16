@@ -113,3 +113,65 @@ h3,.fsmall{font-size:0.8em;}
 	color: rgb(202, 200, 200);
 	font-size: 15px;
 }
+#detail table tr th{
+	height: 30px;
+	padding:4px 12px;
+	color:#444444;
+	width:50%;
+	font-size: 15px;
+	font-weight:100;
+
+
+}
+#detail table tr th span{
+	font-size: 15px;
+	font-weight:100;
+}
+#detail table tr{
+
+}
+#detail table tr td:nth-child(1){
+
+}
+#detail table tr td{
+	height: 38px;
+	padding:4px 4px;
+	color:#444444;
+	width:50%;
+
+}
+#detail table tr td span{
+
+
+}
+
+
+#detail .title{
+	padding-left: 3%;
+	border-bottom: 1px solid #d7dfe6;
+	border-top: 1px solid #d7dfe6;
+	background-color: #f0f3f5;
+	height: 40px;
+	line-height: 40px;
+	font-size: 15px;
+	color: #666666;
+}
+#detail .content{
+	background-color:#ffffff;
+
+
+}
+#detail .content .fristLine{
+	padding:0 4%;
+	height:40px;line-height: 40px;color:blue;font-size: 15px;
+}
+#detail .content .common{
+	padding-left: 4%;
+	height:40px;line-height: 40px;color:blue;font-size: 15px;
+}
+#detail .content .common .fristDiv{
+	font-size:14px;color:#666666;display:inline-block;width:40%;
+}
+#detail .content .common .secondDiv{
+	font-size:14px;display:inline-block;color:#393939;
+}
