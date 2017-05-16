@@ -8,15 +8,15 @@
         <span style="position:absolute;font-size: 15px;">&nbsp;&nbsp;今日可申购</span><span model-bind="num" style="display:inline-block;position:absolute;font-size: 15px;left:122px;"></span>
     </div>
     <div class="purchase_today">
-        <div class="content" v-for="stock in stocks.not_issued1">
-            <div @click="jump(stock.prod_code)" class="fristLine">{{stock.prod_name}}</div>
+        <div class="content"   @click="stock_detail('purchase_today',stock)" v-for="stock in stocks.purchase_today">
+            <div @click="jump(stock.prod_code)" @click.stop="stock_quote(stock.prod_code)" class="fristLine">{{stock.prod_name}}</div>
             <div class="common">
                 <div class="fristDiv">中签公布日期</div>
-                <div class="secondDiv">2016.03.11</div>
+                <div class="secondDiv">{{stock.prospectus_date.split(' ')[0]}}</div>
             </div>
             <div class="common">
                 <div class="fristDiv">发行价(元)</div>
-                <div class="secondDiv">8.5</div>
+                <div class="secondDiv">{{+stock.issue_price||'--'}}</div>
             </div>
         </div>
     </div>

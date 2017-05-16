@@ -6,6 +6,7 @@
                not_issued:null,
                listed:null,
                issued_not_listed:null,
+               purchase_today:null
            }
        },
        watch:{},
@@ -28,6 +29,9 @@
          });
          API.issued_not_listed().then(function (data) {
              that.model.stocks.issued_not_listed = data.data[0]['10104013'];
+         });
+         API.purchase_today().then(function (data) {
+             that.model.stocks.purchase_today = data.data[0]['10104010'];
          })
      },
      beforeRender:function (params) {

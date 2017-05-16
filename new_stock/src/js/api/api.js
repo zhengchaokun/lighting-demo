@@ -39,6 +39,9 @@
         issued_not_listed:function () {
             return execute("get","info/v2/query/new_share/issued_not_listed")
         },
+        purchase_today:function () {
+            return execute("get","info/v2/query/new_share/purchase_today")
+        },
         real:function (params) {
             return execute("get","quote/v1/real",params)
         },
