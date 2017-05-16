@@ -1,12 +1,15 @@
 ;(function (win) {
     win.API = {
         not_issued:function () {
-            return execute("get","info/v2/query/new_share/not_issued")
+            return execute("get","info/v2/query/new_share/not_issued").then(function (data) {
+                return data.data[0]['10104011'];
+            })
         },
         listed:function () {
             return execute("get","info/v2/query/new_share/listed").then(function (data) {
                 var code = [];
-                data.data[0]['10104012'].forEach(function (stock) {
+                data = data.data[0]['10104012'];
+                data.forEach(function (stock) {
                     var market = stock.secu_market,
                         flag;
                     if (market == '90') {
@@ -21,7 +24,7 @@
                     en_prod_code:code.join(",")
                 }).then(function (real) {
                     var snapshot =  real.data.snapshot;
-                    data.data[0]['10104012'].forEach(function (stock) {
+                    data.forEach(function (stock) {
                         var market = stock.secu_market,
                             flag;
                         if (market == '90') {
@@ -37,10 +40,14 @@
             })
         },
         issued_not_listed:function () {
-            return execute("get","info/v2/query/new_share/issued_not_listed")
+            return execute("get","info/v2/query/new_share/issued_not_listed").then(function (data) {
+                return data.data[0]['10104013'];
+            })
         },
         purchase_today:function () {
-            return execute("get","info/v2/query/new_share/purchase_today")
+            return execute("get","info/v2/query/new_share/purchase_today").then(function (data) {
+                return data.data[0]['10104010'];
+            })
         },
         real:function (params) {
             return execute("get","quote/v1/real",params)

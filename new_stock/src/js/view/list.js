@@ -22,16 +22,16 @@
      ready:function(){
          var that = this;
          API.not_issued().then(function (data) {
-             that.model.stocks.not_issued = data.data[0]['10104011'];
+             that.model.stocks.not_issued = data;
          });
          API.listed().then(function (data) {
-             that.model.stocks.listed = data.data[0]['10104012'];
+             that.model.stocks.listed = data;
          });
          API.issued_not_listed().then(function (data) {
-             that.model.stocks.issued_not_listed = data.data[0]['10104013'];
+             that.model.stocks.issued_not_listed = data;
          });
          API.purchase_today().then(function (data) {
-             that.model.stocks.purchase_today = data.data[0]['10104010'];
+             that.model.stocks.purchase_today = data;
          })
      },
      beforeRender:function (params) {
