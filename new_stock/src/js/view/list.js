@@ -9,7 +9,11 @@
            }
        },
        watch:{},
-       methods:{}
+       methods:{
+           stock_quote:function (code) {
+               location.href="https://minfo.gildata.com/mobileF10View/default_quotation.html?s="+code
+           }
+       }
      },{
      ready:function(){
          var that = this;
