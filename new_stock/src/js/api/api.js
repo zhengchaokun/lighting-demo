@@ -3,6 +3,12 @@
         not_issued:function () {
             return execute("get","not_issued")
         },
+        listed:function () {
+            return execute("get","listed")
+        },
+        issued_not_listed:function () {
+            return execute("get","issued_not_listed")
+        },
         token: new Promise(function (resolve,reject) {
             Light.ajax.JSONP({
                 url:"https://light.hscloud.cn/auth.json",
@@ -24,7 +30,7 @@
                     type:method,
                     url:prefix+func,
                     success:function(data){
-                        console.log(data)
+                        resolve(data)
                     },
                     error:function () {
                         reject();
