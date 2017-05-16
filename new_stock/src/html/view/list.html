@@ -38,6 +38,8 @@
             </div>
         </div>
     </div>
+
+
     <div class='title'><img src="images/app3.png" style="height:20px;width:20px;margin-top:10px;"><span
             style="position:absolute;font-size: 15px;">&nbsp;&nbsp;即将申购</span>
         <span style="display:inline-block;position:absolute;font-size: 15px;left:105px;"></span>
@@ -69,19 +71,19 @@
         <span model-bind="third" style="display:inline-block;position:absolute;font-size: 15px;left:105px;"></span>
     </div>
     <div class="issued">
-        <div class="content">
-            <div class="fristLine">白云电器</div>
+        <div class="content" @click="stock_detail('listed',stock)" v-for="stock in stocks.listed">
+            <div class="fristLine" @click.stop="stock_quote(stock.prod_code)">{{stock.prod_name}}</div>
             <div class="common">
                 <div class="fristDiv">发行价格(元)</div>
-                <div class="secondDiv">18.75</div>
+                <div class="secondDiv">{{+stock.issue_price||'--'}}</div>
             </div>
             <div class="common">
                 <div class="fristDiv">当前价格(元)</div>
-                <div class="secondDiv">26.27</div>
+                <div class="secondDiv">{{+stock.last_price||'--'}}</div>
             </div>
             <div class="common">
                 <div class="fristDiv">市盈率</div>
-                <div class="secondDiv">10%</div>
+                <div class="secondDiv">{{+stock.diluted_pe_ratio||'--'}}</div>
             </div>
         </div>
     </div>

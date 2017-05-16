@@ -1,13 +1,46 @@
 ;(function (win) {
     win.API = {
         not_issued:function () {
-            return execute("get","not_issued")
+            return execute("get","info/v2/query/new_share/not_issued")
         },
         listed:function () {
-            return execute("get","listed")
+            return execute("get","info/v2/query/new_share/listed").then(function (data) {
+                var code = [];
+                data.data[0]['10104012'].forEach(function (stock) {
+                    var market = stock.secu_market,
+                        flag;
+                    if (market == '90') {
+                        flag =  "SZ";
+                    }
+                    else {
+                        flag =  "SS";
+                    }
+                    code.push(stock.prod_code+"."+flag);
+                });
+                return API.real({
+                    en_prod_code:code.join(",")
+                }).then(function (real) {
+                    var snapshot =  real.data.snapshot;
+                    data.data[0]['10104012'].forEach(function (stock) {
+                        var market = stock.secu_market,
+                            flag;
+                        if (market == '90') {
+                            flag =  "SZ";
+                        }
+                        else {
+                            flag =  "SS";
+                        }
+                        stock.last_price = snapshot[stock.prod_code+"."+flag][5];
+                    });
+                    return data;
+                });
+            })
         },
         issued_not_listed:function () {
-            return execute("get","issued_not_listed")
+            return execute("get","info/v2/query/new_share/issued_not_listed")
+        },
+        real:function (params) {
+            return execute("get","quote/v1/real",params)
         },
         token: new Promise(function (resolve,reject) {
             Light.ajax.JSONP({
@@ -20,7 +53,7 @@
         })
     };
 
-    var prefix = "https://open.hscloud.cn/info/v2/query/new_share/";
+    var prefix = "https://open.hscloud.cn/";
     function execute(method,func,params) {
         params = params || {};
         return win.API.token.then(function (token) {
