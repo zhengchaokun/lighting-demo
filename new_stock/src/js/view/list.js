@@ -12,6 +12,9 @@
        methods:{
            stock_quote:function (code) {
                location.href="https://minfo.gildata.com/mobileF10View/default_quotation.html?s="+code
+           },
+           stock_detail:function (type,stock) {
+               location.href="index.html?type=view#/detail?type="+type+"&stock="+stock.prod_code;
            }
        }
      },{

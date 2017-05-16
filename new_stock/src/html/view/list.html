@@ -43,9 +43,9 @@
         <span style="display:inline-block;position:absolute;font-size: 15px;left:105px;"></span>
     </div>
     <div class="issue">
-        <div class="content" v-for="stock in stocks.not_issued">
+        <div class="content" @click="stock_detail('not_issued',stock)" v-for="stock in stocks.not_issued">
             <div class="fristLine">
-                <section @click="stock_quote(stock.prod_code)">{{stock.prod_name}}<span>&nbsp;&nbsp;{{stock.prod_code}}</span></section>
+                <section @click.stop="stock_quote(stock.prod_code)">{{stock.prod_name}}<span>&nbsp;&nbsp;{{stock.prod_code}}</span></section>
                 <span class="stockCode">></span></div>
             <div class="common">
                 <div class="fristDiv">申购价格(元)</div>
