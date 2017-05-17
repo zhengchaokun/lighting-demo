@@ -1,15 +1,17 @@
 <div id="list" style="display:none;background-color:#f0f3f5;height:300px;">
-    <div class='top'><img src="images/xin.png" style="height:40px;width:40px;margin-top:20px;"/>
-        &nbsp;&nbsp;<span style="position:absolute;font-size: 15px;color:#666666;">打新学堂<span style="color:#b4b4b4;font-size:15px;">(申请流程规划解读)</span></span>
-        <img src="images/app4.png" style="float: right;height: 15px;padding-right: 15px;padding-top:30px;">
-    </div>
+    <a href="infor.html">
+        <div class='top'><img src="images/xin.png" style="height:40px;width:40px;margin-top:20px;"/>
+            &nbsp;&nbsp;<span style="position:absolute;font-size: 15px;color:#666666;">打新学堂<span style="color:#b4b4b4;font-size:15px;">(申请流程规划解读)</span></span>
+            <img src="images/app4.png" style="float: right;height: 15px;padding-right: 15px;padding-top:30px;">
+        </div>
+    </a>
 
     <div class='title'><img src="images/app7.png" style="height:20px;width:20px;margin-top:10px;">
         <span style="position:absolute;font-size: 15px;">&nbsp;&nbsp;今日可申购</span><span model-bind="num" style="display:inline-block;position:absolute;font-size: 15px;left:122px;"></span>
     </div>
-    <div class="purchase_today">
+    <div class="purchase_today stock-list">
         <div class="content"   @click="stock_detail('purchase_today',stock)" v-for="stock in stocks.purchase_today">
-            <div @click="jump(stock.prod_code)" @click.stop="stock_quote(stock.prod_code)" class="fristLine">{{stock.prod_name}}</div>
+            <div @click="jump(stock.prod_code)" @click.stop="stock_quote(stock.prod_code)" class="fristLine">{{stock.prod_name}}<span>&nbsp;&nbsp;{{stock.prod_code}}</span></div>
             <div class="common">
                 <div class="fristDiv">中签公布日期</div>
                 <div class="secondDiv">{{stock.prospectus_date.split(' ')[0]}}</div>
@@ -25,9 +27,9 @@
     <div class='title'><img src="images/app7.png" style="height:20px;width:20px;margin-top:10px;">
         <span style="position:absolute;font-size: 15px;">&nbsp;&nbsp;正在申购</span><span model-bind="first" style="display:inline-block;position:absolute;font-size: 15px;left:105px;"></span>
     </div>
-    <div class="issueing">
+    <div class="issueing stock-list">
         <div class="content"  @click="stock_detail('issued_not_listed',stock)" v-for="stock in stocks.issued_not_listed">
-            <div class="fristLine" @click.stop="stock_quote(stock.prod_code)">{{stock.prod_name}}</div>
+            <div class="fristLine" @click.stop="stock_quote(stock.prod_code)">{{stock.prod_name}}<span>&nbsp;&nbsp;{{stock.prod_code}}</span></div>
             <div class="common">
                 <div class="fristDiv">中签公布日期</div>
                 <div class="secondDiv">{{stock.prospectus_date.split(' ')[0]}}</div>
@@ -44,7 +46,7 @@
             style="position:absolute;font-size: 15px;">&nbsp;&nbsp;即将申购</span>
         <span style="display:inline-block;position:absolute;font-size: 15px;left:105px;"></span>
     </div>
-    <div class="issue">
+    <div class="issue stock-list">
         <div class="content" @click="stock_detail('not_issued',stock)" v-for="stock in stocks.not_issued">
             <div class="fristLine">
                 <section @click.stop="stock_quote(stock.prod_code)">{{stock.prod_name}}<span>&nbsp;&nbsp;{{stock.prod_code}}</span></section>
@@ -70,9 +72,9 @@
         <span style="position:absolute;font-size: 15px;">&nbsp;&nbsp;最新上市</span>
         <span model-bind="third" style="display:inline-block;position:absolute;font-size: 15px;left:105px;"></span>
     </div>
-    <div class="issued">
+    <div class="issued stock-list">
         <div class="content" @click="stock_detail('listed',stock)" v-for="stock in stocks.listed">
-            <div class="fristLine" @click.stop="stock_quote(stock.prod_code)">{{stock.prod_name}}</div>
+            <div class="fristLine" @click.stop="stock_quote(stock.prod_code)">{{stock.prod_name}}<span>&nbsp;&nbsp;{{stock.prod_code}}</span></div>
             <div class="common">
                 <div class="fristDiv">发行价格(元)</div>
                 <div class="secondDiv">{{+stock.issue_price||'--'}}</div>

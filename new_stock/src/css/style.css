@@ -175,3 +175,10 @@ h3,.fsmall{font-size:0.8em;}
 #detail .content .common .secondDiv{
 	font-size:14px;display:inline-block;color:#393939;
 }
+
+.stock-list .content{
+	margin-top: 10px;
+}
+.stock-list .content:first-child{
+	margin-top: 0;
+}
