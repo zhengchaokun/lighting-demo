@@ -11,7 +11,8 @@
     </div>
     <div class="purchase_today stock-list">
         <div class="content"   @click="stock_detail('purchase_today',stock)" v-for="stock in stocks.purchase_today">
-            <div @click="jump(stock.prod_code)" @click.stop="stock_quote(stock.prod_code)" class="fristLine">{{stock.prod_name}}<span>&nbsp;&nbsp;{{stock.prod_code}}</span></div>
+            <div @click="jump(stock.prod_code)" @click.stop="stock_quote(stock.prod_code)" class="fristLine">{{stock
+                .prod_name}}<span class="code">{{stock.prod_code}}</span><span class="stockCode">></span></div>
             <div class="common">
                 <div class="fristDiv">中签公布日期</div>
                 <div class="secondDiv">{{stock.prospectus_date.split(' ')[0]}}</div>
@@ -29,7 +30,7 @@
     </div>
     <div class="issueing stock-list">
         <div class="content"  @click="stock_detail('issued_not_listed',stock)" v-for="stock in stocks.issued_not_listed">
-            <div class="fristLine" @click.stop="stock_quote(stock.prod_code)">{{stock.prod_name}}<span>&nbsp;&nbsp;{{stock.prod_code}}</span></div>
+            <div class="fristLine" @click.stop="stock_quote(stock.prod_code)">{{stock.prod_name}}<span><span class="code">{{stock.prod_code}}</span><span class="stockCode">></span></div>
             <div class="common">
                 <div class="fristDiv">中签公布日期</div>
                 <div class="secondDiv">{{stock.prospectus_date.split(' ')[0]}}</div>
@@ -48,9 +49,8 @@
     </div>
     <div class="issue stock-list">
         <div class="content" @click="stock_detail('not_issued',stock)" v-for="stock in stocks.not_issued">
-            <div class="fristLine">
-                <section @click.stop="stock_quote(stock.prod_code)">{{stock.prod_name}}<span>&nbsp;&nbsp;{{stock.prod_code}}</span></section>
-                <span class="stockCode">></span></div>
+            <div class="fristLine" @click.stop="stock_quote(stock.prod_code)">
+                {{stock.prod_name}}<span class="code">{{stock.prod_code}}</span><span class="stockCode">></span>
             <div class="common">
                 <div class="fristDiv">申购价格(元)</div>
                 <div class="secondDiv">{{+stock.issue_price||'--'}}</div>
@@ -74,7 +74,7 @@
     </div>
     <div class="issued stock-list">
         <div class="content" @click="stock_detail('listed',stock)" v-for="stock in stocks.listed">
-            <div class="fristLine" @click.stop="stock_quote(stock.prod_code)">{{stock.prod_name}}<span>&nbsp;&nbsp;{{stock.prod_code}}</span></div>
+            <div class="fristLine" @click.stop="stock_quote(stock.prod_code)">{{stock.prod_name}}<span class="code">{{stock.prod_code}}</span><span class="stockCode">></span></div>
             <div class="common">
                 <div class="fristDiv">发行价格(元)</div>
                 <div class="secondDiv">{{+stock.issue_price||'--'}}</div>

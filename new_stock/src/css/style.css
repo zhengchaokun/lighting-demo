@@ -182,3 +182,7 @@ h3,.fsmall{font-size:0.8em;}
 .stock-list .content:first-child{
 	margin-top: 0;
 }
+
+.fristLine .code{
+	margin-left: 15px;
+}
