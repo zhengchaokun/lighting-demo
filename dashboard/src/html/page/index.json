@@ -1,0 +1,24 @@
+{
+  "name":"首页",
+  "views": [
+    {
+      "id": "dashboard"
+    },
+    {
+      "id": "dashboard/container",
+      "parent": "dashboard"
+    },
+    {
+      "id": "dashboard/menu",
+      "parent": "dashboard/container"
+    },
+    {
+      "id": "dashboard/menu/index",
+      "parent": "dashboard/menu",
+      "home":true
+    }
+  ],
+  "scripts":[
+    "__VIEW_SCRIPTS__"
+  ]
+}

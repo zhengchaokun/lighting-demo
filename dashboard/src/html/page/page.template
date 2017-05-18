@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <snippet id="header" />
+  <!-- build:css css/<%=page.name%>.css -->
+  <%page.styles.forEach(function(style){%>
+  <link rel="stylesheet" href="<%=style%>" />
+  <%})%>
+  <!-- endbuild -->
+
+  <title><%=project.project%>-<%=project.desc%></title>
+</head>
+<body>
+  <div id="main">
+    <%page.views.forEach(function(view){%>
+    <view id="<%=view.id%>" home="<%=view.home||false%>" />
+    <%})%>
+  </div>
+  <snippet id="footer" />
+
+  <!-- build:js js/<%=page.name%>.js -->
+  <%page.scripts.forEach(function(script){%>
+  <%if(script=='__VIEW_SCRIPTS__'){%>
+  <!-- inject:view -->
+  <!-- endinject -->
+  <%}else{%>
+  <script type="text/javascript" src="<%=script%>"></script>
+  <%}})%>
+  <!-- endbuild -->
+
+
+  <script type="text/javascript">
+    Light.start();
+  </script>
+</body>
+</html>
