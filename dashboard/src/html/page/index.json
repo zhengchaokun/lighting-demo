@@ -19,5 +19,8 @@
   ],
   "scripts":[
     "__VIEW_SCRIPTS__"
+  ],
+  "styles":[
+    "css/style.css"
   ]
 }
