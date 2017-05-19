@@ -9,7 +9,7 @@
          * 后端应该根据用户的回话信息获取当前用户的权限内容，返回前台相关的条目
          */
         getMenuItems:function () {
-
+            return execute("","",{})
         }
     };
 

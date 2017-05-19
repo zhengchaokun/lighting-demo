@@ -18,7 +18,8 @@
     }
   ],
   "scripts":[
-    "",
+    "https://res.lightyy.com/lighting/framework/light-1.3.min.js",
+    "js/api/api.js",
     "__VIEW_SCRIPTS__"
   ],
   "styles":[
