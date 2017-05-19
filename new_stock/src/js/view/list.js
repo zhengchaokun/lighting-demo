@@ -11,8 +11,16 @@
        },
        watch:{},
        methods:{
-           stock_quote:function (code) {
-               location.href="https://minfo.gildata.com/mobileF10View/default_quotation.html?s="+code
+           stock_quote:function (stock) {
+               var market = stock.secu_market,
+                   flag;
+               if (market == '90') {
+                   flag =  "SZ";
+               }
+               else {
+                   flag =  "SS";
+               }
+               location.href="https://minfo.gildata.com/mobileF10View/default_quotation.html?s="+stock.prod_code+"."+flag;
            },
            stock_detail:function (type,stock) {
                location.href="index.html?1=1#/detail?type="+type+"&stock="+stock.prod_code;

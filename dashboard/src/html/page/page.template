@@ -16,6 +16,7 @@
     <view id="<%=view.id%>" home="<%=view.home||false%>" />
     <%})%>
   </div>
+  <component id="dialog"/>
   <snippet id="footer" />
 
   <!-- build:js js/<%=page.name%>.js -->
