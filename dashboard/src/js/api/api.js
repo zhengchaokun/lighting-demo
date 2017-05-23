@@ -9,11 +9,11 @@
          * 后端应该根据用户的回话信息获取当前用户的权限内容，返回前台相关的条目
          */
         getMenuItems:function () {
-            return execute("","",{})
+            return execute("get","menu_items.json",{})
         }
     };
 
-    var prefix = "";
+    var prefix = config.api_prefix;
     function execute(method,func,params) {
         params.plateform = "h5";
         return new Promise(function (resolve,reject) {
@@ -35,6 +35,6 @@
     }
 
     Light.on("viewChanged",function () {
-        document.setTitle(Light.currentView.title || '');
+        document.title = Light.currentView.title || config.defaultTitle;
     });
 })(window);

@@ -7,6 +7,9 @@
         methods: {
             init:function(){
                 //init
+            },
+            alert:function (cb) {
+
             }
         }
     });
