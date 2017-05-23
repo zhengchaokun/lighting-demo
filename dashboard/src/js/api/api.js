@@ -3,6 +3,7 @@
         loginInfo:function () {
             return new Promise(function (resolve, reject) {
                 //TODO 如果用户会话存在则resolve，否则reject
+                resolve();
             })
         },
         /**
