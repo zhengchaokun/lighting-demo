@@ -22,6 +22,7 @@
                 type:method,
                 url:prefix+func,
                 success:function(data){
+                    resolve(data)
                 },
                 error:function () {
                     reject();

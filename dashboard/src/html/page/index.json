@@ -25,6 +25,7 @@
     "__VIEW_SCRIPTS__"
   ],
   "styles":[
+    "css/reset.css",
     "css/style.css"
   ]
 }

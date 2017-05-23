@@ -1,2 +1,36 @@
 
-<div id="dashboardMenu" style="display:none;"></div>
+<div id="dashboardMenu" style="display:none;">
+    <div class="outermost clearfix flex">
+        <!--一级导航栏-->
+        <div class="s_bar ">
+            <a href="javascript:void(0)">
+                <img class="log" src="images/logo.svg">
+            </a>
+            <ul>
+                <li v-for="menu in menuItems"><a href="javascript:void(0)"><img :src="menu.icon">{{menu.title}}</a></li>
+            </ul>
+        </div>
+        <!--二级导航栏-->
+        <!--<div class=" silde_comp">-->
+            <!--<div class="silde_comp_n">-->
+                <!--<div class="c_title">-->
+                    <!--<img src="images/back.svg">-->
+                    <!--恒泰微信内嵌-->
+                <!--</div>-->
+                <!--<div class="c_choose">-->
+                    <!--<ul>-->
+
+                        <!--<li class="c_active"><a href="javascript:void(0)"></a>服务实例</li>-->
+                        <!--<li><a href="javascript:void(0)"></a>版本发布</li>-->
+                        <!--<li><a href="javascript:void(0)"></a>上架商店</li>-->
+                        <!--<li><a href="javascript:void(0)"></a>流量分析</li>-->
+                        <!--<li><a href="javascript:void(0)"></a>参数配置</li>-->
+                        <!--<li><a href="javascript:void(0)"></a>外观定制</li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<img class="c_back" src="images/stu.svg">-->
+        <!--</div>-->
+        <sub-view></sub-view>
+    </div>
+</div>
