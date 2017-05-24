@@ -7,7 +7,7 @@
                 <img class="log" src="images/logo.svg">
             </a>
             <ul>
-                <li v-for="menu in menuItems"><a href="javascript:void(0)"><img :src="menu.icon">{{menu.title}}</a></li>
+                <li v-for="menu in menuItems"><a :href="menu.href"><img :src="menu.icon">{{menu.title}}</a></li>
             </ul>
         </div>
         <!--二级导航栏-->
