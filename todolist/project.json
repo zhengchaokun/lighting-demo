@@ -2,5 +2,5 @@
   "project":"todolist",
   "version":"0.0.1",
   "desc":"Just For Fun",
-  "type":"olight"
+  "type":"vue"
 }
