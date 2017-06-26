@@ -8,7 +8,7 @@
         <section class="main" v-show="todos.length">
             <input class="toggle-all" type="checkbox" v-model="allDone" title="">
             <ul class="todo-list">
-                <todo-item :todo="todo" @remove="removeTodo"  v-for="todo in filteredTodos"></todo-item>
+                <todo-item :todo="todo" @remove="removeTodo" :key="i" v-for="(todo,i) in filteredTodos"></todo-item>
             </ul>
         </section>
         <footer class="footer" v-show="todos.length">
