@@ -434,7 +434,7 @@
 
 </template>
 <script>
-    let API = require("../js/api/api")
+    let API = require("../api/api")
     let uiSchart = require("../ui/schart.vue");
     import Light from "light";
     export default {

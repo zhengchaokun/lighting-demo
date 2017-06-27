@@ -166,7 +166,7 @@
 </template>
 
 <script>
-    let API = require("../js/api/api")
+    let API = require("../api/api")
     function drawKLine(type) {
         var that  = this;
         var code = that.stock_code;
