@@ -1,7 +1,0 @@
-{
-	"project":"dashboard",
-	"version":"0.0.1",
-	"desc":"Just For Fun",
-	"type":"light-1.0",
-	"plugins":["vue","less"]
-}
