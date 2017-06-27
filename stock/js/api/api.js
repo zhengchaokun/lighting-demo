@@ -89,6 +89,9 @@ let getToken = new Promise(function (resolve) {
         resolve(data.access_token)
     });
 });
+// Light.ajax.getJSON("https://light.hscloud.cn/data/flatservice/openapi/token?compId="+__ENV__.app_id, function (data) {
+//     resolve(data.data.access_token)
+// });
 
 let prefix = "http://api.hscloud.cn/";
 function execute(func, params) {
