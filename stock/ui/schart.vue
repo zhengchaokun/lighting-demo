@@ -297,10 +297,14 @@
         data:function () {
             return {
                 tickRES:null,
-                five_tab:0
+                five_tab:0,
+                chart_tab:0
             }
         },
-        props:['chart_tab','realRES','stock_code'],
+        props:['realRES','stock_code'],
+        mounted:function () {
+            this.chart_tab = 1;
+        },
         watch:{
             chart_tab:function (tab) {
                 clearInterval(this._drawTimelineInterval);
