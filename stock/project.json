@@ -1,0 +1,12 @@
+{
+  "project":"todolist",
+  "version":"0.0.1",
+  "desc":"Just For Fun",
+  "type":"vue",
+
+  "env":{
+    "default":{
+      "app_id":"8112734868605450"
+    }
+  }
+}

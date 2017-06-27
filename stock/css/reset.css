@@ -1,0 +1,111 @@
+*{ margin:0; padding:0}
+
+body{ font:0.12rem/0.22rem "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑","Arial","sans-serif";color:#000;-webkit-text-size-adjust:none;}
+li{ list-style:none}
+a{text-decoration:none; color: #4A4A4A;}
+a:hover{text-decoration:none;}
+img{border:0; vertical-align:middle;}
+input{vertical-align:middle; outline: none;}
+textarea{resize:none}
+form{display:inline-block;width:100%;}
+button{ border: none; background: none; text-align: center; cursor: pointer; display: block;}
+s{ text-decoration:none;}
+
+h3{font-size:14px;}
+b{vertical-align: middle;}
+
+em{ font-style:normal;}
+table{border-spacing:0;border-collapse:collapse;}
+textarea{overflow-y:auto;overflow-x:hidden;outline-style:none;outline-width:initial;outline-color:initial;resize:none }
+textarea:focus{box-shadow: 0 0 0.04rem 0 #399DE2;border: 0.01rem solid #399DE2; }
+.fleft{float:left;}
+.fright{float:right;}
+.tcenter{text-align:center;}
+.tleft{text-align:left}
+.tright{text-align:right;}
+.clear{clear:both;}
+/*clear clearfix*/
+.clearfix:after {content:"\0020"; display: block; height: 0;clear: both; visibility: hidden; }
+.clearfix {zoom: 1;}
+
+.show{display:block;}
+.hide{display:none;}
+.hide-v{ visibility:hidden;}
+.b{font-weight:bolder;}
+.b5{font-weight:500;}
+label{display:inline-block;}
+
+.pd20{padding: 0.2rem;}
+
+/*字体颜色*/
+.fc-white{color:#ffffff;}
+.fc-red{color:#ff420b;}
+.fc-green{color:#399b35;}
+.fc-blue{ color: #1f95c7;}
+.fc-hui{ color: #c6c7cc;}
+
+/*背景颜色*/
+.bg-red{background-color:#bd1b02;}
+.bg-green{background-color:#399b35;}
+.bg-white{background-color:#fff;}
+
+
+/*字体样式*/
+.fs16{font-size:0.16rem;}
+.fs18{font-size:0.18rem;}
+.fs20{font-size:0.2rem;}
+.fs22{font-size:0.22rem;}
+.fs24{font-size:0.24rem;}
+.fs25{font-size:0.25rem;}
+.fs26{font-size:0.26rem;}
+.fs32{font-size:0.32rem;}
+.fs36{font-size:0.36rem;}
+.fs100{font-size:1rem; line-height: 1rem;}
+
+
+/*百分比宽度*/
+.w10{width: 10%}
+.w15{width: 15%}
+.w20{width: 20%}
+.w25{width: 25%}
+.w30{width: 30%}
+.w40{width: 40%}
+.w50{width: 50%}
+.w55{width: 55%}
+.w60{width: 60%}
+.w65{width: 65%}
+.w70{width: 70%}
+.w90{width: 90%}
+.w100{width: 100%}
+
+
+.mt5{ margin-top: 0.05rem;}
+.mt10{ margin-top: 0.1rem;}
+.mt13{ margin-top: 0.13rem;}
+.mt15{ margin-top: 0.15rem;}
+.mt17{ margin-top: 0.17rem;}
+.mt20{ margin-top: 0.2rem;}
+.mt25{ margin-top: 0.25rem;}
+.mt30{ margin-top: 0.3rem;}
+.mt40{ margin-top: 0.4rem;}
+.mt50{ margin-top: 0.5rem;}
+.mt60{ margin-top: 0.6rem;}
+.ml5{ margin-left: 0.05rem;}
+.ml10{ margin-left: 0.1rem;}
+.ml20{ margin-left: 0.2rem;}
+.mr20{ margin-right: 0.2rem;}
+
+.mlb6{ margin-left: 6%;}
+.lh30{ line-height: 0.3rem;}
+.lh40{ line-height: 0.4rem;}
+.line{ height: 1px; width: 100%; background-color: #3d4045;}
+.line-dashed{ height: 0.01rem; width: 100%; border-top: 0.01rem dashed #D7D7D7;}
+.line-blue{ height: 0.02rem; width: 100%; background: #4BABED;}
+.texindent{text-indent:0.08rem;}
+.p-style{ line-height: 0.24rem; word-break: break-all; text-align: justify;}
+
+.pos-r{ position: relative;}
+.pos-a{ position: absolute;}
+.pos-f{ position: fixed;}
+
+.overhide{ overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
