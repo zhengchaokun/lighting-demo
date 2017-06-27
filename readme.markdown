@@ -1,4 +1,4 @@
 # lighting框架的模版整理
 
-1. 桌面PCweb开发的模版-[dashboard](./dashboard)
-2. 打新助手-[new_stock](./new_stock)
+1. 高仿腾讯自选股-[stock](./stock)
+2. 代办列表-[todolist](./todolist)
