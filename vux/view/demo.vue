@@ -18,7 +18,15 @@
             <cell :title="$t('Show Me')" @click.native="showPlugin" is-link></cell>
             <cell :title="$t('will auto close in 3s')" @click.native="showPluginAuto" is-link></cell>
         </group>
+        <card>
+            <img slot="header" src="http://placeholder.qiniudn.com/640x300" style="width:100%;display:block;">
+            <div slot="content" class="card-padding">
+                <p style="color:#999;font-size:12px;">Posted on January 21, 2015</p>
+                <p style="font-size:14px;line-height:1.2;">Quisque eget vestibulum nulla. Quisque quis dui quis ex ultricies efficitur vitae non felis. Phasellus quis nibh hendrerit..</p>
+            </div>
+        </card>
     </div>
+
 </template>
 
 <i18n>
@@ -38,11 +46,14 @@
 
 <script>
     import { Alert, Group, XSwitch, Cell, TransferDomDirective as TransferDom } from 'vux'
+    import { Divider, Card } from 'vux'
     export default {
         directives: {
             TransferDom
         },
         components: {
+            Card,
+            Divider,
             Alert,
             Group,
             XSwitch,
