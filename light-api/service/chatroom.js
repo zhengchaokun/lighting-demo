@@ -3,20 +3,24 @@ const websocket = require("../lib/websocket.js");
 exports.register = function (server, options, next) {
     const ws = websocket.init(server);
 
+    const users = {};
+
     ws.on("connection",function(socket){
 
         const query = socket.handshake.query;
         const room = query.room||'默认';
-        const user = query.user||"匿名用户";
+        const userName = query.userName||"匿名用户";
 
-        socket.on("discuss",function(msg){
-            socket.to(room).emit(msg);
+        socket.join(room);
+        ws.to(room).emit("checkin",userName);
+
+        socket.on("discus",function(msg){
+            ws.to(room).emit("discus",msg);
         })
 
-        socket.to(room).emit(`${user}进入${room}聊天室！`);
-
         socket.on("disconnect",function(){
-            socket.to(room).emit(`${user}离开${room}聊天室！`);
+            socket.leave(room);
+            ws.to(room).emit("checkout",userName);
         })
 
     })
