@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/head-develop/LIGHT/!svn/ver/10392/branches/light1.3/light1.3-torelease/light-data-service/config/test
+END
+fileWhiteList.json
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/head-develop/LIGHT/!svn/ver/10341/branches/light1.3/light1.3-torelease/light-data-service/config/test/fileWhiteList.json
+END
+log.json
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/head-develop/LIGHT/!svn/ver/10392/branches/light1.3/light1.3-torelease/light-data-service/config/test/log.json
+END
+db.json
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/head-develop/LIGHT/!svn/ver/10392/branches/light1.3/light1.3-torelease/light-data-service/config/test/db.json
+END
+server.json
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/head-develop/LIGHT/!svn/ver/10341/branches/light1.3/light1.3-torelease/light-data-service/config/test/server.json
+END

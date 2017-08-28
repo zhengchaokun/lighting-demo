@@ -1,0 +1,69 @@
+//引入校验module
+const Joi = require('joi');
+const Path = require('path');
+
+module.exports = {
+  method:'POST',
+  path:'/demo/file/light/{fileType}',
+  config:{
+      tags: ['api'],
+      description: '上传文件',
+      auth:false,
+      plugins: {
+            'hapi-swagger': {
+                payloadType: 'form'
+            }
+        },
+      validate: {
+        payload: {
+                file: Joi.any()
+                    .meta({ swaggerType: 'file' })
+                    .description('json file')
+            },
+        params:{
+            fileType: Joi.string().required()
+        }
+    },
+    payload:{
+            maxBytes:209715200,
+            output:'stream',
+            parse :true
+    }
+  },
+  
+  handler:function(request,reply){
+        let fileSteam = request.payload.file;
+        let filename = fileSteam.hapi.filename;
+        let type = fileSteam.hapi.headers['content-type'];
+
+        //白名单验证
+        
+        //获取自定义配置文件白名单
+        const whileList = this.getConfig("fileWhiteList");
+        //获取文件扩展名
+        let suffix = Path.extname(filename);
+        if(whileList.indexOf(suffix)==-1){
+            return reply.err(suffix+"文件格式不支持!");
+         }
+
+        let chunks = [];
+        let size = 0;
+
+        fileSteam.on('data', function(chunk) { 
+             chunks.push(chunk);
+             size += chunk.length;
+            
+        }); 
+
+        fileSteam.on('end', () => {
+            let sdb =  this.getPlugin('light-api-mongo');
+            let buf = Buffer.concat(chunks, size);
+            sdb.saveFile(buf,{filename:filename,type:type}).then(function(result){
+                return reply.data(result);
+            }); 
+
+        });
+             
+  }
+
+}

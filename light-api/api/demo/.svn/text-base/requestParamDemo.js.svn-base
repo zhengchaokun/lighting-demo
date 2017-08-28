@@ -1,0 +1,39 @@
+module.exports = {
+  method:'POST',
+  path:'/demo/getRequestParam/{username?}',
+  config:{
+      description: '获取请求参数的demo'
+  },
+  handler:function(request,reply){
+   
+    let logger = this.getLogger(__filename);
+
+    //获取请求对象参数对象（payload：Post请求体, query：URL参数, params：url路径参数, headers：请求头参数）
+    //eg http://localhost:9000/getRequestParam/book?id=234&desc=I am query
+    //url上的book会解析到request.params
+    //url上的?id=234&desc=I am query 会解析到requst.query
+    //post请求的body的form-data、 x-www-form-urlencode、 raw 会解析到 request.payload
+
+    let params = request.params;
+    logger.info("---params----");
+    logger.info(params);
+
+    let query =request.query;
+    logger.info("---query----");
+    logger.info(query);
+
+    let payload = request.payload;
+    logger.info("---payload----");
+    logger.info(payload);
+
+    let headers = request.headers;
+    logger.info("---headers----");
+    logger.info(headers);
+    
+   
+
+    reply.data({case:"get request params case"});
+      
+  }
+
+}

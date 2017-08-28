@@ -1,0 +1,106 @@
+//引入校验module
+const Joi = require('joi');
+module.exports={
+    method:'GET',
+    path:'/demo/mysqldemo',
+    config:{
+        description: 'light-api-mysql插件demo',
+        validate: {
+         query:{
+           id:Joi.number().integer().required()
+         }
+        }
+    },
+    handler:function(request,reply){
+        let params = request.query;
+        let appId = params.id; //测试id=8112734868605605
+
+        //获取light-api-mysql插件服务,必须在/config/config.js中引入插件
+        let rdb = this.getPlugin('light-api-mysql');
+
+        //（1）mysql的非事务服务的包含query,update,remove,insert,queryListPage方法
+
+        //query方法查询
+        rdb.query('SELECT * FROM lt_app WHERE id = ?',appId)
+           .then(function(result){
+               return reply.data(result);  
+           });
+
+        //update更新方法
+        // rdb.update('lt_app',appId,{app_describe:'金融app1',update_date:new Date().getTime()})
+        //    .then(function(result){
+        //         return reply.data(result); 
+        //     });
+
+         //inset方法
+        //  let app = {
+        //             app_key: "fa78311e287543dfb7953a65f5704b02",
+        //             app_secret: "613845c9e7f0476087cbe8d01ec892ad",
+        //             name: "xin_jian_app_yong_yu_api"+new Date().getTime(),
+        //             show_name: "新建App用于api",
+        //             app_describe: "api金融app1",
+        //             last_version: 8113265699726154,
+        //             last_release_version: 8113265699726154,
+        //             prev_release_version: 8113265699725739,
+        //             icon: "5911605286b0e32d34e532c3",
+        //             app_status: "3",
+        //             app_level: "0",
+        //             app_biz_type: "5",
+        //             is_https: "1",
+        //             is_open: "1",
+        //             create_date: 1483411401970,
+        //             update_date: 1498444810863,
+        //             developer_id: 8109801540157451,
+        //             release_date: 1493110254111,
+        //             star: 0,
+        //             last_release_date: 1493110254111,
+        //             use_type: "1",
+        //             domain: "td8h2gfa",
+        //             is_lease: "1",
+        //             is_token: 0,
+        //             system: "h5",
+        //             store_status: "2",
+        //             show_url: "http://752p44brq.m.qinglight.com",
+        //             content_id: "57c936642c5a4e6fa441038e",
+        //             is_delete: 0,
+        //             biz_type: "0"
+        //  }
+
+        // rdb.insert("lt_app",app)
+        //    .then(function(result){//result-->{id: 8112734868605768}
+        //       return reply.data(result); 
+        // });
+
+        //remove 删除方法
+        // rdb.remove('lt_app',8112734868605768)
+        //    .then(function(result){
+        //       reply.data(result);
+        //    });
+
+        //queryListPage分页查询
+        //返回结果包括当页数据与分页对象，分页对象-->{pageSize: 10,pageNo: 2,count: 685}
+        // rdb.queryListPage("select * from lt_app ",{pageSize:10,pageNo:2})
+        //     .then(function(result){
+        //       reply.data(result);
+        //     });
+
+
+
+        //（2）mysql的事务服务的包含trans方法
+        //trans 函数包含query,update,remove,insert,queryListPage事务处理的方法。
+       
+        // rdb.trans(function(){
+        //   this.query('select * from lt_app where id=? ',appId);
+        //   this.update('lt_app',appId,{app_describe:'金融app1',update_date:new Date().getTime()});
+        //   this.remove('lt_app',8112734868605770);
+        //   this.insert("lt_app",app);
+        //   this.queryListPage("select * from lt_app",{pageSize:10,pageNo:2});
+        // }).then(function(result){
+        //     reply.data(result);//返回结果按照tans函数顺序放在数组中
+        // }).catch(function(err){
+        //     reply.err('执行错误');
+        // });
+
+
+    }
+}

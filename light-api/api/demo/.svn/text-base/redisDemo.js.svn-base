@@ -1,0 +1,72 @@
+module.exports={
+    method:'GET',
+    path:'/demo/redisdemo',
+    config:{
+        description: 'light-api-redis插件demo'
+    },
+    handler:function(request,reply){
+
+      //获取light-api-redis插件服务,必须在/config/config.js中引入插件
+      //redis插件提供cache服务与消息队列mq服务
+
+      //（1）获取redis插件服务的cache功能
+      //注意，/config/../db.json开启cache配置为true
+      let cache = this.getPlugin('light-api-redis').cache;
+      
+      //set方法 存入缓存 key-->value  value可以是字符串也可以是对象
+        // cache.set('demokey',{name:'demo'})
+        //      .then(function(result){
+        //         return reply.data(result)  //结果返回--->'ok'
+        //      }).catch(function(err){
+        //         return reply.err('执行错误');
+        //      });
+
+      //get方法 更具key获取缓存数据
+        cache.get('demokey')
+             .then(function(result){
+                return reply.data(result)
+             }).catch(function(err){
+                return reply.err('执行错误');
+             });
+
+      //remove方法 更具key获取缓存数据
+        // cache.remove('demokey')
+        //      .then(function(result){
+        //         return reply.data(result) //结果返回---->1
+        //      }).catch(function(err){
+        //         return reply.err('执行错误');
+        //      });
+
+      //setTtl方法 设置存入cache的数据的时效时间 单位未秒
+        // cache.setTtl('demokey',{name:'demo'},60)
+        //      .then(function(result){
+        //         return reply.data(result) // 结果返回--->'ok'
+        //      }).catch(function(err){
+        //         return reply.err('执行错误');
+        //      });
+
+     //getExpireTime方法 获取key的过期时间 单位为秒
+        // cache.getExpireTime('demokey')
+        //      .then(function(result){
+        //         return reply.data(result) //返回结果--->时效时间 单位为秒
+        //      }).catch(function(err){
+        //         return reply.err('执行错误');
+        //      });
+
+
+
+
+     //（2）获取redis插件消息队列服务功能
+     //注意，/config/../db.json开启mq配置为true
+      let mq = this.getPlugin('light-api-redis').mq;     
+      
+      //向渠道'channel1'发送消息
+      //mq.sender('channel1',{name:'nb',age:23});
+
+      //向渠道'chanel1接收消息（此功能基本用于插件）
+      // mq.onMessage(['channel1'],function(err,message){
+      //      console.log(message);
+      //  });)
+
+    }
+}

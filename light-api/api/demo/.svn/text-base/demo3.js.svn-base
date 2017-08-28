@@ -1,0 +1,269 @@
+//引入校验module
+const Joi = require('joi');
+module.exports = {
+  method:'GET',
+  path:'/demo/getApp',
+  config:{
+      description: '插件API的demo',
+       validate: {
+         query:{
+           id:Joi.number().integer().required()
+         }
+       }
+  },
+  handler:function(request,reply){
+    //获取日志对象,标题当前目录
+    let logger = this.getLogger(__filename);
+    //日志级别Api
+    // logger.trace('this is trace');
+    // logger.debug('this is debug');
+    // logger.info('this is info');
+    // logger.warn('this is warn');
+    // logger.error('this is error');
+    // logger.fatal('this is fatal');
+
+    //获取请求对象参数对象（payload：Post请求体, query：URL参数, params：url路径参数, headers：请求头参数）
+    //获取url参数对象
+    let params = request.query;
+    let appId = params.id; //测试id=8112734868605605
+
+    //=======================插件的api=========================
+    /**
+     * light-api-mysql ,light-api-mongo,light-redis-api插件的api
+     */
+    //=======================插件的api=========================
+
+    //获取light-api-mysql插件服务,必须在/config/config.js中引入插件
+    let rdb = this.getPlugin('light-api-mysql');
+
+    //=======================light-api-mysql的api=========================
+
+    //（1）mysql的非事务服务的包含query,update,remove,insert,queryListPage方法
+
+    //query方法查询
+      // rdb.query('SELECT * FROM lt_app WHERE id = ?',appId)
+      //    .then(function(result){
+      //        return reply.data(result);  
+      //    });
+
+    //update更新方法
+      // rdb.update('lt_app',appId,{app_describe:'金融app1',update_date:new Date().getTime()})
+      //    .then(function(result){
+      //         return reply.data(result); 
+      //     });
+
+    //inset方法
+         let app = {
+                    app_key: "fa78311e287543dfb7953a65f5704b02",
+                    app_secret: "613845c9e7f0476087cbe8d01ec892ad",
+                    name: "xin_jian_app_yong_yu_api",
+                    show_name: "新建App用于api",
+                    app_describe: "api金融app1",
+                    last_version: 8113265699726154,
+                    last_release_version: 8113265699726154,
+                    prev_release_version: 8113265699725739,
+                    icon: "5911605286b0e32d34e532c3",
+                    app_status: "3",
+                    app_level: "0",
+                    app_biz_type: "5",
+                    is_https: "1",
+                    is_open: "1",
+                    create_date: 1483411401970,
+                    update_date: 1498444810863,
+                    developer_id: 8109801540157451,
+                    release_date: 1493110254111,
+                    star: 0,
+                    last_release_date: 1493110254111,
+                    use_type: "1",
+                    domain: "td8h2gfa",
+                    is_lease: "1",
+                    is_token: 0,
+                    system: "h5",
+                    store_status: "2",
+                    show_url: "http://752p44brq.m.qinglight.com",
+                    content_id: "57c936642c5a4e6fa441038e",
+                    is_delete: 0,
+                    biz_type: "0"
+         }
+        
+        // rdb.insert("lt_app",app)
+        //    .then(function(result){//result-->{id: 8112734868605768}
+        //       return reply.data(result); 
+        //    });
+      //remove 删除方法
+        // rdb.remove('lt_app',8112734868605768)
+        //    .then(function(result){
+        //       reply.data(result);
+        //    });
+
+      //queryListPage分页查询
+      //返回结果包括当页数据与分页对象，分页对象-->{pageSize: 10,pageNo: 2,count: 685}
+        // rdb.queryListPage("select * from lt_app ",{pageSize:10,pageNo:2})
+        //     .then(function(result){
+        //       reply.data(result);
+        //     });
+
+
+      //（2）mysql的事务服务的包含trans方法
+      //trans 函数包含query,update,remove,insert,queryListPage事务处理的方法。
+       
+        // rdb.trans(function(){
+        //   this.query('select * from lt_app where id=? ',appId);
+        //   this.update('lt_app',appId,{app_describe:'金融app1',update_date:new Date().getTime()});
+        //   this.remove('lt_app',8112734868605770);
+        //   this.insert("lt_app",app);
+        //   this.queryListPage("select * from lt_app",{pageSize:10,pageNo:2});
+        // }).then(function(result){
+        //     reply.data(result);//返回结果按照tans函数顺序放在数组中
+        // }).catch(function(err){
+        //     reply.err('执行错误');
+        // });
+
+
+
+      //=======================light-api-mongo的api=========================
+      
+      //获取light-api-mongo插件服务,必须在/config/config.js中引入插件
+      let sdb = this.getPlugin('light-api-mongo');
+      // (1)默认数据库的query，insert，update，remove 方法
+      //query方法 查找默认db的集合
+        // sdb.query('integration',{_id:'56c2edb02c5a4e78577632c9'})
+        //    .then(function(result){
+        //      reply.data(result);
+        //    }).catch(function(err){
+        //      reply.err('执行错误');
+        //    });
+
+      //insert方法 插入默认db的integration集合一条文档
+        // sdb.insert('integration',{name:'cc',age:23,job:'project'})
+        //    .then(function(result){
+        //         return reply.data(result); //返回插入数据_id,-->5950a1c4fa7a0a2b102869d1
+        //     }).catch(function(err){
+        //         return reply.err('执行错误')
+        //     });
+
+      //update方法 更新默认db的integration集合的文档
+
+        // sdb.update('integration','5950a1c4fa7a0a2b102869d1',{name:'vv'})
+        //    .then(function(result){
+        //       return reply.data(result);
+        //    }).catch(function(err){
+        //       return reply.err('执行错误')
+        //    });
+
+      //remove方法 删除指定文档
+        //  sdb.remove('integration',"5950a1c4fa7a0a2b102869d1")
+        //     .then(function(result){
+        //        return reply.data(result);
+        //     }).catch(function(err){
+        //        return reply.err('执行错误')
+        //     })
+
+      // (2)指定非默认数据库的query，insert，update，remove 方法
+      // 配置中必须配置 "otherDB":["db1","db2"],下面demo已查live数据库为例子
+
+      // insert方法
+        // sdb.insert('board',{name:'cc',age:23,job:'project'},"live")
+        //     .then(function(result){
+        //         return reply.data(result);
+        //     }).catch(function(err){
+        //       
+        //         return reply.err(err);
+        //     });
+
+      // query方法
+        // sdb.query('board',{_id:"5950a8487819af2adc1aabd0"},"live")
+        //    .then(function(result){
+        //       return reply.data(result);
+        //    }).catch(function(err){
+        //       return reply.err('执行错误');
+        //    })
+
+      //update方法
+        // sdb.update("board",'5950a8487819af2adc1aabd0',{name:'gg'},"live")
+        //    .then(function(result){
+        //       return reply.data(result);
+        //    }).catch(function(err){
+        //      console.log(err);
+        //       return reply.err('执行错误');
+        //    })
+          
+      //remove 方法
+        // sdb.remove('board','5950a8487819af2adc1aabd0',"live")
+        //    .then(function(result){
+        //       return reply.data(result);
+        //    }).catch(function(err){
+        //       return reply.err('执行错误');
+        //    })
+
+
+
+
+      //=======================light-api-redis的api=========================
+
+      //获取light-api-redis插件服务,必须在/config/config.js中引入插件
+      //redis插件提供cache服务与消息队列mq服务
+
+      //（1）获取redis插件服务的cache功能
+      //注意，/config/../db.json开启cache配置为true
+      let cache = this.getPlugin('light-api-redis').cache;
+      
+      //set方法 存入缓存 key-->value  value可以是字符串也可以是对象
+        // cache.set('demokey',{name:'demo'})
+        //      .then(function(result){
+        //         return reply.data(result)  //结果返回--->'ok'
+        //      }).catch(function(err){
+        //         return reply.err('执行错误');
+        //      });
+
+      //get方法 更具key获取缓存数据
+        cache.get('demokey')
+             .then(function(result){
+                return reply.data(result)
+             }).catch(function(err){
+                return reply.err('执行错误');
+             });
+
+      //remove方法 更具key获取缓存数据
+        // cache.remove('demokey')
+        //      .then(function(result){
+        //         return reply.data(result) //结果返回---->1
+        //      }).catch(function(err){
+        //         return reply.err('执行错误');
+        //      });
+
+      //setTtl方法 设置存入cache的数据的时效时间 单位未秒
+        // cache.setTtl('demokey',{name:'demo'},60)
+        //      .then(function(result){
+        //         return reply.data(result) // 结果返回--->'ok'
+        //      }).catch(function(err){
+        //         return reply.err('执行错误');
+        //      });
+
+     //getExpireTime方法 获取key的过期时间 单位为秒
+        // cache.getExpireTime('demokey')
+        //      .then(function(result){
+        //         return reply.data(result) //返回结果--->时效时间 单位为秒
+        //      }).catch(function(err){
+        //         return reply.err('执行错误');
+        //      });
+
+
+
+
+     //（2）获取redis插件消息队列服务功能
+     //注意，/config/../db.json开启mq配置为true
+      let mq = this.getPlugin('light-api-redis').mq;     
+      
+      //向渠道'channel1'发送消息
+      //mq.sender('channel1',{name:'nb',age:23});
+
+      //向渠道'chanel1接收消息（此功能基本用于插件）
+      // mq.onMessage(['channel1'],function(err,message){
+      //      console.log(message);
+      //  });
+      
+      
+  }
+
+}

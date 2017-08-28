@@ -1,0 +1,12 @@
+{
+  "appenders": [
+    { "type": "console"},
+    {  "type": "dateFile",
+       "filename": "/tmp/logs/light-data-service",
+       "alwaysIncludePattern": true,
+       "pattern": "-yyyy-MM-dd-hh.log"
+     }
+  ],
+  "replaceConsole": false,
+   "level": "info" 
+}

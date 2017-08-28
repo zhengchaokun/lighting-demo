@@ -1,0 +1,84 @@
+module.exports={
+    method:'GET',
+    path:'/demo/mongodemo',
+    config:{
+        description: 'light-api-mongo插件demo'
+    },
+    handler:function(request,reply){
+
+        //获取light-api-mysql插件服务,必须在/config/config.js中引入插件
+        let sdb = this.getPlugin('light-api-mongo');
+
+        // (1)默认数据库的query，insert，update，remove 方法
+        //query方法 查找默认db的集合
+            sdb.query('integration',{_id:'56c2edb02c5a4e78577632c9'})
+            .then(function(result){
+                reply.data(result);
+            }).catch(function(err){
+                reply.err('执行错误');
+            });
+
+        //insert方法 插入默认db的integration集合一条文档
+            // sdb.insert('integration',{name:'cc',age:23,job:'project'})
+            //    .then(function(result){
+            //         return reply.data(result); //返回插入数据_id,-->5950a1c4fa7a0a2b102869d1
+            //     }).catch(function(err){
+            //         return reply.err('执行错误')
+            //     });
+
+        //update方法 更新默认db的integration集合的文档
+
+            // sdb.update('integration','5950a1c4fa7a0a2b102869d1',{name:'vv'})
+            //    .then(function(result){
+            //       return reply.data(result);
+            //    }).catch(function(err){
+            //       return reply.err('执行错误')
+            //    });
+
+        //remove方法 删除指定文档
+            //  sdb.remove('integration',"5950a1c4fa7a0a2b102869d1")
+            //     .then(function(result){
+            //        return reply.data(result);
+            //     }).catch(function(err){
+            //        return reply.err('执行错误')
+            //     })
+
+        // (2)指定非默认数据库的query，insert，update，remove 方法
+        // 配置中必须配置 "otherDB":["db1","db2"],下面demo已查live数据库为例子
+
+        // insert方法
+            // sdb.insert('board',{name:'cc',age:23,job:'project'},"live")
+            //     .then(function(result){
+            //         return reply.data(result);
+            //     }).catch(function(err){
+            //       
+            //         return reply.err(err);
+            //     });
+
+        // query方法
+            // sdb.query('board',{_id:"5950a8487819af2adc1aabd0"},"live")
+            //    .then(function(result){
+            //       return reply.data(result);
+            //    }).catch(function(err){
+            //       return reply.err('执行错误');
+            //    })
+
+        //update方法
+            // sdb.update("board",'5950a8487819af2adc1aabd0',{name:'gg'},"live")
+            //    .then(function(result){
+            //       return reply.data(result);
+            //    }).catch(function(err){
+            //      console.log(err);
+            //       return reply.err('执行错误');
+            //    })
+            
+        //remove 方法
+            // sdb.remove('board','5950a8487819af2adc1aabd0',"live")
+            //    .then(function(result){
+            //       return reply.data(result);
+            //    }).catch(function(err){
+            //       return reply.err('执行错误');
+            //    })
+
+    }
+}

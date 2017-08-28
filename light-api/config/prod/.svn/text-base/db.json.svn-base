@@ -1,0 +1,21 @@
+{
+    "mysql":{  
+        "connectionLimit" : 200,
+        "host": "lightrds.mysql.rds.aliyuncs.com",
+        "user": "light",
+        "password" :"Light123",
+        "database" :"light"
+    },
+    "mongoDB":{
+        "defaultDB":"portal",
+        "otherDB":["live","log"],
+        "servers":["10.156.245.226:27017"]
+    },
+    "redis":{
+        "sentinels":["10.253.12.184:39301","10.253.12.156:39301"],
+        "name": "mymaster",
+        "cache":true,
+        "mq":false,
+        "channels":["channel1"]
+    }
+}

@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/head-develop/LIGHT/!svn/ver/10414/branches/light1.3/light1.3-torelease/light-data-service/api/demo
+END
+mongoDemo.js
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/head-develop/LIGHT/!svn/ver/10414/branches/light1.3/light1.3-torelease/light-data-service/api/demo/mongoDemo.js
+END
+logDemo.js
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/head-develop/LIGHT/!svn/ver/10414/branches/light1.3/light1.3-torelease/light-data-service/api/demo/logDemo.js
+END
+demo3.js
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/head-develop/LIGHT/!svn/ver/10414/branches/light1.3/light1.3-torelease/light-data-service/api/demo/demo3.js
+END
+mysqlDemo.js
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/head-develop/LIGHT/!svn/ver/10414/branches/light1.3/light1.3-torelease/light-data-service/api/demo/mysqlDemo.js
+END
+redisDemo.js
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/head-develop/LIGHT/!svn/ver/10414/branches/light1.3/light1.3-torelease/light-data-service/api/demo/redisDemo.js
+END
+downloadFileDemo.js
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/head-develop/LIGHT/!svn/ver/10414/branches/light1.3/light1.3-torelease/light-data-service/api/demo/downloadFileDemo.js
+END
+requestParamDemo.js
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/head-develop/LIGHT/!svn/ver/10414/branches/light1.3/light1.3-torelease/light-data-service/api/demo/requestParamDemo.js
+END
+validateDemo.js
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/head-develop/LIGHT/!svn/ver/10414/branches/light1.3/light1.3-torelease/light-data-service/api/demo/validateDemo.js
+END
+uploadFileDomo.js
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/head-develop/LIGHT/!svn/ver/10414/branches/light1.3/light1.3-torelease/light-data-service/api/demo/uploadFileDomo.js
+END

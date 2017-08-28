@@ -1,0 +1,28 @@
+module.exports = {
+  method:'GET',
+  path:'/demo/logCase',
+  config:{
+      description: '日志demo'
+   
+  },
+  handler:function(request,reply){
+    //获取日志对象,标题当前目录
+    let logger = this.getLogger(__filename);
+
+    //日志级别输出控制配置/config/../log.json的level字段 
+    //level 的值 all、 trace 、debug、info、warn、error、fatal 
+    //eg:level:warn --此设置日志会输出warn、error、fatal 不会输出 ：trace 、debug、info
+   
+    //日志级别Api
+    logger.trace('this is trace');
+    logger.debug('this is debug');
+    logger.info('this is info');
+    logger.warn('this is warn');
+    logger.error('this is error');
+    logger.fatal('this is fatal');
+
+    reply.data({case:"log case"});
+      
+  }
+
+}

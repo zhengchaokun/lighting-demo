@@ -1,0 +1,40 @@
+//引入校验module
+const Joi = require('joi');
+const Path = require('path');
+module.exports = {
+  method:'GET',
+  path:'/demo/file/{filename}',
+  config:{
+      description: '下载文件',
+      tags: ['api'],
+      validate: {
+          params:{
+             filename:Joi.string().required()
+          }
+      }   
+  },
+  handler:function(request,reply){
+    //获取文件名 fileId.extname eg:1ffsfddsafsadfsd.png
+    let filename = request.params.filename;
+    //获取文件的扩展名
+    let suffix =  Path.extname(filename);
+    //获取文件的名去扩展名
+    let fileId = Path.basename(filename,suffix);
+
+    //根据 eg：123.png 获取mime类型 'image/png'
+    var contentType = this.getMime(filename);
+    //console.log(contentType);
+
+    //从mongoDb的gridFS中读取文件并按照类型输出
+    let sdb =  this.getPlugin('light-api-mongo');
+    sdb.readFile(fileId).then(function(result){
+        if(contentType){
+            return reply(result).header('Content-Type', contentType);
+        }else{
+            return reply(result);
+        }
+               
+    }); 
+  }
+
+}

@@ -1,0 +1,50 @@
+//引入校验模块
+const Joi = require('joi');
+module.exports = {
+  method:'POST',
+  path:'/demo/validate',
+  config:{
+      description: '获取用户信息',
+      validate:{
+            query:{
+                username: Joi.string().alphanum().min(3).max(30).required(),
+                password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/),
+                access_token: [Joi.string(), Joi.number()],
+                birthyear: Joi.number().integer().min(1900).max(2013),
+                email: Joi.string().email().allow('')
+            }
+      }
+  },
+  handler:function(request,reply){
+
+       //  (1)校验需要引入校验模块joi,默认不校验
+       // （2）校验失败 会返回400错误 
+       // （3）校验可以再配置的validate中进行校验 可以校验params， query，reload，headers
+       //  (4) 上述校验用例的说明：
+
+       // username 为字符串，数字字符型，长度3-30 必填字段 不允许为'' 
+       // username: Joi.string().alphanum().min(3).max(30).required(),
+
+       // password:为字符串，符合正则匹配，可选字段 不允许为''
+       // password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).optional(),
+      
+       //access_toke:为字符串或数字类型 不允许为''
+       //access_token: [Joi.string(), Joi.number()],
+
+       //birthyear:为数字类型 ，整数 ，范围1900-2013 不允许为''
+       //birthyear: Joi.number().integer().min(1900).max(2013),
+
+       //email:为字符串 ，email格式  ，可以允许为''
+       //email: Joi.string().email().allow('')
+
+       
+
+
+      let logger = this.getLogger(__filename);
+      let params = request.query;
+      logger.info(params);
+      reply.data(params);
+      
+  }
+
+}

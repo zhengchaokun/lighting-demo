@@ -1,0 +1,23 @@
+{
+    "mysql":{  
+        "connectionLimit" : 10,
+        "host": "l1.qinglight.com",
+        "user": "root",
+        "password" :"",
+        "database" :"light_test"
+    },
+    "mongoDB":{
+        "defaultDB":"portal",
+        "otherDB":["live","log"],
+        "servers":["l5.qinglight.com:8080"]
+    },
+    "redis":{
+        "sentinels":["l4.qinglight.com:8080"],
+        "name": "mymaster",
+        "cache":true,
+        "mq":false,
+        "channels":["gho","kml","ghol"]
+    }
+}
+
+
