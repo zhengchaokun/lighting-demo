@@ -10,6 +10,7 @@ module.exports = {
                 fileWhiteList:fileWhiteList
             },
             "plugins":{
+                "./service/chatroom.js":{}
             }
 
         }
