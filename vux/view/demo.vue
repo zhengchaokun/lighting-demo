@@ -21,7 +21,7 @@
         <card>
             <img slot="header" src="http://placeholder.qiniudn.com/640x300" style="width:100%;display:block;">
             <div slot="content" class="card-padding">
-                <p style="color:#999;font-size:12px;">Posted on January 21, 2015</p>
+                <p style="color:#999;font-size:12px;">Posted on January 21, 2015{{count}}</p>
                 <p style="font-size:14px;line-height:1.2;">Quisque eget vestibulum nulla. Quisque quis dui quis ex ultricies efficitur vitae non felis. Phasellus quis nibh hendrerit..</p>
             </div>
         </card>
@@ -46,7 +46,8 @@
 
 <script>
     import { Alert, Group, XSwitch, Cell, TransferDomDirective as TransferDom } from 'vux'
-    import { Divider, Card } from 'vux'
+    import Card from 'vux/src/components/card/index.vue'
+    import { Divider } from 'vux'
     export default {
         directives: {
             TransferDom
@@ -64,6 +65,11 @@
                 show: false,
                 show1: false,
                 show2: false
+            }
+        },
+        computed:{
+            count () {
+                return this.$store.state.count
             }
         },
         methods: {
@@ -91,6 +97,13 @@
                     this.$vux.alert.hide()
                 }, 3000)
             }
+        },
+        mounted(){
+            const that = this;
+            this.$store.commit("increment")
+//            setInterval(function () {
+//                that.$store.commit("increment")
+//            },1000)
         }
     }
 </script>

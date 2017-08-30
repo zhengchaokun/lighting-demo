@@ -1,43 +1,27 @@
 import App from "light"
 import Vuex from 'vuex'
-import vuexI18n from 'vuex-i18n'
 
 let Vue = App.Vue;
 Vue.use(Vuex)
-/**
- * you can add your module here
- */
-let store = new Vuex.Store({
-    modules: {
-        i18n: vuexI18n.store
-    }
-})
 
-store.registerModule('vux', {
+
+const store2 = new Vuex.Store({
     state: {
-        demoScrollTop: 0,
-        isLoading: false,
-        direction: 'forward'
+        count: 0
     },
     mutations: {
-        updateDemoPosition (state, payload) {
-            state.demoScrollTop = payload.top
-        },
-        updateLoadingStatus (state, payload) {
-            state.isLoading = payload.isLoading
-        },
-        updateDirection (state, payload) {
-            state.direction = payload.direction
-        }
-    },
-    actions: {
-        updateDemoPosition ({commit}, top) {
-            commit({type: 'updateDemoPosition', top: top})
+        increment (state) {
+            state.count++
         }
     }
-})
+});
 
-Vue.use(vuexI18n.plugin, store)
+Vue.prototype.$store = store2;
+
+Vue.prototype.$t = function (ket) {
+    console.log(ket)
+    return ket;
+}
 
 // plugins
 import { LocalePlugin, DevicePlugin, ToastPlugin, AlertPlugin, ConfirmPlugin, LoadingPlugin, WechatPlugin, AjaxPlugin, AppPlugin } from 'vux'
