@@ -18,9 +18,13 @@ const store2 = new Vuex.Store({
 
 Vue.prototype.$store = store2;
 
-Vue.prototype.$t = function (ket) {
-    console.log(ket)
-    return ket;
+Vue.prototype.$t = function (key) {
+    // console.log(this)
+    if(window.__I18N_MAP&&window.__I18N_MAP[key]&&window.__I18N_MAP[key][navigator.language]){
+        return window.__I18N_MAP[key][navigator.language];
+    }else{
+        return key;
+    }
 }
 
 // plugins
