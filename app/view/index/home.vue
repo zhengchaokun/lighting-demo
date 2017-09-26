@@ -9,6 +9,8 @@
 
             <button @click="checkGL()">检查是否支持手势识别</button>
             <button @click="verifyGL()">手势验证</button>
+
+            <a href="gmu://globalquote">进入行情</a>
         </div>
     </div>
 </template>
