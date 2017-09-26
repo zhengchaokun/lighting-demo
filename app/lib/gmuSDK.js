@@ -368,7 +368,7 @@
                 LightJSBridge.call("validate.preVerifyOpeation",{
                     "verifyType":"FP"
                 }, function(data){
-                    if(data&&data.data&&data.data.result==="true"){
+                    if(data&&data.data&&data.data.result==="success"){
                         cb&&cb(true);
                     }else{
                         cb&&cb(false);
@@ -383,7 +383,7 @@
                 LightJSBridge.call("validate.preVerifyOpeation",{
                     "verifyType":"GL"
                 }, function(data){
-                    if(data&&data.data&&data.data.result==="true"){
+                    if(data&&data.data&&data.data.result==="success"){
                         cb&&cb(true);
                     }else{
                         cb&&cb(false);
