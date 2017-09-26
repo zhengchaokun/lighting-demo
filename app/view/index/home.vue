@@ -7,7 +7,7 @@
             <button @click="verifyFP()">指纹验证</button>
 
 
-            <button @click="checkFP()">检查是否支持手势识别</button>
+            <button @click="checkGL()">检查是否支持手势识别</button>
             <button @click="verifyGL()">手势验证</button>
         </div>
     </div>
@@ -39,7 +39,7 @@
             },
 
             verifyFP(){
-                GMUSDK.verifyGL(function (ok) {
+                GMUSDK.verifyFP(function (ok) {
                     if(ok){
                         alert("验证通过");
                     }else{
