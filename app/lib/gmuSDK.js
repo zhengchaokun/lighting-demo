@@ -408,11 +408,15 @@
                 cb && cb(false);
             }
         },
-        verifyGL:function (cb) {
+        verifyGL:function (params,cb) {
+            if(typeof params === "function"){
+                cb = params;
+                params = {};
+            }
+            params.verifyType = "GL";
+
             if (deviceFlag && window.LightJSBridge) {
-                LightJSBridge.call("validate.verifyOpeation",{
-                    "verifyType":"GL"
-                }, function(data){
+                LightJSBridge.call("validate.verifyOpeation",params, function(data){
                     if(data&&data.data&&data.data.result==="success"){
                         cb&&cb(true);
                     }else{

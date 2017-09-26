@@ -8,6 +8,7 @@
 
 
             <button @click="checkGL()">检查是否支持手势识别</button>
+            <button @click="setVerifyGL()">手势设置</button>
             <button @click="verifyGL()">手势验证</button>
 
             <a href="gmu://globalquote">进入行情</a>
@@ -51,6 +52,17 @@
             },
             verifyGL(){
                 GMUSDK.verifyGL(function (ok) {
+                    if(ok){
+                        alert("验证通过");
+                    }else{
+                        alert("验证失败")
+                    }
+                })
+            },
+            setVerifyGL(){
+                GMUSDK.verifyGL({
+                    GLOpeationType:"set"
+                },function (ok) {
                     if(ok){
                         alert("验证通过");
                     }else{
