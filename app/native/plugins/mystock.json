@@ -1,0 +1,48 @@
+{	
+  "inputParams": {
+    "stockcode": "$stockcode",
+    "title": "自选股"
+  },
+  "outputParam": [
+    "stockcode",
+    "2",
+    "3"
+  ],
+  "navigationbar": {
+    "show": true,
+    "right_item": {
+		"icon": "search",
+		"action": "gmu://search"
+	}
+  },
+  "menu": {
+    "show": false
+  },
+  "style": {
+    "thirdTextColor":"@textColor1",
+    "loginButtonColor":"@mainColor"
+  },
+  "config":{
+    "filters":[{"title":"沪深","markets":["XSHG","XSHE"]},{"title":"港股", "markets":["XHKG","XHKG-M","XHKG-I"]},{"title":"美股","markets":["XNAS","XASE","XNYS"]},{"title":"期货","markets":["CCFX","XSGE","XDCE","XZCE","XFCC"]}],
+    "thirdColumnIds":["COL_PRICE_CHANGE_PERCENT","COL_PRICE_CHANGE","COL_MARKET_VALUE"],
+    "showSpecialMarker":"false",
+    "quoteRefreshTimeInterval":[5, 10, 30]
+  },
+  "pages": [
+    {
+      "pageid": "mine",
+      "navigationbar": {
+        "show": true,
+        "right_item": {
+			"icon": "selector_title_search_btn",
+			"action": "gmu://search"
+		}
+      },
+      "menu": {
+        "show": false
+      },
+      "style": {},
+      "config":{}
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{	
+	"inputParams": {
+	  },
+	  "outputParam": [
+	  ],
+	  "navigationbar": {
+		"show": true
+	  },
+	  "menu": {
+		"show": false
+	  },
+	  "style": {
+	    "stockFieldNameColor":"@textColor3",
+		"stockFieldValueColor":"@textColor2",
+		"newsTitleColor":"@textColor1",
+		"newsTimeColor":"@textColor2",
+		"infoBackgroundColor":"#f4f4f4",
+		"infoTextColor":"@textColor2",
+		"infoTipsColor":"@textColor3",
+        "infoSeperatorColor":"#c6cdd4",
+        "quoteLandscapeViewBackButtonColor":"@mainColor",
+		"infoSeperatorColor":"#c6cdd4",
+        "bidListHighlightColor":"#ffebd8",
+        "bidListBackgroundColor":"#fff7f0",
+        "offerListHighlightColor":"#ddf2e8",
+        "offerListBackgroundColor":"#f3feff"
+      },
+
+  	"config":{
+		"reportForm":[
+			{
+                "markets":["XSHG.mri", "XSHE.mri"],
+                "fields":["OpenPrice","PrevClosePrice","TotalMoney","Amplitude","HighPrice","LowPrice","Volume","RiseCount","StableCount","FallCount"]
+            },
+            {
+                "markets":["XHKG-I"],
+                "fields":["OpenPrice","PrevClosePrice","TotalMoney","Amplitude","HighPrice","LowPrice","empty","RiseCount","StableCount","FallCount"]
+            },
+            {
+                "markets":["XNAS", "XNAS.mri","XNAS.eu","XNAS.es","XASE","XASE.mri","XASE.eu","XASE.es","XNYS","XNYS.mri","XNYS.eu","XNYS.es"],
+                "fields":["OpenPrice","PrevClosePrice","Volume","TotalValue","HighPrice","LowPrice","PE","52WeekHigh","52WeekLow","EPS"]
+            },
+            {
+                "markets":["CCFX","XSGE","XDCE","XZCE","XFCC"],
+                "fields":["OpenPrice","Amount","Volume","TotalMoney","HighPrice","LowPrice","AmountDelta","Inside","Outside","PrevSettlement"]
+            },
+            {
+                "markets":[XSHG.EM","XSHG.EU","XSHE.EM","XSHE.EU"],
+                "fields":["OpenPrice","HighPrice","PrevClosePrice","LowPrice","TurnoverRate","Volume","IOPV","TotalMoney","Premium","PremiumRate"]
+            }
+		],
+		"quoteChart":[
+				{
+                    "markets":["XNAS", "XNAS.mri","XNAS.eu","XNAS.es","XASE","XASE.mri","XASE.eu","XASE.es","XNYS","XNYS.mri","XNYS.eu","XNYS.es"],
+                    "chart":["TrendLine","TRENDLINE5DAY", "KLineDay","KLineWeek","KLineMonth","KLineMinutes"],
+                     "extraTitle":"分钟",
+                     "extraChart":["KLINE5MIN", "KLINE15MIN", "KLINE30MIN", "KLINE60MIN"]
+                },
+                {
+                    "markets":["XSHG.EU","XSHE.EU","XSHG.EM.ETF","XSHE.EM.LOF","XSHE.EM.ETF","XSHG.EM.LOF"],
+                    "chart":["TrendLine","TRENDLINE5DAY","NetValue","KLineDay","KLineWeek","KLineMonth","KLineMinutes"],
+                     "extraTitle":"分钟",
+                     "extraChart":["KLINE5MIN", "KLINE15MIN", "KLINE30MIN", "KLINE60MIN"]
+                },
+                {
+                     "markets":["XSHG.esa","XSHE.esa","XSHE.esb"],
+                     "chart":["LEVEL2","TrendLine","TRENDLINE5DAY","KLineDay","KLineWeek","KLineMonth","KLineMinutes"],
+                      "extraTitle":"分钟",
+                      "extraChart":["KLINE5MIN", "KLINE15MIN", "KLINE30MIN", "KLINE60MIN"]
+                },
+                {
+                    "markets":["XHKG-I", "XHKG-M","XHKG-M.es","XHKG-M.rw","XHKG-M.db","XHKG-M.dw","XHKG-M.tr","XHKG-M.dm","XHKG-G","XHKG-N","XHKG-E"],
+                    "chart":["TrendLine","TRENDLINE5DAY", "KLineDay","KLineWeek","KLineMonth","KLineMinutes"],
+                     "extraTitle":"分钟",
+                     "extraChart":["KLINE5MIN", "KLINE15MIN", "KLINE30MIN", "KLINE60MIN"]
+                },
+                {
+                    "markets":["CCFX","XSGE","XDCE","XZCE","XFCC"],
+                    "chart":["TrendLine","TRENDLINE5DAY", "KLineDay","KLineWeek","KLineMonth","KLineMinutes"],
+                     "extraTitle":"分钟",
+                     "extraChart":["KLINE5MIN", "KLINE15MIN", "KLINE30MIN", "KLINE60MIN"]
+                }
+			],
+        "bottomMenu":{
+            "left":[
+                 {
+                    "type":"buy"
+                },
+                {
+                   "type":"sell"
+                }
+            ],
+            "right":[
+                {
+                    "type":"comment"
+                },
+                {
+                    "type":"share"
+                }
+            ]
+       		 },
+			"showStockInfoView": true,
+			"showStockFundFlow":true,
+			"enableQuoteReportDetail":true,
+			"enableSocialShare":false
+	}
+}

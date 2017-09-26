@@ -1,0 +1,39 @@
+{
+    "inputParams": {},
+    "outputParam":[],
+    "navigationbar": {
+        "show": true,
+        "right_item": {
+           "icon": "search",
+            "action": "gmu://search"
+        }
+    },
+    "menu": {
+        "show": false
+    },
+    "style": {
+            "tabViewSelectedTextColoe2": "#ffffff",
+            "textColor": "#333333",
+            "inputViewBackgroundColor": "#eaeaea",
+            "tabViewSelectedTextColoe": "#ed3331",
+            "backgroundColor": "#ffffff",
+            "headerBackgroundColor2": "#f8f8f8",
+            "stockNameColor": "#333333",
+            "headerBackgroundColor": "#e81f1f",
+            "headerTextColor": "#000333",
+            "tabViewTextColor": "#666666",
+            "tabViewBackgroundColor": "#eaeaea",
+            "blockNameColor": "#333333",
+            "stockCodeColor": "#999999",
+            "tableCellHighlightedColor": "#f6f6f6",
+            "tableCellBackgroundColor": "#ffffff",
+            "descriptionTextColor": "#999999",
+            "stockNewPriceColor": "#333333",
+            "refreshTextColor": "#999999",
+            "seperatorLineColor": "#dddddd"
+    },
+    "config":{
+    },
+    "pages":[
+    ]
+}

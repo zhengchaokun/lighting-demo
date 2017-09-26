@@ -1,0 +1,68 @@
+{
+		"inputParams": {
+            "title":"行情"
+		},
+		"outputParam": [
+
+		],
+		"navigationbar": {
+				"show":true,
+				"left_item":{
+				},
+				"right_item": {
+                		"icon": "search",
+                		"action": "gmu://search"
+                		}
+		},
+		"menu": {
+				"show": true
+		},
+		"style": {
+				"stockInfoColor":"@textColor1",
+                "headerTextColor":"@mainColor",
+                "tabBarBackgroundColor":"#f8f8f8"
+		},
+		"config": {
+				"subViews": [
+					{
+						"name": "沪深",
+						"collapses": ["CNIndex", "CNBlocks", "CNRiseList","CNFallList", "CNTurnoverList"]
+					},
+					{
+						"name": "美股",
+						"collapses": ["USChinaStocks","USFamousStocks"]
+					},
+					{
+						"name": "港股",
+						"collapses": ["HKIndex","HKBlocks","HKRiseList","HKFallList","HKTurnoverList"]
+					},
+					{
+						"name": "期货",
+						"collapses": ["FutureIndex","FinancialFutures","XSGEFutures","XDCEFutures","XZCEFutures"]
+					},
+					{
+					    "name":"其他",
+					    "collapses":["Fund"]
+					}
+				],
+				"showMarketTags":true,
+                "showSpecialTags":true
+
+        	},
+		"pages":[
+			{
+				"pageid":"hugangtong",
+				"inputParams":{
+					"title":"沪港通专题"
+				},
+				"config":{
+						"subViews":[
+							{
+								"name": "沪港通专题",
+								"collapses": ["HGTBALANCE","SH2HK","HK2SH"]
+							}
+						]
+				}
+			}
+		]
+}

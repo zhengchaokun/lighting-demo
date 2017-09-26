@@ -1,0 +1,28 @@
+{
+		"inputParams": {
+		},
+		"outputParam": [
+
+		],
+		"navigationbar": {
+			"show": true,
+			"left_item": {
+			},
+			"right_item": {
+			}
+		},
+		"menu": {
+			"show": false
+		},
+		"style": {
+				"searchBarBackgroundColor":"@backgroundColor",
+				"clearButtonTextColor":"#d1d2d4",
+				"addButtonTintColor":"#007aff",
+				"statusTextColor":"#d1d2d4"
+		},
+		"config": {
+				"showSpeciaMarker": false,
+				"filters":["XSHG","XSHE","XNAS", "XASE", "XNYS", "XBHS","XHKG-I","XHKG-M","XHKG-G","XBHK", "CCFX", "XSGE", "XDCE", "XZCE", "CFFE", "CSI", "NEEQ"],
+				"funcKey":["600",  "601", "000", "002", "300"]
+		}
+}

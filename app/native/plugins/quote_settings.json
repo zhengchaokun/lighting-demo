@@ -1,0 +1,13 @@
+{
+    "inputParams": {
+        "title": "设置"
+    },
+    "navigationbar": {
+        "show": true
+    },
+    "menu": {
+        "show": false
+    },
+    "style": {
+    }
+}

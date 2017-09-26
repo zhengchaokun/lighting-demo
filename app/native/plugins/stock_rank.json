@@ -1,0 +1,100 @@
+{
+    "inputParams": {},
+    "outputParam":[],
+    "navigationbar": {
+        "show": true,
+        "right_item": {
+            "icon": "search",
+            "action": "gmu://search"
+        }
+    },
+    "menu": {
+        "show": false
+    },
+    "style": {
+    },
+    "config":{
+        "views":[
+            {
+                "sortId":"col_price_change_percent",
+                "orderType":"desc",
+                "markets":["XSHG.esa","XSHE.esa","XSHE.es.gem","XSHE.es.smse"],
+                "fields":["COL_NEW_PRICE", "COL_PRICE_CHANGE_PERCENT", "COL_PRICE_CHANGE", "COL_TOTAL_VOLUME", "COL_TOTAL_MONEY","COL_CHANGE_HAND_RATIO","COL_PRE_CLOSE_PRICE"]
+            }
+        ]
+    },
+    "pages":[
+        {
+            "pageid":"usrank",
+            "config":{
+                "views":[
+                    {
+                        "sortId":"col_price_change_percent",
+                        "orderType":"desc",
+                        "markets":["XSHG.esa","XSHE.esa","XSHE.es.gem","XSHE.es.smse"],
+                        "fields":["COL_NEW_PRICE", "COL_PRICE_CHANGE_PERCENT", "COL_PRICE_CHANGE", "COL_TOTAL_VOLUME"]
+                    }
+                ]
+            }
+        },
+        {
+            "pageid":"hsrank",
+            "inputParams": {
+                "title": "分类排名"
+            },
+            "config":{
+                "views":[
+                    {
+                        "name":"沪深A股",
+                        "sortId":"col_price_change_percent",
+                        "orderType":"desc",
+                        "markets":["XSHG.esa","XSHE.esa","XSHE.es.gem","XSHE.es.smse"],
+                        "fields":["COL_NEW_PRICE", "COL_PRICE_CHANGE_PERCENT", "COL_PRICE_CHANGE", "COL_TOTAL_VOLUME", "COL_TOTAL_MONEY","COL_CHANGE_HAND_RATIO","COL_PRE_CLOSE_PRICE"]
+                    },
+                    {
+                        "name":"上证指数",
+                        "sortId":"col_price_change_percent",
+                        "orderType":"desc",
+                        "markets":["XSHG.mri"],
+                        "fields":["COL_NEW_PRICE", "COL_PRICE_CHANGE_PERCENT", "COL_PRICE_CHANGE", "COL_TOTAL_VOLUME", "COL_TOTAL_MONEY","COL_CHANGE_HAND_RATIO","COL_PRE_CLOSE_PRICE"]
+                    },
+                    {
+                        "name":"上证A股",
+                        "sortId":"col_price_change_percent",
+                        "orderType":"desc",
+                        "markets":["XSHG.esa"],
+                        "fields":["COL_NEW_PRICE", "COL_PRICE_CHANGE_PERCENT", "COL_PRICE_CHANGE", "COL_TOTAL_VOLUME", "COL_TOTAL_MONEY","COL_CHANGE_HAND_RATIO","COL_PRE_CLOSE_PRICE"]
+                    },
+                    {
+                        "name":"深证指数",
+                        "sortId":"col_price_change_percent",
+                        "orderType":"desc",
+                        "markets":["XSHE.mri"],
+                        "fields":["COL_NEW_PRICE", "COL_PRICE_CHANGE_PERCENT", "COL_PRICE_CHANGE", "COL_TOTAL_VOLUME", "COL_TOTAL_MONEY","COL_CHANGE_HAND_RATIO","COL_PRE_CLOSE_PRICE"]
+                    },
+                    {
+                        "name":"深证A股",
+                        "sortId":"col_price_change_percent",
+                        "orderType":"desc",
+                        "markets":["XSHE.esa"],
+                        "fields":["COL_NEW_PRICE", "COL_PRICE_CHANGE_PERCENT", "COL_PRICE_CHANGE", "COL_TOTAL_VOLUME", "COL_TOTAL_MONEY","COL_CHANGE_HAND_RATIO","COL_PRE_CLOSE_PRICE"]
+                    },
+                    {
+                        "name":"创业板",
+                        "sortId":"col_price_change_percent",
+                        "orderType":"desc",
+                        "markets":["XSHE.esa.gem"],
+                        "fields":["COL_NEW_PRICE", "COL_PRICE_CHANGE_PERCENT", "COL_PRICE_CHANGE", "COL_TOTAL_VOLUME", "COL_TOTAL_MONEY","COL_CHANGE_HAND_RATIO","COL_PRE_CLOSE_PRICE"]
+                    },
+                    {
+                        "name":"中小板",
+                        "sortId":"col_price_change_percent",
+                        "orderType":"desc",
+                        "markets":["XSHE.esa.smse"],
+                        "fields":["COL_NEW_PRICE", "COL_PRICE_CHANGE_PERCENT", "COL_PRICE_CHANGE", "COL_TOTAL_VOLUME", "COL_TOTAL_MONEY","COL_CHANGE_HAND_RATIO","COL_PRE_CLOSE_PRICE"]
+                    }
+                ]
+            }
+        }
+    ]
+}

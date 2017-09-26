@@ -1,0 +1,17 @@
+{
+    "navigationbar": {
+        "show": true
+    },
+    "menu": {
+        "show": false
+    },
+    "config": {
+
+    },
+    "style":{
+      "navigationbar":{
+            "backgroundColor": "#f30000",
+            "titleColor": "#ffffff"
+      }
+    }
+}

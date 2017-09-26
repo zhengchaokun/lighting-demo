@@ -1,0 +1,18 @@
+{	
+	"inputParams": {
+	  },
+	  "outputParam": [
+	  ],
+	  "navigationbar": {
+		"show": true
+	  },
+	  "menu": {
+		"show": true
+	  },
+	  "style": {
+	},
+
+  	"config":{
+
+	}
+}

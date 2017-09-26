@@ -62,5 +62,11 @@
     }
 </script>
 <style lang="less">
-
+    button,a{
+        padding: 10px;
+        border: 1px solid #4BABED;
+        margin: 10px;
+        font-size: 16px;
+        color:#4BABED;
+    }
 </style>
