@@ -64,9 +64,9 @@
                     GLOpeationType:"set"
                 },function (ok) {
                     if(ok){
-                        alert("验证通过");
+                        alert("设置成功");
                     }else{
-                        alert("验证失败")
+                        alert("设置失败")
                     }
                 })
             }
