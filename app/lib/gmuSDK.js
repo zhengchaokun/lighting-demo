@@ -362,6 +362,66 @@
             } else {
                 cb && cb();
             }
+        },
+        checkFP:function (cb) {
+            if (deviceFlag && window.LightJSBridge) {
+                LightJSBridge.call("validate.preVerifyOpeation",{
+                    "verifyType":"FP"
+                }, function(data){
+                    if(data&&data.data&&data.data.result==="success"){
+                        cb&&cb(true);
+                    }else{
+                        cb&&cb(false);
+                    }
+                });
+            } else {
+                cb && cb(false);
+            }
+        },
+        checkGL:function (cb) {
+            if (deviceFlag && window.LightJSBridge) {
+                LightJSBridge.call("validate.preVerifyOpeation",{
+                    "verifyType":"GL"
+                }, function(data){
+                    if(data&&data.data&&data.data.result==="success"){
+                        cb&&cb(true);
+                    }else{
+                        cb&&cb(false);
+                    }
+                });
+            } else {
+                cb && cb(false);
+            }
+        },
+        verifyFP:function (cb) {
+            if (deviceFlag && window.LightJSBridge) {
+                LightJSBridge.call("validate.verifyOpeation",{
+                    "verifyType":"FP"
+                }, function(data){
+                    if(data&&data.data&&data.data.result==="success"){
+                        cb&&cb(true);
+                    }else{
+                        cb&&cb(false);
+                    }
+                });
+            } else {
+                cb && cb(false);
+            }
+        },
+        verifyGL:function (cb) {
+            if (deviceFlag && window.LightJSBridge) {
+                LightJSBridge.call("validate.verifyOpeation",{
+                    "verifyType":"GL"
+                }, function(data){
+                    if(data&&data.data&&data.data.result==="success"){
+                        cb&&cb(true);
+                    }else{
+                        cb&&cb(false);
+                    }
+                });
+            } else {
+                cb && cb(false);
+            }
         }
     };
     function convertBase64ToBlob(data) {
