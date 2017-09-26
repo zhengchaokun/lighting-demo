@@ -5,7 +5,7 @@
         <div class="title">
             <code class="more"></code>
             <span>{{navMap[$route.path]}}</span>
-            <code class="scan"></code>
+            <code class="scan" @click="scan()"></code>
         </div>
 
         <sub-view></sub-view>
@@ -33,6 +33,7 @@
     </div>
 </template>
 <script>
+    const GMUSDK = require("../lib/gmuSDK");
     export default {
         data(){
             return {
@@ -48,6 +49,11 @@
             jump(link,index){
                 location.href = link;
                 this.index=index;
+            },
+            scan(){
+                GMUSDK.scan({},function(result){
+                    alert(result)
+                })
             }
         }
     }
