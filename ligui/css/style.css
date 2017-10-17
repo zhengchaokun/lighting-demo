@@ -1,0 +1,53 @@
+.mgt15 {
+    margin-top: 15px;
+}
+.mgt30 {
+    margin-top: 30px;
+}
+.mgt50 {
+    margin-top: 50px;
+}
+.mgt60 {
+    margin-top: 60px;
+}
+.tcenter {
+    text-align: center;
+}
+.tcenter .el-form-item__content {
+    text-align: center !important;
+}
+.w300 {
+    width:300px;
+}
+.w400 {
+    width:400px;
+}
+.w300 .el-input, .w300 .el-input__inner {
+    width:300px;
+}
+html,body,#main, .el-row {
+    height:100%;
+    margin:0;
+}
+body {
+    background: #FDFDFD;
+}
+
+.sidebar {
+    min-width: 160px;
+    height:100%;
+    background: #eef1f6;
+}
+.mainbody {
+    padding:20px;
+}
+.form-editinfo .el-form-item__content {
+    text-align: left;
+}
+.form-service .el-form-item__content {
+    width:400px;
+}
+.tooltip {
+    vertical-align: middle;
+    margin-left: 30px;
+}
