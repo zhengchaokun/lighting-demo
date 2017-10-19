@@ -1,0 +1,138 @@
+*{ margin:0; padding:0}
+
+body{ font:0.12rem/0.24rem "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑","Arial","sans-serif";color:#000;-webkit-text-size-adjust:none; outline: none;background: #F6F6F6}
+li{ list-style:none}
+a{text-decoration:none; color: #4A4A4A;}
+a:hover{text-decoration:none;}
+img{border:0; vertical-align:middle;}
+input{vertical-align:middle; outline: none;}
+textarea{resize:none}
+form{display:inline-block;width:100%;}
+button{ border: none; background: none; text-align: center; cursor: pointer; display: block;}
+s{ text-decoration:none;}
+label{display:inline-block;}
+h3{font-size:14px;}
+b{vertical-align: middle;}
+em,span{ display:inline-block;font-style:normal;}
+/*
+a,button,input,textarea {-webkit-tap-highlight-color: rgba(0,0,0,0); -webkit-user-modify:read-write-plaintext-only;}
+*/
+/*禁止长按链接与图片弹出菜单*/
+a,img { -webkit-touch-callout: none }
+.greyBg{
+    position:fixed;
+    background:rgba(0,0,0,0.5);
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    .operateWrap{
+        background:#fff;
+        border-radius:4px;
+        position:absolute;
+        top:10%;
+        width:2.5rem;
+        left:50%;
+        margin-left:-1.55rem;
+        padding:0.3rem;
+        p{
+            display:flex;
+            display:-webkit-flex;
+            margin-bottom:0.05rem;
+            .toCheck{
+                color:#666;
+                text-decoration:underline
+            }
+            em{
+                word-break: break-all;
+            }
+            span{
+                font-weight:900
+            }
+        }
+        .colorRed{
+            color:red;
+            display:block;
+        }
+        .tips{
+            color:#f3bd6a;
+            display:block;
+        }
+        .closed{
+            position:absolute;
+            right:0.05rem;
+            top:0;
+            width:0.3rem;
+            height:0.3rem;
+            background:url(images/closeConsole.png) no-repeat;
+            background-size:100%
+        }
+        .buttonStyle{
+            width:0.4rem;
+            height:0.25rem;
+            color:#fff;
+            border-radius:4px;
+            border:1px solid #686e71;
+            background:#686e71;
+            text-align:center;
+        }
+        .inputStyle{
+            height:0.25rem;
+            border-radius:4px;
+            border:1px solid #686e71;
+            padding:0 0.05rem;
+        }
+    }
+    
+}
+
+.apiContent{
+    padding:0.3rem 0.15rem;
+    .apiDesc{
+        color:#9e9b9b;
+        font-size:0.16rem;
+        text-indent:0.24rem;
+    }
+    p{
+        font-size:0.18rem;
+        line-height:0.24rem;
+        font-weight:900;
+        margin:0.15rem 0;
+        color:#696666;
+    }
+    span{
+        width:50%;
+        padding:0.05rem;
+        font-size:0.14rem;
+        border-radius:4px;
+    }
+    .exampleShow{
+        text-align:center;
+        span{
+            background:#686e71;
+            color:#fff;
+        }
+        
+    }
+    .viewOnlineApi{
+        text-align:center;
+        span{
+            color:#686e71;
+            border:1px solid #686e71;
+            background:#fff;
+        }
+    }
+}
+.infoList{
+    max-height:2rem;
+    overflow:auto;
+}
+.infoList li{
+    display: -webkit-flex; /* Safari */
+    display: flex;
+    justify-content:space-between;
+    border-bottom:1px solid #eee;
+}
+.w50{
+    width:0.55rem;
+}
