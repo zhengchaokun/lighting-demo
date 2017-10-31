@@ -1,0 +1,15 @@
+{
+  "menus": [
+    {
+      "action": "gmu://jsnative#jsnative"
+    }
+  ],
+  "style": {
+    "navigationbar": {
+      "backgroundColor": "#bbbbbb",
+      "titleColor": "#ffffff",
+      "buttonColor": "#ffffff",
+      "useDarkStatusBarStyle": true
+    }
+  }
+}

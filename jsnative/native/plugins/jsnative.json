@@ -1,0 +1,12 @@
+{
+  "pages": [
+    {
+      "pageid": "jsnative",
+      "inputParams": {
+        "startPage": "http://192.168.12.1:3000/app.native.js"
+      }
+    }
+  ],
+  "config": {
+  }
+}
