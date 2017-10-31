@@ -2,7 +2,6 @@ import App from "light"
 import Vue from 'vue'
 import weex from 'weex-vue-render'
 window.weex = weex;
-console.log(weex)
 weex.init(Vue)
 
 // require("./lib/px2rem");
