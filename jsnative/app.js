@@ -1,8 +1,5 @@
 import App from "light"
-import Vue from 'vue'
-import weex from 'weex-vue-render'
-window.weex = weex;
-weex.init(Vue)
+
 
 // require("./lib/px2rem");
 // require("./app.less");
