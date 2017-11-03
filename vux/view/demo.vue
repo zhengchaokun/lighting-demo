@@ -45,20 +45,18 @@
 </i18n>
 
 <script>
-    import { Alert, Group, XSwitch, Cell, TransferDomDirective as TransferDom } from 'vux'
-    import Card from 'vux/src/components/card/index.vue'
-    import { Divider } from 'vux'
+    let { vuxAlert, vuxGroup, vuxXSwitch, vuxCell, vuxTransferDomDirective,vuxCard,vuxDivider } = vux;
     export default {
         directives: {
-            TransferDom
+            TransferDom:vuxTransferDomDirective
         },
         components: {
-            Card,
-            Divider,
-            Alert,
-            Group,
-            XSwitch,
-            Cell
+            Card:vuxCard,
+            Divider:vuxDivider,
+            Alert:vuxAlert,
+            Group:vuxGroup,
+            XSwitch:vuxXSwitch,
+            Cell:vuxCell
         },
         data () {
             return {

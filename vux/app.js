@@ -27,16 +27,21 @@ Vue.prototype.$t = function (key) {
     }
 }
 
+require("./lib/vux")
+require("./lib/vux.css")
+
+console.log(vux)
+
 // plugins
-import { LocalePlugin, DevicePlugin, ToastPlugin, AlertPlugin, ConfirmPlugin, LoadingPlugin, WechatPlugin, AjaxPlugin, AppPlugin } from 'vux'
-Vue.use(DevicePlugin)
-Vue.use(ToastPlugin)
-Vue.use(AlertPlugin)
-Vue.use(ConfirmPlugin)
-Vue.use(LoadingPlugin)
-Vue.use(WechatPlugin)
-Vue.use(AjaxPlugin)
-Vue.use(LocalePlugin)
+let { vuxLocalePlugin, vuxDevicePlugin, vuxToastPlugin, vuxAlertPlugin, vuxConfirmPlugin, vuxLoadingPlugin, vuxWechatPlugin, vuxAjaxPlugin, vuxAppPlugin } = vux;
+Vue.use(vuxDevicePlugin)
+Vue.use(vuxToastPlugin)
+Vue.use(vuxAlertPlugin)
+Vue.use(vuxConfirmPlugin)
+Vue.use(vuxLoadingPlugin)
+Vue.use(vuxWechatPlugin)
+Vue.use(vuxAjaxPlugin)
+Vue.use(vuxLocalePlugin)
 
 
 App.filter("start",function (next) {
