@@ -25,12 +25,10 @@ Vue.prototype.$t = function (key) {
     }else{
         return key;
     }
-}
+};
 
 require("./lib/vux")
 require("./lib/vux.css")
-
-console.log(vux)
 
 // plugins
 let { vuxLocalePlugin, vuxDevicePlugin, vuxToastPlugin, vuxAlertPlugin, vuxConfirmPlugin, vuxLoadingPlugin, vuxWechatPlugin, vuxAjaxPlugin, vuxAppPlugin } = vux;
