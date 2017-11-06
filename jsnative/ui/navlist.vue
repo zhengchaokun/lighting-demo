@@ -3,7 +3,7 @@
     <text class="nav-head-text"
           v-for='list in navLists'
           @click="onclicklist(list)"
-          :class="{'on':list.index==selectedIndex}"
+          :class="{'on':(list.index===selectedIndex)}"
     >{{list.name}}</text>
       <div  @click="h()">
           <text>111111111111</text>

@@ -2,15 +2,15 @@
   <div class="wrapper">
     <div class="tabbar" append="tree">
       <tabitem
-        v-for="item in tabItems"
-        :key="item.index"
-        :index="item.index"
-        :icon="item.icon"
-        :title="item.title"
-        :src="item.src"
-        :titleColor="item.titleColor"
-        @tabItemOnClick="tabItemOnClick"
-        ></tabItem>
+              v-for="item in tabItems"
+              :key="item.index"
+              :index="item.index"
+              :icon="item.icon"
+              :title="item.title"
+              :src="item.src"
+              :titleColor="item.titleColor"
+              @tabItemOnClick="tabItemOnClick"
+      ></tabItem>
     </div>
   </div>
 </template>
@@ -18,20 +18,20 @@
 <style scoped>
   .wrapper {
     width: 750;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    /*bottom: 0;*/
   }
   .content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin-top: 0;
-    margin-bottom: 88;
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    /*bottom: 0;*/
+    /*margin-top: 0;*/
+    /*margin-bottom: 88;*/
   }
   .tabbar {
     flex-direction: row;

@@ -3,33 +3,12 @@
         <div style="flex-direction: column;">
             <sub-view></sub-view>
             <tabbar :tabItems="tabItems" @tabBarOnClick="tabBarOnClick"></tabbar>
-
-            <!--<div class="nav-Bottom">
-                <div class="nav-list" @click="jump('#/light/index',1)">
-                    <image class="nav-list-img" src="http://gtms01.alicdn.com/tps/i1/TB1qw.hMpXXXXagXXXX9t7RGVXX-46-46.png" v-if="index!=1"></image>
-                    <image class="nav-list-img" src="http://gtms04.alicdn.com/tps/i4/TB16jjPMpXXXXazXVXX9t7RGVXX-46-46.png" v-if="index==1"></image>
-                    <text class="nav-list-tit" :class="{'active':index==1}">首 页</text>
-                </div>
-                <div class="nav-list" @click="jump('#/light/index',2)" :class="{'active':index==2}">
-                    <image class="nav-list-img" src="http://gtms01.alicdn.com/tps/i1/TB1qw.hMpXXXXagXXXX9t7RGVXX-46-46.png" v-if="index!=2"></image>
-                    <image class="nav-list-img" src="http://gtms04.alicdn.com/tps/i4/TB16jjPMpXXXXazXVXX9t7RGVXX-46-46.png" v-if="index==2"></image>
-                    <text class="nav-list-tit">关 于</text>
-                </div>
-                <div class="nav-list" @click="jump('#/light/index',3)" :class="{'active':index==3}">
-                    <image class="nav-list-img" src="http://gtms01.alicdn.com/tps/i1/TB1qw.hMpXXXXagXXXX9t7RGVXX-46-46.png" v-if="index!=3"></image>
-                    <image class="nav-list-img" src="http://gtms04.alicdn.com/tps/i4/TB16jjPMpXXXXazXVXX9t7RGVXX-46-46.png" v-if="index==3"></image>
-                    <text class="nav-list-tit">联系我们</text>
-                </div>
-            </div>-->
-
         </div>
     </div>
 </template>
 
 
 <script>
-
-
     module.exports = {
         data: function () {
             return {

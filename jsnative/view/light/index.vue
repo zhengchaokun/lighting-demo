@@ -1,7 +1,7 @@
 
 <template>
     <div>
-       <navlist :navLists="navLists" @navListOnClick="navListOnClick"></navlist>
+       <navlist :navLists="navLists"></navlist>
     </div>
 </template>
 <script>
