@@ -4,9 +4,7 @@
         <sub-view></sub-view>
 
         <div class="wrapper">
-            <a class="button" href="javascript:void(0)">
-                <text class="text" @click="jump('/index/demo')">demo</text>
-            </a>
+            <text class="text" @click="jump('/light/index')">demo</text>
         </div>
     </div>
 </template>
