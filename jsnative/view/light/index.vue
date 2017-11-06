@@ -13,22 +13,26 @@
                     {
                         index:0,
                         color:'#646d88',
-                        name:'要闻'
+                        name:'要闻',
+                        selected:''
                     },
                     {
                         index:1,
                         color:'#646d88',
-                        name:'牛牛大学'
+                        name:'牛牛大学',
+                        selected:''
                     },
                     {
                         index:2,
                         color:'#646d88',
-                        name:'要闻'
+                        name:'要闻',
+                        selected:''
                     },
                     {
                         index:3,
                         color:'#646d88',
-                        name:'牛牛大学'
+                        name:'牛牛大学',
+                        selected:''
                     }
                 ]
             }

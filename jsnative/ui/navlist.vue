@@ -3,17 +3,19 @@
     <text class="nav-head-text"
           v-for='list in navLists'
           @click="onclicklist(list)"
-          :class="{'on':(list.index===selectedIndex)}"
+          :style="{
+            color: list.color ,
+            'border-bottom-style':list.index==selectedIndex?'solid':'',
+            'border-bottom-width':list.index==selectedIndex?'2px':'',
+            'border-bottom-color':list.index==selectedIndex?'#457fca':''
+          }"
     >{{list.name}}</text>
-      <div  @click="h()">
-          <text>111111111111</text>
-      </div>
   </div>
 </template>
 
 <style scoped>
   .nav-head{background: #fff; flex-direction: row; }
-  .nav-head-text{color: #646d88; height: 70px; font-size: 24; padding-right: 10px; padding-left: 10px; margin-left:10px; margin-right:10px; justify-content: center;}
+  .nav-head-text{ height: 70px; font-size: 24; padding-right: 10px; padding-left: 10px; margin-left:10px; margin-right:10px; justify-content: center;}
   .on{color:#457fca; border-bottom-style:solid; border-bottom-width:2px; border-bottom-color:#457fca; }
 
 </style>
@@ -33,21 +35,19 @@
     },
     methods: {
       onclicklist: function (e) {
-          alert(123)
         this.selectedIndex = e.index;
-          console.log(this.selectedIndex)
-          console.log(e.index)
         this.select(e.index);
         this.$emit('navListOnClick', e);
       },
       select: function(index) {
+        var line={};
         for(var i = 0; i < this.navLists.length; i++) {
           var navList = this.navLists[i];
           if(i == index){
-            navList.color = this.selectedColor;
+              navList.color = this.selectedColor;
           }
           else {
-            navList.color = this.color;
+              navList.color = this.color;
           }
         }
       }

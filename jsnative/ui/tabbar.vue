@@ -18,20 +18,6 @@
 <style scoped>
   .wrapper {
     width: 750;
-    /*position: absolute;*/
-    /*top: 0;*/
-    /*left: 0;*/
-    /*right: 0;*/
-    /*bottom: 0;*/
-  }
-  .content {
-    /*position: absolute;*/
-    /*top: 0;*/
-    /*left: 0;*/
-    /*right: 0;*/
-    /*bottom: 0;*/
-    /*margin-top: 0;*/
-    /*margin-bottom: 88;*/
   }
   .tabbar {
     flex-direction: row;
