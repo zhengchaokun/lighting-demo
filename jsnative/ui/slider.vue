@@ -1,6 +1,6 @@
 <template>
     <div>
-        <slider class="slider" interval="4500" >
+        <slider class="slider" interval="4500" auto-play="true">
             <div class="frame" v-for="img in imageLists" @click="onclickimg(img)">
                 <image class="image" resize="cover" :src="img.imgsrc"></image>
                 <text class="title">{{img.title}}</text>
@@ -23,6 +23,7 @@
         bottom: 0;
         left: 0;
         padding-left: 40px;
+        width: 750px;
         height: 60px;
         color: #FFFFFF;
         font-size: 28px;
