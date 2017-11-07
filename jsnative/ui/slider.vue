@@ -1,52 +1,34 @@
 <template>
     <div>
-        <slider class="slider" interval="4500" auto-play="true">
+        <slider class="slider" interval="4500" >
             <div class="frame" v-for="img in imageLists" @click="onclickimg(img)">
                 <image class="image" resize="cover" :src="img.imgsrc"></image>
                 <text class="title">{{img.title}}</text>
             </div>
-            <indicator class="indicator"></indicator>
         </slider>
     </div>
 </template>
 
 <style scoped>
     .slider {
-        width: 750;
-        height: 380;
-        margin-top: 5;
+        height: 380px;
+        margin-top: 5px;
     }
     .image {
-        width: 750;
-        height: 380;
+        width: 750px;
+        height: 380px;
     }
     .title {
         position: absolute;
-        top: 20px;
-        left: 20px;
-        padding-left: 20px;
-        width: 200px;
+        bottom: 0;
+        left: 0;
+        padding-left: 40px;
+        height: 60px;
         color: #FFFFFF;
-        font-size: 36px;
+        font-size: 28px;
         line-height: 60px;
-        background-color: rgba(0, 0, 0, 0.3);
+        background-color: rgba(0, 0, 0, 0.7);
     }
-    .frame {
-        width: 700px;
-        height: 700px;
-        position: relative;
-    }
-    .indicator {
-        width: 700px;
-        height: 700px;
-        item-color: green;
-        item-selected-color: red;
-        item-size: 50px;
-        position: absolute;
-        top: 200px;
-        left: 200px;
-    }
-
 </style>
 
 <script>

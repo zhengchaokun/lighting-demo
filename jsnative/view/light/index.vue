@@ -21,17 +21,17 @@
                 ],
                 imageLists: [
                     {
-                        title: 'item A',
+                        title: '详情介绍1111',
                         imgsrc: 'https://gd2.alicdn.com/bao/uploaded/i2/T14H1LFwBcXXXXXXXX_!!0-item_pic.jpg',
                         src:'#'
                     },
                     {
-                        title: 'item B',
+                        title: '详情介绍2222',
                         imgsrc: 'https://gd1.alicdn.com/bao/uploaded/i1/TB1PXJCJFXXXXciXFXXXXXXXXXX_!!0-item_pic.jpg',
                         src:'#'
                     },
                     {
-                        title: 'item C',
+                        title: '详情介绍3333',
                         imgsrc: 'https://gd3.alicdn.com/bao/uploaded/i3/TB1x6hYLXXXXXazXVXXXXXXXXXX_!!0-item_pic.jpg',
                         src:''
                     }
