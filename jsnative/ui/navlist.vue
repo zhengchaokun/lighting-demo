@@ -39,6 +39,12 @@
         border-bottom-width: 4px;
         border-bottom-color: #457fca;
     }
+    .off{
+        color: #646d88;
+        border-bottom-style: solid;
+        border-bottom-width: 4px;
+        border-bottom-color: #fff;
+    }
 
 </style>
 
@@ -58,7 +64,7 @@
                     return "on"
                 }
                 else {
-                    return "";
+                    return "off";
                 }
             },
             onclicklist: function (e) {

@@ -28,7 +28,7 @@
         color: #FFFFFF;
         font-size: 28px;
         line-height: 60px;
-        background-color: rgba(0, 0, 0, 0.7);
+        background-color: rgba(0, 0, 0, 0.6);
     }
 </style>
 

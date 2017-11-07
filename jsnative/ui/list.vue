@@ -61,8 +61,8 @@
         },
         props: ['infolists'],
         methods: {
-            /*fetch (event) {
-                modal.toast({ message: 'loadmore', duration: 1 })
+            fetch (event) {
+                weex.requireModule("modal").toast({ message: 'loadmore', duration: 1 })
 
                 setTimeout(() => {
                     const length = this.infolists.length
@@ -70,7 +70,7 @@
                     this.infolists.push(i + 1)
                 }
                 }, 800)
-            }*/
+            }
         }
     }
 </script>
