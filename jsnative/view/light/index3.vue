@@ -2,7 +2,7 @@
 <template>
     <div>
         <text>
-            123455
+            这是第3页
         </text>
     </div>
 </template>

@@ -2,7 +2,7 @@
 <template>
     <div>
         <text>
-            123
+            这是第2页
         </text>
     </div>
 </template>

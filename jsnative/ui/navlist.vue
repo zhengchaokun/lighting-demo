@@ -4,9 +4,6 @@
               v-for='list in navLists'
               @click="onclicklist(list)"
               :class="[selected(list)]"
-              :style="{
-            color: list.color
-          }"
         >{{list.name}}
         </text>
     </div>
@@ -21,7 +18,7 @@
     .nav-head-text {
         height: 70px;
         line-height: 70px;
-        font-size: 24;
+        font-size: 30;
         color: #646d88;
         padding-right: 10px;
         padding-left: 10px;
@@ -33,7 +30,7 @@
     .on {
         color: #457fca;
         border-bottom-style: solid;
-        border-bottom-width: 2px;
+        border-bottom-width: 4px;
         border-bottom-color: #457fca;
     }
 
@@ -43,14 +40,11 @@
     export default {
         data: function () {
             return {
-                selectedIndex: 0,
-                color: '#646d88',
-                selectedColor: '#457fca'
+                selectedIndex: 0
             }
         },
         props: ['navLists'],
         mounted(){
-            this.select(this.selectedIndex);
         },
         methods: {
             selected: function (list) {
@@ -63,20 +57,7 @@
             },
             onclicklist: function (e) {
                 this.selectedIndex = e.index;
-                this.select(e.index);
                 this.$emit('navListOnClick', e);
-            },
-            select: function (index) {
-                for (var i = 0; i < this.navLists.length; i++) {
-                    var navList = this.navLists[i];
-                    if (i == index) {
-                        navList.color = this.selectedColor;
-
-                    }
-                    else {
-                        navList.color = this.color;
-                    }
-                }
             }
 
         }
