@@ -49,7 +49,7 @@
       title: { default: '' },
       titleColor: { default: '#000000' },
       icon: { default: '' },
-      backgroundColor: { default: '#ffffff' },
+      backgroundColor: { default: '#ccc' },
       src:{default:''}
     },
     methods: {
