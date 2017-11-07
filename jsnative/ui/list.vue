@@ -14,10 +14,9 @@
 
 <style scoped>
     .list{
-        height: 700px;
+        height: 650px;
         overflow: auto;
         margin-top: 20px;
-        padding-bottom: 100px;
         flex-direction: column;
     }
     .cell{
