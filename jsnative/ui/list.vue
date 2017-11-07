@@ -1,7 +1,7 @@
 <template>
     <div>
         <list class="list" @loadmore="fetch" loadmoreoffset="10">
-            <cell class="cell" v-for="list in infolists">
+            <cell class="cell" :key="list.title" v-for="list in infolists">
                 <image class="cell-img" :src="list.imgsrc"></image>
                 <div class="panel">
                     <text class="cell-tit">{{list.title}}</text>
