@@ -13,6 +13,9 @@
 </template>
 
 <style scoped>
+    .list{
+        padding-bottom: 80px;
+    }
     .cell{
         height: 170px;
         flex-direction: row;
@@ -58,9 +61,9 @@
                 modal.toast({ message: 'loadmore', duration: 1 })
 
                 setTimeout(() => {
-                    const length = this.lists.length
+                    const length = this.infolists.length
                     for (let i = length; i < length + LOADMORE_COUNT; ++i) {
-                    this.lists.push(i + 1)
+                    this.infolists.push(i + 1)
                 }
                 }, 800)
             }
