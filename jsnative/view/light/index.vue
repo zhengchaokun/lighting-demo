@@ -18,8 +18,9 @@
                 navLists:[
                     {index:0, name:'要闻'},
                     {index:1, name:'牛牛大学'},
-                    {index:2, name:'要闻'},
-                    {index:3, name:'牛牛大学'}
+                    {index:2, name:'自选'},
+                    {index:3, name:'百科'},
+                    {index:4, name:'财经日历'}
                 ],
                 imageLists: [
                     {
@@ -49,6 +50,29 @@
                         title: '开盘沪指下跌0.3%，下周有望反弹开盘沪指下跌0.3%，下周有望反弹开盘沪指下跌0.3%，下周有望反弹',
                         imgsrc: 'https://gd2.alicdn.com/bao/uploaded/i2/T14H1LFwBcXXXXXXXX_!!0-item_pic.jpg',
                         time:'20分钟以前',
+                        src:'#'
+                    },
+                    {
+                        title: '开盘沪指下跌0.3%，下周有望反弹',
+                        imgsrc: 'https://gd2.alicdn.com/bao/uploaded/i2/T14H1LFwBcXXXXXXXX_!!0-item_pic.jpg',
+                        time:'11:26',
+                        src:'#'
+                    },{
+                        title: '开盘沪指下跌0.3%，下周有望反弹下周有望反弹下周有望反弹',
+                        imgsrc: 'https://gd2.alicdn.com/bao/uploaded/i2/T14H1LFwBcXXXXXXXX_!!0-item_pic.jpg',
+                        time:'1分钟以前',
+                        src:'#'
+                    },
+                    {
+                        title: '开盘沪指下跌0.3%，下周有望反弹开盘沪指下跌0.3%，下周有望反弹开盘沪指下跌0.3%，下周有望反弹',
+                        imgsrc: 'https://gd2.alicdn.com/bao/uploaded/i2/T14H1LFwBcXXXXXXXX_!!0-item_pic.jpg',
+                        time:'20分钟以前',
+                        src:'#'
+                    },
+                    {
+                        title: '开盘沪指下跌0.3%，下周有望反弹',
+                        imgsrc: 'https://gd2.alicdn.com/bao/uploaded/i2/T14H1LFwBcXXXXXXXX_!!0-item_pic.jpg',
+                        time:'11:26',
                         src:'#'
                     },
                     {

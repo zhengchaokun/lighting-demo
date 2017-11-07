@@ -20,12 +20,14 @@
     }
 
     .nav-head-text {
+        flex: 1;
+        text-align: center;
         height: 70px;
         line-height: 70px;
-        font-size: 30;
+        font-size: 30px;
         color: #646d88;
-        padding-right: 10px;
-        padding-left: 10px;
+        /*padding-right: 10px;
+        padding-left: 10px;*/
         margin-left: 10px;
         margin-right: 10px;
         justify-content: center;

@@ -14,7 +14,11 @@
 
 <style scoped>
     .list{
-        padding-bottom: 80px;
+        height: 700px;
+        overflow: auto;
+        margin-top: 20px;
+        padding-bottom: 100px;
+        flex-direction: column;
     }
     .cell{
         height: 170px;
@@ -57,7 +61,7 @@
         },
         props: ['infolists'],
         methods: {
-            fetch (event) {
+            /*fetch (event) {
                 modal.toast({ message: 'loadmore', duration: 1 })
 
                 setTimeout(() => {
@@ -66,7 +70,7 @@
                     this.infolists.push(i + 1)
                 }
                 }, 800)
-            }
+            }*/
         }
     }
 </script>

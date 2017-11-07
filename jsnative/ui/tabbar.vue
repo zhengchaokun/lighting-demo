@@ -30,7 +30,7 @@
 </style>
 
 <script>
-  import App from "light"
+ /* import App from "light"*/
   module.exports = {
     props: {
       tabItems: { default: [] },

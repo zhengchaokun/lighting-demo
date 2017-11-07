@@ -1,24 +1,59 @@
-
 <template>
-    <div>
-        <text>
-            这是第2页
-        </text>
-    </div>
+    <list class="list" @loadmore="fetch" loadmoreoffset="10">
+        <cell class="cell" v-for="num in lists">
+            <div class="panel">
+                <text class="text">{{num}}</text>
+            </div>
+        </cell>
+    </list>
 </template>
-<script>
-    import navlist from '../../ui/navlist.vue'
-    export default {
-        data(){
-            return {
 
+<script>
+
+    const LOADMORE_COUNT = 4
+
+    export default {
+        data () {
+            return {
+                lists: [1, 2, 3, 4, 5]
             }
         },
-        methods:{
+        methods: {
+            fetch (event) {
+                const modal = weex.requireModule('modal')
+                modal.toast({ message: 'loadmore', duration: 1 })
 
+                setTimeout(() => {
+                    const length = this.lists.length
+                    for (let i = length; i < length + LOADMORE_COUNT; ++i) {
+                    this.lists.push(i + 1)
+                }
+            }, 800)
+            }
         }
     }
 </script>
-<style scoped>
 
+<style scoped>
+    .list{
+        height: 1000px;
+    }
+    .panel {
+        width: 600px;
+        height: 250px;
+        margin-left: 75px;
+        margin-top: 35px;
+        margin-bottom: 35px;
+        flex-direction: column;
+        justify-content: center;
+        border-width: 2px;
+        border-style: solid;
+        border-color: rgb(162, 217, 192);
+        background-color: rgba(162, 217, 192, 0.2);
+    }
+    .text {
+        font-size: 50px;
+        text-align: center;
+        color: #41B883;
+    }
 </style>
