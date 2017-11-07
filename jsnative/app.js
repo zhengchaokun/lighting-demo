@@ -12,4 +12,6 @@ App.filter("start",function (next) {
     //视图拦截器
     App.log(`view changed:${from.path}--${to.path}`);
     next()
-}).start();
+}).start(function (router) {
+    weex.router = router;
+})

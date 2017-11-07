@@ -30,7 +30,7 @@
 </style>
 
 <script>
-  import App from "light"
+//  import App from "light"
   module.exports = {
     props: {
       tabItems: { default: [] },
@@ -53,7 +53,7 @@
         this.selectedIndex = e.index;
         this.select(e.index);
         this.$emit('tabBarOnClick', e);
-        App.router.push(e.src)
+        weex.router.push(e.src)
 
       },
       select: function(index) {
