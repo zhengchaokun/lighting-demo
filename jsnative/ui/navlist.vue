@@ -22,6 +22,7 @@
         height: 70px;
         line-height: 70px;
         font-size: 24;
+        color: #646d88;
         padding-right: 10px;
         padding-left: 10px;
         margin-left: 10px;

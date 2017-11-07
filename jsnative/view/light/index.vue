@@ -10,30 +10,10 @@
         data(){
             return {
                 navLists:[
-                    {
-                        index:0,
-                        color:'#646d88',
-                        name:'要闻',
-                        selected:''
-                    },
-                    {
-                        index:1,
-                        color:'#646d88',
-                        name:'牛牛大学',
-                        selected:''
-                    },
-                    {
-                        index:2,
-                        color:'#646d88',
-                        name:'要闻',
-                        selected:''
-                    },
-                    {
-                        index:3,
-                        color:'#646d88',
-                        name:'牛牛大学',
-                        selected:''
-                    }
+                    {index:0, name:'要闻'},
+                    {index:1, name:'牛牛大学'},
+                    {index:2, name:'要闻'},
+                    {index:3, name:'牛牛大学'}
                 ]
             }
         },
