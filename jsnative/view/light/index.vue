@@ -5,7 +5,7 @@
 
        <sliderlist :imageLists="imageLists" @imgOnClick="imgOnClick"></sliderlist> <!--轮播图-->
 
-       <infolist :infolists="infolists"></infolist>
+       <infolist :infolists="infolists"></infolist> <!-- 列表详情 -->
     </div>
 </template>
 <script>
@@ -40,6 +40,23 @@
                 ],
                 infolists:[
                     {
+                        title: '开盘沪指下跌0.3%，下周有望反弹下周有望反弹下周有望反弹',
+                        imgsrc: 'https://gd2.alicdn.com/bao/uploaded/i2/T14H1LFwBcXXXXXXXX_!!0-item_pic.jpg',
+                        time:'1分钟以前',
+                        src:'#'
+                    },
+                    {
+                        title: '开盘沪指下跌0.3%，下周有望反弹开盘沪指下跌0.3%，下周有望反弹开盘沪指下跌0.3%，下周有望反弹',
+                        imgsrc: 'https://gd2.alicdn.com/bao/uploaded/i2/T14H1LFwBcXXXXXXXX_!!0-item_pic.jpg',
+                        time:'20分钟以前',
+                        src:'#'
+                    },
+                    {
+                        title: '开盘沪指下跌0.3%，下周有望反弹',
+                        imgsrc: 'https://gd2.alicdn.com/bao/uploaded/i2/T14H1LFwBcXXXXXXXX_!!0-item_pic.jpg',
+                        time:'11:26',
+                        src:'#'
+                    },{
                         title: '开盘沪指下跌0.3%，下周有望反弹下周有望反弹下周有望反弹',
                         imgsrc: 'https://gd2.alicdn.com/bao/uploaded/i2/T14H1LFwBcXXXXXXXX_!!0-item_pic.jpg',
                         time:'1分钟以前',

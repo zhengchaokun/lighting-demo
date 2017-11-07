@@ -12,7 +12,7 @@
 <style scoped>
     .slider {
         height: 380px;
-        margin-top: 5px;
+        margin-top: 70px;
     }
     .image {
         width: 750px;

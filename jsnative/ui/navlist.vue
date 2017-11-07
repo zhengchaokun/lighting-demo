@@ -11,8 +11,12 @@
 
 <style scoped>
     .nav-head {
+        width: 750;
         background: #fff;
         flex-direction: row;
+        position: fixed;
+        top:0;
+        left: 0;
     }
 
     .nav-head-text {
