@@ -32,16 +32,52 @@
                 <!--<loading-indicator style="height: 60px; width: 60px;"></loading-indicator>-->
                 <!--<text class="refreshtextstyle" ref="refreshtextstyle"> 加载中</text>-->
             <!--</refresh>-->
-            <cell v-for="stock in stocks" class="flex-row list-content-item">
+            <cell class="flex-row list-content-item">
                 <div class="flex-column flex-2">
-                    <text class="list-content-title">{{stock.prod_name}}</text>
-                    <text class="list-content-info gray">{{stock.code}}</text>
+                    <text class="list-content-title">N苏波涛</text>
+                    <text class="list-content-info gray">600570.ss</text>
                 </div>
                 <div class="row-item">
-                    <text class="list-content-price red">{{stock.last_px}}</text>
+                    <text class="list-content-price red">12.99</text>
                 </div>
                 <div class="row-item mgr20">
-                    <text class="list-content-rate bg-red align-items-center">{{stock.px_change_rate}}%</text>
+                    <text class="list-content-rate bg-red align-items-center">+12.99%</text>
+                </div>
+            </cell>
+            <cell class="flex-row list-content-item">
+                <div class="flex-column flex-2">
+                    <text class="list-content-title">N苏波涛</text>
+                    <text class="list-content-info gray">600570.ss</text>
+                </div>
+                <div class="row-item">
+                    <text class="list-content-price red">12.99</text>
+                </div>
+                <div class="row-item mgr20">
+                    <text class="list-content-rate bg-red align-items-center">+12.99%</text>
+                </div>
+            </cell>
+            <cell class="flex-row list-content-item">
+                <div class="flex-column flex-2">
+                    <text class="list-content-title">N苏波涛</text>
+                    <text class="list-content-info gray">600570.ss</text>
+                </div>
+                <div class="row-item">
+                    <text class="list-content-price red">12.99</text>
+                </div>
+                <div class="row-item mgr20">
+                    <text class="list-content-rate bg-red align-items-center">+12.99%</text>
+                </div>
+            </cell>
+            <cell class="flex-row list-content-item">
+                <div class="flex-column flex-2">
+                    <text class="list-content-title">N苏波涛</text>
+                    <text class="list-content-info gray">600570.ss</text>
+                </div>
+                <div class="row-item">
+                    <text class="list-content-price red">12.99</text>
+                </div>
+                <div class="row-item mgr20">
+                    <text class="list-content-rate bg-red align-items-center">+12.99%</text>
                 </div>
             </cell>
         </list>
@@ -50,9 +86,7 @@
 <script>
     export default {
         data(){
-            return {
-                stocks:[]
-            }
+            return {}
         },
         methods:{
         },
@@ -85,11 +119,14 @@
         color:#fa3540;
     }
     .gray{
-        color: #999999;
+        color: #878787;
     }
-    .mgr20{
-        /*margin-left: 20px;*/
-        margin-right: 20px;
+    .green{
+        color: #249b3a;
+    }
+    .bg-green{
+        background-color: #249b3a;
+        color:#fff;
     }
     .bg-red{
         background-color: #fa3e48;

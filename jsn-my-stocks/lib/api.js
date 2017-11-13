@@ -1,13 +1,5 @@
-weex.registerModule('dataCenter', {
-    /**
-     * 获取自选股列表
-     * @param cb
-     */
-    getMyStocks (cb) {
-        cb("XSHE-000558,XSHG-600000,XNAS-NTES,XSHE-002094");
-    },
-    //quoteDc.loadRealtimeList({'en_prod_code':e,'fields':'prod_name,last_px,px_change,px_change_rate,hq_type_code,special_marker,trade_status'},callback)
-    loadRealtimeList(options,cb){
+module.exports = {
+    real(options,cb){
         const stream = weex.requireModule('stream')
         return stream.fetch({
             method: 'GET',
@@ -23,8 +15,7 @@ weex.registerModule('dataCenter', {
             }
         })
     }
-
-});
+}
 
 function parse2query(data) {
     let string = "";
