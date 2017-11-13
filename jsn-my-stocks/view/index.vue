@@ -66,15 +66,15 @@
                     that.refreshing = 'hide';
                 })
             },
-            loadData(){
+            loadData(en_prod_code,key){
                 const that =this;
                 return api.real({
-                    'en_prod_code':"600570.XSHG,600571.XSHG",
+                    'en_prod_code':en_prod_code,
                     'fields':'prod_name,last_px,px_change,px_change_rate,hq_type_code,special_marker,trade_status'
                 }).then(function (data) {
                     let snapshot = data.data.snapshot;
 
-                    that.stocks = [];
+                    that[key] = [];
                     Object.keys(snapshot).forEach(function (stock) {
                         if(stock!=="fields"){
                             let info = {};
@@ -82,28 +82,7 @@
                                 info[field] = snapshot[stock][index];
                             });
                             info.code = stock;
-                            that.stocks.push(info);
-                        }
-                    });
-                });
-            },
-            loadTopData(){
-                const that =this;
-                return api.real({
-                    'en_prod_code':"1A0001.SS,2A01.SZ,399006.SZ",
-                    'fields':'prod_name,last_px,px_change,px_change_rate,hq_type_code,special_marker,trade_status'
-                }).then(function (data) {
-                    let snapshot = data.data.snapshot;
-
-                    that.topData = [];
-                    Object.keys(snapshot).forEach(function (stock) {
-                        if(stock!=="fields"){
-                            let info = {};
-                            snapshot.fields.forEach(function (field,index) {
-                                info[field] = snapshot[stock][index];
-                            });
-                            info.code = stock;
-                            that.topData.push(info);
+                            that[key].push(info);
                         }
                     });
                 });
@@ -120,11 +99,11 @@
         },
         mounted(){
             const that =this;
-            that.loadData();
-            that.loadTopData();
+            that.loadData("600570.XSHG,600571.XSHG","stocks")
+            that.loadData("1A0001.SS,2A01.SZ,399006.SZ","topData")
             setInterval(function () {
-                that.loadData()
-                that.loadTopData();
+                that.loadData("600570.XSHG,600571.XSHG","stocks")
+                that.loadData("1A0001.SS,2A01.SZ,399006.SZ","topData")
             },5*1000)
         }
     }
