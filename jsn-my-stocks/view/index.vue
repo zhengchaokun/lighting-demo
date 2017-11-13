@@ -2,8 +2,10 @@
     <div style="">
         <div class="flex-row top-wrap">
             <div v-for="stock in topData" class="row-item align-items-center">
-                <text class="red zs-title">{{stock.last_px}}</text>
-                <div class="zs-wrap"><text class="gray zs-data">{{stock.prod_name}}</text><text class="red zs-data">{{stock.px_change_rate}}%</text></div>
+                <text class=" zs-title" :class="[getColorByRate(stock.px_change_rate)]">{{stock.last_px}}</text>
+                <div class="zs-wrap">
+                    <text class="gray zs-data">{{stock.prod_name}}</text>
+                    <text class="zs-data" :class="[getColorByRate(stock.px_change_rate)]">{{stock.px_change_rate}}%</text></div>
             </div>
         </div>
 
@@ -30,10 +32,10 @@
                     <text class="list-content-info">{{stock.code}}</text>
                 </div>
                 <div class="row-item">
-                    <text class="list-content-price red">{{stock.last_px}}</text>
+                    <text class="list-content-price"  :class="[getColorByRate(stock.px_change_rate)]">{{stock.last_px}}</text>
                 </div>
                 <div class="row-item">
-                    <text class="list-content-rate bg-red align-items-center">{{stock.px_change_rate}}%</text>
+                    <text class="list-content-rate align-items-center" :class="[getColorByRate(stock.px_change_rate,true)]">{{stock.px_change_rate}}%</text>
                 </div>
             </cell>
         </list>
@@ -105,6 +107,15 @@
                         }
                     });
                 });
+            },
+            getColorByRate(price,isBg){
+                if(price>0){
+                    return (isBg?'bg-':'')+"red";
+                }
+                if(price<0){
+                    return (isBg?'bg-':'')+"green";
+                }
+                return "";
             }
         },
         mounted(){
