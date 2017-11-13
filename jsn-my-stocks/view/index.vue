@@ -1,17 +1,9 @@
 <template>
     <div style="">
         <div class="flex-row top-wrap">
-            <div class="row-item align-items-center">
-                <text class="red zs-title">3465.61</text>
-                <div class="zs-wrap"><text class="gray zs-data">上证</text><text class="red zs-data">+0.14%</text></div>
-            </div>
-            <div class="row-item align-items-center">
-                <text class="red zs-title">11594.37</text>
-                <div class="zs-wrap"><text class="gray zs-data">深证</text><text class="red zs-data">+0.14%</text></div>
-            </div>
-            <div class="row-item align-items-center">
-                <text class="red zs-title">1900.63</text>
-                <div class="zs-wrap"><text class="gray zs-data">创业板</text><text class="red zs-data">+0.14%</text></div>
+            <div v-for="stock in topData" class="row-item align-items-center">
+                <text class="red zs-title">{{stock.last_px}}</text>
+                <div class="zs-wrap"><text class="gray zs-data">{{stock.prod_name}}</text><text class="red zs-data">{{stock.px_change_rate}}%</text></div>
             </div>
         </div>
 
@@ -55,13 +47,14 @@
                 stocks:[],
                 refreshing:'hide',
                 refreshText:'',
-                lastUpdateDate:new Date().getTime()
+                lastUpdateDate:new Date().getTime(),
+                topData:[]
             }
         },
         methods:{
             refreshDown(ev){
                 this.refreshText = '下拉刷新数据' + '\n' +"最后更新:"+this.lastUpdateDate;
-                if(Math.abs(Number(event.pullingDistance)) > 95){
+                if(Math.abs(Number(ev.pullingDistance)) > 95){
                     this.refreshText = '松开刷新数据' + '\n' +"最后更新:"+this.lastUpdateDate;
                 }
             },
@@ -91,13 +84,36 @@
                         }
                     });
                 });
+            },
+            loadTopData(){
+                const that =this;
+                return api.real({
+                    'en_prod_code':"1A0001.SS,2A01.SZ,399006.SZ",
+                    'fields':'prod_name,last_px,px_change,px_change_rate,hq_type_code,special_marker,trade_status'
+                }).then(function (data) {
+                    let snapshot = data.data.snapshot;
+
+                    that.topData = [];
+                    Object.keys(snapshot).forEach(function (stock) {
+                        if(stock!=="fields"){
+                            let info = {};
+                            snapshot.fields.forEach(function (field,index) {
+                                info[field] = snapshot[stock][index];
+                            });
+                            info.code = stock;
+                            that.topData.push(info);
+                        }
+                    });
+                });
             }
         },
         mounted(){
             const that =this;
             that.loadData();
-            setTimeout(function () {
+            that.loadTopData();
+            setInterval(function () {
                 that.loadData()
+                that.loadTopData();
             },5*1000)
         }
     }
