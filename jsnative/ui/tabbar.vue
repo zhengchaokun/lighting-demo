@@ -52,6 +52,7 @@
         this.selectedIndex = e.index;
         this.select(e.index);
         this.$emit('tabBarOnClick', e);
+        weex.requireModule("modal").toast({ message: require('vue').router.toString()});
         require('vue').router.push(e.src)
 
       },
