@@ -154,8 +154,8 @@
         font-size: 24px;
     }
     .list-content-title{
-        font-size: 32px;
-        padding-top: 10px;
+        font-size: 30px;
+        padding-top: 15px;
         padding-left: 20px;
         color:#4f4f4f;
         lines:1;
