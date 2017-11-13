@@ -89,6 +89,17 @@
             return {}
         },
         methods:{
+        },
+        mounted(){
+            const datacenter = weex.requireModule("dataCenter");
+            datacenter.getMyStocks(function (data) {
+
+            })
+
+            datacenter.loadRealtimeList({'en_prod_code':"600570.SS",'fields':'prod_name,last_px,px_change,px_change_rate,hq_type_code,special_marker,trade_status'},function (data) {
+                console.log(data)
+            });
+
         }
     }
 </script>
