@@ -16,6 +16,23 @@ module.exports = {
                 }
             })
         })
+    },
+    myStocks(){
+        const dataCenter = weex.requireModule('dataCenter')
+        if(dataCenter){
+            return new Promise(function (resolve) {
+                dataCenter.getMyStocks(function(res) {
+                    let ret = [];
+                    res.split(",").forEach(function (code) {
+                        code=code.split("-");
+                        ret.push(`${code[1]}.${code[0]}`)
+                    });
+                    resolve(ret);
+                })
+            })
+        }else{
+            return Promise.resolve(["1A0001.SS","2A01.SZ","399006.SZ","600570.SS"])
+        }
     }
-}
+};
 

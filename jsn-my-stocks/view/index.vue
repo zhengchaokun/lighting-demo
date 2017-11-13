@@ -106,12 +106,14 @@
         },
         mounted(){
             const that =this;
-            that.loadData("600570.XSHG,600571.XSHG,600572.XSHG,600573.XSHG","stocks")//TODO:这里要先获取自选股之后才能访问
-            that.loadData("1A0001.SS,2A01.SZ,399006.SZ","topData")
-//            setInterval(function () {
-//                that.loadData("600570.XSHG,600571.XSHG","stocks")
-//                that.loadData("1A0001.SS,2A01.SZ,399006.SZ","topData")
-//            },5*1000)
+            api.myStocks().then(function (data) {
+                that.loadData(data.join(","),"stocks");
+                that.loadData("1A0001.SS,2A01.SZ,399006.SZ","topData")
+                setInterval(function () {
+                    that.loadData(data.join(","),"stocks");
+                    that.loadData("1A0001.SS,2A01.SZ,399006.SZ","topData")
+                },5*1000)
+            })
         }
     }
 </script>
