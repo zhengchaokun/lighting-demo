@@ -28,10 +28,10 @@
         </div>
 
         <list class="content">
-            <!--<refresh class="refesh">-->
-                <!--<loading-indicator style="height: 60px; width: 60px;"></loading-indicator>-->
-                <!--<text class="refreshtextstyle" ref="refreshtextstyle"> 加载中</text>-->
-            <!--</refresh>-->
+            <refresh class="refresh" :display="refreshing" @pullingdown="refreshDown" @refresh="refreshStart">
+                <loading-indicator style="height: 60px; width: 60px;"></loading-indicator>
+                <text class="refresh-text" :value="refreshText"></text>
+            </refresh>
             <cell v-for="stock in stocks" class="flex-row list-content-item">
                 <div class="flex-column flex-2">
                     <text class="list-content-title">{{stock.prod_name}}</text>
@@ -52,35 +52,71 @@
     export default {
         data(){
             return {
-                stocks:[]
+                stocks:[],
+                refreshing:'hide',
+                refreshText:'',
+                lastUpdateDate:new Date().getTime()
             }
         },
         methods:{
+            refreshDown(ev){
+                this.refreshText = '下拉刷新数据' + '\n' +"最后更新:"+this.lastUpdateDate;
+                if(Math.abs(Number(event.pullingDistance)) > 95){
+                    this.refreshText = '松开刷新数据' + '\n' +"最后更新:"+this.lastUpdateDate;
+                }
+            },
+            refreshStart(){
+                const that =this;
+                this.loadData(function () {
+                    that.refreshing="hide"
+                })
+            },
+            loadData(cb){
+                const that =this;
+                api.real({
+                    'en_prod_code':"600570.XSHG,600571.XSHG",
+                    'fields':'prod_name,last_px,px_change,px_change_rate,hq_type_code,special_marker,trade_status'
+                },function (data) {
+                    let snapshot = data.data.snapshot;
+
+                    that.stocks = [];
+                    Object.keys(snapshot).forEach(function (stock) {
+                        if(stock!=="fields"){
+                            let info = {};
+                            snapshot.fields.forEach(function (field,index) {
+                                info[field] = snapshot[stock][index];
+                            });
+                            info.code = stock;
+                            that.stocks.push(info);
+                        }
+                    });
+                    cb();
+                });
+            }
         },
         mounted(){
             const that =this;
-
-            api.real({
-                'en_prod_code':"600570.XSHG,600571.XSHG",
-                'fields':'prod_name,last_px,px_change,px_change_rate,hq_type_code,special_marker,trade_status'
-            },function (data) {
-                let snapshot = data.data.snapshot;
-
-                Object.keys(snapshot).forEach(function (stock) {
-                    if(stock!=="fields"){
-                        let info = {};
-                        snapshot.fields.forEach(function (field,index) {
-                            info[field] = snapshot[stock][index];
-                        });
-                        info.code = stock;
-                        that.stocks.push(info);
-                    }
-                })
-            });
+            that.loadData();
+            setTimeout(function () {
+                that.loadData()
+            },5*1000)
         }
     }
 </script>
 <style scoped>
+    .refresh{
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        width: 750px;
+    }
+    .refresh-text{
+        text-align: center;
+        font-size: 24px;
+        height: 60px;
+        color:#949494;
+        margin-top:10px;
+    }
     .red{
         color:#fa3540;
     }
