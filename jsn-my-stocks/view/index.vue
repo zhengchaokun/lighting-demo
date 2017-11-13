@@ -67,16 +67,16 @@
             },
             refreshStart(){
                 const that =this;
-                this.loadData(function () {
-                    that.refreshing="hide"
+                this.loadData().then(function () {
+                    that.refreshing = 'hide';
                 })
             },
-            loadData(cb){
+            loadData(){
                 const that =this;
-                api.real({
+                return api.real({
                     'en_prod_code':"600570.XSHG,600571.XSHG",
                     'fields':'prod_name,last_px,px_change,px_change_rate,hq_type_code,special_marker,trade_status'
-                },function (data) {
+                }).then(function (data) {
                     let snapshot = data.data.snapshot;
 
                     that.stocks = [];
@@ -90,7 +90,6 @@
                             that.stocks.push(info);
                         }
                     });
-                    cb();
                 });
             }
         },
