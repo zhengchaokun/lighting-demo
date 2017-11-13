@@ -35,19 +35,31 @@
             <cell class="flex-row list-content-item">
                 <div class="flex-column flex-2">
                     <text class="list-content-title">N苏波涛</text>
-                    <text class="list-content-info gray">600570.ss</text>
+                    <text class="list-content-info">600570.ss</text>
                 </div>
                 <div class="row-item">
                     <text class="list-content-price red">12.99</text>
                 </div>
                 <div class="row-item">
-                    <text class="list-content-rate bg-red align-items-center">+142.99%</text>
+                    <text class="list-content-rate bg-red align-items-center">+47.23%</text>
                 </div>
             </cell>
             <cell class="flex-row list-content-item">
                 <div class="flex-column flex-2">
                     <text class="list-content-title">N苏波涛</text>
-                    <text class="list-content-info gray">600570.ss</text>
+                    <text class="list-content-info">600570.ss</text>
+                </div>
+                <div class="row-item">
+                    <text class="list-content-price green">322.98</text>
+                </div>
+                <div class="row-item">
+                    <text class="list-content-rate bg-green align-items-center">-32.99%</text>
+                </div>
+            </cell>
+            <cell class="flex-row list-content-item">
+                <div class="flex-column flex-2">
+                    <text class="list-content-title">N苏波涛</text>
+                    <text class="list-content-info">600570.ss</text>
                 </div>
                 <div class="row-item">
                     <text class="list-content-price red">12.99</text>
@@ -59,19 +71,7 @@
             <cell class="flex-row list-content-item">
                 <div class="flex-column flex-2">
                     <text class="list-content-title">N苏波涛</text>
-                    <text class="list-content-info gray">600570.ss</text>
-                </div>
-                <div class="row-item">
-                    <text class="list-content-price red">12.99</text>
-                </div>
-                <div class="row-item">
-                    <text class="list-content-rate bg-red align-items-center">+12.99%</text>
-                </div>
-            </cell>
-            <cell class="flex-row list-content-item">
-                <div class="flex-column flex-2">
-                    <text class="list-content-title">N苏波涛</text>
-                    <text class="list-content-info gray">600570.ss</text>
+                    <text class="list-content-info">600570.ss</text>
                 </div>
                 <div class="row-item">
                     <text class="list-content-price red">12.99</text>
@@ -97,7 +97,14 @@
         color:#fa3540;
     }
     .gray{
-        color: #999999;
+        color: #878787;
+    }
+    .green{
+        color: #249b3a;
+    }
+    .bg-green{
+        background-color: #249b3a;
+        color:#fff;
     }
     .bg-red{
         background-color: #fa3e48;
@@ -147,7 +154,7 @@
         line-height: 50px;
         margin-left: 10px;
     }
-    .content{ }
+
     .list-content-item{
         height: 90px;
         border-style: solid;
@@ -166,13 +173,14 @@
         lines:1;
     }
     .list-content-info{
-        font-size: 18px;
+        font-size: 20px;
         padding-left: 20px;
+        color: #b3b3b3;
     }
     .list-content-price{
         font-size: 32px;
         font-weight: bold;
-        padding-left: 15px;
+        padding-left: 10px;
     }
     .list-content-rate{
         width: 150px;
