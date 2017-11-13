@@ -1,7 +1,7 @@
 <template>
     <div style="">
         <div class="flex-row top-wrap">
-            <div v-for="stock in topData" class="row-item align-items-center">
+            <div v-for="stock in topData" @click="openStockDetail(stock)" class="row-item align-items-center">
                 <text class=" zs-title" :class="[getColorByRate(stock.px_change_rate)]">{{stock.last_px}}</text>
                 <div class="zs-wrap">
                     <text class="gray zs-data">{{stock.prod_name}}</text>
@@ -26,7 +26,7 @@
                 <loading-indicator style="height: 60px; width: 60px;"></loading-indicator>
                 <text class="refresh-text" :value="refreshText"></text>
             </refresh>
-            <cell v-for="stock in stocks" class="flex-row list-content-item">
+            <cell  @click="openStockDetail(stock)" v-for="stock in stocks" class="flex-row list-content-item">
                 <div class="flex-column flex-2">
                     <text class="list-content-title">{{stock.prod_name}}</text>
                     <text class="list-content-info">{{stock.code}}</text>
@@ -95,16 +95,23 @@
                     return (isBg?'bg-':'')+"green";
                 }
                 return "";
+            },
+            openStockDetail(st){
+                weex.requireModule("event").openURL(require("../config").prefix+require("../lib/utils").parse2query({
+                    prod_code:st.code,
+                    hq_type_code:st.hq_type_code,
+                    prod_name:encodeURIComponent(st.prod_name),
+                }))
             }
         },
         mounted(){
             const that =this;
-            that.loadData("600570.XSHG,600571.XSHG","stocks")
+            that.loadData("600570.XSHG,600571.XSHG,600572.XSHG,600573.XSHG","stocks")//TODO:这里要先获取自选股之后才能访问
             that.loadData("1A0001.SS,2A01.SZ,399006.SZ","topData")
-            setInterval(function () {
-                that.loadData("600570.XSHG,600571.XSHG","stocks")
-                that.loadData("1A0001.SS,2A01.SZ,399006.SZ","topData")
-            },5*1000)
+//            setInterval(function () {
+//                that.loadData("600570.XSHG,600571.XSHG","stocks")
+//                that.loadData("1A0001.SS,2A01.SZ,399006.SZ","topData")
+//            },5*1000)
         }
     }
 </script>
