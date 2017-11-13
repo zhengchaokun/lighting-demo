@@ -32,72 +32,38 @@
                 <!--<loading-indicator style="height: 60px; width: 60px;"></loading-indicator>-->
                 <!--<text class="refreshtextstyle" ref="refreshtextstyle"> 加载中</text>-->
             <!--</refresh>-->
-            <cell class="flex-row list-content-item">
+            <cell v-for="stock in stocks" class="flex-row list-content-item">
                 <div class="flex-column flex-2">
-                    <text class="list-content-title">N苏波涛</text>
-                    <text class="list-content-info gray">600570.ss</text>
+                    <text class="list-content-title">{{stock.prod_name}}</text>
+                    <text class="list-content-info gray">{{stock.code}}</text>
                 </div>
                 <div class="row-item">
-                    <text class="list-content-price red">12.99</text>
-                </div>
-                <div class="row-item mgr20">
-                    <text class="list-content-rate bg-red align-items-center">+12.99%</text>
-                </div>
-            </cell>
-            <cell class="flex-row list-content-item">
-                <div class="flex-column flex-2">
-                    <text class="list-content-title">N苏波涛</text>
-                    <text class="list-content-info gray">600570.ss</text>
+                    <text class="list-content-price red">{{stock.last_px}}</text>
                 </div>
                 <div class="row-item">
-                    <text class="list-content-price red">12.99</text>
-                </div>
-                <div class="row-item mgr20">
-                    <text class="list-content-rate bg-red align-items-center">+12.99%</text>
-                </div>
-            </cell>
-            <cell class="flex-row list-content-item">
-                <div class="flex-column flex-2">
-                    <text class="list-content-title">N苏波涛</text>
-                    <text class="list-content-info gray">600570.ss</text>
-                </div>
-                <div class="row-item">
-                    <text class="list-content-price red">12.99</text>
-                </div>
-                <div class="row-item mgr20">
-                    <text class="list-content-rate bg-red align-items-center">+12.99%</text>
-                </div>
-            </cell>
-            <cell class="flex-row list-content-item">
-                <div class="flex-column flex-2">
-                    <text class="list-content-title">N苏波涛</text>
-                    <text class="list-content-info gray">600570.ss</text>
-                </div>
-                <div class="row-item">
-                    <text class="list-content-price red">12.99</text>
-                </div>
-                <div class="row-item mgr20">
-                    <text class="list-content-rate bg-red align-items-center">+12.99%</text>
+                    <text class="list-content-rate bg-red align-items-center">{{stock.px_change_rate}}%</text>
                 </div>
             </cell>
         </list>
     </div>
 </template>
 <script>
+    const api = require("../lib/api");
     export default {
         data(){
-            return {}
+            return {
+                stocks:[]
+            }
         },
         methods:{
         },
         mounted(){
             const that =this;
-            const datacenter = weex.requireModule("dataCenter");
-            datacenter.getMyStocks(function (data) {
 
-            });
-
-            datacenter.loadRealtimeList({'en_prod_code':"600570.XSHG,600571.XSHG",'fields':'prod_name,last_px,px_change,px_change_rate,hq_type_code,special_marker,trade_status'},function (data) {
+            api.real({
+                'en_prod_code':"600570.XSHG,600571.XSHG",
+                'fields':'prod_name,last_px,px_change,px_change_rate,hq_type_code,special_marker,trade_status'
+            },function (data) {
                 let snapshot = data.data.snapshot;
 
                 Object.keys(snapshot).forEach(function (stock) {

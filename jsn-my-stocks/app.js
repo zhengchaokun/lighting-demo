@@ -1,7 +1,5 @@
 import App from "light"
 
-require("./lib/datacenter");
-
 App.filter("start",function (next) {
     //启动拦截器
     App.log("app started...");
