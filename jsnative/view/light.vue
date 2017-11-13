@@ -56,7 +56,7 @@
                 console.log('tabBarOnClick', e.index)
             },
             jump(link,index){
-                App.router.push(link);
+                require('vue').router.push(link);
                 this.index=index;
             }
         }

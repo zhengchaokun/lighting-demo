@@ -52,7 +52,7 @@
         this.selectedIndex = e.index;
         this.select(e.index);
         this.$emit('tabBarOnClick', e);
-        weex.router.push(e.src)
+        require('vue').router.push(e.src)
 
       },
       select: function(index) {
