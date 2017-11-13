@@ -228,6 +228,4 @@
         border-radius: 8px;
         text-align: center;
     }
-
-
 </style>
