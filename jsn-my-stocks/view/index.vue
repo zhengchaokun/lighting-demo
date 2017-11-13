@@ -35,7 +35,7 @@
             <cell v-for="stock in stocks" class="flex-row list-content-item">
                 <div class="flex-column flex-2">
                     <text class="list-content-title">{{stock.prod_name}}</text>
-                    <text class="list-content-info gray">{{stock.code}}</text>
+                    <text class="list-content-info">{{stock.code}}</text>
                 </div>
                 <div class="row-item">
                     <text class="list-content-price red">{{stock.last_px}}</text>
@@ -142,7 +142,7 @@
         line-height: 50px;
         margin-left: 10px;
     }
-    .content{ }
+
     .list-content-item{
         height: 90px;
         border-style: solid;
@@ -161,19 +161,22 @@
         lines:1;
     }
     .list-content-info{
-        font-size: 18px;
+        font-size: 20px;
         padding-left: 20px;
+        color: #b3b3b3;
     }
     .list-content-price{
         font-size: 32px;
         font-weight: bold;
-        padding-left: 20px;
+        padding-left: 10px;
     }
     .list-content-rate{
+        width: 150px;
         font-size:32px;
         padding-top: 10px;
         padding-bottom: 10px;
         border-radius: 8px;
+        text-align: center;
     }
 
 
