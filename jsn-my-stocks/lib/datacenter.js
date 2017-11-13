@@ -17,7 +17,11 @@ weex.registerModule('dataCenter', {
                 fields:options.fields,
                 access_token:"3D861398FC8E40FA96E79F284FD3809B20170929092052B7E451A8"
             })
-        }, cb)
+        }, function (data) {
+            if(data.ok){
+                cb(data.data);
+            }
+        })
     }
 
 });
