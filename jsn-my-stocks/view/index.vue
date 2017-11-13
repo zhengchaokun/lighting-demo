@@ -40,7 +40,19 @@
                 <div class="row-item">
                     <text class="list-content-price red">12.99</text>
                 </div>
-                <div class="row-item mgr20">
+                <div class="row-item">
+                    <text class="list-content-rate bg-red align-items-center">+142.99%</text>
+                </div>
+            </cell>
+            <cell class="flex-row list-content-item">
+                <div class="flex-column flex-2">
+                    <text class="list-content-title">N苏波涛</text>
+                    <text class="list-content-info gray">600570.ss</text>
+                </div>
+                <div class="row-item">
+                    <text class="list-content-price red">12.99</text>
+                </div>
+                <div class="row-item">
                     <text class="list-content-rate bg-red align-items-center">+12.99%</text>
                 </div>
             </cell>
@@ -52,7 +64,7 @@
                 <div class="row-item">
                     <text class="list-content-price red">12.99</text>
                 </div>
-                <div class="row-item mgr20">
+                <div class="row-item">
                     <text class="list-content-rate bg-red align-items-center">+12.99%</text>
                 </div>
             </cell>
@@ -64,19 +76,7 @@
                 <div class="row-item">
                     <text class="list-content-price red">12.99</text>
                 </div>
-                <div class="row-item mgr20">
-                    <text class="list-content-rate bg-red align-items-center">+12.99%</text>
-                </div>
-            </cell>
-            <cell class="flex-row list-content-item">
-                <div class="flex-column flex-2">
-                    <text class="list-content-title">N苏波涛</text>
-                    <text class="list-content-info gray">600570.ss</text>
-                </div>
                 <div class="row-item">
-                    <text class="list-content-price red">12.99</text>
-                </div>
-                <div class="row-item mgr20">
                     <text class="list-content-rate bg-red align-items-center">+12.99%</text>
                 </div>
             </cell>
@@ -98,10 +98,6 @@
     }
     .gray{
         color: #999999;
-    }
-    .mgr20{
-        /*margin-left: 20px;*/
-        margin-right: 20px;
     }
     .bg-red{
         background-color: #fa3e48;
@@ -176,13 +172,15 @@
     .list-content-price{
         font-size: 32px;
         font-weight: bold;
-        padding-left: 20px;
+        padding-left: 15px;
     }
     .list-content-rate{
+        width: 150px;
         font-size:32px;
         padding-top: 10px;
         padding-bottom: 10px;
         border-radius: 8px;
+        text-align: center;
     }
 
 
