@@ -1,0 +1,16 @@
+{
+  "pages": [
+    {
+      "pageid": "quote",
+      "inputParams": {
+        "startPage": "https://www.lightyy.com/apps/weex-test/quote.js"
+      }
+    },
+    {
+      "pageid": "stock",
+      "inputParams": {
+        "startPage": "app.native.js"
+      }
+    }
+  ]
+}

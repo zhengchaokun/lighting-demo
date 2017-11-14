@@ -1,7 +1,17 @@
 {
   "menus": [
     {
-      "action": "gmu://web#app"
+      "title":"JSN行情",
+      "action":"gmu://jsnative#quote"
+    },{
+      "title":"JSN自选股",
+      "action":"gmu://jsnative#stock"
+    },{
+      "title": "native行情",
+      "action": "gmu://globalquote"
+    },{
+      "title":"native自选股",
+      "action":"gmu://mystock"
     }
   ],
   "style": {
