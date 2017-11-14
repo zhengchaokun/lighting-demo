@@ -32,10 +32,11 @@
                     </div>
                 </cell>
             </list>
+            <div style="height: 200px;"></div>
         </div>
 
         <div class="nav-bar flex-row">
-            <div class="nav-bar-item row-item align-items-center">
+            <div class="nav-bar-item row-item align-items-center" @click="jump('/template/b')">
                 <image class="nav-bar-item-pic" style="background-color: #fb585b"></image>
                 <text style="color:#fb585b" class="nav-bar-item-text">首页</text>
             </div>
@@ -55,10 +56,16 @@
     </div>
 </template>
 <script>
+    import App from "light"
     export default {
         data() {
             return {
                 news:[{},{},{},{},{},{},{},{},{}]
+            }
+        },
+        methods:{
+            jump(src){
+                App.router.push(src)
             }
         }
     }
