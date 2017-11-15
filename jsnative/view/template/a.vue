@@ -36,7 +36,7 @@
         </div>
 
         <div class="nav-bar flex-row">
-            <div class="nav-bar-item row-item align-items-center" @click="jump('/template/b')">
+            <div class="nav-bar-item row-item align-items-center" @click="jump('template/a')">
                 <image class="nav-bar-item-pic" style="background-color: #fb585b"></image>
                 <text style="color:#fb585b" class="nav-bar-item-text">首页</text>
             </div>
@@ -70,24 +70,8 @@
         }
     }
 </script>
+<style scoped src="../../css/ui.css"></style>
 <style scoped>
-    .flex-row{
-        flex-direction: row;
-    }
-    .flex-column{
-        flex-direction: column;
-    }
-    .row-item{
-        flex: 1;
-        display: inline-flex;
-    }
-    .align-items-center{
-        align-items:center;
-    }
-    .flex-2{
-        flex: 2;
-    }
-
     .header{
         background-color: #d53c3f;
         padding: 20px;
