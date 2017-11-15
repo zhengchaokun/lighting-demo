@@ -40,15 +40,15 @@
                 <image class="nav-bar-item-pic" style="background-color: #fb585b"></image>
                 <text style="color:#fb585b" class="nav-bar-item-text">首页</text>
             </div>
-            <div class="nav-bar-item row-item align-items-center">
+            <div @click="jump('template/b')" class="nav-bar-item row-item align-items-center">
                 <image class="nav-bar-item-pic"></image>
                 <text class="nav-bar-item-text">西瓜视频</text>
             </div>
-            <div class="nav-bar-item row-item align-items-center">
+            <div @click="jump('template/c')" class="nav-bar-item row-item align-items-center">
                 <image class="nav-bar-item-pic"></image>
                 <text class="nav-bar-item-text">微头条</text>
             </div>
-            <div class="nav-bar-item row-item align-items-center">
+            <div @click="jump('template/d')" class="nav-bar-item row-item align-items-center">
                 <image class="nav-bar-item-pic"></image>
                 <text class="nav-bar-item-text">我的</text>
             </div>
@@ -64,8 +64,8 @@
             }
         },
         methods:{
-            jump(src){
-                App.router.push(src)
+            jump(view){
+                App.navigate(view,{t:1})
             }
         }
     }

@@ -12,6 +12,4 @@ App.filter("start",function (next) {
     //视图拦截器
     App.log(`view changed:${from.path}--${to.path}`);
     next()
-}).start(function (router) {
-    require('vue').router = router;
-});
+}).start();
