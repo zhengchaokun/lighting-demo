@@ -217,12 +217,12 @@
         padding-left: 30px;
     }
     .list-info{
-        color: #aaaaaa;
+        color: #cfcdcd;
         font-size: 28px;
         line-height: 90px;
     }
     .list-icon{
-        color: #aaaaaa;
+        color: #cfcdcd;
         line-height: 90px;
         padding-right: 30px;
     }
