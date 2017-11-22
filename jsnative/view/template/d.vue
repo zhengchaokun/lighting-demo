@@ -61,14 +61,14 @@
         top: 0;
         left: 0;
         background-color: #232428;
-        justify-content: space-between;
+        justify-content: space-around;
         align-items: center;
     }
     .top-nav-input{
-        width: 430px;
+        width: 400px;
         height: 60px;
         background-color: #313133;
-        text-indent: 20px;
+        text-indent: 40px;
         color: #838383;
         margin-left: 20px;
         placeholder-color:#838383;
@@ -93,7 +93,7 @@
     }
     .top-nav-text{
         color: #c8c7ca;
-        font-size: 30px;
+        font-size: 28px;
         margin-left: 10px;
     }
 

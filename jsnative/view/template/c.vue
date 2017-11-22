@@ -267,15 +267,14 @@
     .item-wrap{
         width: 750px;
         height: 410px;
-        padding-left: 30px;
-        padding-right: 30px;
     }
     .item-box{
-        width: 690px;
+        width: 750px;
+        padding-left: 30px;
+        padding-right: 30px;
         height: 170px;
-        margin-top: 20px;
-        margin-left: 30px;
         justify-content: space-around;
+        align-items: center;
     }
     .item-cont{
         margin-top: 20px;
@@ -319,6 +318,7 @@
     .line{
         width: 690px;
         height: 1px;
+        margin-top: 20px;
         background-color: #f8f8f8;
     }
 
