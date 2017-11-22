@@ -16,7 +16,7 @@
         </div>
 
         <div class="flex-row justify-space-between bgc-white list-wrap">
-            <div class="flex-row ml40">
+            <div class="flex-row ml40 align-items-center">
                 <text class="list-tit">上证指数</text>
                 <text class="c-eee lh80 mr10"> &#47; </text>
                 <text class="fs28 c-green lh80 mr20">3397.82</text>
@@ -124,12 +124,12 @@
                 <indicator class="indicator"></indicator>
             </slider>
 
-            <div class="flex-row justify-space-between bgc-white list-wrap mt20 h120">
-                <div class="flex-row ml40 flex-1">
+            <div class="flex-row justify-space-between bgc-white list-wrap mt20">
+                <div class="flex-row ml40 flex-1 align-items-center">
                     <image src="" class="list-img"></image>
-                    <text class="list-tit lh120 fs30 lins1 flex-1">长乐早报：美联储加息大局已定美联储加息大局已定</text>
+                    <text class="list-tit fs30 lins1 flex-1">长乐早报：美联储加息大局已定美联储加息大局已定</text>
                 </div>
-                <text class="list-icon lh120"> &gt; </text>
+                <text class="list-icon"> &gt; </text>
             </div>
 
             <div class="nav-bar flex-row">
@@ -220,6 +220,7 @@
         top: 50px;
         left: 0;
         justify-content: space-between;
+        align-items: center;
     }
     .top-nav-icon{
         width: 50px;
@@ -241,12 +242,13 @@
     }
     .top-nav-text{
         color: #ffe7ad;
-        line-height: 65px;
         font-size: 30px;
         margin-right: 30px;
+        align-items: center;
     }
     .top-nav-input{
         width: 490px;
+        height: 64px;
         background-color: rgba(254,186,53,0.8);
         text-align: center;
         color: #ffe7b8;
@@ -325,26 +327,24 @@
         border-bottom-color: #f1f1f1;
         border-bottom-style: solid;
         border-bottom-width: 2px;
+        align-items: center;
     }
     .list-tit{
         font-size: 26px;
-        line-height: 80px;
         margin-right: 10px;
+        align-items: center;
+        lines:1;
     }
     .list-icon{
         color: #cfcdcd;
-        line-height: 80px;
         padding-right: 30px;
     }
     .list-img{
         width: 50px;
         height: 50px;
         margin-right: 30px;
-        margin-top: 35px;
         background-color: #f1a7a9;
     }
-    .h120{ height: 120px;}
-    .lh120{ line-height: 120px;}
 
     .list{
         height: 500px;

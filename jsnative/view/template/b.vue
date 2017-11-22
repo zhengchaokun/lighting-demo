@@ -64,7 +64,7 @@
             <div class="mt20 bgc-white flex-column list-wrap">
                 <div class="flex-row list-cont">
                     <text class="list-tit">头条商城</text>
-                    <div class="flex-row">
+                    <div class="flex-row align-items-center">
                         <text class="list-info">邀请好友得200元现金奖励</text>
                         <text class="list-icon"> &gt; </text>
                     </div>
@@ -72,7 +72,7 @@
                 <div class="line"></div>
                 <div class="flex-row list-cont">
                     <text class="list-tit">京东特供</text>
-                    <div class="flex-row">
+                    <div class="flex-row align-items-center">
                         <text class="list-info">京东购物节</text>
                         <text class="list-icon"> &gt; </text>
                     </div>
@@ -129,10 +129,10 @@
         height: 350px;
         background-color: #383838;
         opacity: 0.8;
+        align-items: center;
     }
     .app-icon-wrap{
         width: 640px;
-        margin-left: 55px;
         margin-top: 50px;
         justify-content: space-between;
     }
@@ -146,7 +146,6 @@
         width: 280px;
         height: 60px;
         margin-top: 50px;
-        margin-left: 235px;
         border-radius: 20px;
         background-color: #313131;
     }
@@ -209,21 +208,19 @@
     .list-cont{
         height: 90px;
         justify-content: space-between;
+        align-items: center;
     }
     .list-tit{
         font-size: 32px;
-        line-height: 90px;
         color: #262626;
         padding-left: 30px;
     }
     .list-info{
         color: #cfcdcd;
         font-size: 28px;
-        line-height: 90px;
     }
     .list-icon{
         color: #cfcdcd;
-        line-height: 90px;
         padding-right: 30px;
     }
     .line{
