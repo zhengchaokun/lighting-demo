@@ -18,10 +18,10 @@
         <div class="flex-row justify-space-between bgc-white list-wrap">
             <div class="flex-row ml40 align-items-center">
                 <text class="list-tit">上证指数</text>
-                <text class="c-eee lh80 mr10"> &#47; </text>
-                <text class="fs28 c-green lh80 mr20">3397.82</text>
-                <text class="fs24 c-green lh80 mr20">-15.93</text>
-                <text class="fs24 c-green lh80">-0.47%</text>
+                <text class="c-eee mr10"> &#47; </text>
+                <text class="fs28 c-green mr20">3397.82</text>
+                <text class="fs24 c-green mr20">-15.93</text>
+                <text class="fs24 c-green">-0.47%</text>
             </div>
             <text class="list-icon"> &gt; </text>
         </div>
