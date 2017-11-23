@@ -13,22 +13,22 @@
            </div>
         </div>
         <div class="flex-row bgc-white function-wrap">
-            <div class="flex-column function-cont">
+            <div class="function-cont">
                 <image class="function-pic"></image>
                 <text class="function-text">首页</text>
             </div>
-            <div class="flex-column function-cont">
+            <div class="function-cont">
                 <image class="function-pic"></image>
                 <text class="function-text">历史</text>
             </div>
-            <div class="flex-column function-cont">
+            <div class="function-cont">
                 <image class="function-pic"></image>
                 <text class="function-text">夜间</text>
             </div>
         </div>
 
         <scroller>
-            <div class="mt20 bgc-white flex-column list-wrap">
+            <div class="mt20 bgc-white list-wrap">
                 <div class="flex-row list-cont">
                     <text class="list-tit">我的关注</text>
                     <div class="flex-row">
@@ -37,16 +37,16 @@
                     </div>
                 </div>
                 <div class="flex-row bgc-white attention-wrap">
-                    <div class="flex-column attention-cont">
+                    <div class="attention-cont">
                         <image class="attention-pic"></image>
                         <text class="attention-text">我的问答</text>
                     </div>
-                    <div class="flex-column attention-cont">
+                    <div class="attention-cont">
                         <image class="attention-pic"></image>
                         <div class="reddot"></div>
                         <text class="attention-text">学习web的技能</text>
                     </div>
-                    <div class="flex-column attention-cont">
+                    <div class="attention-cont">
                         <image class="attention-pic"></image>
                         <div class="reddot"></div>
                         <text class="attention-text">Google开发者</text>
@@ -61,7 +61,7 @@
                     </div>
                 </div>
             </div>
-            <div class="mt20 bgc-white flex-column list-wrap">
+            <div class="mt20 bgc-white list-wrap">
                 <div class="flex-row list-cont">
                     <text class="list-tit">头条商城</text>
                     <div class="flex-row align-items-center">
@@ -78,7 +78,7 @@
                     </div>
                 </div>
             </div>
-            <div class="mt20 bgc-white flex-column list-wrap">
+            <div class="mt20 bgc-white list-wrap">
                 <div class="flex-row list-cont">
                     <text class="list-tit">我要爆料</text>
                     <div class="flex-row">
