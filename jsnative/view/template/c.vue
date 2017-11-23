@@ -132,7 +132,7 @@
                 <text class="list-icon"> &gt; </text>
             </div>
 
-            <div class="nav-bar flex-row">
+            <!--<div class="nav-bar flex-row">
                 <div class="nav-bar-item row-item align-items-center" @click="jump('template/a')">
                     <image class="nav-bar-item-pic bgc-red"></image>
                     <text class="nav-bar-item-text c-red">首页</text>
@@ -150,6 +150,24 @@
                     <text class="nav-bar-item-text">理财</text>
                 </div>
                 <div @click="jump('template/a')" class="nav-bar-item row-item align-items-center">
+                    <image class="nav-bar-item-pic"></image>
+                    <text class="nav-bar-item-text">我的</text>
+                </div>
+            </div>-->
+            <div class="nav-bar flex-row">
+                <div class="nav-bar-item row-item align-items-center" @click="jump('template/a')">
+                    <image class="nav-bar-item-pic"></image>
+                    <text class="nav-bar-item-text">首页</text>
+                </div>
+                <div @click="jump('template/c')" class="nav-bar-item row-item align-items-center">
+                    <image class="nav-bar-item-pic bgc-red"></image>
+                    <text class="nav-bar-item-text c-red">西瓜视频</text>
+                </div>
+                <div @click="jump('template/d')" class="nav-bar-item row-item align-items-center">
+                    <image class="nav-bar-item-pic"></image>
+                    <text class="nav-bar-item-text">微头条</text>
+                </div>
+                <div @click="jump('template/b')" class="nav-bar-item row-item align-items-center">
                     <image class="nav-bar-item-pic"></image>
                     <text class="nav-bar-item-text">我的</text>
                 </div>
@@ -381,6 +399,28 @@
         position: fixed;
         bottom: 0;
         width: 750px;
+        height: 90px;
+        background-color: #f9f9f9;
+        border-top-width:2px;
+        border-top-color: #c7c7c7;
+        border-top-style: solid;
+        padding-top: 10px;
+    }
+    .nav-bar-item-pic{
+        width: 40px;
+        height: 40px;
+        background-color: #ccc;
+    }
+    .nav-bar-item-text{
+        color:#565656;
+        font-size: 20px;
+        padding-top: 10px;
+    }
+
+    /*.nav-bar{
+        position: fixed;
+        bottom: 0;
+        width: 750px;
         height: 100px;
         background-color: #323b4c;
         padding-top: 10px;
@@ -394,5 +434,5 @@
         color:#7b8493;
         font-size: 24px;
         padding-top: 10px;
-    }
+    }*/
 </style>

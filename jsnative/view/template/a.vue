@@ -40,8 +40,8 @@
 
         <div class="nav-bar flex-row">
             <div class="nav-bar-item row-item align-items-center" @click="jump('template/a')">
-                <image class="nav-bar-item-pic" style="background-color: #fb585b"></image>
-                <text style="color:#fb585b" class="nav-bar-item-text">首页</text>
+                <image class="nav-bar-item-pic bgc-red"></image>
+                <text class="nav-bar-item-text c-red">首页</text>
             </div>
             <div @click="jump('template/c')" class="nav-bar-item row-item align-items-center">
                 <image class="nav-bar-item-pic"></image>

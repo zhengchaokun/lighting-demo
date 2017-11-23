@@ -104,8 +104,8 @@
                 <text class="nav-bar-item-text">微头条</text>
             </div>
             <div @click="jump('template/b')" class="nav-bar-item row-item align-items-center">
-                <image class="nav-bar-item-pic" style="background-color: #fb585b"></image>
-                <text class="nav-bar-item-text" style="color:#fb585b">我的</text>
+                <image class="nav-bar-item-pic bgc-red"></image>
+                <text class="nav-bar-item-text c-red">我的</text>
             </div>
         </div>
     </div>
