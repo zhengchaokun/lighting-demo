@@ -1,131 +1,134 @@
 
 <template>
     <div>
-        <div class="flex-row top-nav-wrap">
-            <input placeholder="股票代码或拼音简称" class="top-nav-input" />
-            <div class="ml10 flex-row align-items-center">
-                <image src="" class="top-nav-icon"></image>
-                <text class="top-nav-text">财富币</text>
+        <div @click="showShake=true">
+
+
+            <div class="flex-row top-nav-wrap">
+                <input placeholder="股票代码或拼音简称" class="top-nav-input" />
+                <div class="ml10 flex-row align-items-center">
+                    <image src="" class="top-nav-icon"></image>
+                    <text class="top-nav-text">财富币</text>
+                </div>
+                <div class="pos-r ml10 flex-row align-items-center">
+                    <image src="" class="top-nav-icon"></image>
+                    <text class="top-nav-dot">1</text>
+                    <text class="top-nav-text">消息</text>
+                </div>
             </div>
-            <div class="pos-r ml10 flex-row align-items-center">
-                <image src="" class="top-nav-icon"></image>
-                <text class="top-nav-dot">1</text>
-                <text class="top-nav-text">消息</text>
+
+            <slider class="slider" interval="4500" auto-play="true">
+                <div class="frame" v-for="img in imageLists">
+                    <image class="image" resize="cover" :style="{backgroundColor: img.bjc}"></image> <!-- :src="img.imgsrc" -->
+                </div>
+                <indicator class="indicator"></indicator>
+            </slider>
+
+            <div class="flex-row justify-space-around info-wrap">
+                <div class="flex-row align-items-center">
+                    <text class="info-tit">上证指数</text>
+                    <text class="fs26 c-green mr20">3397.82</text>
+                    <text class="fs26 c-green">-0.47%</text>
+                </div>
+                <div class="flex-row align-items-center">
+                    <text class="info-tit">上证指数</text>
+                    <text class="fs26 c-green mr20">3397.82</text>
+                    <text class="fs26 c-green">-0.47%</text>
+                </div>
+                <text class="info-icon"> &gt; </text>
+            </div>
+
+            <image src="" class="ad"></image>
+            <div class="line"></div>
+            <image src="" class="ad" style="background-color: #e1f1b3"></image>
+
+            <div class="flex-row item-box">
+                <div class="item-cont">
+                    <image src="" class="item-pic"></image>
+                    <div class="item-row">
+                        <text class="item-text">交易</text>
+                    </div>
+                    <text class="item-intro"></text>
+                </div>
+                <div class="item-cont">
+                    <image src="" class="item-pic"></image>
+                    <div class="item-row">
+                        <text class="item-text">活期宝</text>
+                    </div>
+                    <text class="item-intro">最快1秒到账</text>
+                </div>
+                <div class="item-cont">
+                    <image src="" class="item-pic"></image>
+                    <div class="item-row">
+                        <text class="item-text">固收</text>
+                    </div>
+                    <text class="item-intro">稳定收益</text>
+                </div>
+                <div class="item-cont">
+                    <image src="" class="item-pic"></image>
+                    <div class="item-row">
+                        <text class="item-text">基金吧</text>
+                    </div>
+                    <text class="item-intro"></text>
+                </div>
+                <div class="item-cont">
+                    <image src="" class="item-pic"></image>
+                    <div class="item-row">
+                        <text class="item-text">排行</text>
+                    </div>
+                    <text class="item-intro"></text>
+                </div>
+            </div>
+            <div class="flex-row item-box">
+                <div class="item-cont">
+                    <image src="" class="item-pic"></image>
+                    <div class="item-row">
+                        <text class="item-text">自选</text>
+                    </div>
+                    <text class="item-intro"></text>
+                </div>
+                <div class="item-cont">
+                    <image src="" class="item-pic"></image>
+                    <div class="item-row">
+                        <text class="item-text">净值</text>
+                    </div>
+                    <text class="item-intro"></text>
+                </div>
+                <div class="item-cont">
+                    <image src="" class="item-pic"></image>
+                    <div class="item-row">
+                        <text class="item-text">估值</text>
+                    </div>
+                    <text class="item-intro"></text>
+                </div>
+                <div class="item-cont">
+                    <image src="" class="item-pic"></image>
+                    <div class="item-row">
+                        <text class="item-text">股票开户</text>
+                        <div class="item-dot"></div>
+                    </div>
+                    <text class="item-intro">送100元</text>
+                    <text class="item-tip">人人有份</text>
+                </div>
+                <div class="item-cont">
+                    <image src="" class="item-pic"></image>
+                    <div class="item-row">
+                        <text class="item-text">更多</text>
+                        <div class="item-dot"></div>
+                    </div>
+                    <text class="item-intro"></text>
+                </div>
+            </div>
+            <div class="line"></div>
+
+            <div class="flex-row bgc-white list-wrap">
+                <div class="flex-row ml40 flex-1 align-items-center">
+                    <text class="list-text">足迹</text>
+                    <text class="list-tit">为您记录最近浏览过的基金</text>
+                </div>
+                <text class="list-icon"> &gt; </text>
             </div>
         </div>
-
-        <slider class="slider" interval="4500" auto-play="true">
-            <div class="frame" v-for="img in imageLists">
-                <image class="image" resize="cover" :style="{backgroundColor: img.bjc}"></image> <!-- :src="img.imgsrc" -->
-            </div>
-            <indicator class="indicator"></indicator>
-        </slider>
-
-        <div class="flex-row justify-space-around info-wrap">
-            <div class="flex-row align-items-center">
-                <text class="info-tit">上证指数</text>
-                <text class="fs26 c-green mr20">3397.82</text>
-                <text class="fs26 c-green">-0.47%</text>
-            </div>
-            <div class="flex-row align-items-center">
-                <text class="info-tit">上证指数</text>
-                <text class="fs26 c-green mr20">3397.82</text>
-                <text class="fs26 c-green">-0.47%</text>
-            </div>
-            <text class="info-icon"> &gt; </text>
-        </div>
-
-        <image src="" class="ad"></image>
-        <div class="line"></div>
-        <image src="" class="ad" style="background-color: #f1ef9d"></image>
-
-        <div class="flex-row item-box">
-            <div class="item-cont">
-                <image src="" class="item-pic"></image>
-                <div class="item-row">
-                    <text class="item-text">交易</text>
-                </div>
-                <text class="item-intro"></text>
-            </div>
-            <div class="item-cont">
-                <image src="" class="item-pic"></image>
-                <div class="item-row">
-                    <text class="item-text">活期宝</text>
-                </div>
-                <text class="item-intro">最快1秒到账</text>
-            </div>
-            <div class="item-cont">
-                <image src="" class="item-pic"></image>
-                <div class="item-row">
-                    <text class="item-text">固收</text>
-                </div>
-                <text class="item-intro">稳定收益</text>
-            </div>
-            <div class="item-cont">
-                <image src="" class="item-pic"></image>
-                <div class="item-row">
-                    <text class="item-text">基金吧</text>
-                </div>
-                <text class="item-intro"></text>
-            </div>
-            <div class="item-cont">
-                <image src="" class="item-pic"></image>
-                <div class="item-row">
-                    <text class="item-text">排行</text>
-                </div>
-                <text class="item-intro"></text>
-            </div>
-        </div>
-        <div class="flex-row item-box">
-            <div class="item-cont">
-                <image src="" class="item-pic"></image>
-                <div class="item-row">
-                    <text class="item-text">自选</text>
-                </div>
-                <text class="item-intro"></text>
-            </div>
-            <div class="item-cont">
-                <image src="" class="item-pic"></image>
-                <div class="item-row">
-                    <text class="item-text">净值</text>
-                </div>
-                <text class="item-intro"></text>
-            </div>
-            <div class="item-cont">
-                <image src="" class="item-pic"></image>
-                <div class="item-row">
-                    <text class="item-text">估值</text>
-                </div>
-                <text class="item-intro"></text>
-            </div>
-            <div class="item-cont">
-                <image src="" class="item-pic"></image>
-                <div class="item-row">
-                    <text class="item-text">股票开户</text>
-                    <div class="item-dot"></div>
-                </div>
-                <text class="item-intro">送100元</text>
-                <text class="item-tip">人人有份</text>
-            </div>
-            <div class="item-cont">
-                <image src="" class="item-pic"></image>
-                <div class="item-row">
-                    <text class="item-text">更多</text>
-                    <div class="item-dot"></div>
-                </div>
-                <text class="item-intro"></text>
-            </div>
-        </div>
-        <div class="line"></div>
-
-        <div class="flex-row bgc-white list-wrap">
-            <div class="flex-row ml40 flex-1 align-items-center">
-                <text class="list-text">足迹</text>
-                <text class="list-tit">为您记录最近浏览过的基金</text>
-            </div>
-            <text class="list-icon"> &gt; </text>
-        </div>
-
         <div class="nav-bar flex-row">
             <div class="nav-bar-item row-item align-items-center" @click="jump('template/a')">
                 <text class="nav-bar-item-tit c-red">首页</text>
@@ -148,6 +151,24 @@
                 <text class="nav-bar-item-text">Me</text>
             </div>
         </div>
+
+        <!--mask-->
+        <div class="mask" v-if="showShake" @click="showShake=false" @touchmove.prevent></div>
+
+        <div class="alert-box" v-if="showShake">
+            <div class="alert-corner">
+                <text class="alert-corner-text">NEW</text>
+            </div>
+            <text class="alert-close" @click="showShake=false"> &#88; </text>
+            <image src="" class="alert-img"></image>
+            <div class="alert-text-wrap">
+                <text class="alert-text-tit">发现新版本！V4.6.1</text>
+                <text class="alert-text-info">wifi下30秒完成升级</text>
+                <text class="alert-text-cont">不可错过的版本升级！1.全新市场频道。2.全新市场频道。3.全新市场频道。4.全新市场频道。</text>
+            </div>
+            <text class="alert-text-btn">立即升级</text>
+        </div>
+
     </div>
 </template>
 <script>
@@ -155,6 +176,7 @@
     export default {
         data(){
             return {
+                showShake:true,
                 imageLists: [
                     {
                         imgsrc: '#',
@@ -376,4 +398,99 @@
         font-size: 24px;
         padding-top: 5px;
     }
+
+    .mask{
+        width:750px;
+        height: 2000px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(142,142,142,0.8);
+    }
+
+    .alert-box{
+        width: 640px;
+        height: 630px;
+        position: fixed;
+        top: 330px;
+        left: 55px;
+        background-color: #fff;
+    }
+
+    .alert-corner{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 0;
+        height: 0;
+        border-top-width: 110px;
+        border-top-style: solid;
+        border-top-color: #4990e2;
+        border-right-width: 110px;
+        border-right-style: solid;
+        border-right-color: rgba(255,255,255,0);
+    }
+    .alert-corner-text{
+        position: absolute;
+        top:-90px;
+        left: 10px;
+        color: #fff;
+        font-size: 24px;
+        transform: rotate(-45deg);
+    }
+
+    .alert-close{
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        color: #cdcdcd;
+        text-align: center;
+    }
+    .alert-img{
+        position: absolute;
+        left: 250px;
+        top: -50px;
+        width: 140px;
+        height: 200px;
+        background-color: #cbe198;
+    }
+
+    .alert-text-wrap{
+        margin-top: 200px;
+        align-items: center;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+    .alert-text-tit{
+        font-size: 38px;
+        color: #000;
+    }
+    .alert-text-info{
+        margin-top: 10px;
+        font-size: 26px;
+        color: #9b9b9b;
+    }
+    .alert-text-cont{
+        margin-top: 20px;
+        font-size: 30px;
+        color: #9b9b9b;
+        lines:4;
+    }
+    .alert-text-btn{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 640px;
+        height: 108px;
+        text-align: center;
+        line-height: 100px;
+        background-color: #ff7648;
+        color: #fff;
+        font-size: 32px;
+    }
+
 </style>
+
