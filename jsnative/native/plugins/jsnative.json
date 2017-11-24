@@ -3,28 +3,28 @@
     {
       "pageid": "home",
       "inputParams": {
-        "startPage": "app.native.js?_VIEW_=/template/a",
+        "startPage": "app.native.js?_VIEW_=/template/c",
         "title":"首页"
       }
     },
     {
       "pageid": "market",
       "inputParams": {
-        "startPage": "app.native.js?_VIEW_=/template/c",
+        "startPage": "https://www.lightyy.com/apps/weex-test/quote.js",
         "title":"行情"
       }
     },
     {
       "pageid": "optional",
       "inputParams": {
-        "startPage": "app.native.js?_VIEW_=/template/b",
+        "startPage": "https://www.lightyy.com/apps/weex-test/mystock.js",
         "title":"自选"
       }
     },
     {
       "pageid": "my",
       "inputParams": {
-        "startPage": "app.native.js?_VIEW_=/template/d",
+        "startPage": "app.native.js?_VIEW_=/template/b",
         "title":"我的"
       }
     }

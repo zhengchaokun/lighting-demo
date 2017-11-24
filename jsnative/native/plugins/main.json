@@ -23,7 +23,7 @@
   },
   "style": {
     "navigationbar": {
-      "backgroundColor": "#717171",
+      "backgroundColor": "#e91f1f",
       "titleColor": "#ffffff",
       "buttonColor": "#ffffff",
       "useDarkStatusBarStyle": true
