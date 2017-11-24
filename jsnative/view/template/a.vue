@@ -38,7 +38,7 @@
             <cell style="height: 90px;"></cell>
         </list>
 
-        <div class="nav-bar flex-row">
+        <!--<div class="nav-bar flex-row">
             <div class="nav-bar-item row-item align-items-center" @click="jump('template/a')">
                 <image class="nav-bar-item-pic bgc-red"></image>
                 <text class="nav-bar-item-text c-red">首页</text>
@@ -55,7 +55,7 @@
                 <image class="nav-bar-item-pic"></image>
                 <text class="nav-bar-item-text">我的</text>
             </div>
-        </div>
+        </div>-->
     </div>
 </template>
 <script>

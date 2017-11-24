@@ -1,9 +1,31 @@
 {
   "pages": [
     {
-      "pageid": "jsnative",
+      "pageid": "home",
       "inputParams": {
-        "startPage": "http://192.168.12.1:3000/app.native.js"
+        "startPage": "app.native.js?_VIEW_=/template/a",
+        "title":"首页"
+      }
+    },
+    {
+      "pageid": "market",
+      "inputParams": {
+        "startPage": "app.native.js?_VIEW_=/template/c",
+        "title":"行情"
+      }
+    },
+    {
+      "pageid": "optional",
+      "inputParams": {
+        "startPage": "app.native.js?_VIEW_=/template/b",
+        "title":"自选"
+      }
+    },
+    {
+      "pageid": "my",
+      "inputParams": {
+        "startPage": "app.native.js?_VIEW_=/template/d",
+        "title":"我的"
       }
     }
   ],
