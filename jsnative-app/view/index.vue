@@ -3,12 +3,12 @@
     <div style="height: 1500px; background-color: #f5f6f8">
         <slider class="slider" interval="4500" auto-play="true">
             <div class="frame" v-for="img in imageLists">
-                <image class="image" resize="cover" :style="{backgroundColor: img.bjc}"></image> <!-- :src="img.imgsrc" -->
+                <image class="image" resize="cover" :src="img.bjc"></image>
             </div>
         </slider>
         <div class="flex-row top-nav-wrap">
             <div class="pos-r ml30 mt10">
-                <image src="" class="top-nav-icon"></image>
+                <image src="../images/message.png" class="top-nav-icon"></image>
                 <text class="top-nav-dot">14</text>
             </div>
             <input placeholder="股票代码或拼音简称" class="top-nav-input" />
@@ -32,60 +32,55 @@
                     <div class="flex-row item-box">
                         <div class="flex-clounm item-cont">
                             <div class="pos-r">
-                                <image src="" class="item-pic"></image>
-                                <text class="item-dot">8</text>
+                                <image src="../images/icon-1.png" class="item-pic"></image>
                             </div>
                             <text class="item-text">理财持仓</text>
                         </div>
                         <div class="flex-clounm item-cont">
                             <div class="pos-r">
-                                <image src="" class="item-pic"></image>
+                                <image src="../images/icon-2.png" class="item-pic"></image>
                             </div>
-                            <text class="item-text">理财持仓</text>
+                            <text class="item-text">我的资产</text>
                         </div>
                         <div class="flex-clounm item-cont">
                             <div class="pos-r">
-                                <image src="" class="item-pic"></image>
+                                <image src="../images/icon-3.png" class="item-pic"></image>
                                 <text class="item-dot">8</text>
                             </div>
-                            <text class="item-text">理财持仓</text>
+                            <text class="item-text">涨乐资讯</text>
                         </div>
                         <div class="flex-clounm item-cont">
                             <div class="pos-r">
-                                <image src="" class="item-pic"></image>
-                                <text class="item-dot">8</text>
+                                <image src="../images/icon-4.png" class="item-pic"></image>
                             </div>
-                            <text class="item-text">理财持仓</text>
+                            <text class="item-text">股票开户</text>
                         </div>
                     </div>
                     <div class="line"></div>
                     <div class="flex-row item-box">
                         <div class="flex-clounm item-cont">
                             <div class="pos-r">
-                                <image src="" class="item-pic"></image>
-                                <text class="item-dot">8</text>
+                                <image src="../images/icon-5.png" class="item-pic"></image>
                             </div>
-                            <text class="item-text">理财持仓</text>
+                            <text class="item-text">签到</text>
                         </div>
                         <div class="flex-clounm item-cont">
                             <div class="pos-r">
-                                <image src="" class="item-pic"></image>
+                                <image src="../images/icon-6.png" class="item-pic"></image>
                             </div>
-                            <text class="item-text">理财持仓</text>
+                            <text class="item-text">成本神器</text>
                         </div>
                         <div class="flex-clounm item-cont">
                             <div class="pos-r">
-                                <image src="" class="item-pic"></image>
-                                <text class="item-dot">8</text>
+                                <image src="../images/icon-7.png" class="item-pic"></image>
                             </div>
-                            <text class="item-text">理财持仓</text>
+                            <text class="item-text">相似K线</text>
                         </div>
                         <div class="flex-clounm item-cont">
                             <div class="pos-r">
-                                <image src="" class="item-pic"></image>
-                                <text class="item-dot">8</text>
+                                <image src="../images/icon-8.png" class="item-pic"></image>
                             </div>
-                            <text class="item-text">理财持仓</text>
+                            <text class="item-text">新股申购</text>
                         </div>
                     </div>
                 </div>
@@ -93,30 +88,27 @@
                     <div class="flex-row item-box">
                         <div class="flex-clounm item-cont">
                             <div class="pos-r">
-                                <image src="" class="item-pic"></image>
-                                <text class="item-dot">8</text>
+                                <image src="../images/icon-5.png" class="item-pic"></image>
                             </div>
-                            <text class="item-text">理财持仓</text>
+                            <text class="item-text">签到</text>
                         </div>
                         <div class="flex-clounm item-cont">
                             <div class="pos-r">
-                                <image src="" class="item-pic"></image>
+                                <image src="../images/icon-6.png" class="item-pic"></image>
                             </div>
-                            <text class="item-text">理财持仓</text>
+                            <text class="item-text">成本神器</text>
                         </div>
                         <div class="flex-clounm item-cont">
                             <div class="pos-r">
-                                <image src="" class="item-pic"></image>
-                                <text class="item-dot">8</text>
+                                <image src="../images/icon-7.png" class="item-pic"></image>
                             </div>
-                            <text class="item-text">理财持仓</text>
+                            <text class="item-text">相似K线</text>
                         </div>
                         <div class="flex-clounm item-cont">
                             <div class="pos-r">
-                                <image src="" class="item-pic"></image>
-                                <text class="item-dot">8</text>
+                                <image src="../images/icon-8.png" class="item-pic"></image>
                             </div>
-                            <text class="item-text">理财持仓</text>
+                            <text class="item-text">新股申购</text>
                         </div>
                     </div>
                     <div class="flex-row item-box"></div>
@@ -126,7 +118,7 @@
 
             <div class="flex-row justify-space-between bgc-white list-wrap mt20">
                 <div class="flex-row ml40 flex-1 align-items-center">
-                    <image src="" class="list-img"></image>
+                    <image src="../images/play.png" class="list-img"></image>
                     <text class="list-tit fs30 lins1 flex-1">长乐早报：美联储加息大局已定美联储加息大局已定</text>
                 </div>
                 <text class="list-icon"> &gt; </text>
@@ -141,14 +133,14 @@
                     </div>
                 </cell>
                 <cell class="cell bgc-white flex-row">
-                    <image src="" class="cell-img"></image>
+                    <image src="../images/newpic.png" class="cell-img"></image>
                     <div class="flex-cloumn flex-1">
                         <text class="cell-tit">港股上了天 还要继续眼红吗？</text>
                         <text class="cell-info">今年以来，虽然A股上涨了6.1（截止发稿前），但是境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱</text>
                     </div>
                 </cell>
                 <cell class="cell bgc-white flex-row">
-                    <image src="" class="cell-img"></image>
+                    <image src="../images/newpic.png" class="cell-img"></image>
                     <div class="flex-cloumn flex-1">
                         <text class="cell-tit">港股上了天 还要继续眼红吗？</text>
                         <text class="cell-info">今年以来，虽然A股上涨了6.1（截止发稿前），但是境外资金持续走弱</text>
@@ -168,15 +160,15 @@
                 imageLists: [
                     {
                         imgsrc: '#',
-                        bjc:'#ffaf02'
+                        bjc:'../images/banner-1.png'
                     },
                     {
                         imgsrc: '#',
-                        bjc:'#ff6123'
+                        bjc:'../images/banner-2.png'
                     },
                     {
                         imgsrc: '#',
-                        bjc:'#fe3b21'
+                        bjc:'../images/banner-3.png'
                     }
                 ]
             }
@@ -202,7 +194,6 @@
     .top-nav-icon{
         width: 50px;
         height: 50px;
-        background-color: #9f9f9f;
     }
     .top-nav-dot{
         position: absolute;
@@ -261,7 +252,6 @@
     .item-pic{
         width: 80px;
         height: 80px;
-        background-color: #457fca;
         border-radius: 30px;
     }
     .item-text{
@@ -317,10 +307,9 @@
         padding-right: 30px;
     }
     .list-img{
-        width: 50px;
-        height: 50px;
+        width: 58px;
+        height: 58px;
         margin-right: 30px;
-        background-color: #f1a7a9;
     }
 
     .list{
@@ -339,7 +328,7 @@
         width: 145px;
         height: 145px;
         margin-right: 30px;
-        background-color: #72caa8;
+        border-radius: 5px;
     }
     .cell-tit{
         font-size: 32px;

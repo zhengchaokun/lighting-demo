@@ -3,10 +3,10 @@
     <div style="height: 1500px; background-color: #f5f6f8">
         <div class="top-container">
            <div class="flex-row app-icon-wrap">
-               <image class="app-icon"></image>
-               <image class="app-icon"></image>
-               <image class="app-icon"></image>
-               <image class="app-icon"></image>
+               <image class="app-icon" src="../images/login-phone.png"></image>
+               <image class="app-icon" src="../images/login-wx.png"></image>
+               <image class="app-icon" src="../images/login-qq.png"></image>
+               <image class="app-icon" src="../images/login-wb.png"></image>
            </div>
            <div class="login-wrap">
                <text class="login-text">更多登录方式 ></text>
@@ -14,15 +14,15 @@
         </div>
         <div class="flex-row bgc-white function-wrap">
             <div class="function-cont">
-                <image class="function-pic"></image>
+                <image class="function-pic" src="../images/icon-star.png"></image>
                 <text class="function-text">首页</text>
             </div>
             <div class="function-cont">
-                <image class="function-pic"></image>
+                <image class="function-pic" src="../images/icon-history.png"></image>
                 <text class="function-text">历史</text>
             </div>
             <div class="function-cont">
-                <image class="function-pic"></image>
+                <image class="function-pic" src="../images/icon-night.png"></image>
                 <text class="function-text">夜间</text>
             </div>
         </div>
@@ -38,16 +38,16 @@
                 </div>
                 <div class="flex-row bgc-white attention-wrap">
                     <div class="attention-cont">
-                        <image class="attention-pic"></image>
+                        <image class="attention-pic" src="../images/gz-1.png"></image>
                         <text class="attention-text">我的问答</text>
                     </div>
                     <div class="attention-cont">
-                        <image class="attention-pic"></image>
+                        <image class="attention-pic" src="../images/gz-2.png"></image>
                         <div class="reddot"></div>
                         <text class="attention-text">学习web的技能</text>
                     </div>
                     <div class="attention-cont">
-                        <image class="attention-pic"></image>
+                        <image class="attention-pic" src="../images/gz-2.png"></image>
                         <div class="reddot"></div>
                         <text class="attention-text">Google开发者</text>
                     </div>
@@ -140,7 +140,6 @@
         width: 130px;
         height: 130px;
         border-radius: 65px;
-        background-color: #ccc;
     }
     .login-wrap{
         width: 280px;
@@ -189,7 +188,6 @@
     .function-pic{
         width: 50px;
         height: 50px;
-        background-color: #457fca;
     }
     .function-text{
         padding-top: 10px;
@@ -243,7 +241,6 @@
         width: 100px;
         height: 100px;
         border-radius: 50px;
-        background-color: #72caa8;
     }
     .attention-text{
         width: 100px;

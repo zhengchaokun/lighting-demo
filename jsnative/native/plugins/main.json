@@ -15,10 +15,10 @@
     {
       "title": "我的",
       "action": "gmu://jsnative#my"
-    }
+    } 
   ],
   "navigationbar": {
-    "disableSystemBarTint": false,
+    "disableSystemBarTint": false,y
     "immersiveMode": false
   },
   "style": {
