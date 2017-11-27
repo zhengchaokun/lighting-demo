@@ -1,0 +1,36 @@
+{
+  "menus": [
+    {
+      "title": "首页",
+      "action": "gmu://jsnative#home"
+    },
+    {
+      "title": "行情",
+      "action": "gmu://jsnative#market"
+    },
+    {
+      "title": "自选",
+      "action": "gmu://jsnative#optional"
+    },
+    {
+      "title": "我的",
+      "action": "gmu://jsnative#my"
+    }
+  ],
+  "navigationbar": {
+    "disableSystemBarTint": false,
+    "immersiveMode": false
+  },
+  "style": {
+    "navigationbar": {
+      "backgroundColor": "#e91f1f",
+      "titleColor": "#ffffff",
+      "buttonColor": "#ffffff",
+      "useDarkStatusBarStyle": true
+    },
+    "menu": {
+      "titleColor": "#8a8a8a",
+      "titleSelectedColor": "#0785db"
+    }
+  }
+}
