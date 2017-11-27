@@ -132,47 +132,6 @@
                 <text class="list-icon"> &gt; </text>
             </div>
 
-            <!--<div class="nav-bar flex-row">
-                <div class="nav-bar-item row-item align-items-center" @click="jump('template/a')">
-                    <image class="nav-bar-item-pic bgc-red"></image>
-                    <text class="nav-bar-item-text c-red">首页</text>
-                </div>
-                <div @click="jump('template/a')" class="nav-bar-item row-item align-items-center">
-                    <image class="nav-bar-item-pic"></image>
-                    <text class="nav-bar-item-text">行情</text>
-                </div>
-                <div @click="jump('template/a')" class="nav-bar-item row-item align-items-center">
-                    <image class="nav-bar-item-pic"></image>
-                    <text class="nav-bar-item-text">交易</text>
-                </div>
-                <div @click="jump('template/a')" class="nav-bar-item row-item align-items-center">
-                    <image class="nav-bar-item-pic"></image>
-                    <text class="nav-bar-item-text">理财</text>
-                </div>
-                <div @click="jump('template/a')" class="nav-bar-item row-item align-items-center">
-                    <image class="nav-bar-item-pic"></image>
-                    <text class="nav-bar-item-text">我的</text>
-                </div>
-            </div>-->
-            <!--<div class="nav-bar flex-row">
-                <div class="nav-bar-item row-item align-items-center" @click="jump('template/a')">
-                    <image class="nav-bar-item-pic"></image>
-                    <text class="nav-bar-item-text">首页</text>
-                </div>
-                <div @click="jump('template/c')" class="nav-bar-item row-item align-items-center">
-                    <image class="nav-bar-item-pic bgc-red"></image>
-                    <text class="nav-bar-item-text c-red">西瓜视频</text>
-                </div>
-                <div @click="jump('template/d')" class="nav-bar-item row-item align-items-center">
-                    <image class="nav-bar-item-pic"></image>
-                    <text class="nav-bar-item-text">微头条</text>
-                </div>
-                <div @click="jump('template/b')" class="nav-bar-item row-item align-items-center">
-                    <image class="nav-bar-item-pic"></image>
-                    <text class="nav-bar-item-text">我的</text>
-                </div>
-            </div>-->
-
             <list class="list mt20">
                 <cell class="cell bgc-white flex-row">
                     <image src="" class="cell-img"></image>
