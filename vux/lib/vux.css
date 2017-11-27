@@ -1148,6 +1148,14 @@ to {
     width: 35%;
 }
 }
+.vux-modal-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+.vux-modal-open-for-container {
+  overflow: hidden!important;
+}
 
 .vux-fade-enter-active,
 .vux-fade-leave-active {
@@ -1470,14 +1478,8 @@ to {
     width: 35%;
 }
 }
-
-.vux-modal-open {
-  overflow: hidden;
-  position: fixed;
-  width: 100%;
-}
-.vux-modal-open-for-container {
-  overflow: hidden!important;
+.vux-x-dialog-absolute .weui-dialog {
+  position: absolute;
 }
 /**
 * actionsheet
@@ -2626,11 +2628,6 @@ It could drastically improve the appearance of the blurred image for content rea
 .vux-popup-animate-top-leave-active {
   -webkit-transform: translate3d(0, -100%, 0);
           transform: translate3d(0, -100%, 0);
-}
-.vux-modal-open {
-  overflow: hidden;
-  position: fixed;
-  width: 100%;
 }
 /**
 * actionsheet
@@ -6605,7 +6602,7 @@ following styles will be removed after v3.0.0
   text-overflow: ellipsis;
 }
 
-.fullpage-demo[data-v-9eebfc0e] {
+.fullpage-demo[data-v-3e294579] {
   background-color:yellow;
   font-size: 72px;
   line-height: 320px;
@@ -6634,7 +6631,7 @@ following styles will be removed after v3.0.0
   float: left;
 }
 
-.popover-demo-content[data-v-ede0a594] {
+.popover-demo-content[data-v-fc8f2e40] {
   padding: 5px 10px;
 }
 /**
@@ -14266,23 +14263,23 @@ i.weui-tabbar__icon,
 /**
 * loadmore
 */
-.vux-week-calendar[data-v-dde63eea] {
+.vux-week-calendar[data-v-dc089a42] {
   background-color: #fff;
 }
-.vux-week-calendar-day-item[data-v-dde63eea],
-.vux-week-calendar-date-item[data-v-dde63eea] {
+.vux-week-calendar-day-item[data-v-dc089a42],
+.vux-week-calendar-date-item[data-v-dc089a42] {
   text-align: center;
 }
-.vux-week-calendar-day-item[data-v-dde63eea] {
+.vux-week-calendar-day-item[data-v-dc089a42] {
   color: #000;
 }
-.vux-week-calendar-each-day-box[data-v-dde63eea] {
+.vux-week-calendar-each-day-box[data-v-dc089a42] {
   padding: 5px 0;
 }
-.vux-week-calendar-each-day-box[data-v-dde63eea] {
+.vux-week-calendar-each-day-box[data-v-dc089a42] {
   position: relative;
 }
-.vux-week-calendar-each-day[data-v-dde63eea] {
+.vux-week-calendar-each-day[data-v-dc089a42] {
   position: relative;
   background-color: transparent;
   border: 1px solid transparent;
@@ -14296,11 +14293,11 @@ i.weui-tabbar__icon,
   border-radius: 50%;
   box-sizing: border-box;
 }
-.vux-week-calendar-is-selected .vux-week-calendar-each-day[data-v-dde63eea] {
+.vux-week-calendar-is-selected .vux-week-calendar-each-day[data-v-dc089a42] {
   background-color: #FF9900;
   color: #fff;
 }
-.vux-calendar-dot[data-v-dde63eea] {
+.vux-calendar-dot[data-v-dc089a42] {
   display: block;
   text-align: center;
   width: 5px;
@@ -14312,7 +14309,7 @@ i.weui-tabbar__icon,
   background-color: #f74c31;
   border-radius: 50%;
 }
-.vux-week-calendar-top-tip[data-v-dde63eea] {
+.vux-week-calendar-top-tip[data-v-dc089a42] {
   position: absolute;
   left: -10px;
   top: 0;
@@ -14753,6 +14750,9 @@ input.weui-btn_plain-default {
     -webkit-transform: rotate3d(0, 0, 1, 360deg);
             transform: rotate3d(0, 0, 1, 360deg);
 }
+}
+.weui-btn.vux-x-button-no-border:after {
+  display: none;
 }
 
 .vux-circle {
