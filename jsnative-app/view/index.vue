@@ -126,7 +126,7 @@
 
             <list class="list mt20">
                 <cell class="cell bgc-white flex-row">
-                    <image src="" class="cell-img"></image>
+                    <image src="../images/newpic.png" class="cell-img"></image>
                     <div class="flex-cloumn flex-1">
                         <text class="cell-tit">港股上了天 还要继续眼红吗？</text>
                         <text class="cell-info">今年以来，虽然A股上涨了6.1（截止发稿前），但是境外资金持续走弱</text>
