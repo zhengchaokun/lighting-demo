@@ -1,0 +1,84 @@
+<Markets>
+<!--  上交所  -->
+    <typeTtem name="XSHG" h5Value="XSHG" desc="上交所" tag="SS" market="SS"/>
+    <typeTtem name="XSHG.mri" h5Value="XSHG.mri" desc="上海市场（指数）" tag="SS" market="SS"/>
+    <typeTtem name="XSHG.esa" h5Value="XSHG.esa" desc="上海A股" tag="SS" market="SS"/>
+    <typeTtem name="XSHG.esa.m" h5Value="XSHG.esa.m" desc="上海A股" tag="SS" market="SS"/>
+    <typeTtem name="XSHG.esb" h5Value="XSHG.esb" desc="上海B股" tag="SS" market="SS"/>
+    <typeTtem name="XSHG.d" h5Value="XSHG.d" desc="上证债券" tag="SS" market="SS"/>
+    <typeTtem name="XSHG.eu" h5Value="XSHG.eu"  desc="上证基金" tag="SS" market="SS"/>
+    <typeTtem name="XSHG.em.etf" h5Value="XSHG.em.etf" desc="上证ETF" tag="SS" market="SS"/>
+    <typeTtem name="XSHG.em.lof" h5Value="XSHG.em.lof" desc="上证LOF" tag="SS" market="SS"/>
+    <typeTtem name="XSHG.m" h5Value="XSHG.m" desc="上证其他" tag="SS" market="SS"/>
+   
+<!--  深交所  -->
+    <typeTtem name="XSHE" h5Value="XSHE" desc="深交所" tag="SZ" market="SZ"/>
+    <typeTtem name="XSHE.mri" h5Value="XSHE.mri" desc="深圳市场（指数）" tag="SZ" market="SZ"/>
+    <typeTtem name="XSHE.esa" h5Value="XSHE.esa" desc="深圳A股" tag="SZ" market="SZ"/>
+    <typeTtem name="XSHE.esa.m" h5Value="XSHE.esa.m"  desc="深圳A股" tag="SZ" market="SZ"/>
+    <typeTtem name="XSHE.esb" h5Value="XSHE.esb"  desc="深圳B股" tag="SZ" market="SZ"/>
+    <typeTtem name="XSHE.d" h5Value="XSHE.d"  desc="深证债券" tag="SZ" market="SZ"/>
+    <typeTtem name="XSHE.eu" h5Value="XSHE.eu"  desc="深证基金" tag="SZ" market="SZ"/>
+    <typeTtem name="XSHE.esa.neeq" h5Value="XSHE.esa.neeq"  desc="深证三板" tag="SZ" market="SZ"/>
+    <typeTtem name="XSHE.esa.smse" h5Value="XSHE.esa.smse"  desc="深证中小板" tag="SZ" market="SZ"/>
+    <typeTtem name="XSHE.em.lof" h5Value="XSHE.em.lof" desc="深证LOF" tag="SZ" market="SZ"/>
+    <typeTtem name="XSHE.em.etf" h5Value="XSHE.em.etf"  desc="深证ETF" tag="SZ" market="SZ"/>
+    <typeTtem name="XSHE.r" h5Value="XSHE.r" desc="深证权证" tag="SZ" market="SZ"/>
+    <typeTtem name="XSHE.esa.gem" h5Value="XSHE.esa.gem" desc="深证创业板	" tag="SZ" market="SZ"/>
+    <typeTtem name="XSHE.m" h5Value="XSHE.m" desc="深证其他" tag="SZ" market="SZ"/>
+    
+<!--  板块  -->
+    <typeTtem name="XBHS" h5Value="XBHS" desc="沪深板块" tag="HSBK"/>
+    <typeTtem name="XBHK" h5Value="XBHK" desc="港股板块" tag="HKBK"/>
+    <typeTtem name="XBUS" h5Value="XBUS" desc="美股板块" tag="USBK"/>
+    
+<!--  美股  -->
+    <typeTtem name="XNAS" h5Value="XNAS"   desc="纳斯达克" tag="O" market="O"/>
+    <typeTtem name="XNAS.mri" h5Value="XNAS.mri"   desc="纳斯达克指数" tag="O" market="O"/>
+    <typeTtem name="XNAS.eu" h5Value="XNAS.eu"   desc="" tag="O" market="O"/>
+    <typeTtem name="XNAS.es" h5Value="XNAS.es"   desc="纳斯达克股票" tag="O" market="O"/>
+    <typeTtem name="XASE" h5Value="XASE"   desc="美交所" tag="A" market="A"/>
+    <typeTtem name="XASE.mri" h5Value="XASE.mri"   desc="美交所指数" tag="A" market="A"/>
+    <typeTtem name="XASE.eu" h5Value="XASE.eu"   desc="" tag="A" market="A"/>
+    <typeTtem name="XASE.es" h5Value="XASE.es"   desc="美交所股票" tag="A" market="A"/>
+    <typeTtem name="XNYS" h5Value="XNYS"   desc="纽交所" tag="N" market="N"/>
+    <typeTtem name="XNYS.mri" h5Value="XNYS.mri" desc="纽交所指数" tag="N" market="N"/>
+    <typeTtem name="XNYS.eu" h5Value="XNYS.eu"   desc="" tag="N" market="N"/>
+    <typeTtem name="XNYS.es" h5Value="XNYS.es"   desc="纽交所股票" tag="N" market="N"/>
+
+<!--  新三板  -->
+    <typeTtem name="NEEQ" h5Value="NEEQ"   desc="新三板" tag="NEEQ" market="NEEQ" />
+    <typeTtem name="NEEQ.XYZR" h5Value="NEEQ.XYZR"   desc="协议转让" tag="NEEQ" market="NEEQ" />
+    <typeTtem name="NEEQ.ZSZR" h5Value="NEEQ.ZSZR"   desc="做市转让" tag="NEEQ" market="NEEQ" />
+    <typeTtem name="NEEQ.LWTS" h5Value="NEEQ.LWTS"   desc="两网退市" tag="NEEQ"  market="NEEQ" />
+    <typeTtem name="NEEQ.M" h5Value="NEEQ.M"   desc="其他" tag="NEEQ" market="NEEQ" />
+    
+<!--  港股  -->
+    <typeTtem name="XHKG-I" h5Value="XHKG-I" desc="港股INDEX" tag="HKI" market="HKI"/>
+    <typeTtem name="XHKG-M" h5Value="XHKG-M" desc="港股MAIN" tag="HKM" market="HKM"/>
+    <typeTtem name="XHKG-M.es" h5Value="XHKG-M.es" desc="股票" tag="HKM" market="HKM"/>
+    <typeTtem name="XHKG-M.rw" h5Value="XHKG-M.rw" desc="Warrant" tag="HKM" market="HKM"/>
+    <typeTtem name="XHKG-M.db" h5Value="XHKG-M.db" desc="债券" tag="HKM" market="HKM"/>
+    <typeTtem name="XHKG-M.dw" h5Value="XHKG-M.dw" desc="BWarrant" tag="HKM" market="HKM"/>
+    <typeTtem name="XHKG-M.tr" h5Value="XHKG-M.tr" desc="信托" tag="HKM" market="HKM"/>
+    <typeTtem name="XHKG-M.dm" h5Value="XHKG-M.dm" desc="其他" tag="HKM" market="HKM"/>
+    <typeTtem name="XHKG-G" h5Value="XHKG-G" desc="港股GEM" tag="HKG" market="HKG"/>
+    <typeTtem name="XHKG-N" h5Value="XHKG-N" desc="港股NASD" tag="HKN" market="HKN"/>
+    <typeTtem name="XHKG-E" h5Value="XHKG-E" desc="港股ETS" tag="HKE" market="HKE"/>
+<!--  中证指数  -->
+    <typeTtem name="CSI" h5Value="CSI"   desc="中证指数" tag="CSI" market="CSI" />
+    <typeTtem name="CSI.MRI.SZSE" h5Value="CSI.MRI.SZSE"   desc="深交所指数" tag="CSI" market="CSI" />
+    <typeTtem name="CSI.MRI.SSE" h5Value="CSI.MRI.SSE"   desc="上交所指数" tag="CSI" market="CSI" />
+    <typeTtem name="CSI.MRI.OTHER" h5Value="CSI.MRI.OTHER"   desc="其他指数" tag="CSI" market="CSI" />
+    <typeTtem name="CSI.MRI.HS" h5Value="CSI.MRI.HS"   desc="沪深指数" tag="CSI" market="CSI" />
+    <typeTtem name="CSI.MRI.HK" h5Value="CSI.MRI.HK"   desc="香港指数" tag="CSI" market="CSI" />
+    <typeTtem name="CSI.MRI.GLB" h5Value="CSI.MRI.GLB"   desc="全球指数" tag="CSI" market="CSI" />
+    <typeTtem name="CSI.MRI.AP" h5Value="CSI.MRI.AP"   desc="亚太指数" tag="CSI" market="CSI" />
+<!--  期货  -->
+    <typeTtem name="CCFX" h5Value="CCFX"   desc="中金期货" tag="CFFE" market="CFFE" />
+    <typeTtem name="XSGE" h5Value="XSGE"   desc="上海期货" tag="SHFE" market="SHFE" />
+    <typeTtem name="XDCE" h5Value="XDCE"   desc="大连期货" tag="DCE" market="DCE" />
+    <typeTtem name="XZCE" h5Value="XZCE"   desc="郑州期货" tag="CZCE" market="CZCE" />
+    <typeTtem name="XFCC" h5Value="XFCC"   desc="期货组合" tag="FCC" market="FCC" />
+
+</Markets>

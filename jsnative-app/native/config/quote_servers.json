@@ -1,0 +1,17 @@
+{
+  "client": {
+    "markets":[{"free":["XSHG","XSHE","XBUS","XNAS", "XASE", "XNYS", "XBHS","XHKG-I","XHKG-M","XHKG-G","XBHK", "CCFX", "XSGE", "XDCE", "XZCE", "CFFE", "CSI", "NEEQ"]},
+      {"charge":["XSHG","XSHE"]}]
+  },
+  "servers":[{
+    "name":"沪深&港股",
+    "host": "112.124.211.189",
+    "port":9999,
+    "markets":[{"free":["XSHG","XBUS","XSHE", "XBHS", "XSGE", "XDCE", "XZCE", "CFFE", "XHKG-I", "XHKG-M","XHKG-G","XBHK","CCFX", "CSI", "NEEQ","XNAS", "XASE", "XNYS"]}]
+  },{
+    "name":"Level2",
+    "host": "121.43.74.158",
+    "port":9999,
+    "markets":[{"charge":["XSHG","XSHE"]}]
+  }]
+}

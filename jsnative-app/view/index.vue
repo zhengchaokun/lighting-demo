@@ -8,7 +8,7 @@
         </slider>
         <div class="flex-row top-nav-wrap">
             <div class="pos-r ml30 mt10">
-                <image src="../images/message.png" class="top-nav-icon"></image>
+                <image src="images/message.png" class="top-nav-icon"></image>
                 <text class="top-nav-dot">14</text>
             </div>
             <input placeholder="股票代码或拼音简称" class="top-nav-input" />
@@ -32,26 +32,26 @@
                     <div class="flex-row item-box">
                         <div class="flex-clounm item-cont">
                             <div class="pos-r">
-                                <image src="../images/icon-1.png" class="item-pic"></image>
+                                <image src="images/icon-1.png" class="item-pic"></image>
                             </div>
                             <text class="item-text">理财持仓</text>
                         </div>
                         <div class="flex-clounm item-cont">
                             <div class="pos-r">
-                                <image src="../images/icon-2.png" class="item-pic"></image>
+                                <image src="images/icon-2.png" class="item-pic"></image>
                             </div>
                             <text class="item-text">我的资产</text>
                         </div>
                         <div class="flex-clounm item-cont">
                             <div class="pos-r">
-                                <image src="../images/icon-3.png" class="item-pic"></image>
+                                <image src="images/icon-3.png" class="item-pic"></image>
                                 <text class="item-dot">8</text>
                             </div>
                             <text class="item-text">涨乐资讯</text>
                         </div>
                         <div class="flex-clounm item-cont">
                             <div class="pos-r">
-                                <image src="../images/icon-4.png" class="item-pic"></image>
+                                <image src="images/icon-4.png" class="item-pic"></image>
                             </div>
                             <text class="item-text">股票开户</text>
                         </div>
@@ -60,25 +60,25 @@
                     <div class="flex-row item-box">
                         <div class="flex-clounm item-cont">
                             <div class="pos-r">
-                                <image src="../images/icon-5.png" class="item-pic"></image>
+                                <image src="images/icon-5.png" class="item-pic"></image>
                             </div>
                             <text class="item-text">签到</text>
                         </div>
                         <div class="flex-clounm item-cont">
                             <div class="pos-r">
-                                <image src="../images/icon-6.png" class="item-pic"></image>
+                                <image src="images/icon-6.png" class="item-pic"></image>
                             </div>
                             <text class="item-text">成本神器</text>
                         </div>
                         <div class="flex-clounm item-cont">
                             <div class="pos-r">
-                                <image src="../images/icon-7.png" class="item-pic"></image>
+                                <image src="images/icon-7.png" class="item-pic"></image>
                             </div>
                             <text class="item-text">相似K线</text>
                         </div>
                         <div class="flex-clounm item-cont">
                             <div class="pos-r">
-                                <image src="../images/icon-8.png" class="item-pic"></image>
+                                <image src="images/icon-8.png" class="item-pic"></image>
                             </div>
                             <text class="item-text">新股申购</text>
                         </div>
@@ -88,25 +88,25 @@
                     <div class="flex-row item-box">
                         <div class="flex-clounm item-cont">
                             <div class="pos-r">
-                                <image src="../images/icon-5.png" class="item-pic"></image>
+                                <image src="images/icon-5.png" class="item-pic"></image>
                             </div>
                             <text class="item-text">签到</text>
                         </div>
                         <div class="flex-clounm item-cont">
                             <div class="pos-r">
-                                <image src="../images/icon-6.png" class="item-pic"></image>
+                                <image src="images/icon-6.png" class="item-pic"></image>
                             </div>
                             <text class="item-text">成本神器</text>
                         </div>
                         <div class="flex-clounm item-cont">
                             <div class="pos-r">
-                                <image src="../images/icon-7.png" class="item-pic"></image>
+                                <image src="images/icon-7.png" class="item-pic"></image>
                             </div>
                             <text class="item-text">相似K线</text>
                         </div>
                         <div class="flex-clounm item-cont">
                             <div class="pos-r">
-                                <image src="../images/icon-8.png" class="item-pic"></image>
+                                <image src="images/icon-8.png" class="item-pic"></image>
                             </div>
                             <text class="item-text">新股申购</text>
                         </div>
@@ -118,7 +118,7 @@
 
             <div class="flex-row justify-space-between bgc-white list-wrap mt20">
                 <div class="flex-row ml40 flex-1 align-items-center">
-                    <image src="../images/play.png" class="list-img"></image>
+                    <image src="images/play.png" class="list-img"></image>
                     <text class="list-tit fs30 lins1 flex-1">长乐早报：美联储加息大局已定美联储加息大局已定</text>
                 </div>
                 <text class="list-icon"> &gt; </text>
@@ -126,21 +126,21 @@
 
             <list class="list mt20">
                 <cell class="cell bgc-white flex-row">
-                    <image src="../images/newpic.png" class="cell-img"></image>
+                    <image src="images/newpic.png" class="cell-img"></image>
                     <div class="flex-cloumn flex-1">
                         <text class="cell-tit">港股上了天 还要继续眼红吗？</text>
                         <text class="cell-info">今年以来，虽然A股上涨了6.1（截止发稿前），但是境外资金持续走弱</text>
                     </div>
                 </cell>
                 <cell class="cell bgc-white flex-row">
-                    <image src="../images/newpic.png" class="cell-img"></image>
+                    <image src="images/newpic.png" class="cell-img"></image>
                     <div class="flex-cloumn flex-1">
                         <text class="cell-tit">港股上了天 还要继续眼红吗？</text>
                         <text class="cell-info">今年以来，虽然A股上涨了6.1（截止发稿前），但是境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱</text>
                     </div>
                 </cell>
                 <cell class="cell bgc-white flex-row">
-                    <image src="../images/newpic.png" class="cell-img"></image>
+                    <image src="images/newpic.png" class="cell-img"></image>
                     <div class="flex-cloumn flex-1">
                         <text class="cell-tit">港股上了天 还要继续眼红吗？</text>
                         <text class="cell-info">今年以来，虽然A股上涨了6.1（截止发稿前），但是境外资金持续走弱</text>
@@ -160,15 +160,15 @@
                 imageLists: [
                     {
                         imgsrc: '#',
-                        bjc:'../images/banner-1.png'
+                        bjc:'images/banner-1.png'
                     },
                     {
                         imgsrc: '#',
-                        bjc:'../images/banner-2.png'
+                        bjc:'images/banner-2.png'
                     },
                     {
                         imgsrc: '#',
-                        bjc:'../images/banner-3.png'
+                        bjc:'images/banner-3.png'
                     }
                 ]
             }

@@ -34,5 +34,5 @@ exports.getBaseURL = function(vm) {
     // in Browser or WebView
     base = h5Base;
   }
-  return base
+  return "https://www.lightyy.com/apps/weex-test/"
 }
