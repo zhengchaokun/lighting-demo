@@ -55,14 +55,14 @@
 			</div>
 		</collapseview>
 		<!--跌幅榜 -->
-		<collapseview title="跌幅榜" ref="coll3" :showContent="show3" rightTitle=" ••• " rightFontColor="#ccc" @rightonclick="onRightClick(ranklistparams[2])">
+		<collapseview title="跌幅榜" ref="coll3" rightTitle=" ••• " rightFontColor="#ccc" @rightonclick="onRightClick(ranklistparams[2])">
 			<div v-for="item in falllist">
 				<ranklistItem @onClickItem="goStockDetail(item,2)" :stockName="item.prod_name" :stockCode="item.prod_code_all" :stockPrice="item.last_px" :stockRate="getPriceChangePercent(item.px_change_rate,0)" :busiFlag="item.busiFlag" :rateColor="item.px_change_rate_color" :marketicon="item.marketicon"></ranklistItem>
 				<div style="height: 1;background-color: #ddd;margin-top: 5;margin-bottom: 5"></div>
 			</div>
 		</collapseview>
 		<!--换手率榜 -->
-		<collapseview title="换手率榜" ref="coll4" :showContent="show4" rightTitle=" ••• " rightFontColor="#ccc" @rightonclick="onRightClick(ranklistparams[3])">
+		<collapseview title="换手率榜" ref="coll4" rightTitle=" ••• " rightFontColor="#ccc" @rightonclick="onRightClick(ranklistparams[3])">
 			<div v-for="item in turnoverlist">
 				<ranklistItem @onClickItem="goStockDetail(item,3)" :stockName="item.prod_name" :stockCode="item.prod_code_all" :stockPrice="item.last_px" :stockRate="getPriceChangePercent(item.turnover_ratio,0)" :busiFlag="item.busiFlag" :rateColor="item.turnover_ratio_color" :marketicon="item.marketicon"></ranklistItem>
 				<div style="height: 1;background-color: #ddd;margin-top: 5;margin-bottom: 5"></div>
@@ -191,8 +191,6 @@
 				refreshing:'hide',
 				refreshtext:'',
 				refreshFlag:false,
-				show3:false,
-				show4:false,
 
 				stock_fields: "prod_name,hq_type_code,last_px,px_change_rate,px_change,business_amount,business_balance,turnover_ratio,preclose_px,shares_per_hand",
 				block_fields: "prod_name,hq_type_code,px_change_rate,rise_first_grp,stock_px_change_rate,px_change,last_px,open_px,high_px,low_px,business_amount,business_balance,preclose_px,shares_per_hand",
@@ -254,7 +252,7 @@
 				this.loadRiseRankList();
 				this.loadFallRankList();
 				this.loadTurnoverRatioList();
-	            date = this.getNowFormatDate();
+	            date = common.getNowFormatDate();
 	            this.refreshFlag = false;
 	          	this.refreshing = 'show';
 	            setTimeout(() => {
@@ -267,24 +265,6 @@
 	          }
 
 	        },
-	         //获取时间函数
-            getNowFormatDate:function(){
-              var date = new Date();
-              var seperator1 = "-";
-              var seperator2 = ":";
-              var month = date.getMonth() + 1;
-              var strDate = date.getDate();
-              if (month >= 1 && month <= 9) {
-                  month = "0" + month;
-              }
-              if (strDate >= 0 && strDate <= 9) {
-                  strDate = "0" + strDate;
-              }
-              var currentdate = month + seperator1 + strDate
-                      + " " + date.getHours() + seperator2 + date.getMinutes()
-                      + seperator2 + date.getSeconds();
-              return currentdate;
-            },
 			getPriceChangePercent:function(rate,px_change){
 				if(rate=="停牌")
 					return rate;
@@ -765,7 +745,7 @@
     	created:function(){
     		var that=this;
     		that.baseUrl = getBaseURL(this);
-			date = this.getNowFormatDate();
+			date = common.getNowFormatDate();
     	}
 	};
 

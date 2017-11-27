@@ -131,6 +131,7 @@
  	var timeHandle = weex.requireModule('timer') || {};
  	var quoteDc = weex.requireModule('dataCenter');
  	var date = '';
+ 	var common = require('./common-api.js').common;
 	module.exports = {
 		props:{
 			isPageShow:{default:true},
@@ -327,7 +328,7 @@
 	          if(this.refreshFlag){
 	          	this.refreshtext = '正在刷新...'+ '\n' +'最后更新:'+date;
 	            this.loadRealtimeList();
-	            date = this.getNowFormatDate();
+	            date = common.getNowFormatDate();
 	            this.refreshFlag = false;
 	          	this.refreshing = 'show';
 	            setTimeout(() => {
@@ -339,24 +340,6 @@
 	            this.refreshing = 'hide';
 	          }
 	        },
-	         //获取时间函数
-            getNowFormatDate:function(){
-              var date = new Date();
-              var seperator1 = "-";
-              var seperator2 = ":";
-              var month = date.getMonth() + 1;
-              var strDate = date.getDate();
-              if (month >= 1 && month <= 9) {
-                  month = "0" + month;
-              }
-              if (strDate >= 0 && strDate <= 9) {
-                  strDate = "0" + strDate;
-              }
-              var currentdate = month + seperator1 + strDate
-                      + " " + date.getHours() + seperator2 + date.getMinutes()
-                      + seperator2 + date.getSeconds();
-              return currentdate;
-            },
 			indexonclick: function(index) {
 				nativeLog("Header stock is clicked");
 				if(stockDetailUserJsHead){
@@ -469,7 +452,7 @@
 		created: function() {
 			var that = this;
 			this.baseUrl = getBaseURL(this);
-			date = this.getNowFormatDate();
+			date = common.getNowFormatDate();
 		}
 	}
 </script>

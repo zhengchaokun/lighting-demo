@@ -140,6 +140,7 @@
 	const scrollerView = weex.requireModule('scrollerview');
 	//var log = weex.requireModule('jslog');
 	var event = weex.requireModule('event');
+	var common =require('./common-api.js').common;
 	var tflag = -1;	//判断当前选中的是哪一项的排序
 	var date = "";
 	var platform="";	//判断是android还是ios
@@ -226,7 +227,7 @@
               if(this.refreshFlag){
                 this.refreshtext = '正在刷新...'+ '\n' +'最后更新:'+date;
                 this.$emit("onrefresh");
-                date = this.getNowFormatDate();
+                date = common.getNowFormatDate();
                 this.refreshFlag = false;
                 this.refreshing = 'show';
                 setTimeout(() => {
@@ -238,25 +239,6 @@
                 this.refreshing = 'hide';
               }
             },
-            //获取时间函数
-            getNowFormatDate:function(){
-              var date = new Date();
-              var seperator1 = "-";
-              var seperator2 = ":";
-              var month = date.getMonth() + 1;
-              var strDate = date.getDate();
-              if (month >= 1 && month <= 9) {
-                  month = "0" + month;
-              }
-              if (strDate >= 0 && strDate <= 9) {
-                  strDate = "0" + strDate;
-              }
-              var currentdate = month + seperator1 + strDate
-                      + " " + date.getHours() + seperator2 + date.getMinutes()
-                      + seperator2 + date.getSeconds();
-              return currentdate;
-            },
-
 			//子项点击进入个股详情页
 			onitemclick:function(item){
 				// log.i("index:"+index);
@@ -375,7 +357,7 @@
 			var config =this.$getConfig();
           	platform =config.env.platform;
 			this.baseUrl = getBaseURL(this);
-			date = this.getNowFormatDate();
+			date = common.getNowFormatDate();
 		},
 	}
 </script>

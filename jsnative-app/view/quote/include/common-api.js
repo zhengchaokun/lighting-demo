@@ -207,5 +207,110 @@ exports.common = {
             fontSize=29;
         }
         return fontSize;
-    }
+    },
+    getRateColor:function(changeRate){
+        if (changeRate > 0){
+            return "#fa3e48";
+        }else if (changeRate < 0){
+            return "#249b3a";
+        }else{
+            return "#a3a3a3";
+        }
+    },
+    getImagePath:function(baseUrl,imageName){
+        return baseUrl+ "image/"+imageName;
+    },
+    pullDownRefreshUpdateStatus:function(refreshText,refreshFlag,refreshDate,refreshStatus,event) {
+        if (refreshStatus == "ING") {
+            refreshText = '下拉刷新数据' + '\n' +"最后更新:"+refreshDate;   
+            if(Math.abs(Number(event.pullingDistance)) > 95){
+             //log.i(event.pullingDistance+"测试");
+             refreshText = '松开刷新数据' + '\n' +"最后更新:"+refreshDate;
+             refreshFlag = true;
+         }
+        }
+        var refreshData = new Object();
+        refreshData.refreshText = refreshText;
+        refreshData.refreshFlag = refreshFlag;
+        return refreshData;
+    },
+    onrefresh:function(refreshText,refreshFlag,refreshing,refreshDate,Fct){
+        if(refreshFlag){
+          refreshText = '正在刷新...'+ '\n' +'最后更新:'+refreshDate;
+          Fct();
+          refreshFlag = false;
+          refreshing = 'show';
+          // setTimeout(() => {
+          //     refreshing = 'hide';
+          //   }, 1000);
+          
+        }
+        else{
+          refreshText = '';
+          refreshing = 'hide';
+        }
+        var refreshData = new Object();
+        refreshData.refreshText = refreshText;
+        refreshData.refreshFlag = refreshFlag;
+        refreshData.refreshing = refreshing;
+        return refreshData;
+    },
+    getPriceChangePercent:function(rate,px_change){
+        if(rate=="停牌" || rate == "--")
+            return rate;
+        if(typeof(rate)!="undefined"){
+            if ((rate + "").indexOf("%") >=0){
+                if ((rate + "").indexOf("-")==-1){
+                    return "+"+rate;
+                }
+                return rate;
+            }
+            if(rate==0&& px_change<0) ///涨跌幅为0，但涨跌额小于0的时候，需要显示为-0.00%
+            {
+                return "-0.00%";
+            }else{
+                return getPriceChange(rate);
+            }
+        }
+    },
+    getPriceChange:function(rate){
+        if(rate>0)
+            return "+"+rate;
+        else 
+            return rate;
+    },
+    getColorWithPriceChange:function(priceChange){
+        if(priceChange>0)
+            return "riseColor";
+        else if(priceChange<0)
+            return "fallColor";
+        else 
+            return "stableColor";
+    },
+    getColorWithNumber:function(priceChange){
+        if(priceChange>0)
+            return "#FF4500";
+        else if(priceChange<0)
+            return "#3CB371";
+        else 
+            return "#333";
+    },
+    //获取时间函数
+    getNowFormatDate:function(){
+        var date = new Date();
+        var seperator1 = "-";
+        var seperator2 = ":";
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = month + seperator1 + strDate
+            + " " + date.getHours() + seperator2 + date.getMinutes()
+            + seperator2 + date.getSeconds();
+        return currentdate;
+    },
 }

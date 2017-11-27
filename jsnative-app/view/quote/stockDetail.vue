@@ -1,7 +1,7 @@
 <template>
     <list style="flex-direction:column;" focustype="block" @viewappear="onViewappear" @viewdisappear="onViewdisappear" :scrollDisabled="isScrollDisabled">
         <!--快照  -->
-		<refresh class="refesh" :display="refreshing" @pullingdown="onpullingdown" @refresh="onrefresh">
+		    <refresh class="refesh" :display="refreshing" @pullingdown="onpullingdown" @refresh="onrefresh">
           <loading-indicator style="height: 60px; width: 60px;"></loading-indicator>
           <text class="refreshtextstyle" ref="refreshtextstyle" :value="refreshtext" ></text>
         </refresh>
@@ -252,11 +252,6 @@
   .bar{
     margin-top: 60px;
   }
-  .tabtrip{
-   /* flex:1;*/
-    height: 60px;
-    justify-content:flex-start;
-  }
   .contentDiv{
    /* flex:2;*/
     width: 750px;
@@ -284,22 +279,6 @@
     margin-bottom: 10;
     margin-right: 12;
   }
-  .tabStrip{
-    flex: 1;
-    margin-right: 10px;
-  }
-  .bidOfferList{
-    flex: 8;
-  }
-  .tickView{
-    flex: 8;
-  }
-  .detailList{
-    text-overflow:ellipsis;
-    flex:1;
-    margin-left:20px;
-  }
-
   .tabview {
         width: 750;
         height:70;
@@ -592,16 +571,6 @@
         ],
 
         tradedataList:[
-          {time:'--:--',volume:'—',price:'—',colorp:'#FF4500',colorv:'#FF4500'},
-          {time:'--:--',volume:'—',price:'—',colorp:'#FF4500',colorv:'#FF4500'},
-          {time:'--:--',volume:'—',price:'—',colorp:'#FF4500',colorv:'#FF4500'},
-          {time:'--:--',volume:'—',price:'—',colorp:'#FF4500',colorv:'#FF4500'},
-          {time:'--:--',volume:'—',price:'—',colorp:'#FF4500',colorv:'#FF4500'},
-          {time:'--:--',volume:'—',price:'—',colorp:'#FF4500',colorv:'#FF4500'},
-          {time:'--:--',volume:'—',price:'—',colorp:'#FF4500',colorv:'#FF4500'},
-          {time:'--:--',volume:'—',price:'—',colorp:'#FF4500',colorv:'#FF4500'},
-          {time:'--:--',volume:'—',price:'—',colorp:'#FF4500',colorv:'#FF4500'},
-          {time:'--:--',volume:'—',price:'—',colorp:'#FF4500',colorv:'#FF4500'},
         ],
         UpDownTabItems:[
             {index: 0, title: '领涨', titleColor: ''},
@@ -647,7 +616,7 @@
           if(this.refreshFlag){
             this.refreshtext = '正在刷新...'+ '\n' +'最后更新:'+date;
             this.getAllData();
-            date = this.getNowFormatDate();
+            date = common.getNowFormatDate();
             this.refreshFlag = false;
             this.refreshing = 'show';
             setTimeout(() => {
@@ -659,33 +628,6 @@
             this.refreshing = 'hide';
           }
         },
-        //获取时间函数
-        getNowFormatDate:function(){
-              var date = new Date();
-              var seperator1 = "-";
-              var seperator2 = ":";
-              var month = date.getMonth() + 1;
-              var strDate = date.getDate();
-              var sMinute = date.getMinutes();
-              var sSecond = date.getSeconds();
-              if (sMinute < 10) {
-                        sMinute = "0" + sMinute;
-                    }
-              if (sSecond < 10) {
-                  sSecond = "0" + sSecond;
-              }
-              if (month >= 1 && month <= 9) {
-                  month = "0" + month;
-              }
-              if (strDate >= 0 && strDate <= 9) {
-                  strDate = "0" + strDate;
-              }
-              var currentdate = month + seperator1 + strDate
-                      + " " + date.getHours() + seperator2 + sMinute
-                      + seperator2 + sSecond;
-              return currentdate;
-        },
-
         getTradeDate:function(){
           var that = this;
           quoteDc.loadMarket({codeType:this.codeType},function(ret){
@@ -710,20 +652,38 @@
         },
 	    getRealtime:function(){
           var that =this;
+
           quoteDc.loadRealtime({stockCode:this.stockCode,codeType:this.codeType},function(ret){
             //console.log("allan realtime=" + JSON.stringify(ret));
             if(!that.isPageShow){
               return;
             }
             that.snapshotdata = ret;
+            
             var stockCode = that.stockCode;
             if (getAbbreviation(that.codeType).length > 0){
                 stockCode = stockCode + "."+getAbbreviation(that.codeType);
             }
-            if(that.snapshotdata.data.snapshot[stockCode]==null){
+            if(that.snapshotdata.data.snapshot[stockCode]==null && that.snapshotdata.data.snapshot[that.stockCode]==null){
               return;
             }
             that.getSnapshotdata();
+            var fields = that.snapshotdata.data.snapshot.fields;
+            var preclose =that.snapshotdata.data.snapshot[stockCode][fields.indexOf("preclose_px")];
+            console.log("昨日收盘价="+preclose);
+            if(preclose>0){
+              if(that.chartType.indexOf('TRENDLINE')!=-1){
+                    that.getTrend();
+                }else if(that.chartType.indexOf("NETVALUE")!=-1){
+                    that.getNetValue();
+                }else{
+                    that.getKLine();
+                }
+
+                if (that.BidTickDivAttr == 'visible'){
+                    that.getTick();
+                }
+            }
             that.setTitle();
           });
         },
@@ -1495,13 +1455,13 @@
             if(!this.hasData(volume) || Number(volume)<=0)
               return "--";
             if(marketType=="MARKET_FUTURE"){ //期货不需要除每手股数
-              return this.amountToString(volume,1)+"手";
+              return this.formatBigNumber(volume,2,true)+"手";
             }else if(marketType=="MARKET_CN"){
               //A股以手为单位
               return this.amountToHand(volume,hand)+"手";
             }else if(marketType=="MARKET_US" ||  marketType =="MARKET_HK") {
               //美股、港股以股为单位
-              var result = this.amountToString(volume,1);
+              var result = this.formatBigNumber(volume,2,true);
                if(result == '--'){
                 return result;
                }
@@ -1509,29 +1469,6 @@
             }else{
                 return this.amountToHand(volume,hand);
             }
-        },
-        amountToString:function(amount,bs){
-              var absvalue= Math.abs(amount);
-              if(bs>0){
-                  absvalue=absvalue*bs;
-              }
-              var absvalueStr="";
-              if(absvalue==0)
-              return "--";
-              if (absvalue >= 100000000000) { //万亿
-                absvalueStr=parseFloat(absvalue / 100000000000).toFixed(2) + "千亿";
-              }else if(absvalue >=100000000){ //亿以上
-                absvalueStr=parseFloat(absvalue / 100000000).toFixed(2) + "亿";
-              }else if(absvalue>=100000){ //十万以上
-                absvalueStr=parseFloat(absvalue / 10000).toFixed(2) + "万";
-              }else {
-                //十万以下
-                absvalueStr=this.formatZero(parseFloat(absvalue).toFixed(0));
-              }
-              if (amount < 0) {
-                absvalueStr="-"+absvalueStr;
-              }
-              return absvalueStr;
         },
         amountToHand:function(amount,unit){
           if(unit==0){
@@ -1549,12 +1486,45 @@
             return hands;
           }
         },
-        formatZero: function(num) {
-            if (num == 0 || num == "NaN") {
-              return "--";
-            } else {
-              return num;
+        //数据进行格式化
+        formatBigNumber:function(number,bit,flag){
+            //log.e("原始数据"+number);
+            var num = Number(number);
+            var preFix = "";
+            if(num < -0.00001){
+                preFix = '-';
+                num = Math.abs(num);
             }
+            var amountStr="";
+            if ( num < 100000 ) {
+            //小于10万
+              if(!!flag){
+                amountStr = num.toFixed(0);
+              }
+              else{
+                amountStr = num.toFixed(bit);
+              }
+            }
+            else if ( num < 100000000 ) {
+            //小于1亿
+            amountStr = (num/10000).toFixed(bit) +"万";
+            }
+            else if( num < 100000000000){
+              amountStr = (num/100000000).toFixed(bit) +"亿";
+            }
+            else{
+            //千亿
+              amountStr = (num/100000000000).toFixed(bit)+"千亿";
+            }
+            //log.e("转换后数据"+preFix+amountStr);
+            return preFix+amountStr;
+        },
+        //判断是否有数据
+        hasData:function(data){
+          if(parseFloat(data).toString() == "NaN") {
+　　　　    return false;
+　　　　  }
+　　　　  return true;
         },
         getChartTabItems: function (productTypes) {
           if (productTypes == 'PRODUCT_FUND') {    //基金
@@ -1646,42 +1616,6 @@
               this.getKLine();
             }
          }
-        },
-
-        //数据进行格式化
-        formatBigNumber:function(number,bit){
-            //log.e("原始数据"+number);
-            var num = Number(number);
-            var preFix = "";
-            if(num < -0.00001){
-                preFix = '-';
-                num = Math.abs(num);
-            }
-            var amountStr="";
-            if ( num < 100000 ) {
-            //小于10万
-              amountStr = num.toFixed(bit);
-            }
-            else if ( num < 100000000 ) {
-            //小于1亿
-            amountStr = (num/10000).toFixed(bit) +"万";
-            }
-            else if( num < 100000000000){
-              amountStr = (num/100000000).toFixed(bit) +"亿";
-            }
-            else{
-            //千亿
-              amountStr = (num/100000000000).toFixed(bit)+"千亿";
-            }
-            //log.e("转换后数据"+preFix+amountStr);
-            return preFix+amountStr;
-        },
-        //判断是否有数据
-        hasData:function(data){
-          if(parseFloat(data).toString() == "NaN") {
-　　　　    return false;
-　　　　  }
-　　　　  return true;
         },
         //切换快照底部视图状态
         showRealTimeBottom:function(){
@@ -2392,28 +2326,22 @@
                 that.doSwitchChart(that.chartType);
 
                 that.getAllData();
+              }else{
+                //test 代码
+                console.log("viewappear 刷新数据");
+                that.getAllData();
               }
           });
 
         },
         onViewdisappear:function(e){
             this.isPageShow = false;
+
         },
         getAllData:function(){
             var that = this;
             that.getRealtime();
-              if(that.chartType.indexOf('TRENDLINE')!=-1){
-                  that.getTrend();
-              }else if(that.chartType.indexOf("NETVALUE")!=-1){
-                  that.getNetValue();
-              }else{
-                  that.getKLine();
-              }
-
-              if (that.BidTickDivAttr == 'visible'){
-                  that.getTick();
-              }
-
+            
               if(that.isUpDownListShow){
                 if(!that.isPageShow){
                     return;
@@ -2483,7 +2411,7 @@
       this.baseUrl=getBaseURL(this);
       var that =this;
       var config =this.$getConfig();
-      date = this.getNowFormatDate();
+      date = common.getNowFormatDate();
       var inputParam = config.inputParam;
       if (inputParam){
           if (inputParam.stockCode){

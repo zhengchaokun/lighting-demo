@@ -114,7 +114,7 @@ module.exports={
     created:function(){
     	this.baseUrl=getBaseURL(this);
     	var self = this;
-    	date = this.getNowFormatDate();
+    	date = common.getNowFormatDate();
       	var config =this.$getConfig();
       	var inputParam = config.inputParam;
       	if (inputParam){
@@ -161,7 +161,7 @@ module.exports={
             self.getData(1);
             self.getData(2);
             self.gettitleData();
-            date = this.getNowFormatDate();
+            date = common.getNowFormatDate();
             this.refreshFlag = false;
             this.refreshing = 'show';
             setTimeout(() => {
@@ -172,24 +172,6 @@ module.exports={
             this.refreshtext = '';
             this.refreshing = 'hide';
           }
-        },
-            //获取时间函数
-        getNowFormatDate:function(){
-          var date = new Date();
-          var seperator1 = "-";
-          var seperator2 = ":";
-          var month = date.getMonth() + 1;
-          var strDate = date.getDate();
-          if (month >= 1 && month <= 9) {
-              month = "0" + month;
-          }
-          if (strDate >= 0 && strDate <= 9) {
-              strDate = "0" + strDate;
-          }
-          var currentdate = month + seperator1 + strDate
-                  + " " + date.getHours() + seperator2 + date.getMinutes()
-                  + seperator2 + date.getSeconds();
-          return currentdate;
         },
     	goStockDetail:function(item,type){
         if(stockDetailUserJsHead){

@@ -15,14 +15,14 @@
     			</div>
     		</collapseview>
 
-    		<collapseview ref="coll2" title="知名美股" :showContent="show3"  rightTitle="•••" rightFontColor="#ccc" @rightonclick="onRightClick(ranklistparams[1])">
+    		<collapseview ref="coll2" title="知名美股"   rightTitle="•••" rightFontColor="#ccc" @rightonclick="onRightClick(ranklistparams[1])">
     			<div v-for="item in uslist">
     				<ranklistItem @onClickItem="goStockDetail(item,2)" :stockName="item.prod_name" :stockCode="item.prod_code_all" :stockPrice="item.last_px" :stockRate="getPriceChangePercent(item.px_change_rate,0)" :busiFlag="item.busiFlag" :rateColor="item.px_change_rate_color" :marketicon="item.marketicon"></ranklistItem>
             <div style="height: 1;background-color: #ddd;margin-top: 5;margin-bottom: 5"></div>
     			</div>
     		</collapseview>
 
-    		<collapseview ref="coll3" title="中概股" :showContent="show4" rightTitle="•••" rightFontColor="#ccc" @rightonclick="onRightClick(ranklistparams[2])">
+    		<collapseview ref="coll3" title="中概股"  rightTitle="•••" rightFontColor="#ccc" @rightonclick="onRightClick(ranklistparams[2])">
     			<div v-for="item in chlist">
     			<ranklistItem @onClickItem="goStockDetail(item,3)" :stockName="item.prod_name" :stockCode="item.prod_code_all" :stockPrice="item.last_px" :stockRate="getPriceChangePercent(item.px_change_rate,0)" :busiFlag="item.busiFlag" :rateColor="item.px_change_rate_color" :marketicon="item.marketicon"></ranklistItem>
             <div style="height: 1;background-color: #ddd;margin-top: 5;margin-bottom: 5"></div>
@@ -61,7 +61,7 @@
     var stockDetailUserJsHead = require('./common-api.js').common.Constants.stockDetailUserJsHead;
     var getBusiFlag = require('./common-api.js').common.getBusiFlag;
     var getMarketIcon=require('./common-api.js').common.getMarketIcon;
-
+    var common =require('./common-api.js').common;
     const storage = weex.requireModule('storage');
     var e1={};
     var e2={};
@@ -83,8 +83,6 @@
           refreshing:'hide',
           refreshtext:'',
           refreshFlag:false,
-          show3:false,
-          show4:false,
 
           fields: 'prod_name,hq_type_code,last_px,px_change_rate,px_change,business_amount,shares_per_hand',
           "ranklistparams": [
@@ -115,7 +113,7 @@
     created:function(){
         var self = this;
         self.baseUrl = getBaseURL(this);
-        date = self.getNowFormatDate();
+        date = common.getNowFormatDate();
     },
 
     methods:{
@@ -134,7 +132,7 @@
                 this.getData(1,this.hotlist);
                 this.getData(2,this.chlist);
                 this.getData(3,this.uslist);
-                date = this.getNowFormatDate();
+                date = common.getNowFormatDate();
                 this.refreshFlag = false;
                 this.refreshing = 'show';
                 setTimeout(() => {
@@ -145,24 +143,6 @@
                 this.refreshtext = '';
                 this.refreshing = 'hide';
               }
-            },
-            //获取时间函数
-            getNowFormatDate:function(){
-              var date = new Date();
-              var seperator1 = "-";
-              var seperator2 = ":";
-              var month = date.getMonth() + 1;
-              var strDate = date.getDate();
-              if (month >= 1 && month <= 9) {
-                  month = "0" + month;
-              }
-              if (strDate >= 0 && strDate <= 9) {
-                  strDate = "0" + strDate;
-              }
-              var currentdate = month + seperator1 + strDate
-                      + " " + date.getHours() + seperator2 + date.getMinutes()
-                      + seperator2 + date.getSeconds();
-              return currentdate;
             },
     	onRightClick:function(params){
     		if (params.type == "block_rank") {

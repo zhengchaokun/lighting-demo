@@ -147,7 +147,7 @@
 <script>
  	var event = weex.requireModule('event');
  	var getBaseURL = require('./include/base-url.js').getBaseURL;
-  var getBusiFlag = require('./include/common-api.js').common.getBusiFlag;
+  var common = require('./include/common-api.js').common;
   var getAbbreviation = require('./include/common-api.js').common.getAbbreviation;
  	var timeHandle = weex.requireModule('timer') || {};
  	var date = '';
@@ -156,6 +156,7 @@
   var event = weex.requireModule('event');
   var stockDetailUserJsHead = require('./include/common-api.js').common.Constants.stockDetailUserJsHead;
   const storage = weex.requireModule('storage');
+  //var log = weex.requireModule('jslog');
 	module.exports ={
 
 		data:function(){
@@ -193,100 +194,58 @@
         selectMarket: "全部",
         baseUrl:'',
         isShowAddStockBut: false,
-        isPageShow: true
+        isPageShow: true,
 			}
 		},
 		methods:{
 		  //下拉
       onpullingdown: function(event){
-        this.refreshtext = '下拉刷新数据' + '\n' +"最后更新:"+date;   
-        if(Math.abs(Number(event.pullingDistance)) > 95){
-          //log.i(event.pullingDistance+"测试");
-          this.refreshtext = '松开刷新数据' + '\n' +"最后更新:"+date;
-          this.refreshFlag = true;
-        }
+        var refreshData = common.pullDownRefreshUpdateStatus(this.refreshtext,this.refreshFlag,date,"ING",event);
+        this.refreshtext = refreshData.refreshtext;
+        this.refreshFlag = refreshData.refreshFlag;
       },
       //完成刷新
       onrefresh:function(){
         var self = this;
         if(this.refreshFlag){
-        	this.refreshtext = '正在刷新...'+ '\n' +'最后更新:'+date;
+          this.refreshtext = '正在刷新...'+ '\n' +'最后更新:'+date;
           this.loadRealtimeList();
-		      this.onUpdate();
+          this.onUpdate();
           date = this.getNowFormatDate();
           this.refreshFlag = false;
-        	this.refreshing = 'show';
+          this.refreshing = 'show';
           setTimeout(() => {
               self.refreshing = 'hide';
             }, 1000);
-        	}
+          }
         else{
           this.refreshtext = '';
           this.refreshing = 'hide';
         }
       },
+      onRefreshFunc:function(){
+          this.loadRealtimeList();
+          this.onUpdate();
+      },
       //获取时间函数
       getNowFormatDate:function(){
-        var date = new Date();
-        var seperator1 = "-";
-        var seperator2 = ":";
-        var month = date.getMonth() + 1;
-        var strDate = date.getDate();
-        if (month >= 1 && month <= 9) {
-            month = "0" + month;
-        }
-        if (strDate >= 0 && strDate <= 9) {
-            strDate = "0" + strDate;
-        }
-        var currentdate = month + seperator1 + strDate
-                + " " + date.getHours() + seperator2 + date.getMinutes()
-                + seperator2 + date.getSeconds();
+        var currentdate = common.formatDate(new Date(),"yyyy-MM-dd hh:mm:ss");
         return currentdate;
       },
 			getPriceChangePercent:function(rate,px_change){
-				if(rate=="停牌" || rate == "--")
-					return rate;
-				if(typeof(rate)!="undefined"){
-          if ((rate + "").indexOf("%") >=0){
-            if ((rate + "").indexOf("-")==-1){
-              return "+"+rate;
-            }
-            return rate;
-          }
-					if(rate==0&& px_change<0) ///涨跌幅为0，但涨跌额小于0的时候，需要显示为-0.00%
-					{
-						return "-0.00%";
-					}else if(rate>0){
-						return "+"+rate+"%";
-					}else{
-            return rate+"%";
-          }
-				}
+        return common.getPriceChangePercent(rate,px_change);
 			},
 			getPriceChange:function(rate){
-				if(rate>0)
-					return "+"+rate;
-				else 
-					return rate;
+        common.getPriceChange(rate);
 			},
 			getRealtimeList:function(e,callback){
 	           quoteDc.loadRealtimeList({'en_prod_code':e,'fields':'prod_name,last_px,px_change,px_change_rate,hq_type_code,special_marker,trade_status'},callback);
 	        },
 	        getColorWithPriceChange:function(priceChange){
-					if(priceChange>0)
-						return "riseColor";
-					else if(priceChange<0)
-						return "fallColor";
-					else 
-						return "stableColor";
+              return common.getColorWithPriceChange(priceChange);
 	        },
 	        getColorWithNumber:function(priceChange){
-					if(priceChange>0)
-						return "#FF4500";
-					else if(priceChange<0)
-						return "#3CB371";
-					else 
-						return "#333";
+  					  return common.getColorWithNumber(priceChange);
 	        },
 	        
 	        onIndexItem: function(item){
@@ -452,13 +411,9 @@
                 tmp['px_change_rate'] = "0.00%"
               }
               var changeRate = parseFloat(tmp['px_change_rate']);
-              if (changeRate > 0){
-                  tmp['color'] = "#fa3e48";
-              }else if (changeRate < 0){
-                  tmp['color'] = "#249b3a";
-              }else{
-                tmp['color'] = "#a3a3a3";
-              }
+
+              tmp['color'] = common.getRateColor(changeRate);
+
               if(a.indexOf("null")!=-1){
                   var sstemp = getAbbreviation(tmp.hq_type_code);
                   tmp["prod_code_all"] =tmp.prod_code+(sstemp.length>0?("."+sstemp):'');
@@ -468,8 +423,8 @@
                 tmp.px_change_rate="停牌";
                 //n.px_change_rate_color =""
               }
-              tmp['marketicon']= self.getMarketIcon(idx);
-              tmp['busiFlag'] = getBusiFlag(tmp.hq_type_code,specialM);
+              tmp['marketicon']= self.getMarketIcon(idx,tmp['hq_type_code']);
+              tmp['busiFlag'] = common.getBusiFlag(tmp.hq_type_code,specialM);
               self.defStockList[idx] = tmp;
           }
           //
@@ -486,38 +441,20 @@
       　　if (arr.length <= 1) {
             return arr; 
           }
-          /*function order(src, min){
-            if (orderType){//1 倒序
-              return src < min;
-            }else{//0
-                return src > min;
-            }
-          };*/
-
           var order;
-          if (orderType){
-              order = function(src, min){
+          order = function(src, min){
                   if (!src){
                     src = 0;
                   }
                   if (!min){
                     min = 0;
                   }
-
-                  return src < min;
-              };
-          }else{
-              order = function(src, min){
-                  if (!src){
-                    src = 0;
-                  }
-                  if (!min){
-                    min = 0;
-                  }
-                  return src > min;
-              };
-          }
-          
+                  if (orderType) 
+                    {return src < min;}
+                  else{
+                    return src > min;
+                  }    
+          };
       　　var pivotIndex = Math.floor(arr.length / 2);
       　　var pivot = arr.splice(pivotIndex, 1)[0];
       　　var left = [];
@@ -531,62 +468,60 @@
       　　}
       　　return this.sortList(left, key, orderType).concat([pivot], this.sortList(right, key, orderType));
         },
-        onOrderIcon: function(type, orderType){
 
+        onOrderIcon: function(type, orderType){
           if (type == "price"){
             if (orderType == 0){
-              this.priceOrderIcon = this.baseUrl+ "image/sort_arrow_up.png";
+              this.priceOrderIcon = common.getImagePath(this.baseUrl,"sort_arrow_up.png");
             }else if (orderType == 1){
-              this.priceOrderIcon = this.baseUrl+ "image/sort_arrow_down.png";
+              this.priceOrderIcon = common.getImagePath(this.baseUrl,"sort_arrow_down.png");
             }else{
-              this.priceOrderIcon = this.baseUrl+ "image/sort_other.png";
+              this.priceOrderIcon = common.getImagePath(this.baseUrl,"sort_other.png");
             }
 
-            this.rateOrderIcon = this.baseUrl+ "image/sort_other.png";
+            this.rateOrderIcon = common.getImagePath(this.baseUrl,"sort_other.png");
             this.changeRateOrderType = -1;
 
           }else{
             if (orderType == 0){
-              this.rateOrderIcon = this.baseUrl+ "image/sort_arrow_up.png";
+              this.rateOrderIcon = common.getImagePath(this.baseUrl,"sort_arrow_up.png");
             }else if (orderType == 1){
-              this.rateOrderIcon = this.baseUrl+ "image/sort_arrow_down.png";
+              this.rateOrderIcon = common.getImagePath(this.baseUrl,"sort_arrow_down.png");
             }else{
-              this.rateOrderIcon = this.baseUrl+ "image/sort_other.png";
+              this.rateOrderIcon = common.getImagePath(this.baseUrl,"sort_other.png");
             }
-            this.priceOrderIcon = this.baseUrl+ "image/sort_other.png";
+            this.priceOrderIcon = common.getImagePath(this.baseUrl,"sort_other.png");
             this.newPriceOrderType = -1;
           }
+          console.log("priceOrderIcon"+this.priceOrderIcon);
         },
         
         onNewPrice:function(e){
-          this.newPriceOrderType--;
-          if (this.newPriceOrderType < -1){
-              this.newPriceOrderType = 1;
-          }
-
-          this.onOrderIcon("price",this.newPriceOrderType);
-
-          if (this.newPriceOrderType != -1){
-            this.stockList = this.sortList(this.stockList, "last_px", this.newPriceOrderType);
-          }else{//default order
-            this.stockList = this.currStockList.concat();
-          }
+          this.newPriceOrderType = this.sortListByField("last_px",this.newPriceOrderType);
         },
         onChangeRate:function(e){
-          this.changeRateOrderType--;
-          if (this.changeRateOrderType < -1){
-              this.changeRateOrderType = 1;
+          this.changeRateOrderType= this.sortListByField("px_change_rate",this.changeRateOrderType);
+        },
+
+        sortListByField:function(fieldName,orderType) {
+          
+          orderType--;
+          if (orderType < -1){
+              orderType = 1;
           }
 
-          this.onOrderIcon("changeRate",this.changeRateOrderType);
+          this.onOrderIcon("changeRate",orderType);
 
-          if (this.changeRateOrderType != -1){
-            this.stockList = this.sortList(this.stockList, "px_change_rate", this.changeRateOrderType);
+          if (orderType != -1){
+            this.stockList = this.sortList(this.stockList, fieldName, orderType);
           }else{
             this.stockList = this.currStockList.concat();
           }
+          return orderType;
         },
+
         refreshList: function(){
+          console.log("newPriceOrderType"+this.newPriceOrderType+"   changeRateOrderType"+this.changeRateOrderType);
             if (this.newPriceOrderType != -1){
                 this.stockList = this.sortList(this.stockList, "last_px", this.newPriceOrderType);
             }else if (this.changeRateOrderType != -1){
@@ -599,7 +534,7 @@
             this.isPageShow = true;
         },
         onViewdisappear:function(){
-          this.isPageShow = false;
+            this.isPageShow = false;
         },
         onShowSelecBoard: function(){
             this.isShowSelecBoard = !this.isShowSelecBoard;
@@ -647,25 +582,14 @@
               //选择颜色
               this.selectItems[this.marketType].color="#fa3e48";
         },
-        getMarketIcon:function(idx){
+        getMarketIcon:function(idx,codeType){
             if (idx < this.stockMarketIconList.length){
               var i = this.stockMarketIconList[idx];
               console.log("getMarketIcon i="+i);
               if (i == -1 || i >= this.filters.length){
                   return "other";
               }
-
-              if (this.filters[i].title == "沪深"){
-                return "hs";
-              }else if (this.filters[i].title == "美股"){
-                return "us";
-              }else if (this.filters[i].title == "港股"){
-                return "hk";
-              }else if (this.filters[i].title == "期货"){
-                return "future";
-              }else{
-                return "other";
-              }
+              return common.getMarketIcon(codeType);
             }else{
               return "other";
             }
@@ -674,9 +598,7 @@
             if (marketType == 0){//all
               this.currStockList = this.defStockList.concat();
             }else{
-              var index = marketType - 1;
-              var filter = this.filters[index];
-              var markets = this.filters[index].markets;
+              var markets = this.filters[marketType - 1].markets;
               this.currStockList = [];
               for (var j = 0; j < this.oriMarketTypeList.length; j++){
                   for (var x= 0; x < markets.length; x++){
@@ -705,8 +627,9 @@
     	created:function(){
         var self = this;
     		self.baseUrl = getBaseURL(this);
-        self.priceOrderIcon = this.baseUrl+ "image/sort_other.png";
-        self.rateOrderIcon = this.baseUrl+ "image/sort_other.png";
+        self.priceOrderIcon = common.getImagePath(this.baseUrl,"sort_other.png");
+        self.rateOrderIcon = common.getImagePath(this.baseUrl,"sort_other.png");
+        console.log("rateOrderIcon"+this.rateOrderIcon);
         self.loadMyStocksList();
         self.loadRealtimeList();
         date = self.getNowFormatDate();

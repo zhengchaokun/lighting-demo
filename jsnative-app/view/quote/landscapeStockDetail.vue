@@ -33,7 +33,7 @@
       <jstabbar v-if="!isShowFocusInfo" ref="jstabbar" height="30" fontSize=16 :selectedIndex="tabIdx" :tabItems="chartTabItems" @tabBarOnClick="switchType"></jstabbar>
       <div class="contentDiv">
           <div class="trendDiv">
-            <chartview landscape="true" :stockcode='stockCode' :codetype='codeType' :chartType='chartType' :techtype="techType" :klinemode="kLineMode" :snapshotdata='snapshotdata' :trenddata='trenddata' :klinedata='klinedata' :netvaluedata='netvaluedata' @showline="showLine" @hideline="hideLine" :class="[trendExpand(chartType,isBidTickDivShow)]"></chartview>
+            <chartview landscape="true" :stockcode='stockCode' :codetype='codeType' :chartType='chartType' :techtype="techType" :klinemode="kLineMode" :snapshotdata='snapshotdata' :trenddata='trenddata' :klinedata='klinedata' :netvaluedata='netvaluedata' @showline="showLine" @hideline="hideLine" :class="[trendExpand(chartType,isBidTickDivShow)]" ref="chartview" @click="doubleClick"></chartview>
             <div v-if="isBidTickDivShow" style="width:125;">
                 <div class="tabbidtrade" style="width:115;">
                     <text :style="{ color: bidcolor,flex:1}" @click="switchBidAndTrade(0)" class="detailtext" >五档</text>
@@ -287,6 +287,12 @@
   var productType;
   var marketType;
   var index = 0;
+  //模拟双击事件
+  var  clicked = 1;
+  var  clickedTime={
+        'timeA':" ",
+       'timeB':" "
+  };
    module.exports = {
     props:{
       stocktitle:{default:""},
@@ -374,7 +380,8 @@
         kLineMode:'CANDLE_FORWARD',
         baseUrl:'',  
         tabIdx: -1,
-        isShowPage:true
+        isShowPage:true,
+        isDoubleStart:true //双击事件状态 true:双击开启 false 双击取消
        }
     },
     components: {
@@ -398,8 +405,28 @@
             if (!that.isShowPage){
                   return;
               }
-            that.snapshotdata = ret;
+            that.snapshotdata = ret;   
+            var stockCode = that.stockCode;
+            if (getAbbreviation(that.codeType).length > 0){
+                stockCode = stockCode + "."+getAbbreviation(that.codeType);
+            }
+            if(that.snapshotdata.data.snapshot[stockCode]==null && that.snapshotdata.data.snapshot[that.stockCode]==null){
+              return;
+            }
+            var fields = that.snapshotdata.data.snapshot.fields;
+            var preclose =that.snapshotdata.data.snapshot[stockCode][fields.indexOf("preclose_px")];
+            console.log("横屏昨日收盘价="+preclose);
+            if(preclose>0){
+                if(that.chartType.indexOf('TRENDLINE')!=-1){
+                    that.getTrend();
+                }else if(that.chartType.indexOf("NETVALUE")!=-1){
+                  that.getNetValue();
+                }else{
+                  that.getKLine();
+                }
+            }
             that.getSnapshotdata();
+
             that.getTick();
             //that.setTitle();
           });
@@ -1045,12 +1072,18 @@
         },
 
       showLine: function (event) {
+        
         this.isShowFocusInfo = true;
         
         this.hsParamsData = event.hsParams;
+
+
+        this.isDoubleStart=false;
       },
       hideLine: function (event) {
         this.isShowFocusInfo = false;
+
+        this.isDoubleStart=true;
       },
 
       start:function(event) {
@@ -1220,6 +1253,37 @@
         onClose:function(e){
             head.back();
         },
+        doubleClick:function(e){
+          if(clicked==1){
+              clickedTime.timeA=new Date();
+              clicked++;             
+          }
+          else if(clicked==2){
+            clickedTime.timeB=new Date();
+            if (Math.abs(clickedTime.timeA-clickedTime.timeB)<400){
+               //  双击 function
+                this.chartViewClick(e);
+                clicked=1;
+            }else{
+              clickedTime.timeA=new Date();
+            };
+          }
+        },
+        chartViewClick:function(e){
+            if(this.isDoubleStart){
+              console.log("showfocusline 111");
+              //iOS 需要传递touches位置信息 android不需要
+              if(e.touches){
+                console.log("touches="+JSON.stringify(e.touches));
+                this.$refs.chartview.showFocusLine(e.touches);
+              }else{
+                this.$refs.chartview.showFocusLine({});
+              }
+            }else{
+              console.log("hidefocusline 111");
+              this.$refs.chartview.hideFocusLine();
+            }
+        },
         getIosChartHeightClass:function(){
           //ios横屏模式下 k线图扩展有问题，需要价格高度 android没有问题
           var config =this.$getConfig();
@@ -1241,13 +1305,13 @@
           console.log("allan landscape onViewapper ...");
           this.isShowPage = true;
           this.getRealtime();
-          if(this.chartType.indexOf('TRENDLINE')!=-1){
-              this.getTrend();
-          }else if(this.chartType.indexOf("NETVALUE")!=-1){
-            this.getNetValue();
-          }else{
-            this.getKLine();
-          }
+          // if(this.chartType.indexOf('TRENDLINE')!=-1){
+          //     this.getTrend();
+          // }else if(this.chartType.indexOf("NETVALUE")!=-1){
+          //   this.getNetValue();
+          // }else{
+          //   this.getKLine();
+          // }
           this.getTradeDate();
         },
         onViewdisappear:function(){
@@ -1290,8 +1354,8 @@
         //nativeLog("不显示五档和明细");
         this.notNeedShowBidTick = false;
       }
-
       this.getChartTabItems(productType);
+      that.getRealtime();
       storage.getItem("chartInfo",function(e){
         //console.log("allan=" + JSON.stringify(e));
         if(e.result == "success"){
@@ -1323,13 +1387,6 @@
       timeHandle.setInterval(function(){
             if (that.isShowPage){
                 that.getRealtime();
-                if(that.chartType.indexOf('TRENDLINE')!=-1){
-                    that.getTrend();
-                }else if(that.chartType.indexOf("NETVALUE")!=-1){
-                  that.getNetValue();
-                }else{
-                  that.getKLine();
-                }
                 that.getTradeDate();
             }
           },5000);        
