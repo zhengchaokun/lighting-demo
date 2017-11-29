@@ -1,32 +1,31 @@
 
 <template>
     <div style="height: 1500px; background-color: #f5f6f8">
-        <slider class="slider" interval="4500" auto-play="true">
-            <div class="frame" v-for="img in imageLists">
-                <image class="image" resize="cover" :src="img.bjc"></image>
-            </div>
-        </slider>
-        <div class="flex-row top-nav-wrap">
-            <div class="pos-r ml30 mt10">
-                <image src="images/message.png" class="top-nav-icon"></image>
-                <text class="top-nav-dot">14</text>
-            </div>
-            <input placeholder="股票代码或拼音简称" class="top-nav-input" />
-            <text class="top-nav-text">导航</text>
-        </div>
-
-        <div class="flex-row justify-space-between bgc-white list-wrap">
-            <div class="flex-row ml40 align-items-center">
-                <text class="list-tit">上证指数</text>
-                <text class="c-eee mr10"> &#47; </text>
-                <text class="fs28 c-green mr20">3397.82</text>
-                <text class="fs24 c-green mr20">-15.93</text>
-                <text class="fs24 c-green">-0.47%</text>
-            </div>
-            <text class="list-icon"> &gt; </text>
-        </div>
-
         <scroller>
+            <slider class="slider" interval="4500" auto-play="true">
+                <div class="frame" v-for="img in imageLists">
+                    <image class="image" resize="cover" :src="img.bjc"></image>
+                </div>
+            </slider>
+            <!--<div class="flex-row top-nav-wrap">-->
+                <!--<div class="pos-r ml30 mt10">-->
+                    <!--<image src="images/message.png" class="top-nav-icon"></image>-->
+                    <!--<text class="top-nav-dot">14</text>-->
+                <!--</div>-->
+                <!--<input placeholder="股票代码或拼音简称" class="top-nav-input" />-->
+                <!--<text class="top-nav-text">导航</text>-->
+            <!--</div>-->
+
+            <div class="flex-row justify-space-between bgc-white list-wrap">
+                <div class="flex-row ml40 align-items-center">
+                    <text class="list-tit">上证指数</text>
+                    <text class="c-eee mr10"> &#47; </text>
+                    <text class="fs28 c-green mr20">3397.82</text>
+                    <text class="fs24 c-green mr20">-15.93</text>
+                    <text class="fs24 c-green">-0.47%</text>
+                </div>
+                <text class="list-icon"> &gt; </text>
+            </div>
             <slider class="item-wrap bgc-white">
                 <div class="flex-cloumn">
                     <div class="flex-row item-box">
@@ -124,29 +123,30 @@
                 <text class="list-icon"> &gt; </text>
             </div>
 
-            <list class="list mt20">
-                <cell class="cell bgc-white flex-row">
-                    <image src="images/newpic.png" class="cell-img"></image>
-                    <div class="flex-cloumn flex-1">
-                        <text class="cell-tit">港股上了天 还要继续眼红吗？</text>
-                        <text class="cell-info">今年以来，虽然A股上涨了6.1（截止发稿前），但是境外资金持续走弱</text>
-                    </div>
-                </cell>
-                <cell class="cell bgc-white flex-row">
-                    <image src="images/newpic.png" class="cell-img"></image>
-                    <div class="flex-cloumn flex-1">
-                        <text class="cell-tit">港股上了天 还要继续眼红吗？</text>
-                        <text class="cell-info">今年以来，虽然A股上涨了6.1（截止发稿前），但是境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱</text>
-                    </div>
-                </cell>
-                <cell class="cell bgc-white flex-row">
-                    <image src="images/newpic.png" class="cell-img"></image>
-                    <div class="flex-cloumn flex-1">
-                        <text class="cell-tit">港股上了天 还要继续眼红吗？</text>
-                        <text class="cell-info">今年以来，虽然A股上涨了6.1（截止发稿前），但是境外资金持续走弱</text>
-                    </div>
-                </cell>
-            </list>
+            <!--<list class="list mt20">-->
+                <!---->
+            <!--</list>-->
+            <div class="cell bgc-white flex-row">
+                <image src="images/newpic.png" class="cell-img"></image>
+                <div class="flex-cloumn flex-1">
+                    <text class="cell-tit">港股上了天 还要继续眼红吗？</text>
+                    <text class="cell-info">今年以来，虽然A股上涨了6.1（截止发稿前），但是境外资金持续走弱</text>
+                </div>
+            </div>
+            <div class="cell bgc-white flex-row">
+                <image src="images/newpic.png" class="cell-img"></image>
+                <div class="flex-cloumn flex-1">
+                    <text class="cell-tit">港股上了天 还要继续眼红吗？</text>
+                    <text class="cell-info">今年以来，虽然A股上涨了6.1（截止发稿前），但是境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱</text>
+                </div>
+            </div>
+            <div class="cell bgc-white flex-row">
+                <image src="images/newpic.png" class="cell-img"></image>
+                <div class="flex-cloumn flex-1">
+                    <text class="cell-tit">港股上了天 还要继续眼红吗？</text>
+                    <text class="cell-info">今年以来，虽然A股上涨了6.1（截止发稿前），但是境外资金持续走弱</text>
+                </div>
+            </div>
             <div style="height: 120px"></div>
         </scroller>
 

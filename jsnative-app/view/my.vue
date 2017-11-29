@@ -1,33 +1,32 @@
 
 <template>
     <div style="height: 1500px; background-color: #f5f6f8">
-        <div class="top-container">
-           <div class="flex-row app-icon-wrap">
-               <image class="app-icon" src="images/login-phone.png"></image>
-               <image class="app-icon" src="images/login-wx.png"></image>
-               <image class="app-icon" src="images/login-qq.png"></image>
-               <image class="app-icon" src="images/login-wb.png"></image>
-           </div>
-           <div class="login-wrap">
-               <text class="login-text">更多登录方式 ></text>
-           </div>
-        </div>
-        <div class="flex-row bgc-white function-wrap">
-            <div class="function-cont">
-                <image class="function-pic" src="images/icon-star.png"></image>
-                <text class="function-text">首页</text>
-            </div>
-            <div class="function-cont">
-                <image class="function-pic" src="images/icon-history.png"></image>
-                <text class="function-text">历史</text>
-            </div>
-            <div class="function-cont">
-                <image class="function-pic" src="images/icon-night.png"></image>
-                <text class="function-text">夜间</text>
-            </div>
-        </div>
-
         <scroller>
+            <div class="top-container">
+                <div class="flex-row app-icon-wrap">
+                    <image class="app-icon" src="images/login-phone.png"></image>
+                    <image class="app-icon" src="images/login-wx.png"></image>
+                    <image class="app-icon" src="images/login-qq.png"></image>
+                    <image class="app-icon" src="images/login-wb.png"></image>
+                </div>
+                <div class="login-wrap">
+                    <text class="login-text">更多登录方式 ></text>
+                </div>
+            </div>
+            <div class="flex-row bgc-white function-wrap">
+                <div class="function-cont">
+                    <image class="function-pic" src="images/icon-star.png"></image>
+                    <text class="function-text">首页</text>
+                </div>
+                <div class="function-cont">
+                    <image class="function-pic" src="images/icon-history.png"></image>
+                    <text class="function-text">历史</text>
+                </div>
+                <div class="function-cont">
+                    <image class="function-pic" src="images/icon-night.png"></image>
+                    <text class="function-text">夜间</text>
+                </div>
+            </div>
             <div class="mt20 bgc-white list-wrap">
                 <div class="flex-row list-cont">
                     <text class="list-tit">我的关注</text>
