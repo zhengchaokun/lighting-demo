@@ -1,0 +1,34 @@
+{
+  "pages": [
+    {
+      "pageid": "home",
+      "inputParams": {
+        "startPage": "app.native.js#/index",
+        "title":"首页"
+      }
+    },
+    {
+      "pageid": "market",
+      "inputParams": {
+        "startPage": "app.native.js#/quote/quote",
+        "title":"行情"
+      }
+    },
+    {
+      "pageid": "optional",
+      "inputParams": {
+        "startPage": "app.native.js#/quote/mystock",
+        "title":"自选"
+      }
+    },
+    {
+      "pageid": "my",
+      "inputParams": {
+        "startPage": "app.native.js#/my",
+        "title":"我的"
+      }
+    }
+  ],
+  "config": {
+  }
+}

@@ -15,10 +15,10 @@
     {
       "title": "我的",
       "action": "gmu://jsnative#my"
-    } 
+    }
   ],
   "navigationbar": {
-    "disableSystemBarTint": false,y
+    "disableSystemBarTint": false,
     "immersiveMode": false
   },
   "style": {
@@ -30,7 +30,7 @@
     },
     "menu": {
       "titleColor": "#8a8a8a",
-      "titleSelectedColor": "#0785db"
+      "titleSelectedColor": "#e91f1f"
     }
   }
 }
