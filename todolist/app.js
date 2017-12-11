@@ -17,3 +17,7 @@ App.filter("start",function (next) {
     App.log("视图跳转");
     next()
 }).start();
+
+let env = __ENV__;
+
+console.log(env.a)

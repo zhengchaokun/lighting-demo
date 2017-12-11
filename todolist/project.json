@@ -2,5 +2,14 @@
   "project":"todolist",
   "version":"0.0.1",
   "desc":"Just For Fun",
-  "type":"vue"
+  "type":"vue",
+
+  "env":{
+    "dev":{
+      "a":"1"
+    },
+    "prod":{
+      "a":"2"
+    }
+  }
 }
