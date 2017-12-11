@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "ligui": "^1.4.4"
+    "ligui": "^1.4.6"
   },
   "devDependencies": {},
   "scripts": {
