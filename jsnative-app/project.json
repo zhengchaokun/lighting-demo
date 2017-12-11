@@ -3,7 +3,7 @@
   "version":"0.0.1",
   "desc":"Just For Fun",
   "type":"vue",
-  "plugins":["native"],
+  "plugins":["native","jsnative"],
   "link_id":"1872",
 
   "env":{
