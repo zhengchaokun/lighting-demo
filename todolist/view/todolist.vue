@@ -2,6 +2,7 @@
     <section class="todoapp" v-cloak>
         <header class="header">
             <h1>todos</h1>
+            <img src="../images/test.png" alt=""/>
             <input class="new-todo" autofocus autocomplete="off" placeholder="有什么要做的吗?" v-model="newTodo"
                    @keyup.enter="addTodo">
         </header>
