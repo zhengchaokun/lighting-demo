@@ -10,6 +10,9 @@
     export default {
         data(){
             return {}
+        },
+        mounted(){
+            console.log(`contact-mounted`)
         }
     }
 </script>

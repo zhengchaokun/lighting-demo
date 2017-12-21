@@ -8,7 +8,9 @@
             <code class="scan" @click="scan()"></code>
         </div>
 
-        <sub-view></sub-view>
+        <keep-alive>
+            <sub-view></sub-view>
+        </keep-alive>
 
         <!--底部导航-->
         <div class="bottom">
