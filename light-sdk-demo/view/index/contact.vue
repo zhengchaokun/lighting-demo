@@ -10,6 +10,7 @@
             <h1>联系电话：0571-28829564</h1>
         </div>
         <div @click="share()">分享</div>
+        <div @click="login()">三方登录</div>
     </div>
 </template>
 <script>
@@ -25,6 +26,13 @@
                     content:'',
                     url:'',
                     image:''
+                }, function (result) {
+                    alert(result);
+                })
+            },
+            login(){
+                LightSDK.native.socialLogin({
+                    type:'weixin',
                 }, function (result) {
                     alert(result);
                 })
