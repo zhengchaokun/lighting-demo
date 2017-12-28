@@ -9,7 +9,9 @@
         </div>
 
         <keep-alive>
-            <sub-view></sub-view>
+            <transition :name="transitionName">
+                <sub-view class="child-view"></sub-view>
+            </transition>
         </keep-alive>
 
         <!--底部导航-->
@@ -44,7 +46,8 @@
                     "/index/home":"首 页",
                     "/index/about":"关 于",
                     "/index/contact":"联系我们",
-                }
+                },
+                transitionName:'slide-left'
             }
         },
         methods:{
@@ -57,9 +60,35 @@
                     alert(result)
                 })
             }
-        }
+        },
+        watch: {
+            '$route' (to, from) {
+                const toDepth = to.path.split('/').length
+                const fromDepth = from.path.split('/').length
+                this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+            }
+        },
     }
 </script>
 <style lang="less">
-
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s ease;
+    }
+    .fade-enter, .fade-leave-active {
+        opacity: 0
+    }
+    .child-view {
+        position: absolute;
+        transition: all .5s cubic-bezier(.55,0,.1,1);
+    }
+    .slide-left-enter, .slide-right-leave-active {
+        opacity: 0;
+        -webkit-transform: translate(100%, 0);
+        transform: translate(100%, 0);
+    }
+    .slide-left-leave-active, .slide-right-enter {
+        opacity: 0;
+        -webkit-transform: translate(-100%, 0);
+        transform: translate(-100%, 0);
+    }
 </style>
