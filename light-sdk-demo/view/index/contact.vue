@@ -9,12 +9,26 @@
         <div class="main">
             <h1>联系电话：0571-28829564</h1>
         </div>
+        <div @click="share()">分享</div>
     </div>
 </template>
 <script>
+    import LightSDK from "light-sdk"
     export default {
-        data(){
+        data() {
             return {}
+        },
+        methods: {
+            share() {
+                LightSDK.native.socialShare({
+                    title:'',
+                    content:'',
+                    url:'',
+                    image:''
+                }, function (result) {
+                    alert(result);
+                })
+            }
         }
     }
 </script>
