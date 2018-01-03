@@ -20,7 +20,7 @@
         },
         methods:{
             scan(){
-                LightSDK.native.scan({},function (result) {
+                LightSDK.native.scanCode({},function (result) {
                     alert(result);
                 })
             }
