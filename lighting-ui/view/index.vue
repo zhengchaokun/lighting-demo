@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper">
-        <lc-grid :cols="3" :list="list" :border="true"></lc-grid>
+        <lc-grid :list="list" :border="true"></lc-grid>
     </div>
 </template>
 
