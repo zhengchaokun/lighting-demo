@@ -17,7 +17,7 @@
 </template>
 
 <script>
-    import LcPopup from 'light-ui/packages/lc-popup';
+    import LcPopup from 'lighting-ui/packages/lc-popup';
     export default {
         components: { LcPopup },
         data: () => ({
