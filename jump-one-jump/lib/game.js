@@ -59,16 +59,16 @@ let Game = function (options) {
 
 Game.prototype = {
     init: function () {
-        this._checkUserAgent() // 检测是否移动端
-        this._setCamera() // 设置摄像机位置
-        this._setRenderer() // 设置渲染器参数
-        this._setLight() // 设置光照
-        this._createCube() // 加一个方块
-        this._createCube() // 再加一个方块
-        this._createJumper() // 加入游戏者jumper
-        this._updateCamera() // 更新相机坐标
+        this._checkUserAgent() ; // 检测是否移动端
+        this._setCamera() ; // 设置摄像机位置
+        this._setRenderer() ; // 设置渲染器参数
+        this._setLight() ; // 设置光照
+        this._createCube() ; // 加一个方块
+        this._createCube() ; // 再加一个方块
+        this._createJumper(); // 加入游戏者jumper
+        this._updateCamera();// 更新相机坐标
 
-        let self = this
+        let self = this;
         let mouseEvents = (self.config.isMobile) ?
             {
                 down: 'touchstart',
@@ -78,20 +78,20 @@ Game.prototype = {
             {
                 down: 'mousedown',
                 up: 'mouseup',
-            }
+            };
         // 事件绑定到canvas中
-        let canvas = document.querySelector('canvas')
+        let canvas = document.querySelector('canvas');
         canvas.addEventListener(mouseEvents.down, function () {
             self._handleMousedown()
-        })
+        });
         // 监听鼠标松开的事件
         canvas.addEventListener(mouseEvents.up, function (evt) {
             self._handleMouseup()
-        })
+        });
         // 监听窗口变化的事件
         window.addEventListener('resize', function () {
             self._handleWindowResize()
-        })
+        });
     },
     // 游戏失败重新开始的初始化配置
     restart: function () {
@@ -156,12 +156,12 @@ Game.prototype = {
      *@return {Number} this.jumperStat.ySpeed 垂直方向上的速度
      **/
     _handleMousedown: function () {
-        let self = this
+        let self = this;
         if (!self.jumperStat.ready && self.jumper.scale.y > 0.02) {
-            self.jumper.scale.y -= 0.01
-            self.jumperStat.xSpeed += 0.004
-            self.jumperStat.ySpeed += 0.008
-            self._render(self.scene, self.camera)
+            self.jumper.scale.y -= 0.01;
+            self.jumperStat.xSpeed += 0.004;
+            self.jumperStat.ySpeed += 0.008;
+            self._render(self.scene, self.camera);
             requestAnimationFrame(function () {
                 self._handleMousedown()
             })
@@ -401,37 +401,37 @@ Game.prototype = {
     },
     // 初始化jumper：游戏主角
     _createJumper: function () {
-        let material = new THREE.MeshLambertMaterial({color: this.config.jumperColor})
-        let geometry = new THREE.CubeGeometry(this.config.jumperWidth, this.config.jumperHeight, this.config.jumperDeep)
-        geometry.translate(0, 1, 0)
-        let mesh = new THREE.Mesh(geometry, material)
-        mesh.position.y = 1
-        this.jumper = mesh
+        let material = new THREE.MeshLambertMaterial({color: this.config.jumperColor});
+        let geometry = new THREE.CubeGeometry(this.config.jumperWidth, this.config.jumperHeight, this.config.jumperDeep);
+        geometry.translate(0, 1, 0);
+        let mesh = new THREE.Mesh(geometry, material);
+        mesh.position.y = 1;
+        this.jumper = mesh;
         this.scene.add(this.jumper)
     },
     // 新增一个方块, 新的方块有2个随机方向
     _createCube: function () {
-        let material = new THREE.MeshLambertMaterial({color: this.config.cubeColor})
-        let geometry = new THREE.CubeGeometry(this.config.cubeWidth, this.config.cubeHeight, this.config.cubeDeep)
-        let mesh = new THREE.Mesh(geometry, material)
+        let material = new THREE.MeshLambertMaterial({color: this.config.cubeColor});
+        let geometry = new THREE.CubeGeometry(this.config.cubeWidth, this.config.cubeHeight, this.config.cubeDeep);
+        let mesh = new THREE.Mesh(geometry, material);
         if (this.cubes.length) {
-            let random = Math.random()
-            this.cubeStat.nextDir = random > 0.5 ? 'left' : 'right'
-            mesh.position.x = this.cubes[this.cubes.length - 1].position.x
-            mesh.position.y = this.cubes[this.cubes.length - 1].position.y
-            mesh.position.z = this.cubes[this.cubes.length - 1].position.z
+            let random = Math.random();
+            this.cubeStat.nextDir = random > 0.5 ? 'left' : 'right';
+            mesh.position.x = this.cubes[this.cubes.length - 1].position.x;
+            mesh.position.y = this.cubes[this.cubes.length - 1].position.y;
+            mesh.position.z = this.cubes[this.cubes.length - 1].position.z;
             if (this.cubeStat.nextDir === 'left') {
                 mesh.position.x = this.cubes[this.cubes.length - 1].position.x - 4 * Math.random() - 6
             } else {
                 mesh.position.z = this.cubes[this.cubes.length - 1].position.z - 4 * Math.random() - 6
             }
         }
-        this.cubes.push(mesh)
+        this.cubes.push(mesh);
         // 当方块数大于6时，删除前面的方块，因为不会出现在画布中
         if (this.cubes.length > 6) {
             this.scene.remove(this.cubes.shift())
         }
-        this.scene.add(mesh)
+        this.scene.add(mesh);
         // 每新增一个方块，重新计算摄像机坐标
         if (this.cubes.length > 1) {
             this._updateCameraPos()
@@ -442,24 +442,24 @@ Game.prototype = {
     },
     _setLight: function () {
         let directionalLight = new THREE.DirectionalLight(0xffffff, 1.1);
-        directionalLight.position.set(3, 10, 5)
-        this.scene.add(directionalLight)
+        directionalLight.position.set(3, 10, 5);
+        this.scene.add(directionalLight);
 
-        let light = new THREE.AmbientLight(0xffffff, 0.3)
+        let light = new THREE.AmbientLight(0xffffff, 0.3);
         this.scene.add(light)
     },
     _setCamera: function () {
-        this.camera.position.set(100, 100, 100)
+        this.camera.position.set(100, 100, 100);
         this.camera.lookAt(this.cameraPos.current)
     },
     _setRenderer: function () {
-        this.renderer.setSize(this.size.width, this.size.height)
+        this.renderer.setSize(this.size.width, this.size.height);
         this.renderer.setClearColor(this.config.background)
     },
     _setSize: function () {
-        this.size.width = window.innerWidth,
-            this.size.height = window.innerHeight
+        this.size.width = window.innerWidth;
+        this.size.height = window.innerHeight;
     }
-}
+};
 
 module.exports = Game;
