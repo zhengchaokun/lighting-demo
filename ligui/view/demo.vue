@@ -136,7 +136,12 @@
                                 <el-table-column
                                         prop="regtime"
                                         label="注册时间"
-                                        min-width="220">
+                                        min-width="220"
+                                        
+                                        :filter-multiple=false
+                                        :filters="[{text: '全部', value: '全部'},{ text: '家', value: '家' }, { text: '公司', value: '公司' }]"
+                                        :filter-method="filterTag"
+                                        filter-placement="bottom-end">
                                 </el-table-column>
                                 <el-table-column
                                         label="状态"
@@ -329,6 +334,9 @@
             }
         },
         methods: {
+            filterTag(value, row) {
+                return row.tag === value;
+            },
             toggleActive: function(item,e) {
                 let first_item = item.options[0];
                 if(first_item.sub_title==undefined) {
