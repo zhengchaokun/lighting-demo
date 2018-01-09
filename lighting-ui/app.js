@@ -1,4 +1,4 @@
-import App from "light"
+import App from "light";
 
 App.filter("start",function (next) {
     //启动拦截器

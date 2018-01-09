@@ -1,8 +1,11 @@
 <template>
     <div class="wrapper">
-        <div class="btn yellow  btn-margin" @click="openBottomPopup">
-            <text class="btn-txt">Click</text>
-        </div>
+        <lc-cell label="hhh" title="more"></lc-cell>
+        <lc-radio :list="list"></lc-radio>
+        <lc-checkbox label="uuu"></lc-checkbox>
+
+
+        <lc-button text="click" @LcButtonClicked="openBottomPopup"></lc-button>
         <lc-popup popup-color="rgb(92, 184, 92)"
                    :show="isBottomShow"
                    @wxcPopupOverlayClicked="popupOverlayBottomClick"
@@ -17,12 +20,19 @@
 </template>
 
 <script>
-    import LcPopup from 'lighting-ui/packages/lc-popup';
+    import {LcPopup, LcButton, LcCell, LcRadio, LcCheckbox, LcForm, LcInput, LcProgress, LcTabPage, LcTextarea } from 'lighting-ui/index.js' ; 
+    
     export default {
-        components: { LcPopup },
+        components: { LcButton, LcPopup, LcCell, LcRadio, LcCheckbox, LcForm, LcInput, LcProgress, LcTabPage, LcTextarea },
         data: () => ({
             isBottomShow: false,
-            height: 400
+            height: 400,
+            list: [
+                { title: '选项1', value: 1 },
+                { title: '选项2', value: 2, checked: true },
+                { title: '选项3', value: 3 },
+                { title: '选项4', value: 4 }
+            ]
         }),
         methods: {
             openBottomPopup () {
