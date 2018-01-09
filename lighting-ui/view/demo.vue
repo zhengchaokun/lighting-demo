@@ -1,73 +1,46 @@
+
 <template>
     <div class="wrapper">
-        <div class="btn btn-margin red"
-            @click="openLeftPopup">
-            <text class="btn-txt">点击弹出左侧面板</text>
+        <div class="btn yellow  btn-margin" @click="openBottomPopup">
+            <text class="btn-txt">Click</text>
+            <text class="btn-txt" @click="xxxxxxxxx()">Click2</text>
         </div>
-        <lc-popup width="500"
-                 :show="isLeftShow"
-                 @LcPopupOverlayClicked="popupOverlayLeftClick"
-                 pos="left"></lc-popup>
+        <lc-popup popup-color="rgb(92, 184, 92)"
+                   :show="isBottomShow"
+                   @wxcPopupOverlayClicked="popupOverlayBottomClick"
+                   pos="left"
+                   width="500">
+            <div class="demo-content">
+                <image src="https://img.alicdn.com/tfs/TB1ojYvOXXXXXaOXFXXXXXXXXXX-180-41.png" class="demo-image"></image>
+                <text>Different from a "web app", "HTML5 app", or "hybrid app", you can use Weex to build a real mobile app. The code that you write is relatively simple, because you can build native applications just using HTML, CSS, Javascript.
+                </text>
+            </div>
+        </lc-popup>
     </div>
 </template>
 
 <script>
+    import Light from "light";
     import LcPopup from 'lighting-ui/packages/lc-popup';
+    console.log(Light)
     export default {
         components: { LcPopup },
         data: () => ({
-            isLeftShow: false,
+            isBottomShow: false,
             height: 400
         }),
         methods: {
-            openLeftPopup () {
-                this.isLeftShow = true;
+            openBottomPopup () {
+                this.isBottomShow = true;
             },
-            popupOverlayLeftClick () {
-                this.isLeftShow = false;
+            popupOverlayBottomClick () {
+                this.isBottomShow = false;
             },
+            xxxxxxxxx(){
+                Light.requireModule("modal").alert({
+                    message:"hello"
+                })
+            }
         }
     };
 </script>
-<style scoped>
-  .wxc-demo {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #FFFFFF;
-  }
-
-  .scroller {
-    flex: 1;
-  }
-
-  .btn {
-    width: 600px;
-    height: 80px;
-    margin-top: 150px;
-    margin-left: 75px;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    border-radius: 6px;
-    background-color: rgb(92, 184, 92);
-    border-color: rgb(76, 174, 76);
-  }
-
-  .red {
-    background-color: #C3413D;
-    border-color: #C3413D;
-  }
-
-  .btn-txt {
-    font-size: 32px;
-    color: #ffffff;
-  }
-
-  .btn-margin {
-    margin-top: 40px;
-  }
-
-</style>
