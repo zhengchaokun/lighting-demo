@@ -1,4 +1,4 @@
-let data = [
+let datas = [
     {
         label: "badge",
         path: "#/badge"
@@ -161,4 +161,4 @@ let data = [
     }
 ]
 
-export default data;
+export default datas;
