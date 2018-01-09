@@ -35,12 +35,7 @@
             ]
         }),
         methods: {
-            openBottomPopup () {
-                this.isBottomShow = true;
-            },
-            popupOverlayBottomClick () {
-                this.isBottomShow = false;
-            }
+
         }
     };
 </script>
