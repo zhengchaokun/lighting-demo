@@ -40,7 +40,8 @@
   </div>
 </template>
 <script>
-    import { LcBadge, LcCell } from 'lighting-ui';
+    import LcBadge from 'lighting-ui/packages/lc-badge';
+    import LcCell from 'lighting-ui/packages/lc-cell';
 
     export default {
         components: { LcBadge, LcCell },

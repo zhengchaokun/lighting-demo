@@ -20,10 +20,14 @@
 </template>
 
 <script>
-    import {LcPopup, LcButton, LcCell, LcRadio, LcCheckbox, LcForm, LcInput, LcProgress, LcTabPage, LcTextarea } from 'lighting-ui/index.js' ; 
+    import LcPopup from 'lighting-ui/packages/lc-popup';
+    import LcButton from 'lighting-ui/packages/lc-button';
+    import LcCell from 'lighting-ui/packages/lc-cell';
+    import LcRadio from 'lighting-ui/packages/lc-radio';
+    import LcCheckbox from 'lighting-ui/packages/lc-checkbox';
     
     export default {
-        components: { LcButton, LcPopup, LcCell, LcRadio, LcCheckbox, LcForm, LcInput, LcProgress, LcTabPage, LcTextarea },
+        components: { LcButton, LcPopup, LcCell, LcRadio, LcCheckbox},
         data: () => ({
             isBottomShow: false,
             height: 400,
