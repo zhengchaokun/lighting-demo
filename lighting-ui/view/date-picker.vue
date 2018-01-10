@@ -44,12 +44,13 @@
 </style>
 
 <script> 
+  require("weex-picker/js/build/main.js")
   import Light from 'light';
   import Title from '../_mods/title.vue';
   import LcButton from 'lighting-ui/packages/lc-button';
 //   import LcInput from 'lighting-ui/packages/lc-input';
   import Category from '../_mods/category.vue';
-  require("weex-picker/js/src/index.js")
+
  
   module.exports = {
     data: () => ({
@@ -63,7 +64,7 @@
     components: { Title, Category, LcButton},
     methods: {
       normalpick: function() {
-        const picker = weex.requireModule('picker');
+        const picker = Light.requireModule('picker');
         var self = this;
     	  picker.pick({
     	  height: '300px',
@@ -76,7 +77,7 @@
     	})
       },
       pickDate: function(e) {
-        const picker = weex.requireModule('picker');  
+        const picker = Light.requireModule('picker');  
     	var self = this;
     	picker.pickDate({
     	  'value': '2017-12-15',
@@ -90,7 +91,7 @@
     	});
       },
       pickTime:function(){
-        const picker = weex.requireModule('picker');  
+        const picker = Light.requireModule('picker');  
     	var self = this;
     	picker.pickTime({
     	}, function(ret) {
