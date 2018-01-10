@@ -1,10 +1,12 @@
 <template>
-    <div class="wrapper">
-        <!-- <div v-for="(data,i) in datas" :key="i">
-            <lc-cell :label="data.label" :link="data.path"></lc-cell>
-        </div> -->
-        <lc-cell :cell-style="style" :has-bottom-border="hasBottomBorder(i)" :has-top-border="hasTopBorder(i)" v-for="(data,i) in datas" :key="i" :label="data.label" :link="data.path"></lc-cell>
-    </div>
+    <scroller>
+        <div class="wrapper">
+            <!-- <div v-for="(data,i) in datas" :key="i">
+                <lc-cell :label="data.label" :link="data.path"></lc-cell>
+            </div> -->
+            <lc-cell :cell-style="style" :has-bottom-border="hasBottomBorder(i)" :has-top-border="hasTopBorder(i)" v-for="(data,i) in datas" :key="i" :label="data.label" :link="data.path"></lc-cell>
+        </div>
+    </scroller>
 </template>
 
 <script>
