@@ -1,6 +1,8 @@
 <template>
   <div class="demo">
     <scroller>
+      <title title="lc-badge"></title>
+      <category title="徽标组件"></category>
       <lc-cell label="消息"
                 title="[恭喜发财，大吉大利]"
                 :link="link"
@@ -40,11 +42,13 @@
   </div>
 </template>
 <script>
+    import Title from '../_mods/title.vue';
+    import Category from '../_mods/category.vue';
     import LcBadge from 'lighting-ui/packages/lc-badge';
     import LcCell from 'lighting-ui/packages/lc-cell';
 
     export default {
-        components: { LcBadge, LcCell },
+        components: { LcBadge, LcCell, Title, Category },
         data(){
             return {
                 link: '#/index'
@@ -58,5 +62,4 @@
     }
 </script>
 <style lang="less">
-
 </style>
