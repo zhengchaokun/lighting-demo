@@ -78,6 +78,7 @@
 </style>
 
 <script>
+  import Light from 'light';
   import { LcTextarea, LcInput, LcForm } from '../../index';
   import Title from '../_mods/title.vue';
   import Category from '../_mods/category.vue';
