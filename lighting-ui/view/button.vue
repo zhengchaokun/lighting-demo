@@ -110,7 +110,6 @@
 
 <style scoped>
   .wxc-demo {
-      height: 2000px;
     position: absolute;
     top: 0;
     right: 0;
