@@ -44,7 +44,11 @@
 </style>
 
 <script> 
+<<<<<<< HEAD
 
+=======
+  // require("weex-picker/js/build/main.js")
+>>>>>>> 561f88feadcc549b9d026fa583de640b78629777
   import Light from 'light';
   import Title from '../_mods/title.vue';
   import LcButton from 'lighting-ui/packages/lc-button';
