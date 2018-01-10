@@ -157,7 +157,6 @@
 </style>
 
 <script>
-<<<<<<< HEAD
   import Light from 'light';
   import Title from '../_mods/title.vue';
   import Category from '../_mods/category.vue';
@@ -166,16 +165,6 @@
   import LcDialog from 'lighting-ui/packages/lc-dialog';
 
 //   const modal = Light.requireModule('modal');
-=======
-
-  import Title from '../_mods/title.vue';
-  import Category from '../_mods/category.vue';
-  import LcDialog from 'lighting-ui/packages/lc-dialog';
-  import LcCell from 'lighting-ui/packages/lc-cell';
-  import LcButton from 'lighting-ui/packages/lc-button';
-  import Light from 'light';
-  const modal = Light.requireModule('modal');
->>>>>>> 561f88feadcc549b9d026fa583de640b78629777
 
   export default {
     components: { Title, Category, LcDialog, LcCell,LcButton },
@@ -232,30 +221,21 @@
         this.titleDemo = "这是确认框";
       },
       dialogCancelBtnClick () {
-<<<<<<< HEAD
         const modal = Light.requireModule('modal');  
-=======
->>>>>>> 561f88feadcc549b9d026fa583de640b78629777
         this.show = false;
         this.showDemo = false;
         this.imgDemo= false;
         modal.toast({ 'message': '取消回调', 'duration': 1 });
       },
       dialogConfirmBtnClick () {
-<<<<<<< HEAD
         const modal = Light.requireModule('modal');  
-=======
->>>>>>> 561f88feadcc549b9d026fa583de640b78629777
         this.show = false;
         this.showDemo = false;
         this.imgDemo= false;
         modal.toast({ 'message': '确认回调', 'duration': 1 });
       },
       dialogNoPromptClick (e) {
-<<<<<<< HEAD
         const modal = Light.requireModule('modal');    
-=======
->>>>>>> 561f88feadcc549b9d026fa583de640b78629777
         this.isChecked = e.isChecked;
         modal.toast({ 'message': `noPrompt isChecked: ${e.isChecked}`, 'duration': 1 });
       }
