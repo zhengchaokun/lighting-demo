@@ -106,7 +106,7 @@
 <script>
   import Title from '../_mods/title.vue';
   import Category from '../_mods/category.vue';
-  import LcProgress from 'lighting-ui/packages/lc-progress'
+  import LcProgress from 'lighting-ui/packages/lc-progress';
 
   export default {
     components: { Title, Category, LcProgress },
