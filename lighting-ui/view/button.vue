@@ -158,13 +158,13 @@
     data: () => ({
       type: 'normal',
       text: '按钮文字',
-      width: '345px',
-      height: '44px',
+      width: '690px',
+      height: '88px',
       disabled: false,
       backgroundColor: '#399de2',
       borderColor: '#399de2',
       borderRadius: '4px',
-      fontSize: '17px',
+      fontSize: '34px',
       color: '#FFFFFF'
     }),
     computed: {
