@@ -72,10 +72,6 @@ let datas = [
         path: "#/loading"
     },
     {
-        label: "lottery-rain",
-        path: "#/lottery-rain"
-    },
-    {
         label: "marquee",
         path: "#/marquee"
     },

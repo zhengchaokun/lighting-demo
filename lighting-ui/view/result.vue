@@ -8,6 +8,7 @@
                 :desc="desc"
                 padding-top="232"
                 @onResultClick="resultClicked"
+                class="result"
                 ></lc-result>
   </div>
 </template>
@@ -20,6 +21,9 @@
     left: 0;
     bottom: 0;
     background-color: #fff;
+  }
+  .result{
+    background-color: rgb(242, 243, 244);
   }
 </style>
 
