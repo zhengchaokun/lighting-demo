@@ -52,18 +52,10 @@
 
 <script>
   import Light from 'light';
-<<<<<<< HEAD
   import Title from '../_mods/title.vue';
   import Category from '../_mods/category.vue';
   import LcButton from 'lighting-ui/packages/lc-button';
   import LcOverlay from 'lighting-ui/packages/lc-overlay';
-=======
-  const modal = Light.requireModule('modal');
-  import Title from '../_mods/title.vue';
-  import Category from '../_mods/category.vue';
-  import LcOverlay from 'lighting-ui/packages/lc-overlay';
-  import LcButton from 'lighting-ui/packages/lc-button';
->>>>>>> ce3f87513046776e6226d2b82f804ffbc092da49
 
   export default {
     components: { Title, Category, LcOverlay,LcButton },
@@ -82,10 +74,7 @@
         this.show = true;
       },
       LcOverlayBodyClicked (e) {
-<<<<<<< HEAD
         const modal = Light.requireModule('modal');  
-=======
->>>>>>> ce3f87513046776e6226d2b82f804ffbc092da49
         modal.toast({
           'message': 'click overlay!',
           'duration': 1
