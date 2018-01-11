@@ -1,5 +1,5 @@
 
-<template>
+<template> 
   <div class="lc-demo">
     <scroller class="scroller">
       <title title="lc-textarea"></title>
@@ -78,7 +78,7 @@
 </style>
 
 <script>
-  import Light from "light";
+  import Light from 'light';
   import Title from '../_mods/title.vue';
   import Category from '../_mods/category.vue';
   import LcTextarea from 'lighting-ui/packages/lc-textarea';

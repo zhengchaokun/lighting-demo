@@ -1,16 +1,107 @@
-
 <template>
-    <div>
-       Hello,World !
+  <div class="lc-demo">
+    <title title="lc-date-picker"></title>
+    <category title="选择器Picker"></category>
+    <div style="align-items: center">
+        <text class="mt20">pick value: {{value}}</text>
+        <lc-button text="normalpick" type="normal"  @LcButtonClicked="normalpick" class="mt20"></lc-button>
+        <lc-button text="pickDate" type="normal"  @LcButtonClicked="pickDate" class="mt20"></lc-button>
+        <lc-button text="pickTime" type="normal"  @LcButtonClicked="pickTime" class="mt20"></lc-button>
     </div>
+    <category title="按钮组件"></category>
+    <!-- <lc-input 
+            type="date"
+            placeholder="select date"
+            autofocus="false"
+            value=""
+            class="mt20"
+            :input-style="inputStyle"
+            onchange="onchange"
+            max = "2029-11-28"
+            min = "2015-11-28"/>
+    <lc-input
+        type="time"
+        class="mt20"
+        placeholder="select time"
+        autofocus="false"
+        value=""
+        onchange="onchange"
+        :input-style="inputStyle"
+    /> -->
+  </div>
 </template>
-<script>
-    export default {
-        data(){
-            return {}
-        }
-    }
-</script>
-<style lang="less">
 
+<style>
+  .mt20{margin-top: 20px;}
+  .lc-demo {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #fff;
+  }
 </style>
+
+<script> 
+  import Light from 'light';
+  import Title from '../_mods/title.vue';
+  import LcButton from 'lighting-ui/packages/lc-button';
+//   import LcInput from 'lighting-ui/packages/lc-input';
+  import Category from '../_mods/category.vue';
+ 
+  module.exports = {
+    data: () => ({
+        value:'',
+        txtChange:'',
+        inputStyle:{
+          fontSize:'36px',
+          textAlign:'center'
+        }
+    }),
+    components: { Title, Category, LcButton},
+    methods: {
+      normalpick: function() {
+        const picker = Light.requireModule('picker');
+        var self = this;
+    	  picker.pick({
+    	  height: '300px',
+    	  items: [1, 2, 3, 4],
+    	}, function(ret) {
+    	  var result = ret.result;
+    	  if (result == 'success') {
+    		self.value = ret.data;
+    	  }
+    	})
+      },
+      pickDate: function(e) {
+        const picker = Light.requireModule('picker');  
+    	var self = this;
+    	picker.pickDate({
+    	  'value': '2017-12-15',
+    	  'max': '2022-12-30',
+    	  'min': '2000-12-30',
+    	}, function(ret) {
+    	  var result = ret.result;
+    	  if (result == 'success') {
+    		self.value = ret.data;
+    	  }
+    	});
+      },
+      pickTime:function(){
+        const picker = Light.requireModule('picker');  
+    	var self = this;
+    	picker.pickTime({
+    	}, function(ret) {
+    	  var result = ret.result;
+    	  if (result == 'success') {
+    		self.value = ret.data;
+    	  }
+    	});
+      },
+      onchange: function(event) {
+          this.txtChange = event.value;
+      }
+    }
+  }
+</script>
