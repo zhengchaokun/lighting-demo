@@ -68,6 +68,8 @@ Game.prototype = {
         this._createJumper(); // 加入游戏者jumper
         this._updateCamera();// 更新相机坐标
 
+        this._createHelpers(0)
+
         let self = this;
         let mouseEvents = (self.config.isMobile) ?
             {
