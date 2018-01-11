@@ -163,11 +163,7 @@
       disabled: false,
       backgroundColor: '#399de2',
       borderColor: '#399de2',
-<<<<<<< HEAD
-      borderRadius: '8px',
-=======
       borderRadius: '4px',
->>>>>>> ce3f87513046776e6226d2b82f804ffbc092da49
       fontSize: '34px',
       color: '#FFFFFF'
     }),
