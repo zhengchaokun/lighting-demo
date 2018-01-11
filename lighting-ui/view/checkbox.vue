@@ -17,12 +17,12 @@
         :checked="true"
         :has-bottom-border="true"></lc-checkbox>
 
-      <div class="margin">
+      <!-- <div class="margin"> -->
         <category title="CheckboxList"></category>
+        <text class="checked-text">选中项 {{checkedList.toString()}}</text>        
         <lc-checkbox-list :list="list"
           @LcCheckboxListChecked="LcCheckboxListChecked"></lc-checkbox-list>
-        <text class="checked-text">选中项 {{checkedList.toString()}}</text>
-      </div>
+      <!-- </div> -->
     </scroller>
   </div>
 </template>
@@ -57,7 +57,8 @@
 <script>
   import Title from '../_mods/title.vue';
   import Category from '../_mods/category.vue';
-  import { LcCheckbox, LcCheckboxList } from 'lighting-ui/packages/lc-checkbox';
+  import LcCheckbox from 'lighting-ui/packages/lc-checkbox';
+  import LcCheckboxList from 'lighting-ui/packages/lc-checkbox-list';
 
   export default {
     components: { Title, Category, LcCheckbox, LcCheckboxList },

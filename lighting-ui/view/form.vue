@@ -6,14 +6,14 @@
       <category title="基本样式"></category>
       <lc-form title="小标题" title-color="#0785db">
         <lc-cell label="列表项1" 
-          value="value" 
-          has-arrow="true" 
+          :value="value" 
+          :has-arrow="true" 
           :has-bottom-border="false">
         </lc-cell>
         <lc-cell label="列表项2" 
           title="更多"
-          value="value" 
-          has-arrow="true" 
+          :value="value" 
+          :has-arrow="true" 
           :has-top-border="false" 
           :has-bottom-border="false">
         </lc-cell>
@@ -27,6 +27,7 @@
           placeholder="请填写备注" 
           :rows="4" 
           :max="140"
+          :cell-style="cellStyle"
           :has-top-border="false"></lc-textarea>
       </lc-form>
     </scroller>
@@ -61,7 +62,11 @@
   export default {
     components: { Title, Category, LcForm, LcCell, LcTextarea },
     data: () => ({
-      value: ''
+      value: '',
+      cellStyle: {
+        backgroundColor: '#339876',
+        paddingTop: '40px'
+      }
     })
   }
 </script>

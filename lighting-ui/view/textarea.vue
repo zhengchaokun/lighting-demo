@@ -78,6 +78,7 @@
 </style>
 
 <script>
+  import Light from "light";
   import Title from '../_mods/title.vue';
   import Category from '../_mods/category.vue';
   import LcTextarea from 'lighting-ui/packages/lc-textarea';
