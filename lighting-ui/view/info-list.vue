@@ -27,7 +27,7 @@
 
       <lc-info-list 
         type="text"
-        line="2"
+        :line="2"
         :textTitle="textTitle1"
         :textTime="textTime"
       ></lc-info-list>
