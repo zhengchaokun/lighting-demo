@@ -403,11 +403,11 @@ Game.prototype = {
     },
     // 初始化jumper：游戏主角
     _createJumper: function () {
-        let material = new THREE.MeshLambertMaterial({color: this.config.jumperColor});
-        let geometry = new THREE.CubeGeometry(this.config.jumperWidth, this.config.jumperHeight, this.config.jumperDeep);
-        geometry.translate(0, 1, 0);
-        let mesh = new THREE.Mesh(geometry, material);
-        mesh.position.y = 1;
+        // let material = new THREE.MeshLambertMaterial({color: this.config.jumperColor});
+        // let geometry = new THREE.CubeGeometry(this.config.jumperWidth, this.config.jumperHeight, this.config.jumperDeep);
+        // let mesh = new THREE.Mesh(geometry, material);
+        let mesh = require("./game/jumper").createJumper();
+        mesh.position.y = 2;
         this.jumper = mesh;
         this.scene.add(this.jumper)
     },
