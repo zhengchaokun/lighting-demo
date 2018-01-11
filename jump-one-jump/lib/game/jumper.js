@@ -19,8 +19,6 @@ function createJumper(){
         mesh.receiveShadow=true;
         meshBox.add(mesh);
     });
-    meshBox.position.y=100;
-    meshBox.rotation.y=-Math.PI;
     meshBox.scale.set(0.06,0.06,0.06)
     return meshBox;
 }
