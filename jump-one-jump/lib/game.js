@@ -175,7 +175,7 @@ Game.prototype = {
         // 标记鼠标已经松开
         self.jumperStat.ready = true
         // 判断jumper是在方块水平面之上，是的话说明需要继续运动
-        if (self.jumper.position.y >= 1) {
+        if (self.jumper.position.y >= 2) {
             // jumper根据下一个方块的位置来确定水平运动方向
             if (self.cubeStat.nextDir === 'left') {
                 self.jumper.position.x -= self.jumperStat.xSpeed
@@ -190,6 +190,7 @@ Game.prototype = {
             }
             // jumper在垂直方向上先上升后下降
             self.jumperStat.ySpeed -= 0.01
+            self.jumper.rotation.y += 0.2
             // 每一次的变化，渲染器都要重新渲染，才能看到渲染效果
             self._render(self.scene, self.camera)
             requestAnimationFrame(function () {
@@ -200,7 +201,7 @@ Game.prototype = {
             self.jumperStat.ready = false
             self.jumperStat.xSpeed = 0
             self.jumperStat.ySpeed = 0
-            self.jumper.position.y = 1
+            self.jumper.position.y = 2
             self._checkInCube()
             if (self.falledStat.location === 1) {
                 // 掉落成功，进入下一步
