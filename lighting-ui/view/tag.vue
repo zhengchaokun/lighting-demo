@@ -46,11 +46,61 @@
                 :font-color="fontColor"
                 :value="value"></lc-tag>
         </div>
-     </div>
-     <!-- <category title="特殊标签配置"></category>
-      <special-advance></special-advance>
+      </div>
+      <category title="特殊标签配置"></category>
+      <div class="sub-demo">
+        <lc-cell :has-top-border="false"
+              :auto-accessible="false"
+              label="图片地址">
+        <input class="input" slot="value"
+                placeholder="请输入tag图片地址"
+                :value="specialIcon"
+                @input="specialIcon=$event.value"/>
+        </lc-cell>
+        <lc-cell :has-top-border="false"
+                :auto-accessible="false"
+                label="标签颜色">
+        <input class="input" slot="value"
+                placeholder="请输入标签色值"
+                :value="tagColor1"
+                @input="tagColor1=$event.value"/>
+        </lc-cell>
+        <lc-cell :has-top-border="false"
+                :auto-accessible="false"
+                label="文字颜色">
+        <input class="input" slot="value"
+                placeholder="请输入文字色值"
+                :value="fontColor1"
+                @input="fontColor1=$event.value"/>
+        </lc-cell>
+        <lc-cell :has-top-border="false"
+                :auto-accessible="false"
+                label="标签内容">
+        <input class="input" slot="value"
+                placeholder="请输入tag文字内容"
+                :value="value1"
+                @input="value1=$event.value"/>
+        </lc-cell>
+        <div class="demo">
+        <lc-tag type="special"
+                :specialIcon="specialIcon"
+                :tag-color="tagColor1"
+                :font-color="fontColor1"
+                :value="value1"></lc-tag>
+        </div>
+      </div>
       <category title="图片标签配置"></category>
-      <image-advance></image-advance> -->
+      <div class="sub-demo">
+        <lc-cell :has-top-border="false" label="标签内容">
+        <input class="input" slot="value"
+                placeholder="请输入tag图片链接"
+                :value="img"
+                @input="img=$event.value"/>
+        </lc-cell>
+        <div class="demo">
+        <lc-tag type="image" :img="img"></lc-tag>
+        </div>
+      </div>
     </scroller>
   </div>
 </template>
@@ -97,7 +147,6 @@
   import LcTag from 'lighting-ui/packages/lc-tag';
   import LcCell from 'lighting-ui/packages/lc-cell';
   import Category from '../_mods/category.vue';
-//   import Advance from './advance.vue';
 //   import ImageAdvance from './image-advance.vue';
 //   import SpecialAdvance from './special-advance.vue';
 
@@ -108,7 +157,12 @@
       type: 'solid',
       tagColor: '#399DE2',
       fontColor: '#ffffff',
-      value: '实心标签'
+      value: '实心标签',
+      img: '//gtms04.alicdn.com/tfs/TB1ZfodRVXXXXciXFXXXXXXXXXX-92-24.png',
+      specialIcon: '//gtms02.alicdn.com/tfs/TB1gC.jRVXXXXaiXFXXXXXXXXXX-32-32.png',
+      tagColor1: '#399DE2',
+      fontColor1: '#399DE2',
+      value1: '实心标签'
     })
   }
 </script>

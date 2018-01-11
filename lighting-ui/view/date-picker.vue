@@ -49,7 +49,6 @@
   import LcButton from 'lighting-ui/packages/lc-button';
 //   import LcInput from 'lighting-ui/packages/lc-input';
   import Category from '../_mods/category.vue';
-
  
   module.exports = {
     data: () => ({
