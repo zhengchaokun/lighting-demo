@@ -1,4 +1,4 @@
-<!-- CopyRight (C) 2017-2022 Alibaba Group Holding Limited. -->
+
 <template>
   <div class="wxc-demo">
     <scroller class="scroller">

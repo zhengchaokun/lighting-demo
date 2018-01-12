@@ -1,7 +1,3 @@
-<!-- CopyRight (C) 2017-2022 Alibaba Group Holding Limited. -->
-<!-- Created by Tw93 on 16/10/26. -->
-<!-- Update by Tw93 on 17/10/21. -->
-
 <template>
   <div class="container">
     <lc-indexlist :normal-list="list.normalList"

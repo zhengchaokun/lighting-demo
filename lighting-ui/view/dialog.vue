@@ -1,6 +1,3 @@
-<!-- CopyRight (C) 2017-2022 Alibaba Group Holding Limited. -->
-<!-- Created by Tw93 on 16/10/26. -->
-
 <template>
   <div class="wxc-demo">
     <scroller class="scroller">
