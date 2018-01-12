@@ -17,12 +17,12 @@
           :has-top-border="false" 
           :has-bottom-border="false">
         </lc-cell>
-        <!-- <lc-input label="标题" 
+        <lc-input label="标题" 
           v-model="value" 
           placeholder="请输入标题" 
           :has-top-border="false"
           :has-bottom-border="false">
-        </lc-input> -->
+        </lc-input>
         <lc-textarea label="备注" 
           placeholder="请填写备注" 
           :rows="4" 
@@ -55,7 +55,7 @@
   import Category from '../_mods/category.vue';
   import LcForm from 'lighting-ui/packages/lc-form';
   import LcCell from 'lighting-ui/packages/lc-cell';
-  // import LcInput from 'lighting-ui/packages/lc-input';
+  import LcInput from 'lighting-ui/packages/lc-input';
   import LcTextarea from 'lighting-ui/packages/lc-textarea';
 
  
@@ -64,8 +64,7 @@
     data: () => ({
       value: '',
       cellStyle: {
-        backgroundColor: '#339876',
-        paddingTop: '40px'
+        backgroundColor: '#fff'
       }
     })
   }

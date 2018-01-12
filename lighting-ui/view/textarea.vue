@@ -9,7 +9,7 @@
         <lc-textarea placeholder="提示"></lc-textarea>
         
         <text class="title-text">自定义行数</text>
-        <lc-textarea rows="6" placeholder="提示"></lc-textarea>
+        <lc-textarea :rows="6" placeholder="提示"></lc-textarea>
 
         <text class="title-text">显示计数器</text>
         <lc-textarea placeholder="提示" :max="50"></lc-textarea> 
