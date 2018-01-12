@@ -37,39 +37,6 @@
     flex: 1;
     align-items: center;
   }
-
-  .title {
-    align-self: flex-start;
-  }
-
-  .demo-image {
-    width: 300px;
-    height: 300px;
-    margin-top: 100px;
-  }
-
-  .btn {
-    width: 560px;
-    height: 70px;
-    margin-top: 100px;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    border-radius: 6px;
-    background-color: #9B7B56;
-    border-color: #9B7B56;
-  }
-
-  .image-text {
-    font-size: 26px;
-    color: #9B7B56;
-    margin-top: 10px;
-  }
-
-  .btn-txt {
-    color: #ffffff;
-    font-size: 28px;
-  }
 </style>
 <script>
   import Title from 'lighting-ui/packages/_mods/title.vue';
