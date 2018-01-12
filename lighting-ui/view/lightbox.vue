@@ -12,7 +12,7 @@
         interval="5000"
         showIndicator="true"
         :image-list="imageList"
-        @lcImgClick="lcImgClick(e)">
+        @lcImgClick="lcImgClick">
       </lc-lightbox>
     </scroller>
   </div>
@@ -55,8 +55,8 @@
       };
     },
     methods: {
-      lcImgClick () {
-        console.log('clicked')
+      lcImgClick (e) {
+        console.log('clicked'+e.index)
       }
     }
   };
