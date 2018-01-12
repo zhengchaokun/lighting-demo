@@ -52,8 +52,8 @@
 
 <script>
   import Light from 'light';
-  import Title from '../_mods/title.vue';
-  import Category from '../_mods/category.vue';
+  import Title from 'lighting-ui/packages/_mods/title.vue';
+  import Category from 'lighting-ui/packages/_mods/category.vue';
   import LcButton from 'lighting-ui/packages/lc-button';
   import LcOverlay from 'lighting-ui/packages/lc-overlay';
 

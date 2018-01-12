@@ -18,8 +18,8 @@
 
   import LcButton from 'lighting-ui/packages/lc-button';
   import LcTip from 'lighting-ui/packages/lc-tip';
-  import Title from '../_mods/title.vue';
-  import Category from '../_mods/category.vue';
+  import Title from 'lighting-ui/packages/_mods/title.vue';
+  import Category from 'lighting-ui/packages/_mods/category.vue';
 
   export default {
     components: { Title, Category, LcButton,LcTip  },

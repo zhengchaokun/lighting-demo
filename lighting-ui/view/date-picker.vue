@@ -9,7 +9,7 @@
         <lc-button text="pickTime" type="normal"  @LcButtonClicked="pickTime" class="mt20"></lc-button>
     </div>
     <category title="按钮组件"></category>
-    <!-- <lc-input 
+    <lc-input 
             type="date"
             placeholder="select date"
             autofocus="false"
@@ -27,7 +27,7 @@
         value=""
         onchange="onchange"
         :input-style="inputStyle"
-    /> -->
+    />
   </div>
 </template>
 
@@ -45,10 +45,10 @@
 
 <script> 
   import Light from 'light';
-  import Title from '../_mods/title.vue';
+  import Title from 'lighting-ui/packages/_mods/title.vue';
   import LcButton from 'lighting-ui/packages/lc-button';
-//   import LcInput from 'lighting-ui/packages/lc-input';
-  import Category from '../_mods/category.vue';
+  import LcInput from 'lighting-ui/packages/lc-input';
+  import Category from 'lighting-ui/packages/_mods/category.vue';
  
   module.exports = {
     data: () => ({
@@ -59,7 +59,7 @@
           textAlign:'center'
         }
     }),
-    components: { Title, Category, LcButton},
+    components: { Title, Category, LcButton,LcInput},
     methods: {
       normalpick: function() {
         const picker = Light.requireModule('picker');

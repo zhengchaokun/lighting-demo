@@ -52,8 +52,8 @@
 </style>
 
 <script>
-  import Title from '../_mods/title.vue';
-  import Category from '../_mods/category.vue';
+  import Title from 'lighting-ui/packages/_mods/title.vue';
+  import Category from 'lighting-ui/packages/_mods/category.vue';
   import LcCheckbox from 'lighting-ui/packages/lc-checkbox';
   import LcCheckboxList from 'lighting-ui/packages/lc-checkbox-list';
 

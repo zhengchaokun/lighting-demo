@@ -197,8 +197,8 @@
   import Light from "light";
   const dom = Light.requireModule('dom');
 
-  import Title from '../_mods/title.vue';
-  import Category from '../_mods/category.vue';
+  import Title from 'lighting-ui/packages/_mods/title.vue';
+  import Category from 'lighting-ui/packages/_mods/category.vue';
   import Config from './tools/tabpage-config.js'
   import LcItem from './tools/lc-item.vue';
   import LcPanItem from './tools/pan-item.vue';

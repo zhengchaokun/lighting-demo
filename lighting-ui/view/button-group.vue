@@ -11,8 +11,8 @@
 </template>
 
 <script>
-    import Title from '../_mods/title.vue';
-    import Category from '../_mods/category.vue';
+    import Title from 'lighting-ui/packages/_mods/title.vue';
+    import Category from 'lighting-ui/packages/_mods/category.vue';
     import LcButtonGroup from 'lighting-ui/packages/lc-button-group';
 
     export default {

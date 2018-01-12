@@ -100,8 +100,8 @@
 </style>
 
 <script>
-  import Title from '../_mods/title.vue';
-  import Category from '../_mods/category.vue';
+  import Title from 'lighting-ui/packages/_mods/title.vue';
+  import Category from 'lighting-ui/packages/_mods/category.vue';
   import LcProgress from 'lighting-ui/packages/lc-progress';
 
   export default {

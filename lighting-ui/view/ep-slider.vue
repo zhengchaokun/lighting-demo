@@ -121,8 +121,8 @@
   import LcEpSlider from 'lighting-ui/packages/lc-ep-slider';
   import LcPanItem from 'lighting-ui/packages/lc-pan-item';
   import Utils from 'lighting-ui/packages/utils';
-  import Title from '../_mods/title.vue';
-  import Category from '../_mods/category.vue';
+  import Title from 'lighting-ui/packages/_mods/title.vue';
+  import Category from 'lighting-ui/packages/_mods/category.vue';
 
   export default {
     components: { Title, Category, LcEpSlider, LcPanItem },

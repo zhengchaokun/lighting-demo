@@ -79,8 +79,8 @@
 <script>
 
   import LcGridSelect from 'lighting-ui/packages/lc-grid-select';
-  import Title from '../_mods/title.vue';
-  import Category from '../_mods/category.vue';
+  import Title from 'lighting-ui/packages/_mods/title.vue';
+  import Category from 'lighting-ui/packages/_mods/category.vue';
   import Light from 'light';
   const modal = Light.requireModule('modal');
 
