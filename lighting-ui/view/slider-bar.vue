@@ -67,8 +67,8 @@
 </style>
 
 <script>
-  import Title from '../_mods/title.vue';
-  import Category from '../_mods/category.vue';
+  import Title from 'lighting-ui/packages/_mods/title.vue';
+  import Category from 'lighting-ui/packages/_mods/category.vue';
   import LcSliderBar from 'lighting-ui/packages/lc-slider-bar';
 
   export default {

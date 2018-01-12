@@ -18,8 +18,8 @@
 
 <script>
     import LcGrid from 'lighting-ui/packages/lc-grid';
-    import Title from '../_mods/title.vue';
-    import Category from '../_mods/category.vue';
+    import Title from 'lighting-ui/packages/_mods/title.vue';
+    import Category from 'lighting-ui/packages/_mods/category.vue';
 
     export default {
         components: { Title, Category, LcGrid },

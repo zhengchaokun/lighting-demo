@@ -149,9 +149,9 @@
 
 <script>
   import LcPopup from 'lighting-ui/packages/lc-popup';
-  import Title from '../_mods/title.vue';
-  import Category from '../_mods/category.vue';
-//   import { setTitle } from '../_mods/set-nav';
+  import Title from 'lighting-ui/packages/_mods/title.vue';
+  import Category from 'lighting-ui/packages/_mods/category.vue';
+//   import { setTitle } from 'lighting-ui/packages/_mods/set-nav';
 
   export default {
     components: { Title, Category, LcPopup },

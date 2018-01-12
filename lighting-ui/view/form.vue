@@ -51,8 +51,8 @@
 </style>
 
 <script>
-  import Title from '../_mods/title.vue';
-  import Category from '../_mods/category.vue';
+  import Title from 'lighting-ui/packages/_mods/title.vue';
+  import Category from 'lighting-ui/packages/_mods/category.vue';
   import LcForm from 'lighting-ui/packages/lc-form';
   import LcCell from 'lighting-ui/packages/lc-cell';
   import LcInput from 'lighting-ui/packages/lc-input';

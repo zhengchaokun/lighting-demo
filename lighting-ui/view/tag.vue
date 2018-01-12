@@ -143,10 +143,10 @@
 
 <script>
   import Data from './tools/tag-data'
-  import Title from '../_mods/title.vue';
+  import Title from 'lighting-ui/packages/_mods/title.vue';
   import LcTag from 'lighting-ui/packages/lc-tag';
   import LcCell from 'lighting-ui/packages/lc-cell';
-  import Category from '../_mods/category.vue';
+  import Category from 'lighting-ui/packages/_mods/category.vue';
 //   import ImageAdvance from './image-advance.vue';
 //   import SpecialAdvance from './special-advance.vue';
 

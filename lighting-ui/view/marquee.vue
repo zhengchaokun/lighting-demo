@@ -18,8 +18,8 @@
 
 <script>
   import LcMarquee from 'lighting-ui/packages/lc-marquee';
-  import Title from '../_mods/title.vue';
-  import Category from '../_mods/category.vue';
+  import Title from 'lighting-ui/packages/_mods/title.vue';
+  import Category from 'lighting-ui/packages/_mods/category.vue';
   import data from 'marquee.js'
 
   export default {

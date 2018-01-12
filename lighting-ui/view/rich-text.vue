@@ -68,8 +68,8 @@
   }
 </style>
 <script>
-  import Title from '../_mods/title.vue';
-  import Category from '../_mods/category.vue';
+  import Title from 'lighting-ui/packages/_mods/title.vue';
+  import Category from 'lighting-ui/packages/_mods/category.vue';
   import LcRichText from 'lighting-ui/packages/lc-rich-text';
   import LcSpecialRichText from 'lighting-ui/packages/lc-special-rich-text'
 

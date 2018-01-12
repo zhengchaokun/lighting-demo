@@ -45,10 +45,10 @@
 
 <script> 
   import Light from 'light';
-  import Title from '../_mods/title.vue';
+  import Title from 'lighting-ui/packages/_mods/title.vue';
   import LcButton from 'lighting-ui/packages/lc-button';
 //   import LcInput from 'lighting-ui/packages/lc-input';
-  import Category from '../_mods/category.vue';
+  import Category from 'lighting-ui/packages/_mods/category.vue';
  
   module.exports = {
     data: () => ({
