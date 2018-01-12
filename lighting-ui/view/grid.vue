@@ -4,7 +4,7 @@
     <scroller>
       <title title="lc-grid"></title>
       <category title="默认3列"></category>
-      <lc-grid :list="data"></lc-grid>
+      <lc-grid :list="all"></lc-grid>
 
       <category title="自定义列"></category>
       <lc-grid :cols="5" :list="text"></lc-grid>
@@ -25,7 +25,7 @@
         components: { Title, Category, LcGrid },
         data(){
             return {
-                data: [
+                all: [
                         {
                             label:"button",
                             icon: "https://i.loli.net/2017/12/19/5a387c4f536a1.png",

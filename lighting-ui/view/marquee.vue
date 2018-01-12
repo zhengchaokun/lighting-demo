@@ -6,9 +6,10 @@
 
       <lc-marquee
         :list="marquee.list"
+        :index='1'
         :interval="marquee.interval"
         :duration="marquee.duration"
-        @change="marqueeChange">
+        @marqueeChange="change">
       </lc-marquee>
 
     </scroller>
@@ -33,7 +34,7 @@
       }
     },
     methods: {
-      marqueeChange: function (e) {
+      change: function (e) {
         console.log(e)
       }
     }
