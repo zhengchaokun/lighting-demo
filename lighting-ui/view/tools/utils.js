@@ -55,13 +55,39 @@ const Utils = {
     },
     goToH5Page(jumpUrl, animated = false, callback = null) {
         const Navigator = weex.requireModule('navigator')
-        const jumpUrlObj = new Utils.UrlParser(jumpUrl, true);
-        const url = Utils.appendProtocol(jumpUrlObj.toString());
-        Navigator.push({
-            url: Utils.encodeURLParams(url),
-            animated: animated
-        }, callback);
+        if (/^(https|http):\/\//.test(jumpUrl)) {
+            const jumpUrlObj = new Utils.UrlParser(jumpUrl, true);
+            const url = Utils.appendProtocol(jumpUrlObj.toString());
+            Navigator.push({
+                url: url,
+                animated: animated
+            }, callback);
+        } else {
+            // params = params || {};
+            if (jumpUrl.indexOf('#/') === 0) {
+                jumpUrl = jumpUrl.substring(1);
+            } else {
+                jumpUrl = `/${jumpUrl}`;
+            }
+            let query = '';
+            // if (params != {}) {
+            //   query = '?';
+            //   Object.keys(params).forEach(function (key) {
+            //     query += `${key}=${secodeURIComponent(params[key])}&`;
+            //   })
+            //   query.substring(0, query.length - 2);
+            // } else {
+            //   query = '';
+            // }
+            var finalUrl = `${weex.config.bundleUrl.split('#')[0]}#${jumpUrl}${query}`;
+
+            Navigator.push({
+                url: finalUrl,
+                animated: animated
+            }, callback);
+        }
     },
+    
     env: {
         isTaobao() {
             const { appName } = weex.config.env;

@@ -60,7 +60,7 @@
 
  
   export default {
-    components: { Title, Category, LcForm, LcCell, LcTextarea },
+    components: { Title, Category, LcForm, LcCell, LcTextarea, LcInput },
     data: () => ({
       value: '',
       cellStyle: {

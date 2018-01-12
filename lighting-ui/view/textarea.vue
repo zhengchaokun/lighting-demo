@@ -24,7 +24,7 @@
         <lc-textarea label="标题" placeholder="提示" :autofocus="true"></lc-textarea>     
 
         <text class="title-text">和input一起使用</text>
-        <!-- <lc-input label="标题" placeholder="提示" :has-bottom-border="false"></lc-input> -->
+        <lc-input label="标题" placeholder="提示" :has-bottom-border="false"></lc-input>
         <lc-textarea label="标题" :has-top-border="false" style="margin-bottom:20px;"></lc-textarea>
 
       
@@ -82,14 +82,13 @@
   import Title from '../_mods/title.vue';
   import Category from '../_mods/category.vue';
   import LcTextarea from 'lighting-ui/packages/lc-textarea';
-  import LcForm from 'lighting-ui/packages/lc-form';
+  import LcInput from 'lighting-ui/packages/lc-input';
   
-
-
+  
   const modal = Light.requireModule('modal');
   
   export default {
-    components: { Title, Category, LcTextarea, LcForm },
+    components: { Title, Category, LcTextarea, LcInput },
     data: () => ({
       hasTopBorder: false
     }),

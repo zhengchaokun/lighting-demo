@@ -32,7 +32,7 @@
       <lc-input label="邮箱" placeholder="请输入邮箱地址" is-type="email" ></lc-input> 
     
       <text class="hint">自定义校验规则</text>
-      <lc-input label="必须输入2333" :is-type="be2333" placeholder="预设内容"></lc-input>
+      <lc-input label="必须输入2333" label-width="240px" :is-type="be2333" placeholder="预设内容"></lc-input>
 
       <text class="hint">确认输入</text>
       <lc-input label="密码" type="password" placeholder="请输入6位密码" :min="6" :max="6" v-model="password1" :has-bottom-border="false"></lc-input>
