@@ -83,12 +83,12 @@ Game.prototype = {
             };
         // 事件绑定到canvas中
         let canvas = document.querySelector('canvas');
-        canvas.addEventListener(mouseEvents.down, function () {
-            self._handleMousedown()
+        canvas.addEventListener(mouseEvents.down, function (evt) {
+            self._handleMousedown(evt)
         });
         // 监听鼠标松开的事件
         canvas.addEventListener(mouseEvents.up, function (evt) {
-            self._handleMouseup()
+            self._handleMouseup(evt)
         });
         // 监听窗口变化的事件
         window.addEventListener('resize', function () {
@@ -157,12 +157,11 @@ Game.prototype = {
      *@return {Number} this.jumperStat.xSpeed 水平方向上的速度
      *@return {Number} this.jumperStat.ySpeed 垂直方向上的速度
      **/
-    _handleMousedown: function () {
+    _handleMousedown: function (evt) {
         let self = this;
         if (!self.jumperStat.ready && self.jumper.scale.y > 0.02) {
-            self.jumper.scale.y -= 0.01;
-            self.jumperStat.xSpeed += 0.004;
-            self.jumperStat.ySpeed += 0.008;
+            require("./game/jumper").prepare(evt);
+
             self._render(self.scene, self.camera);
             requestAnimationFrame(function () {
                 self._handleMousedown()
@@ -176,22 +175,7 @@ Game.prototype = {
         self.jumperStat.ready = true
         // 判断jumper是在方块水平面之上，是的话说明需要继续运动
         if (self.jumper.position.y >= 2) {
-            // jumper根据下一个方块的位置来确定水平运动方向
-            if (self.cubeStat.nextDir === 'left') {
-                self.jumper.position.x -= self.jumperStat.xSpeed
-            } else {
-                self.jumper.position.z -= self.jumperStat.xSpeed
-            }
-            // jumper在垂直方向上运动
-            self.jumper.position.y += self.jumperStat.ySpeed
-            // 运动伴随着缩放
-            if (self.jumper.scale.y < 1) {
-                self.jumper.scale.y += 0.02
-            }
-            // jumper在垂直方向上先上升后下降
-            self.jumperStat.ySpeed -= 0.01
-            self.jumper.rotation.y += 0.2
-            // 每一次的变化，渲染器都要重新渲染，才能看到渲染效果
+            require("./game/jumper").jump(self.cubeStat.nextDir === 'left');
             self._render(self.scene, self.camera)
             requestAnimationFrame(function () {
                 self._handleMouseup()
@@ -199,8 +183,6 @@ Game.prototype = {
         } else {
             // jumper掉落到方块水平位置，开始充值状态，并开始判断掉落是否成功
             self.jumperStat.ready = false
-            self.jumperStat.xSpeed = 0
-            self.jumperStat.ySpeed = 0
             self.jumper.position.y = 2
             self._checkInCube()
             if (self.falledStat.location === 1) {
@@ -407,7 +389,7 @@ Game.prototype = {
         // let material = new THREE.MeshLambertMaterial({color: this.config.jumperColor});
         // let geometry = new THREE.CubeGeometry(this.config.jumperWidth, this.config.jumperHeight, this.config.jumperDeep);
         // let mesh = new THREE.Mesh(geometry, material);
-        let mesh = require("./game/jumper").createJumper();
+        let mesh = require("./game/jumper").jumper;
         mesh.position.y = 2;
         this.jumper = mesh;
         this.scene.add(this.jumper)

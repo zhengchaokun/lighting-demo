@@ -12,7 +12,7 @@
         mounted() {
             let game = new Game({
                 canvas:this.$refs.canvas
-            })
+            });
             game.init()
             // game.addSuccessFn(success)
             // game.addFailedFn(failed)

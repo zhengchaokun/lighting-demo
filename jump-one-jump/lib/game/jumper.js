@@ -1,53 +1,61 @@
 const THREE = require("three");
 
-function createJumper(){
-    const meshBox=new THREE.Object3D();
-    const loader=new THREE.JSONLoader();
-    loader.load("model/cooss_head_1x.json",function(geo){
-        const met=new THREE.MeshPhongMaterial();
-        const mesh=new THREE.Mesh(geo,met);
+const jumper=new THREE.Object3D();
+const loader=new THREE.JSONLoader();
 
-        mesh.castShadow=true;
-        mesh.receiveShadow=true;
-        meshBox.add(mesh);
-    });loader.load("model/cooss_foot_1x.json",function(geo){
-        const met=new THREE.MeshPhongMaterial();
-        const mesh=new THREE.Mesh(geo,met);
+let head,foot,glass;
 
-        mesh.castShadow=true;
-        mesh.receiveShadow=true;
-        meshBox.add(mesh);
-    });
-    loader.load("model/cooss_glass_1x.json",function(geo){
-        const met=new THREE.MeshPhongMaterial({color:0xff2222});
-        const mesh=new THREE.Mesh(geo,met);
+loader.load("model/cooss_head_1x.json",function(geo){
+    const met=new THREE.MeshPhongMaterial();
+    head=new THREE.Mesh(geo,met);
+    head.castShadow=true;
+    head.receiveShadow=true;
+    jumper.add(head);
+});loader.load("model/cooss_foot_1x.json",function(geo){
+    const met=new THREE.MeshPhongMaterial();
+    foot=new THREE.Mesh(geo,met);
+    foot.castShadow=true;
+    foot.receiveShadow=true;
+    jumper.add(foot);
+});
+loader.load("model/cooss_glass_1x.json",function(geo){
+    const met=new THREE.MeshPhongMaterial({color:0xff2222});
+    glass=new THREE.Mesh(geo,met);
+    glass.castShadow=true;
+    glass.receiveShadow=true;
+    jumper.add(glass);
+});
 
-        mesh.castShadow=true;
-        mesh.receiveShadow=true;
-        meshBox.add(mesh);
-    });
-    return meshBox;
-}
-
-let speedY=0,speedM=0,isPrepare=true;
-function moveJumperPrepare(jumper) {
-    if(isPrepare){
-        jumper.scale.y -= 0.01;
-        speedY+=0.01;
-        speedM+=0.01;
-
-        requestAnimationFrame(function () {
-            moveJumperPrepare(jumper)
-        })
+let times=0,mSpeed=0,angle=0;
+function prepare(evt) {
+    if(evt){
+        times=0;
     }
+    times++;
+    mSpeed=times*0.005;
+    angle = Math.PI/times;
+
+    let scale = 1+times*0.015;
+    foot.scale.set(scale,scale,scale);
 }
 
-function moveJumperStart(jumper) {
-    isPrepare = false;
+function jump(left) {
+    if (left) {
+        jumper.position.x -= mSpeed;
+    } else {
+        jumper.position.z -= mSpeed;
+    }
+    jumper.position.y += times*0.01;
 
-
+    if (foot.scale.x > 1) {
+        foot.scale.set(foot.scale.x-0.01,foot.scale.x-0.01,foot.scale.x-0.01);
+    }
+    times--;
+    jumper.rotation.y += angle
 }
 
 module.exports = {
-    createJumper
+    jumper,
+    prepare,
+    jump
 };
