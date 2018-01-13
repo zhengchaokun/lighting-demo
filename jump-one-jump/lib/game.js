@@ -28,19 +28,19 @@ let Game = function (options) {
     this.scene = new THREE.Scene();
 
     // create the ground plane
-    var planeGeometry = new THREE.PlaneGeometry(5000,5000,1,1);
-    var planeMaterial =    new THREE.MeshLambertMaterial({color: 0xffffff});
-    var plane = new THREE.Mesh(planeGeometry,planeMaterial);
-    plane.receiveShadow  = true;
+    // var planeGeometry = new THREE.PlaneGeometry(5000,5000,1,1);
+    // var planeMaterial =    new THREE.MeshLambertMaterial({color: 0xffffff});
+    // var plane = new THREE.Mesh(planeGeometry,planeMaterial);
+    // plane.receiveShadow  = true;
 
     // rotate and position the plane
-    plane.rotation.x=-0.5*Math.PI;
-    plane.position.x=0
-    plane.position.y=-1
-    plane.position.z=0
-
-    // add the plane to the scene
-    this.scene.add(plane);
+    // plane.rotation.x=-0.5*Math.PI;
+    // plane.position.x=0
+    // plane.position.y=-1
+    // plane.position.z=0
+    //
+    // // add the plane to the scene
+    // this.scene.add(plane);
 
     this.cameraPos = {
         current: new THREE.Vector3(0, 0, 0), // 摄像机当前的坐标
@@ -454,7 +454,8 @@ Game.prototype = {
     },
     _setRenderer: function () {
         this.renderer.setSize(this.size.width, this.size.height);
-        // this.renderer.setClearColor(this.config.background)
+        this.renderer.setClearColor(this.config.background)
+        // this.renderer.shadowMapEnabled = true;
     },
     _setSize: function () {
         this.size.width = window.innerWidth;
