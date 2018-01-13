@@ -8,9 +8,9 @@ let Game = function (options) {
         ground: -1, // 地面y坐标
         fallingSpeed: 0.5, // 游戏失败掉落速度
         cubeColor: "#fff",
-        cubeWidth: 4, // 方块宽度
-        cubeHeight: 2, // 方块高度
-        cubeDeep: 4, // 方块深度
+        cubeWidth: 3, // 方块宽度
+        cubeHeight: 1, // 方块高度
+        cubeDeep: 3, // 方块深度
         jumperColor: "#3f3857",
         jumperWidth: 1, // jumper宽度
         jumperHeight: 2, // jumper高度
@@ -26,6 +26,21 @@ let Game = function (options) {
 
 
     this.scene = new THREE.Scene();
+
+    // create the ground plane
+    var planeGeometry = new THREE.PlaneGeometry(5000,5000,1,1);
+    var planeMaterial =    new THREE.MeshLambertMaterial({color: 0xffffff});
+    var plane = new THREE.Mesh(planeGeometry,planeMaterial);
+    plane.receiveShadow  = true;
+
+    // rotate and position the plane
+    plane.rotation.x=-0.5*Math.PI;
+    plane.position.x=0
+    plane.position.y=-1
+    plane.position.z=0
+
+    // add the plane to the scene
+    this.scene.add(plane);
 
     this.cameraPos = {
         current: new THREE.Vector3(0, 0, 0), // 摄像机当前的坐标
@@ -67,8 +82,6 @@ Game.prototype = {
         this._createCube() ; // 再加一个方块
         this._createJumper(); // 加入游戏者jumper
         this._updateCamera();// 更新相机坐标
-
-        this._createHelpers(0)
 
         let self = this;
         let mouseEvents = (self.config.isMobile) ?
@@ -399,6 +412,7 @@ Game.prototype = {
         let material = new THREE.MeshLambertMaterial({color: this.config.cubeColor});
         let geometry = new THREE.CubeGeometry(this.config.cubeWidth, this.config.cubeHeight, this.config.cubeDeep);
         let mesh = new THREE.Mesh(geometry, material);
+        mesh.castShadow = true;
         if (this.cubes.length) {
             let random = Math.random();
             this.cubeStat.nextDir = random > 0.5 ? 'left' : 'right';
@@ -427,7 +441,8 @@ Game.prototype = {
     },
     _setLight: function () {
         let directionalLight = new THREE.DirectionalLight(0xffffff, 1.1);
-        directionalLight.position.set(3, 10, 5);
+        directionalLight.position.set(3, 10, 3);
+        directionalLight.castShadow = true;
         this.scene.add(directionalLight);
 
         let light = new THREE.AmbientLight(0xffffff, 0.3);
@@ -439,7 +454,7 @@ Game.prototype = {
     },
     _setRenderer: function () {
         this.renderer.setSize(this.size.width, this.size.height);
-        this.renderer.setClearColor(this.config.background)
+        // this.renderer.setClearColor(this.config.background)
     },
     _setSize: function () {
         this.size.width = window.innerWidth;
