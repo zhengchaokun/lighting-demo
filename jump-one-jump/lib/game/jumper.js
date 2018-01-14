@@ -27,6 +27,7 @@ loader.load("model/cooss_glass_1x.json",function(geo){
 });
 
 jumper.horizontal = 2;
+jumper.position.y = 2;
 
 module.exports = {
     jumper
