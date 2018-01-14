@@ -60,7 +60,7 @@ let Game = function (options) {
 };
 function triggerJump() {
     let that = this;
-    that.jumperStat.ready = true
+    that.jumperStat.ready = true;
     if (that.jumper.position.y >= 2) {
         if (that.cubeStat.nextDir === 'left') {
             that.jumper.position.x -= that.jumperStat.mSpeed;
@@ -68,9 +68,9 @@ function triggerJump() {
             that.jumper.position.z -= that.jumperStat.mSpeed;
         }
         that.jumper.position.y += that.jumperStat.ySpeed;
-        that.jumperStat.ySpeed-=0.01
+        that.jumperStat.ySpeed-=config.ySpeed;
 
-        that.render(that.scene, that.camera)
+        that.render();
         requestAnimationFrame(function () {
             triggerJump.call(that);
         })
@@ -108,7 +108,7 @@ Game.prototype = {
 
         let that = this;
         function touchStart(evt) {
-            if (!that.jumperStat.ready && that.jumper.scale.y < 2) {
+            if (!that.jumperStat.ready) {
 
                 that.jumperStat.mSpeed+=config.mSpeed;//横向速度
                 that.jumperStat.ySpeed+=config.ySpeed;//竖向速度
