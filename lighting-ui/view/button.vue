@@ -1,6 +1,3 @@
-<!-- CopyRight (C) 2017-2022 Alibaba Group Holding Limited. -->
-<!-- Created by Tw93 on 17/07/31. -->
-
 <template>
   <div class="wxc-demo">
     <scroller class="scroller">
@@ -149,8 +146,8 @@
   import Light from 'light';
   import LcButton from 'lighting-ui/packages/lc-button';
   import LcCell from 'lighting-ui/packages/lc-cell';
-  import Title from '../_mods/title.vue';
-  import Category from '../_mods/category.vue';
+  import Title from 'lighting-ui/packages/_mods/title.vue';
+  import Category from 'lighting-ui/packages/_mods/category.vue';
 
   
   export default {
@@ -158,13 +155,13 @@
     data: () => ({
       type: 'normal',
       text: '按钮文字',
-      width: '345px',
-      height: '44px',
+      width: '690px',
+      height: '88px',
       disabled: false,
       backgroundColor: '#399de2',
       borderColor: '#399de2',
-      borderRadius: '4px',
-      fontSize: '17px',
+      borderRadius: '8px',
+      fontSize: '34px',
       color: '#FFFFFF'
     }),
     computed: {

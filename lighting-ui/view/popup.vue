@@ -1,6 +1,3 @@
-<!-- CopyRight (C) 2017-2022 Alibaba Group Holding Limited. -->
-<!-- Created by Tw93 on 16/10/25. -->
-
 <template>
   <div class="wxc-demo" style="height:1000px;">
     <scroller class="scroller">
@@ -152,9 +149,9 @@
 
 <script>
   import LcPopup from 'lighting-ui/packages/lc-popup';
-  import Title from '../_mods/title.vue';
-  import Category from '../_mods/category.vue';
-//   import { setTitle } from '../_mods/set-nav';
+  import Title from 'lighting-ui/packages/_mods/title.vue';
+  import Category from 'lighting-ui/packages/_mods/category.vue';
+//   import { setTitle } from 'lighting-ui/packages/_mods/set-nav';
 
   export default {
     components: { Title, Category, LcPopup },

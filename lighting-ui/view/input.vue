@@ -1,8 +1,8 @@
 
 
 <template>
-<div></div>
-  <!-- <div class="lc-demo">
+
+  <div class="lc-demo">
     <scroller class="scroller">
       <title title="lc-input"></title>
       <category title="基本用法"></category>
@@ -32,7 +32,7 @@
       <lc-input label="邮箱" placeholder="请输入邮箱地址" is-type="email" ></lc-input> 
     
       <text class="hint">自定义校验规则</text>
-      <lc-input label="必须输入2333" :is-type="be2333" placeholder="预设内容"></lc-input>
+      <lc-input label="必须输入2333" label-width="240px" :is-type="be2333" placeholder="预设内容"></lc-input>
 
       <text class="hint">确认输入</text>
       <lc-input label="密码" type="password" placeholder="请输入6位密码" :min="6" :max="6" v-model="password1" :has-bottom-border="false"></lc-input>
@@ -82,7 +82,7 @@
         <lc-input label="单项输入" @on-change="onEvent('change')" placeholder="预设内容"></lc-input>
       </div>  
     </scroller>
-  </div> -->
+  </div>
 </template>
 
 <style scoped>
@@ -125,45 +125,47 @@
 </style>
 
 <script>
-  // import Title from '../_mods/title.vue';
-  // import Category from '../_mods/category.vue';
-  // import { LcInput } from '../../index';
+  import Light from "light"
+  const modal = Light.requireModule('modal');
+  
+  import Title from 'lighting-ui/packages/_mods/title.vue';
+  import Category from 'lighting-ui/packages/_mods/category.vue';
+  import LcInput  from 'lighting-ui/packages/lc-input';
 
-  // const modal = Light.requireModule('modal');
 
-  // export default {
-  //   components: { Title, Category, LcInput },
-  //   data: () => ({
-  //     value: '',
-  //     showCancel: true,
-  //     isDisabled: true,
-  //     iconType: '',
-  //     inputValue: '1128',
-  //     maxValue: '3',
-  //     enterText: 'enter me',
-  //     style: '',
-  //     password1: '',
-  //     password2: '',
-  //     input01: '',
-  //     input01: '',
-  //     be2333: function (value) {
-  //       return {
-  //         valid: value==='2333',
-  //         msg: 'Must be 2333'
-  //       }
-  //     },
-  //     cellStyle: {
-  //       paddingTop: '0',
-  //       paddingBottom: '0',
-  //       paddingRight: '0'
-  //     }
-  //   }),
-  //   methods: {
-  //     onEvent(e) {
-  //       modal.toast({
-  //         message: `event:${e}`
-  //       })
-  //     }
-  //   }
-  // };
+  export default {
+    components: { Title, Category, LcInput },
+    data: () => ({
+      value: '',
+      showCancel: true,
+      isDisabled: true,
+      iconType: '',
+      inputValue: '1128',
+      maxValue: '3',
+      enterText: 'enter me',
+      style: '',
+      password1: '',
+      password2: '',
+      input01: '',
+      input02: '',
+      be2333: function (value) {
+        return {
+          valid: value==='2333',
+          msg: 'Must be 2333'
+        }
+      },
+      cellStyle: {
+        paddingTop: '0',
+        paddingBottom: '0',
+        paddingRight: '0'
+      }
+    }),
+    methods: {
+      onEvent(e) {
+        modal.toast({
+          message: `event:${e}`
+        })
+      }
+    }
+  };
 </script>

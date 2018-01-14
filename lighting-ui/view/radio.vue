@@ -1,4 +1,3 @@
-<!-- CopyRight (C) 2017-2022 Alibaba Group Holding Limited. -->
 <template>
   <div class="wxc-demo">
     <scroller class="scroller">
@@ -37,8 +36,8 @@
 </style>
 
 <script>
-  import Title from '../_mods/title.vue';
-  import Category from '../_mods/category.vue';
+  import Title from 'lighting-ui/packages/_mods/title.vue';
+  import Category from 'lighting-ui/packages/_mods/category.vue';
   import LcRadio from 'lighting-ui/packages/lc-radio';
 
   export default {

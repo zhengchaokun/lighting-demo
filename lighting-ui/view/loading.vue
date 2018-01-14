@@ -1,5 +1,3 @@
-<!-- CopyRight (C) 2017-2022 Alibaba Group Holding Limited. -->
-<!-- Created by Tw93 on 16/10/26. -->
 
 <template>
   <div class="wxc-demo">
@@ -72,8 +70,8 @@
 </template>
 
 <script>
-  import Title from '../_mods/title.vue';
-  import Category from '../_mods/category.vue';
+  import Title from 'lighting-ui/packages/_mods/title.vue';
+  import Category from 'lighting-ui/packages/_mods/category.vue';
   import LcCell from 'lighting-ui/packages/lc-cell'
   import LcLoading from 'lighting-ui/packages/lc-loading'
   import LcPartLoading from 'lighting-ui/packages/lc-part-loading'

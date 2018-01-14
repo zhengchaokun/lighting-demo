@@ -1,162 +1,158 @@
 let datas = [
     {
-        label: "badge",
+        label: "badge 徽标",
         path: "#/badge"
     },
     {
-        label: "button-group",
+        label: "button-group 按钮组",
         path: "#/button-group"
     },
     {
-        label: "button",
+        label: "button 按钮",
         path: "#/button"
     },
     {
-        label: "cell",
+        label: "cell 单元格",
         path: "#/cell"
     },
     {
-        label: "checkbox",
+        label: "checkbox 多选框",
         path: "#/checkbox"
     },
     {
-        label: "countdown",
+        label: "countdown 倒计时",
         path: "#/countdown"
     },
     {
-        label: "date-picker",
+        label: "date-picker 选择器",
         path: "#/date-picker"
     },
     {
-        label: "dialog",
+        label: "dialog 弹框",
         path: "#/dialog"
     },
     {
-        label: "ep-slider",
+        label: "ep-slider 滑块",
         path: "#/ep-slider"
     },
     {
-        label: "fold-list",
+        label: "fold-list 折叠列表",
         path: "#/fold-list"
     },
     {
-        label: "form",
+        label: "form 表单",
         path: "#/form"
     },
     {
-        label: "grid-select",
+        label: "grid-select 多格筛选",
         path: "#/grid-select"
     },
     {
-        label: "grid",
+        label: "grid 网格",
         path: "#/grid"
     },
     {
-        label: "indexlist",
+        label: "indexlist 索引列表",
         path: "#/indexlist"
     },
     {
-        label: "info-list",
+        label: "info-list 信息列表",
         path: "#/info-list"
     },
     {
-        label: "input",
+        label: "input 输入框",
         path: "#/input"
     },
     {
-        label: "lightbox",
+        label: "lightbox 轮播图",
         path: "#/lightbox"
     },
     {
-        label: "loading",
+        label: "loading 加载",
         path: "#/loading"
     },
     {
-        label: "lottery-rain",
-        path: "#/lottery-rain"
-    },
-    {
-        label: "marquee",
+        label: "marquee 跑马灯",
         path: "#/marquee"
     },
     {
-        label: "mask",
+        label: "mask 遮罩",
         path: "#/mask"
     },
     {
-        label: "minibar",
+        label: "minibar 导航栏",
         path: "#/minibar"
     },
     {
-        label: "noticebar",
+        label: "noticebar 提醒条",
         path: "#/noticebar"
     },
     {
-        label: "overlay",
+        label: "overlay 蒙层",
         path: "#/overlay"
     },
     {
-        label: "page-calendar",
+        label: "page-calendar 日历",
         path: "#/page-calendar"
     },
     {
-        label: "popup",
+        label: "popup 弹层",
         path: "#/popup"
     },
     {
-        label: "progress",
+        label: "progress 进度条",
         path: "#/progress"
     },
     {
-        label: "radio",
+        label: "radio 单选",
         path: "#/radio"
     },
     {
-        label: "result",
+        label: "result 结果页",
         path: "#/result"
     },
     {
-        label: "rich-text",
+        label: "rich-text 富文本",
         path: "#/rich-text"
     },
     {
-        label: "searchbar",
+        label: "searchbar 搜索条",
         path: "#/searchbar"
     },
     {
-        label: "simple-flow",
+        label: "simple-flow 流程图",
         path: "#/simple-flow"
     },
-    {
-        label: "slide-nav",
+    /* {
+        label: "slide-nav 视窗增大",
         path: "#/slide-nav"
-    },
+    }, */
     {
-        label: "slider-bar",
+        label: "slider-bar 滑动输入条",
         path: "#/slider-bar"
     },
     {
-        label: "stepper",
+        label: "stepper 步进器",
         path: "#/stepper"
     },
     {
-        label: "tab-bar",
+        label: "tab-bar 底部标签页",
         path: "#/tab-bar"
     },
     {
-        label: "tab-page",
+        label: "tab-page 顶部标签页",
         path: "#/tab-page"
     },
     {
-        label: "tag",
+        label: "tag 标签",
         path: "#/tag"
     },
     {
-        label: "textarea",
+        label: "textarea 文本域",
         path: "#/textarea"
     },
     {
-        label: "tip",
+        label: "tip 提示",
         path: "#/tip"
     }
 ]

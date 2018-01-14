@@ -1,5 +1,3 @@
-<!-- CopyRight (C) 2017-2022 Alibaba Group Holding Limited. -->
-<!-- Created by Tw93 on 17/07/31. -->
 
 <template>
   <div class="lc-demo">
@@ -12,15 +10,14 @@
       </div>
       <div class="demo">
         <text class="demo-text">设置value</text>
-        <lc-progress :value=50
-                      :bar-width=600></lc-progress>
+        <lc-progress :value="50" :bar-width="600"></lc-progress>
       </div>
       <div class="demo">
         <text class="demo-text">自定义</text>
-        <lc-progress :value=70
-                      bar-color='#9B7B56'
-                      :bar-height=18
-                      :bar-width=640></lc-progress>
+        <lc-progress :value="70"
+          bar-color='#9B7B56'
+          :bar-height="9"
+          :bar-width="640"></lc-progress>
       </div>
       <div class="btn"
            @click="uploadFile">
@@ -28,7 +25,7 @@
       </div>
       <div class="up-demo" v-if="progressVisible">
         <text class="progress-text left">0</text>
-        <lc-progress :value="value" :bar-width=540></lc-progress>
+        <lc-progress :value="value" :bar-width="540"></lc-progress>
         <text class="progress-text right">{{value}}</text>
       </div>
     </scroller>
@@ -72,7 +69,6 @@
   .progress-text {
     font-size: 24px;
     color: #44B825;
-    letter-spacing: 0.18px;
   }
 
   .left {
@@ -104,8 +100,8 @@
 </style>
 
 <script>
-  import Title from '../_mods/title.vue';
-  import Category from '../_mods/category.vue';
+  import Title from 'lighting-ui/packages/_mods/title.vue';
+  import Category from 'lighting-ui/packages/_mods/category.vue';
   import LcProgress from 'lighting-ui/packages/lc-progress';
 
   export default {

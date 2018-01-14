@@ -147,11 +147,15 @@
 </style>
 
 <script>
+  import Light from "light"
   const expressionBinding = Light.requireModule('expressionBinding');
-  import { LcRichText, LcSpecialRichText, Utils } from '../../index';
+  import LcRichText from 'lighting-ui/packages/lc-rich-text';
+
+  import Utils from './utils.js';
+  
 
   export default {
-    components: { LcRichText, LcSpecialRichText },
+    components: { LcRichText },
     props: {
       title: {
         type: [String, Array],
