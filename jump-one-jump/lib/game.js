@@ -66,7 +66,6 @@ Game.prototype = {
         this._updateCamera();// 更新相机坐标
 
         let that = this;
-
         let canvas = document.querySelector('canvas');
         canvas.addEventListener("touchstart", function (evt) {
             that._handleMousedown(evt)
@@ -76,12 +75,6 @@ Game.prototype = {
             that._handleMouseup(evt)
         });
     },
-    /**
-     *鼠标按下或触摸开始绑定的函数
-     *根据鼠标按下的时间来给 xSpeed 和 ySpeed 赋值
-     *@return {Number} this.jumperStat.xSpeed 水平方向上的速度
-     *@return {Number} this.jumperStat.ySpeed 垂直方向上的速度
-     **/
     _handleMousedown: function (evt) {
         let self = this;
         if (!self.jumperStat.ready && self.jumper.scale.y > 0.02) {
@@ -93,10 +86,8 @@ Game.prototype = {
             })
         }
     },
-    // 鼠标松开或触摸结束绑定的函数
     _handleMouseup: function () {
         let self = this
-        // 标记鼠标已经松开
         self.jumperStat.ready = true
         // 判断jumper是在方块水平面之上，是的话说明需要继续运动
         if (self.jumper.position.y >= 2) {
@@ -125,10 +116,7 @@ Game.prototype = {
             }
         }
     },
-    /**
-     *游戏失败执行的碰撞效果
-     *@param {String} dir 传入一个参数用于控制倒下的方向：'rightTop','rightBottom','leftTop','leftBottom','none'
-     **/
+
     _fallingRotate: function (dir) {
         let self = this
         let offset = self.falledStat.distance - self.config.cubeWidth / 2
@@ -368,10 +356,6 @@ Game.prototype = {
         this.renderer.setSize(this.size.width, this.size.height);
         this.renderer.setClearColor(this.config.background)
         // this.renderer.shadowMapEnabled = true;
-    },
-    _setSize: function () {
-        this.size.width = window.innerWidth;
-        this.size.height = window.innerHeight;
     },
     // 游戏失败重新开始的初始化配置
     restart: function () {
