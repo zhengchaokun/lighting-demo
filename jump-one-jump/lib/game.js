@@ -92,47 +92,30 @@ Game.prototype = {
 
         that.start();
     },
-    // 每成功一步, 重新计算摄像机的位置，保证游戏始终在画布中间进行
-    _updateCameraPos: function () {
-        let lastIndex = this.cubes.length - 1
-        let pointA = {
-            x: this.cubes[lastIndex].position.x,
-            z: this.cubes[lastIndex].position.z
-        }
-        let pointB = {
-            x: this.cubes[lastIndex - 1].position.x,
-            z: this.cubes[lastIndex - 1].position.z
-        }
-        let pointR = new THREE.Vector3()
-        pointR.x = (pointA.x + pointB.x) / 2
-        pointR.y = 0
-        pointR.z = (pointA.z + pointB.z) / 2
-        this.cameraPos.next = pointR
-    },
     // 基于更新后的摄像机位置，重新设置摄像机坐标
     _updateCamera: function () {
-        let self = this
+        let self = this;
         let c = {
             x: self.cameraPos.current.x,
             y: self.cameraPos.current.y,
             z: self.cameraPos.current.z
-        }
+        };
         let n = {
             x: self.cameraPos.next.x,
             y: self.cameraPos.next.y,
             z: self.cameraPos.next.z
-        }
+        };
         if (c.x > n.x || c.z > n.z) {
-            self.cameraPos.current.x -= 0.1
-            self.cameraPos.current.z -= 0.1
+            self.cameraPos.current.x -= 0.1;
+            self.cameraPos.current.z -= 0.1;
             if (self.cameraPos.current.x - self.cameraPos.next.x < 0.05) {
                 self.cameraPos.current.x = self.cameraPos.next.x
             }
             if (self.cameraPos.current.z - self.cameraPos.next.z < 0.05) {
                 self.cameraPos.current.z = self.cameraPos.next.z
             }
-            self.camera.lookAt(new THREE.Vector3(c.x, 0, c.z))
-            self.render()
+            self.camera.lookAt(new THREE.Vector3(c.x, 0, c.z));
+            self.render();
             requestAnimationFrame(function () {
                 self._updateCamera()
             })
@@ -169,15 +152,27 @@ Game.prototype = {
         this.scene.add(mesh);
         // 每新增一个方块，重新计算摄像机坐标
         if (this.cubes.length > 1) {
-            this._updateCameraPos()
+            let lastIndex = this.cubes.length - 1;
+            let pointA = {
+                x: this.cubes[lastIndex].position.x,
+                z: this.cubes[lastIndex].position.z
+            };
+            let pointB = {
+                x: this.cubes[lastIndex - 1].position.x,
+                z: this.cubes[lastIndex - 1].position.z
+            };
+            let pointR = new THREE.Vector3();
+            pointR.x = (pointA.x + pointB.x) / 2;
+            pointR.y = 0;
+            pointR.z = (pointA.z + pointB.z) / 2;
+            this.cameraPos.next = pointR
         }
     },
     render: function () {
         this.renderer.render(this.scene, this.camera)
     },
-    // 游戏失败重新开始的初始化配置
     start: function () {
-        this.score = 0
+        this.score = 0;
         this.cameraPos = {
             current: new THREE.Vector3(0, 0, 0),
             next: new THREE.Vector3()
