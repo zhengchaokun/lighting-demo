@@ -85,6 +85,12 @@ Game.prototype = {
                     foot.scale.y+0.01,
                     foot.scale.z+0.01
                 );
+
+                //盒子变压缩
+                that.cubes[that.cubes.length-2].scale.z+=0.001
+                that.cubes[that.cubes.length-2].scale.x+=0.001
+                that.cubes[that.cubes.length-2].scale.y-=0.005
+
                 that.render(that.scene, that.camera);
                 requestAnimationFrame(touchStart);
             }
@@ -223,6 +229,14 @@ function triggerJump() {
                 foot.scale.y-0.01,
                 foot.scale.z-0.01
             );
+        }
+
+        ////盒子回弹
+        let box = that.cubes[that.cubes.length-2];
+        if(box.scale.z>1){
+            box.scale.z-=0.001
+            box.scale.x-=0.001
+            box.scale.y+=0.005
         }
 
         that.render();
