@@ -60,7 +60,6 @@ let Game = function (options) {
 };
 Game.prototype = {
     init: function () {
-
         this.camera.position.set(100, 100, 100);
         this.camera.lookAt(this.cameraPos.current)
         this.renderer.setSize(this.size.width, this.size.height);
@@ -73,11 +72,6 @@ Game.prototype = {
 
         let light = new THREE.AmbientLight(0xffffff, 0.3);
         this.scene.add(light)
-
-        this._createCube() ; // 加一个方块
-        this._createCube() ; // 再加一个方块
-        this._createJumper(); // 加入游戏者jumper
-        this._updateCamera();// 更新相机坐标
 
         let that = this;
         function touchStart(evt) {
@@ -95,6 +89,8 @@ Game.prototype = {
         }
         that.renderer.domElement.addEventListener("touchstart",touchStart);
         that.renderer.domElement.addEventListener("touchend", touchEnd);
+
+        that.start();
     },
     // 每成功一步, 重新计算摄像机的位置，保证游戏始终在画布中间进行
     _updateCameraPos: function () {
@@ -180,7 +176,7 @@ Game.prototype = {
         this.renderer.render(this.scene, this.camera)
     },
     // 游戏失败重新开始的初始化配置
-    restart: function () {
+    start: function () {
         this.score = 0
         this.cameraPos = {
             current: new THREE.Vector3(0, 0, 0),
@@ -198,7 +194,6 @@ Game.prototype = {
         // 删除jumper
         this.scene.remove(this.jumper)
         // 显示的分数设为 0
-        this.successCallback(this.score)
         this._createCube()
         this._createCube()
         this._createJumper()
