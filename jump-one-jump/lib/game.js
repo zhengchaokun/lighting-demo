@@ -66,17 +66,17 @@ Game.prototype = {
         this._updateCamera();// 更新相机坐标
 
         let that = this;
-        function touchstart(evt) {
-            if (!that.jumperStat.ready && that.jumper.scale.y > 0.02) {
+        function touchStart(evt) {
+            if (!that.jumperStat.ready && that.jumper.scale.y < 2) {
                 require("./game/jumper").prepare(evt);
 
                 that.render(that.scene, that.camera);
-                requestAnimationFrame(function () {
-                    touchstart()
-                })
+                requestAnimationFrame(touchStart);
             }
         }
-        that.renderer.domElement.addEventListener("touchstart",touchstart );
+        that.renderer.domElement.addEventListener("touchstart",touchStart);
+
+
         that.renderer.domElement.addEventListener("touchend", function (evt) {
             that._handleMouseup(evt)
         });
