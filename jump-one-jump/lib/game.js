@@ -3,7 +3,6 @@ const THREE = require("three");
 let Game = function (options) {
     // 基本参数
     this.config = {
-        isMobile: true,
         background: "#fcd9d3", // 背景颜色
         ground: -1, // 地面y坐标
         fallingSpeed: 0.5, // 游戏失败掉落速度
@@ -58,7 +57,6 @@ let Game = function (options) {
 
 Game.prototype = {
     init: function () {
-        this._checkUserAgent() ; // 检测是否移动端
         this._setCamera() ; // 设置摄像机位置
         this._setRenderer() ; // 设置渲染器参数
         this._setLight() ; // 设置光照
@@ -67,86 +65,16 @@ Game.prototype = {
         this._createJumper(); // 加入游戏者jumper
         this._updateCamera();// 更新相机坐标
 
-        let self = this;
-        let mouseEvents = (self.config.isMobile) ?
-            {
-                down: 'touchstart',
-                up: 'touchend',
-            }
-            :
-            {
-                down: 'mousedown',
-                up: 'mouseup',
-            };
-        // 事件绑定到canvas中
+        let that = this;
+
         let canvas = document.querySelector('canvas');
-        canvas.addEventListener(mouseEvents.down, function (evt) {
-            self._handleMousedown(evt)
+        canvas.addEventListener("touchstart", function (evt) {
+            that._handleMousedown(evt)
         });
         // 监听鼠标松开的事件
-        canvas.addEventListener(mouseEvents.up, function (evt) {
-            self._handleMouseup(evt)
+        canvas.addEventListener("touchend", function (evt) {
+            that._handleMouseup(evt)
         });
-        // 监听窗口变化的事件
-        window.addEventListener('resize', function () {
-            self._handleWindowResize()
-        });
-    },
-    // 游戏失败重新开始的初始化配置
-    restart: function () {
-        this.score = 0
-        this.cameraPos = {
-            current: new THREE.Vector3(0, 0, 0),
-            next: new THREE.Vector3()
-        }
-        this.fallingStat = {
-            speed: 0.2,
-            end: false
-        }
-        // 删除所有方块
-        let length = this.cubes.length
-        for (let i = 0; i < length; i++) {
-            this.scene.remove(this.cubes.pop())
-        }
-        // 删除jumper
-        this.scene.remove(this.jumper)
-        // 显示的分数设为 0
-        this.successCallback(this.score)
-        this._createCube()
-        this._createCube()
-        this._createJumper()
-        this._updateCamera()
-    },
-    // 游戏成功的执行函数, 外部传入
-    addSuccessFn: function (fn) {
-        this.successCallback = fn
-    },
-    // 游戏失败的执行函数, 外部传入
-    addFailedFn: function (fn) {
-        this.failedCallback = fn
-    },
-    // 检测是否手机端
-    _checkUserAgent: function () {
-        let n = navigator.userAgent;
-        if (n.match(/Android/i) || n.match(/webOS/i) || n.match(/iPhone/i) || n.match(/iPad/i) || n.match(/iPod/i) || n.match(/BlackBerry/i)) {
-            this.config.isMobile = true
-        }
-    },
-    // THREE.js辅助工具
-    _createHelpers: function () {
-        let axesHelper = new THREE.AxesHelper(10)
-        this.scene.add(axesHelper)
-    },
-    // 窗口缩放绑定的函数
-    _handleWindowResize: function () {
-        this._setSize()
-        this.camera.left = this.size.width / -80
-        this.camera.right = this.size.width / 80
-        this.camera.top = this.size.height / 80
-        this.camera.bottom = this.size.height / -80
-        this.camera.updateProjectionMatrix()
-        this.renderer.setSize(this.size.width, this.size.height)
-        this._render()
     },
     /**
      *鼠标按下或触摸开始绑定的函数
@@ -444,7 +372,32 @@ Game.prototype = {
     _setSize: function () {
         this.size.width = window.innerWidth;
         this.size.height = window.innerHeight;
-    }
+    },
+    // 游戏失败重新开始的初始化配置
+    restart: function () {
+        this.score = 0
+        this.cameraPos = {
+            current: new THREE.Vector3(0, 0, 0),
+            next: new THREE.Vector3()
+        }
+        this.fallingStat = {
+            speed: 0.2,
+            end: false
+        }
+        // 删除所有方块
+        let length = this.cubes.length
+        for (let i = 0; i < length; i++) {
+            this.scene.remove(this.cubes.pop())
+        }
+        // 删除jumper
+        this.scene.remove(this.jumper)
+        // 显示的分数设为 0
+        this.successCallback(this.score)
+        this._createCube()
+        this._createCube()
+        this._createJumper()
+        this._updateCamera()
+    },
 };
 
 module.exports = Game;
