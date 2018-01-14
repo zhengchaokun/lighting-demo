@@ -61,14 +61,28 @@ let Game = function (options) {
 Game.prototype = {
     init: function () {
         this.renderer.setSize(this.size.width, this.size.height);
-        this.renderer.setClearColor(config.background);
+        this.renderer.shadowMapEnabled = true;
+        this.renderer.shadowMapSoft = true;
+
+        //添加最强地表
+        const planeGeometry = new THREE.PlaneGeometry(1000,1000,1,1);
+        const planeMaterial =    new THREE.MeshLambertMaterial({color: config.background});
+        const plane = new THREE.Mesh(planeGeometry,planeMaterial);
+        plane.receiveShadow  = true;
+
+        // rotate and position the plane
+        plane.rotation.x=-0.5*Math.PI;
+        plane.position.x=0;
+        plane.position.y=-config.cubeHeight/2;
+        plane.position.z=0;
+        this.scene.add(plane);
 
         let directionalLight = new THREE.DirectionalLight(0xffffff, 1.1);
-        directionalLight.position.set(3, 10, 3);
+        directionalLight.position.set(10, 6, 5);
         directionalLight.castShadow = true;
         this.scene.add(directionalLight);
 
-        let light = new THREE.AmbientLight(0xffffff, 0.3);
+        let light = new THREE.AmbientLight(0xFFFFFF,0.4);
         this.scene.add(light);
 
         let that = this;
@@ -150,6 +164,8 @@ Game.prototype = {
                 mesh.position.z = this.cubes[this.cubes.length - 1].position.z - 4 * Math.random() - 6
             }
         }
+        mesh.receiveShadow = true;
+
         this.cubes.push(mesh);
         // 当方块数大于6时，删除前面的方块，因为不会出现在画布中
         if (this.cubes.length > 6) {

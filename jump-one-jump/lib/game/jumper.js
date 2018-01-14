@@ -28,9 +28,10 @@ function createJumper() {
         jumper.add(glass);
     });
 
-    jumper.horizontal = 2;
-    jumper.position.y = 2;
+    jumper.horizontal = 1.5;
+    jumper.position.y = jumper.horizontal;
 
+    jumper.castShadow = true;
     return jumper;
 }
 module.exports = {
