@@ -181,22 +181,22 @@ Game.prototype = {
         this.cameraPos = {
             current: new THREE.Vector3(0, 0, 0),
             next: new THREE.Vector3()
-        }
+        };
         this.fallingStat = {
             speed: 0.2,
             end: false
-        }
+        };
         // 删除所有方块
-        let length = this.cubes.length
+        let length = this.cubes.length;
         for (let i = 0; i < length; i++) {
             this.scene.remove(this.cubes.pop())
         }
         // 删除jumper
-        this.scene.remove(this.jumper)
+        this.scene.remove(this.jumper);
         // 显示的分数设为 0
-        this._createCube()
-        this._createCube()
-        this._createJumper()
+        this._createCube();
+        this._createCube();
+        this._createJumper();
         this._updateCamera()
     },
 };
