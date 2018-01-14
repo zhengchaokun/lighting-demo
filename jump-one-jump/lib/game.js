@@ -205,6 +205,9 @@ function triggerJump() {
         that.jumper.position.y += that.jumperStat.ySpeed;
         that.jumperStat.ySpeed-=config.ySpeed;
 
+        //转圈
+        that.jumper.rotation.y-=Math.PI/(that.jumperStat.mSpeed/config.mSpeed);
+
         that.render();
         requestAnimationFrame(function () {
             triggerJump.call(that);
@@ -215,6 +218,7 @@ function triggerJump() {
         that.jumperStat.ySpeed = 0;
 
         that.jumper.position.y = that.jumper.horizontal;
+        that.jumper.rotation.y = 0;
 
 
         const jumpResult = checkJumpResult.call(that);
