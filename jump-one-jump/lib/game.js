@@ -117,6 +117,7 @@ function checkJumpResult() {
         };
         let distanceS, // jumper和当前方块的坐标轴距离
             distanceL;  // jumper和下一个方块的坐标轴距离
+
         // 判断下一个方块相对当前方块的方向来确定计算距离的坐标轴
         if (this.cubeStat.nextDir === 'left') {
             distanceS = Math.abs(pointO.x - pointA.x);
