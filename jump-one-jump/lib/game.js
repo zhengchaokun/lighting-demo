@@ -2,7 +2,7 @@ const THREE = require("three");
 
 const config = {
     background: "#fcd9d3", // 背景颜色
-    ground: -1, // 地面y坐标
+    ground: -0.5, // 地面y坐标
     fallingSpeed: 0.5, // 游戏失败掉落速度
     cubeColor: "#fff",
     cubeWidth: 3, // 方块宽度
