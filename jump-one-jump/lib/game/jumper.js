@@ -26,36 +26,8 @@ loader.load("model/cooss_glass_1x.json",function(geo){
     jumper.add(glass);
 });
 
-let times=0,mSpeed=0,angle=0;
-function prepare(evt) {
-    if(evt){
-        times=0;
-    }
-    times++;
-    mSpeed=times*0.005;
-    angle = Math.PI/times;
-
-    let scale = 1+times*0.015;
-    foot.scale.set(scale,scale,scale);
-}
-
-function jump(left) {
-    if (left) {
-        jumper.position.x -= mSpeed;
-    } else {
-        jumper.position.z -= mSpeed;
-    }
-    jumper.position.y += times*0.01;
-
-    if (foot.scale.x > 1) {
-        foot.scale.set(foot.scale.x-0.01,foot.scale.x-0.01,foot.scale.x-0.01);
-    }
-    times--;
-    jumper.rotation.y += angle
-}
+jumper.horizontal = 2;
 
 module.exports = {
-    jumper,
-    prepare,
-    jump
+    jumper
 };

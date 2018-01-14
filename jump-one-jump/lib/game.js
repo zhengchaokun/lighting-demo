@@ -61,7 +61,7 @@ let Game = function (options) {
 function triggerJump() {
     let that = this;
     that.jumperStat.ready = true;
-    if (that.jumper.position.y >= 2) {
+    if (that.jumper.position.y >= that.jumper.horizontal) {
         if (that.cubeStat.nextDir === 'left') {
             that.jumper.position.x -= that.jumperStat.mSpeed;
         } else {
@@ -75,12 +75,13 @@ function triggerJump() {
             triggerJump.call(that);
         })
     } else {
-        // jumper掉落到方块水平位置，开始充值状态，并开始判断掉落是否成功
-        that.jumperStat.ready = false
-        that.jumperStat.mSpeed = 0
-        that.jumperStat.ySpeed = 0
-        that.jumper.position.y = 2
-        that._checkInCube()
+        that.jumperStat.ready = false;
+        that.jumperStat.mSpeed = 0;
+        that.jumperStat.ySpeed = 0;
+
+        that.jumper.position.y = that.jumper.horizontal;
+
+        _checkInCube.call(that)
         if (that.falledStat.location === 1) {
             // 掉落成功，进入下一步
             that.score++
@@ -96,6 +97,50 @@ function triggerJump() {
         }
     }
 }
+
+function _checkInCube() {
+    if (this.cubes.length > 1) {
+        // jumper 的位置
+        let pointO = {
+            x: this.jumper.position.x,
+            z: this.jumper.position.z
+        }
+        // 当前方块的位置
+        let pointA = {
+            x: this.cubes[this.cubes.length - 1 - 1].position.x,
+            z: this.cubes[this.cubes.length - 1 - 1].position.z
+        }
+        // 下一个方块的位置
+        let pointB = {
+            x: this.cubes[this.cubes.length - 1].position.x,
+            z: this.cubes[this.cubes.length - 1].position.z
+        }
+        let distanceS, // jumper和当前方块的坐标轴距离
+            distanceL  // jumper和下一个方块的坐标轴距离
+        // 判断下一个方块相对当前方块的方向来确定计算距离的坐标轴
+        if (this.cubeStat.nextDir === 'left') {
+            distanceS = Math.abs(pointO.x - pointA.x)
+            distanceL = Math.abs(pointO.x - pointB.x)
+        } else {
+            distanceS = Math.abs(pointO.z - pointA.z)
+            distanceL = Math.abs(pointO.z - pointB.z)
+        }
+        let should = this.config.cubeWidth / 2 + this.config.jumperWidth / 2
+        let result = 0
+        if (distanceS < should) {
+            // 落在当前方块，将距离储存起来，并继续判断是否可以站稳
+            this.falledStat.distance = distanceS
+            result = distanceS < this.config.cubeWidth / 2 ? -1 : -10
+        } else if (distanceL < should) {
+            this.falledStat.distance = distanceL
+            // 落在下一个方块，将距离储存起来，并继续判断是否可以站稳
+            result = distanceL < this.config.cubeWidth / 2 ? 1 : 10
+        } else {
+            result = 0
+        }
+        this.falledStat.location = result
+    }
+};
 Game.prototype = {
     init: function () {
         this._setCamera() ; // 设置摄像机位置
@@ -203,58 +248,6 @@ Game.prototype = {
                     self._fallingRotate('rightBottom')
                 }
             }
-        }
-    },
-    /**
-     *判断jumper的掉落位置
-     *@return {Number} this.falledStat.location
-     * -1 : 掉落在原来的方块，游戏继续
-     * -10: 掉落在原来方块的边缘，游戏失败
-     *  1 : 掉落在下一个方块，游戏成功，游戏继续
-     *  10: 掉落在下一个方块的边缘，游戏失败
-     *  0 : 掉落在空白区域，游戏失败
-     **/
-    _checkInCube: function () {
-        if (this.cubes.length > 1) {
-            // jumper 的位置
-            let pointO = {
-                x: this.jumper.position.x,
-                z: this.jumper.position.z
-            }
-            // 当前方块的位置
-            let pointA = {
-                x: this.cubes[this.cubes.length - 1 - 1].position.x,
-                z: this.cubes[this.cubes.length - 1 - 1].position.z
-            }
-            // 下一个方块的位置
-            let pointB = {
-                x: this.cubes[this.cubes.length - 1].position.x,
-                z: this.cubes[this.cubes.length - 1].position.z
-            }
-            let distanceS, // jumper和当前方块的坐标轴距离
-                distanceL  // jumper和下一个方块的坐标轴距离
-            // 判断下一个方块相对当前方块的方向来确定计算距离的坐标轴
-            if (this.cubeStat.nextDir === 'left') {
-                distanceS = Math.abs(pointO.x - pointA.x)
-                distanceL = Math.abs(pointO.x - pointB.x)
-            } else {
-                distanceS = Math.abs(pointO.z - pointA.z)
-                distanceL = Math.abs(pointO.z - pointB.z)
-            }
-            let should = this.config.cubeWidth / 2 + this.config.jumperWidth / 2
-            let result = 0
-            if (distanceS < should) {
-                // 落在当前方块，将距离储存起来，并继续判断是否可以站稳
-                this.falledStat.distance = distanceS
-                result = distanceS < this.config.cubeWidth / 2 ? -1 : -10
-            } else if (distanceL < should) {
-                this.falledStat.distance = distanceL
-                // 落在下一个方块，将距离储存起来，并继续判断是否可以站稳
-                result = distanceL < this.config.cubeWidth / 2 ? 1 : 10
-            } else {
-                result = 0
-            }
-            this.falledStat.location = result
         }
     },
     // 每成功一步, 重新计算摄像机的位置，保证游戏始终在画布中间进行
