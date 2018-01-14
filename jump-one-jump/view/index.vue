@@ -26,6 +26,7 @@
                         message:"失败了，点击再试一次！",
                         okTitle:'再试一次'
                     },function(){
+                        that.score = 0;
                         game.start();
                     })
                 }
