@@ -17,6 +17,8 @@ const config = {
 };
 
 let Game = function (options) {
+    this.options = options;
+
     // 游戏状态
     this.score = 0;
     this.size = {
@@ -35,7 +37,7 @@ let Game = function (options) {
 
     this.renderer = new THREE.WebGLRenderer({
         antialias: true,
-        canvas:options.canvas
+        canvas:this.options.canvas
     });
 
     this.cubes = []; // 方块数组
@@ -222,8 +224,8 @@ function triggerJump() {
             that._createCube();
             that._updateCamera();
 
-            if (that.successCallback) {
-                that.successCallback(that.score)
+            if (that.options.success) {
+                that.options.success(that.score)
             }
         } else {
             // 掉落失败，进入失败动画
@@ -344,8 +346,8 @@ function animationFall(dir){
             animationFall.call(self,dir)
         })
     } else {
-        if (self.failedCallback) {
-            self.failedCallback()
+        if (self.options.fail) {
+            self.options.fail()
         }
     }
 }
