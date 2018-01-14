@@ -17,9 +17,6 @@ const config = {
 };
 
 let Game = function (options) {
-    // 基本参数
-    this.config = config;
-
     // 游戏状态
     this.score = 0;
     this.size = {
@@ -63,7 +60,7 @@ Game.prototype = {
         this.camera.position.set(100, 100, 100);
         this.camera.lookAt(this.cameraPos.current)
         this.renderer.setSize(this.size.width, this.size.height);
-        this.renderer.setClearColor(this.config.background)
+        this.renderer.setClearColor(config.background)
 
         let directionalLight = new THREE.DirectionalLight(0xffffff, 1.1);
         directionalLight.position.set(3, 10, 3);
@@ -123,8 +120,8 @@ Game.prototype = {
     },
     // 新增一个方块, 新的方块有2个随机方向
     _createCube: function () {
-        let material = new THREE.MeshLambertMaterial({color: this.config.cubeColor});
-        let geometry = new THREE.CubeGeometry(this.config.cubeWidth, this.config.cubeHeight, this.config.cubeDeep);
+        let material = new THREE.MeshLambertMaterial({color: config.cubeColor});
+        let geometry = new THREE.CubeGeometry(config.cubeWidth, config.cubeHeight, config.cubeDeep);
         let mesh = new THREE.Mesh(geometry, material);
         mesh.castShadow = true;
         if (this.cubes.length) {
@@ -285,16 +282,16 @@ function checkJumpResult() {
             distanceS = Math.abs(pointO.z - pointA.z);
             distanceL = Math.abs(pointO.z - pointB.z);
         }
-        let should = this.config.cubeWidth / 2 + this.config.jumperWidth / 2;
+        let should = config.cubeWidth / 2 + config.jumperWidth / 2;
         let result = 0;
         if (distanceS < should) {
             // 落在当前方块，将距离储存起来，并继续判断是否可以站稳
             this.falledStat.distance = distanceS;
-            result = distanceS < this.config.cubeWidth / 2 ? -1 : -10
+            result = distanceS < config.cubeWidth / 2 ? -1 : -10
         } else if (distanceL < should) {
             this.falledStat.distance = distanceL;
             // 落在下一个方块，将距离储存起来，并继续判断是否可以站稳
-            result = distanceL < this.config.cubeWidth / 2 ? 1 : 10
+            result = distanceL < config.cubeWidth / 2 ? 1 : 10
         } else {
             result = 0
         }
@@ -303,11 +300,11 @@ function checkJumpResult() {
 }
 function animationFall(dir){
     let self = this
-    let offset = self.falledStat.distance - self.config.cubeWidth / 2
+    let offset = self.falledStat.distance - config.cubeWidth / 2
     let rotateAxis = 'z' // 旋转轴
     let rotateAdd = self.jumper.rotation[rotateAxis] + 0.1 // 旋转速度
     let rotateTo = self.jumper.rotation[rotateAxis] < Math.PI / 2 // 旋转结束的弧度
-    let fallingTo = self.config.ground + self.config.jumperWidth / 2 + offset
+    let fallingTo = config.ground + config.jumperWidth / 2 + offset
 
     if (dir === 'rightTop') {
         rotateAxis = 'x'
@@ -331,7 +328,7 @@ function animationFall(dir){
         self.jumper.translate.x = offset
     } else if (dir === 'none') {
         rotateTo = false
-        fallingTo = self.config.ground
+        fallingTo = config.ground
     } else {
         throw Error('Arguments Error')
     }
@@ -339,7 +336,7 @@ function animationFall(dir){
         if (rotateTo) {
             self.jumper.rotation[rotateAxis] = rotateAdd
         } else if (self.jumper.position.y > fallingTo) {
-            self.jumper.position.y -= self.config.fallingSpeed
+            self.jumper.position.y -= config.fallingSpeed
         } else {
             self.fallingStat.end = true
         }
