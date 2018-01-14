@@ -38,11 +38,11 @@ let Game = function (options) {
 
     this.cubes = []; // 方块数组
     this.cubeStat = {
-        nextDir: '' // 下一个方块相对于当前方块的方向: 'left' 或 'right'
+        nextDir: 'left' // 下一个方块相对于当前方块的方向: 'left' 或 'right'
     };
     this.jumperStat = {
         ready: false, // 鼠标按完没有
-        xSpeed: 0, // xSpeed根据鼠标按的时间进行赋值
+        mSpeed: 0, // xSpeed根据鼠标按的时间进行赋值
         ySpeed: 0  // ySpeed根据鼠标按的时间进行赋值
     };
     this.falledStat = {
@@ -54,7 +54,45 @@ let Game = function (options) {
         end: false // 掉到地面没有
     };
 };
+function _handleMouseup() {
+    let self = this;
+    self.jumperStat.ready = true
+    // 判断jumper是在方块水平面之上，是的话说明需要继续运动
+    if (self.jumper.position.y >= 2) {
+        if (self.cubeStat.nextDir === 'left') {
+            self.jumper.position.x -= self.jumperStat.mSpeed;
+        } else {
+            self.jumper.position.z -= self.jumperStat.mSpeed;
+        }
+        self.jumper.position.y += self.jumperStat.ySpeed;
+        self.jumperStat.ySpeed-=0.01
 
+        self.render(self.scene, self.camera)
+        requestAnimationFrame(function () {
+            _handleMouseup.call(self);
+        })
+    } else {
+        // jumper掉落到方块水平位置，开始充值状态，并开始判断掉落是否成功
+        self.jumperStat.ready = false
+        self.jumperStat.mSpeed = 0
+        self.jumperStat.ySpeed = 0
+        self.jumper.position.y = 2
+        self._checkInCube()
+        if (self.falledStat.location === 1) {
+            // 掉落成功，进入下一步
+            self.score++
+            self._createCube()
+            self._updateCamera()
+
+            if (self.successCallback) {
+                self.successCallback(self.score)
+            }
+        } else {
+            // 掉落失败，进入失败动画
+            self._falling()
+        }
+    }
+};
 Game.prototype = {
     init: function () {
         this._setCamera() ; // 设置摄像机位置
@@ -68,50 +106,20 @@ Game.prototype = {
         let that = this;
         function touchStart(evt) {
             if (!that.jumperStat.ready && that.jumper.scale.y < 2) {
-                require("./game/jumper").prepare(evt);
+
+                that.jumperStat.mSpeed+=0.005;//横向速度
+                that.jumperStat.ySpeed+=0.01;//竖向速度
 
                 that.render(that.scene, that.camera);
                 requestAnimationFrame(touchStart);
             }
         }
-        that.renderer.domElement.addEventListener("touchstart",touchStart);
-
-
-        that.renderer.domElement.addEventListener("touchend", function (evt) {
-            that._handleMouseup(evt)
-        });
-    },
-    _handleMouseup: function () {
-        let self = this
-        self.jumperStat.ready = true
-        // 判断jumper是在方块水平面之上，是的话说明需要继续运动
-        if (self.jumper.position.y >= 2) {
-            require("./game/jumper").jump(self.cubeStat.nextDir === 'left');
-            self.render(self.scene, self.camera)
-            requestAnimationFrame(function () {
-                self._handleMouseup()
-            })
-        } else {
-            // jumper掉落到方块水平位置，开始充值状态，并开始判断掉落是否成功
-            self.jumperStat.ready = false
-            self.jumper.position.y = 2
-            self._checkInCube()
-            if (self.falledStat.location === 1) {
-                // 掉落成功，进入下一步
-                self.score++
-                self._createCube()
-                self._updateCamera()
-
-                if (self.successCallback) {
-                    self.successCallback(self.score)
-                }
-            } else {
-                // 掉落失败，进入失败动画
-                self._falling()
-            }
+        function touchEnd() {
+            _handleMouseup.call(that)
         }
+        that.renderer.domElement.addEventListener("touchstart",touchStart);
+        that.renderer.domElement.addEventListener("touchend", touchEnd);
     },
-
     _fallingRotate: function (dir) {
         let self = this
         let offset = self.falledStat.distance - self.config.cubeWidth / 2
