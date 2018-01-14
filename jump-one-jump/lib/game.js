@@ -73,11 +73,18 @@ Game.prototype = {
 
         let that = this;
         function touchStart(evt) {
-            if (!that.jumperStat.ready) {
+            let foot = that.jumper.getObjectByName("foot");
+            if (!that.jumperStat.ready && foot.scale.x<2) {
 
                 that.jumperStat.mSpeed+=config.mSpeed;//横向速度
                 that.jumperStat.ySpeed+=config.ySpeed;//竖向速度
 
+                //下肢变粗
+                foot.scale.set(
+                    foot.scale.x+0.01,
+                    foot.scale.y+0.01,
+                    foot.scale.z+0.01
+                );
                 that.render(that.scene, that.camera);
                 requestAnimationFrame(touchStart);
             }
@@ -207,6 +214,16 @@ function triggerJump() {
 
         //转圈
         that.jumper.rotation.y-=Math.PI/(that.jumperStat.mSpeed/config.mSpeed);
+
+        //下肢变细
+        let foot = that.jumper.getObjectByName("foot");
+        if(foot.scale.x>=1){
+            foot.scale.set(
+                foot.scale.x-0.01,
+                foot.scale.y-0.01,
+                foot.scale.z-0.01
+            );
+        }
 
         that.render();
         requestAnimationFrame(function () {

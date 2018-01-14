@@ -17,6 +17,7 @@ function createJumper() {
         foot=new THREE.Mesh(geo,met);
         foot.castShadow=true;
         foot.receiveShadow=true;
+        foot.name = "foot";
         jumper.add(foot);
     });
     loader.load("model/cooss_glass_1x.json",function(geo){
