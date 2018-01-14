@@ -70,7 +70,7 @@ Game.prototype = {
             if (!that.jumperStat.ready && that.jumper.scale.y > 0.02) {
                 require("./game/jumper").prepare(evt);
 
-                that._render(that.scene, that.camera);
+                that.render(that.scene, that.camera);
                 requestAnimationFrame(function () {
                     touchstart()
                 })
@@ -87,7 +87,7 @@ Game.prototype = {
         // 判断jumper是在方块水平面之上，是的话说明需要继续运动
         if (self.jumper.position.y >= 2) {
             require("./game/jumper").jump(self.cubeStat.nextDir === 'left');
-            self._render(self.scene, self.camera)
+            self.render(self.scene, self.camera)
             requestAnimationFrame(function () {
                 self._handleMouseup()
             })
@@ -154,7 +154,7 @@ Game.prototype = {
             } else {
                 self.fallingStat.end = true
             }
-            self._render()
+            self.render()
             requestAnimationFrame(function () {
                 self._falling()
             })
@@ -286,7 +286,7 @@ Game.prototype = {
                 self.cameraPos.current.z = self.cameraPos.next.z
             }
             self.camera.lookAt(new THREE.Vector3(c.x, 0, c.z))
-            self._render()
+            self.render()
             requestAnimationFrame(function () {
                 self._updateCamera()
             })
@@ -331,7 +331,7 @@ Game.prototype = {
             this._updateCameraPos()
         }
     },
-    _render: function () {
+    render: function () {
         this.renderer.render(this.scene, this.camera)
     },
     _setLight: function () {
