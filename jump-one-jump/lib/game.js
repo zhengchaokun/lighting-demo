@@ -60,9 +60,20 @@ let Game = function (options) {
 };
 Game.prototype = {
     init: function () {
-        this._setCamera() ; // 设置摄像机位置
-        this._setRenderer() ; // 设置渲染器参数
-        this._setLight() ; // 设置光照
+
+        this.camera.position.set(100, 100, 100);
+        this.camera.lookAt(this.cameraPos.current)
+        this.renderer.setSize(this.size.width, this.size.height);
+        this.renderer.setClearColor(this.config.background)
+
+        let directionalLight = new THREE.DirectionalLight(0xffffff, 1.1);
+        directionalLight.position.set(3, 10, 3);
+        directionalLight.castShadow = true;
+        this.scene.add(directionalLight);
+
+        let light = new THREE.AmbientLight(0xffffff, 0.3);
+        this.scene.add(light)
+
         this._createCube() ; // 加一个方块
         this._createCube() ; // 再加一个方块
         this._createJumper(); // 加入游戏者jumper
@@ -133,12 +144,7 @@ Game.prototype = {
     },
     // 初始化jumper：游戏主角
     _createJumper: function () {
-        // let material = new THREE.MeshLambertMaterial({color: this.config.jumperColor});
-        // let geometry = new THREE.CubeGeometry(this.config.jumperWidth, this.config.jumperHeight, this.config.jumperDeep);
-        // let mesh = new THREE.Mesh(geometry, material);
-        let mesh = require("./game/jumper").jumper;
-        mesh.position.y = 2;
-        this.jumper = mesh;
+        this.jumper = require("./game/jumper").jumper;
         this.scene.add(this.jumper)
     },
     // 新增一个方块, 新的方块有2个随机方向
@@ -172,24 +178,6 @@ Game.prototype = {
     },
     render: function () {
         this.renderer.render(this.scene, this.camera)
-    },
-    _setLight: function () {
-        let directionalLight = new THREE.DirectionalLight(0xffffff, 1.1);
-        directionalLight.position.set(3, 10, 3);
-        directionalLight.castShadow = true;
-        this.scene.add(directionalLight);
-
-        let light = new THREE.AmbientLight(0xffffff, 0.3);
-        this.scene.add(light)
-    },
-    _setCamera: function () {
-        this.camera.position.set(100, 100, 100);
-        this.camera.lookAt(this.cameraPos.current)
-    },
-    _setRenderer: function () {
-        this.renderer.setSize(this.size.width, this.size.height);
-        this.renderer.setClearColor(this.config.background)
-        // this.renderer.shadowMapEnabled = true;
     },
     // 游戏失败重新开始的初始化配置
     restart: function () {
