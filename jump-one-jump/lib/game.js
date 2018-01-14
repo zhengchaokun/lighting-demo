@@ -58,90 +58,6 @@ let Game = function (options) {
         end: false // 掉到地面没有
     };
 };
-function triggerJump() {
-    let that = this;
-    that.jumperStat.ready = true;
-    if (that.jumper.position.y >= that.jumper.horizontal) {
-        if (that.cubeStat.nextDir === 'left') {
-            that.jumper.position.x -= that.jumperStat.mSpeed;
-        } else {
-            that.jumper.position.z -= that.jumperStat.mSpeed;
-        }
-        that.jumper.position.y += that.jumperStat.ySpeed;
-        that.jumperStat.ySpeed-=config.ySpeed;
-
-        that.render();
-        requestAnimationFrame(function () {
-            triggerJump.call(that);
-        })
-    } else {
-        that.jumperStat.ready = false;
-        that.jumperStat.mSpeed = 0;
-        that.jumperStat.ySpeed = 0;
-
-        that.jumper.position.y = that.jumper.horizontal;
-
-
-        if (checkJumpResult.call(that)) {
-            // 掉落成功，进入下一步
-            that.score++;
-            that._createCube();
-            that._updateCamera();
-
-            if (that.successCallback) {
-                that.successCallback(that.score)
-            }
-        } else {
-            // 掉落失败，进入失败动画
-            that._falling()
-        }
-    }
-}
-
-function checkJumpResult() {
-    if (this.cubes.length > 1) {
-        // jumper 的位置
-        let pointO = {
-            x: this.jumper.position.x,
-            z: this.jumper.position.z
-        };
-        // 当前方块的位置
-        let pointA = {
-            x: this.cubes[this.cubes.length - 1 - 1].position.x,
-            z: this.cubes[this.cubes.length - 1 - 1].position.z
-        };
-        // 下一个方块的位置
-        let pointB = {
-            x: this.cubes[this.cubes.length - 1].position.x,
-            z: this.cubes[this.cubes.length - 1].position.z
-        };
-        let distanceS, // jumper和当前方块的坐标轴距离
-            distanceL;  // jumper和下一个方块的坐标轴距离
-
-        // 判断下一个方块相对当前方块的方向来确定计算距离的坐标轴
-        if (this.cubeStat.nextDir === 'left') {
-            distanceS = Math.abs(pointO.x - pointA.x);
-            distanceL = Math.abs(pointO.x - pointB.x);
-        } else {
-            distanceS = Math.abs(pointO.z - pointA.z);
-            distanceL = Math.abs(pointO.z - pointB.z);
-        }
-        let should = this.config.cubeWidth / 2 + this.config.jumperWidth / 2;
-        let result = 0;
-        if (distanceS < should) {
-            // 落在当前方块，将距离储存起来，并继续判断是否可以站稳
-            this.falledStat.distance = distanceS;
-            result = distanceS < this.config.cubeWidth / 2 ? -1 : -10
-        } else if (distanceL < should) {
-            this.falledStat.distance = distanceL;
-            // 落在下一个方块，将距离储存起来，并继续判断是否可以站稳
-            result = distanceL < this.config.cubeWidth / 2 ? 1 : 10
-        } else {
-            result = 0
-        }
-        return result===1;
-    }
-}
 Game.prototype = {
     init: function () {
         this._setCamera() ; // 设置摄像机位置
@@ -168,88 +84,6 @@ Game.prototype = {
         }
         that.renderer.domElement.addEventListener("touchstart",touchStart);
         that.renderer.domElement.addEventListener("touchend", touchEnd);
-    },
-    _fallingRotate: function (dir) {
-        let self = this
-        let offset = self.falledStat.distance - self.config.cubeWidth / 2
-        let rotateAxis = 'z' // 旋转轴
-        let rotateAdd = self.jumper.rotation[rotateAxis] + 0.1 // 旋转速度
-        let rotateTo = self.jumper.rotation[rotateAxis] < Math.PI / 2 // 旋转结束的弧度
-        let fallingTo = self.config.ground + self.config.jumperWidth / 2 + offset
-
-        if (dir === 'rightTop') {
-            rotateAxis = 'x'
-            rotateAdd = self.jumper.rotation[rotateAxis] - 0.1
-            rotateTo = self.jumper.rotation[rotateAxis] > -Math.PI / 2
-            self.jumper.geometry.translate.z = offset
-        } else if (dir === 'rightBottom') {
-            rotateAxis = 'x'
-            rotateAdd = self.jumper.rotation[rotateAxis] + 0.1
-            rotateTo = self.jumper.rotation[rotateAxis] < Math.PI / 2
-            self.jumper.geometry.translate.z = -offset
-        } else if (dir === 'leftBottom') {
-            rotateAxis = 'z'
-            rotateAdd = self.jumper.rotation[rotateAxis] - 0.1
-            rotateTo = self.jumper.rotation[rotateAxis] > -Math.PI / 2
-            self.jumper.geometry.translate.x = -offset
-        } else if (dir === 'leftTop') {
-            rotateAxis = 'z'
-            rotateAdd = self.jumper.rotation[rotateAxis] + 0.1
-            rotateTo = self.jumper.rotation[rotateAxis] < Math.PI / 2
-            self.jumper.geometry.translate.x = offset
-        } else if (dir === 'none') {
-            rotateTo = false
-            fallingTo = self.config.ground
-        } else {
-            throw Error('Arguments Error')
-        }
-        if (!self.fallingStat.end) {
-            if (rotateTo) {
-                self.jumper.rotation[rotateAxis] = rotateAdd
-            } else if (self.jumper.position.y > fallingTo) {
-                self.jumper.position.y -= self.config.fallingSpeed
-            } else {
-                self.fallingStat.end = true
-            }
-            self.render()
-            requestAnimationFrame(function () {
-                self._falling()
-            })
-        } else {
-            if (self.failedCallback) {
-                self.failedCallback()
-            }
-        }
-    },
-    /**
-     *游戏失败进入掉落阶段
-     *通过确定掉落的位置来确定掉落效果
-     **/
-    _falling: function () {
-        let self = this
-        if (self.falledStat.location == 0) {
-            self._fallingRotate('none')
-        } else if (self.falledStat.location === -10) {
-            if (self.cubeStat.nextDir == 'left') {
-                self._fallingRotate('leftTop')
-            } else {
-                self._fallingRotate('rightTop')
-            }
-        } else if (self.falledStat.location === 10) {
-            if (self.cubeStat.nextDir == 'left') {
-                if (self.jumper.position.x < self.cubes[self.cubes.length - 1].position.x) {
-                    self._fallingRotate('leftTop')
-                } else {
-                    self._fallingRotate('leftBottom')
-                }
-            } else {
-                if (self.jumper.position.z < self.cubes[self.cubes.length - 1].position.z) {
-                    self._fallingRotate('rightTop')
-                } else {
-                    self._fallingRotate('rightBottom')
-                }
-            }
-        }
     },
     // 每成功一步, 重新计算摄像机的位置，保证游戏始终在画布中间进行
     _updateCameraPos: function () {
@@ -383,5 +217,166 @@ Game.prototype = {
         this._updateCamera()
     },
 };
+
+
+function triggerJump() {
+    let that = this;
+    that.jumperStat.ready = true;
+    if (that.jumper.position.y >= that.jumper.horizontal) {
+        if (that.cubeStat.nextDir === 'left') {
+            that.jumper.position.x -= that.jumperStat.mSpeed;
+        } else {
+            that.jumper.position.z -= that.jumperStat.mSpeed;
+        }
+        that.jumper.position.y += that.jumperStat.ySpeed;
+        that.jumperStat.ySpeed-=config.ySpeed;
+
+        that.render();
+        requestAnimationFrame(function () {
+            triggerJump.call(that);
+        })
+    } else {
+        that.jumperStat.ready = false;
+        that.jumperStat.mSpeed = 0;
+        that.jumperStat.ySpeed = 0;
+
+        that.jumper.position.y = that.jumper.horizontal;
+
+
+        const jumpResult = checkJumpResult.call(that);
+        if (jumpResult===1) {
+            // 掉落成功，进入下一步
+            that.score++;
+            that._createCube();
+            that._updateCamera();
+
+            if (that.successCallback) {
+                that.successCallback(that.score)
+            }
+        } else {
+            // 掉落失败，进入失败动画
+            if (jumpResult === 0) {
+                animationFall.call(that,'none')
+            } else if (jumpResult === -10) {
+                if (that.cubeStat.nextDir === 'left') {
+                    animationFall.call(that,'leftTop')
+                } else {
+                    animationFall.call(that,'rightTop')
+                }
+            } else if (jumpResult === 10) {
+                if (that.cubeStat.nextDir === 'left') {
+                    if (that.jumper.position.x < that.cubes[that.cubes.length - 1].position.x) {
+                        animationFall.call(that,'leftTop')
+                    } else {
+                        animationFall.call(that,'leftBottom')
+                    }
+                } else {
+                    if (that.jumper.position.z < that.cubes[that.cubes.length - 1].position.z) {
+                        animationFall.call(that,'rightTop')
+                    } else {
+                        animationFall.call(that,'rightBottom')
+                    }
+                }
+            }
+        }
+    }
+}
+function checkJumpResult() {
+    if (this.cubes.length > 1) {
+        // jumper 的位置
+        let pointO = {
+            x: this.jumper.position.x,
+            z: this.jumper.position.z
+        };
+        // 当前方块的位置
+        let pointA = {
+            x: this.cubes[this.cubes.length - 1 - 1].position.x,
+            z: this.cubes[this.cubes.length - 1 - 1].position.z
+        };
+        // 下一个方块的位置
+        let pointB = {
+            x: this.cubes[this.cubes.length - 1].position.x,
+            z: this.cubes[this.cubes.length - 1].position.z
+        };
+        let distanceS, // jumper和当前方块的坐标轴距离
+            distanceL;  // jumper和下一个方块的坐标轴距离
+
+        // 判断下一个方块相对当前方块的方向来确定计算距离的坐标轴
+        if (this.cubeStat.nextDir === 'left') {
+            distanceS = Math.abs(pointO.x - pointA.x);
+            distanceL = Math.abs(pointO.x - pointB.x);
+        } else {
+            distanceS = Math.abs(pointO.z - pointA.z);
+            distanceL = Math.abs(pointO.z - pointB.z);
+        }
+        let should = this.config.cubeWidth / 2 + this.config.jumperWidth / 2;
+        let result = 0;
+        if (distanceS < should) {
+            // 落在当前方块，将距离储存起来，并继续判断是否可以站稳
+            this.falledStat.distance = distanceS;
+            result = distanceS < this.config.cubeWidth / 2 ? -1 : -10
+        } else if (distanceL < should) {
+            this.falledStat.distance = distanceL;
+            // 落在下一个方块，将距离储存起来，并继续判断是否可以站稳
+            result = distanceL < this.config.cubeWidth / 2 ? 1 : 10
+        } else {
+            result = 0
+        }
+        return result;
+    }
+}
+
+function animationFall(dir){
+    let self = this
+    let offset = self.falledStat.distance - self.config.cubeWidth / 2
+    let rotateAxis = 'z' // 旋转轴
+    let rotateAdd = self.jumper.rotation[rotateAxis] + 0.1 // 旋转速度
+    let rotateTo = self.jumper.rotation[rotateAxis] < Math.PI / 2 // 旋转结束的弧度
+    let fallingTo = self.config.ground + self.config.jumperWidth / 2 + offset
+
+    if (dir === 'rightTop') {
+        rotateAxis = 'x'
+        rotateAdd = self.jumper.rotation[rotateAxis] - 0.1
+        rotateTo = self.jumper.rotation[rotateAxis] > -Math.PI / 2
+        self.jumper.translate.z = offset
+    } else if (dir === 'rightBottom') {
+        rotateAxis = 'x'
+        rotateAdd = self.jumper.rotation[rotateAxis] + 0.1
+        rotateTo = self.jumper.rotation[rotateAxis] < Math.PI / 2
+        self.jumper.translate.z = -offset
+    } else if (dir === 'leftBottom') {
+        rotateAxis = 'z'
+        rotateAdd = self.jumper.rotation[rotateAxis] - 0.1
+        rotateTo = self.jumper.rotation[rotateAxis] > -Math.PI / 2
+        self.jumper.translate.x = -offset
+    } else if (dir === 'leftTop') {
+        rotateAxis = 'z'
+        rotateAdd = self.jumper.rotation[rotateAxis] + 0.1
+        rotateTo = self.jumper.rotation[rotateAxis] < Math.PI / 2
+        self.jumper.translate.x = offset
+    } else if (dir === 'none') {
+        rotateTo = false
+        fallingTo = self.config.ground
+    } else {
+        throw Error('Arguments Error')
+    }
+    if (!self.fallingStat.end) {
+        if (rotateTo) {
+            self.jumper.rotation[rotateAxis] = rotateAdd
+        } else if (self.jumper.position.y > fallingTo) {
+            self.jumper.position.y -= self.config.fallingSpeed
+        } else {
+            self.fallingStat.end = true
+        }
+        self.render()
+        requestAnimationFrame(function () {
+            animationFall.call(self,dir)
+        })
+    } else {
+        if (self.failedCallback) {
+            self.failedCallback()
+        }
+    }
+}
 
 module.exports = Game;
