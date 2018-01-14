@@ -18,7 +18,7 @@ const config = {
 
 let Game = function (options) {
     // 基本参数
-    this.config = config
+    this.config = config;
 
     // 游戏状态
     this.score = 0;
@@ -84,9 +84,9 @@ function triggerJump() {
 
         if (checkJumpResult.call(that)) {
             // 掉落成功，进入下一步
-            that.score++
-            that._createCube()
-            that._updateCamera()
+            that.score++;
+            that._createCube();
+            that._updateCamera();
 
             if (that.successCallback) {
                 that.successCallback(that.score)
