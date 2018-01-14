@@ -121,11 +121,6 @@ Game.prototype = {
             })
         }
     },
-    // 初始化jumper：游戏主角
-    _createJumper: function () {
-        this.jumper = require("./game/jumper").jumper;
-        this.scene.add(this.jumper)
-    },
     // 新增一个方块, 新的方块有2个随机方向
     _createCube: function () {
         let material = new THREE.MeshLambertMaterial({color: this.config.cubeColor});
@@ -191,7 +186,10 @@ Game.prototype = {
         // 显示的分数设为 0
         this._createCube();
         this._createCube();
-        this._createJumper();
+
+        this.jumper = require("./game/jumper").createJumper();
+        this.scene.add(this.jumper);
+
         this._updateCamera()
     },
 };

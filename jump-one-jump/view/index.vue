@@ -14,6 +14,7 @@
                 canvas:this.$refs.canvas
             });
             game.init()
+            window.game = game;
             // game.addSuccessFn(success)
             // game.addFailedFn(failed)
             //
