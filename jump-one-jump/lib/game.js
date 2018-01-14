@@ -66,12 +66,10 @@ Game.prototype = {
         this._updateCamera();// 更新相机坐标
 
         let that = this;
-        let canvas = document.querySelector('canvas');
-        canvas.addEventListener("touchstart", function (evt) {
+        that.renderer.domElement.addEventListener("touchstart", function (evt) {
             that._handleMousedown(evt)
         });
-        // 监听鼠标松开的事件
-        canvas.addEventListener("touchend", function (evt) {
+        that.renderer.domElement.addEventListener("touchend", function (evt) {
             that._handleMouseup(evt)
         });
     },
