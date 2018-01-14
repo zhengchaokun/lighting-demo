@@ -313,7 +313,6 @@ function checkJumpResult() {
         return result;
     }
 }
-
 function animationFall(dir){
     let self = this
     let offset = self.falledStat.distance - self.config.cubeWidth / 2
