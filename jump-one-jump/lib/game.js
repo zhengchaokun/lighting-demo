@@ -30,7 +30,8 @@ let Game = function (options) {
         current: new THREE.Vector3(0, 0, 0), // 摄像机当前的坐标
         next: new THREE.Vector3() // 摄像机即将要移到的位置
     };
-    this.camera = new THREE.OrthographicCamera(this.size.width / -80, this.size.width / 80, this.size.height / 80, this.size.height / -80, 0, 5000)
+    this.camera = new THREE.OrthographicCamera(this.size.width / -80, this.size.width / 80, this.size.height / 80, this.size.height / -80, 0, 5000);
+    this.camera.position.set(100, 100, 100);
 
     this.renderer = new THREE.WebGLRenderer({
         antialias: true,
@@ -57,10 +58,8 @@ let Game = function (options) {
 };
 Game.prototype = {
     init: function () {
-        this.camera.position.set(100, 100, 100);
-        this.camera.lookAt(this.cameraPos.current)
         this.renderer.setSize(this.size.width, this.size.height);
-        this.renderer.setClearColor(config.background)
+        this.renderer.setClearColor(config.background);
 
         let directionalLight = new THREE.DirectionalLight(0xffffff, 1.1);
         directionalLight.position.set(3, 10, 3);
