@@ -71,7 +71,7 @@ Game.prototype = {
         this.scene.add(directionalLight);
 
         let light = new THREE.AmbientLight(0xffffff, 0.3);
-        this.scene.add(light)
+        this.scene.add(light);
 
         let that = this;
         function touchStart(evt) {
