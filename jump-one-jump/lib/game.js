@@ -195,10 +195,33 @@ Game.prototype = {
         }
 
         //调整jumper的朝向
-        if(this.cubeStat.nextDir === "left"){
-            this.jumper.rotation.y = Math.PI/2;
+        // if(this.cubeStat.nextDir === "left"){
+        //     this.jumper.rotation.y = Math.PI/2;
+        // }else{
+        //     this.jumper.rotation.y = 0;
+        // }
+        //调整jumper的朝向
+        const that = this;
+        function justPosition(dist) {
+            if(dist-that.jumper.rotation.y>0.1){
+                that.jumper.rotation.y+=0.1
+                that.render()
+                requestAnimationFrame(function () {
+                    justPosition(dist)
+                })
+            }
+            if(dist-that.jumper.rotation.y<-0.1){
+                that.jumper.rotation.y-=0.1
+                that.render()
+                requestAnimationFrame(function () {
+                    justPosition(dist)
+                })
+            }
+        }
+        if(this.cubes.length>1 && this.cubeStat.nextDir === "left"){
+            justPosition(Math.PI/2)
         }else{
-            this.jumper.rotation.y = 0;
+            justPosition(0)
         }
     },
     render: function () {
@@ -276,8 +299,7 @@ function triggerJump() {
         that.jumperStat.ySpeed = 0;
 
         that.jumper.position.y = that.jumper.horizontal;
-        that.jumper.rotation.y = 0;
-
+        that.jumper.rotation.y += Math.PI*2;
 
         const jumpResult = checkJumpResult.call(that);
         if (jumpResult===1) {
