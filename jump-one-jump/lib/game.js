@@ -189,6 +189,11 @@ Game.prototype = {
             pointR.z = (pointA.z + pointB.z) / 2;
             this.cameraPos.next = pointR
         }
+
+        //调整jumper的朝向
+        if(this.cubeStat.nextDir === "left"){
+            this.jumper.rotation.y = Math.PI/2;
+        }
     },
     render: function () {
         this.renderer.render(this.scene, this.camera)
@@ -210,12 +215,12 @@ Game.prototype = {
         }
         // 删除jumper
         this.scene.remove(this.jumper);
+        this.jumper = require("./game/jumper").createJumper();
+        this.scene.add(this.jumper);
+
         // 显示的分数设为 0
         this._createCube();
         this._createCube();
-
-        this.jumper = require("./game/jumper").createJumper();
-        this.scene.add(this.jumper);
 
         this._updateCamera()
     },
