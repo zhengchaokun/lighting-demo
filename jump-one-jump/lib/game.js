@@ -61,29 +61,33 @@ let Game = function (options) {
 Game.prototype = {
     init: function () {
         this.renderer.setSize(this.size.width, this.size.height);
-        this.renderer.shadowMapEnabled = true;
-        this.renderer.shadowMapSoft = true;
+        this.renderer.shadowMap.enabled = true;
+        this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
         //添加最强地表
         const planeGeometry = new THREE.PlaneGeometry(1000,1000,1,1);
         const planeMaterial =    new THREE.MeshLambertMaterial({color: config.background});
         const plane = new THREE.Mesh(planeGeometry,planeMaterial);
         plane.receiveShadow  = true;
-
-        // rotate and position the plane
         plane.rotation.x=-0.5*Math.PI;
         plane.position.x=0;
         plane.position.y=-config.cubeHeight/2;
         plane.position.z=0;
         this.scene.add(plane);
 
-        let directionalLight = new THREE.DirectionalLight(0xffffff, 1.1);
-        directionalLight.position.set(10, 6, 5);
+        //直射光
+        const directionalLight = new THREE.DirectionalLight( 0xffffff, 1, 100 );
+        directionalLight.position.set( 10, 6, 5 );
         directionalLight.castShadow = true;
-        this.scene.add(directionalLight);
+        directionalLight.shadow.mapSize.width = 1000;
+        directionalLight.shadow.mapSize.height = 1000;
+        directionalLight.shadow.camera.near = 0.5;
+        directionalLight.shadow.camera.far = 5000;
+        this.scene.add( directionalLight );
 
-        let light = new THREE.AmbientLight(0xFFFFFF,0.4);
-        this.scene.add(light);
+        //散射光
+        const ambientLight = new THREE.AmbientLight(0xFFFFFF,0.4);
+        this.scene.add(ambientLight);
 
         let that = this;
         function touchStart(evt) {
