@@ -77,7 +77,7 @@ Game.prototype = {
 
         //直射光
         const directionalLight = new THREE.DirectionalLight( 0xffffff, 1, 100 );
-        directionalLight.position.set( 20, 12, 5 );
+        directionalLight.position.set( 20, 12, -10 );
         directionalLight.castShadow = true;
         directionalLight.shadow.mapSize.width = 1000;
         directionalLight.shadow.mapSize.height = 1000;
