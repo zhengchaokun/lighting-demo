@@ -193,6 +193,8 @@ Game.prototype = {
         //调整jumper的朝向
         if(this.cubeStat.nextDir === "left"){
             this.jumper.rotation.y = Math.PI/2;
+        }else{
+            this.jumper.rotation.y = 0;
         }
     },
     render: function () {
