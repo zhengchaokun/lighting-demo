@@ -2,11 +2,10 @@ const THREE = require("three");
 
 const config = {
     background: "#fcd9d3", // 背景颜色
-    ground: -0.5, // 地面y坐标
     fallingSpeed: 0.5, // 游戏失败掉落速度
     cubeColor: "#888",
     cubeWidth: 3, // 方块宽度
-    cubeHeight: 1, // 方块高度
+    cubeHeight: 1.2, // 方块高度
     cubeDeep: 3, // 方块深度
     jumperColor: "#3f3857",
     jumperWidth: 1, // jumper宽度
@@ -62,7 +61,7 @@ Game.prototype = {
     init: function () {
         this.renderer.setSize(this.size.width, this.size.height);
         this.renderer.shadowMap.enabled = true;
-        this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        // this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
         //添加最强地表
         const planeGeometry = new THREE.PlaneGeometry(1000,1000,1,1);
@@ -244,7 +243,7 @@ Game.prototype = {
         }
 
         let {x,y,z} = mesh.position;
-        this.scene.getObjectByName("spotLight").position.set( 20+x, 12+y, -10+z );
+        this.scene.getObjectByName("spotLight").position.set( 20+x, 16+y, -10+z );
         this.scene.getObjectByName("spotLight").target = mesh;
     },
     render: function () {
@@ -412,7 +411,7 @@ function animationFall(dir){
     let rotateAxis = 'z' // 旋转轴
     let rotateAdd = self.jumper.rotation[rotateAxis] + 0.1 // 旋转速度
     let rotateTo = self.jumper.rotation[rotateAxis] < Math.PI / 2 // 旋转结束的弧度
-    let fallingTo = config.ground + config.jumperWidth / 2 + offset
+    let fallingTo = config.cubeHeight/2 + config.jumperWidth / 2 + offset
 
     if (dir === 'rightTop') {
         rotateAxis = 'x'
@@ -436,7 +435,7 @@ function animationFall(dir){
         self.jumper.translate.x = offset
     } else if (dir === 'none') {
         rotateTo = false
-        fallingTo = config.ground
+        fallingTo = config.cubeHeight/2
     } else {
         throw Error('Arguments Error')
     }
