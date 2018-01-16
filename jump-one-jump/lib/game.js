@@ -11,8 +11,8 @@ const config = {
     jumperWidth: 2, // jumper宽度
     jumperHeight: 3, // jumper高度
     jumperDeep: 2, // jumper深度
-    mSpeed:0.003,
-    ySpeed:0.01,
+    mSpeed:0.004,
+    ySpeed:0.02,
 };
 
 let Game = function (options) {
@@ -124,7 +124,9 @@ Game.prototype = {
             if (!that.jumperStat.ready && foot.scale.x<2) {
 
                 that.jumperStat.mSpeed+=config.mSpeed;//横向速度
-                that.jumperStat.ySpeed+=config.ySpeed;//竖向速度
+
+                // that.jumperStat.ySpeed+=config.ySpeed;//竖向速度
+                that.jumperStat.ySpeed=0.4;//竖向速度
 
                 //下肢变粗
                 foot.scale.set(
@@ -203,9 +205,9 @@ Game.prototype = {
             mesh.position.y = this.cubes[this.cubes.length - 1].position.y;
             mesh.position.z = this.cubes[this.cubes.length - 1].position.z;
             if (this.cubeStat.nextDir === 'left') {
-                mesh.position.x = this.cubes[this.cubes.length - 1].position.x - 4 * Math.random() - 6
+                mesh.position.x = this.cubes[this.cubes.length - 1].position.x - 8 * Math.random() - config.cubeWidth/2
             } else {
-                mesh.position.z = this.cubes[this.cubes.length - 1].position.z - 4 * Math.random() - 6
+                mesh.position.z = this.cubes[this.cubes.length - 1].position.z - 8 * Math.random() - config.cubeWidth/2
             }
         }
         mesh.receiveShadow = true;
