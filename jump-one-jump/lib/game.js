@@ -110,6 +110,7 @@ Game.prototype = {
         let that = this;
         function touchStart(evt) {
             let foot = that.jumper.getObjectByName("foot");
+            let head = that.jumper.getObjectByName("head");
             if (!that.jumperStat.ready && foot.scale.x<2) {
 
                 that.jumperStat.mSpeed+=config.mSpeed;//横向速度
@@ -121,6 +122,13 @@ Game.prototype = {
                     foot.scale.y+0.01,
                     foot.scale.z+0.01
                 );
+
+                //头部变大
+                // head.scale.set(
+                //     head.scale.x-0.008,
+                //     head.scale.y-0.008,
+                //     head.scale.z-0.008
+                // );
 
                 //盒子变压缩
                 that.cubes[that.cubes.length-2].scale.z+=0.001
@@ -304,6 +312,16 @@ function triggerJump() {
                 foot.scale.z-0.01
             );
         }
+
+        //头部变大
+        // let head = that.jumper.getObjectByName("head");
+        // if(head.scale.x<=1){
+        //     head.scale.set(
+        //         head.scale.x+0.008,
+        //         head.scale.y+0.008,
+        //         head.scale.z+0.008
+        //     );
+        // }
 
         ////盒子回弹
         let box = that.cubes[that.cubes.length-2];
