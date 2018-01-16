@@ -8,9 +8,9 @@ const config = {
     cubeHeight: 1.2, // 方块高度
     cubeDeep: 3, // 方块深度
     jumperColor: "#3f3857",
-    jumperWidth: 1, // jumper宽度
-    jumperHeight: 2, // jumper高度
-    jumperDeep: 1, // jumper深度
+    jumperWidth: 2, // jumper宽度
+    jumperHeight: 3, // jumper高度
+    jumperDeep: 2, // jumper深度
     mSpeed:0.003,
     ySpeed:0.01,
 };
@@ -25,7 +25,9 @@ let Game = function (options) {
         height: window.innerHeight
     };
 
+    this.sceneTop = new THREE.Scene();
     this.scene = new THREE.Scene();
+    this.sceneTop.add(this.scene);
 
     this.cameraPos = {
         current: new THREE.Vector3(0, 0, 0), // 摄像机当前的坐标
@@ -33,6 +35,7 @@ let Game = function (options) {
     };
     this.camera = new THREE.OrthographicCamera(this.size.width / -80, this.size.width / 80, this.size.height / 80, this.size.height / -80, 0, 5000);
     this.camera.position.set(100, 100, 100);
+    this.camera.lookAt(new THREE.Vector3(0, 0,0));
 
     this.renderer = new THREE.WebGLRenderer({
         antialias: true,
@@ -76,32 +79,32 @@ Game.prototype = {
 
         //直射光
         const directionalLight = new THREE.DirectionalLight( 0xffffff, 1, 100 );
-        directionalLight.position.set(  20, 10, -10 );
-        // directionalLight.castShadow = true;
-        // directionalLight.shadow.mapSize.width = 1000;
-        // directionalLight.shadow.mapSize.height = 1000;
-        //
+        directionalLight.position.set(  25, 18, -15 );
+        directionalLight.castShadow = true;
+        directionalLight.shadow.mapSize.width = 1024;
+        directionalLight.shadow.mapSize.height = 1024;
+
         // directionalLight.shadow.camera.near = 5;
         // directionalLight.shadow.camera.far = 100;
         // directionalLight.shadow.camera.bottom = -1;
         // directionalLight.shadow.camera.top = 10;
-        // directionalLight.shadow.camera.left = -10 ;
-        // directionalLight.shadow.camera.right = 5;
-        this.scene.add( directionalLight );
+        directionalLight.shadow.camera.left = -20 ;
+        directionalLight.shadow.camera.right = 20;
+        this.sceneTop.add( directionalLight );
 
         //聚光灯
-        const spotLight = new THREE.SpotLight( 0xffffff, 0.5 );
-        spotLight.angle = 0.6;
-        spotLight.penumbra = 0.05;
-        spotLight.decay = 2;
-        spotLight.distance = 200;
-        spotLight.castShadow = true;
-        spotLight.shadow.mapSize.width = 1024;
-        spotLight.shadow.mapSize.height = 1024;
-        spotLight.shadow.camera.near = 10;
-        spotLight.shadow.camera.far = 30;
-        spotLight.name = "spotLight";
-        this.scene.add( spotLight );
+        // const spotLight = new THREE.SpotLight( 0xffffff, 0.5 );
+        // spotLight.angle = 0.6;
+        // spotLight.penumbra = 0.05;
+        // spotLight.decay = 2;
+        // spotLight.distance = 200;
+        // spotLight.castShadow = true;
+        // spotLight.shadow.mapSize.width = 1024;
+        // spotLight.shadow.mapSize.height = 1024;
+        // spotLight.shadow.camera.near = 10;
+        // spotLight.shadow.camera.far = 30;
+        // spotLight.name = "spotLight";
+        // this.scene.add( spotLight );
 
         //散射光
         const ambientLight = new THREE.AmbientLight(config.background,0.6);
@@ -171,7 +174,9 @@ Game.prototype = {
             if (self.cameraPos.current.z - self.cameraPos.next.z < 0.05) {
                 self.cameraPos.current.z = self.cameraPos.next.z
             }
-            self.camera.lookAt(new THREE.Vector3(c.x, 0, c.z));
+            // self.camera.lookAt(new THREE.Vector3(c.x, 0, c.z));
+            this.scene.position.x = -c.x;
+            this.scene.position.z = -c.z;
             self.render();
             requestAnimationFrame(function () {
                 self._updateCamera()
@@ -252,12 +257,12 @@ Game.prototype = {
             justPosition(0)
         }
 
-        let {x,y,z} = mesh.position;
-        this.scene.getObjectByName("spotLight").position.set( 20+x, 16+y, -10+z );
-        this.scene.getObjectByName("spotLight").target = mesh;
+        // let {x,y,z} = mesh.position;
+        // this.scene.getObjectByName("spotLight").position.set( 20+x, 16+y, -10+z );
+        // this.scene.getObjectByName("spotLight").target = mesh;
     },
     render: function () {
-        this.renderer.render(this.scene, this.camera)
+        this.renderer.render(this.sceneTop, this.camera)
     },
     start: function () {
         this.score = 0;
