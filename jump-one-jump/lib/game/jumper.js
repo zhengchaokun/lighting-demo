@@ -32,6 +32,7 @@ function createJumper() {
     jumper.position.y = jumper.horizontal;
 
     jumper.castShadow = true;
+    jumper.scale.set(0.8,0.8,0.8)
     return jumper;
 }
 module.exports = {

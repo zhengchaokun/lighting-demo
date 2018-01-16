@@ -1,7 +1,7 @@
 const THREE = require("three");
 
 const config = {
-    background: "#fcd9d3", // 背景颜色
+    background: "#ffc9ce", // 背景颜色
     fallingSpeed: 0.5, // 游戏失败掉落速度
     cubeColor: "#888",
     cubeWidth: 3, // 方块宽度
@@ -76,11 +76,11 @@ Game.prototype = {
 
         //直射光
         const directionalLight = new THREE.DirectionalLight( 0xffffff, 1, 100 );
-        directionalLight.position.set( 20, 10, -10 );
+        directionalLight.position.set(  20, 10, -10 );
         // directionalLight.castShadow = true;
         // directionalLight.shadow.mapSize.width = 1000;
         // directionalLight.shadow.mapSize.height = 1000;
-
+        //
         // directionalLight.shadow.camera.near = 5;
         // directionalLight.shadow.camera.far = 100;
         // directionalLight.shadow.camera.bottom = -1;
@@ -104,7 +104,7 @@ Game.prototype = {
         this.scene.add( spotLight );
 
         //散射光
-        const ambientLight = new THREE.AmbientLight(0xFFFFFF,0.4);
+        const ambientLight = new THREE.AmbientLight(config.background,0.6);
         this.scene.add(ambientLight);
 
         let that = this;
