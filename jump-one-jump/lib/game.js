@@ -205,9 +205,9 @@ Game.prototype = {
             mesh.position.y = this.cubes[this.cubes.length - 1].position.y;
             mesh.position.z = this.cubes[this.cubes.length - 1].position.z;
             if (this.cubeStat.nextDir === 'left') {
-                mesh.position.x = this.cubes[this.cubes.length - 1].position.x - 8 * Math.random() - config.cubeWidth/2
+                mesh.position.x = this.cubes[this.cubes.length - 1].position.x - 6 * Math.random() - config.cubeWidth/2
             } else {
-                mesh.position.z = this.cubes[this.cubes.length - 1].position.z - 8 * Math.random() - config.cubeWidth/2
+                mesh.position.z = this.cubes[this.cubes.length - 1].position.z - 6 * Math.random() - config.cubeWidth/2
             }
         }
         mesh.receiveShadow = true;
