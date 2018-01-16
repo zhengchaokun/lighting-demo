@@ -205,9 +205,9 @@ Game.prototype = {
             mesh.position.y = this.cubes[this.cubes.length - 1].position.y;
             mesh.position.z = this.cubes[this.cubes.length - 1].position.z;
             if (this.cubeStat.nextDir === 'left') {
-                mesh.position.x = this.cubes[this.cubes.length - 1].position.x - 6 * Math.random() - config.cubeWidth/2
+                mesh.position.x = this.cubes[this.cubes.length - 1].position.x - 8 * Math.random() - config.cubeWidth/2 -1
             } else {
-                mesh.position.z = this.cubes[this.cubes.length - 1].position.z - 6 * Math.random() - config.cubeWidth/2
+                mesh.position.z = this.cubes[this.cubes.length - 1].position.z - 8 * Math.random() - config.cubeWidth/2 -1
             }
         }
         mesh.receiveShadow = true;
@@ -315,7 +315,7 @@ function triggerJump() {
         that.jumperStat.ySpeed-=config.ySpeed;
 
         //转圈
-        that.jumper.rotation.y-=Math.PI/(that.jumperStat.mSpeed/config.mSpeed);
+        that.jumper.rotation.y-=Math.PI/22;
 
         //下肢变细
         let foot = that.jumper.getObjectByName("foot");
