@@ -4,7 +4,7 @@ const config = {
     background: "#fcd9d3", // 背景颜色
     ground: -0.5, // 地面y坐标
     fallingSpeed: 0.5, // 游戏失败掉落速度
-    cubeColor: "#fff",
+    cubeColor: "#888",
     cubeWidth: 3, // 方块宽度
     cubeHeight: 1, // 方块高度
     cubeDeep: 3, // 方块深度
@@ -12,7 +12,7 @@ const config = {
     jumperWidth: 1, // jumper宽度
     jumperHeight: 2, // jumper高度
     jumperDeep: 1, // jumper深度
-    mSpeed:0.005,
+    mSpeed:0.003,
     ySpeed:0.01,
 };
 
