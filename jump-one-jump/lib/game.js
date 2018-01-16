@@ -110,6 +110,13 @@ Game.prototype = {
         const ambientLight = new THREE.AmbientLight(config.background,0.6);
         this.scene.add(ambientLight);
 
+        // const geometry = new THREE.TorusGeometry( config.cubeWidth/2, 0.05, 16, 100 );
+        // const material = new THREE.MeshBasicMaterial( { color: 0xffffff } );
+        // const torus = new THREE.Mesh( geometry, material );
+        // torus.rotation.x = -Math.PI/2;
+        // torus.position.y = config.cubeHeight/2+0.05;
+        // this.scene.add( torus );
+
         let that = this;
         function touchStart(evt) {
             let foot = that.jumper.getObjectByName("foot");
