@@ -65,11 +65,15 @@
             </scroller>            
             <div class="line"></div>
 
-            <lc-info-list 
-                type="imgleft"
-                :infoList="infoList"
-                @infoClick="infoClick"
-            ></lc-info-list>
+            <div class="bgc-white">
+                <lc-info-list 
+                    type="imgleft"
+                    :infoList="infoList"
+                    @infoClick="infoClick"
+                    imgStyle="{width:145px; height:123px;}"
+                ></lc-info-list>
+            </div>
+            
         </scroller>
 
     </div>
@@ -99,14 +103,24 @@ export default {
       ],
       infoList:[
           {
-              textTitle:'金点子提醒：京东开始全面升级到电子发票，让电子发票引领未来金点子提醒：京东开始全面升级到电子发票，让电子发票引领未来',
+              textTitle:'技术论事：沪指连阳终结',
               textInfo:'今年以来，虽然A股上涨了6.1（截止发稿前），但是境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
-              src:'https://img.alicdn.com/tfs/TB1jkA5g9_I8KJjy0FoXXaFnVXa-320-320.png'
+              src:'images/newpic.png'
           },
           {
-              textTitle:'金点子提醒：京东开始全面升级到电子发票',
+              textTitle:'人民日报：部分楼市放松限购政策',
               textInfo:'境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
-              src:'https://img.alicdn.com/tfs/TB1jkA5g9_I8KJjy0FoXXaFnVXa-320-320.png'
+              src:'images/newpic1.png'
+          },
+          {
+              textTitle:'日本史上最大ipo要来了',
+              textInfo:'境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
+              src:'images/newpic2.png'
+          },
+          {
+              textTitle:'盘中直击：指数弱势反弹',
+              textInfo:'境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
+              src:'images/newpic3.png'
           }
       ]
     };
