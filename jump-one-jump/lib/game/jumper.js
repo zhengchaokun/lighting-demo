@@ -11,8 +11,10 @@ function createJumper() {
         head=new THREE.Mesh(geo,met);
         head.castShadow=true;
         head.receiveShadow=true;
+        head.name = "head";
         jumper.add(head);
-    });loader.load("model/cooss_foot_1x.json",function(geo){
+    });
+    loader.load("model/cooss_foot_1x.json",function(geo){
         const met=new THREE.MeshPhongMaterial();
         foot=new THREE.Mesh(geo,met);
         foot.castShadow=true;
