@@ -1,4 +1,5 @@
 import App from "light"
+import "./app.less"
 
 App.filter("start",function (next) {
     //启动拦截器

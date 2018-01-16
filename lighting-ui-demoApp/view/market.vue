@@ -54,21 +54,7 @@
                                 <div :class="['part-line', partPage==2 && 'active']"></div>
                             </div>
                         <div class="chart">
-                            <list>
-                                <div v-show="partPage==0">
-                                    上证走势图
-                                </div>
-                            </list>
-                            <list>
-                                <div v-show="partPage==1">
-                                    深证走势图
-                                </div>
-                            </list>
-                            <list>
-                                <div v-show="partPage==2">
-                                    创业板走势图
-                                </div>
-                            </list>
+
                         </div>
                     </lc-tab-page>
                     <lc-cell :has-arrow="true"
@@ -85,8 +71,38 @@
                     </lc-cell> 
                     <div class="grid mt10">
                         <div class="grid-item" v-for="(item, _index) in blockList" :key="_index">
-                            <text v-if="item.label" class="item-label">{{item.label}}</text>
+                            <text class="gird-title">{{item.title}}</text>
+                            <text class="gird-title f-red" style="margin-top:20px;">{{item.change}}</text>
+                            <text class="gird-desc">{{item.total}}</text>
                         </div>
+                        <div class="grid-item" style="">
+                            <text class="gird-desc" style="font-size:30px;">热门板块</text>
+                            <text class="gird-desc" style="margin-top:30px;font-size:30px;">更多></text>
+                        </div>
+                    </div>
+                    <div class="grid2 mt10">
+                        <div class="grid2-item" v-for="(item, _index) in topicList" :key="_index">
+                            <text class="grid2-title">{{item}}</text>
+                        </div>
+                    </div>
+                    <div class="mt10" style="background-color:#ffffff;">
+                        <div class="mt10" style="flex-direction: row;justify-content: space-between;">
+                            <div class="bookmark">
+                                <text class="bookmark-text">个股异动</text>
+                            </div>
+                            <text class="bookmark-desc">实时智能计算个股异动情况 ></text>
+                        </div>
+                        <lc-tab-page 
+                            ref="lc-part-page"
+                            type="card"
+                            :tab-titles="geguTitles"
+                            :tab-styles="partStyles"
+                            title-type="text"
+                            :is-tab-view="isTabView"
+                            :tab-page-height="tabPageHeight2"
+                            :title-use-slot="true"
+                            @LcTabPageCurrentTabSelected="partSelected">
+                        </lc-tab-page>
                     </div>
                 </div>
                 <!-- 股指 -->
@@ -125,7 +141,8 @@
                 needSlider: false,
                 isTabView: true,
                 tabPageHeight: 1280,
-                tabPageHeight1: 200,
+                tabPageHeight1: 360,
+                tabPageHeight2: 800,
                 partTitles: [
                     { title: '上证指数' },
                     { title: '深证指数' },
@@ -163,28 +180,28 @@
                 raise_count: 1871,
                 fall_count: 1334,
                 blockList: [{
-                    title: '房地产',
-                    change: '3.99%',
-                    total: '449.98亿'
-                },{
-                    title: '商务服务',
-                    change: '2.41%',
-                    total: '49.03亿'
-                },
-                {
-                    title: '供水供气',
-                    change: '2.35%',
-                    total: '38.32亿'
-                },
-                {
-                    title: '住宿餐饮',
-                    change: '2.33%',
-                    total: '7.86亿'
-                },{
-                    title: '仓储物流',
-                    change: '1.94%',
-                    total: '25.98亿'
-                }]
+                        title: '房地产',
+                        change: '3.99%',
+                        total: '449.98亿'
+                    },{
+                        title: '商务服务',
+                        change: '2.41%',
+                        total: '49.03亿'
+                    },{
+                        title: '供水供气',
+                        change: '2.35%',
+                        total: '38.32亿'
+                    },{
+                        title: '住宿餐饮',
+                        change: '2.33%',
+                        total: '7.86亿'
+                    },{
+                        title: '仓储物流',
+                        change: '1.94%',
+                        total: '25.98亿'
+                        }],
+                topicList:['涨跌幅榜','换手率榜','资金流向榜','量比榜','次新股榜','创业板涨幅'],
+                geguTitles:[{title:'创新高'},{title:'创新低'},{title:'上破均线'}],
             }
         },
         computed:{
@@ -210,7 +227,7 @@
         background-color: #F9F9F9;
     }
     .page{
-        height: 600px;
+        height: 1200px;
     }
     .chart{
         height: 110px;
@@ -245,10 +262,14 @@
         flex-direction: row;
         flex-wrap: wrap;
         background-color: #FFFFFF;
+        border-style: solid;
+        border-color: #D9D9D9;
+        border-top-width: 1px;
+        /* border-bottom-width: 1px; */
     }
     .grid-item{
         width: 250px;
-        height: 160px;
+        height: 200px;
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -256,5 +277,54 @@
         border-color: #D9D9D9;
         border-right-width: 1px;
         border-bottom-width: 1px;
+    }
+    .grid-title{
+        font-size: 24px;
+        font-weight: 400;
+        color: #3a3a3a;
+    }
+    .gird-desc{
+        font-size: 18px;
+        color: #b7b7b7;
+    }
+    .grid2{
+        flex-direction: row;
+        flex-wrap: wrap;
+        background-color: #FFFFFF;
+        border-style: solid;
+        border-color: #D9D9D9;
+        border-top-width: 1px;
+        border-bottom-width: 1px;
+    }
+    .grid2-item{
+        width: 250px;
+        height: 96px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-style: solid;
+        border-color: #D9D9D9;
+    }
+    .grid2-title{
+        font-size: 26px;
+        color: #6da6e7;
+    }
+    .bookmark{
+        width: 160px;
+        background-color: #fe6a6b;
+        border-bottom-right-radius: 40px;
+        border-top-right-radius: 40px;
+    }
+    .bookmark-text{
+        line-height: 56px;
+        font-size: 26px;
+        color: #ffffff;
+        margin-left: 20px;
+    }
+    .bookmark-desc{
+        font-size: 18px;
+        color: #b7b7b7;
+        line-height: 48px;
+        margin-right: 20px;
     }
 </style>
