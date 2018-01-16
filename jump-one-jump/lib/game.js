@@ -77,13 +77,32 @@ Game.prototype = {
 
         //直射光
         const directionalLight = new THREE.DirectionalLight( 0xffffff, 1, 100 );
-        directionalLight.position.set( 20, 12, -10 );
-        directionalLight.castShadow = true;
-        directionalLight.shadow.mapSize.width = 1000;
-        directionalLight.shadow.mapSize.height = 1000;
-        directionalLight.shadow.camera.near = 0.5;
-        directionalLight.shadow.camera.far = 5000;
+        directionalLight.position.set( 20, 10, -10 );
+        // directionalLight.castShadow = true;
+        // directionalLight.shadow.mapSize.width = 1000;
+        // directionalLight.shadow.mapSize.height = 1000;
+
+        // directionalLight.shadow.camera.near = 5;
+        // directionalLight.shadow.camera.far = 100;
+        // directionalLight.shadow.camera.bottom = -1;
+        // directionalLight.shadow.camera.top = 10;
+        // directionalLight.shadow.camera.left = -10 ;
+        // directionalLight.shadow.camera.right = 5;
         this.scene.add( directionalLight );
+
+        //聚光灯
+        const spotLight = new THREE.SpotLight( 0xffffff, 0.5 );
+        spotLight.angle = 0.6;
+        spotLight.penumbra = 0.05;
+        spotLight.decay = 2;
+        spotLight.distance = 200;
+        spotLight.castShadow = true;
+        spotLight.shadow.mapSize.width = 1024;
+        spotLight.shadow.mapSize.height = 1024;
+        spotLight.shadow.camera.near = 10;
+        spotLight.shadow.camera.far = 30;
+        spotLight.name = "spotLight";
+        this.scene.add( spotLight );
 
         //散射光
         const ambientLight = new THREE.AmbientLight(0xFFFFFF,0.4);
@@ -223,6 +242,10 @@ Game.prototype = {
         }else{
             justPosition(0)
         }
+
+        let {x,y,z} = mesh.position;
+        this.scene.getObjectByName("spotLight").position.set( 20+x, 12+y, -10+z );
+        this.scene.getObjectByName("spotLight").target = mesh;
     },
     render: function () {
         this.renderer.render(this.scene, this.camera)
