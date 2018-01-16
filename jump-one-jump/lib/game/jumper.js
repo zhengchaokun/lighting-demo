@@ -28,7 +28,7 @@ function createJumper() {
         jumper.add(glass);
     });
 
-    jumper.horizontal = 1.5;
+    jumper.horizontal = 1.49;
     jumper.position.y = jumper.horizontal;
 
     jumper.castShadow = true;

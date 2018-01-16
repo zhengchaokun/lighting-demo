@@ -132,7 +132,9 @@ Game.prototype = {
             }
         }
         function touchEnd() {
-            triggerJump.call(that)
+            if(that.jumper.position.y === that.jumper.horizontal){
+                triggerJump.call(that)
+            }
         }
         that.renderer.domElement.addEventListener("touchstart",touchStart);
         that.renderer.domElement.addEventListener("touchend", touchEnd);
