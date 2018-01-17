@@ -69,17 +69,17 @@
                             </div>
                         </div>
                         <div v-for="(item, index) in geguData" :key="index" class="share-list">
-                            <div class="share-title flex-2">
+                            <div class="share-title flex-3">
                                 <text class="fs32 f-black">{{item.title}}</text>
                                 <text class="fs24 f-dark mt10">{{item.code}}</text>
                             </div>
-                            <div class="flex-1">
+                            <div class="flex-2">
                                 <text class="fs32 f-black">{{item.total}}</text>
                             </div>
-                            <div class="flex-1">
+                            <div class="flex-2">
                                 <text :class="['fs32', item.change >= 0 ? 'f-red':'f-green']">{{item.change}}%</text>
                             </div>
-                            <div class="flex-2" style="align-items: flex-end;">
+                            <div class="flex-3" style="align-items: flex-end;">
                                 <text class="fs32 f-black">{{item.desc}}</text>
                             </div>
                         </div>
