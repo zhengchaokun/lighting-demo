@@ -1,6 +1,6 @@
 
 <template>
-    <div style="background-color:#f0eff4; height:1500px;">
+    <div style="background-color:#f0eff4;">
         <scroller>
             <lc-lightbox autoPlay="true" ref="lc-lightbox"
                 height="440"
@@ -56,22 +56,46 @@
                 <text class="right-corner"> &gt; </text> 
             </div>
             
-            <scroller class="flex-row mt20" scroll-direction="horizontal" style="height:100px;">
-                <div class="topic-wrap flex-row" v-for="(topic,index) in topics" :key="index">
-                    <a class="topic-a" href="">
-                        <text class="topic-text">{{topic.val}}</text>
-                    </a>                   
-                </div>
-            </scroller>            
-            <div class="line"></div>
+            <div class="mt20 bgc-white">
+                <scroller class="flex-row" scroll-direction="horizontal" style="height:100px;">
+                    <div class="topic-wrap flex-row" v-for="(topic,index) in topics" :key="index">
+                        <a class="topic-a" href="">
+                            <text class="topic-text">{{topic.val}}</text>
+                        </a>                   
+                    </div>
+                </scroller>            
+                <div class="line"></div>
 
-            <div class="bgc-white">
                 <lc-info-list 
                     type="imgleft"
                     :infoList="infoList"
                     @infoClick="infoClick"
                     imgStyle="{width:145px; height:123px;}"
                 ></lc-info-list>
+            </div>
+
+            <div class="mt20 bgc-white">
+                <div class="concept-head">
+                    <image src="images/fire.png" class="concept-img"></image>
+                    <text class="concept-tit">热门概念</text>
+                </div>
+                <scroller class="flex-row" scroll-direction="horizontal" style="height:350px;">                    
+                    <div class="concept-box" v-for="(concept,index) in concepts" :key="index">
+                        <text class="concept-name">{{concept.name}}</text> 
+                        <text :class="['concept-price', concept.price>0 && 'c-red',concept.price<0 && 'c-green']">{{concept.price}}%</text> 
+                        <text class="concept-info">{{concept.info}}</text> 
+                    </div> 
+                    <div class="concept-box concept-more">
+                        <image class="concept-more-img" src="images/more-icon.png"></image>
+                        <text class="concept-more-text">查看更多</text>
+                    </div>                                                      
+                </scroller> 
+            </div>
+
+            <div class="mt20 bgc-white tag-wrap">
+                <div v-for="(tag,index) in tags" :key="index">
+                    <text>{{tag.val}}</text>
+                </div>
             </div>
             
         </scroller>
@@ -83,7 +107,7 @@ import App from "light";
 import LcLightbox from "lighting-ui/packages/lc-lightbox";
 import LcInfoList from "lighting-ui/packages/lc-info-list";
 export default {
-  components: { LcLightbox,LcInfoList },
+  components: { LcLightbox,LcInfoList},
   data() {
     return {
       imageList: [
@@ -122,6 +146,13 @@ export default {
               textInfo:'境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
               src:'images/newpic3.png'
           }
+      ],
+      concepts:[
+          {name:'医药',price:'-0.7',info:'医药市场格局加速重组,4家公司重组,未来格局不明朗'},
+          {name:'家电',price:'+0.3',info:'智能小家电市场容量激增'},
+          {name:'分散染料',price:'+0.33',info:'分散染料板块拉升'},
+          {name:'白酒',price:'0.0',info:'啤酒也提价，啤酒股能否重启行情'},
+          {name:'猪肉',price:'-0.42',info:'春节将至，黑猪散养成风口'}
       ]
     };
   },
@@ -190,45 +221,24 @@ export default {
   background-color: #edecee;
 }
 
-.topic-wrap{
-    background-color: #fff;
-    height: 100px;
-    align-items: center;
-}
-.topic-a{
-    margin-left: 30px;
-    margin-right: 30px;
-}
+.topic-wrap{background-color: #fff;height: 100px;align-items: center;}
+.topic-a{margin-left: 30px; margin-right: 30px;}
 .topic-text{ color: #4e92e3; font-size: 30px;}
 
-.list {
-  height: 500px;
-}
-.cell {
-  padding-top: 60px;
-  padding-bottom: 60px;
-  padding-left: 30px;
-  padding-right: 30px;
-  border-bottom-style: solid;
-  border-bottom-color: #cdd5db;
-  border-bottom-width: 1px;
-}
-.cell-img {
-  width: 145px;
-  height: 145px;
-  margin-right: 30px;
-  border-radius: 5px;
-}
-.cell-tit {
-  font-size: 32px;
-  lines: 1;
-  color: #282d32;
-}
-.cell-info {
-  font-size: 26px;
-  lines: 2;
-  color: #909090;
-  margin-top: 10px;
-  line-height: 38px;
-}
+.concept-wrap{height: 450px;}
+.concept-head{ height: 100px; flex-direction: row; align-items: center;justify-content: center;}
+.concept-tit{ font-size: 36px; color: #414141; margin-left: 20px;}
+.concept-img{ width: 43px; height: 54px;}
+
+.concept-box{ align-items: center; width: 245px; height: 300px; margin-left: 30px; margin-right: 30px;
+ margin-top: 10px; padding: 30px; border-style: solid; border-width: 1px; border-color: #ececec; border-radius: 8px;}
+.concept-more{ background-color: #f3f3f3;}
+.concept-more-img{ width: 108px; height: 108px; margin-top: 20px;}
+.concept-more-text{color: #bababa; font-size: 32px; margin-top: 20px;}
+.concept-name{ color: #333; font-size: 38px; margin-top: 10px;}
+.concept-price{font-size: 44px; margin-top: 50px;}
+.concept-info{ color: #929292; font-size: 26px; lines:2; margin-top: 20px;}
+
+.tag-wrap{ height: 250px; padding: 40px;}
+
 </style>
