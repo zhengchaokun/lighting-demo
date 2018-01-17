@@ -194,9 +194,7 @@ Game.prototype = {
     },
     // 新增一个方块, 新的方块有2个随机方向
     _createCube: function () {
-        let material = new THREE.MeshLambertMaterial({color: config.cubeColor});
-        let geometry = new THREE.CubeGeometry(config.cubeWidth, config.cubeHeight, config.cubeDeep);
-        let mesh = new THREE.Mesh(geometry, material);
+        const mesh = geometry();
         mesh.castShadow = true;
         if (this.cubes.length) {
             let random = Math.random();
@@ -301,6 +299,21 @@ Game.prototype = {
     },
 };
 
+function geometry() {
+    let material = new THREE.MeshLambertMaterial({color: config.cubeColor});
+    let cube = function () {
+        let geometryCube = new THREE.CubeGeometry(config.cubeWidth, config.cubeHeight, config.cubeDeep);
+        return new THREE.Mesh(geometryCube, material);
+    };
+
+    let cylinder = function () {
+        let geometryCylinder = new THREE.CylinderGeometry( config.cubeWidth/2, config.cubeWidth/2, config.cubeHeight, 32 );
+        return new THREE.Mesh(geometryCylinder, material);
+    };
+
+    let geometrys = [cube,cylinder];
+    return geometrys[Math.floor(Math.random()*geometrys.length)]();
+}
 
 function triggerJump() {
     let that = this;
