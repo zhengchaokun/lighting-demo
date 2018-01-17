@@ -1,0 +1,256 @@
+
+<template>
+    <div style="background-color:#f0eff4;">
+        <scroller>
+            <lc-lightbox autoPlay="true" ref="lc-lightbox"
+                height="440"
+                interval="5000"
+                showIndicator="true"
+                :image-list="imageList"
+                :indicatorColor="indicatorColor"
+                @lcImgClick="lcImgClick">
+            </lc-lightbox>
+
+            <div class="pos-r">
+                <scroller class="flex-row" scroll-direction="horizontal" style="height:200px;">                 
+                    <div class="flex-row item-box">                   
+                        <div class="flex-clounm item-cont">
+                            <div class="pos-r">
+                                <image src="images/icon-1.png" class="item-pic"></image>
+                            </div>
+                            <text class="item-text">理财持仓</text>
+                        </div>
+                        <div class="flex-clounm item-cont">
+                            <div class="pos-r">
+                                <image src="images/icon-2.png" class="item-pic"></image>
+                            </div>
+                            <text class="item-text">我的资产</text>
+                        </div>
+                        <div class="flex-clounm item-cont">
+                            <div class="pos-r">
+                                <image src="images/icon-3.png" class="item-pic"></image>
+                                <text class="item-dot">8</text>
+                            </div>
+                            <text class="item-text">涨乐资讯</text>
+                        </div>
+                        <div class="flex-clounm item-cont">
+                            <div class="pos-r">
+                                <image src="images/icon-4.png" class="item-pic"></image>
+                            </div>
+                            <text class="item-text">股票开户</text>
+                        </div>
+                        <div class="flex-clounm item-cont">
+                            <div class="pos-r">
+                                <image src="images/icon-5.png" class="item-pic"></image>
+                            </div>
+                            <text class="item-text">签到</text>
+                        </div>
+                        <div class="flex-clounm item-cont">
+                            <div class="pos-r">
+                                <image src="images/icon-6.png" class="item-pic"></image>
+                            </div>
+                            <text class="item-text">成本神器</text>
+                        </div>
+                    </div>                                                                                                
+                </scroller>
+                <text class="right-corner"> &gt; </text> 
+            </div>
+            
+            <div class="mt20 bgc-white">
+                <scroller class="flex-row" scroll-direction="horizontal" style="height:100px;">
+                    <div class="topic-wrap flex-row" v-for="(topic,index) in topics" :key="index">
+                        <a class="topic-a" href="">
+                            <text class="topic-text">{{topic.val}}</text>
+                        </a>                   
+                    </div>
+                </scroller>            
+                <div class="line"></div>
+
+                <lc-info-list 
+                    type="imgleft"
+                    :infoList="infoList"
+                    @infoClick="infoClick"
+                    imgStyle="{width:145px; height:123px;}"
+                ></lc-info-list>
+            </div>
+
+            <div class="mt20 bgc-white">
+                <div class="concept-head">
+                    <image src="images/fire.png" class="concept-img"></image>
+                    <text class="concept-tit">热门概念</text>
+                </div>
+                <scroller class="flex-row" scroll-direction="horizontal" style="height:350px;">                    
+                    <div class="concept-box" v-for="(concept,index) in concepts" :key="index">
+                        <text class="concept-name">{{concept.name}}</text> 
+                        <text :class="['concept-price', concept.price>0 && 'c-red',concept.price<0 && 'c-green']">{{concept.price}}%</text> 
+                        <text class="concept-info">{{concept.info}}</text> 
+                    </div> 
+                    <div class="concept-box concept-more">
+                        <image class="concept-more-img" src="images/more-icon.png"></image>
+                        <text class="concept-more-text">查看更多</text>
+                    </div>                                                      
+                </scroller> 
+            </div>
+
+            <div class="mt20 bgc-white tag-wrap">
+                <div class="tag-box" v-for="(tag,index) in tags" :key="index">
+                    <text class="tag-text">{{tag.val}}</text>
+                </div>
+            </div>
+            
+        </scroller>
+
+    </div>
+</template>
+<script>
+import App from "light";
+import LcLightbox from "lighting-ui/packages/lc-lightbox";
+import LcInfoList from "lighting-ui/packages/lc-info-list";
+export default {
+  components: { LcLightbox,LcInfoList},
+  data() {
+    return {
+      imageList: [
+        { src: "images/banner-1.jpg" },
+        { src: "images/banner-2.jpg" }
+      ],
+      indicatorColor: {
+        "item-color": "#5976ec",
+        "item-selected-color": "#fff",
+        "item-size": "16px"
+      },
+      topics:[
+          { val:'#市场两极分化#', src:'#'},
+          { val:'#软银手机业务上市#', src:'#'},
+          { val:'#1月客座率提升#', src:'#'},
+          { val:'#反弹力度不强#', src:'#'}
+      ],
+      infoList:[
+          {
+              textTitle:'技术论事：沪指连阳终结',
+              textInfo:'今年以来，虽然A股上涨了6.1（截止发稿前），但是境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
+              src:'images/newpic.png'
+          },
+          {
+              textTitle:'人民日报：部分楼市放松限购政策',
+              textInfo:'境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
+              src:'images/newpic1.png'
+          },
+          {
+              textTitle:'日本史上最大ipo要来了',
+              textInfo:'境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
+              src:'images/newpic2.png'
+          },
+          {
+              textTitle:'盘中直击：指数弱势反弹',
+              textInfo:'境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
+              src:'images/newpic3.png'
+          }
+      ],
+      concepts:[
+          {name:'医药',price:'-0.7',info:'医药市场格局加速重组,4家公司重组,未来格局不明朗'},
+          {name:'家电',price:'+0.3',info:'智能小家电市场容量激增'},
+          {name:'分散染料',price:'+0.33',info:'分散染料板块拉升'},
+          {name:'白酒',price:'0.0',info:'啤酒也提价，啤酒股能否重启行情'},
+          {name:'猪肉',price:'-0.42',info:'春节将至，黑猪散养成风口'}
+      ],
+      tags:[
+          {val:'直播',href:'#'},
+          {val:'财经日历',href:'#'},
+          {val:'技术论市',href:'#'},
+          {val:'订阅',href:'#'},
+          {val:'涨乐FM',href:'#'},
+          {val:'活动专区',href:'#'},
+          {val:'涨乐吧火热讨论中',href:'#'}
+      ]
+    };
+  },
+  methods: {
+    jump(view) {
+      App.navigate(view);
+    },
+    lcImgClick(e) {
+      console.log("clicked" + e.index);
+    },
+    infoClick(e) {
+      console.log("clicked" + e.index);
+    }
+  }
+};
+</script>
+<style scoped src="../css/ui.css"></style>
+<style scoped>
+.item-wrap {
+  width: 750px;
+  height: 410px;
+}
+.item-box {
+  height: 200px;
+  background-color: #fff;
+  justify-content: space-around;
+  align-items: center;
+}
+.right-corner{
+    position: absolute;
+    right: 5px;
+    top: 60px;
+    font-size: 36px;
+    color: #dbdbdb;
+}
+.item-cont {
+  align-items: center;
+  width: 190px;
+}
+.item-pic {
+  width: 80px;
+  height: 80px;
+  border-radius: 30px;
+}
+.item-text {
+  padding-top: 10px;
+  font-size: 28px;
+  color: #363636;
+}
+.item-dot {
+  position: absolute;
+  right: -15px;
+  top: -15px;
+  width: 44px;
+  height: 44px;
+  line-height: 44px;
+  color: #fff;
+  text-align: center;
+  border-radius: 22px;
+  background-color: #f7585d;
+}
+
+.line {
+  width: 750px;
+  height: 1px;
+  background-color: #edecee;
+}
+
+.topic-wrap{background-color: #fff;height: 100px;align-items: center;}
+.topic-a{margin-left: 30px; margin-right: 30px;}
+.topic-text{ color: #4e92e3; font-size: 30px;}
+
+.concept-wrap{height: 450px;}
+.concept-head{ height: 100px; flex-direction: row; align-items: center;justify-content: center;}
+.concept-tit{ font-size: 36px; color: #414141; margin-left: 20px;}
+.concept-img{ width: 43px; height: 54px;}
+
+.concept-box{ align-items: center; width: 245px; height: 300px; margin-left: 30px; margin-right: 30px;
+    margin-top: 10px; padding: 30px; border-style: solid; border-width: 1px; border-color: #ececec; border-radius: 8px;}
+.concept-more{ background-color: #f3f3f3;}
+.concept-more-img{ width: 108px; height: 108px; margin-top: 20px;}
+.concept-more-text{color: #bababa; font-size: 32px; margin-top: 20px;}
+.concept-name{ color: #333; font-size: 38px; margin-top: 10px;}
+.concept-price{font-size: 44px; margin-top: 50px;}
+.concept-info{ color: #929292; font-size: 26px; lines:2; margin-top: 20px;}
+
+.tag-wrap{ height: 250px; padding: 30px;flex-direction: row;flex-wrap: wrap; justify-content: space-between;align-content: space-around;}
+.tag-box{align-items: center; justify-content: center; height: 60px; padding-left: 20px; padding-right: 20px; 
+    border-style: solid; border-width: 1px; border-color: #eaeaea; border-radius: 20px;}
+.tag-text{ font-size: 32px; color: #525252;}
+
+</style>
