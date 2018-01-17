@@ -1,6 +1,6 @@
 
 <template>
-    <div style="background-color:#f0eff4; height:1500px;">
+    <div style="background-color:#f0eff4;">
         <scroller>
             <lc-lightbox autoPlay="true" ref="lc-lightbox"
                 height="440"
@@ -56,22 +56,72 @@
                 <text class="right-corner"> &gt; </text> 
             </div>
             
-            <scroller class="flex-row mt20" scroll-direction="horizontal" style="height:100px;">
-                <div class="topic-wrap flex-row" v-for="(topic,index) in topics" :key="index">
-                    <a class="topic-a" href="">
-                        <text class="topic-text">{{topic.val}}</text>
-                    </a>                   
-                </div>
-            </scroller>            
-            <div class="line"></div>
+            <div class="mt20 bgc-white">
+                <scroller class="flex-row" scroll-direction="horizontal" style="height:100px;">
+                    <div class="topic-wrap flex-row" v-for="(topic,index) in topics" :key="index">
+                        <a class="topic-a" href="">
+                            <text class="topic-text">{{topic.val}}</text>
+                        </a>                   
+                    </div>
+                </scroller>            
+                <div class="line"></div>
 
-            <div class="bgc-white">
                 <lc-info-list 
                     type="imgleft"
                     :infoList="infoList"
                     @infoClick="infoClick"
                     imgStyle="{width:145px; height:123px;}"
                 ></lc-info-list>
+            </div>
+
+            <div class="mt20 bgc-white">
+                <div class="concept-head">
+                    <image src="images/fire.png" class="concept-img"></image>
+                    <text class="concept-tit">热门概念</text>
+                </div>
+                <scroller class="flex-row" scroll-direction="horizontal" style="height:350px;">                    
+                    <div class="concept-box" v-for="(concept,index) in concepts" :key="index">
+                        <text class="concept-name">{{concept.name}}</text> 
+                        <text :class="['concept-price', concept.price>0 && 'c-red',concept.price<0 && 'c-green']">{{concept.price}}%</text> 
+                        <text class="concept-info">{{concept.info}}</text> 
+                    </div> 
+                    <div class="concept-box concept-more">
+                        <image class="concept-more-img" src="images/more-icon.png"></image>
+                        <text class="concept-more-text">查看更多</text>
+                    </div>                                                      
+                </scroller> 
+            </div>
+
+            <div class="mt20 bgc-white tag-wrap">
+                <div class="tag-box" v-for="(tag,index) in tags" :key="index" :class="[tagClass(index)]">
+                    <text class="tag-text" :class="[tagClass(index)]">{{tag.val}}</text>
+                </div>
+            </div>
+
+            <div class="mt20 bgc-white msg-wrap" v-for="(msg,index) in msgList" :key="index">
+                <div class="msg-head flex-row justify-space-between">
+                    <div class="flex-row ">
+                        <image class="msg-head-img" :src="msg.pic"></image>
+                        <div class="ml20">
+                            <text class="msg-head-name">{{msg.name}}</text>
+                            <text class="msg-head-time">{{msg.time}}</text>
+                        </div>
+                    </div>
+                    <div class="msg-head-attent">
+                        <text class="msg-head-attent-text">关注</text>
+                    </div>
+                </div>
+                <div class="msg-cont">
+                    <text class="msg-cont-topic">{{msg.topic}}</text>
+                    <text class="msg-cont-detail">{{msg.detail}}</text>
+                </div>
+                <div class="msg-reply">
+                    <div class="flex-row mt10" v-for="(r,i) in msg.reply" :key="i">
+                        <text class="msg-reply-name">{{r.rname}}:</text>
+                        <text class="msg-reply-msg">{{r.rmsg}}</text>
+                    </div>
+                </div>
+                
             </div>
             
         </scroller>
@@ -83,7 +133,7 @@ import App from "light";
 import LcLightbox from "lighting-ui/packages/lc-lightbox";
 import LcInfoList from "lighting-ui/packages/lc-info-list";
 export default {
-  components: { LcLightbox,LcInfoList },
+  components: { LcLightbox,LcInfoList},
   data() {
     return {
       imageList: [
@@ -122,6 +172,46 @@ export default {
               textInfo:'境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
               src:'images/newpic3.png'
           }
+      ],
+      concepts:[
+          {name:'医药',price:'-0.7',info:'医药市场格局加速重组,4家公司重组,未来格局不明朗'},
+          {name:'家电',price:'+0.3',info:'智能小家电市场容量激增'},
+          {name:'分散染料',price:'+0.33',info:'分散染料板块拉升'},
+          {name:'白酒',price:'0.0',info:'啤酒也提价，啤酒股能否重启行情'},
+          {name:'猪肉',price:'-0.42',info:'春节将至，黑猪散养成风口'}
+      ],
+      tags:[
+          {val:'直播',href:'#'},
+          {val:'财经日历',href:'#'},
+          {val:'技术论市',href:'#'},
+          {val:'订阅',href:'#'},
+          {val:'涨乐FM',href:'#'},
+          {val:'活动专区',href:'#'},
+          {val:'涨乐吧火热讨论中',href:'#'}
+      ],
+      msgList:[
+          {
+              name:'Lerry',
+              time:'28分钟前',
+              pic:'images/head-pic-1.png',
+              topic:'连续十几天上涨，没有一天降的多',
+              detail:'一日到达旧金山',
+              reply:[
+                  {rname:'小凯伦',rmsg:'太狠了，都不用办护照了，哈哈哈'},
+                  {rname:'墨迹头',rmsg:'大盘就是这样潇洒，个股更潇洒'}
+              ]
+          },
+          {
+              name:'友人相交',
+              time:'14分钟前',
+              pic:'images/head-pic-2.png',
+              topic:'为什么？',
+              detail:'指数越来越高，个股价越来越低',
+              reply:[
+                  {rname:'乐的不行',rmsg:'就是逆向而行，如果不是，那就不是大盘了'},
+                  {rname:'靠股发财',rmsg:'狙杀手段'}
+              ]
+          }
       ]
     };
   },
@@ -134,6 +224,13 @@ export default {
     },
     infoClick(e) {
       console.log("clicked" + e.index);
+    },
+    tagClass(index){
+        if(this.tags.length-1 == index){
+            return 'tag-box-red'
+        }else{
+            return 'c-gray'
+        }
     }
   }
 };
@@ -190,45 +287,44 @@ export default {
   background-color: #edecee;
 }
 
-.topic-wrap{
-    background-color: #fff;
-    height: 100px;
-    align-items: center;
-}
-.topic-a{
-    margin-left: 30px;
-    margin-right: 30px;
-}
+.topic-wrap{background-color: #fff;height: 100px;align-items: center;}
+.topic-a{margin-left: 30px; margin-right: 30px;}
 .topic-text{ color: #4e92e3; font-size: 30px;}
 
-.list {
-  height: 500px;
-}
-.cell {
-  padding-top: 60px;
-  padding-bottom: 60px;
-  padding-left: 30px;
-  padding-right: 30px;
-  border-bottom-style: solid;
-  border-bottom-color: #cdd5db;
-  border-bottom-width: 1px;
-}
-.cell-img {
-  width: 145px;
-  height: 145px;
-  margin-right: 30px;
-  border-radius: 5px;
-}
-.cell-tit {
-  font-size: 32px;
-  lines: 1;
-  color: #282d32;
-}
-.cell-info {
-  font-size: 26px;
-  lines: 2;
-  color: #909090;
-  margin-top: 10px;
-  line-height: 38px;
-}
+.concept-wrap{height: 450px;}
+.concept-head{ height: 100px; flex-direction: row; align-items: center;justify-content: center;}
+.concept-tit{ font-size: 36px; color: #414141; margin-left: 20px;}
+.concept-img{ width: 43px; height: 54px;}
+
+.concept-box{ align-items: center; width: 245px; height: 300px; margin-left: 30px; margin-right: 30px;
+    margin-top: 10px; padding: 30px; border-style: solid; border-width: 1px; border-color: #ececec; border-radius: 8px;}
+.concept-more{ background-color: #f3f3f3;}
+.concept-more-img{ width: 108px; height: 108px; margin-top: 20px;}
+.concept-more-text{color: #bababa; font-size: 32px; margin-top: 20px;}
+.concept-name{ color: #333; font-size: 38px; margin-top: 10px;}
+.concept-price{font-size: 44px; margin-top: 50px;}
+.concept-info{ color: #929292; font-size: 26px; lines:2; margin-top: 20px;}
+
+.tag-wrap{ height: 250px; padding-left: 40px; padding-right: 40px; padding-top:30px; flex-direction: row;flex-wrap: wrap; justify-content: space-between;}
+.tag-box{align-items: center; justify-content: center; height: 60px; padding-left: 20px; padding-right: 20px; 
+    margin-top: 20px; border-style: solid; border-width: 1px; border-color: #eaeaea; border-radius: 20px;}
+.tag-box-red{ border-color: #dc7070; color: #dc7070;}
+.tag-text{ font-size: 30px;}
+
+.msg-wrap{ padding-top: 40px; padding-left: 20px; padding-bottom: 60px; padding-right: 50px;}
+.msg-head{ height: 80px; align-items: center;}
+.msg-head-img{ width: 70px; height: 70px; border-radius: 35px; margin-left: 20px;}
+.msg-head-name{ color: #333; font-size: 32px;}
+.msg-head-time{ color: #979797; font-size: 24px;} 
+.msg-head-attent{align-items: center; justify-content: center; width: 100px; height: 50px; border-style: solid; border-width: 1px; border-color: #d4d4d4; }
+.msg-head-attent-text{ color: #4a90e2; font-size: 28px;}
+
+.msg-cont{ margin-top: 30px; margin-left: 20px;}
+.msg-cont-topic{ font-size: 32px; color: #414141; font-weight: bold;}
+.msg-cont-detail{ font-size: 32px; color: #5b5b5b; margin-top: 20px; lines:2;}
+
+.msg-reply{background-color: #f3f3f5; padding: 30px; margin-top: 50px; margin-left: 20px;}
+.msg-reply-name{color: #5681b2; font-weight: bold; font-size: 28px;}
+.msg-reply-msg{color: #545454; font-size: 28px; flex:1; margin-left: 10px;}
+
 </style>
