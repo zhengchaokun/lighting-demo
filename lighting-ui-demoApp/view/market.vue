@@ -92,17 +92,13 @@
                             </div>
                             <text class="bookmark-desc">实时智能计算个股异动情况 ></text>
                         </div>
-                        <lc-tab-page 
-                            ref="lc-part-page"
-                            type="card"
-                            :tab-titles="geguTitles"
-                            :tab-styles="partStyles"
-                            title-type="text"
-                            :is-tab-view="isTabView"
-                            :tab-page-height="tabPageHeight2"
-                            :title-use-slot="true"
-                            @LcTabPageCurrentTabSelected="partSelected">
-                        </lc-tab-page>
+                    </div>
+                    <div style="padding-top:60px;justify-content: center;background-color:#ffffff;align-items:center">
+                        <div class="btn-wrap">
+                            <div v-for="(btn, index) in geguTitles" :key="index" :style="btnStyle(index)" class="btn" @click="btnCLicked(index)" >
+                                <text class="text" :style="btnTextStyle(index)">{{btn.title}}</text>
+                            </div>
+                        </div>                        
                     </div>
                 </div>
                 <!-- 股指 -->
@@ -140,7 +136,7 @@
                 tabList: [0,1,2,3,4],
                 needSlider: false,
                 isTabView: true,
-                tabPageHeight: 1280,
+                tabPageHeight: 2000,
                 tabPageHeight1: 360,
                 tabPageHeight2: 800,
                 partTitles: [
@@ -202,6 +198,7 @@
                         }],
                 topicList:['涨跌幅榜','换手率榜','资金流向榜','量比榜','次新股榜','创业板涨幅'],
                 geguTitles:[{title:'创新高'},{title:'创新低'},{title:'上破均线'}],
+                btnIndex: 0
             }
         },
         computed:{
@@ -210,6 +207,65 @@
             }
         },
         methods:{
+            btnCLicked(index){
+                this.btnIndex = index;
+            },
+            btnStyle(index){
+                let style;
+                if(index == 0){
+                    style = {
+                        'border-style': 'solid',
+                        'border-width': '1px',
+                        'border-right-width': '0px',
+                        'border-top-left-radius': '5px',
+                        'border-bottom-left-radius': '5px'
+                    };
+                    if(this.btnIndex == 0){
+                        style['border-color'] = "#fe6a6b";
+                    }
+                }
+                if(index == 1){
+                    style = {
+                        'border-style': 'solid',
+                        'border-width': '1px'
+                    }
+                    if(this.btnIndex == 0){
+                        style['border-left-color'] = "#fe6a6b";
+                    }
+                    if(this.btnIndex == 1){
+                        style['border-color'] = "#fe6a6b";
+                    }
+                    if(this.btnIndex == 2){
+                        style['border-right-color'] = "#fe6a6b";
+                    }
+                }
+                if(index == 2){
+                    style = {
+                        'border-style': 'solid',
+                        'border-width': '1px',
+                        'border-left-width': '0px',
+                        'border-top-right-radius': '5px',
+                        'border-bottom-right-radius': '5px'
+                    };
+                    if(this.btnIndex == 2){
+                        style['border-color'] = "#fe6a6b";
+                    }
+                }
+                return style;
+            },
+            btnTextStyle(index){
+                if(index == this.btnIndex){
+                    return {
+                        'color':'#fe6a6b',
+                        'font-size':'26px'
+                    }
+                }else{
+                    return {
+                        'color':'#b7b7b7',
+                        'font-size':'22px'
+                    }
+                }
+            },
             tabSelected (e) {
                 console.log(e)
                 this.tabPage = e.page;
@@ -326,5 +382,20 @@
         color: #b7b7b7;
         line-height: 48px;
         margin-right: 20px;
+    }
+    .btn-wrap{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 500px;
+        height: 64px;
+    }
+    .btn{
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        border-color: #b7b7b7;
+        color:#b7b7b7;
     }
 </style>
