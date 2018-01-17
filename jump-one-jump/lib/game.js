@@ -323,12 +323,12 @@ function triggerJump() {
         if (that.cubeStat.nextDir === 'left') {
             that.jumper.position.x -= that.jumperStat.mSpeed;
             if(prevCube.position.z!==that.jumper.position.z){
-                prevCube.position.z-=0.01;
+                that.jumper.position.z-=0.01;
             }
         } else {
             that.jumper.position.z -= that.jumperStat.mSpeed;
             if(prevCube.position.x!==that.jumper.position.x){
-                prevCube.position.x-=0.01;
+                that.jumper.position.x-=0.01;
             }
         }
         that.jumper.position.y += that.jumperStat.ySpeed;
