@@ -376,6 +376,7 @@ function triggerJump() {
 
         that.jumper.position.y = that.jumper.horizontal;
         that.jumper.rotation.y += Math.PI*2;
+        that.jumper.getObjectByName("foot").scale.set(1,1,1);
 
         const jumpResult = checkJumpResult.call(that);
         if (jumpResult===1) {
