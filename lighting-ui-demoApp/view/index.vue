@@ -93,8 +93,8 @@
             </div>
 
             <div class="mt20 bgc-white tag-wrap">
-                <div v-for="(tag,index) in tags" :key="index">
-                    <text>{{tag.val}}</text>
+                <div class="tag-box" v-for="(tag,index) in tags" :key="index">
+                    <text class="tag-text">{{tag.val}}</text>
                 </div>
             </div>
             
@@ -153,6 +153,15 @@ export default {
           {name:'分散染料',price:'+0.33',info:'分散染料板块拉升'},
           {name:'白酒',price:'0.0',info:'啤酒也提价，啤酒股能否重启行情'},
           {name:'猪肉',price:'-0.42',info:'春节将至，黑猪散养成风口'}
+      ],
+      tags:[
+          {val:'直播',href:'#'},
+          {val:'财经日历',href:'#'},
+          {val:'技术论市',href:'#'},
+          {val:'订阅',href:'#'},
+          {val:'涨乐FM',href:'#'},
+          {val:'活动专区',href:'#'},
+          {val:'涨乐吧火热讨论中',href:'#'}
       ]
     };
   },
@@ -231,7 +240,7 @@ export default {
 .concept-img{ width: 43px; height: 54px;}
 
 .concept-box{ align-items: center; width: 245px; height: 300px; margin-left: 30px; margin-right: 30px;
- margin-top: 10px; padding: 30px; border-style: solid; border-width: 1px; border-color: #ececec; border-radius: 8px;}
+    margin-top: 10px; padding: 30px; border-style: solid; border-width: 1px; border-color: #ececec; border-radius: 8px;}
 .concept-more{ background-color: #f3f3f3;}
 .concept-more-img{ width: 108px; height: 108px; margin-top: 20px;}
 .concept-more-text{color: #bababa; font-size: 32px; margin-top: 20px;}
@@ -239,6 +248,9 @@ export default {
 .concept-price{font-size: 44px; margin-top: 50px;}
 .concept-info{ color: #929292; font-size: 26px; lines:2; margin-top: 20px;}
 
-.tag-wrap{ height: 250px; padding: 40px;}
+.tag-wrap{ height: 250px; padding: 30px;flex-direction: row;flex-wrap: wrap; justify-content: space-between;align-content: space-around;}
+.tag-box{align-items: center; justify-content: center; height: 60px; padding-left: 20px; padding-right: 20px; 
+    border-style: solid; border-width: 1px; border-color: #eaeaea; border-radius: 20px;}
+.tag-text{ font-size: 32px; color: #525252;}
 
 </style>
