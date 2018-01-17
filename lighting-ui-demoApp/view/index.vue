@@ -123,6 +123,35 @@
                 </div>
                 
             </div>
+
+            <div class="mt20 flex-row justify-space-between">
+                <div class="flex-row func-wrap">
+                    <image class="func-wrap-img" src="images/icon-kf.png"></image>
+                    <div class="ml30">
+                        <text class="func-wrap-tit">在线客服</text>
+                        <text class="func-wrap-tip">实时解答</text>
+                    </div>
+                </div>
+                <div class="flex-row func-wrap">
+                    <image class="func-wrap-img" src="images/icon-lc.png"></image>
+                    <div class="ml30">
+                        <text class="func-wrap-tit">理财学堂</text>
+                        <text class="func-wrap-tip">炒股入门</text>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt20 bgc-white">
+                <div class="info-list" v-for="(v,index) in infoList1" :key="index">
+                    <div class="flex1">
+                        <text class="info-list-tit">{{v.textTitle}}</text>
+                        <text class="info-list-info">{{v.textInfo}}</text>
+                        <text class="info-list-time">{{v.textTime}}</text>
+                    </div>
+                </div>
+            </div>
+
+            
             
         </scroller>
 
@@ -212,6 +241,48 @@ export default {
                   {rname:'靠股发财',rmsg:'狙杀手段'}
               ]
           }
+      ],
+      infoList1:[
+          {
+              textTitle:'技术论事：沪指连阳终结',
+              textInfo:'今年以来，虽然A股上涨了6.1（截止发稿前），但是境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
+              textTime:'2018-1-15 14:07'
+          },
+          {
+              textTitle:'人民日报：部分楼市放松限购政策部分楼市放松限购政策',
+              textInfo:'境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
+              textTime:'2018-1-15 14:07'
+          },
+          {
+              textTitle:'日本史上最大ipo要来了',
+              textInfo:'境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
+              textTime:'2018-1-15 14:07'
+          },
+          {
+              textTitle:'盘中直击：指数弱势反弹',
+              textInfo:'境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
+              textTime:'2018-1-15 14:07'
+          },
+          {
+              textTitle:'技术论事：沪指连阳终结',
+              textInfo:'今年以来，虽然A股上涨了6.1（截止发稿前），但是境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
+              textTime:'2018-1-15 14:07'
+          },
+          {
+              textTitle:'人民日报：部分楼市放松限购政策',
+              textInfo:'境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
+              textTime:'2018-1-15 14:07'
+          },
+          {
+              textTitle:'日本史上最大ipo要来了',
+              textInfo:'境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
+              textTime:'2018-1-15 14:07'
+          },
+          {
+              textTitle:'盘中直击：指数弱势反弹',
+              textInfo:'境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
+              textTime:'2018-1-15 14:07'
+          }
       ]
     };
   },
@@ -223,6 +294,9 @@ export default {
       console.log("clicked" + e.index);
     },
     infoClick(e) {
+      console.log("clicked" + e.index);
+    },
+    infoClick1(e) {
       console.log("clicked" + e.index);
     },
     tagClass(index){
@@ -326,5 +400,16 @@ export default {
 .msg-reply{background-color: #f3f3f5; padding: 30px; margin-top: 50px; margin-left: 20px;}
 .msg-reply-name{color: #5681b2; font-weight: bold; font-size: 28px;}
 .msg-reply-msg{color: #545454; font-size: 28px; flex:1; margin-left: 10px;}
+
+.func-wrap{ width: 365px; height: 160px; background-color: #fff; justify-content: center; align-items: center;}
+.func-wrap-img{ width: 66px; height: 53px;}
+.func-wrap-tit{color: #323232; font-weight: bold; font-size: 34px;}
+.func-wrap-tip{color: #d4d4d4; font-size: 26px; margin-top: 10px;}
+
+.info-list{ padding-top: 50px; padding-bottom: 40px; padding-left: 30px; padding-right: 30px;
+      border-bottom-style: solid; border-bottom-color: #eae9ec; border-bottom-width: 1px; }
+.info-list-tit{ font-size: 32px; lines:2; color: #36364d; font-weight: bold;}
+.info-list-info{ font-size: 26px; lines:1; color: #9a9aa6; margin-top: 20px; }
+.info-list-time{ text-align: left; color: #9a9aa6; font-size: 24px; margin-top: 20px;}
 
 </style>
