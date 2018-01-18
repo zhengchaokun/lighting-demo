@@ -84,6 +84,186 @@
                     </div>
                 </div>
 
+                <div class="mt20" style="background-color:#ffffff;">
+                    <div class="mt20" style="flex-direction: row;justify-content: space-between;">
+                        <text class="fs32 ml20">个股热度</text>
+                        <text class="bookmark-desc">热度值：0~100 ></text>
+                    </div>
+                    <div class="mt30" style="flex-direction:row;justify-content: space-around;">
+                        <div style="align-items: center">
+                            <text class="fs28 f-dark">热值最高</text>
+                            <text class="fs28 f-dark mt20">热值度：100</text>
+                            <div class="gegu-bar mt40 mb40">
+                            </div>
+                            <div class="flex-row align-items-center">
+                                <text class="fs28 f-black">蓝晓科技</text>
+                                <text class="fs28 f-red">+10.00%</text>
+                            </div>
+                        </div>
+
+                        <div style="align-items: center">
+                            <text class="fs28 f-dark">上升最快</text>
+                            <text class="fs28 f-dark mt20">热值度：39 -> 65</text>
+                            <div class="gegu-bar mt40 mb40">
+                            </div>
+                            <div class="flex-row align-items-center">
+                                <text class="fs28 f-black">中国交建</text>
+                                <text class="fs28 f-red">+6.32%</text>
+                            </div>
+                        </div>
+
+                        <div style="align-items: center">
+                            <text class="fs28 f-dark">下降最快</text>
+                            <text class="fs28 f-dark mt20">热值度：75 -> 47</text>
+                            <div class="gegu-bar mt40 mb40">
+                            </div>
+                            <div class="flex-row align-items-center">
+                                <text class="fs28 f-black">顺威股份</text>
+                                <text class="fs28 f-red">-9.97%</text>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt20" style="background-color:#ffffff;">
+                    <div class="bookmark mt20">
+                        <text class="bookmark-text">智能家族</text>
+                    </div>
+                    <scroller class="flex-row ml20" scroll-direction="horizontal">
+                        <div class="card">
+                            <text class="fs28 f-balck">打新神器</text>
+                            <text class="fs28 f-balck mt20 mb20">今日可申购新股</text>
+                            <div class="flex-row align-items-center">
+                                <text class="f-red fs28">0</text>
+                                <text class="fs28">只</text>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <text class="fs28 f-balck">智能盯盘</text>
+                            <text class="fs28 f-balck mt20 mb20">已有52.14万人设置</text>
+                            <div class="flex-row align-items-center">
+                                <text class="fs28">今日</text>
+                                <text class="f-red fs28">+427人</text>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <text class="fs28 f-balck">成本神器</text>
+                            <text class="fs28 f-balck mt20 mb20">获利占比超过50%</text>
+                            <div class="flex-row align-items-center">
+                                <text class="f-red fs28">925只</text>
+                                <text class="fs28">股票</text>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <text class="fs28 f-balck">相似K线</text>
+                            <text class="fs28 f-balck mt20 mb20">蓝晓科技 VS 中闽能源</text>
+                            <div class="flex-row align-items-center">
+                                <text class="fs28">相似度</text>
+                                <text class="fs28 f-red">96.8%</text>
+                            </div>
+                        </div>
+                    </scroller>   
+                </div>
+
+                <div class="mt20 pt20 pl20" style="background-color:#ffffff;">
+                    <text class="fs32">核心 • 大数据</text>
+                    <div class="flex-row mt40 justify-space-between">
+                        <div class="flex-row align-items-center">
+                            <text class="fs28">新开 17.84万户</text>
+                            <text class="fs24 f-dark">(截止1月5号)</text>                            
+                        </div>
+                        <div class="flex-row mr20 align-items-center">
+                            <text class="fs24 f-dark ml40">较上周减少</text>
+                            <text class="fs24 f-green">20%</text>
+                            <text class="fs24">></text>
+                        </div>
+                    </div>
+                    <div style="height:300px">
+
+                    </div>
+                </div>
+                <div class="line"></div>
+                <div class="flex-row justify-space-around pt30" style="background-color:#ffffff;">
+                    <div class="align-items-center">
+                        <text class="fs30">市场平均市盈率 22.29</text>
+                        <div class="flex-row mt20">
+                            <text class="fs24 f-dark">近90日最低 21.23</text>
+                            <text class="fs24 f-dark">最高 23.49</text>
+                        </div>
+                        <div style="height:300px;"></div>
+                    </div>
+                    <div class="align-items-center">
+                        <text class="fs30">市场平均市净率 2.22</text>
+                        <div class="flex-row mt20">
+                            <text class="fs24 f-dark">近90日最低 2.11</text>
+                            <text class="fs24 f-dark">最高 2.29</text>
+                        </div>
+                        <div style="height:300px;"></div>
+                    </div>
+                </div>
+
+                <div class="mt20" style="background-color:#ffffff;">
+                    <div class="mt20" style="flex-direction: row;justify-content: space-between;">
+                        <div class="bookmark">
+                            <text class="bookmark-text">跟牛人</text>
+                        </div>
+                        <text class="bookmark-desc">更多组合 ></text>
+                    </div>
+
+                    <div class="flex-row align-items-center pt20 pb20 mt20" style="border-top-width:1px;border-color:#d9d9d9;height:170px;">
+                        <div class="align-items-center flex-2" style="border-right-width:1px;border-color:#d9d9d9;">
+                            <text class="fs32 f-red">337.63%</text>
+                            <text class="fs24 f-dark mt20">累计总收益</text>
+                        </div>
+                        <div class="flex-3 pl30">
+                            <div class="flex-row">
+                                <text class="fs32">规范规范vgfd</text>
+                                <div></div>
+                            </div>
+                            <div class="flex-row mt20">
+                                <text class="fs24 f-dark">最大回撤 +38.16%</text>
+                                <text class="fs24 f-dark">胜率 +75.00%</text>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-row align-items-center pt20 pb20" style="border-top-width:1px;border-color:#d9d9d9;height:170px;">
+                        <div class="align-items-center flex-2" style="border-right-width:1px;border-color:#d9d9d9;">
+                            <text class="fs32 f-red">3.00%</text>
+                            <text class="fs24 f-dark mt20">累计总收益</text>
+                        </div>
+                        <div class="flex-3 pl30">
+                            <div class="flex-row">
+                                <text class="fs32">空头司令</text>
+                                <div></div>
+                            </div>
+                            <div class="flex-row mt20">
+                                <text class="fs24 f-dark">最大回撤 +62.17%</text>
+                                <text class="fs24 f-dark">胜率 +50.00%</text>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-row align-items-center pt20 pb20" style="border-top-width:1px;border-color:#d9d9d9;height:170px;">
+                        <div class="align-items-center flex-2" style="border-right-width:1px;border-color:#d9d9d9;">
+                            <text class="fs32 f-red">54.19%</text>
+                            <text class="fs24 f-dark mt20">累计总收益</text>
+                        </div>
+                        <div class="flex-3 pl30">
+                            <div class="flex-row">
+                                <text class="fs32">编程浪子R15</text>
+                                <div></div>
+                            </div>
+                            <div class="flex-row mt20">
+                                <text class="fs24 f-dark">最大回撤 +5.55%</text>
+                                <text class="fs24 f-dark">胜率 +100.00%</text>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt20 flex-row" style="background-color:#ffffff;height:140px;margin-bottom:80px;">
+                    <image></image>
+                    <text>全新行情操作指南</text>
+                </div>
 
             </div>
             <!-- 股指 -->
@@ -449,7 +629,7 @@ export default {
 }
 .cell-link {
   font-size: 34px;
-  color: #b7b7b7;
+  color: #d9d9d9;
 }
 .f-green {
   color: #5d9f3b;
@@ -538,8 +718,8 @@ export default {
   align-items: center;
   justify-content: center;
   flex: 1;
-  border-color: #b7b7b7;
-  color: #b7b7b7;
+  border-color: #d9d9d9;
+  color: #d9d9d9;
 }
 .btn-text {
   font-size: 30px;
@@ -551,7 +731,7 @@ export default {
   justify-content: space-around;
   align-items: center;
   border-bottom-width: 1px;
-  border-bottom-color: #b7b7b7;
+  border-bottom-color: #d9d9d9;
   margin-left: 20px;
   margin-right: 20px;
 }
@@ -560,6 +740,25 @@ export default {
   justify-content: center;
   align-items: flex-start;
 }
-.share-data {
+.gegu-bar{
+    width: 40px;
+    height: 120px;
+    background-color: #e27318;
+}
+.card{
+    width: 320px;
+    height: 200px;
+    border-width: 1px;
+    border-color: #c9a1a1;
+    border-radius: 10px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-right: 20px;
+    align-items: center;
+    padding-top: 26px;
+}
+.line{
+    height: 1px;
+    background-color: #d9d9d9;
 }
 </style>
