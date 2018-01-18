@@ -302,8 +302,22 @@ Game.prototype = {
 function geometry() {
     let material = new THREE.MeshLambertMaterial({color: config.cubeColor});
     let cube = function () {
+        let scene = new THREE.Scene();
+
         let geometryCube = new THREE.CubeGeometry(config.cubeWidth, config.cubeHeight, config.cubeDeep);
-        return new THREE.Mesh(geometryCube, material);
+
+        let plane = new THREE.PlaneGeometry(config.cubeWidth,config.cubeDeep);
+        let texture = THREE.ImageUtils.loadTexture("model/logo-nav.png");
+        let planeMaterial=new THREE.MeshLambertMaterial({
+            map:texture
+        });
+        let planeMesh = new THREE.Mesh(plane,planeMaterial);
+        planeMesh.rotation.x = -Math.PI/2;
+        planeMesh.position.y = config.cubeHeight/2;
+
+        scene.add(planeMesh);
+        scene.add(new THREE.Mesh(geometryCube, material));
+        return scene;
     };
 
     let cylinder = function () {
