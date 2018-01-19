@@ -31,8 +31,12 @@
                 <lc-cell label="其他交易" :cell-style="cellStyle1" cell-index="last" :has-arrow="true" :has-top-border="false"></lc-cell>
             </div>
 
-            <lc-cell class="mt20 mb30" :icon="cellIcon" :has-arrow="true" link="#">
-                <text :style="{color:color}" slot="label">新版交易操作指南</text>
+            <lc-cell class="mt20 mb30" :cell-style="cellStyle" :has-arrow="true" link="#">
+                <div class="flex-row pos-r align-items-center" slot="label">
+                    <image class="cell-img" src="images/icon-zn.png"></image>
+                    <text class="ml20 cell-text">新版交易操作指南</text>
+                    <image class="cell-icon" src="images/icon-zl.png"></image>                    
+                </div>               
             </lc-cell>
        </scroller>
     </div>
@@ -58,7 +62,7 @@ import LcCell from "lighting-ui/packages/lc-cell";
                 cellStyle1:{height:'100px'},
                 titleTextStyle:{fontSize:'24px',color:'#c0c0c0'},
                 titleTextStyle1:{ fontSize:'24px',color:'#d2d2d2',textAlign:'left'},
-                
+                cellIcon:'images/icon-zn.png'
             }
         }
     }
@@ -70,4 +74,8 @@ import LcCell from "lighting-ui/packages/lc-cell";
     margin-top: 16px; border-style: solid; border-width: 1px; border-color: #d4d4d4; border-radius: 8px;}
 .trade-grid-img{width: 84px; height: 84px;}
 .trade-grid-text{ color: #a39fa0; font-size: 28px; margin-top: 30px;}
+
+.cell-img{ width:39px; height: 50px; }
+.cell-icon{ position: absolute; top:-15px; left: 330px; width:87px; height: 40px; }
+.cell-text{ color: #4a4a4a;}
 </style>
