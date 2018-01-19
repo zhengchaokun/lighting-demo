@@ -1,6 +1,7 @@
 const THREE = require("three");
 
 const config = require("./game/config");
+const audio = require("./game/audio")
 
 let Game = function (options) {
     this.options = options;
@@ -346,6 +347,7 @@ function triggerJump() {
             triggerJump.call(that);
         })
     } else {
+        audio.play("jumpdone");
         that.jumperStat.ready = false;
         that.jumperStat.mSpeed = 0;
         that.jumperStat.ySpeed = 0;
