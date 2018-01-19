@@ -30,12 +30,37 @@ let cube = function (pic) {
     }
 };
 
+function threeBox(res) {
+    return function () {
+        const y = new THREE.BoxGeometry(config.cubeWidth, config.cubeHeight, config.cubeDeep),
+            k = new THREE.MeshLambertMaterial({map: THREE.ImageUtils.loadTexture(res)});
+        mapUv(428, 428, y, 1, 0, 0, 280, 148);
+        mapUv(428, 428, y, 2, 0, 148, 280, 428);
+        mapUv(428, 428, y, 4, 280, 148, 428, 428);
+        return new THREE.Mesh(y, k)
+    }
+}
+
 let cylinder = function () {
     let material = new THREE.MeshLambertMaterial({color: "#888"});
     let geometryCylinder = new THREE.CylinderGeometry( config.cubeWidth/2, config.cubeWidth/2, config.cubeHeight, 32 );
     return new THREE.Mesh(geometryCylinder, material);
 };
 
+
+function _mapUv(e, t, i, n, a, o, s, h, l) {
+    var c = 1 / e, u = 1 / t;
+    if (i.faces[n] instanceof THREE.Face3) {
+        d = i.faceVertexUvs[0][2 * n];
+        4 != n || l ? (d[0].x = a * c, d[0].y = o * u, d[1].x = a * c, d[1].y = h * u, d[2].x = s * c, d[2].y = o * u) : (d[0].x = a * c, d[0].y = o * u, d[2].x = a * c, d[2].y = h * u, d[1].x = s * c, d[1].y = o * u);
+        var d = i.faceVertexUvs[0][2 * n + 1];
+        4 != n || l ? (d[0].x = a * c, d[0].y = h * u, d[1].x = s * c, d[1].y = h * u, d[2].x = s * c, d[2].y = o * u) : (d[2].x = a * c, d[2].y = h * u, d[1].x = s * c, d[1].y = h * u, d[0].x = s * c, d[0].y = o * u)
+    }
+}
+function mapUv(e, t, i, n, r, a, o, s, h) {
+    if (n.length) for (var l = 0; l < n.length; ++l) _mapUv(e, t, i, n[l], r, a, o, s, h); else _mapUv(e, t, i, n, r, a, o, s, h)
+}
+
 module.exports = {
-    models:[cube('res/wx/stool.png'),cube('res/wx/bag.png'),cylinder]
+    models:[cube('res/wx/stool.png'),cube('res/wx/bag.png'),cylinder,threeBox("res/wx/express.png"),threeBox("res/wx/tit.png"),threeBox("res/wx/sing.png"),threeBox("res/wx/store_top.png")]
 };
