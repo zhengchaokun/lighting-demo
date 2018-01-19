@@ -12,18 +12,18 @@
     <lc-input 
             type="date"
             placeholder="select date"
-            autofocus="false"
+            :autofocus="false"
             value=""
             class="mt20"
             :input-style="inputStyle"
             onchange="onchange"
-            max = "2029-11-28"
-            min = "2015-11-28"/>
+            :max = "2029-11-28"
+            :min = "2015-11-28"/>
     <lc-input
         type="time"
         class="mt20"
         placeholder="select time"
-        autofocus="false"
+        :autofocus="false"
         value=""
         onchange="onchange"
         :input-style="inputStyle"
