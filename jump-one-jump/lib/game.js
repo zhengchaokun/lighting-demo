@@ -1,19 +1,6 @@
 const THREE = require("three");
 
-const config = {
-    background: "#ffc9ce", // 背景颜色
-    fallingSpeed: 0.5, // 游戏失败掉落速度
-    cubeColor: "#888",
-    cubeWidth: 3, // 方块宽度
-    cubeHeight: 1.2, // 方块高度
-    cubeDeep: 3, // 方块深度
-    jumperColor: "#3f3857",
-    jumperWidth: 2, // jumper宽度
-    jumperHeight: 3, // jumper高度
-    jumperDeep: 2, // jumper深度
-    mSpeed:0.004,
-    ySpeed:0.02,
-};
+const config = require("./game/config");
 
 let Game = function (options) {
     this.options = options;
@@ -299,34 +286,9 @@ Game.prototype = {
     },
 };
 
+let models = require("./game/model").models;
 function geometry() {
-    let material = new THREE.MeshLambertMaterial({color: config.cubeColor});
-    let cube = function () {
-        let scene = new THREE.Scene();
-
-        let geometryCube = new THREE.CubeGeometry(config.cubeWidth, config.cubeHeight, config.cubeDeep);
-
-        let plane = new THREE.PlaneGeometry(config.cubeWidth,config.cubeDeep);
-        let texture = THREE.ImageUtils.loadTexture("model/logo-nav.png");
-        let planeMaterial=new THREE.MeshLambertMaterial({
-            map:texture
-        });
-        let planeMesh = new THREE.Mesh(plane,planeMaterial);
-        planeMesh.rotation.x = -Math.PI/2;
-        planeMesh.position.y = config.cubeHeight/2;
-
-        scene.add(planeMesh);
-        scene.add(new THREE.Mesh(geometryCube, material));
-        return scene;
-    };
-
-    let cylinder = function () {
-        let geometryCylinder = new THREE.CylinderGeometry( config.cubeWidth/2, config.cubeWidth/2, config.cubeHeight, 32 );
-        return new THREE.Mesh(geometryCylinder, material);
-    };
-
-    let geometrys = [cube,cylinder];
-    return geometrys[Math.floor(Math.random()*geometrys.length)]();
+    return models[Math.floor(Math.random()*models.length)]();
 }
 
 function triggerJump() {
