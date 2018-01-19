@@ -2,298 +2,321 @@
 <template>
     <div>
         <scroller>
-        <!-- scroller -->
-        <div style="background-color:#f8f8f8;margin-top:80px;">
-            <!-- 沪深 -->
-            <div class="page" v-if="tabIndex==0">
-                <div class="flex-row">
-                    <div class="row-item pt10" @click="changePart(index)" v-for="(item, index) in chartData" :key="index">
-                        <div class="part-row">
-                            <text class="part-total f-red">{{item['total']}}</text>
-                        </div>
-                        <div class="part-row mt10">
-                            <text class="part-title">{{item['title']}}</text>
-                            <text class="part-title f-red">{{item['change']}}</text>
-                        </div>
-                        <div :class="['part-line', index==chartIndex && 'line-active']"></div>
-                    </div>
-                </div>
-                <div class="chart">
+          <!-- scroller -->
+          <div class="scroller">
+              <!-- 沪深 -->
+              <div class="page" v-if="tabIndex==0">
+                  <div class="flex-row pl20 pr20">
+                      <div class="row-item pt10" @click="changePart(index)" v-for="(item, index) in chartData" :key="index">
+                          <div class="flex-row justify-center">
+                              <text class="fs34 f-red">{{item['total']}}</text>
+                          </div>
+                          <div class="flex-row align-center justify-center mt10">
+                              <text class="fs24">{{item['title']}}</text>
+                              <text class="fs24 f-red">{{item['change']}}</text>
+                          </div>
+                          <div :class="['bottom-line', index==chartIndex && 'line-active']"></div>
+                      </div>
+                  </div>
+                  <div class="chart">
 
-                </div>
+                  </div>
 
-                <div class="cell">
-                    <text class="part-title f-red mr10 ml20">上涨{{raise_count}}只</text>
-                    <lc-progress :value="barPercentage"
-                        bar-color='#f35151'
-                        :bar-height="6"
-                        :bar-width="320">
-                    </lc-progress>
-                    <text class="part-title f-green ml10">{{fall_count}}只下跌</text>
-                    <text class="cell-link mr20"> > </text>
-                </div>
+                  <div class="cell">
+                      <text class="fs24 f-red ml40">上涨 {{raise_count}}只</text>
+                      <lc-progress :value="barPercentage"
+                          bar-color='#f35151'
+                          :bar-height="8"
+                          :bar-width="320">
+                      </lc-progress>
+                      <text class="fs24 f-green ">{{fall_count}}只 下跌</text>
+                      <text class="cell-link mr20"> > </text>
+                  </div>
 
-                <div class="grid mt20">
-                    <div class="grid-item" v-for="(item, index) in blockList" :key="index">
-                        <text class="grid-title f-black">{{item.title}}</text>
-                        <text class="grid-title f-red mt10">{{item.change}}</text>
-                        <text class="grid-desc mt10">{{item.total}}</text>
-                    </div>
-                    <div class="grid-item">
-                        <text class="grid-desc fs32">热门板块</text>
-                        <text class="grid-desc fs32 mt30">更多></text>
-                    </div>
-                </div>
+                  <div class="grid mt20">
+                      <div class="grid-item" v-for="(item, index) in blockList" :key="index">
+                          <text class="fs32 f-black">{{item.title}}</text>
+                          <text class="fs32 f-red mt20">{{item.change}}</text>
+                          <text class="fs24 f-dark mt10">{{item.total}}</text>
+                      </div>
+                      <div class="grid-item">
+                          <text class="fs32 f-dark">热门板块</text>
+                          <text class="fs30 f-dark mt30">更多 ></text>
+                      </div>
+                  </div>
 
-                <div class="grid2 mt20">
-                    <div class="grid2-item" v-for="(item, index) in topicList" :key="index">
-                        <text class="grid2-title">{{item}}</text>
-                    </div>
-                </div>
+                  <div class="grid2 mt20">
+                      <div class="grid2-item" v-for="(item, index) in topicList" :key="index">
+                          <text class="fs28 f-blue">{{item}}</text>
+                      </div>
+                  </div>
 
-                <div class="mt20" style="background-color:#ffffff;">
-                    <div class="mt20" style="flex-direction: row;justify-content: space-between;">
-                        <div class="bookmark">
-                            <text class="bookmark-text">个股异动</text>
-                        </div>
-                        <text class="bookmark-desc">实时智能计算个股异动情况 ></text>
-                    </div>
+                  <!-- 个股异动 -->
+                  <div class="mt20 bgc-white">
+                      <div class="flex-row justify-between align-center mt30">
+                          <div class="bookmark">
+                              <text class="bookmark-text">个股异动</text>
+                          </div>
+                          <div class="flex-row align-center">
+                            <text class="fs24 f-dark">实时智能计算个股异动情况</text>
+                            <image src="images/more-arrow.png" class="icon-more-arrow"></image>
+                          </div>
+                      </div>
 
-                    <div style="padding-top:60px;justify-content: center;background-color:#ffffff;align-items:center">
-                        <div class="btn-wrap mb30">
+                      <div class="flex-row justify-center mt40 pt20 pb20">
+                        <div class="btn-wrap">
                             <div v-for="(btn, index) in geguTitles" :key="index" :style="btnStyle(index)" class="btn-tab" @click="changeBtn(index)" >
                                 <text class="btn-text" :style="btnTextStyle(index)">{{btn.title}}</text>
                             </div>
-                        </div>
-                        <div v-for="(item, index) in geguData" :key="index" class="share-list">
-                            <div class="share-title flex-3">
-                                <text class="fs32 f-black">{{item.title}}</text>
-                                <text class="fs24 f-dark mt10">{{item.code}}</text>
-                            </div>
-                            <div class="flex-2">
-                                <text class="fs32 f-black">{{item.total}}</text>
-                            </div>
-                            <div class="flex-2">
-                                <text :class="['fs32', item.change >= 0 ? 'f-red':'f-green']">{{item.change}}%</text>
-                            </div>
-                            <div class="flex-3" style="align-items: flex-end;">
-                                <text class="fs32 f-black">{{item.desc}}</text>
-                            </div>
-                        </div>
-                        <text class="fs28 f-dark mt20 mb20">查看更多 ></text>                        
-                    </div>
-                </div>
+                        </div>                        
+                      </div>
 
-                <div class="mt20" style="background-color:#ffffff;">
-                    <div class="mt20" style="flex-direction: row;justify-content: space-between;">
-                        <text class="fs32 ml20">个股热度</text>
-                        <text class="bookmark-desc">热度值：0~100 ></text>
-                    </div>
-                    <div class="mt30" style="flex-direction:row;justify-content: space-around;">
-                        <div style="align-items: center">
-                            <text class="fs28 f-dark">热值最高</text>
-                            <text class="fs28 f-dark mt20">热值度：100</text>
-                            <div class="gegu-bar mt40 mb40">
-                            </div>
-                            <div class="flex-row align-items-center">
-                                <text class="fs28 f-black">蓝晓科技</text>
-                                <text class="fs28 f-red">+10.00%</text>
-                            </div>
-                        </div>
+                      <div v-for="(item, index) in geguData" :key="index" class="gegu-list">
+                          <div class="flex-column justify-center align-start flex-5">
+                              <text class="fs32 f-black">{{item.title}}</text>
+                              <text class="fs24 f-dark mt10">{{item.code}}</text>
+                          </div>
+                          <div class="flex-3 align-start">
+                              <text class="fs32 f-black">{{item.total}}</text>
+                          </div>
+                          <div class="flex-3 align-end">
+                              <text :class="['fs32', item.change >= 0 ? 'f-red':'f-green']">{{item.change}}%</text>
+                          </div>
+                          <div class="flex-5 align-end">
+                              <text class="fs28 f-black">{{item.desc}}</text>
+                          </div>
+                      </div>
+                      
+                      <div class="flex-row justify-center">
+                        <text class="fs26 f-dark mt20 mb30">查看更多 ></text>    
+                      </div>
+                  </div>
 
-                        <div style="align-items: center">
-                            <text class="fs28 f-dark">上升最快</text>
-                            <text class="fs28 f-dark mt20">热值度：39 -> 65</text>
-                            <div class="gegu-bar mt40 mb40">
-                            </div>
-                            <div class="flex-row align-items-center">
-                                <text class="fs28 f-black">中国交建</text>
-                                <text class="fs28 f-red">+6.32%</text>
-                            </div>
-                        </div>
+                  <!-- 个股热度 -->
+                  <div class="mt20 bgc-white">
+                      <div class="flex-row justify-between align-center mt40">
+                          <div class="flex-row align-center">
+                            <text class="fs32 ml20">个股热度</text>
+                            <image src="images/question.png" class="icon-question"></image>
+                          </div>
+                          <div class="flex-row align-center">
+                            <text class="fs24 f-dark">热度值：0~100</text>
+                            <image src="images/more-arrow.png" class="icon-more-arrow"></image>
+                          </div>
+                      </div>
+                      <div class="flex-row justify-around mt40 pt20 pb30">
+                          <div class="align-center">
+                              <text class="fs26 f-dark">热值最高</text>
+                              <text class="fs26 f-dark mt20">热值度：100</text>
+                              <div class="gegu-bar mt40 mb40">
+                              </div>
+                              <div class="flex-row align-center">
+                                  <text class="fs28 f-black">蓝晓科技</text>
+                                  <text class="fs28 f-red">+10.00%</text>
+                              </div>
+                          </div>
 
-                        <div style="align-items: center">
-                            <text class="fs28 f-dark">下降最快</text>
-                            <text class="fs28 f-dark mt20">热值度：75 -> 47</text>
-                            <div class="gegu-bar mt40 mb40">
-                            </div>
-                            <div class="flex-row align-items-center">
-                                <text class="fs28 f-black">顺威股份</text>
-                                <text class="fs28 f-red">-9.97%</text>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                          <div class="align-items: center">
+                              <text class="fs26 f-dark">上升最快</text>
+                              <text class="fs26 f-dark mt20">热值度：39 -> 65</text>
+                              <div class="gegu-bar mt40 mb40">
+                              </div>
+                              <div class="flex-row align-center">
+                                  <text class="fs28 f-black">中国交建</text>
+                                  <text class="fs28 f-red">+6.32%</text>
+                              </div>
+                          </div>
 
-                <div class="mt20" style="background-color:#ffffff;">
-                    <div class="bookmark mt20">
-                        <text class="bookmark-text">智能家族</text>
-                    </div>
-                    <scroller class="flex-row ml20" scroll-direction="horizontal">
-                        <div class="card">
-                            <text class="fs28 f-balck">打新神器</text>
-                            <text class="fs28 f-balck mt20 mb20">今日可申购新股</text>
-                            <div class="flex-row align-items-center">
-                                <text class="f-red fs28">0</text>
-                                <text class="fs28">只</text>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <text class="fs28 f-balck">智能盯盘</text>
-                            <text class="fs28 f-balck mt20 mb20">已有52.14万人设置</text>
-                            <div class="flex-row align-items-center">
-                                <text class="fs28">今日</text>
-                                <text class="f-red fs28">+427人</text>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <text class="fs28 f-balck">成本神器</text>
-                            <text class="fs28 f-balck mt20 mb20">获利占比超过50%</text>
-                            <div class="flex-row align-items-center">
-                                <text class="f-red fs28">925只</text>
-                                <text class="fs28">股票</text>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <text class="fs28 f-balck">相似K线</text>
-                            <text class="fs28 f-balck mt20 mb20">蓝晓科技 VS 中闽能源</text>
-                            <div class="flex-row align-items-center">
-                                <text class="fs28">相似度</text>
-                                <text class="fs28 f-red">96.8%</text>
-                            </div>
-                        </div>
-                    </scroller>   
-                </div>
+                          <div class="align-items: center">
+                              <text class="fs26 f-dark">下降最快</text>
+                              <text class="fs26 f-dark mt20">热值度：75 -> 47</text>
+                              <div class="gegu-bar mt40 mb40">
+                              </div>
+                              <div class="flex-row align-center">
+                                  <text class="fs28 f-black">顺威股份</text>
+                                  <text class="fs28 f-red">-9.97%</text>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
 
-                <div class="mt20 pt20 pl20" style="background-color:#ffffff;">
-                    <text class="fs32">核心 • 大数据</text>
-                    <div class="flex-row mt40 justify-space-between">
-                        <div class="flex-row align-items-center">
-                            <text class="fs28">新开 17.84万户</text>
-                            <text class="fs24 f-dark">(截止1月5号)</text>                            
-                        </div>
-                        <div class="flex-row mr20 align-items-center">
-                            <text class="fs24 f-dark ml40">较上周减少</text>
-                            <text class="fs24 f-green">20%</text>
-                            <text class="fs24">></text>
-                        </div>
-                    </div>
-                    <div style="height:300px">
+                  <!-- 智能家族 -->
+                  <div class="mt20 bgc-white">
+                      <div class="bookmark mt20">
+                          <text class="bookmark-text">智能家族</text>
+                      </div>
+                      <scroller class="flex-row ml30 mt30 mb30" scroll-direction="horizontal">
+                          <div class="card">
+                              <text class="fs28 f-black">打新神器</text>
+                              <text class="fs28 f-black mt30 mb20">今日可申购新股</text>
+                              <div class="flex-row align-center">
+                                  <text class="f-red fs28">0</text>
+                                  <text class="fs28">只</text>
+                              </div>
+                          </div>
+                          <div class="card">
+                              <text class="fs28 f-black">智能盯盘</text>
+                              <text class="fs28 f-black mt30 mb20">已有52.14万人设置</text>
+                              <div class="flex-row align-center">
+                                  <text class="fs28">今日</text>
+                                  <text class="f-red fs28">+427人</text>
+                              </div>
+                          </div>
+                          <div class="card">
+                              <text class="fs28 f-black">成本神器</text>
+                              <text class="fs28 f-black mt30 mb20">获利占比超过50%</text>
+                              <div class="flex-row align-center">
+                                  <text class="f-red fs28">925只</text>
+                                  <text class="fs28">股票</text>
+                              </div>
+                          </div>
+                          <div class="card">
+                              <text class="fs28 f-black">相似K线</text>
+                              <text class="fs28 f-black mt30 mb20">蓝晓科技 VS 中闽能源</text>
+                              <div class="flex-row align-center">
+                                  <text class="fs28">相似度</text>
+                                  <text class="fs28 f-red">96.8%</text>
+                              </div>
+                          </div>
+                      </scroller>   
+                  </div>
 
-                    </div>
-                </div>
-                <div class="line"></div>
-                <div class="flex-row justify-space-around pt30" style="background-color:#ffffff;">
-                    <div class="align-items-center">
-                        <text class="fs30">市场平均市盈率 22.29</text>
-                        <div class="flex-row mt20">
-                            <text class="fs24 f-dark">近90日最低 21.23</text>
-                            <text class="fs24 f-dark">最高 23.49</text>
+                  <!-- 核心大数据 -->
+                  <div class="mt20 pt20 bgc-white" >
+                      <text class="fs32 mt20 ml20">核心 • 大数据</text>
+                      <div class="pl20 pr20 mt40">
+                        <div class="flex-row justify-between align-center pt20">
+                            <div class="flex-row align-center">
+                                <text class="fs32 f-black">新开 17.84万户</text>
+                                <text class="fs24 f-dark"> (截止1月5号)</text>                            
+                            </div>
+                            <div class="flex-row align-center mr20">
+                                <text class="fs24 f-dark ml40">较上周减少</text>
+                                <text class="fs24 f-green">20%</text>
+                                <image src="images/more-arrow.png" class="icon-sm-arrow"></image>
+                            </div>
                         </div>
-                        <div style="height:300px;"></div>
-                    </div>
-                    <div class="align-items-center">
-                        <text class="fs30">市场平均市净率 2.22</text>
-                        <div class="flex-row mt20">
-                            <text class="fs24 f-dark">近90日最低 2.11</text>
-                            <text class="fs24 f-dark">最高 2.29</text>
-                        </div>
-                        <div style="height:300px;"></div>
-                    </div>
-                </div>
+                        <div style="height:300px">
 
-                <div class="mt20" style="background-color:#ffffff;">
-                    <div class="mt20" style="flex-direction: row;justify-content: space-between;">
-                        <div class="bookmark">
-                            <text class="bookmark-text">跟牛人</text>
-                        </div>
-                        <text class="bookmark-desc">更多组合 ></text>
-                    </div>
+                        </div>                        
+                      </div>
+                      <div class="line"></div>
+                      <div class="flex-row justify-around mt40 pt20">
+                          <div class="align-center">
+                              <text class="fs30">市场平均市盈率 22.29</text>
+                              <div class="flex-row mt20">
+                                  <text class="fs24 f-dark">近90日最低 21.23</text>
+                                  <text class="fs24 f-dark">最高 23.49</text>
+                              </div>
+                              <div style="height:240px;"></div>
+                          </div>
+                          <div class="align-center">
+                              <text class="fs30">市场平均市净率 2.22</text>
+                              <div class="flex-row mt20">
+                                  <text class="fs24 f-dark">近90日最低 2.11</text>
+                                  <text class="fs24 f-dark">最高 2.29</text>
+                              </div>
+                              <div style="height:240px;"></div>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  <!-- 跟牛人 -->
+                  <div class="mt20 bgc-white">
+                      <div class="flex-row justify-between align-center mt20">
+                          <div class="bookmark">
+                              <text class="bookmark-text">跟牛人</text>
+                          </div>
+                          <div class="flex-row align-center">
+                            <text class="fs24 f-dark">更多组合</text>
+                            <image src="images/more-arrow.png" class="icon-more-arrow"></image>
+                          </div>
+                      </div>
 
-                    <div class="flex-row align-items-center pt20 pb20 mt20" style="border-top-width:1px;border-color:#d9d9d9;height:170px;">
-                        <div class="align-items-center flex-2" style="border-right-width:1px;border-color:#d9d9d9;">
-                            <text class="fs32 f-red">337.63%</text>
-                            <text class="fs24 f-dark mt20">累计总收益</text>
-                        </div>
-                        <div class="flex-3 pl30">
-                            <div class="flex-row">
-                                <text class="fs32">规范规范vgfd</text>
-                                <div></div>
-                            </div>
-                            <div class="flex-row mt20">
-                                <text class="fs24 f-dark">最大回撤 +38.16%</text>
-                                <text class="fs24 f-dark">胜率 +75.00%</text>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex-row align-items-center pt20 pb20" style="border-top-width:1px;border-color:#d9d9d9;height:170px;">
-                        <div class="align-items-center flex-2" style="border-right-width:1px;border-color:#d9d9d9;">
-                            <text class="fs32 f-red">3.00%</text>
-                            <text class="fs24 f-dark mt20">累计总收益</text>
-                        </div>
-                        <div class="flex-3 pl30">
-                            <div class="flex-row">
-                                <text class="fs32">空头司令</text>
-                                <div></div>
-                            </div>
-                            <div class="flex-row mt20">
-                                <text class="fs24 f-dark">最大回撤 +62.17%</text>
-                                <text class="fs24 f-dark">胜率 +50.00%</text>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex-row align-items-center pt20 pb20" style="border-top-width:1px;border-color:#d9d9d9;height:170px;">
-                        <div class="align-items-center flex-2" style="border-right-width:1px;border-color:#d9d9d9;">
-                            <text class="fs32 f-red">54.19%</text>
-                            <text class="fs24 f-dark mt20">累计总收益</text>
-                        </div>
-                        <div class="flex-3 pl30">
-                            <div class="flex-row">
-                                <text class="fs32">编程浪子R15</text>
-                                <div></div>
-                            </div>
-                            <div class="flex-row mt20">
-                                <text class="fs24 f-dark">最大回撤 +5.55%</text>
-                                <text class="fs24 f-dark">胜率 +100.00%</text>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                      <div class="niuren-item mt20">
+                          <div class="align-center flex-2 r-split">
+                              <text class="fs40 f-red">337.63%</text>
+                              <text class="fs24 f-dark mt20">累计总收益</text>
+                          </div>
+                          <div class="flex-3 pl30">
+                              <div class="flex-row align-center">
+                                  <text class="fs32">规范规范vgfd</text>
+                                  <div class="niuren-tag ml20">
+                                    <text class="fs22 f-orange">收益最高</text>
+                                  </div>
+                              </div>
+                              <div class="flex-row mt20">
+                                  <text class="fs24 f-dark">最大回撤 +38.16%</text>
+                                  <text class="fs24 f-dark">  胜率 +75.00%</text>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="niuren-item">
+                          <div class="align-center flex-2 r-split">
+                              <text class="fs40 f-red">3.00%</text>
+                              <text class="fs24 f-dark mt20">累计总收益</text>
+                          </div>
+                          <div class="flex-3 pl30">
+                              <div class="flex-row align-center">
+                                  <text class="fs32">空头司令</text>
+                                  <div class="niuren-tag ml20">
+                                    <text class="fs22 f-orange">人气最高</text>
+                                  </div>
+                              </div>
+                              <div class="flex-row mt20">
+                                  <text class="fs24 f-dark">最大回撤 +62.17%</text>
+                                  <text class="fs24 f-dark">  胜率 +50.00%</text>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="niuren-item">
+                          <div class="align-center flex-2 r-split">
+                              <text class="fs40 f-red">54.19%</text>
+                              <text class="fs24 f-dark mt20">累计总收益</text>
+                          </div>
+                          <div class="flex-3 pl30">
+                              <div class="flex-row align-center">
+                                  <text class="fs32">编程浪子R15</text>
+                                  <div class="niuren-tag ml20">
+                                    <text class="fs22 f-orange">胜率最高</text>
+                                  </div>
+                              </div>
+                              <div class="flex-row mt20">
+                                  <text class="fs24 f-dark">最大回撤 +5.55%</text>
+                                  <text class="fs24 f-dark">  胜率 +100.00%</text>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
 
-                <div class="mt20 flex-row" style="background-color:#ffffff;height:140px;margin-bottom:80px;">
-                    <image></image>
-                    <text>全新行情操作指南</text>
-                </div>
-
-            </div>
-            <!-- 股指 -->
-            <div class="page" v-if="tabIndex==1">
-                <text>股指</text>
-            </div>
-            <!-- 港股 -->
-            <div class="page" v-if="tabIndex==2">
-                <text>港股</text>
-            </div>
-            <!-- 全球 -->
-            <div class="page" v-if="tabIndex==3">
-                <text>全球</text>
-            </div>
-            <!-- 更多 -->
-            <div class="page" v-if="tabIndex==4">
-                <text>更多</text>
-            </div>
-        </div>
+              </div>
+              <!-- 股指 -->
+              <div class="page" v-if="tabIndex==1">
+                  <text>股指</text>
+              </div>
+              <!-- 港股 -->
+              <div class="page" v-if="tabIndex==2">
+                  <text>港股</text>
+              </div>
+              <!-- 全球 -->
+              <div class="page" v-if="tabIndex==3">
+                  <text>全球</text>
+              </div>
+              <!-- 更多 -->
+              <div class="page" v-if="tabIndex==4">
+                  <text>更多</text>
+              </div>
+          </div>
 
         </scroller>
         <!-- tab -->
-        <div class="tabBar" style="position:fixed;top:0px;left:0px;right:0px;">
-            <text v-for="(title, index) in tabTitles" :key="index" :class="['tabBar-text', index==tabIndex && 'f-red']" @click="changeTab(index)">{{title}}</text>
+        <div class="tabBar">
+            <text v-for="(title, index) in tabTitles" :key="index" :class="['tabBar-text', index==tabIndex?'f-red':'f-black']" @click="changeTab(index)">{{title}}</text>
         </div>
     </div>
 </template>
 
 <script>
-import Config from "config/market.js";
 import LcTabPage from "lighting-ui/packages/lc-tab-page";
 import LcCell from "lighting-ui/packages/lc-cell";
 import LcProgress from "lighting-ui/packages/lc-progress";
@@ -580,51 +603,48 @@ export default {
 <style scoped src="../css/ui.css"></style>
 
 <style scoped>
+.scroller{
+  background-color: #f8f8f8;
+  margin-top: 86px;
+}
 .tabBar {
-  height: 80px;
+  position:fixed;
+  top:0px;
+  left:0px;
+  right:0px;
+  height: 86px;
   background-color: #ffffff;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  padding-left: 40px;
   border-bottom-width: 1px;
   border-bottom-color: #d9d9d9;
 }
 .tabBar-text {
-  width: 130px;
-  color: #3a3a3a;
+  width: 140px;
   font-size: 34px;
+  text-align: center;
 }
 .chart {
-  height: 280px;
+  height: 260px;
   border-top-width: 1px;
   border-color: #d9d9d9;
 }
-.part-total {
-  font-weight: 400;
-  font-size: 36px;
-}
-.part-title {
-  font-size: 24px;
-  line-height: 24px;
-}
-.part-line {
+.bottom-line {
   height: 2px;
-  background-color: #f8f8f8;
   margin-top: 8px;
+  margin-left: 30px;
+  margin-right: 30px;
 }
 .line-active {
   background-color: #f35151;
 }
-.part-row {
-  flex-direction: row;
-  justify-content: center;
-}
+
 .cell {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 84px;
+  height: 80px;
   background-color: #ffffff;
 }
 .cell-link {
@@ -643,6 +663,12 @@ export default {
 .f-dark {
   color: #9a9a9a;
 }
+.f-blue{
+  color: #6da6e7;
+}
+.f-orange{
+  color: #ff9933;
+}
 .grid {
   flex-direction: row;
   flex-wrap: wrap;
@@ -652,7 +678,7 @@ export default {
 }
 .grid-item {
   width: 250px;
-  height: 200px;
+  height: 210px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -660,13 +686,6 @@ export default {
   border-color: #d9d9d9;
   border-right-width: 1px;
   border-bottom-width: 1px;
-}
-.grid-title {
-  font-size: 32px;
-}
-.grid-desc {
-  font-size: 22px;
-  color: #9a9a9a;
 }
 .grid2 {
   flex-direction: row;
@@ -677,37 +696,26 @@ export default {
 }
 .grid2-item {
   width: 250px;
-  height: 96px;
+  height: 100px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-style: solid;
-  border-color: #d9d9d9;
-}
-.grid2-title {
-  font-size: 28px;
-  color: #6da6e7;
 }
 .bookmark {
   width: 180px;
+  height: 56px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   background-color: #fe6a6b;
   border-bottom-right-radius: 40px;
   border-top-right-radius: 40px;
 }
 .bookmark-text {
-  line-height: 56px;
   font-size: 32px;
   color: #ffffff;
-  margin-left: 20px;
-}
-.bookmark-desc {
-  font-size: 24px;
-  color: #9a9a9a;
-  line-height: 48px;
-  margin-right: 40px;
 }
 .btn-wrap {
-  display: flex;
   flex-direction: row;
   justify-content: center;
   width: 500px;
@@ -724,41 +732,68 @@ export default {
 .btn-text {
   font-size: 30px;
 }
-.share-list {
-  width: 710px;
+.gegu-list {
   height: 140px;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   border-bottom-width: 1px;
   border-bottom-color: #d9d9d9;
-  margin-left: 20px;
-  margin-right: 20px;
-}
-.share-title {
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+  margin-left: 30px;
+  margin-right: 30px;
 }
 .gegu-bar{
     width: 40px;
     height: 120px;
     background-color: #e27318;
 }
+.icon-question{
+  width: 28px;
+  height: 26px;
+  margin-left: 30px;
+}
+.icon-more-arrow{
+  width: 16px;
+  height: 26px;
+  margin-left: 10px;
+  margin-right: 30px;
+}
+.icon-sm-arrow{
+  width: 10px;
+  height: 20px;
+  margin-left: 10px;
+}
 .card{
-    width: 320px;
-    height: 200px;
+    width: 300px;
     border-width: 1px;
-    border-color: #c9a1a1;
+    border-color: #dfb3b3;
     border-radius: 10px;
-    margin-top: 30px;
-    margin-bottom: 30px;
     margin-right: 20px;
     align-items: center;
-    padding-top: 26px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+.niuren-item{
+  height: 170px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  flex-direction: row;
+  align-items: center;
+  border-top-width:1px;
+  border-color:#d9d9d9;
 }
 .line{
     height: 1px;
     background-color: #d9d9d9;
+}
+.niuren-tag{
+  border-width: 2px;
+  border-color: #ff9933;
+  border-radius: 4px;
+  padding: 2px;
+}
+.r-split{
+  border-right-width:1px;
+  border-color:#d9d9d9;
 }
 </style>
