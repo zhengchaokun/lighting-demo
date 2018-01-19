@@ -5,16 +5,16 @@ let a = function () {
 
     let geometryCube = new THREE.CubeGeometry(config.cubeWidth, config.cubeHeight, config.cubeDeep);
 
-    let plane = new THREE.PlaneGeometry(config.cubeWidth,config.cubeDeep);
+    let plane = new THREE.PlaneGeometry(config.cubeWidth, config.cubeDeep);
     let texture = THREE.ImageUtils.loadTexture("res/bag.png");
 
-    let material = new THREE.MeshLambertMaterial({color: config.cubeColor, map:texture});
-    let planeMaterial=new THREE.MeshLambertMaterial({
-        map:texture
+    let material = new THREE.MeshLambertMaterial({color: config.cubeColor, map: texture});
+    let planeMaterial = new THREE.MeshLambertMaterial({
+        map: texture
     });
-    let planeMesh = new THREE.Mesh(plane,planeMaterial);
-    planeMesh.rotation.x = -Math.PI/2;
-    planeMesh.position.y = config.cubeHeight/2;
+    let planeMesh = new THREE.Mesh(plane, planeMaterial);
+    planeMesh.rotation.x = -Math.PI / 2;
+    planeMesh.position.y = config.cubeHeight / 2;
 
     // scene.add(planeMesh);
     scene.add(new THREE.Mesh(geometryCube, material));
@@ -25,7 +25,7 @@ let cube = function (pic) {
     return function () {
         let geometryCube = new THREE.CubeGeometry(config.cubeWidth, config.cubeHeight, config.cubeDeep);
         let texture = THREE.ImageUtils.loadTexture(pic);
-        let material = new THREE.MeshLambertMaterial({color: "#ddd", map:texture});
+        let material = new THREE.MeshLambertMaterial({color: "#ddd", map: texture});
         return new THREE.Mesh(geometryCube, material);
     }
 };
@@ -43,24 +43,25 @@ function threeBox(res) {
 
 let cylinder = function () {
     let material = new THREE.MeshLambertMaterial({color: "#888"});
-    let geometryCylinder = new THREE.CylinderGeometry( config.cubeWidth/2, config.cubeWidth/2, config.cubeHeight, 32 );
+    let geometryCylinder = new THREE.CylinderGeometry(config.cubeWidth / 2, config.cubeWidth / 2, config.cubeHeight, 32);
     return new THREE.Mesh(geometryCylinder, material);
 };
 
 
 function _mapUv(e, t, i, n, a, o, s, h, l) {
-    var c = 1 / e, u = 1 / t;
+    let c = 1 / e, u = 1 / t;
     if (i.faces[n] instanceof THREE.Face3) {
         d = i.faceVertexUvs[0][2 * n];
-        4 != n || l ? (d[0].x = a * c, d[0].y = o * u, d[1].x = a * c, d[1].y = h * u, d[2].x = s * c, d[2].y = o * u) : (d[0].x = a * c, d[0].y = o * u, d[2].x = a * c, d[2].y = h * u, d[1].x = s * c, d[1].y = o * u);
-        var d = i.faceVertexUvs[0][2 * n + 1];
-        4 != n || l ? (d[0].x = a * c, d[0].y = h * u, d[1].x = s * c, d[1].y = h * u, d[2].x = s * c, d[2].y = o * u) : (d[2].x = a * c, d[2].y = h * u, d[1].x = s * c, d[1].y = h * u, d[0].x = s * c, d[0].y = o * u)
+        4 !== n || l ? (d[0].x = a * c, d[0].y = o * u, d[1].x = a * c, d[1].y = h * u, d[2].x = s * c, d[2].y = o * u) : (d[0].x = a * c, d[0].y = o * u, d[2].x = a * c, d[2].y = h * u, d[1].x = s * c, d[1].y = o * u);
+        let d = i.faceVertexUvs[0][2 * n + 1];
+        4 !== n || l ? (d[0].x = a * c, d[0].y = h * u, d[1].x = s * c, d[1].y = h * u, d[2].x = s * c, d[2].y = o * u) : (d[2].x = a * c, d[2].y = h * u, d[1].x = s * c, d[1].y = h * u, d[0].x = s * c, d[0].y = o * u)
     }
 }
+
 function mapUv(e, t, i, n, r, a, o, s, h) {
-    if (n.length) for (var l = 0; l < n.length; ++l) _mapUv(e, t, i, n[l], r, a, o, s, h); else _mapUv(e, t, i, n, r, a, o, s, h)
+    if (n.length) for (let l = 0; l < n.length; ++l) _mapUv(e, t, i, n[l], r, a, o, s, h); else _mapUv(e, t, i, n, r, a, o, s, h)
 }
 
 module.exports = {
-    models:[cube('res/wx/stool.png'),cube('res/wx/bag.png'),cylinder,threeBox("res/wx/express.png"),threeBox("res/wx/tit.png"),threeBox("res/wx/sing.png"),threeBox("res/wx/store_top.png")]
+    models: [cube('res/wx/stool.png'), cube('res/wx/bag.png'), cylinder, threeBox("res/wx/express.png"), threeBox("res/wx/tit.png"), threeBox("res/wx/sing.png"), threeBox("res/wx/store_top.png")]
 };
