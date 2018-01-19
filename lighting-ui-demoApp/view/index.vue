@@ -93,10 +93,65 @@
             </div>
 
             <div class="mt20 bgc-white tag-wrap">
-                <div class="tag-box" v-for="(tag,index) in tags" :key="index">
-                    <text class="tag-text">{{tag.val}}</text>
+                <div class="tag-box" v-for="(tag,index) in tags" :key="index" :class="[tagClass(index)]">
+                    <text class="tag-text" :class="[tagClass(index)]">{{tag.val}}</text>
                 </div>
             </div>
+
+            <div class="mt20 bgc-white msg-wrap" v-for="(msg,index) in msgList" :key="index">
+                <div class="msg-head flex-row justify-space-between">
+                    <div class="flex-row ">
+                        <image class="msg-head-img" :src="msg.pic"></image>
+                        <div class="ml20">
+                            <text class="msg-head-name">{{msg.name}}</text>
+                            <text class="msg-head-time">{{msg.time}}</text>
+                        </div>
+                    </div>
+                    <div class="msg-head-attent">
+                        <text class="msg-head-attent-text">关注</text>
+                    </div>
+                </div>
+                <div class="msg-cont">
+                    <text class="msg-cont-topic">{{msg.topic}}</text>
+                    <text class="msg-cont-detail">{{msg.detail}}</text>
+                </div>
+                <div class="msg-reply">
+                    <div class="flex-row mt10" v-for="(r,i) in msg.reply" :key="i">
+                        <text class="msg-reply-name">{{r.rname}}:</text>
+                        <text class="msg-reply-msg">{{r.rmsg}}</text>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="mt20 flex-row justify-space-between">
+                <div class="flex-row func-wrap">
+                    <image class="func-wrap-img" src="images/icon-kf.png"></image>
+                    <div class="ml30">
+                        <text class="func-wrap-tit">在线客服</text>
+                        <text class="func-wrap-tip">实时解答</text>
+                    </div>
+                </div>
+                <div class="flex-row func-wrap">
+                    <image class="func-wrap-img" src="images/icon-lc.png"></image>
+                    <div class="ml30">
+                        <text class="func-wrap-tit">理财学堂</text>
+                        <text class="func-wrap-tip">炒股入门</text>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt20 bgc-white">
+                <div class="info-list" v-for="(v,index) in infoList1" :key="index">
+                    <div class="flex1">
+                        <text class="info-list-tit">{{v.textTitle}}</text>
+                        <text class="info-list-info">{{v.textInfo}}</text>
+                        <text class="info-list-time">{{v.textTime}}</text>
+                    </div>
+                </div>
+            </div>
+
+            
             
         </scroller>
 
@@ -162,6 +217,72 @@ export default {
           {val:'涨乐FM',href:'#'},
           {val:'活动专区',href:'#'},
           {val:'涨乐吧火热讨论中',href:'#'}
+      ],
+      msgList:[
+          {
+              name:'Lerry',
+              time:'28分钟前',
+              pic:'images/head-pic-1.png',
+              topic:'连续十几天上涨，没有一天降的多',
+              detail:'一日到达旧金山',
+              reply:[
+                  {rname:'小凯伦',rmsg:'太狠了，都不用办护照了，哈哈哈'},
+                  {rname:'墨迹头',rmsg:'大盘就是这样潇洒，个股更潇洒'}
+              ]
+          },
+          {
+              name:'友人相交',
+              time:'14分钟前',
+              pic:'images/head-pic-2.png',
+              topic:'为什么？',
+              detail:'指数越来越高，个股价越来越低',
+              reply:[
+                  {rname:'乐的不行',rmsg:'就是逆向而行，如果不是，那就不是大盘了'},
+                  {rname:'靠股发财',rmsg:'狙杀手段'}
+              ]
+          }
+      ],
+      infoList1:[
+          {
+              textTitle:'技术论事：沪指连阳终结',
+              textInfo:'今年以来，虽然A股上涨了6.1（截止发稿前），但是境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
+              textTime:'2018-1-15 14:07'
+          },
+          {
+              textTitle:'人民日报：部分楼市放松限购政策部分楼市放松限购政策',
+              textInfo:'境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
+              textTime:'2018-1-15 14:07'
+          },
+          {
+              textTitle:'日本史上最大ipo要来了',
+              textInfo:'境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
+              textTime:'2018-1-15 14:07'
+          },
+          {
+              textTitle:'盘中直击：指数弱势反弹',
+              textInfo:'境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
+              textTime:'2018-1-15 14:07'
+          },
+          {
+              textTitle:'技术论事：沪指连阳终结',
+              textInfo:'今年以来，虽然A股上涨了6.1（截止发稿前），但是境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
+              textTime:'2018-1-15 14:07'
+          },
+          {
+              textTitle:'人民日报：部分楼市放松限购政策',
+              textInfo:'境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
+              textTime:'2018-1-15 14:07'
+          },
+          {
+              textTitle:'日本史上最大ipo要来了',
+              textInfo:'境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
+              textTime:'2018-1-15 14:07'
+          },
+          {
+              textTitle:'盘中直击：指数弱势反弹',
+              textInfo:'境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
+              textTime:'2018-1-15 14:07'
+          }
       ]
     };
   },
@@ -174,6 +295,16 @@ export default {
     },
     infoClick(e) {
       console.log("clicked" + e.index);
+    },
+    infoClick1(e) {
+      console.log("clicked" + e.index);
+    },
+    tagClass(index){
+        if(this.tags.length-1 == index){
+            return 'tag-box-red'
+        }else{
+            return 'c-gray'
+        }
     }
   }
 };
@@ -248,9 +379,37 @@ export default {
 .concept-price{font-size: 44px; margin-top: 50px;}
 .concept-info{ color: #929292; font-size: 26px; lines:2; margin-top: 20px;}
 
-.tag-wrap{ height: 250px; padding: 30px;flex-direction: row;flex-wrap: wrap; justify-content: space-between;align-content: space-around;}
+.tag-wrap{ height: 250px; padding-left: 40px; padding-right: 40px; padding-top:30px; flex-direction: row;flex-wrap: wrap; justify-content: space-between;}
 .tag-box{align-items: center; justify-content: center; height: 60px; padding-left: 20px; padding-right: 20px; 
-    border-style: solid; border-width: 1px; border-color: #eaeaea; border-radius: 20px;}
-.tag-text{ font-size: 32px; color: #525252;}
+    margin-top: 20px; border-style: solid; border-width: 1px; border-color: #eaeaea; border-radius: 20px;}
+.tag-box-red{ border-color: #dc7070; color: #dc7070;}
+.tag-text{ font-size: 30px;}
+
+.msg-wrap{ padding-top: 40px; padding-left: 20px; padding-bottom: 60px; padding-right: 50px;}
+.msg-head{ height: 80px; align-items: center;}
+.msg-head-img{ width: 70px; height: 70px; border-radius: 35px; margin-left: 20px;}
+.msg-head-name{ color: #333; font-size: 32px;}
+.msg-head-time{ color: #979797; font-size: 24px;} 
+.msg-head-attent{align-items: center; justify-content: center; width: 100px; height: 50px; border-style: solid; border-width: 1px; border-color: #d4d4d4; }
+.msg-head-attent-text{ color: #4a90e2; font-size: 28px;}
+
+.msg-cont{ margin-top: 30px; margin-left: 20px;}
+.msg-cont-topic{ font-size: 32px; color: #414141; font-weight: bold;}
+.msg-cont-detail{ font-size: 32px; color: #5b5b5b; margin-top: 20px; lines:2;}
+
+.msg-reply{background-color: #f3f3f5; padding: 30px; margin-top: 50px; margin-left: 20px;}
+.msg-reply-name{color: #5681b2; font-weight: bold; font-size: 28px;}
+.msg-reply-msg{color: #545454; font-size: 28px; flex:1; margin-left: 10px;}
+
+.func-wrap{ width: 365px; height: 160px; background-color: #fff; justify-content: center; align-items: center;}
+.func-wrap-img{ width: 66px; height: 53px;}
+.func-wrap-tit{color: #323232; font-weight: bold; font-size: 34px;}
+.func-wrap-tip{color: #d4d4d4; font-size: 26px; margin-top: 10px;}
+
+.info-list{ padding-top: 50px; padding-bottom: 40px; padding-left: 30px; padding-right: 30px;
+      border-bottom-style: solid; border-bottom-color: #eae9ec; border-bottom-width: 1px; }
+.info-list-tit{ font-size: 32px; lines:2; color: #36364d; font-weight: bold;}
+.info-list-info{ font-size: 26px; lines:1; color: #9a9aa6; margin-top: 20px; }
+.info-list-time{ text-align: left; color: #9a9aa6; font-size: 24px; margin-top: 20px;}
 
 </style>
