@@ -1,5 +1,6 @@
 const audioMap = {
-    "jumpdone":"res/wx/combo1.mp3"
+    "fall":"res/wx/fall.mp3",
+    "success":"res/wx/success.mp3"
 };
 
 
