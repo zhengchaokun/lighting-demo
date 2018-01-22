@@ -163,8 +163,8 @@ Game.prototype = {
             z: self.cameraPos.next.z
         };
         if (c.x > n.x || c.z > n.z) {
-            self.cameraPos.current.x -= 0.1;
-            self.cameraPos.current.z -= 0.1;
+            self.cameraPos.current.x -= 0.15;
+            self.cameraPos.current.z -= 0.15;
             if (self.cameraPos.current.x - self.cameraPos.next.x < 0.05) {
                 self.cameraPos.current.x = self.cameraPos.next.x
             }
