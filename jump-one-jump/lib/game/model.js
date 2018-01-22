@@ -21,10 +21,16 @@ let a = function () {
     return scene;
 };
 
+let picMap = {};
 let cube = function (pic) {
     return function () {
         let geometryCube = new THREE.CubeGeometry(config.cubeWidth, config.cubeHeight, config.cubeDeep);
-        let texture = THREE.ImageUtils.loadTexture(pic);
+        let texture = picMap[pic];
+
+        if(!texture){
+            texture = THREE.ImageUtils.loadTexture(pic);
+            picMap[pic] = texture;
+        }
         let material = new THREE.MeshLambertMaterial({color: "#ddd", map: texture});
         return new THREE.Mesh(geometryCube, material);
     }
