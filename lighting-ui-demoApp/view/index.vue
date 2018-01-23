@@ -99,7 +99,7 @@
             </div>
 
             <div class="mt20 bgc-white msg-wrap" v-for="(msg,index) in msgList" :key="index">
-                <div class="msg-head flex-row justify-space-between">
+                <div class="msg-head flex-row justify-between">
                     <div class="flex-row ">
                         <image class="msg-head-img" :src="msg.pic"></image>
                         <div class="ml20">
@@ -124,7 +124,7 @@
                 
             </div>
 
-            <div class="mt20 flex-row justify-space-between">
+            <div class="mt20 flex-row justify-between">
                 <div class="flex-row func-wrap">
                     <image class="func-wrap-img" src="images/icon-kf.png"></image>
                     <div class="ml30">
@@ -295,9 +295,7 @@ export default {
     },
     infoClick(e) {
       console.log("clicked" + e.index);
-    },
-    infoClick1(e) {
-      console.log("clicked" + e.index);
+      App.navigate('#/news')
     },
     tagClass(index){
         if(this.tags.length-1 == index){
