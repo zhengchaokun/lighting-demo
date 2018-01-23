@@ -66,5 +66,5 @@ import LcTip from 'lighting-ui/packages/lc-tip';
 .info-img-tit{ color: #3d4144; font-size: 28px;}
 .news-cont{ align-items: center;}
 .news-cont-img{ width: 700px; height: 400px; margin-top: 15px; margin-bottom: 15px;}
-.news-cont-text{ color: #313538; font-size: 34px; text-indent: 60px; margin-top: 10px; line-height: 50px;}
+.news-cont-text{ color: #313538; font-size: 34px; text-indent: 60px; margin-top: 20px; line-height: 50px;}
 </style>
