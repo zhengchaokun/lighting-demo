@@ -1,19 +1,7 @@
 const THREE = require("three");
 
-const config = {
-    background: "#ffc9ce", // 背景颜色
-    fallingSpeed: 0.5, // 游戏失败掉落速度
-    cubeColor: "#888",
-    cubeWidth: 3, // 方块宽度
-    cubeHeight: 1.2, // 方块高度
-    cubeDeep: 3, // 方块深度
-    jumperColor: "#3f3857",
-    jumperWidth: 2, // jumper宽度
-    jumperHeight: 3, // jumper高度
-    jumperDeep: 2, // jumper深度
-    mSpeed:0.004,
-    ySpeed:0.02,
-};
+const config = require("./game/config");
+const audio = require("./game/audio")
 
 let Game = function (options) {
     this.options = options;
@@ -175,8 +163,8 @@ Game.prototype = {
             z: self.cameraPos.next.z
         };
         if (c.x > n.x || c.z > n.z) {
-            self.cameraPos.current.x -= 0.1;
-            self.cameraPos.current.z -= 0.1;
+            self.cameraPos.current.x -= 0.15;
+            self.cameraPos.current.z -= 0.15;
             if (self.cameraPos.current.x - self.cameraPos.next.x < 0.05) {
                 self.cameraPos.current.x = self.cameraPos.next.x
             }
@@ -299,20 +287,9 @@ Game.prototype = {
     },
 };
 
+let models = require("./game/model").models;
 function geometry() {
-    let material = new THREE.MeshLambertMaterial({color: config.cubeColor});
-    let cube = function () {
-        let geometryCube = new THREE.CubeGeometry(config.cubeWidth, config.cubeHeight, config.cubeDeep);
-        return new THREE.Mesh(geometryCube, material);
-    };
-
-    let cylinder = function () {
-        let geometryCylinder = new THREE.CylinderGeometry( config.cubeWidth/2, config.cubeWidth/2, config.cubeHeight, 32 );
-        return new THREE.Mesh(geometryCylinder, material);
-    };
-
-    let geometrys = [cube,cylinder];
-    return geometrys[Math.floor(Math.random()*geometrys.length)]();
+    return models[Math.floor(Math.random()*models.length)]();
 }
 
 function triggerJump() {
@@ -323,12 +300,12 @@ function triggerJump() {
         if (that.cubeStat.nextDir === 'left') {
             that.jumper.position.x -= that.jumperStat.mSpeed;
             if(prevCube.position.z!==that.jumper.position.z){
-                prevCube.position.z-=0.01;
+                that.jumper.position.z-=0.01;
             }
         } else {
             that.jumper.position.z -= that.jumperStat.mSpeed;
             if(prevCube.position.x!==that.jumper.position.x){
-                prevCube.position.x-=0.01;
+                that.jumper.position.x-=0.01;
             }
         }
         that.jumper.position.y += that.jumperStat.ySpeed;
@@ -376,9 +353,11 @@ function triggerJump() {
 
         that.jumper.position.y = that.jumper.horizontal;
         that.jumper.rotation.y += Math.PI*2;
+        that.jumper.getObjectByName("foot").scale.set(1,1,1);
 
         const jumpResult = checkJumpResult.call(that);
         if (jumpResult===1) {
+            audio.play("success");
             // 掉落成功，进入下一步
             that.score++;
             that._createCube();
@@ -388,6 +367,7 @@ function triggerJump() {
                 that.options.success(that.score)
             }
         } else {
+            audio.play("fall");
             // 掉落失败，进入失败动画
             if (jumpResult === 0) {
                 animationFall.call(that,'none')

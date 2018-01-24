@@ -1,7 +1,7 @@
 <template>
     <div style="">
         <div class="score">
-            <image class="score-text" v-for="s in score.toString()" :src="'res/'+s+'.png'"></image>
+            <img class="score-text" v-for="s in score.toString()" :src="'res/'+s+'.png'"></img>
         </div>
         <canvas ref="canvas"></canvas>
     </div>
@@ -22,13 +22,8 @@
                 success(score){
                     that.score = score;
                 },fail(){
-                    Light.requireModule("modal").alert({
-                        message:"失败了，点击再试一次！",
-                        okTitle:'再试一次'
-                    },function(){
-                        that.score = 0;
-                        game.start();
-                    })
+                    that.score = 0;
+                    game.start();
                 }
             });
             game.init()
@@ -38,11 +33,12 @@
 <style scoped>
     .score{
         position: fixed;
-        top:160px;
-        left: 90px;
+        top:80px;
+        left: 45px;
     }
     .score-text{
-        width: 60px;
-        height: 60px;
+        width: 30px;
+        height: 30px;
+        display: inline-block;
     }
 </style>
