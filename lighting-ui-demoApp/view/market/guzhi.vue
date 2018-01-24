@@ -23,7 +23,7 @@
                 <text class="fs30 f-black">{{item.total}}</text>
             </div>
             <div class="flex-1 align-end">
-                <text :class="['fs30',item.change>0?'f-red':'f-green']">{{item.change}}%</text>
+                <text :class="['fs30',item.percent>0?'f-red':'f-green']">{{item.percent}}%</text>
             </div>
         </div>
 
@@ -49,7 +49,7 @@
                 <text class="fs30 f-black">{{item.total}}</text>
             </div>
             <div class="flex-1 align-end">
-                <text :class="['fs30',item.change>0?'f-red':'f-green']">{{item.change}}%</text>
+                <text :class="['fs30',item.percent>0?'f-red':'f-green']">{{item.percent}}%</text>
             </div>
         </div>
 
@@ -70,31 +70,31 @@
                         title: '上证指数',
                         code: '1A0001',
                         total: 3543.12,
-                        change: -0.07
+                        percent: -0.07
                     },
                     {
                         title: '深证成指',
                         code: '2A01',
                         total: 11542.51,
-                        change: -0.11
+                        percent: -0.11
                     },
                     {
                         title: '创业板指',
                         code: '399006',
                         total: 1802.25,
-                        change: 1.93
+                        percent: 1.93
                     },
                     {
                         title: '沪深300',
                         code: '1A0300',
                         total: 4364.29,
-                        change: -0.41
+                        percent: -0.41
                     },
                     {
                         title: '中小板指',
                         code: '399005',
                         total: 7702.20,
-                        change: -0.28
+                        percent: -0.28
                     }
                 ],
                 index1Data: [
@@ -102,31 +102,31 @@
                         title: '中证5001802',
                         code: 'IC802',
                         total: 6355.4,
-                        change: 0.25
+                        percent: 0.25
                     },
                     {
                         title: '中证5001803',
                         code: 'IC803',
                         total: 6355.4,
-                        change: 0.25
+                        percent: 0.25
                     },
                     {
                         title: '中证5001806',
                         code: 'IC806',
                         total: 6355.4,
-                        change: 0.25
+                        percent: 0.25
                     },
                     {
                         title: '中证5001809',
                         code: 'IC809',
                         total: 6355.4,
-                        change: 0.25
+                        percent: 0.25
                     },
                     {
                         title: '中证500连续',
                         code: 'ICL0',
                         total: 6355.4,
-                        change: 0.25
+                        percent: 0.25
                     }
                 ]
             }
@@ -141,26 +141,10 @@
         },
         computed:{
             cell0Style(){
-                if(this.isIndex0Fold){
-                    return {
-                        'background-color':'#ffffff'
-                    }
-                }else{
-                    return {
-                        'background-color':'#f8f8f8'
-                    }
-                }
+                return this.isIndex0Fold==true?{'background-color':'#ffffff'}:{'background-color':'#f8f8f8'}
             },
             cell1Style(){
-                if(this.isIndex1Fold){
-                    return {
-                        'background-color':'#ffffff'
-                    }
-                }else{
-                    return {
-                        'background-color':'#f8f8f8'
-                    }
-                }
+                return this.isIndex0Fold==true?{'background-color':'#ffffff'}:{'background-color':'#f8f8f8'}
             }
         }
     }

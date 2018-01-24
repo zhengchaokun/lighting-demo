@@ -589,24 +589,7 @@
   font-size: 34px;
   color: #d9d9d9;
 }
-.f-green {
-  color: #5d9f3b;
-}
-.f-red {
-  color: #f35151;
-}
-.f-black {
-  color: #3a3a3a;
-}
-.f-dark {
-  color: #9a9a9a;
-}
-.f-blue{
-  color: #6da6e7;
-}
-.f-orange{
-  color: #ff9933;
-}
+
 .grid {
   flex-direction: row;
   flex-wrap: wrap;

@@ -44,7 +44,7 @@ export default {
 
 <style scoped>
 .scroller {
-  background-color: #f8f8f8;
+  background-color: #f7f7f7;
   margin-top: 86px;
 }
 .tabBar {
@@ -64,11 +64,5 @@ export default {
   width: 140px;
   font-size: 34px;
   text-align: center;
-}
-.f-red {
-  color: #f35151;
-}
-.f-black {
-  color: #3a3a3a;
 }
 </style>
