@@ -80,7 +80,7 @@
                     <text class="concept-tit">热门概念</text>
                 </div>
                 <scroller class="flex-row" scroll-direction="horizontal" style="height:350px;">                    
-                    <div class="concept-box" v-for="(concept,index) in concepts" :key="index">
+                    <div class="concept-box" v-for="(concept,index) in concepts" :key="index" @click="jumpConcept(index)">
                         <text class="concept-name">{{concept.name}}</text> 
                         <text :class="['concept-price', concept.price>0 && 'c-red',concept.price<0 && 'c-green']">{{concept.price}}%</text> 
                         <text class="concept-info">{{concept.info}}</text> 
@@ -303,6 +303,9 @@ export default {
         }else{
             return 'c-gray'
         }
+    },
+    jumpConcept(){
+        App.navigate('#/concept')
     }
   }
 };
