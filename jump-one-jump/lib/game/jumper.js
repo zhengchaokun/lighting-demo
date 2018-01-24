@@ -30,11 +30,11 @@ function createJumper() {
         jumper.add(glass);
     });
 
-    jumper.horizontal = 1.3;
+    jumper.horizontal = require("./config").jumperHeight/2+require("./config").cubeHeight/2;
     jumper.position.y = jumper.horizontal;
 
     jumper.castShadow = true;
-    jumper.scale.set(0.8,0.8,0.8)
+    jumper.scale.set(0.8,0.8,0.8);
     return jumper;
 }
 module.exports = {
