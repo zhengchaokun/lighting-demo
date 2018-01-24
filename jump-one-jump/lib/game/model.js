@@ -46,12 +46,12 @@ function threeBox(res) {
         picMap[res] = texture;
     }
     return function () {
-        const y = new THREE.BoxGeometry(config.cubeWidth, config.cubeHeight, config.cubeDeep),
+        const box = new THREE.BoxGeometry(config.cubeWidth, config.cubeHeight, config.cubeDeep),
             k = new THREE.MeshLambertMaterial({map: texture});
-        mapUv(428, 428, y, 1, 0, 0, 280, 148);
-        mapUv(428, 428, y, 2, 0, 148, 280, 428);
-        mapUv(428, 428, y, 4, 280, 148, 428, 428);
-        return new THREE.Mesh(y, k)
+        mapUv(428, 428, box, 1, 0, 0, 280, 148);
+        mapUv(428, 428, box, 2, 0, 148, 280, 428);
+        mapUv(428, 428, box, 4, 280, 148, 428, 428);
+        return new THREE.Mesh(box, k)
     }
 }
 
@@ -61,14 +61,14 @@ let cylinder = function () {
     return new THREE.Mesh(geometryCylinder, material);
 };
 
-function mapUv(e, t, i, n, a, o, s, h, l) {
+function mapUv(e, t, box, faceIndex, a, o, s, h, l) {
     let c = 1 / e, u = 1 / t;
-    if (i.faces[n] instanceof THREE.Face3) {
-        d = i.faceVertexUvs[0][2 * n];
-        4 !== n || l ? (d[0].x = a * c, d[0].y = o * u, d[1].x = a * c, d[1].y = h * u, d[2].x = s * c, d[2].y = o * u) : (d[0].x = a * c, d[0].y = o * u, d[2].x = a * c, d[2].y = h * u, d[1].x = s * c, d[1].y = o * u);
-        let d = i.faceVertexUvs[0][2 * n + 1];
-        4 !== n || l ? (d[0].x = a * c, d[0].y = h * u, d[1].x = s * c, d[1].y = h * u, d[2].x = s * c, d[2].y = o * u) : (d[2].x = a * c, d[2].y = h * u, d[1].x = s * c, d[1].y = h * u, d[0].x = s * c, d[0].y = o * u)
-    }
+    let face = box.faceVertexUvs[0][2 * faceIndex];
+
+    4 !== faceIndex || l ? (face[0].x = a * c, face[0].y = o * u, face[1].x = a * c, face[1].y = h * u, face[2].x = s * c, face[2].y = o * u) : (face[0].x = a * c, face[0].y = o * u, face[2].x = a * c, face[2].y = h * u, face[1].x = s * c, face[1].y = o * u);
+
+    let faceOp = box.faceVertexUvs[0][2 * faceIndex + 1];
+    4 !== faceIndex || l ? (faceOp[0].x = a * c, faceOp[0].y = h * u, faceOp[1].x = s * c, faceOp[1].y = h * u, faceOp[2].x = s * c, faceOp[2].y = o * u) : (faceOp[2].x = a * c, faceOp[2].y = h * u, faceOp[1].x = s * c, faceOp[1].y = h * u, faceOp[0].x = s * c, faceOp[0].y = o * u)
 }
 
 module.exports = {
