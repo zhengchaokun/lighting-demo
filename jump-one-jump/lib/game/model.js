@@ -48,9 +48,9 @@ function threeBox(res) {
     return function () {
         const box = new THREE.BoxGeometry(config.cubeWidth, config.cubeHeight, config.cubeDeep),
             k = new THREE.MeshLambertMaterial({map: texture});
-        mapUv(428, 428, box, 1, 0, 0, 280, 148);
+        mapUv(428, 428, box, 4, 0, 0, 280, 148);
         mapUv(428, 428, box, 2, 0, 148, 280, 428);
-        mapUv(428, 428, box, 4, 280, 148, 428, 428);
+        mapUv(428, 428, box, 0, 280, 148, 428, 428);
         return new THREE.Mesh(box, k)
     }
 }
@@ -63,14 +63,38 @@ let cylinder = function () {
 
 function mapUv(e, t, box, faceIndex, a, o, s, h, l) {
     let c = 1 / e, u = 1 / t;
+
     let face = box.faceVertexUvs[0][2 * faceIndex];
-
-    4 !== faceIndex || l ? (face[0].x = a * c, face[0].y = o * u, face[1].x = a * c, face[1].y = h * u, face[2].x = s * c, face[2].y = o * u) : (face[0].x = a * c, face[0].y = o * u, face[2].x = a * c, face[2].y = h * u, face[1].x = s * c, face[1].y = o * u);
-
     let faceOp = box.faceVertexUvs[0][2 * faceIndex + 1];
-    4 !== faceIndex || l ? (faceOp[0].x = a * c, faceOp[0].y = h * u, faceOp[1].x = s * c, faceOp[1].y = h * u, faceOp[2].x = s * c, faceOp[2].y = o * u) : (faceOp[2].x = a * c, faceOp[2].y = h * u, faceOp[1].x = s * c, faceOp[1].y = h * u, faceOp[0].x = s * c, faceOp[0].y = o * u)
+    if(4 === faceIndex || l){
+        face[0].x = a * c;
+        face[0].y = o * u;
+        face[1].x = a * c;
+        face[1].y = h * u;
+        face[2].x = s * c;
+        face[2].y = o * u;
+        faceOp[0].x = a * c;
+        faceOp[0].y = h * u;
+        faceOp[1].x = s * c;
+        faceOp[1].y = h * u;
+        faceOp[2].x = s * c;
+        faceOp[2].y = o * u
+    }else{
+        face[0].x = a * c;
+        face[0].y = o * u;
+        face[2].x = a * c;
+        face[2].y = h * u;
+        face[1].x = s * c;
+        face[1].y = o * u;
+        faceOp[2].x = a * c;
+        faceOp[2].y = h * u;
+        faceOp[1].x = s * c;
+        faceOp[1].y = h * u;
+        faceOp[0].x = s * c;
+        faceOp[0].y = o * u;
+    }
 }
 
 module.exports = {
-    models: [/*cube('res/wx/stool.png'), cube('res/wx/bag.png'), cylinder, threeBox("res/wx/store_top.png"), threeBox("res/wx/tit.png"), threeBox("res/wx/sing.png"), */threeBox("res/wx/express.png")]
+    models: [cube('res/wx/stool.png'), cube('res/wx/bag.png'), cylinder, threeBox("res/wx/store_top.png"), threeBox("res/wx/tit.png"), threeBox("res/wx/sing.png"), threeBox("res/wx/express.png")]
 };
