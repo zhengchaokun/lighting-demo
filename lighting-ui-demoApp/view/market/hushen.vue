@@ -287,8 +287,6 @@
     </div>
 </template>
 <script>
-    import LcTabPage from "lighting-ui/packages/lc-tab-page";
-    import LcCell from "lighting-ui/packages/lc-cell";
     import LcProgress from "lighting-ui/packages/lc-progress";
     export default {
         data() {
@@ -472,6 +470,7 @@
                 ]
             };
         },
+        components: { LcProgress },
         computed: {
             barPercentage() {
                 return this.raise_count / (this.raise_count + this.fall_count) * 100;
@@ -489,9 +488,6 @@
             }
         },
         methods: {
-            changeTab(index) {
-                this.tabIndex = index;
-            },
             changePart(index) {
                 this.chartIndex = index;
             },

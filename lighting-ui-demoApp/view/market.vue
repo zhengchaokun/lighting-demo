@@ -16,13 +16,9 @@
 </template>
 
 <script>
-import LcTabPage from "lighting-ui/packages/lc-tab-page";
-import LcCell from "lighting-ui/packages/lc-cell";
-import LcProgress from "lighting-ui/packages/lc-progress";
 import Light from "light";
 
 export default {
-  components: { LcTabPage, LcCell, LcProgress },
   data() {
     return {
       tabIndex: 0,
