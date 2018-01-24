@@ -61,8 +61,7 @@ let cylinder = function () {
     return new THREE.Mesh(geometryCylinder, material);
 };
 
-
-function _mapUv(e, t, i, n, a, o, s, h, l) {
+function mapUv(e, t, i, n, a, o, s, h, l) {
     let c = 1 / e, u = 1 / t;
     if (i.faces[n] instanceof THREE.Face3) {
         d = i.faceVertexUvs[0][2 * n];
@@ -72,10 +71,6 @@ function _mapUv(e, t, i, n, a, o, s, h, l) {
     }
 }
 
-function mapUv(e, t, i, n, r, a, o, s, h) {
-    if (n.length) for (let l = 0; l < n.length; ++l) _mapUv(e, t, i, n[l], r, a, o, s, h); else _mapUv(e, t, i, n, r, a, o, s, h)
-}
-
 module.exports = {
-    models: [cube('res/wx/stool.png'), cube('res/wx/bag.png'), cylinder, threeBox("res/wx/express.png"), threeBox("res/wx/tit.png"), threeBox("res/wx/sing.png"), threeBox("res/wx/store_top.png")]
+    models: [/*cube('res/wx/stool.png'), cube('res/wx/bag.png'), cylinder, threeBox("res/wx/store_top.png"), threeBox("res/wx/tit.png"), threeBox("res/wx/sing.png"), */threeBox("res/wx/express.png")]
 };
