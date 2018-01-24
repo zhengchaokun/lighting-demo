@@ -4,7 +4,7 @@
         <scroller>
           <!-- scroller -->
           <div class="scroller">
-              <router-view class="page"></router-view>
+              <router-view></router-view>
           </div>
 
         </scroller>
