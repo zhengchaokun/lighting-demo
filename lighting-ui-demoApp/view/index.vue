@@ -13,26 +13,26 @@
 
             <div class="pos-r">
                 <scroller class="flex-row" scroll-direction="horizontal" style="height:200px;">                 
-                    <div class="flex-row item-box">                   
-                        <div class="flex-clounm item-cont">
-                            <div class="pos-r">
-                                <image src="images/icon-1.png" class="item-pic"></image>
-                            </div>
-                            <text class="item-text">理财持仓</text>
-                        </div>
+                    <div class="flex-row item-box">  
                         <div class="flex-clounm item-cont">
                             <div class="pos-r">
                                 <image src="images/icon-2.png" class="item-pic"></image>
                             </div>
                             <text class="item-text">我的资产</text>
-                        </div>
+                        </div>    
                         <div class="flex-clounm item-cont">
                             <div class="pos-r">
                                 <image src="images/icon-3.png" class="item-pic"></image>
                                 <text class="item-dot">8</text>
                             </div>
                             <text class="item-text">涨乐资讯</text>
-                        </div>
+                        </div>              
+                        <div class="flex-clounm item-cont" @click="jump('#/apply')">
+                            <div class="pos-r">
+                                <image src="images/icon-1.png" class="item-pic"></image>
+                            </div>
+                            <text class="item-text">新股申购</text>
+                        </div>                                              
                         <div class="flex-clounm item-cont">
                             <div class="pos-r">
                                 <image src="images/icon-4.png" class="item-pic"></image>
@@ -80,7 +80,7 @@
                     <text class="concept-tit">热门概念</text>
                 </div>
                 <scroller class="flex-row" scroll-direction="horizontal" style="height:350px;">                    
-                    <div class="concept-box" v-for="(concept,index) in concepts" :key="index">
+                    <div class="concept-box" v-for="(concept,index) in concepts" :key="index" @click="jumpConcept(index)">
                         <text class="concept-name">{{concept.name}}</text> 
                         <text :class="['concept-price', concept.price>0 && 'c-red',concept.price<0 && 'c-green']">{{concept.price}}%</text> 
                         <text class="concept-info">{{concept.info}}</text> 
@@ -303,6 +303,9 @@ export default {
         }else{
             return 'c-gray'
         }
+    },
+    jumpConcept(){
+        App.navigate('#/concept')
     }
   }
 };
