@@ -18,7 +18,8 @@
           <list v-for="(v,index) in tabList"
             :key="index"
             class="item-container">
-            <cell class="border-cell"></cell>
+            <text>tttt</text>
+            <!-- <cell class="border-cell"></cell>
             <cell v-for="(demo,key) in v"
               class="cell"
               :key="key"
@@ -35,7 +36,7 @@
                   price-desc="每日经济新闻 12-29 08:23">
                 </lc-item>
               </lc-pan-item>
-            </cell>
+            </cell> -->
           </list>
         </lc-tab-page>
       </div>
