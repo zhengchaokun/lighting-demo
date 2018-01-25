@@ -73,7 +73,7 @@
                     type="imgleft"
                     :infoList="infoList"
                     @infoClick="infoClick"
-                    imgStyle="{width:145px; height:123px;}"
+                    :imgStyle="imgStyle"
                 ></lc-info-list>
             </div>
 
@@ -166,6 +166,7 @@ export default {
   components: { LcLightbox,LcInfoList},
   data() {
     return {
+      imgStyle:{ width:'145px',height:'123px'},
       imageList: [
         { src: "images/banner-1.jpg" },
         { src: "images/banner-2.jpg" }
