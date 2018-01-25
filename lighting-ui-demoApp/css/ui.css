@@ -9,6 +9,7 @@ a{ text-decoration: none;}
 .justify-between{ justify-content: space-between;}
 .justify-around{ justify-content: space-around;}
 .justify-center{ justify-content: center;}
+.justify-end{justify-content: flex-end;}
 .flex-1{ flex: 1; }
 .flex-2{ flex: 2; }
 .flex-3{ flex: 3; }
@@ -18,6 +19,8 @@ a{ text-decoration: none;}
 
 .bgc-white{ background-color: #fff; }
 .bgc-red{ background-color: #bf1015; }
+.bgc-orange{ background-color: #ff9849;}
+.bgc-blue{ background-color: #76a3da;}
 
 .c-red{ color: #bf1015;}
 .c-green{ color: #6da645;}

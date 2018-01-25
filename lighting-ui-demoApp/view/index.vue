@@ -59,7 +59,7 @@
             <div class="mt20 bgc-white">
                 <scroller class="flex-row" scroll-direction="horizontal" style="height:100px;">
                     <div class="topic-wrap flex-row" v-for="(topic,index) in topics" :key="index">
-                        <a class="topic-a" href="">
+                        <a class="topic-a" href="" @click="jump('#/news')">
                             <text class="topic-text">{{topic.val}}</text>
                         </a>                   
                     </div>
@@ -85,7 +85,7 @@
                         <text :class="['concept-price', concept.price>0 && 'c-red',concept.price<0 && 'c-green']">{{concept.price}}%</text> 
                         <text class="concept-info">{{concept.info}}</text> 
                     </div> 
-                    <div class="concept-box concept-more">
+                    <div class="concept-box concept-more" @click="jump('#/concept_more')">
                         <image class="concept-more-img" src="images/more-icon.png"></image>
                         <text class="concept-more-text">查看更多</text>
                     </div>                                                      
