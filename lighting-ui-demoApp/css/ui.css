@@ -9,6 +9,7 @@ a{ text-decoration: none;}
 .justify-between{ justify-content: space-between;}
 .justify-around{ justify-content: space-around;}
 .justify-center{ justify-content: center;}
+.justify-end{justify-content: flex-end;}
 .flex-1{ flex: 1; }
 .flex-2{ flex: 2; }
 .flex-3{ flex: 3; }
@@ -18,6 +19,8 @@ a{ text-decoration: none;}
 
 .bgc-white{ background-color: #fff; }
 .bgc-red{ background-color: #bf1015; }
+.bgc-orange{ background-color: #ff9849;}
+.bgc-blue{ background-color: #76a3da;}
 
 .c-red{ color: #bf1015;}
 .c-green{ color: #6da645;}
@@ -27,6 +30,25 @@ a{ text-decoration: none;}
 .c-white{ color: #FFFFFF;}
 .c-lightgray {color: #f7f1f1;}
 
+
+.f-green {
+    color: #5d9f3b;
+}
+.f-red {
+    color: #f35151;
+}
+.f-black {
+    color: #3a3a3a;
+}
+.f-dark {
+    color: #9a9a9a;
+}
+.f-blue{
+    color: #6da6e7;
+}
+.f-orange{
+    color: #ff9933;
+}
 
 .mt10{margin-top: 10px;}
 .mt20{margin-top: 20px;}
@@ -68,7 +90,10 @@ a{ text-decoration: none;}
 .pr30{padding-right: 30px;}
 .pr40{padding-right: 40px;}
 
-.pd10{padding:10px;}
+.pd10{padding: 10px;}
+.pd20{padding: 20px;}
+.pd30{padding: 30px;}
+.pd40{padding: 40px;}
 
 .pos-r{ position: relative; }
 .pos-a{ position: absolute; }

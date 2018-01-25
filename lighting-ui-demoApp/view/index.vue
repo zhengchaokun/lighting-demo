@@ -11,55 +11,58 @@
                 @lcImgClick="lcImgClick">
             </lc-lightbox>
 
-            <div class="pos-r">
-                <scroller class="flex-row" scroll-direction="horizontal" style="height:200px;">                 
-                    <div class="flex-row item-box">                   
-                        <div class="flex-clounm item-cont">
-                            <div class="pos-r">
-                                <image src="images/icon-1.png" class="item-pic"></image>
+            <div class="mt20 bgc-white">
+                <div class="pos-r">
+                    <scroller class="flex-row" show-scrollbar="false" scroll-direction="horizontal" style="height:200px;">                 
+                        <div class="flex-row item-box">  
+                            <div class="flex-clounm item-cont">
+                                <div class="pos-r">
+                                    <image src="images/icon-2.png" class="item-pic"></image>
+                                </div>
+                                <text class="item-text">我的资产</text>
+                            </div>    
+                            <div class="flex-clounm item-cont">
+                                <div class="pos-r">
+                                    <image src="images/icon-3.png" class="item-pic"></image>
+                                    <text class="item-dot">8</text>
+                                </div>
+                                <text class="item-text">涨乐资讯</text>
+                            </div>              
+                            <div class="flex-clounm item-cont" @click="jump('#/apply')">
+                                <div class="pos-r">
+                                    <image src="images/icon-1.png" class="item-pic"></image>
+                                </div>
+                                <text class="item-text">新股申购</text>
+                            </div>                                              
+                            <div class="flex-clounm item-cont">
+                                <div class="pos-r">
+                                    <image src="images/icon-4.png" class="item-pic"></image>
+                                </div>
+                                <text class="item-text">股票开户</text>
                             </div>
-                            <text class="item-text">理财持仓</text>
-                        </div>
-                        <div class="flex-clounm item-cont">
-                            <div class="pos-r">
-                                <image src="images/icon-2.png" class="item-pic"></image>
+                            <div class="flex-clounm item-cont">
+                                <div class="pos-r">
+                                    <image src="images/icon-5.png" class="item-pic"></image>
+                                </div>
+                                <text class="item-text">签到</text>
                             </div>
-                            <text class="item-text">我的资产</text>
-                        </div>
-                        <div class="flex-clounm item-cont">
-                            <div class="pos-r">
-                                <image src="images/icon-3.png" class="item-pic"></image>
-                                <text class="item-dot">8</text>
+                            <div class="flex-clounm item-cont">
+                                <div class="pos-r">
+                                    <image src="images/icon-6.png" class="item-pic"></image>
+                                </div>
+                                <text class="item-text">成本神器</text>
                             </div>
-                            <text class="item-text">涨乐资讯</text>
-                        </div>
-                        <div class="flex-clounm item-cont">
-                            <div class="pos-r">
-                                <image src="images/icon-4.png" class="item-pic"></image>
-                            </div>
-                            <text class="item-text">股票开户</text>
-                        </div>
-                        <div class="flex-clounm item-cont">
-                            <div class="pos-r">
-                                <image src="images/icon-5.png" class="item-pic"></image>
-                            </div>
-                            <text class="item-text">签到</text>
-                        </div>
-                        <div class="flex-clounm item-cont">
-                            <div class="pos-r">
-                                <image src="images/icon-6.png" class="item-pic"></image>
-                            </div>
-                            <text class="item-text">成本神器</text>
-                        </div>
-                    </div>                                                                                                
-                </scroller>
-                <text class="right-corner"> &gt; </text> 
+                        </div>                                                                                                
+                    </scroller>
+                    <text class="right-corner"> &gt; </text> 
+                </div>
             </div>
             
+            
             <div class="mt20 bgc-white">
-                <scroller class="flex-row" scroll-direction="horizontal" style="height:100px;">
+                <scroller class="flex-row" show-scrollbar="false" scroll-direction="horizontal" style="height:100px;">
                     <div class="topic-wrap flex-row" v-for="(topic,index) in topics" :key="index">
-                        <a class="topic-a" href="">
+                        <a class="topic-a" href="" @click="jump('#/news')">
                             <text class="topic-text">{{topic.val}}</text>
                         </a>                   
                     </div>
@@ -79,13 +82,13 @@
                     <image src="images/fire.png" class="concept-img"></image>
                     <text class="concept-tit">热门概念</text>
                 </div>
-                <scroller class="flex-row" scroll-direction="horizontal" style="height:350px;">                    
-                    <div class="concept-box" v-for="(concept,index) in concepts" :key="index">
+                <scroller class="flex-row" show-scrollbar="false" scroll-direction="horizontal" style="height:350px;">                    
+                    <div class="concept-box" v-for="(concept,index) in concepts" :key="index" @click="jumpConcept(index)">
                         <text class="concept-name">{{concept.name}}</text> 
                         <text :class="['concept-price', concept.price>0 && 'c-red',concept.price<0 && 'c-green']">{{concept.price}}%</text> 
                         <text class="concept-info">{{concept.info}}</text> 
                     </div> 
-                    <div class="concept-box concept-more">
+                    <div class="concept-box concept-more" @click="jump('#/concept_more')">
                         <image class="concept-more-img" src="images/more-icon.png"></image>
                         <text class="concept-more-text">查看更多</text>
                     </div>                                                      
@@ -99,7 +102,7 @@
             </div>
 
             <div class="mt20 bgc-white msg-wrap" v-for="(msg,index) in msgList" :key="index">
-                <div class="msg-head flex-row justify-space-between">
+                <div class="msg-head flex-row justify-between">
                     <div class="flex-row ">
                         <image class="msg-head-img" :src="msg.pic"></image>
                         <div class="ml20">
@@ -124,7 +127,7 @@
                 
             </div>
 
-            <div class="mt20 flex-row justify-space-between">
+            <div class="mt20 flex-row justify-between">
                 <div class="flex-row func-wrap">
                     <image class="func-wrap-img" src="images/icon-kf.png"></image>
                     <div class="ml30">
@@ -150,8 +153,6 @@
                     </div>
                 </div>
             </div>
-
-            
             
         </scroller>
 
@@ -295,9 +296,7 @@ export default {
     },
     infoClick(e) {
       console.log("clicked" + e.index);
-    },
-    infoClick1(e) {
-      console.log("clicked" + e.index);
+      App.navigate('#/news')
     },
     tagClass(index){
         if(this.tags.length-1 == index){
@@ -305,6 +304,9 @@ export default {
         }else{
             return 'c-gray'
         }
+    },
+    jumpConcept(){
+        App.navigate('#/concept')
     }
   }
 };

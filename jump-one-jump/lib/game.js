@@ -163,8 +163,8 @@ Game.prototype = {
             z: self.cameraPos.next.z
         };
         if (c.x > n.x || c.z > n.z) {
-            self.cameraPos.current.x -= 0.1;
-            self.cameraPos.current.z -= 0.1;
+            self.cameraPos.current.x -= 0.15;
+            self.cameraPos.current.z -= 0.15;
             if (self.cameraPos.current.x - self.cameraPos.next.x < 0.05) {
                 self.cameraPos.current.x = self.cameraPos.next.x
             }
@@ -347,7 +347,6 @@ function triggerJump() {
             triggerJump.call(that);
         })
     } else {
-        audio.play("jumpdone");
         that.jumperStat.ready = false;
         that.jumperStat.mSpeed = 0;
         that.jumperStat.ySpeed = 0;
@@ -358,6 +357,7 @@ function triggerJump() {
 
         const jumpResult = checkJumpResult.call(that);
         if (jumpResult===1) {
+            audio.play("success");
             // 掉落成功，进入下一步
             that.score++;
             that._createCube();
@@ -367,6 +367,7 @@ function triggerJump() {
                 that.options.success(that.score)
             }
         } else {
+            audio.play("fall");
             // 掉落失败，进入失败动画
             if (jumpResult === 0) {
                 animationFall.call(that,'none')

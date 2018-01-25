@@ -21,19 +21,33 @@ let a = function () {
     return scene;
 };
 
+let picMap = {};
 let cube = function (pic) {
+    let texture = picMap[pic];
+
+    if(!texture){
+        texture = THREE.ImageUtils.loadTexture(pic);
+        picMap[pic] = texture;
+    }
     return function () {
         let geometryCube = new THREE.CubeGeometry(config.cubeWidth, config.cubeHeight, config.cubeDeep);
-        let texture = THREE.ImageUtils.loadTexture(pic);
+
         let material = new THREE.MeshLambertMaterial({color: "#ddd", map: texture});
         return new THREE.Mesh(geometryCube, material);
     }
 };
 
 function threeBox(res) {
+
+    let texture = picMap[res];
+
+    if(!texture){
+        texture = THREE.ImageUtils.loadTexture(res);
+        picMap[res] = texture;
+    }
     return function () {
         const y = new THREE.BoxGeometry(config.cubeWidth, config.cubeHeight, config.cubeDeep),
-            k = new THREE.MeshLambertMaterial({map: THREE.ImageUtils.loadTexture(res)});
+            k = new THREE.MeshLambertMaterial({map: texture});
         mapUv(428, 428, y, 1, 0, 0, 280, 148);
         mapUv(428, 428, y, 2, 0, 148, 280, 428);
         mapUv(428, 428, y, 4, 280, 148, 428, 428);
