@@ -21,10 +21,10 @@
             <div class="mt20 bgc-white">
                 <lc-cell :icon="icon3" label="查询我的额度" :cell-style="cellStyle1" :has-arrow="true" :has-bottom-border="false"></lc-cell>
                 <lc-cell :icon="icon4" label="新股发行计划" :cell-style="cellStyle1" :has-arrow="true" :has-top-border="false" :has-bottom-border="false"></lc-cell>
-                <lc-cell :icon="icon5" label="新股发行提醒" title="（已开通）" :title-text-style="titleTextStyle" :cell-style="cellStyle1" :has-arrow="true" :has-top-border="false" :has-bottom-border="false"></lc-cell>
+                <lc-cell :icon="icon5" label="新股发行提醒" title="（已开通）" :title-style="titleTextStyle" :cell-style="cellStyle1" :has-arrow="true" :has-top-border="false" :has-bottom-border="false"></lc-cell>
                 <lc-cell :icon="icon6" label="跟我学新规" :cell-style="cellStyle1" cell-index="last" :has-arrow="true" :has-top-border="false"></lc-cell>
             </div>     
-            <lc-cell title="我要还款（原借钱打新的用户使用）" :cell-style="cellStyle2" :title-text-style="titleTextStyle" :has-arrow="true" :has-top-border="false"></lc-cell>
+            <lc-cell title="我要还款（原借钱打新的用户使用）" :cell-style="cellStyle2" :title-style="titleTextStyle" :has-arrow="true" :has-top-border="false"></lc-cell>
       
        </scroller>
     </div>
