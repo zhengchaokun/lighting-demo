@@ -98,9 +98,19 @@
                             <text class="func-wrap-tip">产品预告一目了然</text>
                         </div>
                     </div>
-                </div>
-                
+                </div>                
             </div> 
+
+            <div class="mt20 bgc-white">
+                <lc-cell label="理财学堂" :has-arrow="false" :cell-style="csllStyle" :label-style="labelStyle"></lc-cell> 
+                <lc-info-list 
+                    type="imgleft"
+                    :infoList="infoList"
+                    @infoClick="infoClick"
+                    :imgStyle="imgStyle"
+                ></lc-info-list>                
+            </div>
+
         </scroller>    
     </div>
 </template>
@@ -160,6 +170,29 @@ import LcInfoList from "lighting-ui/packages/lc-info-list";
                 ],
                 csllStyle:{ height:'100px'},
                 labelStyle:{fontSize:'30px',color:'#545454',fontWeight:'bold'},
+                infoList:[
+                    {
+                        textTitle:'技术论事：沪指连阳终结',
+                        textInfo:'今年以来，虽然A股上涨了6.1（截止发稿前），但是境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
+                        src:'images/newpic.png'
+                    },
+                    {
+                        textTitle:'人民日报：部分楼市放松限购政策',
+                        textInfo:'境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
+                        src:'images/newpic1.png'
+                    },
+                    {
+                        textTitle:'日本史上最大ipo要来了',
+                        textInfo:'境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
+                        src:'images/newpic2.png'
+                    },
+                    {
+                        textTitle:'盘中直击：指数弱势反弹',
+                        textInfo:'境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
+                        src:'images/newpic3.png'
+                    }
+                ],
+                imgStyle:{ width:'145px',height:'100px',borderRadius:'8px'},
             }
         },
         methods: {
