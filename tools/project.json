@@ -1,0 +1,17 @@
+{
+  "project":"tools",
+  "version":"0.0.1",
+  "desc":"Just For Fun",
+  "type":"vue",
+  "plugins":["jsnative"],
+  "link_id":"8112734868606775",
+
+  "env":{
+    "default":{
+      "log_level":"debug"
+    },
+    "product":{
+      "log_level":"error"
+    }
+  }
+}
