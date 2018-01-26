@@ -15,39 +15,39 @@
                 <div class="pos-r">
                     <scroller class="flex-row" show-scrollbar="false" scroll-direction="horizontal" style="height:200px;">                 
                         <div class="flex-row item-box">  
-                            <div class="flex-clounm item-cont">
-                                <div class="pos-r">
+                            <div class="item-cont">
+                                <div class="pos-r item-cont-wrap">
                                     <image src="images/icon-2.png" class="item-pic"></image>
                                 </div>
                                 <text class="item-text">我的资产</text>
                             </div>    
-                            <div class="flex-clounm item-cont">
-                                <div class="pos-r">
+                            <div class="item-cont">
+                                <div class="pos-r item-cont-wrap">
                                     <image src="images/icon-3.png" class="item-pic"></image>
                                     <text class="item-dot">8</text>
                                 </div>
                                 <text class="item-text">涨乐资讯</text>
                             </div>              
-                            <div class="flex-clounm item-cont" @click="jump('#/apply')">
-                                <div class="pos-r">
+                            <div class="item-cont" @click="jump('#/apply')">
+                                <div class="pos-r item-cont-wrap">
                                     <image src="images/icon-1.png" class="item-pic"></image>
                                 </div>
                                 <text class="item-text">新股申购</text>
                             </div>                                              
-                            <div class="flex-clounm item-cont">
-                                <div class="pos-r">
+                            <div class="item-cont">
+                                <div class="pos-r item-cont-wrap">
                                     <image src="images/icon-4.png" class="item-pic"></image>
                                 </div>
                                 <text class="item-text">股票开户</text>
                             </div>
-                            <div class="flex-clounm item-cont">
-                                <div class="pos-r">
+                            <div class="item-cont">
+                                <div class="pos-r item-cont-wrap">
                                     <image src="images/icon-5.png" class="item-pic"></image>
                                 </div>
                                 <text class="item-text">签到</text>
                             </div>
-                            <div class="flex-clounm item-cont">
-                                <div class="pos-r">
+                            <div class="item-cont">
+                                <div class="pos-r item-cont-wrap">
                                     <image src="images/icon-6.png" class="item-pic"></image>
                                 </div>
                                 <text class="item-text">成本神器</text>
@@ -338,23 +338,29 @@ export default {
 .item-pic {
   width: 80px;
   height: 80px;
-  border-radius: 30px;
 }
 .item-text {
   padding-top: 10px;
   font-size: 28px;
   color: #363636;
 }
+.item-cont-wrap{
+    width: 120px;
+    height: 95px;
+    align-items: center;
+    justify-content: flex-end;
+}
 .item-dot {
   position: absolute;
-  right: -15px;
-  top: -15px;
-  width: 44px;
-  height: 44px;
-  line-height: 44px;
+  right: 6px;
+  top: 2px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
   color: #fff;
   text-align: center;
   border-radius: 22px;
+  font-size: 24px;
   background-color: #f7585d;
 }
 
