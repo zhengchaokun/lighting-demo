@@ -39,16 +39,78 @@
                     </div>
                 </div>            
             </div>
+
+            <div class="bgc-white mt20">
+                <div class="align-center justify-center">
+                    <text class="title">热门基金</text>
+                    <div class="redline"></div>
+                </div>
+                <div v-for="(jj,index) in jjs" :key="index" class="flex-row jj-wrap">
+                    <div class="jj-nh-wrap">
+                        <text class="jj-nh">{{jj.nh}}</text>
+                        <text class="jj-text">七日年化收益率</text>
+                    </div>
+                    <div class="jj-info-wrap">
+                        <text class="jj-name">{{jj.name}}</text>
+                        <div class="flex-row mt20">
+                            <div v-for="(j,i) in jj.tag" :key="i" class="flex-row jj-tag">
+                                <text class="jj-tag-text">{{j}}</text>
+                            </div>
+                        </div>                       
+                        <text class="jj-intro mt20">{{jj.intro}}</text>
+                    </div>
+                </div>
+                <text class="more">查看更多</text>
+            </div>
+
+            <div class="bgc-white mt20">
+                <div class="align-center justify-center">
+                    <text class="title">热门主题</text>
+                    <div class="redline"></div>
+                </div>
+                <div class="flex-row jj-wrap">
+                    <div class="jj-nh-wrap">
+                        <text class="jj-nh">5.47%</text>
+                        <text class="jj-text">七日年化收益率</text>
+                    </div>
+                    <div class="jj-info-wrap">
+                        <text class="jj-name">理财有妙招 闲钱转起来</text>                     
+                        <text class="jj-intro mt20">存取方便。收益连贯，选择多样，1元起购，宝宝放心。</text>
+                    </div>
+                </div>
+                <text class="more">更多热门主题</text>
+            </div>   
+
+            <div class="mt20 bgc-white">
+                <lc-cell label="热门专区" :has-arrow="false" :cell-style="csllStyle" :label-style="labelStyle"></lc-cell> 
+                <div class="flex-row justify-between">
+                    <div class="flex-row func-wrap flex-1 border-right">
+                        <image class="func-wrap-img" src="images/lc-icon-5.png"></image>
+                        <div class="ml10">
+                            <text class="func-wrap-tit">华泰专属理财</text>
+                            <text class="func-wrap-tip">3分钟了解券商理财</text>
+                        </div>
+                    </div>
+                    <div class="flex-row func-wrap flex-1">
+                        <image class="func-wrap-img" src="images/lc-icon-6.png"></image>
+                        <div class="ml10">
+                            <text class="func-wrap-tit">理财日历</text>
+                            <text class="func-wrap-tip">产品预告一目了然</text>
+                        </div>
+                    </div>
+                </div>
+                
+            </div> 
         </scroller>    
     </div>
 </template>
 <script>
 import App from "light";
 import LcLightbox from "lighting-ui/packages/lc-lightbox";
+import LcCell from "lighting-ui/packages/lc-cell";
 import LcInfoList from "lighting-ui/packages/lc-info-list"; 
-import LcGrid from 'lighting-ui/packages/lc-grid';
     export default {
-        components: { LcLightbox,LcInfoList,LcGrid},
+        components: { LcLightbox,LcInfoList,LcCell},
         data(){
             return {
                 imageList: [
@@ -81,7 +143,23 @@ import LcGrid from 'lighting-ui/packages/lc-grid';
                         icon: "images/lc-icon-4.png",
                         path: ""
                     }
-                ]
+                ],
+                jjs:[
+                    {
+                        name:'中海货币A',
+                        tag:['低风险','1元起'],
+                        intro:'风险低，运作稳，零申赎，闲钱好保姆！',
+                        nh:'5.47%'
+                    },
+                    {
+                        name:'华泰栢瑞天添宝货币A',
+                        tag:['低风险','0.01元起'],
+                        intro:'兼顾流动性和收益，经验丰富固收团队实力护航！',
+                        nh:'5.146%'
+                    }
+                ],
+                csllStyle:{ height:'100px'},
+                labelStyle:{fontSize:'30px',color:'#545454',fontWeight:'bold'},
             }
         },
         methods: {
@@ -114,5 +192,28 @@ import LcGrid from 'lighting-ui/packages/lc-grid';
 .item-cont { align-items: center; width: 172px;}
 .item-pic { width: 75px; height: 75px;}
 .item-text { padding-top: 10px; font-size: 28px; color: #666; }
+
+.title{ height: 128px; line-height: 130px; color: #a3a3a3; font-size: 42px;}
+.redline{ height: 1px; width: 88px; background-color: #eb5b40;}
+
+.jj-wrap{height: 250px; padding: 30px;}
+.jj-nh-wrap{ width: 205px; justify-content: center; border-right-style: solid; border-right-color: #eeecec; border-right-width: 1px;}
+.jj-nh{ color: #d6584c; font-size: 42px;}
+.jj-text{ color: #adadad; font-size: 26px; margin-top: 15px;}
+.jj-info-wrap{ margin-left: 25px; flex: 1;justify-content: center;}
+.jj-name{ color: #373737; font-size: 32px;}
+.jj-tag{ height: 36px; padding-left: 10px; padding-right: 10px; align-items: center; justify-content: center; 
+    border-style: solid; border-color: #edab57; border-width: 1px; margin-right: 15px;}
+.jj-tag-text{ color: #edab57; font-size: 24px;}    
+.jj-intro{ color: #7d7d7d; font-size: 26px;}
+
+.more{ height: 96px; line-height: 96px; text-align:center; color: #5399e1; font-size: 34px;
+     border-top-style: solid; border-top-color: #eeecec; border-top-width: 1px;}
+
+.func-wrap{ height: 210px; justify-content: center; align-items: center;}
+.func-wrap-img{ width: 53px; height: 53px;}
+.func-wrap-tit{color: #2f2f2f; font-size: 32px;}
+.func-wrap-tip{color: #bbbbbb; font-size: 26px;}
+.border-right{border-right-style: solid; border-right-color: #eeecec; border-right-width: 1px;}
 
 </style>
