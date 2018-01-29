@@ -111,6 +111,17 @@
                 ></lc-info-list>                
             </div>
 
+            <div class="statement-wrap">
+                <div class="slogan-wrap flex-row">
+                    <image class="slogan-img" src="images/lc-icon-7.png"></image>
+                    <text class="slogan-text">涨乐财付通，口袋里的理财专家</text>
+                </div>
+                <div class="statement-box pos-r">
+                    <text class="statement-text">免责声明：收益率数据仅供参考，过往业绩不预示未来表现，产品排序不分先后，不构成投资建议。投资者据此操作，风险自负。投资有风险，理财需谨慎。华泰证券金融产品风险评级标准透露</text>
+                    <text class="statement-more">详情</text>
+                </div>
+            </div>
+
         </scroller>    
     </div>
 </template>
@@ -249,4 +260,12 @@ import LcInfoList from "lighting-ui/packages/lc-info-list";
 .func-wrap-tip{color: #bbbbbb; font-size: 26px;}
 .border-right{border-right-style: solid; border-right-color: #eeecec; border-right-width: 1px;}
 
+.statement-wrap{ height: 370px; padding-left: 30px; padding-right: 30px; margin-bottom: 30px;}
+.slogan-wrap{ height: 170px; align-items:center; justify-content: center;
+    border-bottom-style: solid; border-bottom-color: #e3e2e7; border-bottom-width: 1px;}
+.slogan-img{width: 29px; height: 36px;}
+.slogan-text{color: #8e8c97; font-size: 30px; margin-left: 20px;}
+.statement-box{ height: 200px; justify-content: center;}
+.statement-text{color: #bbbabf; font-size: 26px;}
+.statement-more{ position: absolute; color: #7e99b7; font-size: 26px; top: 135px; left: 250px; }
 </style>
