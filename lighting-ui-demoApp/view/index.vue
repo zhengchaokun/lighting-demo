@@ -145,13 +145,11 @@
             </div>
 
             <div class="mt20 bgc-white">
-                <div class="info-list" v-for="(v,index) in infoList1" :key="index">
-                    <div class="flex1">
-                        <text class="info-list-tit">{{v.textTitle}}</text>
-                        <text class="info-list-info">{{v.textInfo}}</text>
-                        <text class="info-list-time">{{v.textTime}}</text>
-                    </div>
-                </div>
+                <lc-info-list type="text" 
+                :infoList="infoList1" 
+                :titleStyle="titleStyle"
+                :timeStyle="timeStyle"
+                ></lc-info-list>
             </div>
             
         </scroller>
@@ -285,7 +283,9 @@ export default {
               textInfo:'境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
               textTime:'2018-1-15 14:07'
           }
-      ]
+      ],
+      titleStyle:{color: '#36364d', fontWeight: 'bold'},
+      timeStyle:{ textAlign:'left'}
     };
   },
   methods: {
