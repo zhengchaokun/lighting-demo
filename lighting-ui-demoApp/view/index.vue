@@ -309,6 +309,27 @@ export default {
     jumpConcept(){
         App.navigate('#/concept')
     }
+  },
+  mounted(){
+       var LightJSBridge = weex.requireModule('LightJSBridge');
+       var head = weex.requireModule('head');
+       var event = weex.requireModule('event'); 
+       LightJSBridge.call('head.setSearchView',{
+           'icon':'search',
+           'placeholderText':'股票代码或拼音简称',
+           'placeholderTextColor':'#f3c4ce',
+           'backgroundColor':'#e5595a'
+        },function(res){
+            console.log(res);
+            App.navigate('#')
+        })
+
+        head.setRightItem({'title':'导航'},function(){ 
+            App.navigate('#/news')
+        });
+        head.setLeftItem({"icon":"msg"},function(){
+            event.openNative('web',{startPage:'https://www.baidu.com'})
+        });
   }
 };
 </script>
