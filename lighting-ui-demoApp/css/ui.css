@@ -25,6 +25,7 @@ a{ text-decoration: none;}
 .bgc-red{ background-color: #bf1015; }
 .bgc-orange{ background-color: #ff9849;}
 .bgc-blue{ background-color: #76a3da;}
+.bgc-dark{ background-color: #f7f7f7;}
 
 .c-red{ color: #bf1015;}
 .c-green{ color: #6da645;}
@@ -49,6 +50,9 @@ a{ text-decoration: none;}
 }
 .f-dark {
     color: #9a9a9a;
+}
+.f-dark2{
+    color: #cecdcd;
 }
 .f-blue{
     color: #6da6e7;
