@@ -448,11 +448,72 @@
                     </div>
                     <!-- 行业排名 -->
                     <div v-if="btn2Index == 1">
-
+                        <div class="pd20 bgc-white">
+                            <div class="flex-row justify-between align-center">
+                                <div class="flex-row align-end">
+                                    <text class="fs26 f-black">所属行业：计算机应用</text>
+                                    <text class="fs20 f-dark">(申万二级)</text>
+                                </div>
+                                <text class="fs20 f-dark">2017-09-30</text>
+                            </div>
+                            <div class="flex-row align-end mt20 pb40 bottom-line">
+                                <text class="fs22 f-dark">恒生电子每股收益</text>
+                                <text class="fs22 f-black">0.47元</text>
+                                <text class="fs22 f-dark">,行业排名</text>
+                                <text class="fs22 f-red">18/150</text>
+                            </div>
+                            <div class="flex-row justify-between mt20">
+                                <text class="fs24 f-black">行业平均</text>
+                                <text class="fs24 f-red">58.21</text>
+                            </div>
+                            <div class="flex-row justify-between mt20" v-for="(item, index) in rankData" :key="item">
+                                <text class="fs24 f-black">{{index+1}}.{{item.name}}</text>
+                                <text class="fs24 f-black">{{item.price}}</text>
+                            </div>
+                        </div>
                     </div>
                     <!-- 股东股本 -->
                     <div v-if="btn2Index == 2">
-
+                        <div class="pd20 bgc-white pb40">
+                            <div class="bottom-line pb40">
+                                <div class="flex-row justify-between align-center mt20 mb20">
+                                    <text class="fs26 f-black">股本结构</text>
+                                    <image src="images/more-arrow.png" class="icon-more-arrow"></image>
+                                </div>
+                                <div class="flex-row pt10 pb10" v-for="(item, index) in gubenData">
+                                    <text class="flex-1 fs24 f-dark">{{item.title}}</text>
+                                    <text class="flex-2 fs24 f-black">{{item.value}}</text>
+                                </div>
+                            </div>
+                            <div class="pb40">
+                                <div class="flex-row justify-between align-center mt20 mb20">
+                                    <text class="fs26 f-black">股东人数</text>
+                                    <image src="images/more-arrow.png" class="icon-more-arrow"></image>
+                                </div>
+                                <div class="flex-row justify-around">
+                                    <div>
+                                        <text class="fs24 f-dark">股东人数(万户)</text>
+                                        <text class="fs32 f-black mt40 t-center">10.00</text>
+                                        <div class="flex-row mt30">
+                                            <text class="fs20 f-dark">较上期变化</text>
+                                            <text class="fs20 f-green">-9.55%</text>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <text class="fs24 f-dark">人均流通股(万股)</text>
+                                        <text class="fs32 f-black mt40 t-center">0.62</text>
+                                        <div class="flex-row mt30">
+                                            <text class="fs20 f-dark">较上期变化</text>
+                                            <text class="fs20 f-red">10.55%</text>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <text class="fs24 f-dark">行业平均(万户)</text>
+                                        <text class="fs32 f-black mt40 t-center">4.11</text>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!-- 财务数据 -->
                     <div v-if="btn2Index == 3">
@@ -570,6 +631,78 @@
                         name: '高俊国',
                         duty: '董事',
                         share: '--'
+                    }
+                ],
+                rankData: [
+                    {
+                        name: '宝信B',
+                        price: 19.78
+                    },
+                    {
+                        name: '二三四五',
+                        price: '22.09'
+                    },
+                    {
+                        name: '航天信息',
+                        price: '22.09'
+                    },
+                    {
+                        name: '捷成股份',
+                        price: '22.09'
+                    },
+                    {
+                        name: '东华软件',
+                        price: '22.09'
+                    },
+                    {
+                        name: '瑞和软件',
+                        price: '24.74'
+                    },
+                    {
+                        name: '华东电脑',
+                        price: '25.22'
+                    },
+                    {
+                        name: '久其软件',
+                        price: '27.17'
+                    },
+                    {
+                        name: '马郎信息',
+                        price: '27.50'
+                    },
+                    {
+                        name: '运达科技',
+                        price: '28.30'
+                    }
+                ],
+                gubenData: [
+                    {
+                        title:'总股本',
+                        value: '6.18亿股'
+                    },
+                    {
+                        title:'流通A股',
+                        value: '6.18亿股'
+                    },
+                    {
+                        title:'股东人数',
+                        value: '100025'
+                    },
+                    {
+                        title:'人均持股',
+                        value: '6176.51股'
+                    },
+                    {
+                        title:'第一大股东',
+                        value: '杭州恒生电子集团有限公司'
+                    },
+                    {
+                        title:'前十大股东占比',
+                        value: '33.86%'
+                    },
+                    {
+                        title:'筹码集中度',
+                        value: '较集中'
                     }
                 ]
             }
