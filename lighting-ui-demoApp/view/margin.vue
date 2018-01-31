@@ -29,7 +29,7 @@
             </div>
 
             <div class="mt20 bgc-white flex-row kf-wrap">
-                <div class="flex-row align-items-center">
+                <div class="flex-row align-center">
                     <image src="images/icon-kf.png" class="kf-img"></image>
                     <div class="ml30">
                         <text class="kf-tit-1">7x24小时客服在线</text>
@@ -112,7 +112,7 @@ import LcGrid from 'lighting-ui/packages/lc-grid';
 
 .kf-wrap{ height: 165px; padding: 40px; align-items: center; justify-content: space-between;}
 .kf-img{ width: 66px; height: 53px; }
-.kf-button{ width: 125px; height: 50px;border-style: solid; border-width: 1px; font-size: 24px; border-color: #a98d77; color: #a98d77; align-items: center; justify-content: center;}
+.kf-button{ width: 125px; height: 50px; line-height: 50px; text-align: center;border-style: solid; border-width: 1px; font-size: 24px; border-color: #a98d77; color: #a98d77;}
 .kf-tit-1{ color: #2f2f2f; font-size: 36px; font-weight: bold;}
 .kf-tit-2{ color: #ddd; font-size: 30px;}
 

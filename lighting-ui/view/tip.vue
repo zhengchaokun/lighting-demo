@@ -1,6 +1,6 @@
 <template>
   <div class="wxc-demo">
-    <scroller>
+    <scroller style="height:1200px">
       <title title="lc-tip"></title>
       <category title="tip"></category>
       <div class="button-list">

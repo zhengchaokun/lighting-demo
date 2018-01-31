@@ -83,7 +83,7 @@
             </div>
             
             <div class="flex-row justify-center">
-            <text class="fs26 f-dark mt20 mb30">查看更多 ></text>    
+                <text class="fs26 f-dark mt20 mb30">查看更多 ></text>    
             </div>
         </div>
 

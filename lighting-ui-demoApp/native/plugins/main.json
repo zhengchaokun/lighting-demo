@@ -1,0 +1,41 @@
+{
+  "menus": [
+    {
+      "title": "首页",
+      "action": "gmu://jsnative#index"
+    },
+    {
+      "title": "行情",
+      "action": "gmu://jsnative#market"
+    },
+    {
+      "title": "交易",
+      "action": "gmu://jsnative#trade"
+    },
+    {
+      "title": "理财",
+      "action": "gmu://jsnative#financing"
+    },
+    {
+      "title": "我的",
+      "action": "gmu://jsnative#account"
+    }
+  ],
+  "navigationbar": {
+    "disableSystemBarTint": false,
+    "immersiveMode": false
+  },
+  "style": {
+    "navigationbar": {
+      "backgroundColor": "#de302f",
+      "titleColor": "#ffffff",
+      "buttonColor": "#ffffff",
+      "useDarkStatusBarStyle": true
+    },
+    "menu": {
+      "backgroundColor": "#323b4c",
+      "titleColor": "#767f90",
+      "titleSelectedColor": "#b11b27"
+    }
+  }
+}
