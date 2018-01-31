@@ -1,7 +1,7 @@
 
 <template>
     <div style="background-color:#f0eff4;">
-        <scroller>
+        <scroller offset-accuracy="10" @scroll="scrollHandler">
             <lc-lightbox autoPlay="true" ref="lc-lightbox"
                 height="440"
                 interval="5000"
@@ -58,7 +58,8 @@
                 </div>
             </div>
             
-            
+            <text>{{hint}}</text>
+
             <div class="mt20 bgc-white">
                 <scroller class="flex-row" show-scrollbar="false" scroll-direction="horizontal" style="height:100px;">
                     <div class="topic-wrap flex-row" v-for="(topic,index) in topics" :key="index">
@@ -164,6 +165,7 @@ export default {
   components: { LcLightbox,LcInfoList},
   data() {
     return {
+         hint:"",
       imgStyle:{ width:'145px',height:'123px'},
       imageList: [
         { src: "images/banner-1.jpg" },
@@ -308,6 +310,19 @@ export default {
     },
     jumpConcept(){
         App.navigate('#/concept')
+    },
+    scrollHandler(e){
+        var LightJSBridge = weex.requireModule('LightJSBridge');
+        this.offsetY = e.contentOffset.y;
+       
+        var percent = Math.abs(this.offsetY) / 500.0;
+        if(percent>1){
+            percent=1;
+        }
+        this.hint = '滚动了'+ this.offsetY + '百分比'+percent;
+        var params={ "alpha":percent};
+        LightJSBridge.call("head.setAlpha",params,null);
+        
     }
   },
   mounted(){
@@ -318,7 +333,7 @@ export default {
            'icon':'search',
            'placeholderText':'股票代码或拼音简称',
            'placeholderTextColor':'#f3c4ce',
-           'backgroundColor':'#e5595a'
+           'backgroundColor':'transparent'
         },function(res){
             console.log(res);
             App.navigate('#')
@@ -328,7 +343,8 @@ export default {
             App.navigate('#/news')
         });
         head.setLeftItem({"icon":"msg"},function(){
-            event.openNative('web',{startPage:'https://www.baidu.com'})
+            App.navigate('#/msg')
+            // event.openNative('web',{startPage:'https://www.baidu.com'})
         });
   }
 };
