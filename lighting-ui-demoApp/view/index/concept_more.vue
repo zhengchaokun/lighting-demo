@@ -82,7 +82,7 @@ import App from "light";
         }
     }
 </script>
-<style scoped src="../css/ui.css"></style>
+<style scoped src="../../css/ui.css"></style>
 <style scoped>
 
 .wrap{ padding: 20px;}

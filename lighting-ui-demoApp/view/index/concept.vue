@@ -78,7 +78,7 @@ import LcInfoList from "lighting-ui/packages/lc-info-list";
         }
     }
 </script>
-<style scoped src="../css/ui.css"></style>
+<style scoped src="../../css/ui.css"></style>
 <style scoped>
 .head{ position: relative; height: 500px; align-items: center; flex-direction: row;}
 .head-img{ width:750px; height: 500px; }
