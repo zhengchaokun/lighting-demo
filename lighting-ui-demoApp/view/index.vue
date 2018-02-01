@@ -89,7 +89,7 @@
                         <text :class="['concept-price', concept.price>0 && 'c-red',concept.price<0 && 'c-green']">{{concept.price}}%</text> 
                         <text class="concept-info">{{concept.info}}</text> 
                     </div> 
-                    <div class="concept-box concept-more" @click="jump('#/concept_more')">
+                    <div class="concept-box concept-more" @click="jump('#/index/concept_more')">
                         <image class="concept-more-img" src="images/more-icon.png"></image>
                         <text class="concept-more-text">查看更多</text>
                     </div>                                                      
@@ -309,7 +309,7 @@ export default {
         }
     },
     jumpConcept(){
-        App.navigate('#/concept')
+        App.navigate('#/index/concept')
     },
     scrollHandler(e){
         var LightJSBridge = weex.requireModule('LightJSBridge');

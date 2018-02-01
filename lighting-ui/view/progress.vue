@@ -16,9 +16,12 @@
         <text class="demo-text">自定义</text>
         <lc-progress :value="70"
           bar-color='#9B7B56'
-          :bar-height="9"
+          border-color="#ffa945"
+          bg-color="#bfbdbb"
+          :bar-height="20"
           :bar-width="640"></lc-progress>
       </div>
+
       <div class="btn"
            @click="uploadFile">
         <text class="btn-txt">上传文件</text>

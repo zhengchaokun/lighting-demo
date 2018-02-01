@@ -1,5 +1,5 @@
 <template>
-  <div class="wxc-demo" style="height:1000px;">
+  <div class="wxc-demo" style="height:1334px;">
     <scroller class="scroller">
       <title title="lc-popup"></title>
       <category title="使用案例"></category>

@@ -466,7 +466,7 @@
                                 <text class="fs24 f-black">行业平均</text>
                                 <text class="fs24 f-red">58.21</text>
                             </div>
-                            <div class="flex-row justify-between mt20" v-for="(item, index) in rankData" :key="item">
+                            <div class="flex-row justify-between mt20" v-for="(item, index) in rankData" :key="item.name">
                                 <text class="fs24 f-black">{{index+1}}.{{item.name}}</text>
                                 <text class="fs24 f-black">{{item.price}}</text>
                             </div>
@@ -514,10 +514,170 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="mt20 bgc-white pd20 pb40">
+                            <div class="flex-row align-center justify-between">
+                                <div class="flex-row align-center">
+                                    <text class="fs28 f-black">十大流通股东</text>
+                                    <text class="fs26 f-dark">| 十大股东</text>
+                                </div>
+                                <text class="fs22 f-dark">2017-09-30</text>
+                            </div>
+
+                            <div v-for="(item, index) in gudongData" class="mt30">
+                                <text class="fs24 f-black">{{item.name}}</text>
+                                <lc-progress :bar-color="item.type == 'unchanged'?greyColor:item.type=='new'?orangeColor:greenColor" :bar-width=700 :value="item.rate" class="mt20"></lc-progress>
+                                <div class="flex-row justify-between mt20">
+                                    <text class="fs24 f-black">{{item.rate}}%</text>
+                                    <text :class="['fs24', item.type == 'unchanged'?'f-dark':item.type=='new'?'f-orange':'f-green']">{{item.desc}}</text>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!-- 财务数据 -->
                     <div v-if="btn2Index == 3">
-
+                        <!-- 关键指标 -->
+                        <div class="flex-row pd20 bgc-white justify-between align-center">
+                            <div class="flex-row">
+                                <text class="fs26 f-black">关键指标</text>
+                                <text class="fs22 f-dark ml10">2017三季报</text>
+                            </div>
+                            <image src="images/more-arrow.png" class="icon-more-arrow"></image>
+                        </div>
+                        <div class="pd20 pt40 bgc-white">
+                            <div class="flex-row justify-between mt20">
+                                <text class="fs26 f-dark">每股收益</text>
+                                <text class="fs24 f-black">0.47元</text>
+                            </div>
+                            <div class="flex-row justify-between mt20">
+                                <text class="fs26 f-dark">每股净资产</text>
+                                <text class="fs24 f-black">4.48元</text>
+                            </div>
+                            <div class="flex-row justify-between mt20">
+                                <text class="fs26 f-dark">每股资本公积</text>
+                                <text class="fs24 f-black">0.47元</text>
+                            </div>
+                            <div class="flex-row justify-between mt20">
+                                <text class="fs26 f-dark">每股未分配利润</text>
+                                <text class="fs24 f-black">2.17元</text>
+                            </div>
+                            <div class="flex-row justify-between mt20">
+                                <text class="fs26 f-dark">每股经营性现金流</text>
+                                <text class="fs24 f-black">-0.10元</text>
+                            </div>
+                        </div>
+                        <!-- 利润表 -->
+                        <div class="flex-row pd20 bgc-white justify-between align-center mt20">
+                            <div class="flex-row">
+                                <text class="fs26 f-black">利润表</text>
+                                <text class="fs22 f-dark ml10">2017三季报</text>
+                            </div>
+                            <image src="images/more-arrow.png" class="icon-more-arrow"></image>
+                        </div>
+                        <div class="pd20 pt40 bgc-white">
+                            <div class="flex-row justify-between mt20">
+                                <text class="fs26 f-dark">营业总收入</text>
+                                <text class="fs24 f-black">16.51元</text>
+                            </div>
+                            <div class="flex-row justify-between mt20">
+                                <text class="fs26 f-dark">营业总收入增长率</text>
+                                <text class="fs24 f-black">23.41%</text>
+                            </div>
+                            <div class="flex-row justify-between mt20">
+                                <text class="fs26 f-dark">营业利润</text>
+                                <text class="fs24 f-black">3.17元</text>
+                            </div>
+                            <div class="flex-row justify-between mt20">
+                                <text class="fs26 f-dark">营业利润增长率</text>
+                                <text class="fs24 f-black">417.53元</text>
+                            </div>
+                            <div class="flex-row justify-between mt20">
+                                <text class="fs26 f-dark">净利润</text>
+                                <text class="fs24 f-black">3.11元</text>
+                            </div>
+                            <div class="flex-row justify-between mt20">
+                                <text class="fs26 f-dark">净利润增长率</text>
+                                <text class="fs24 f-black">62.64元</text>
+                            </div>
+                        </div>
+                        <!-- 资产负债表 -->
+                        <div class="flex-row pd20 bgc-white justify-between align-center mt20">
+                            <div class="flex-row">
+                                <text class="fs26 f-black">资产负债表</text>
+                                <text class="fs22 f-dark ml10">2017三季报</text>
+                            </div>
+                            <image src="images/more-arrow.png" class="icon-more-arrow"></image>
+                        </div>
+                        <div class="pd20 pt40 bgc-white">
+                            <div class="flex-row justify-between mt20">
+                                <text class="fs26 f-dark">资产总计</text>
+                                <text class="fs24 f-black">49.61元</text>
+                            </div>
+                            <div class="flex-row justify-between mt20">
+                                <text class="fs26 f-dark">负债合计</text>
+                                <text class="fs24 f-black">19.77%</text>
+                            </div>
+                            <div class="flex-row justify-between mt20">
+                                <text class="fs26 f-dark">所有者权益合计</text>
+                                <text class="fs24 f-black">29.84元</text>
+                            </div>
+                        </div>
+                        <!-- 现金流量表 -->
+                        <div class="flex-row pd20 bgc-white justify-between align-center mt20">
+                            <div class="flex-row">
+                                <text class="fs26 f-black">现金流量表</text>
+                                <text class="fs22 f-dark ml10">2017三季报</text>
+                            </div>
+                            <image src="images/more-arrow.png" class="icon-more-arrow"></image>
+                        </div>
+                        <div class="pd20 pt40 bgc-white">
+                            <div class="flex-row justify-between mt20">
+                                <text class="fs26 f-dark">经营性现金流</text>
+                                <text class="fs24 f-black">-5871.66万</text>
+                            </div>
+                            <div class="flex-row justify-between mt20">
+                                <text class="fs26 f-dark">经营性现金流增长率</text>
+                                <text class="fs24 f-black">81.75%</text>
+                            </div>
+                            <div class="flex-row justify-between mt20">
+                                <text class="fs26 f-dark">投资性现金流</text>
+                                <text class="fs24 f-black">8390.88万</text>
+                            </div>
+                            <div class="flex-row justify-between mt20">
+                                <text class="fs26 f-dark">筹资性现金流</text>
+                                <text class="fs24 f-black">-1976.20万</text>
+                            </div>
+                        </div>
+                        <!-- 盈利预测 -->
+                        <div class="flex-row pd20 bgc-white justify-between align-center mt20">
+                            <div class="flex-row">
+                                <text class="fs26 f-black">盈利预测</text>
+                                <text class="fs22 f-dark ml10">2017三季报</text>
+                            </div>
+                            <image src="images/more-arrow.png" class="icon-more-arrow"></image>
+                        </div>
+                        <div class="pd20 pt40 bgc-white">
+                            <div class="flex-row justify-between mt20">
+                                <text class="fs26 f-dark">预测每股收益</text>
+                                <text class="fs24 f-black">0.91</text>
+                            </div>
+                            <div class="flex-row justify-between mt20">
+                                <text class="fs26 f-dark">预测每股收益增长率</text>
+                                <text class="fs24 f-black">--</text>
+                            </div>
+                            <div class="flex-row justify-between mt20">
+                                <text class="fs26 f-dark">预测市盈率</text>
+                                <text class="fs24 f-black">56.30</text>
+                            </div>
+                            <div class="flex-row justify-between mt20">
+                                <text class="fs26 f-dark">预测净利润</text>
+                                <text class="fs24 f-black">5.66亿</text>
+                            </div>
+                            <div class="flex-row justify-between mt20">
+                                <text class="fs26 f-dark">预测市净率</text>
+                                <text class="fs24 f-black">9.04</text>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -525,7 +685,9 @@
     </div>
 </template>
 <script>
+    import LcProgress from 'lighting-ui/packages/lc-progress';
     export default {
+        components: {LcProgress},
         data(){
             return {
                 price: 48.88,
@@ -704,7 +866,72 @@
                         title:'筹码集中度',
                         value: '较集中'
                     }
-                ]
+                ],
+                gudongData: [
+                    {
+                        name: '杭州恒生电子股份有限公司',
+                        rate: 20.72,
+                        type: 'unchanged',
+                        desc: '未变'
+                    },
+                    {
+                        name: '蒋建圣',
+                        rate:  1.92,
+                        type: 'unchanged',
+                        desc: '未变'
+                    },
+                    {
+                        name: '全国社保基金---组合',
+                        rate: 1.92,
+                        type: 'new',
+                        desc: '新进'
+                    },
+                    {
+                        name: '中央汇金资产管理有限责任公司',
+                        rate: 1.76,
+                        type: 'unchanged',
+                        desc: '未变'
+                    },
+                    {
+                        name: '陈鸿',
+                        rate: 1.57,
+                        type: 'decrease',
+                        desc: '减持(-1.22%)'     
+                    },
+                    {
+                        name: '中国证券金融股份有限公司',
+                        rate: 1.50,
+                        type: 'decrease',
+                        desc: '减持(-5.21%)'     
+                    },
+                    {
+                        name: '王则江',
+                        rate: 1.23,
+                        type: 'unchanged',
+                        desc: '未变'     
+                    },
+                    {
+                        name: '彭正刚',
+                        rate: 1.15,
+                        type: 'unchanged',
+                        desc: '未变'     
+                    },
+                    {
+                        name: '周林根',
+                        rate: 1.12,
+                        type: 'unchanged',
+                        desc: '未变'     
+                    },
+                    {
+                        name: '海通证券股份有限公司',
+                        rate: 0.97,
+                        type: 'unchanged',
+                        desc: '未变'     
+                    },
+                ],
+                greyColor: '#eaeaea',
+                orangeColor: '#ff9933',
+                greenColor: '#5d9f3b'
             }
         },
         methods:{
