@@ -3,7 +3,7 @@
     <scroller class="scroller">
       <title title="lc-radio"></title>
       <category title="Radio可选"></category>
-      <lc-radio :list="list"
+      <lc-radio :list="list" :config="config"
                  @LcRadioListChecked="LcRadioListChecked"></lc-radio>
       <text class="radio-text">checkedItem: {{checkedInfo}}</text>
       <category title="Radio不可选"></category>
@@ -53,7 +53,11 @@
         { title: '未选不可修改', value: 5, disabled: true },
         { title: '已选不可修改', value: 6, disabled: true, checked: true }
       ],
-      checkedInfo: { title: '选项2', value: 2, oldIndex: -1, index: 1 }
+      checkedInfo: { title: '选项2', value: 2, oldIndex: -1, index: 1 },
+      config: {
+        checkedColor: '#f63031',
+        checkedIcon: 'https://img.alicdn.com/tps/TB1zBLaPXXXXXXeXXXXXXXXXXXX-121-59.svg'
+      }
     }),
     methods: {
       LcRadioListChecked (e) {

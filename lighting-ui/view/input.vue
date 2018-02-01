@@ -10,7 +10,7 @@
       <text class="hint">无标题输入框{{password1}}</text>
       <lc-input placeholder="预设内容"  @on-change="onEvent('change')" v-model="password1"></lc-input>
       
-      <!-- <text class="hint">有标题输入框</text>
+      <text class="hint">有标题输入框</text>
       <lc-input label="单项输入" placeholder="预设内容"></lc-input>
    
       <text class="hint">不显示清除按钮</text>
@@ -80,7 +80,7 @@
       <text class="hint">change事件</text>   
       <div style="margin-bottom: 40px;">
         <lc-input label="单项输入" @on-change="onEvent('change')" placeholder="预设内容"></lc-input>
-      </div>   -->
+      </div>  
     </scroller>
   </div>
 </template>
