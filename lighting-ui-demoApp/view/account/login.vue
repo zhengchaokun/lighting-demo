@@ -1,7 +1,7 @@
 
 <template>
-    <div style="background-color:#fff; height: 1334px;">
-        <scroller style="height: 1334px; position: relative;">
+    <div style="background-color:#fff; height: 1206px;">
+        <scroller style="height: 1206px; position: relative;">
             <div class="align-center">
                 <lc-cell :cell-style="cellStyle">
                     <image slot="label" :src="icons[0]" :style="iconStyle"></image>
@@ -9,15 +9,15 @@
                 </lc-cell>
                 <lc-cell :cell-style="cellStyle1">
                     <image slot="label" :src="icons[1]" :style="iconStyle"></image>
-                    <input slot="title" class="input-inner" v-model="login.tradePass" placeholder="请输入交易密码"></input>
+                    <input type="password" slot="title" class="input-inner" v-model="login.tradePass" placeholder="请输入交易密码"></input>
                 </lc-cell>
                 <lc-cell :cell-style="cellStyle1" class="no-top-border">
                     <image slot="label" :src="icons[2]" :style="iconStyle"></image>
-                    <input slot="title" class="input-inner" v-model="login.connectPass" placeholder="请输入通讯密码"></input>
+                    <input type="password" slot="title" class="input-inner" v-model="login.connectPass" placeholder="请输入通讯密码"></input>
                 </lc-cell>
                 <lc-cell :cell-style="cellStyle1" class="no-top-border" v-if="showCell">
                     <image slot="label" :src="icons[3]" :style="iconStyle"></image>
-                    <input slot="title" class="input-inner" v-model="login.token" placeholder="请输入动态口令"></input>
+                    <input type="password" slot="title" class="input-inner" v-model="login.token" placeholder="请输入动态口令"></input>
                 </lc-cell>
             </div>
             <div class="form-below flex-row justify-between align-center">
@@ -28,7 +28,7 @@
                 <text class="f-lightgray fs28">账号安全设置</text>
             </div>
             <div class="align-center">
-                <lc-button text="登录" :btn-style="btnStyle" :disabled="!valid"></lc-button>                
+                <lc-button text="登录" type="normal" :btn-style="btnStyle" :disabled="!valid"></lc-button>                
             </div>
             <text class="fs26 mt50 text-center text-error">登录遇到问题</text>
             <div class="footer">
@@ -79,7 +79,7 @@
                 btnStyle: {
                     height: '104px',
                     borderWidth: '0',
-                    backgroundColor: '#dcdcdc'
+                    backgroundColor: '#df3031'
                 },
                 switchStyle: {
                     height: '60px'
@@ -87,8 +87,8 @@
             }
         },
         computed: {
-            "valid": function() {
-                if(this.userId && this.tradePass && this.connectPass) {
+            valid() {
+                if(this.login.userId && this.login.tradePass && this.login.connectPass) {
                     return true;
                 } else {
                     return false;
@@ -106,7 +106,7 @@
 <style scoped src="../../css/ui.css"></style>
 <style lang="less">
     .weex-scroller-inner {
-        height: 1240px;
+        height: 1206px;
     }
     ::-webkit-input-placeholder {
         color: #9a9a9a;

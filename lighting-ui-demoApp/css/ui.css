@@ -69,6 +69,7 @@ a{ text-decoration: none;}
 }
 .f-bold {
     font-weight: bold;
+}
 .f-transparent{
     color: rgba(255,255,255,0.6);
 }
