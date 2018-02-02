@@ -18,7 +18,7 @@
                             class="cell"
                             :key="key">
                             <div class="header flex-row align-center">
-                                <image class="figure" src="../../images/figure-1.png" style="width: 84px; height: 84px; margin-right: 14px;"></image>
+                                <image class="figure" src="../images/figure-1.png" style="width: 84px; height: 84px; margin-right: 14px;"></image>
                                 <div class="flex-4">
                                     <text class="f-lightgray fs26">我</text>
                                     <text class="f-lightgray fs26 mt10">{{ item.datetime }}</text>
@@ -43,7 +43,7 @@
                     </template>
                     <template v-else>
                         <div class="align-center" style="width: 750px;">
-                            <image src="../../images/no-comment.png" style="width: 130px; height: 130px; margin-top: 230px; margin-bottom: 80px;"></image>
+                            <image src="../images/no-comment.png" style="width: 130px; height: 130px; margin-top: 230px; margin-bottom: 80px;"></image>
                             <text v-if="index==0" class="f-lightgray-1 fs32">您还没有发出评论哦，</text>
                             <text v-else class="f-lightgray-1 fs32">您还没有收到评论哦，</text>                        
                             <text class="f-lightgray-1 mt20 fs32">快与乐友互动吧！</text>
