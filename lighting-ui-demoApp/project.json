@@ -4,7 +4,7 @@
   "desc":"Just For Fun",
   "type":"vue",
   "plugins":["native","jsnative"],
-  "link_id":"1985",
+  "link_id":"824",
 
   "env":{
     "default":{

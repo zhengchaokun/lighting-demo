@@ -156,9 +156,11 @@
             
             
         </scroller>
-        <lc-minibar title="导航栏标题"
-            right-text="导航" 
-            :style="navbarStyle"
+
+        <div style="height:40px; width:750px; position:fixed; top:0;" :style="{backgroundColor:bgc}"></div>
+        <lc-minibar 
+            right-text="导航"            
+            class="navhead"
             text-color="#FFFFFF"
             :background-color="bgc"      
             @LcMinibarRightButtonClicked="jump('#/nav')">
@@ -180,7 +182,6 @@ export default {
   data() {
     return {
       /* hint:"", */
-      navbarStyle:{position:'fixed',top:'40px',left:'0',fontSize:'30px'},
       bgc:'rgba(222,48,47,0)',
       imgStyle:{ width:'145px',height:'123px'},
       imageList: [
@@ -374,6 +375,9 @@ export default {
 </script>
 <style scoped src="../css/ui.css"></style>
 <style scoped>
+.navhead{
+  position:fixed;top:40px;left:0;height:90px;font-size:30px;  
+}
 .navbar-img{ width: 55px; height: 55px; margin-left: 40px;}
 .navbar-search{ align-items: center; flex-direction: row; justify-content: center;
      width: 510px; height: 70px; border-radius: 15px; background-color:rgba(255, 255, 255, 0.3); }
