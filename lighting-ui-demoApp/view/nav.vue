@@ -2,7 +2,7 @@
 <template>
     <div style="background-color:#f0eff4;">
         <scroller>
-            <lc-cell :cell-style="cellStyle" :has-arrow="true" link="#">
+            <lc-cell :cell-style="cellStyle" :has-arrow="true">
                 <div class="flex-row pos-r align-center" slot="label">                   
                     <image class="cell-img" src="images/guide1.png"></image>
                     <text class="cell-tit">功能全解析</text>
