@@ -340,7 +340,7 @@ export default {
         })
 
         head.setRightItem({'title':'导航'},function(){ 
-            App.navigate('#/news')
+            App.navigate('#/nav')
         });
         head.setLeftItem({"icon":"msg"},function(){
             App.navigate('#/msg')

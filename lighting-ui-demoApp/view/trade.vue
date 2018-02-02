@@ -32,7 +32,7 @@
             </div>
 
             <lc-cell class="mt20 mb30" :cell-style="cellStyle" :has-arrow="true" link="#">
-                <div class="flex-row pos-r align-items-center" slot="label">
+                <div class="flex-row pos-r align-center" slot="label">
                     <image class="cell-img" src="images/icon-zn.png"></image>
                     <text class="ml20 cell-text">新版交易操作指南</text>
                     <image class="cell-icon" src="images/icon-zl.png"></image>                    

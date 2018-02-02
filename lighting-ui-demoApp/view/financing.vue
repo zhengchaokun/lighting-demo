@@ -224,7 +224,7 @@ import LcInfoList from "lighting-ui/packages/lc-info-list";
     }
 </script>
 <style scoped src="../css/ui.css"></style>
-<style lang="less">
+<style scoped>
 .tip-wrap{ height: 80px; padding-left: 30px; padding-right: 30px; flex-direction: row; align-items: center;}
 .tip-img{ width: 28px; height: 28px;}
 .tip-text{ color: #acacac; font-size: 24px; margin-left: 10px;}

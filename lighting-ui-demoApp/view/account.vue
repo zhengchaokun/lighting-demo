@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="body">
-                <lc-cell :icon="icon_home" label="我的交易账户" desc="股票、基金、理财" link="#/account/login" :has-top-border="false" title="立即登录或开户" :title-style="titleStyle" :has-arrow="true" :arrow-icon="arrowIcon" :cell-style="cellStyle" :label-style="labelStyle"></lc-cell>
+                <lc-cell :icon="icon_home" label="我的交易账户" desc="股票、基金、理财" link="#/login" :has-top-border="false" title="立即登录或开户" :title-style="titleStyle" :has-arrow="true" :arrow-icon="arrowIcon" :cell-style="cellStyle" :label-style="labelStyle"></lc-cell>
                 <lc-cell :icon="icon_me_1" label="我的卡券" title="丰富好礼等你来领" :has-top-border="false" :cell-style="cellStyle1" :title-style="titleStyle1"></lc-cell>
                 <lc-cell :icon="icon_me_2" label="我的乐米" title="小乐米 大惊喜" :has-top-border="false" :cell-style="cellStyle1" :title-style="titleStyle1"></lc-cell>
                 <lc-cell :icon="icon_me_3" label="我的业务" title="足不出户办理业务" :has-top-border="false" :cell-style="cellStyle1" :title-style="titleStyle1"></lc-cell>
@@ -50,14 +50,14 @@
                     name: '乐友19990921',
                     coin: 520
                 },
-                arrowIcon: '../images/arrow.png',
-                icon_home: '../images/icon_home.png',
-                icon_me_1: '../images/me_1.png',
-                icon_me_2: '../images/me_2.png',
-                icon_me_3: '../images/me_3.png',
-                icon_me_4: '../images/me_4.png',
-                icon_me_5: '../images/me_5.png',
-                icon_me_6: '../images/me_6.png',
+                arrowIcon: 'images/arrow.png',
+                icon_home: 'images/icon_home.png',
+                icon_me_1: 'images/me_1.png',
+                icon_me_2: 'images/me_2.png',
+                icon_me_3: 'images/me_3.png',
+                icon_me_4: 'images/me_4.png',
+                icon_me_5: 'images/me_5.png',
+                icon_me_6: 'images/me_6.png',
                 labelStyle: {
                     color: '#9a9a9a'                        
                 },

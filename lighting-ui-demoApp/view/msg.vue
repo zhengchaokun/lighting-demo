@@ -54,7 +54,7 @@
     }
 </script>
 <style scoped src="../css/ui.css"></style>
-<style lang="less">
+<style scoped>
 .msg-wrap{ height: 158px; background-color: #fff; padding-left: 30px; padding-right: 30px; align-items: center; justify-content: center;
     border-bottom-style: solid; border-bottom-color: #f0f0f0; border-bottom-width: 1px;}
 
