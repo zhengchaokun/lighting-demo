@@ -2,6 +2,7 @@
 <template>
     <div style="background-color:#f0eff4;">
         <scroller offset-accuracy="10" @scroll="scrollHandler">
+            
             <lc-lightbox autoPlay="true" ref="lc-lightbox"
                 height="440"
                 interval="5000"
@@ -153,19 +154,34 @@
                 ></lc-info-list>
             </div>
             
+            
         </scroller>
-
+        <lc-minibar title="导航栏标题"
+            right-text="导航" 
+            :style="navbarStyle"
+            text-color="#FFFFFF"
+            :background-color="bgc"      
+            @LcMinibarRightButtonClicked="jump('#/nav')">
+            <image class="navbar-img" src="images/msg.png" slot="left" @click="jump('#/msg')" style="padding-left:40px;"></image>
+            <div slot="middle" class="navbar-search">
+                <image class="navbar-search-icon" src="images/search.png"></image>
+                <text class="navbar-search-text">股票代码或拼音简称</text>
+            </div>
+        </lc-minibar>
     </div>
 </template>
 <script>
 import App from "light";
+import LcMinibar from "lighting-ui/packages/lc-minibar";
 import LcLightbox from "lighting-ui/packages/lc-lightbox";
 import LcInfoList from "lighting-ui/packages/lc-info-list";
 export default {
-  components: { LcLightbox,LcInfoList},
+  components: { LcMinibar,LcLightbox,LcInfoList},
   data() {
     return {
-         hint:"",
+      hint:"",
+      navbarStyle:{position:'fixed',top:'0',left:'0',fontSize:'30px'},
+      bgc:'rgba(222,48,47,0)',
       imgStyle:{ width:'145px',height:'123px'},
       imageList: [
         { src: "images/banner-1.jpg" },
@@ -312,7 +328,7 @@ export default {
         App.navigate('#/index/concept')
     },
     scrollHandler(e){
-        var LightJSBridge = weex.requireModule('LightJSBridge');
+        /* var LightJSBridge = weex.requireModule('LightJSBridge');
         this.offsetY = e.contentOffset.y;
        
         var percent = Math.abs(this.offsetY) / 500.0;
@@ -321,12 +337,20 @@ export default {
         }
         this.hint = '滚动了'+ this.offsetY + '百分比'+percent;
         var params={ "alpha":percent};
-        LightJSBridge.call("head.setAlpha",params,null);
+        LightJSBridge.call("head.setAlpha",params,null); */
+        this.offsetY = e.contentOffset.y;
+        var percent = Math.abs(this.offsetY) / 500.0;
+        if(percent>1){
+            percent=1;
+        }
+        this.hint = '滚动了'+ this.offsetY + '百分比'+percent;
+        this.bgc='rgba(222,48,47,'+percent+')'
         
     }
   },
   mounted(){
-       var LightJSBridge = weex.requireModule('LightJSBridge');
+      /* 调native导航 */
+       /* var LightJSBridge = weex.requireModule('LightJSBridge');
        var head = weex.requireModule('head');
        var event = weex.requireModule('event'); 
        LightJSBridge.call('head.setSearchView',{
@@ -345,12 +369,18 @@ export default {
         head.setLeftItem({"icon":"msg"},function(){
             App.navigate('#/msg')
             // event.openNative('web',{startPage:'https://www.baidu.com'})
-        });
+        }); */
   }
 };
 </script>
 <style scoped src="../css/ui.css"></style>
 <style scoped>
+.navbar-img{ width: 55px; height: 55px; margin-left: 40px;}
+.navbar-search{ align-items: center; flex-direction: row; justify-content: center;
+     width: 510px; height: 70px; border-radius: 15px; background-color:rgba(255, 255, 255, 0.3); }
+.navbar-search-icon{ width: 30px; height: 30px;}
+.navbar-search-text{ color: #ebe8e9; font-size: 28px; margin-left: 10px;}
+
 .item-wrap {
   width: 750px;
   height: 410px;
