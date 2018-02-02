@@ -59,7 +59,7 @@
                 </div>
             </div>
             
-            <text>{{hint}}</text>
+            <!-- <text>{{hint}}</text> -->
 
             <div class="mt20 bgc-white">
                 <scroller class="flex-row" show-scrollbar="false" scroll-direction="horizontal" style="height:100px;">
@@ -179,8 +179,8 @@ export default {
   components: { LcMinibar,LcLightbox,LcInfoList},
   data() {
     return {
-      hint:"",
-      navbarStyle:{position:'fixed',top:'0',left:'0',fontSize:'30px'},
+      /* hint:"", */
+      navbarStyle:{position:'fixed',top:'40px',left:'0',fontSize:'30px'},
       bgc:'rgba(222,48,47,0)',
       imgStyle:{ width:'145px',height:'123px'},
       imageList: [
@@ -343,7 +343,6 @@ export default {
         if(percent>1){
             percent=1;
         }
-        this.hint = '滚动了'+ this.offsetY + '百分比'+percent;
         this.bgc='rgba(222,48,47,'+percent+')'
         
     }

@@ -5,6 +5,10 @@
       "inputParams": {
         "startPage": "app.native.js#/index",
         "title":"首页"
+      },
+      "navigationbar":
+      {
+          "show": false
       }
     },
     {
