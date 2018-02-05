@@ -34,7 +34,9 @@ export default {
   methods: {
     changeTab(item, index) {
       this.tabIndex = index;
-      Light.navigate(item.path);
+      Light.navigate(item.path,{},{
+        replace: true
+      });
     }
   }
 };
