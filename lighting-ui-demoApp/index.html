@@ -21,9 +21,17 @@
 <body>
 <div id="main">
     <!-- 首页 -->
-    <view id="index"/>
+    <view id="index"/>   
+    <view id="index/concept"/><!-- 热门概念 -->
+    <view id="index/concept_more"/><!-- 更多热门概念 -->
+
     <!-- 行情>市场 -->
     <view id="market"/>
+    <view id="market/hushen" parent="market"/>
+    <view id="market/guzhi" parent="market"/>
+    <view id="market/hk" parent="market"/>
+    <view id="market/global" parent="market"/>
+    <view id="market/more" parent="market"/>
     <!-- 行情>自选股 -->
     <view id="share"/>
     <!-- 交易>普通交易 -->
@@ -34,6 +42,23 @@
     <view id="financing"/>
     <!-- 我的 -->
     <view id="account"/>
+    <view id="account/viewpoint" />
+    <view id="account/comment"  />
+    <view id="account/thumb" />
+    <view id="account/group"  />
+
+    <!-- 新闻详情 -->
+    <view id="news"/>
+    <!-- 新股申购 -->
+    <view id="apply"/>
+    <!-- 股票详情 -->
+    <view id="quote"/>
+    <!-- 登录 -->
+    <view id="login"/>
+    <!-- 消息 -->
+    <view id="msg"/>
+    <!-- 导航 -->
+    <view id="nav"/>
 </div>
 <!--<snippet id="footer"/>-->
 

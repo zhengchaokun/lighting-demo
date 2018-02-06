@@ -3,8 +3,8 @@
   "version":"0.0.1",
   "desc":"Just For Fun",
   "type":"vue",
-  "plugins":["jsnative"],
-  "link_id":"",
+  "plugins":["native","jsnative"],
+  "link_id":"824",
 
   "env":{
     "default":{

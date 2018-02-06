@@ -72,6 +72,7 @@ export default {
     height: 60,
     fontSize: 24,
     hasActiveBottom: true,
+    bottomColor: '#0aa96b',
     activeBottomColor: '#4A90E2',
     activeBottomHeight: 6,
     activeBottomWidth: 100,

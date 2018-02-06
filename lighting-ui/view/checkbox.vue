@@ -17,7 +17,7 @@
       <!-- <div class="margin"> -->
         <category title="CheckboxList"></category>
         <text class="checked-text">选中项 {{checkedList.toString()}}</text>        
-        <lc-checkbox-list :list="list"
+        <lc-checkbox-list :list="list" :config="config"
           @LcCheckboxListChecked="LcCheckboxListChecked"></lc-checkbox-list>
       <!-- </div> -->
     </scroller>
@@ -66,7 +66,11 @@
         { label: '选项3', value: 3 },
         { label: '选项4', value: 4 }
       ],
-      checkedList: [2]
+      checkedList: [2],
+      config: {
+        checkedColor: '#f63031',
+        checkedIcon: 'https://img.alicdn.com/tps/TB1zBLaPXXXXXXeXXXXXXXXXXXX-121-59.svg'
+      }
     }),
     methods: {
       LcCheckboxListChecked (e) {

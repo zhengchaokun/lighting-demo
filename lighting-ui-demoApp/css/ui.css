@@ -9,26 +9,78 @@ a{ text-decoration: none;}
 .justify-between{ justify-content: space-between;}
 .justify-around{ justify-content: space-around;}
 .justify-center{ justify-content: center;}
+.justify-start{ justify-content: flex-start;}
+.justify-end{ justify-content: flex-end;}
+.t-center{ text-align: center;}
+.t-left{text-align: left;}
+.t-right{text-align: right;}
 .flex-1{ flex: 1; }
 .flex-2{ flex: 2; }
 .flex-3{ flex: 3; }
 .flex-4{ flex: 4; }
 .flex-5{ flex: 5; }
+.flex-9{ flex: 9; }
 
 
 .bgc-white{ background-color: #fff; }
 .bgc-red{ background-color: #bf1015; }
+.bgc-orange{ background-color: #ff9849;}
+.bgc-blue{ background-color: #76a3da;}
+.bgc-dark{ background-color: #f7f7f7;}
 
 .c-red{ color: #bf1015;}
 .c-green{ color: #6da645;}
 .c-eee{ color: #eeeeee;}
 .c-black{ color: #000;}
 .c-gray{ color: #525252;}
+.c-white{ color: #FFFFFF;}
+.c-lightgray {color: #f7f1f1;}
+
+
+.f-white{
+    color: #ffffff;
+}
+.f-green {
+    color: #5d9f3b;
+}
+.f-red {
+    color: #f35151;
+}
+.f-black {
+    color: #3a3a3a;
+}
+.f-dark {
+    color: #9a9a9a;
+}
+.f-dark2{
+    color: #cecdcd;
+}
+.f-blue{
+    color: #6da6e7;
+}
+.f-orange{
+    color: #ff9933;
+}
+.f-lightgray {
+    color: #9a9a9a;
+}
+.f-lightgray-1 {
+    color: #d9dade;
+}
+.f-bold {
+    font-weight: bold;
+}
+.f-transparent{
+    color: rgba(255,255,255,0.6);
+}
 
 .mt10{margin-top: 10px;}
 .mt20{margin-top: 20px;}
+.mt25{margin-top: 25px;}
 .mt30{margin-top: 30px;}
 .mt40{margin-top: 40px;}
+.mt50{margin-top: 50px;}
+.mt60{margin-top: 60px;}
 
 .ml10{margin-left: 10px;}
 .ml20{margin-left: 20px;}
@@ -39,6 +91,7 @@ a{ text-decoration: none;}
 .mr20{ margin-right: 20px;}
 .mr30{ margin-right: 30px;}
 .mr40{ margin-right: 40px;}
+.mr80{ margin-right: 80px;}
 
 .mb10{ margin-bottom: 10px;}
 .mb20{ margin-bottom: 20px;}
@@ -65,7 +118,10 @@ a{ text-decoration: none;}
 .pr30{padding-right: 30px;}
 .pr40{padding-right: 40px;}
 
-.pd10{padding:10px;}
+.pd10{padding: 10px;}
+.pd20{padding: 20px;}
+.pd30{padding: 30px;}
+.pd40{padding: 40px;}
 
 .pos-r{ position: relative; }
 .pos-a{ position: absolute; }
@@ -82,5 +138,17 @@ a{ text-decoration: none;}
 .fs36{font-size: 36px;}
 .fs38{font-size: 38px;}
 .fs40{font-size: 40px;}
-
+.fs44{font-size: 44px;}
+.fs48{font-size: 48px;}
+.fs72{font-size: 72px;}
+.fs78{font-size: 78px;}
 .lines1{ lines:1;}
+
+.noborder {border: none;}
+
+.opacity-8 { opacity: 0.8; }
+.opacity-7 { opacity: 0.7; }
+.opacity-5 { opacity: 0.5; }
+
+.text-center {text-align: center;}
+.text-justify {text-align: justify;}

@@ -1,7 +1,8 @@
 
 <template>
     <div style="background-color:#f0eff4;">
-        <scroller>
+        <scroller offset-accuracy="10" @scroll="scrollHandler">
+            
             <lc-lightbox autoPlay="true" ref="lc-lightbox"
                 height="440"
                 interval="5000"
@@ -11,55 +12,59 @@
                 @lcImgClick="lcImgClick">
             </lc-lightbox>
 
-            <div class="pos-r">
-                <scroller class="flex-row" scroll-direction="horizontal" style="height:200px;">                 
-                    <div class="flex-row item-box">                   
-                        <div class="flex-clounm item-cont">
-                            <div class="pos-r">
-                                <image src="images/icon-1.png" class="item-pic"></image>
+            <div class="mt20 bgc-white">
+                <div class="pos-r">
+                    <scroller class="flex-row" show-scrollbar="false" scroll-direction="horizontal" style="height:200px;">                 
+                        <div class="flex-row item-box">  
+                            <div class="item-cont">
+                                <div class="pos-r item-cont-wrap">
+                                    <image src="images/icon-2.png" class="item-pic"></image>
+                                </div>
+                                <text class="item-text">我的资产</text>
+                            </div>    
+                            <div class="item-cont">
+                                <div class="pos-r item-cont-wrap">
+                                    <image src="images/icon-3.png" class="item-pic"></image>
+                                    <text class="item-dot">8</text>
+                                </div>
+                                <text class="item-text">涨乐资讯</text>
+                            </div>              
+                            <div class="item-cont" @click="jump('#/apply')">
+                                <div class="pos-r item-cont-wrap">
+                                    <image src="images/icon-1.png" class="item-pic"></image>
+                                </div>
+                                <text class="item-text">新股申购</text>
+                            </div>                                              
+                            <div class="item-cont">
+                                <div class="pos-r item-cont-wrap">
+                                    <image src="images/icon-4.png" class="item-pic"></image>
+                                </div>
+                                <text class="item-text">股票开户</text>
                             </div>
-                            <text class="item-text">理财持仓</text>
-                        </div>
-                        <div class="flex-clounm item-cont">
-                            <div class="pos-r">
-                                <image src="images/icon-2.png" class="item-pic"></image>
+                            <div class="item-cont">
+                                <div class="pos-r item-cont-wrap">
+                                    <image src="images/icon-5.png" class="item-pic"></image>
+                                </div>
+                                <text class="item-text">签到</text>
                             </div>
-                            <text class="item-text">我的资产</text>
-                        </div>
-                        <div class="flex-clounm item-cont">
-                            <div class="pos-r">
-                                <image src="images/icon-3.png" class="item-pic"></image>
-                                <text class="item-dot">8</text>
+                            <div class="item-cont">
+                                <div class="pos-r item-cont-wrap">
+                                    <image src="images/icon-6.png" class="item-pic"></image>
+                                </div>
+                                <text class="item-text">成本神器</text>
                             </div>
-                            <text class="item-text">涨乐资讯</text>
-                        </div>
-                        <div class="flex-clounm item-cont">
-                            <div class="pos-r">
-                                <image src="images/icon-4.png" class="item-pic"></image>
-                            </div>
-                            <text class="item-text">股票开户</text>
-                        </div>
-                        <div class="flex-clounm item-cont">
-                            <div class="pos-r">
-                                <image src="images/icon-5.png" class="item-pic"></image>
-                            </div>
-                            <text class="item-text">签到</text>
-                        </div>
-                        <div class="flex-clounm item-cont">
-                            <div class="pos-r">
-                                <image src="images/icon-6.png" class="item-pic"></image>
-                            </div>
-                            <text class="item-text">成本神器</text>
-                        </div>
-                    </div>                                                                                                
-                </scroller>
-                <text class="right-corner"> &gt; </text> 
+                        </div>                                                                                                
+                    </scroller>
+                    <text class="right-corner"> &gt; </text> 
+                </div>
             </div>
             
+            <!-- <text>{{hint}}</text> -->
+
             <div class="mt20 bgc-white">
-                <scroller class="flex-row" scroll-direction="horizontal" style="height:100px;">
+                <scroller class="flex-row" show-scrollbar="false" scroll-direction="horizontal" style="height:100px;">
                     <div class="topic-wrap flex-row" v-for="(topic,index) in topics" :key="index">
-                        <a class="topic-a" href="">
+                        <a class="topic-a" href="" @click="jump('#/news')">
                             <text class="topic-text">{{topic.val}}</text>
                         </a>                   
                     </div>
@@ -70,7 +75,7 @@
                     type="imgleft"
                     :infoList="infoList"
                     @infoClick="infoClick"
-                    imgStyle="{width:145px; height:123px;}"
+                    :imgStyle="imgStyle"
                 ></lc-info-list>
             </div>
 
@@ -79,13 +84,13 @@
                     <image src="images/fire.png" class="concept-img"></image>
                     <text class="concept-tit">热门概念</text>
                 </div>
-                <scroller class="flex-row" scroll-direction="horizontal" style="height:350px;">                    
-                    <div class="concept-box" v-for="(concept,index) in concepts" :key="index">
+                <scroller class="flex-row" show-scrollbar="false" scroll-direction="horizontal" style="height:350px;">                    
+                    <div class="concept-box" v-for="(concept,index) in concepts" :key="index" @click="jumpConcept(index)">
                         <text class="concept-name">{{concept.name}}</text> 
                         <text :class="['concept-price', concept.price>0 && 'c-red',concept.price<0 && 'c-green']">{{concept.price}}%</text> 
                         <text class="concept-info">{{concept.info}}</text> 
                     </div> 
-                    <div class="concept-box concept-more">
+                    <div class="concept-box concept-more" @click="jump('#/index/concept_more')">
                         <image class="concept-more-img" src="images/more-icon.png"></image>
                         <text class="concept-more-text">查看更多</text>
                     </div>                                                      
@@ -99,7 +104,7 @@
             </div>
 
             <div class="mt20 bgc-white msg-wrap" v-for="(msg,index) in msgList" :key="index">
-                <div class="msg-head flex-row justify-space-between">
+                <div class="msg-head flex-row justify-between">
                     <div class="flex-row ">
                         <image class="msg-head-img" :src="msg.pic"></image>
                         <div class="ml20">
@@ -124,7 +129,7 @@
                 
             </div>
 
-            <div class="mt20 flex-row justify-space-between">
+            <div class="mt20 flex-row justify-between">
                 <div class="flex-row func-wrap">
                     <image class="func-wrap-img" src="images/icon-kf.png"></image>
                     <div class="ml30">
@@ -142,29 +147,43 @@
             </div>
 
             <div class="mt20 bgc-white">
-                <div class="info-list" v-for="(v,index) in infoList1" :key="index">
-                    <div class="flex1">
-                        <text class="info-list-tit">{{v.textTitle}}</text>
-                        <text class="info-list-info">{{v.textInfo}}</text>
-                        <text class="info-list-time">{{v.textTime}}</text>
-                    </div>
-                </div>
+                <lc-info-list type="text" 
+                :infoList="infoList1" 
+                :titleStyle="titleStyle"
+                :timeStyle="timeStyle"
+                ></lc-info-list>
             </div>
-
             
             
         </scroller>
 
+        <div style="height:40px; width:750px; position:fixed; top:0;" :style="{backgroundColor:bgc}"></div>
+        <lc-minibar 
+            right-text="导航"            
+            class="navhead"
+            text-color="#FFFFFF"
+            :background-color="bgc"      
+            @LcMinibarRightButtonClicked="jump('#/nav')">
+            <image class="navbar-img" src="images/msg.png" slot="left" @click="jump('#/msg')" style="padding-left:40px;"></image>
+            <div slot="middle" class="navbar-search">
+                <image class="navbar-search-icon" src="images/search.png"></image>
+                <text class="navbar-search-text">股票代码或拼音简称</text>
+            </div>
+        </lc-minibar>
     </div>
 </template>
 <script>
 import App from "light";
+import LcMinibar from "lighting-ui/packages/lc-minibar";
 import LcLightbox from "lighting-ui/packages/lc-lightbox";
 import LcInfoList from "lighting-ui/packages/lc-info-list";
 export default {
-  components: { LcLightbox,LcInfoList},
+  components: { LcMinibar,LcLightbox,LcInfoList},
   data() {
     return {
+      /* hint:"", */
+      bgc:'rgba(222,48,47,0)',
+      imgStyle:{ width:'145px',height:'123px'},
       imageList: [
         { src: "images/banner-1.jpg" },
         { src: "images/banner-2.jpg" }
@@ -283,7 +302,9 @@ export default {
               textInfo:'境外资金持续走弱但是境外资金持续走弱但是境外资金持续走弱',
               textTime:'2018-1-15 14:07'
           }
-      ]
+      ],
+      titleStyle:{color: '#36364d', fontWeight: 'bold'},
+      timeStyle:{ textAlign:'left'}
     };
   },
   methods: {
@@ -295,9 +316,7 @@ export default {
     },
     infoClick(e) {
       console.log("clicked" + e.index);
-    },
-    infoClick1(e) {
-      console.log("clicked" + e.index);
+      App.navigate('#/news')
     },
     tagClass(index){
         if(this.tags.length-1 == index){
@@ -305,12 +324,66 @@ export default {
         }else{
             return 'c-gray'
         }
+    },
+    jumpConcept(){
+        App.navigate('#/index/concept')
+    },
+    scrollHandler(e){
+        /* var LightJSBridge = weex.requireModule('LightJSBridge');
+        this.offsetY = e.contentOffset.y;
+       
+        var percent = Math.abs(this.offsetY) / 500.0;
+        if(percent>1){
+            percent=1;
+        }
+        this.hint = '滚动了'+ this.offsetY + '百分比'+percent;
+        var params={ "alpha":percent};
+        LightJSBridge.call("head.setAlpha",params,null); */
+        this.offsetY = e.contentOffset.y;
+        var percent = Math.abs(this.offsetY) / 500.0;
+        if(percent>1){
+            percent=1;
+        }
+        this.bgc='rgba(222,48,47,'+percent+')'
+        
     }
+  },
+  mounted(){
+      /* 调native导航 */
+       /* var LightJSBridge = weex.requireModule('LightJSBridge');
+       var head = weex.requireModule('head');
+       var event = weex.requireModule('event'); 
+       LightJSBridge.call('head.setSearchView',{
+           'icon':'search',
+           'placeholderText':'股票代码或拼音简称',
+           'placeholderTextColor':'#f3c4ce',
+           'backgroundColor':'transparent'
+        },function(res){
+            console.log(res);
+            App.navigate('#')
+        })
+
+        head.setRightItem({'title':'导航'},function(){ 
+            App.navigate('#/nav')
+        });
+        head.setLeftItem({"icon":"msg"},function(){
+            App.navigate('#/msg')
+            // event.openNative('web',{startPage:'https://www.baidu.com'})
+        }); */
   }
 };
 </script>
 <style scoped src="../css/ui.css"></style>
 <style scoped>
+.navhead{
+  position:fixed;top:40px;left:0;height:90px;font-size:30px;  
+}
+.navbar-img{ width: 55px; height: 55px; margin-left: 40px;}
+.navbar-search{ align-items: center; flex-direction: row; justify-content: center;
+     width: 510px; height: 70px; border-radius: 15px; background-color:rgba(255, 255, 255, 0.3); }
+.navbar-search-icon{ width: 30px; height: 30px;}
+.navbar-search-text{ color: #ebe8e9; font-size: 28px; margin-left: 10px;}
+
 .item-wrap {
   width: 750px;
   height: 410px;
@@ -335,23 +408,29 @@ export default {
 .item-pic {
   width: 80px;
   height: 80px;
-  border-radius: 30px;
 }
 .item-text {
   padding-top: 10px;
   font-size: 28px;
   color: #363636;
 }
+.item-cont-wrap{
+    width: 120px;
+    height: 95px;
+    align-items: center;
+    justify-content: flex-end;
+}
 .item-dot {
   position: absolute;
-  right: -15px;
-  top: -15px;
-  width: 44px;
-  height: 44px;
-  line-height: 44px;
+  right: 6px;
+  top: 2px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
   color: #fff;
   text-align: center;
   border-radius: 22px;
+  font-size: 24px;
   background-color: #f7585d;
 }
 

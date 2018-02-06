@@ -10,29 +10,29 @@
            </div>
 
            <lc-cell label="我的持仓" title="交易账户未登录" :has-arrow="true" link="#"
-                :cell-style="cellStyle" :title-text-style="titleTextStyle"
+                :cell-style="cellStyle" :title-style="titleStyle"
            ></lc-cell>
 
            <div class="mt20">
                 <lc-cell label="打新神器" :cell-style="cellStyle1" :has-arrow="true" :has-bottom-border="false"></lc-cell>
                 <lc-cell label="新债申购" :cell-style="cellStyle1" :has-arrow="true" :has-top-border="false" :has-bottom-border="false"></lc-cell>
                 <lc-cell label="港股通" :cell-style="cellStyle1" :has-arrow="true" :has-top-border="false" :has-bottom-border="false"></lc-cell>
-                <lc-cell label="国债理财" :cell-style="cellStyle1" title="（俗称国债逆回购）" :title-text-style="titleTextStyle1" cell-index="last" :has-arrow="true" :has-top-border="false"></lc-cell>
+                <lc-cell label="国债理财" :cell-style="cellStyle1" title="（俗称国债逆回购）" :title-style="titleStyle1" cell-index="last" :has-arrow="true" :has-top-border="false"></lc-cell>
             </div>
 
             <div class="mt20">
                 <lc-cell label="华泰理财产品" :cell-style="cellStyle1" :has-arrow="true" :has-bottom-border="false"></lc-cell>
                 <lc-cell label="场外基金交易" :cell-style="cellStyle1" :has-arrow="true" :has-top-border="false" :has-bottom-border="false"></lc-cell>
-                <lc-cell label="分级基金" :cell-style="cellStyle1" title="（场内）" :title-text-style="titleTextStyle1" cell-index="last" :has-arrow="true" :has-top-border="false"></lc-cell>
+                <lc-cell label="分级基金" :cell-style="cellStyle1" title="（场内）" :title-style="titleStyle1" cell-index="last" :has-arrow="true" :has-top-border="false"></lc-cell>
             </div>
 
             <div class="mt20">
-                <lc-cell label="借钱神器" :cell-style="cellStyle1" title="（泰融e）" :title-text-style="titleTextStyle1" :has-arrow="true" :has-bottom-border="false"></lc-cell>
+                <lc-cell label="借钱神器" :cell-style="cellStyle1" title="（泰融e）" :title-style="titleStyle1" :has-arrow="true" :has-bottom-border="false"></lc-cell>
                 <lc-cell label="其他交易" :cell-style="cellStyle1" cell-index="last" :has-arrow="true" :has-top-border="false"></lc-cell>
             </div>
 
             <lc-cell class="mt20 mb30" :cell-style="cellStyle" :has-arrow="true" link="#">
-                <div class="flex-row pos-r align-items-center" slot="label">
+                <div class="flex-row pos-r align-center" slot="label">
                     <image class="cell-img" src="images/icon-zn.png"></image>
                     <text class="ml20 cell-text">新版交易操作指南</text>
                     <image class="cell-icon" src="images/icon-zl.png"></image>                    
@@ -60,8 +60,8 @@ import LcCell from "lighting-ui/packages/lc-cell";
                 ],
                 cellStyle:{height:'120px'},
                 cellStyle1:{height:'100px'},
-                titleTextStyle:{fontSize:'24px',color:'#c0c0c0'},
-                titleTextStyle1:{ fontSize:'24px',color:'#d2d2d2',textAlign:'left'},
+                titleStyle:{fontSize:'24px',color:'#c0c0c0'},
+                titleStyle1:{ fontSize:'24px',color:'#d2d2d2',textAlign:'left'},
                 cellIcon:'images/icon-zn.png'
             }
         }

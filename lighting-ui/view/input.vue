@@ -7,8 +7,8 @@
       <title title="lc-input"></title>
       <category title="基本用法"></category>
       
-      <text class="hint">无标题输入框</text>
-      <lc-input placeholder="预设内容"></lc-input>
+      <text class="hint">无标题输入框{{password1}}</text>
+      <lc-input placeholder="预设内容"  @on-change="onEvent('change')" v-model="password1"></lc-input>
       
       <text class="hint">有标题输入框</text>
       <lc-input label="单项输入" placeholder="预设内容"></lc-input>
@@ -35,7 +35,7 @@
       <lc-input label="必须输入2333" label-width="240px" :is-type="be2333" placeholder="预设内容"></lc-input>
 
       <text class="hint">确认输入</text>
-      <lc-input label="密码" type="password" placeholder="请输入6位密码" :min="6" :max="6" v-model="password1" :has-bottom-border="false"></lc-input>
+      <lc-input label="密码" type="password" placeholder="请输入6位密码" :min="6" :max="6" v-model="password1" @on-input="onEvent('change')" :has-bottom-border="false"></lc-input>
       <lc-input label="确认密码" type="password" v-model="password2"  placeholder="请确认密码" :equal-with="password1" :has-top-border="false"></lc-input>
 
       <text class="hint">验证码</text>
@@ -144,7 +144,7 @@
       maxValue: '3',
       enterText: 'enter me',
       style: '',
-      password1: '',
+      password1: '222',
       password2: '',
       input01: '',
       input02: '',
@@ -162,9 +162,15 @@
     }),
     methods: {
       onEvent(e) {
-        modal.toast({
-          message: `event:${e}`
-        })
+        // modal.toast({
+        //   message: `event:${e}`
+        // })
+        console.log(this.password1);
+      }
+    },
+    watch: {
+      "password1": function(val) {
+        console.log(val);
       }
     }
   };
