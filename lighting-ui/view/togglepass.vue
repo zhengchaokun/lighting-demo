@@ -1,12 +1,13 @@
 
 <template>
     <div>
-        <input type="text" @change="change" v-if="type=='text'" v-model="text1"/>
-        <input type="password" @change="change" v-if="type=='password'" v-model="text2"/>
+        <input type="text" @input="change(text1)" v-if="type=='text'" v-model="text1"/>
+        <input type="password" @input="change(text2)" v-if="type=='password'" v-model="text2"/>
         <button @click="toggle">切换</button>
     </div>
 </template>
 <script>
+    let text = "";
     export default {
         data(){
             return {
@@ -17,21 +18,27 @@
         },
         methods:{
             toggle(){
+                console.log(text)
                 const that =this;
                 if(this.type==='password'){
                     this.type= "text";
+                    that.text1 = "";
                     this.$nextTick(function () {
-                        that.text1 = that.text2;
+                        that.text1 = text
                     })
                 }else{
                     this.type= "password";
+                    that.text2 = "";
                     this.$nextTick(function () {
-                        that.text2 = that.text1;
+                        that.text2 = text
                     })
                 }
             },
             //必须有这个
-            change(){}
+            change(t){
+                console.log(t)
+                text = t;
+            }
         }
     }
 </script>
