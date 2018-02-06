@@ -6,12 +6,11 @@
       <category title="使用案例"></category>
       <div>
         <div class="demo">
-          <lc-minibar title="Minibar" background-color="#F2F3F4"></lc-minibar>
+          <lc-minibar title="Minibar"></lc-minibar>
         </div>
 
         <div class="demo">
           <lc-minibar @LcMinibarLeftButtonClicked="minibarLeftButtonClick"
-                       background-color="#F2F3F4"
                        @LcMinibarRightButtonClicked="minibarRightButtonClick"></lc-minibar>
         </div>
 
@@ -23,8 +22,7 @@
         </div>
         <div class="demo">
           <lc-minibar title="右侧带文字的导航栏"
-                       background-color="#009ff0"
-                       text-color="#FFFFFF"
+                       background-color="#000"
                        :left-button="leftButton"
                        @LcMinibarLeftButtonClicked="minibarLeftButtonClick"
                        @LcMinibarRightButtonClicked="minibarRightButtonClick"
@@ -32,6 +30,7 @@
         </div>
         <div class="demo">
           <lc-minibar title="右侧带icon的导航栏"
+                      background-color="rgb(97, 154, 173)"
                        @LcMinibarLeftButtonClicked="minibarLeftButtonClick"
                        @LcMinibarRightButtonClicked="minibarRightButtonClick"
                        :right-button="rightButton"></lc-minibar>

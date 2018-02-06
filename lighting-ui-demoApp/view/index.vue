@@ -165,7 +165,7 @@
             :background-color="bgc"      
             @LcMinibarRightButtonClicked="jump('#/nav')">
             <image class="navbar-img" src="images/msg.png" slot="left" @click="jump('#/msg')" style="padding-left:40px;"></image>
-            <div slot="middle" class="navbar-search">
+            <div slot="middle" class="navbar-search" @click="jump('#/search')">
                 <image class="navbar-search-icon" src="images/search.png"></image>
                 <text class="navbar-search-text">股票代码或拼音简称</text>
             </div>
@@ -378,7 +378,7 @@ export default {
 .navhead{
   position:fixed;top:40px;left:0;height:90px;font-size:30px;  
 }
-.navbar-img{ width: 55px; height: 55px; margin-left: 40px;}
+.navbar-img{ width: 55px; height: 55px;}
 .navbar-search{ align-items: center; flex-direction: row; justify-content: center;
      width: 510px; height: 70px; border-radius: 15px; background-color:rgba(255, 255, 255, 0.3); }
 .navbar-search-icon{ width: 30px; height: 30px;}
