@@ -174,7 +174,7 @@
         height: 80px;
         border-width: 1px;
         background-color: #ffffff;
-        border-color: #9a9a9a;
+        border-color: #cecece;
         justify-content: center;
         align-items: center;
     }
