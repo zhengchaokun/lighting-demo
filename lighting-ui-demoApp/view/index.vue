@@ -35,11 +35,11 @@
                                 </div>
                                 <text class="item-text">新股申购</text>
                             </div>                                              
-                            <div class="item-cont">
+                            <div class="item-cont" @click="jump('#/trade/ggt')">
                                 <div class="pos-r item-cont-wrap">
                                     <image src="images/icon-4.png" class="item-pic"></image>
                                 </div>
-                                <text class="item-text">股票开户</text>
+                                <text class="item-text">港股通</text>
                             </div>
                             <div class="item-cont">
                                 <div class="pos-r item-cont-wrap">
@@ -151,6 +151,7 @@
                 :infoList="infoList1" 
                 :titleStyle="titleStyle"
                 :timeStyle="timeStyle"
+                @infoClick="infoClick"
                 ></lc-info-list>
             </div>
             
@@ -161,10 +162,9 @@
         <lc-minibar 
             right-text="导航"            
             class="navhead"
-            text-color="#FFFFFF"
             :background-color="bgc"      
             @LcMinibarRightButtonClicked="jump('#/nav')">
-            <image class="navbar-img" src="images/msg.png" slot="left" @click="jump('#/msg')" style="padding-left:40px;"></image>
+            <image class="navbar-img" src="images/msg.png" slot="left" @click="jump('#/msg')"></image>
             <div slot="middle" class="navbar-search" @click="jump('#/search')">
                 <image class="navbar-search-icon" src="images/search.png"></image>
                 <text class="navbar-search-text">股票代码或拼音简称</text>
@@ -313,6 +313,7 @@ export default {
     },
     lcImgClick(e) {
       console.log("clicked" + e.index);
+      App.navigate('#/login');
     },
     infoClick(e) {
       console.log("clicked" + e.index);

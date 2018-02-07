@@ -43,16 +43,28 @@ module.exports = {
             }
         },
         "market":{
-            url:"app.native.js#/market"
+            url:"app.native.js#/market/hushen",
+            navBar:{
+                title:"行情"
+            }
         },
         "trade":{
-            url:"app.native.js#/trade"
+            url:"app.native.js#/trade",
+            navBar:{
+                title:"交易"
+            }
         },
         "financing":{
-            url:"app.native.js#/financing"
+            url:"app.native.js#/financing",
+            navBar:{
+                type:"0"
+            }
         },
         "account":{
-            url:"app.native.js#/account"
-        }
+            url:"app.native.js#/account",
+            navBar:{
+                title:"我的"
+            }
+        }       
     }
 };

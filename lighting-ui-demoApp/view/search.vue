@@ -65,9 +65,9 @@ import LcTip from 'lighting-ui/packages/lc-tip';
 
 .result-wrap{ padding-left: 26px; padding-right: 26px; margin-top: 90px;}
 .result-box{ height: 98px; flex-direction: row; align-items: center; justify-content: space-between; border-bottom-width: 1px; border-bottom-color: #dcdcde; }
-.result-type{ width: 82px; height: 40px; line-height: 40px; text-align: center; border-width: 1px; border-color: #a84347; color: #a84347; font-size: 28px;}
+.result-type{ width: 82px; height: 40px; line-height: 40px; text-align: center; border-width: 1px; border-color: #a84347; color: #a84347; font-size: 24px;}
 .result-text{ color: #000002; font-size: 32px;}
-.result-icon{width: 50px; height: 50px; line-height: 50px; text-align: center; border-width: 1px; font-size: 36px; border-radius: 25px;}
+.result-icon{width: 50px; height: 50px; line-height: 46px; text-align: center; border-width: 1px; font-size: 36px; border-radius: 25px;}
 .add{ border-color: #a84347; color: #a84347;}
 .remove{ border-color: #959597; color: #959597;}
 

@@ -1,7 +1,7 @@
 
 <template>
     <div style="background-color:#f0eff4;">
-        <scroller>
+        <scroller offset-accuracy="10" @scroll="scrollHandler">
             <lc-lightbox autoPlay="true" ref="lc-lightbox"
                 height="400"
                 interval="5000"
@@ -122,18 +122,29 @@
                 </div>
             </div>
 
-        </scroller>    
+        </scroller>  
+
+        <div style="height:40px; width:750px; position:fixed; top:0;" :style="{backgroundColor:bgc}"></div>
+        <lc-minibar           
+            class="navhead"
+            title="严选理财"
+            :background-color="bgc">
+            <image class="navbar-img" src="images/msg.png" slot="left" @click="jump('#/msg')"></image>
+            <image class="navbar-img" src="images/search.png" slot="right" @click="jump('#/search')"></image>
+        </lc-minibar>  
     </div>
 </template>
 <script>
 import App from "light";
+import LcMinibar from "lighting-ui/packages/lc-minibar";
 import LcLightbox from "lighting-ui/packages/lc-lightbox";
 import LcCell from "lighting-ui/packages/lc-cell";
 import LcInfoList from "lighting-ui/packages/lc-info-list"; 
     export default {
-        components: { LcLightbox,LcInfoList,LcCell},
+        components: { LcMinibar,LcLightbox,LcInfoList,LcCell},
         data(){
             return {
+                bgc:'rgba(255,132,2,0)',
                 imageList: [
                     { src: "images/banner-1.jpg" },
                     { src: "images/banner-2.jpg" }
@@ -219,12 +230,23 @@ import LcInfoList from "lighting-ui/packages/lc-info-list";
             },
             clickHandler({item, index}){
                 console.log(item, index)
+            },
+            scrollHandler(e){
+                this.offsetY = e.contentOffset.y;
+                var percent = Math.abs(this.offsetY) / 500.0;
+                if(percent>1){
+                    percent=1;
+                }
+                this.bgc='rgba(255,132,2,'+percent+')'                
             }
         }
     }
 </script>
 <style scoped src="../css/ui.css"></style>
 <style scoped>
+.navhead{ position:fixed;top:40px;left:0;height:90px;font-size:30px;}
+.navbar-img{ width: 55px; height: 55px;}
+
 .tip-wrap{ height: 80px; padding-left: 30px; padding-right: 30px; flex-direction: row; align-items: center;}
 .tip-img{ width: 28px; height: 28px;}
 .tip-text{ color: #acacac; font-size: 24px; margin-left: 10px;}
