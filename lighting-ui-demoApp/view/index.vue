@@ -22,7 +22,7 @@
                                 </div>
                                 <text class="item-text">我的资产</text>
                             </div>    
-                            <div class="item-cont">
+                            <div class="item-cont" @click="jump('#/information/headline')">
                                 <div class="pos-r item-cont-wrap">
                                     <image src="images/icon-3.png" class="item-pic"></image>
                                     <text class="item-dot">8</text>
