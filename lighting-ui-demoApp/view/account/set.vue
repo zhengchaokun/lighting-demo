@@ -13,15 +13,15 @@
            </div>
            <lc-cell label="个人设置" :has-arrow="true" :arrow-icon="arrowIcon" :cell-style="cellStyle" :label-style="labelStyle"></lc-cell>
 
-           <lc-cell label="账户与安全" title="管理您的账户信息" :has-arrow="true" :arrow-icon="arrowIcon" :cell-style="cellStyle1" :label-style="labelStyle" :title-style="titleStyle" class="no-top-border"></lc-cell>
+           <lc-cell label="账户与安全" title="管理您的账户信息" :has-arrow="true" :arrow-icon="arrowIcon" :cell-style="cellStyle2" :label-style="labelStyle" :title-style="titleStyle"></lc-cell>
            <lc-cell label="默认首页设置" title="根据自己的使用习惯设置" :has-arrow="true" :arrow-icon="arrowIcon" :cell-style="cellStyle1" :label-style="labelStyle" :title-style="titleStyle"></lc-cell>
-           <lc-cell label="行情设置" :has-arrow="true" :arrow-icon="arrowIcon" :cell-style="cellStyle1" ></lc-cell>
-           <lc-cell label="服务器设置" :has-arrow="true" :arrow-icon="arrowIcon" :cell-style="cellStyle1" ></lc-cell>
-           <lc-cell label="清理缓存" :has-arrow="true" :arrow-icon="arrowIcon" :cell-style="cellStyle1" ></lc-cell>
-           <lc-cell label="免责条款" :has-arrow="true" :arrow-icon="arrowIcon" :cell-style="cellStyle1" ></lc-cell>
-           <lc-cell label="音频自动播放" :has-arrow="true" :arrow-icon="arrowIcon" :cell-style="cellStyle1"></lc-cell>
-           <lc-cell label="投资者教育" :has-arrow="true" :arrow-icon="arrowIcon" :cell-style="cellStyle1" ></lc-cell>
-           <lc-cell label="V5.0.7版本" :has-arrow="true" :arrow-icon="arrowIcon" :cell-style="cellStyle1" ></lc-cell>
+           <lc-cell label="行情设置" :has-arrow="true" :arrow-icon="arrowIcon" :cell-style="cellStyle1" :label-style="labelStyle" ></lc-cell>
+           <lc-cell label="服务器设置" :has-arrow="true" :arrow-icon="arrowIcon" :cell-style="cellStyle1" :label-style="labelStyle" ></lc-cell>
+           <lc-cell label="清理缓存" :has-arrow="true" :arrow-icon="arrowIcon" :cell-style="cellStyle1" :label-style="labelStyle" ></lc-cell>
+           <lc-cell label="免责条款" :has-arrow="true" :arrow-icon="arrowIcon" :cell-style="cellStyle1" :label-style="labelStyle" ></lc-cell>
+           <lc-cell label="音频自动播放" :has-arrow="true" :arrow-icon="arrowIcon" :cell-style="cellStyle1" :label-style="labelStyle"></lc-cell>
+           <lc-cell label="投资者教育" :has-arrow="true" :arrow-icon="arrowIcon" :cell-style="cellStyle1" :label-style="labelStyle" ></lc-cell>
+           <lc-cell label="V5.0.7版本" :has-arrow="true" :arrow-icon="arrowIcon" :cell-style="cellStyle1" :label-style="labelStyle" ></lc-cell>
            
            
         </scroller>
@@ -59,6 +59,11 @@
                 cellStyle1: {
                     borderBottomWidth: '0px',
                     height: '98px'
+                },
+                cellStyle2: {
+                    borderBottomWidth: '0px',
+                    height: '98px',
+                    borderTopWidth: '0px'
                 },
                 labelStyle: {
                     color: '#4e4e4e',
