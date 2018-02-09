@@ -2,11 +2,11 @@
 <template>
      <div style="background-color:#f0eff4; height: 1334px;">
         <scroller style="height: 1334px;">
-           <div class="block flex-row align-center">
+           <div class="block flex-row align-center justify-between">
                 <text>行情颜色选择</text>
                 <div class="flex-row">
-                    <div class="flex-row" v-for="(bgColor, index) in bgColors" :key="index">
-                        <image :src="bgColor.checked ? checkedIcon : unCheckedIcon" style="width: 42px; height: 42px; margin-right: 24px;" @click="toggleSelect(bgColor)"></image>
+                    <div class="flex-row ml20" v-for="(bgColor, index) in bgColors" :key="index">
+                        <image :src="bgColor.checked ? checkedIcon : unCheckedIcon" style="width: 42px; height: 42px; margin-right: 10px;" @click="toggleSelect(bgColor)"></image>
                         <text :style="textStyle">{{ bgColor.label }}</text>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                 checkedIcon: 'images/radio-checked.png',
                 unCheckedIcon: 'images/radio-unchecked.png',
                 cellStyle: {
-                    marginTop: '40px',
+                    marginTop: '20px',
                     marginBottom: '20px',
                     borderTopWidth: '0px',
                     borderBottomWidth: '0px'
