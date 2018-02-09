@@ -245,7 +245,7 @@ import LcInfoList from "lighting-ui/packages/lc-info-list";
 <style scoped src="../css/ui.css"></style>
 <style scoped>
 .navhead{ position:fixed;top:40px;left:0;height:90px;font-size:30px;}
-.navbar-img{ width: 55px; height: 55px;}
+.navbar-img{ width: 50px; height: 50px;}
 
 .tip-wrap{ height: 80px; padding-left: 30px; padding-right: 30px; flex-direction: row; align-items: center;}
 .tip-img{ width: 28px; height: 28px;}
