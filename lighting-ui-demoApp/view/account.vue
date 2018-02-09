@@ -35,16 +35,26 @@
                 </div>
             </div>
         </scroller>
+
+        <lc-minibar class="navhead" title="" :background-color="bgc">
+            <image class="navbar-img" src="images/msg.png" slot="left" @click="jump('#/msg')"></image>
+            <div slot="right" class="navbar-right">
+                <image class="navbar-icon" src="images/scan-top.png"></image>
+                <image class="navbar-icon ml40" src="images/set.png" @click="jump('#/set')"></image>
+            </div>
+        </lc-minibar>
        
     </div>
 </template>
 <script>
     import Light from "light";
     import LcCell from "lighting-ui/packages/lc-cell";
+    import LcMinibar from "lighting-ui/packages/lc-minibar";
     export default {
-        components: {LcCell},
+        components: {LcCell,LcMinibar},
         data(){
             return {
+                bgc:'rgba(255,255,255,0)',
                 isSigned: true,
                 user: {
                     name: '乐友19990921',
@@ -62,7 +72,7 @@
                     color: '#9a9a9a'                        
                 },
                 cellStyle: {
-                    height: '180px',
+                    height: '170px',
                     marginBottom: '20px',
                     border: 'none',
                     paddingRight: '40px'
@@ -72,7 +82,7 @@
                     marginRight: '0px'
                 },
                 cellStyle1: {
-                    height: '120px',
+                    height: '100px',
                     paddingRight: '10px'                    
                 },
                 titleStyle1: {
@@ -110,10 +120,16 @@
 
 <style scoped src="../css/ui.css"></style>
 <style scoped>
+    .navhead{ position:fixed;top:40px;left:0;width: 750px; height:90px;font-size:30px; }
+    .navbar-right{ flex-direction: row;}
+    .navbar-img{ width: 55px; height: 55px;}
+    .navbar-icon{ width: 45px; height: 45px;}
+
     .header {
         position: relative;
-        height: 220px;
+        height: 350px;
         background-color: #d03132; 
+        padding-top: 130px;
         padding-left: 40px;
     }
     .user-info {
