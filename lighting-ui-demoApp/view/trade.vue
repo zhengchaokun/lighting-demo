@@ -16,7 +16,7 @@
            <div class="mt20">
                 <lc-cell label="打新神器" :cell-style="cellStyle1" :has-arrow="true" :has-bottom-border="false"></lc-cell>
                 <lc-cell label="新债申购" :cell-style="cellStyle1" :has-arrow="true" :has-top-border="false" :has-bottom-border="false"></lc-cell>
-                <lc-cell label="港股通" :cell-style="cellStyle1" :has-arrow="true" :has-top-border="false" :has-bottom-border="false"></lc-cell>
+                <lc-cell label="港股通" link="#/trade/ggt" :cell-style="cellStyle1" :has-arrow="true" :has-top-border="false" :has-bottom-border="false"></lc-cell>
                 <lc-cell label="国债理财" :cell-style="cellStyle1" title="（俗称国债逆回购）" :title-style="titleStyle1" cell-index="last" :has-arrow="true" :has-top-border="false"></lc-cell>
             </div>
 

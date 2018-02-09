@@ -63,7 +63,7 @@ module.exports = {
         "account":{
             url:"app.native.js#/account",
             navBar:{
-                title:"我的"
+                type:"0"               
             }
         }       
     }

@@ -84,9 +84,11 @@ a{ text-decoration: none;}
 
 .ml10{margin-left: 10px;}
 .ml20{margin-left: 20px;}
+.ml25{margin-left: 25px;}
 .ml30{margin-left: 30px;}
 .ml40{margin-left: 40px;}
 
+.mr5{ margin-right: 5px;}
 .mr10{ margin-right: 10px;}
 .mr20{ margin-right: 20px;}
 .mr30{ margin-right: 30px;}
