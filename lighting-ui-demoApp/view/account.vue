@@ -72,7 +72,7 @@
                     color: '#9a9a9a'                        
                 },
                 cellStyle: {
-                    height: '180px',
+                    height: '170px',
                     marginBottom: '20px',
                     border: 'none',
                     paddingRight: '40px'
@@ -82,7 +82,7 @@
                     marginRight: '0px'
                 },
                 cellStyle1: {
-                    height: '120px',
+                    height: '100px',
                     paddingRight: '10px'                    
                 },
                 titleStyle1: {
