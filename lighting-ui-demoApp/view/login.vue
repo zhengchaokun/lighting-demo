@@ -32,33 +32,38 @@
             </div>
             <text class="fs26 mt50 text-center text-error">登录遇到问题</text>
             <div class="footer">
-                <text class="fs20 f-lightgray-1 text-center">不是华泰用户？</text>
-                <text class="fs32 f-blue mt10 text-center">在线开户</text>
+                <text class="fs24 f-dark text-center">不是华泰用户？</text>
+                <text class="fs32 f-orange mt10 text-center">在线开户</text>
             </div>
 
             <lc-popup :have-overlay="true"
                 popup-color="#fff"
                 :show="isBottomShow"
-                @LcPopupOverlayClicked="popupOverlayBottomClick"
+                @LcPopupOverlayClicked="closePopup()"
                 pos="bottom"
-                height="1040">
-                <div class="popup-title justify-center">
-                    <text class="fs32 f-black text-center">系统提示</text>
-                </div>    
-                <div class="block">
-                    <text class="f-lightgray fs30 text-center">登录保存设置</text>
-                    <lc-radio :list="list1" :config="config" style="margin-top: 26px;"></lc-radio>
+                height="870">
+                <scroller>
+                    <!-- <div class="popup-title justify-center">
+                        <text class="fs32 f-black text-center">系统提示</text>
+                    </div>     -->
+                    <div class="block mt20">
+                        <text class="f-lightgray fs30 text-center">登录保存设置</text>
+                        <lc-radio :list="list1" :config="config" style="margin-top: 26px;"></lc-radio>
+                    </div>
+                    <div class="block">
+                        <text class="f-lightgray fs30 mt20 text-center">保持在线时长</text>
+                        <lc-radio :list="list2" :config="config" style="margin-top: 26px;" @LcRadioListChecked="LcRadioListChecked"></lc-radio>
+                    </div>
+                </scroller>
+                
+                <div>
+                    <div class="flex-row align-center justify-center h-76">
+                        <text class="fs24 f-lightgray">锁屏或回至主屏幕时保持登录状态</text>
+                        <text class="fs24 f-orange">{{ selected }}</text>                    
+                    </div>
+                    <lc-button text="确定" type="red" :btn-style="btnStyle1" :text-style="textStyle" @LcButtonClicked="closePopup"></lc-button>
                 </div>
-                <div class="block">
-                    <text class="f-lightgray fs30 mt20 text-center">保持在线时长</text>
-                    <lc-radio :list="list2" :config="config" style="margin-top: 26px;" @LcRadioListChecked="LcRadioListChecked"></lc-radio>
-                </div>
-                <div class="flex-row align-center justify-center h-76">
-                    <text class="fs24 f-lightgray">锁屏或回至主屏幕时保持登录状态</text>
-                    <text class="fs24 f-orange">{{ selected }}</text>                    
-                </div>
-                <div class="line"></div>
-                <lc-button text="确定" type="normal" :btn-style="btnStyle1" :text-style="textStyle" @LcButtonClicked="closePopup"></lc-button>
+                
             </lc-popup>
         </scroller>
     </div>
@@ -125,17 +130,20 @@
                 ],
                 selected: '30分钟',
                 config: {
-                    checkedColor: '#ff9933',
-                    checkedIcon: '../../images/tick.png'
+                    unCheckedColor:'#cacaca',
+                    checkedColor: '#ffa17f',
+                    fontSize:'30px',
+                    checkedIcon: 'images/tick.png'
                 },
                 btnStyle1: {
-                    width: '750px',
-                    height: '100px',
-                    backgroundColor: '#fff',
-                    borderWidth: '0'
+                    width: '750px', 
+                    height: '108px',
+                    backgroundColor: '#de3031',
+                    borderWidth: '0',
+                    borderRadius:'0'
                 },
                 textStyle: {
-                    color: '#df3031'
+                    color: '#fff'
                 }
             }
         },
@@ -158,9 +166,6 @@
             LcRadioListChecked(e) {
                 console.log(e);
                 this.selected = e.title;
-            },
-            popupOverlayBottomClick() {
-
             },
             closePopup(e) {
                 console.log(111,e);
@@ -187,14 +192,14 @@
         padding-right: 30px;
     }
     .footer {
-        position: absolute;
+        position: fixed;
         left: 0;
         right: 0;
         bottom: 90px;
         width: 750px;
     }
     .text-error {
-        color: #dd613a;
+        color: #ff9933;
     }
     .popup-title {
         height: 110px;
