@@ -1,12 +1,19 @@
-function parse2query(data) {
-    let string = "";
-    Object.keys(data).forEach(function (key) {
-        string+=`${key}=${data[key]}&`
-    });
-    string=string.substring(0,string.length-1);
-    return string;
+function getBackgroundColorByTimeMode(mode) {
+    if("day" == mode){
+       return "#ffffff";
+    }else if("night" == mode){
+       return "#000000";
+    }else if("auto" == mode){
+      var dateTemp=new Date();
+      var hour=dateTemp.getHours();
+      if(hour>=6 && hour<19){
+          return "#ffffff";
+      }else{
+          return "#000000";
+      }
+    }
 }
 
 module.exports = {
-    parse2query
+    getBackgroundColorByTimeMode
 }
