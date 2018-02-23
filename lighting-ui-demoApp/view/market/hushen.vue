@@ -2,19 +2,20 @@
 <template>
     <div class="page">
         <div class="flex-row pl20 pr20">
-            <div class="row-item pt10" @click="changePart(index)" v-for="(item, index) in chartData" :key="index">
+            <div class="row-item pt10" @click="changePart(index)" v-for="(item, index) in cnIndexList" :key="index">
                 <div class="flex-row justify-center">
-                    <text class="fs34 f-red">{{item['total']}}</text>
+                    <text class="fs34 f-red">{{item['last_px']}}</text>
                 </div>
                 <div class="flex-row align-center justify-center mt10">
-                    <text class="fs24">{{item['title']}}</text>
-                    <text class="fs24 f-red">{{item['change']}}</text>
+                    <text class="fs24">{{item['prod_name']}}</text>
+                    <text class="fs24 f-red">{{item['px_change_rate']}}</text>
                 </div>
                 <div :class="['bottom-line', index==chartIndex && 'line-active']"></div>
             </div>
         </div>
         <div class="chart">
-
+            <chartview :stockcode='stockCode' :codetype='codeType' :chartType='chartType'  :snapshotdata='snapshotdata' :trenddata='trenddata' style="width:750px;height:260px;">
+            </chartview>
         </div>
 
         <div class="cell">
@@ -287,6 +288,7 @@
     </div>
 </template>
 <script>
+    const dataCenter = require("../.././js/openApi.js");
     import LcProgress from "lighting-ui/packages/lc-progress";
     export default {
         data() {
@@ -310,6 +312,15 @@
                     change: "+0.10%"
                     }
                 ],
+                cnstocks:"1A0001.SS,2A01.SZ,399006.SZ",
+                cnIndexList:[
+                ],
+                stockCode:'1A0001',
+                codeType:'XSHG.MRI',
+                chartType:'TRENDLINE',
+                snapshotdata:{},
+                snapshotdata_indexlist:[],
+                trenddata:{},
                 /* bar */
                 raise_count: 1871,
                 fall_count: 1334,
@@ -490,6 +501,7 @@
         methods: {
             changePart(index) {
                 this.chartIndex = index;
+                this.getIndexChartData(index);
             },
             changeBtn(index) {
                 this.btnIndex = index;
@@ -556,8 +568,96 @@
                     "font-size": "30px"
                     };
                 }
+            },
+            getIndexChartData:function(index){
+                var current_snapshotdata =this.snapshotdata_indexlist[index];
+                var item =this.cnIndexList[index];
+                this.snapshotdata =current_snapshotdata;
+                var that=this;
+                this.stockCode =item.prod_code;
+                this.codeType =item.hq_type_code;
+                //获取5日分时图数据
+                dataCenter.getTrend({prod_code:item.prod_code_all,fields:'last_px,business_amount,avg_px,business_balance,min_time',date:20180223,crc:0},function(res){
+                    //console.log("4545 trendsdata="+JSON.stringify(res));
+
+                    /*native端需要转换数据模型格式 {trends:{date:20180223,trend:[{avg_px,business_amount,business_balance,hq_px,min_time,wavg_px},{},...]}}
+                    openApi返回数据格式 其中 {"data":{"trend":{"fields":["min_time","last_px","avg_px","business_amount","business_balance"],"crc":{"600570.SS":20180223},"600570.SS":[[],[],....]}}}
+                    其中avg_px为native中用到的wavg_px last_px为hq_px
+                    */
+                    var r = ["last_px", "business_amount", "avg_px","business_balance","min_time"];
+                    var result=res.data.trend;
+                    var fields = result.fields;
+                    var crc=result.crc;
+                    var newArr=[];
+                    for (var key in result){
+                        if ("fields" != key && "crc" !=key) {
+                            var trendsdata =result[key];
+                            for (var i = 0; i < trendsdata.length; i++) {
+                                var trendArr =trendsdata[i];//trend模型数据数组  [201501090931,54.63,54.829486,49700]
+
+                                for (var p = {}, l = 0; l < fields.length; l++){
+                                    p[r[l]] = trendArr[fields.indexOf(r[l])];
+                                }
+                                /*native所需字段*/
+                                p.wavg_px=p.avg_px;
+                                p.avg_px=0;
+                                p.hq_px =p.last_px;
+                                p.min_time =parseInt(p.min_time)%10000;
+                                newArr.push(p);
+                            }
+                            
+                            var trenddata={};
+                            trenddata.trends=[];
+                            trenddata.trends.push({date:20180223,trend:newArr});
+                            //trenddata.trends.trend=newArr;
+                           // console.log("4545 trendsdata_index="+JSON.stringify(trenddata));
+                           //目前只是iOS格式 安卓格式还不实现
+                            that.trenddata={"result":trenddata};
+                        }
+                    }
+                    
+                });
             }
-        }
+        },
+       created:function(){
+            var that=this;
+            dataCenter.getRealtimeList({en_prod_code:this.cnstocks},function(res){
+                         //console.log("cnindexlist="+JSON.stringify(res));
+                         that.cnIndexList=[];
+                         var result=res.data.snapshot;
+                         var fields = result.fields;
+                         var r = ["last_px", "px_change", "px_change_rate","prod_name","hq_type_code"];
+                         var newArr=[];
+                         var j=0;
+                         for (var key in result){
+                            if ("fields" != key) {
+                                for (var p = {}, l = 0; l < r.length; l++){
+                                    p[r[l]] = result[key][fields.indexOf(r[l])];
+                                    p.prod_code_all = key;
+                                    p.prod_code = key.split('.')[0];
+                                }
+                                newArr.push(p);
+                                //指数的三个快照数据
+                                var data={};
+                                var snapshotdata={};
+                                snapshotdata.fields=fields;
+                                snapshotdata[key]=result[key];
+                                data.data={};
+                                data.data.snapshot =snapshotdata;
+                                
+                                console.log("4545 snapshotdata_index="+JSON.stringify(data));
+                                that.snapshotdata_indexlist.push(data);
+                                j++;
+                            }
+                        }
+                        that.cnIndexList=newArr;
+                        //console.log("4545 cnIndexlist="+JSON.stringify(that.cnIndexList));
+                        that.getIndexChartData(0);
+                    }
+            );
+            
+
+       }
     }
 </script>
 
