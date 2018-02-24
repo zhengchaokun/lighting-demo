@@ -53,6 +53,10 @@
     var head = weex.requireModule('head');
     const event = weex.requireModule('event');
     const dataCenter = weex.requireModule('dataCenter');
+
+    const dataCenterOpenAPI = require("../.././js/openApi.js");
+    const modal = weex.requireModule('modal')
+
     const storage = weex.requireModule('storage');
     const LightJSBridge =weex.requireModule('LightJSBridge');
     const getBusiFlag = require('../.././js/common-api.js').common.getBusiFlag;
@@ -246,6 +250,9 @@
             },
             gotoBack:function(){
                 LightJSBridge.call("native.back",{number:1},function(){});
+            },
+            getOpenAPIResult:function(inputValue,callback){
+                dataCenterOpenAPI.getWizardResult({prod_code:inputValue,en_finance_mic:"SS,SZ",data_count:"10"},callback);
             }
         },
         data:function(){
@@ -272,8 +279,9 @@
                 if (!value || value == ""){
                     return;
                 }
-                this.requestResult(value,e=>{
-                    var result = e.data;
+
+                this.getOpenAPIResult(value,e=>{
+                    var result = e.data.data;
                     this.resultlist = [];
                     for(var i in result){
                         var item={};
