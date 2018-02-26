@@ -226,7 +226,7 @@ export default {
 };
 </script>
 <style scoped src="../css/ui.css"></style>
-<style lang="less">
+<style scoped>
 .head {
   border-bottom-width: 2px;
   border-bottom-color: #e9e9e9;
