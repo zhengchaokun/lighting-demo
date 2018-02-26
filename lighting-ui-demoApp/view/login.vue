@@ -33,7 +33,7 @@
             <text class="fs26 mt50 text-center text-error">登录遇到问题</text>
             <div class="footer">
                 <text class="fs24 f-dark text-center">不是华泰用户？</text>
-                <text class="fs32 f-orange mt10 text-center">在线开户</text>
+                <text class="fs32 f-orange mt10 text-center" @click="jump('#/account/openaccount')">在线开户</text>
             </div>
 
             <lc-popup :have-overlay="true"
@@ -69,6 +69,7 @@
     </div>
 </template>
 <script>
+    import App from "light";
     import LcCell from "lighting-ui/packages/lc-cell";
     import LcButton from "lighting-ui/packages/lc-button";
     import LcRadio from "lighting-ui/packages/lc-radio";
@@ -157,6 +158,9 @@
             }
         },
         methods: {
+            jump(view) {
+                App.navigate(view);
+            },
             toggleCell(e) {
                 this.showCell = e.value;
             },

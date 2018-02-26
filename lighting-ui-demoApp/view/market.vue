@@ -4,7 +4,9 @@
         <scroller>
           <!-- scroller -->
           <div class="scroller">
+            <keep-alive>
               <router-view></router-view>
+            </keep-alive>     
           </div>
 
         </scroller>
