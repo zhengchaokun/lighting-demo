@@ -1,7 +1,7 @@
 
 <template>
     <div>
-        <scroller> 
+        <scroller style="height: 1334px;"> 
             <image class="topimg" src="images/kh.jpg"></image>
             <div class="kh-wrap">
                 <div class="flex-row justify-center align-center mt20">
