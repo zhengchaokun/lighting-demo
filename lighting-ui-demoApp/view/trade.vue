@@ -3,7 +3,7 @@
     <div style="background-color:#f0eff4;">
        <scroller>
            <div class="trade-grid flex-row">
-               <div class="trade-grid-wrap bgc-white" v-for="(trade,i) in trades" :key="i">
+               <div class="trade-grid-wrap bgc-white" v-for="(trade,i) in trades" :key="i" @click="jump(trade.path)">
                    <image class="trade-grid-img" :src="trade.src"></image>
                    <text class="trade-grid-text">{{trade.val}}</text>
                </div>
@@ -49,10 +49,10 @@ import LcCell from "lighting-ui/packages/lc-cell";
         data(){
             return {
                 trades:[
-                    {src:'images/g-1.png',val:'买入'},
+                    {src:'images/g-1.png',val:'买入',},
                     {src:'images/g-2.png',val:'卖出'},
                     {src:'images/g-3.png',val:'撤单'},
-                    {src:'images/g-4.png',val:'查询资金'},
+                    {src:'images/g-4.png',val:'查询资金',path: "#/trade/query_money" },
                     {src:'images/g-5.png',val:'查询委托'},
                     {src:'images/g-6.png',val:'查询成交'},
                     {src:'images/g-7.png',val:'银证转账'},
@@ -63,6 +63,11 @@ import LcCell from "lighting-ui/packages/lc-cell";
                 titleStyle:{fontSize:'24px',color:'#c0c0c0'},
                 titleStyle1:{ fontSize:'24px',color:'#d2d2d2',textAlign:'left'},
                 cellIcon:'images/icon-zn.png'
+            }
+        },
+        methods:{
+            jump(view) {
+                App.navigate(view);
             }
         }
     }
