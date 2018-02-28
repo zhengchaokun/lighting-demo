@@ -47,6 +47,16 @@
     <view id="trade"/>
     <view id="trade/ggt"/> <!-- 港股通 -->
     <view id="trade/query_money"/> <!-- 查询资金 -->
+    
+    <!-- 交易tab页面 -->
+    <view id="trade_detail" />
+    <view id="trade_detail/buy" parent="trade_detail" /><!-- 买入 -->
+    <view id="trade_detail/sell" parent="trade_detail" /><!-- 卖出 -->
+    <view id="trade_detail/cancel" parent="trade_detail" /><!-- 撤单 -->
+    <view id="trade_detail/delegate" parent="trade_detail" /><!-- 委托 -->
+    <view id="trade_detail/delegate/today" parent="trade_detail/delegate"/><!-- 当日委托 -->
+    <view id="trade_detail/delegate/deal" parent="trade_detail/delegate"/><!-- 当日成交 -->
+    <view id="trade_detail/hold" parent="trade_detail" /><!-- 持仓 -->
 
     <!-- 交易>融资融券 -->
     <view id="margin"/>
