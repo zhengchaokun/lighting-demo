@@ -10,7 +10,7 @@
                 </div>
                 <div class="flex-row justify-between align-center mt50">
                     <div class="item-cont">
-                        <image src="images/id.png" style="{width:65px}" class="item-pic"></image>
+                        <image src="images/id.png" style="width:65px" class="item-pic"></image>
                         <text class="item-text">二代身份证</text>
                     </div>
                     <div class="item-cont">
