@@ -2477,13 +2477,43 @@
      //          that.sellbuttonvalue="平仓";
      //  }
 
-      //定时5秒刷新数据
-      timeHandle.setInterval(function(){
-          if (that.isPageShow){
-              that.getAllData();
-          }
+      //主推
+      quoteDc.subscribe({
+        stockCode: this.stockCode,
+        codeType: this.codeType,
+        subType: 1
+      }, function(ret) {
+        if (!that.isPageShow){
+          return;
+        }
+        that.snapshotdata = ret;
 
-      },5000);
+            var stockCode = that.stockCode;
+            if (getAbbreviation(that.codeType).length > 0){
+                stockCode = stockCode + "."+getAbbreviation(that.codeType);
+            }
+            if(that.snapshotdata.data.snapshot[stockCode]==null && that.snapshotdata.data.snapshot[that.stockCode]==null){
+              return;
+            }
+            that.getSnapshotdata();
+            var fields = that.snapshotdata.data.snapshot.fields;
+            var preclose =that.snapshotdata.data.snapshot[stockCode][fields.indexOf("preclose_px")];
+            console.log("昨日收盘价="+preclose);
+            if(preclose>0){
+              if(that.chartType.indexOf('TRENDLINE')!=-1){
+                    that.getTrend();
+                }else if(that.chartType.indexOf("NETVALUE")!=-1){
+                    that.getNetValue();
+                }else{
+                    that.getKLine();
+                }
+
+                if (that.BidTickDivAttr == 'visible'){
+                    that.getTick();
+                }
+            }
+            that.setTitle();
+      })
     }
   }
 </script>
