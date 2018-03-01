@@ -1,0 +1,17 @@
+{
+  "project":"light-quote-demo",
+  "version":"0.0.1",
+  "desc":"Light Quote",
+  "type":"vue",
+  "plugins":["jsnative"],
+  "link_id":"",
+
+  "env":{
+    "default":{
+      "log_level":"debug"
+    },
+    "product":{
+      "log_level":"error"
+    }
+  }
+}

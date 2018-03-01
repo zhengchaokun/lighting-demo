@@ -23,8 +23,35 @@
                     <scroller :scroll-direction='horizontal' style="flex-direction: row">
                         <div>
                             <div class="list-head">
-                                <div v-for="title in titles" :key="title" class="list-head-item">
-                                    <text class="list-head-text">{{title}}</text>
+                                <div class="list-head-item flex-row">
+                                    <text class="list-head-text mr10">最新</text>
+                                    <image src="images/header_arrow_none.png" class="order-dot-icon" v-if="timeOrder==0"></image>
+                                    <image src="images/header_arrow_up.png" class="order-arrow-icon" v-if="timeOrder==1"></image>
+                                    <image src="images/header_arrow_down.png" class="order-arrow-icon" v-if="timeOrder==-1"></image>
+                                </div>
+                                <div class="list-head-item flex-row">
+                                    <text class="list-head-text mr10">幅度</text>
+                                    <image src="images/header_arrow_none.png" class="order-dot-icon" v-if="changeOrder==0"></image>
+                                    <image src="images/header_arrow_up.png" class="order-arrow-icon" v-if="changeOrder==1"></image>
+                                    <image src="images/header_arrow_down.png" class="order-arrow-icon" v-if="changeOrder==-1"></image>
+                                </div>
+                                <div class="list-head-item">
+                                    <text class="list-head-text">涨跌</text>
+                                </div>
+                                <div class="list-head-item">
+                                    <text class="list-head-text">昨收</text>
+                                </div>
+                                <div class="list-head-item">
+                                    <text class="list-head-text">开盘</text>
+                                </div>
+                                <div class="list-head-item">
+                                    <text class="list-head-text">最高</text>
+                                </div>
+                                <div class="list-head-item">
+                                    <text class="list-head-text">最低</text>
+                                </div>
+                                <div class="list-head-item">
+                                    <text class="list-head-text">均价</text>
                                 </div>
                             </div>
                             <div>
@@ -219,10 +246,42 @@
                     },
                 ],
                 titles:['最新','幅度','涨跌','昨收','开盘','最高','最低','均价'],
-                horizontal: 'horizontal'
+                horizontal: 'horizontal',
+                timeOrder: 0,
+                changeOrder: 0
             }
         },
         methods:{
+            toggleTimeOrder() {
+                this.changeOrder = 0;
+                if (this.timeOrder == 0) {
+                    this.timeOrder = 1;
+                    return;
+                }
+                if (this.timeOrder == 1) {
+                    this.timeOrder = -1;
+                    return;
+                }
+                if (this.timeOrder == -1) {
+                    this.timeOrder = 0;
+                    return;
+                }
+            },
+            toggleChangeOrder() {
+                this.timeOrder = 0;
+                if (this.changeOrder == 0) {
+                    this.changeOrder = 1;
+                    return;
+                }
+                if (this.changeOrder == 1) {
+                    this.changeOrder = -1;
+                    return;
+                }
+                if (this.changeOrder == -1) {
+                    this.changeOrder = 0;
+                    return;
+                }
+            },
             onrefresh (event) {
                 this.refreshing = true
                 setTimeout(() => {
@@ -242,7 +301,7 @@
         width: 170px;
         height: 108px;
         border-bottom-width: 1px;
-        border-bottom-color: #e0e0e0;
+        border-bottom-color: #f5f5f5;
         padding-bottom: 20px;
         justify-content: center;
         align-items: center;
@@ -250,7 +309,7 @@
     .list-title-item{
         height: 108px;
         border-bottom-width: 1px;
-        border-bottom-color: #e0e0e0;
+        border-bottom-color: #f5f5f5;
         padding-bottom: 20px;
         justify-content: center;
         align-items: flex-start;
@@ -294,5 +353,13 @@
         justify-content: center;
         align-items: center;
         width: 170px;
+    }
+    .order-arrow-icon {
+        width: 10px;
+        height: 18px;
+    }
+    .order-dot-icon {
+        width: 4px;
+        height: 18px;
     }
 </style>

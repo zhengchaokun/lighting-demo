@@ -40,7 +40,7 @@
             <image class="navbar-img" src="images/msg.png" slot="left" @click="jump('#/msg')"></image>
             <div slot="right" class="navbar-right">
                 <image class="navbar-icon" src="images/scan-top.png"></image>
-                <image class="navbar-icon ml40" src="images/set.png" @click="jump('#/set')"></image>
+                <image class="navbar-icon ml40" src="images/set.png" @click="jump('#/account/set')"></image>
             </div>
         </lc-minibar>
        
