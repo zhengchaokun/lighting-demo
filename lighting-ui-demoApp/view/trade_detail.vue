@@ -34,7 +34,7 @@
                     },
                     {
                         title: '委托',
-                        path: '#/trade_detail/delegate'
+                        path: '#/trade_detail/delegate/today'
                     },
                     {
                         title: '持仓',

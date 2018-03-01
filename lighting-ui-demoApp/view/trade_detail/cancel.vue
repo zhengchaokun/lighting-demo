@@ -1,7 +1,7 @@
 
 <template>
     <div>
-       Hello,World !
+       撤单，暂无记录
     </div>
 </template>
 <script>
