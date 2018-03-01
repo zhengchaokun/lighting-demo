@@ -34,7 +34,6 @@
                         <text class="title">利是宝</text>
                         <text class="title-info ml20">随心存取，最快一秒</text>
                     </div>
-                    <!-- <text class="more">更多 ></text> -->
                 </div>
                 <div class="flex-row justify-between">
                     <div class="func-wrap flex-1">
@@ -78,7 +77,7 @@
                         <text class="title">国泰专题</text>
                     </div>
                 </div>
-                <div class="list flex-row justify-between align-center">
+                <div class="list mt20 flex-row justify-between">
                     <div class="cell">
                         <image class="cell-img" src="images/bj-1.png"></image>
                         <text class="cell-info cell-info-1">年赚30%</text>
@@ -95,6 +94,44 @@
                         <text class="cell-info cell-info-2">赚钱力MAX</text>
                     </div>
                 </div>
+            </div>
+            <div class="mt20 bgc-white">
+                <div class="title-wrap flex-row justify-between align-center">
+                    <div class="flex-row align-center">
+                        <div class="shutiao"></div>
+                        <text class="title">人气产品</text>
+                    </div>
+                    <text class="more">更多 ></text>
+                </div>
+                <div class="prod-box flex-row align-center" v-for="(prod,index) in product" :key="index">
+                    <div class="align-center justify-between" style="width:180px;">
+                        <text class="prod-wrap-tit">{{prod.profit}}</text>
+                        <text class="prod-wrap-tip">近一年收益率</text>                   
+                    </div>
+                    <div class=" ml40">
+                        <text class="prod-wrap-name">{{prod.name}}</text>
+                        <div class="flex-row mt10">
+                            <text class="prod-wrap-tag" v-for="(tag,i) in prod.tags" :key="i">{{tag.tag}}</text>  
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+            <div class="mt20 bgc-white">
+                <div class="title-wrap flex-row justify-between align-center">
+                    <div class="flex-row align-center">
+                        <div class="shutiao"></div>
+                        <text class="title">热门资讯</text>
+                    </div>
+                    <text class="more">更多 ></text>
+                </div>
+                <lc-info-list type="text" 
+                :infoList="infoList1" 
+                :titleStyle="titleStyle"
+                :timeStyle="timeStyle" ></lc-info-list>
+                <lc-info-list type="imgright"
+                    :infoList="infoList2"
+                    :timeStyle="timeStyle"
+                    :imgStyle="imgStyle" ></lc-info-list>
             </div>
         </scroller>
         <div class="headtop"></div>
@@ -113,9 +150,10 @@ import LcCell from "lighting-ui/packages/lc-cell";
 import LcLightbox from "lighting-ui/packages/lc-lightbox";
 import LcMarquee from 'lighting-ui/packages/lc-marquee';
 import LcButton from "lighting-ui/packages/lc-button";
+import LcInfoList from "lighting-ui/packages/lc-info-list";
 
     export default {
-        components: { LcCell,LcLightbox,LcMarquee,LcButton },
+        components: { LcCell,LcLightbox,LcMarquee,LcButton,LcInfoList },
         data(){
             return {
                 imageList: [
@@ -141,7 +179,42 @@ import LcButton from "lighting-ui/packages/lc-button";
                     height: '76px',
                     backgroundColor: '#fff',
                     borderRadius: '30px'
-                }
+                },
+                product:[
+                    {profit:'38.99%',name:'国泰金鑫股票',tags:[{tag:'金牛女神'},{tag:'价值成长'}]},
+                    {profit:'47.01%',name:'国泰互联网+股票',tags:[{tag:'业绩持久'},{tag:'长期回报'}]},
+                    {profit:'39.06%',name:'国泰新经济混合',tags:[{tag:'把握拐点'},{tag:'深挖潜力股'}]},
+                ],
+                infoList1:[
+                    {
+                        textTitle:'A股调整或因短期情绪，长期震荡向上趋势不改',
+                        textTime:'2018/2/9 4:02:00'
+                    },
+                    {
+                        textTitle:'A股深度调整，揭秘背后原因！',
+                        textTime:'2018/2/6 7:02:00'
+                    }
+                ],
+                titleStyle:{color: '#333', FontSize:'30px'},
+                timeStyle:{ textAlign:'left'},
+                infoList2:[
+                    {
+                        textTitle:'月考成绩揭晓，说说接下来怎么办',
+                        src:'images/p1.png',
+                        textTime:'2018/2/1 8:02:00'
+                    },
+                    {
+                        textTitle:'央企改革见成效，国泰央企结硕果',
+                        src:'images/p2.png',
+                        textTime:'2018/1/31 8:02:00'
+                    },
+                    {
+                        textTitle:'躁春行情选成长，成长股里挑估值',
+                        src:'images/p3.png',
+                        textTime:'2018/1/30 8:02:00'
+                    }
+                ],
+                imgStyle:{ width:'140px',height:'140px'},
 
             }
         },
@@ -154,14 +227,14 @@ import LcButton from "lighting-ui/packages/lc-button";
 </script>
 <style scoped src="../css/ui.css"></style>
 <style scoped>
-.headtop{height:40px; width:750px; position:fixed; top:0; background-color:#2877d3;}
-.navhead{ position:fixed;top:38px;left:0; width: 750px; height:90px;font-size:30px; background-color: #2877d3; align-items: center; }
+.headtop{height:80px; width:750px; position:fixed; top:0; background-color:#2877d3;}
+.navhead{ position:fixed;top:78px;left:0; width: 750px; height:90px;font-size:30px; background-color: #2877d3; align-items: center; }
 .navbar-search{ align-items: center; flex-direction: row; 
      width: 686px; height: 70px; border-radius: 15px; background-color:#1862b7; }
 .navbar-search-icon{ width: 30px; height: 30px;}
 .navbar-search-text{ color: #aadcff; font-size: 28px; margin-left: 10px;}
 
-.item-wrap{ height: 160px; margin-top: 120px; background-color: #fff;}
+.item-wrap{ height: 160px; margin-top: 160px; background-color: #fff;}
 .item-cont { align-items: center;  width: 180px; }
 .item-pic { width: 85px; height: 70px; }
 .item-text { font-size: 26px; color: #999; }
@@ -183,11 +256,18 @@ import LcButton from "lighting-ui/packages/lc-button";
 .border-right{border-right-style: solid; border-right-color: #eeecec; border-right-width: 1px;}
 .h185{ height: 185px;}
 
-.list{ }
+.list{ height: 210px; padding-left: 20px; padding-right: 20px;}
 .cell{position: relative;}
-.cell-img{ width: 222px; height: 160px;}
+.cell-img{ width: 230px; height: 160px;}
 .cell-info{width: 220px; text-align: center; position: absolute; color: #fff; }
 .cell-info-1{ font-size: 32px; top: 40px;}
 .cell-info-2{ font-size: 24px; top: 85px;}
+
+.prod-box{ height: 180px; margin-left: 30px; border-bottom-width: 1px; border-bottom-color:rgb(219, 218, 218);}
+.prod-wrap{}
+.prod-wrap-tit{color: #d70a30; font-size: 50px; font-weight: 400;}
+.prod-wrap-tip{color: #999; font-size: 26px; margin-top: 10px;}
+.prod-wrap-name{color: #333; font-size: 38px;}
+.prod-wrap-tag{color: #979797; font-size: 24px; margin-right: 20px; padding: 8px; border-width: 1px; border-color: #979797;}
 
 </style>
