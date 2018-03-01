@@ -5,9 +5,13 @@
     </div>
 </template>
 <script>
+    import Light from 'light'
     export default {
         data(){
             return {}
+        },
+        created(){
+            Light.trigger('tabChange', 2)
         }
     }
 </script>

@@ -55,6 +55,9 @@ a{ text-decoration: none;}
 .f-dark2{
     color: #cecdcd;
 }
+.f-dark3{
+    color: rgba(255,255,255,0.5);
+}
 .f-blue{
     color: #6da6e7;
 }
