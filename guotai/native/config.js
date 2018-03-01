@@ -29,10 +29,16 @@ module.exports = {
     },
     views:{
         "index":{
-            url:"app.native.js#/index"
+            url:"app.native.js#/index",
+            navBar:{
+                type:"0"
+            }
         },
         "jijin":{
-            url:"app.native.js#/jijin"
+            url:"app.native.js#/jijin",
+            navBar:{
+                type:"0"
+            }
         },
         "my":{
             url:"app.native.js#/my"
