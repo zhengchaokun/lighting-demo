@@ -12,11 +12,11 @@
 		height: 40;
 		width: 120;
 		border-width: 1;
-		border-color: #000000;
+		border-color: #272c64;
 		align-items: center;
 	}
 	.text{
-	  	color:#000000;
+	  	color:#272c64;
 	  	padding-top: 6;
 		text-align: center;
 	}
