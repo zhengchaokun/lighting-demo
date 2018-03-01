@@ -134,7 +134,7 @@
                     :imgStyle="imgStyle" ></lc-info-list>
             </div>
         </scroller>
-        <div class="headtop"></div>
+        <!-- <div class="headtop"></div> -->
         <div class="navhead">
             <div class="navbar-search">
                 <image class="navbar-search-icon ml20" src="images/search.png"></image>
@@ -227,8 +227,8 @@ import LcInfoList from "lighting-ui/packages/lc-info-list";
 </script>
 <style scoped src="../css/ui.css"></style>
 <style scoped>
-.headtop{height:40px; width:750px; position:fixed; top:0; background-color:#2877d3;}
-.navhead{ position:fixed;top:38px;left:0; width: 750px; height:90px;font-size:30px; background-color: #2877d3; align-items: center; }
+/* .headtop{height:80px; width:750px; position:fixed; top:0; background-color:#2877d3;} */
+.navhead{ position:fixed;top:0px;left:0; width: 750px; height:110px; padding-top: 20px; font-size:30px; background-color: #2877d3; align-items: center; }
 .navbar-search{ align-items: center; flex-direction: row; 
      width: 686px; height: 70px; border-radius: 15px; background-color:#1862b7; }
 .navbar-search-icon{ width: 30px; height: 30px;}
