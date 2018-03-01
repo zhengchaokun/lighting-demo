@@ -124,6 +124,14 @@
                     </div>
                     <text class="more">更多 ></text>
                 </div>
+                <lc-info-list type="text" 
+                :infoList="infoList1" 
+                :titleStyle="titleStyle"
+                :timeStyle="timeStyle" ></lc-info-list>
+                <lc-info-list type="imgright"
+                    :infoList="infoList2"
+                    :timeStyle="timeStyle"
+                    :imgStyle="imgStyle" ></lc-info-list>
             </div>
         </scroller>
         <div class="headtop"></div>
@@ -142,9 +150,10 @@ import LcCell from "lighting-ui/packages/lc-cell";
 import LcLightbox from "lighting-ui/packages/lc-lightbox";
 import LcMarquee from 'lighting-ui/packages/lc-marquee';
 import LcButton from "lighting-ui/packages/lc-button";
+import LcInfoList from "lighting-ui/packages/lc-info-list";
 
     export default {
-        components: { LcCell,LcLightbox,LcMarquee,LcButton },
+        components: { LcCell,LcLightbox,LcMarquee,LcButton,LcInfoList },
         data(){
             return {
                 imageList: [
@@ -176,6 +185,36 @@ import LcButton from "lighting-ui/packages/lc-button";
                     {profit:'47.01%',name:'国泰互联网+股票',tags:[{tag:'业绩持久'},{tag:'长期回报'}]},
                     {profit:'39.06%',name:'国泰新经济混合',tags:[{tag:'把握拐点'},{tag:'深挖潜力股'}]},
                 ],
+                infoList1:[
+                    {
+                        textTitle:'A股调整或因短期情绪，长期震荡向上趋势不改',
+                        textTime:'2018/2/9 4:02:00'
+                    },
+                    {
+                        textTitle:'A股深度调整，揭秘背后原因！',
+                        textTime:'2018/2/6 7:02:00'
+                    }
+                ],
+                titleStyle:{color: '#333', FontSize:'30px'},
+                timeStyle:{ textAlign:'left'},
+                infoList2:[
+                    {
+                        textTitle:'月考成绩揭晓，说说接下来怎么办',
+                        src:'images/p1.png',
+                        textTime:'2018/2/1 8:02:00'
+                    },
+                    {
+                        textTitle:'央企改革见成效，国泰央企结硕果',
+                        src:'images/p2.png',
+                        textTime:'2018/1/31 8:02:00'
+                    },
+                    {
+                        textTitle:'躁春行情选成长，成长股里挑估值',
+                        src:'images/p3.png',
+                        textTime:'2018/1/30 8:02:00'
+                    }
+                ],
+                imgStyle:{ width:'140px',height:'140px'},
 
             }
         },
@@ -188,14 +227,14 @@ import LcButton from "lighting-ui/packages/lc-button";
 </script>
 <style scoped src="../css/ui.css"></style>
 <style scoped>
-.headtop{height:40px; width:750px; position:fixed; top:0; background-color:#2877d3;}
-.navhead{ position:fixed;top:38px;left:0; width: 750px; height:90px;font-size:30px; background-color: #2877d3; align-items: center; }
+.headtop{height:80px; width:750px; position:fixed; top:0; background-color:#2877d3;}
+.navhead{ position:fixed;top:78px;left:0; width: 750px; height:90px;font-size:30px; background-color: #2877d3; align-items: center; }
 .navbar-search{ align-items: center; flex-direction: row; 
      width: 686px; height: 70px; border-radius: 15px; background-color:#1862b7; }
 .navbar-search-icon{ width: 30px; height: 30px;}
 .navbar-search-text{ color: #aadcff; font-size: 28px; margin-left: 10px;}
 
-.item-wrap{ height: 160px; margin-top: 120px; background-color: #fff;}
+.item-wrap{ height: 160px; margin-top: 160px; background-color: #fff;}
 .item-cont { align-items: center;  width: 180px; }
 .item-pic { width: 85px; height: 70px; }
 .item-text { font-size: 26px; color: #999; }

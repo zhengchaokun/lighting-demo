@@ -14,8 +14,11 @@
             </div>
         </div>
         <div class="chart">
-            <chartview :stockcode='stockCode' :codetype='codeType' :chartType='chartType'  :snapshotdata='snapshotdata' :trenddata='trenddata' style="width:750px;height:260px;">
-            </chartview>
+            <!-- <chartview :stockcode='stockCode' :codetype='codeType' :chartType='chartType'  :snapshotdata='snapshotdata' :trenddata='trenddata' style="width:750px;height:260px;">
+            </chartview> -->
+            <canvas ref="canvas_holder" style="width:750px;height:260px;">
+                
+            </canvas>
         </div>
 
         <div class="cell">
@@ -289,6 +292,8 @@
 </template>
 <script>
     const dataCenter = require("../.././js/openApi.js");
+    const utils =require("../.././js/utils.js");
+    const GCanvas =  require("../.././js/gcanvas.js");
     import LcProgress from "lighting-ui/packages/lc-progress";
     export default {
         data() {
@@ -318,9 +323,19 @@
                 stockCode:'1A0001',
                 codeType:'XSHG.MRI',
                 chartType:'TRENDLINE',
+                preclosePx:0,
                 snapshotdata:{},
                 snapshotdata_indexlist:[],
                 trenddata:{},
+                /* canvas */
+                storage:{},
+                crc:0,
+                minTime:0,
+                cacheContext:{},
+                gridColor:"#ccc",
+                trendfields:[],
+                trendpdata:[],
+                realCanvas:{},
                 /* bar */
                 raise_count: 1871,
                 fall_count: 1334,
@@ -570,63 +585,368 @@
                 }
             },
             getIndexChartData:function(index){
+
                 var current_snapshotdata =this.snapshotdata_indexlist[index];
                 var item =this.cnIndexList[index];
+                console.log("item ="+JSON.stringify(item));
+                //获取昨收价
+                this.preclosePx =item.preclose_px;
+
                 this.snapshotdata =current_snapshotdata;
                 var that=this;
                 this.stockCode =item.prod_code;
                 this.codeType =item.hq_type_code;
+                var nowdate =utils.formatDate(new Date(),"yyyyMMdd");
+                console.log("nowdate="+nowdate);
                 //获取5日分时图数据
-                dataCenter.getTrend({prod_code:item.prod_code_all,fields:'last_px,business_amount,avg_px,business_balance,min_time',date:20180223,crc:0},function(res){
+                dataCenter.getTrend({prod_code:item.prod_code_all,fields:'last_px,business_amount,avg_px,business_balance,min_time',date:nowdate,crc:0},function(res){
+                    var code =item.prod_code_all;
+                    var data = res.data.trend[code];
+                    that.trendfields =res.data.trend["fields"];
+                    try {
+                        that.crc = res.data.trend.crc[code];
+                        that.minTime = data[data.length - 1][0].toString().substring(8, 12);
+                    } catch (e) {
+                        console.info("openapiError:", e);
+                    }
+                    var period=9;
+                    that.storeStorage(code, period, "trend", data);
+
                     //console.log("4545 trendsdata="+JSON.stringify(res));
 
                     /*native端需要转换数据模型格式 {trends:{date:20180223,trend:[{avg_px,business_amount,business_balance,hq_px,min_time,wavg_px},{},...]}}
                     openApi返回数据格式 其中 {"data":{"trend":{"fields":["min_time","last_px","avg_px","business_amount","business_balance"],"crc":{"600570.SS":20180223},"600570.SS":[[],[],....]}}}
                     其中avg_px为native中用到的wavg_px last_px为hq_px
                     */
-                    var r = ["last_px", "business_amount", "avg_px","business_balance","min_time"];
-                    var result=res.data.trend;
-                    var fields = result.fields;
-                    var crc=result.crc;
-                    var newArr=[];
-                    for (var key in result){
-                        if ("fields" != key && "crc" !=key) {
-                            var trendsdata =result[key];
-                            for (var i = 0; i < trendsdata.length; i++) {
-                                var trendArr =trendsdata[i];//trend模型数据数组  [201501090931,54.63,54.829486,49700]
+                    //nativeView方式
+                    // var r = ["last_px", "business_amount", "avg_px","business_balance","min_time"];
+                    // var result=res.data.trend;
+                    // var fields = result.fields;
+                    // var crc=result.crc;
+                    // var newArr=[];        
+                    // for (var key in result){
+                    //     if ("fields" != key && "crc" !=key) {
+                    //         var trendsdata =result[key];
+                    //         for (var i = 0; i < trendsdata.length; i++) {
+                    //             var trendArr =trendsdata[i];//trend模型数据数组  [201501090931,54.63,54.829486,49700]
 
-                                for (var p = {}, l = 0; l < fields.length; l++){
-                                    p[r[l]] = trendArr[fields.indexOf(r[l])];
-                                }
-                                /*native所需字段*/
-                                p.wavg_px=p.avg_px;
-                                p.avg_px=0;
-                                p.hq_px =p.last_px;
-                                p.min_time =parseInt(p.min_time)%10000;
-                                newArr.push(p);
-                            }
+                    //             for (var p = {}, l = 0; l < fields.length; l++){
+                    //                 p[r[l]] = trendArr[fields.indexOf(r[l])];
+                    //             }
+                    //             /*native所需字段*/
+                    //             p.wavg_px=p.avg_px;
+                    //             p.avg_px=0;
+                    //             p.hq_px =p.last_px;
+                    //             p.min_time =parseInt(p.min_time)%10000;
+                    //             newArr.push(p);
+                    //         }
                             
-                            var trenddata={};
-                            trenddata.trends=[];
-                            trenddata.trends.push({date:20180223,trend:newArr});
-                            //trenddata.trends.trend=newArr;
-                           // console.log("4545 trendsdata_index="+JSON.stringify(trenddata));
-                           //目前只是iOS格式 安卓格式还不实现
-                            that.trenddata={"result":trenddata};
-                        }
-                    }
+                    //         var trenddata={};
+                    //         trenddata.trends=[];
+                    //         trenddata.trends.push({date:20180223,trend:newArr});
+                    //         //trenddata.trends.trend=newArr;
+                    //        // console.log("4545 trendsdata_index="+JSON.stringify(trenddata));
+                    //        //目前只是iOS格式 安卓格式还不实现
+                    //         that.trenddata={"result":trenddata};
+                    //     }
+                    // }
                     
                 });
+            },
+            /*
+             * 分时图多个数据存储
+             * real昨收 & marketDetail总量 & trend数据
+             */
+            storeStorage:function(code, period, attr, data) {
+                console.log("storeStorage++++++");
+                // if (code != this.storage.code || period != this.storage.period) {
+                //     return;
+                // }
+                console.log("storeStorage-----");
+                this.storage[attr] = data;
+                
+                this.handleTrend();
+            },
+            //检查数据完备与否，执行分时绘图方法，storage在刷新股票时会清空
+            handleTrend:function(){
+                //画分时图
+                var head, time, distance;
+                if (this.storage.trend === undefined) {
+                    console.log("handleTrend not deal");
+                    return;
+                }
+                
+                this.handleData();
+                
+            },
+            //处理数据，计算最大值最小值
+            handleData:function(){
+                var max=0;
+                var min=100000000;
+
+                //var r = ["last_px", "business_amount", "avg_px","business_balance","min_time"];
+                var index =this.trendfields.indexOf("last_px");
+                for (var i = 0; i < this.storage.trend.length; i++) {
+                     var item =this.storage.trend[i];
+                   
+                     if(max<item[index])
+                        max=item[index];
+                     if(min>item[index])
+                        min =item[index];
+                }
+                //var range = MAX(fabs([_trendDataPack getHighestPrice] - _preClosePrice),fabs([_trendDataPack getLowestPrice]-_preClosePrice));
+                var range =Math.max(Math.abs(max-this.preclosePx),Math.abs(min-this.preclosePx));
+
+                var upLimit = range==0?this.preclosePx*1.02:this.preclosePx+range;
+                var downLimit = range==0?this.preclosePx*0.98:this.preclosePx-range;
+
+               
+
+                var leftX,rightX,topY,bottomY,width,height;
+                var realCanvas=this.realCanvas;
+                leftX = 10;
+                rightX = realCanvas.width-10;
+                topY = 10;
+                bottomY = realCanvas.height-topY;
+                width = rightX - leftX;
+                height = bottomY-topY;
+                var middle =height/2;
+
+                 //计算分时折线图均线坐标
+                var data=[];
+                var lineX=leftX,lineY;
+                for (var i = 0; i < this.storage.trend.length; i++) {
+                   
+                    var item =this.storage.trend[i];
+
+                    var last_px =item[index];
+
+                    if(last_px>this.preclosePx){
+                        //上面
+                        lineY=(last_px-this.preclosePx)*1.0/range*middle;
+                    }else{
+                        //下面
+                        lineY =middle+(this.preclosePx-last_px)*1.0/range*middle;
+                    }
+
+                    lineX +=realCanvas.width/(this.storage.trend.length-1);
+
+                    if(lineX>rightX) //超过边框
+                        lineX=rightX;
+                    if(lineY<topY)
+                        lineY=topY;
+
+                    var point ={lineX:lineX,lineY:lineY};
+                    data.push(point);
+                }
+                this.trendpdata =data;
+                this.cacheContext.clearRect(leftX,topY,rightX,bottomY);
+                //画折线图
+                this.draw1Trend();
+
+                console.log("upLimit="+upLimit+"downLimit="+downLimit);
+                this.cacheContext.font="20px";
+                this.cacheContext.fillStyle = 'red';
+                this.cacheContext.textAlign = "left";
+                this.cacheContext.textBaseline = "top";
+                this.cacheContext.fillText(upLimit.toFixed(2),leftX,topY);
+                this.cacheContext.fillStyle = 'green';
+                this.cacheContext.textBaseline = "bottom";
+                this.cacheContext.fillText(downLimit.toFixed(2),leftX,bottomY);
+
+                
+            },
+            /*画分时图折线图 & 阴影图*/
+            draw1Trend:function(){
+                //---绘制折线图
+                var start=0;
+                var trendX=10;
+                var data =this.trendpdata;
+                this.cacheContext.beginPath();
+                this.cacheContext.lineWidth = 2;
+                this.cacheContext.strokeStyle = '#3B7FED';
+               
+                var start =0;
+
+                for (var i = start; i < data.length; i++) {
+                    if(i==start){
+                        this.cacheContext.moveTo(data[i].lineX, data[i].lineY);
+                    }else{
+                        this.cacheContext.lineTo(data[i].lineX, data[i].lineY);
+                    }
+                }
+
+                this.cacheContext.stroke();
+
+                //---封闭阴影图
+                this.cacheContext.beginPath();
+                var leftX,rightX,topY,bottomY,width,height;
+                 var realCanvas=this.realCanvas;
+                leftX = 10;
+                rightX = realCanvas.width-10;
+                topY = 10;
+                bottomY = realCanvas.height-topY;
+                width = rightX - leftX;
+                height = bottomY-topY;
+
+                //分时图渐变色
+                var trendGradientColor = {
+                    0.45: "#c2deff",
+                    1: "#c2deff"
+                };
+                try {
+                    var gradient = this.cacheContext.createLinearGradient(leftX, topY, leftX, bottomY);
+                    for (var i in trendGradientColor) {
+                        gradient.addColorStop(i, trendGradientColor[i]);
+                    }
+                } catch (e) {
+                    console.info("openapiError:", e);
+                }
+                this.cacheContext.fillStyle = gradient;
+                this.cacheContext.moveTo(leftX, bottomY);
+                trendX = leftX;
+                start=0;
+                for (var i = start; i < data.length - 1; i++) {
+                    this.cacheContext.lineTo(data[i].lineX, data[i].lineY);
+                }
+                var lastX =data[i].lineX;
+                if(lastX>rightX) //超过边框
+                        lastX=rightX;
+
+                this.cacheContext.lineTo(lastX, bottomY);
+                this.cacheContext.closePath();
+                this.cacheContext.fill();
+
+            },
+            /*填充canvas表格线*/
+            drawGrid:function(){
+                var leftX,rightX,topY,bottomY,width,height;
+                var realCanvas=this.realCanvas;
+                leftX = 10;
+                rightX = realCanvas.width-10;
+                topY = 10;
+                bottomY = realCanvas.height-topY;
+                width = rightX - leftX;
+                height = bottomY-topY;
+                
+
+                var stepY;
+                this.cacheContext.beginPath();
+                this.cacheContext.strokeStyle = this.gridColor;
+                this.cacheContext.lineWidth = 1;
+                //绘制实线
+                this.cacheContext.moveTo(leftX, topY);
+                this.cacheContext.lineTo(rightX, topY);
+                this.cacheContext.lineTo(rightX, bottomY);
+                this.cacheContext.lineTo(leftX, bottomY);
+                this.cacheContext.closePath();
+                this.cacheContext.stroke();
+
+
+                //绘制虚线
+                stepY = height / 2;
+                for (var i = 1; i < 2; i++) {
+                    this.drawDashed({
+                        x: this.getOdd(leftX),
+                        y: this.getOdd(topY + i * stepY)
+                    }, {
+                        x: this.getOdd(rightX),
+                        y: this.getOdd(topY + i * stepY)
+                    });
+                }
+
+                //绘制实线
+                var stepX =width/4;
+                 for (var i = 1; i < 4; i++) {
+                    this.drawSolid({
+                        x: this.getOdd(leftX+i*stepX),
+                        y: this.getOdd(topY)
+                    }, {
+                        x: this.getOdd(leftX+i*stepX),
+                        y: this.getOdd(bottomY)
+                    });
+                }
+            },
+            //数字为参数，返回奇数
+            getOdd: function(value, add) {
+                var result;
+                if (add) {
+                    result = value % 2 == 0 ? value - 1 : value;
+                } else {
+                    result = value % 2 == 0 ? value - 1 : value;
+                }
+                return result;
+            },
+             //传入两个坐标点对象，绘制连接这两个点的实线
+            drawSolid:function(start,end){
+                this.cacheContext.beginPath();
+                this.cacheContext.strokeStyle = this.gridColor;
+                this.cacheContext.lineWidth = 2;
+                //绘制实线
+                this.cacheContext.moveTo(start.x, start.y);
+                this.cacheContext.lineTo(end.x, end.y);
+                this.cacheContext.closePath();
+                this.cacheContext.stroke();
+            },
+            //传入两个坐标点对象，绘制连接这两个点的虚线
+            drawDashed: function(start, end) {
+                var gap = 0.008,
+                    length = 0.012,
+                    position = 0,
+                    x, y,
+                    gapX, gapY, lengthX, lengthY, step;
+                this.cacheContext.beginPath();
+                this.cacheContext.strokeStyle = '#b3b3b3';
+                this.cacheContext.lineWidth = 1.5;
+                gapX = (end.x - start.x) * gap;
+                gapY = (end.y - start.y) * gap;
+                lengthX = (end.x - start.x) * length;
+                lengthY = (end.y - start.y) * length;
+                step = gap + length;
+                x = start.x;
+                y = start.y;
+                this.cacheContext.moveTo(x, y);
+                for (; position + length < 1; position += step) {
+                    x += lengthX;
+                    y += lengthY;
+                    this.cacheContext.lineTo(x, y);
+                    x += gapX;
+                    y += gapY;
+                    this.cacheContext.moveTo(x, y);
+                }
+                this.cacheContext.lineTo(end.x, end.y);
+                this.cacheContext.stroke();
             }
         },
        created:function(){
             var that=this;
-            dataCenter.getRealtimeList({en_prod_code:this.cnstocks},function(res){
+            this.realCanvas={width:750,height:260};
+            console.log("deviceInfo ="+JSON.stringify(weex.config.env));
+            var scale =weex.config.env.scale;
+            this.realCanvas.width =weex.config.env.deviceWidth/scale *2;
+            this.realCanvas.height =this.realCanvas.width/750* 260;
+            if(scale<1){ //web会小于1
+                this.realCanvas.width=weex.config.env.deviceWidth/weex.config.env.dpr;
+                this.realCanvas.height =this.realCanvas.width/750*260;
+            }
+            console.log("realCanvas deviceInfo ="+JSON.stringify(this.realCanvas));
+       },
+       mounted: function () {          
+          var ref = this.$refs.canvas_holder;
+          var that=this;
+          GCanvas.start(ref, function () {
+            var cacheContext = GCanvas.getContext('2d');
+            that.cacheContext=cacheContext;
+            //填充canvas表格线
+            that.drawGrid();
+
+
+                        dataCenter.getRealtimeList({en_prod_code:that.cnstocks},function(res){
                          //console.log("cnindexlist="+JSON.stringify(res));
                          that.cnIndexList=[];
                          var result=res.data.snapshot;
                          var fields = result.fields;
-                         var r = ["last_px", "px_change", "px_change_rate","prod_name","hq_type_code"];
+                         var r = ["last_px", "px_change", "px_change_rate","prod_name","hq_type_code","preclose_px"];
                          var newArr=[];
                          var j=0;
                          for (var key in result){
@@ -655,8 +975,8 @@
                         that.getIndexChartData(0);
                     }
             );
-            
-
+          });
+          
        }
     }
 </script>

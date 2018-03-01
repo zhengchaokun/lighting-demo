@@ -1,7 +1,9 @@
 
 <template>
     <div>
-       Hello,World !
+        <scroller>
+            <image src="images/my.jpg" style="width:750px; height:1200px;"></image>
+        </scroller> 
     </div>
 </template>
 <script>
@@ -11,6 +13,6 @@
         }
     }
 </script>
-<style lang="less">
-
+<style scoped src="../css/ui.css"></style>
+<style scoped>
 </style>
