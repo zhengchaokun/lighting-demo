@@ -57,7 +57,7 @@
                         <text class="title">优质基金</text>
                     </div>
                 </div>
-                <div class="prod-box flex-row align-center" v-for="(prod,index) in product" :key="index">
+                <div class="prod-box flex-row align-center" v-for="(prod,index) in product" :key="index" @click="jump('jijin/detail')">
                     <div class="align-center justify-between" style="width:200px;">
                         <text class="prod-wrap-tit">{{prod.profit}}</text>
                         <text class="prod-wrap-tip">{{prod.detail}}</text>                   
