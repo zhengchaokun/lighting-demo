@@ -101,9 +101,9 @@
                         <div class="shutiao"></div>
                         <text class="title">人气产品</text>
                     </div>
-                    <text class="more">更多 ></text>
+                    <text class="more" @click="switchTab()">更多 ></text>
                 </div>
-                <div class="prod-box flex-row align-center" v-for="(prod,index) in product" :key="index">
+                <div class="prod-box flex-row align-center" v-for="(prod,index) in product" :key="index" @click="switchTab()">
                     <div class="align-center justify-between" style="width:180px;">
                         <text class="prod-wrap-tit">{{prod.profit}}</text>
                         <text class="prod-wrap-tip">近一年收益率</text>                   
@@ -122,16 +122,20 @@
                         <div class="shutiao"></div>
                         <text class="title">热门资讯</text>
                     </div>
-                    <text class="more">更多 ></text>
+                    <text class="more" @click="jump('index/newsList')">更多 ></text>
                 </div>
                 <lc-info-list type="text" 
-                :infoList="infoList1" 
-                :titleStyle="titleStyle"
-                :timeStyle="timeStyle" ></lc-info-list>
+                    :infoList="infoList1" 
+                    :titleStyle="titleStyle"
+                    :timeStyle="timeStyle" 
+                    @infoClick="infoClick"
+                    ></lc-info-list>
                 <lc-info-list type="imgright"
                     :infoList="infoList2"
                     :timeStyle="timeStyle"
-                    :imgStyle="imgStyle" ></lc-info-list>
+                    :imgStyle="imgStyle" 
+                    @infoClick="infoClick"
+                    ></lc-info-list>
             </div>
         </scroller>
         <div class="headtop"></div>
@@ -221,6 +225,13 @@ import LcInfoList from "lighting-ui/packages/lc-info-list";
          methods: {
             jump(view) {
                 App.navigate(view);
+            },
+            infoClick(){
+                App.navigate('index/newsInfo');
+            },
+            switchTab(){
+                 var LightJSBridge = weex.requireModule('LightJSBridge');
+                 LightJSBridge.call("native.switchTab",{index:1});
             }
         }
     }

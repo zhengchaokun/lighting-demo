@@ -66,7 +66,8 @@
     		<text style="color:#0a72c9" class="listDetailText">查看更多</text>
     	</div>
     	<div style="height:900px;width:750px;margin-top:40px;background-color:#ffffff">
-    		<div v-for="(item,index) in detailMenus" style="height: 120px;width: 750px;">
+    		<div v-for="(item,index) in detailMenus" @click="jump(item.path)" style="height: 120px;width: 750px;">
+
     			<div class="menuListDiv" style="align-items:center;">
     				<image :src="item.icon" style="height: 40px;width: 30px;margin-left:16px;margin-right:16px;"></image>
     				<text style="flex:4;font-size:30px;">{{item.title}}</text>
@@ -100,6 +101,8 @@
 
 </template>
 <script>
+	import App from "light";
+	import LightSDK from 'light-sdk';
 	var modal = weex.requireModule('modal');
 	const dataCenter = require("../.././js/openApi.js");
     const utils =require("../.././js/utils.js");
@@ -125,7 +128,7 @@
         			["02-14","1.265","2.263","0.48%"],
         		],
         		detailMenus:[
-        			{icon:"images/menu_0.png",title:"基金概况",detail:"基本信息、投资目标、投资策略"},
+        			{icon:"images/menu_0.png",title:"基金概况",detail:"基本信息、投资目标、投资策略",path:"jijin/info"},
         			{icon:"images/menu_1.png",title:"费率",detail:"1.50%"},
         			{icon:"images/menu_2.png",title:"基金经理",detail:"程洲"},
         			{icon:"images/menu_3.png",title:"分红",detail:""},
@@ -223,6 +226,7 @@
     	mounted:function(){
     		this.loadDisPlayData();
     		this.initCanvas();
+    		LightSDK.native.setTitle({title:'基金详情'})
     	},
     	methods:{
     		initCanvas:function(){
@@ -293,7 +297,9 @@
                     startAngle = endAngle; //设置起始弧度  
                 }  
 			},
-
+			jump(view) {
+                App.navigate(view);
+            },
     		switchChangeValue:function(index){
     			for (var i = 0; i < this.tabs.length; i++) {
 					var item = this.tabs[i];
@@ -617,7 +623,7 @@
                 this.cacheContext.lineTo(end.x, end.y);
                 this.cacheContext.stroke();
             }
-    	}
+		}
     }
 
 </script>
