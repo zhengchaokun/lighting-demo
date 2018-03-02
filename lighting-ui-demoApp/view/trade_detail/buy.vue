@@ -61,7 +61,7 @@
        <!-- 数据 -->
        <div class="data-container">
 
-       </div>
+       </div>   
     </div>
 </template>
 <script>
@@ -76,7 +76,7 @@
     }
 </script>
 <style scoped src="../../css/ui.css"></style>
-<style lang="less">
+<style scoped>
     .lg-input-container{
         height: 100px;
         border-bottom-width: 1px;
