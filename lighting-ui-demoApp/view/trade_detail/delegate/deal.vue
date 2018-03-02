@@ -1,8 +1,10 @@
 
 <template>
     <div>
-        当日成交
-        暂无记录
+       <div class="align-center" style="margin-top: 120px;">
+           <image src="images/holding_shares_empty.png" class="icon-empty"/>
+           <text class="f-dark2 fs44 mt20">暂无记录</text>
+       </div>
     </div>
 </template>
 <script>
@@ -16,6 +18,10 @@
         }
     }
 </script>
-<style lang="less">
-
+<style scoped src="../../../css/ui.css"></style>
+<style scoped>
+    .icon-empty{
+        width: 240px;
+        height: 240px;
+    }
 </style>
