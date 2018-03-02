@@ -1,0 +1,47 @@
+//配置文件的定义
+module.exports = {
+    menuBar:{
+        backgroundColor:"#fff",//背景色
+        defaultColor:"#999",//默认菜单颜色
+        selectedColor:"#d70b30",//菜单选中颜色
+
+        //使用字体图标自动生成图片，省去了开发者自己制作多张图的问题
+        iconFontFrom:"/native/iconfont.ttf",
+
+        menus:[{
+            text:'首页',
+            icon:'0xe626',
+            view:"index",
+        },{
+            text:'基金',
+            icon:'0xe618',
+            view:"jijin",
+        },{
+            text:'我的资产',
+            icon:'0xe601',
+            view:"my",
+        }]
+    },
+    navBar:{
+        backgroundColor:"#2877d3",
+        titleColor:"#ffffff",
+        buttonColor:"#ffffff"
+    },
+    views:{
+        "index":{
+            url:"app.native.js#/index",
+            navBar:{
+                type:"0"
+            }
+        },
+        "jijin":{
+            url:"app.native.js#/jijin",
+            navBar:{
+                type:"0"
+            }
+        },
+        "my":{
+            url:"app.native.js#/my"
+        }       
+    }
+};
