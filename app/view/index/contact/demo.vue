@@ -1,9 +1,9 @@
 
 <template>
-    <div style="height: 800px">
+    <div style="height: 800px;padding: 100px">
        <div class="bar-wrap" ref="barWrap">
            <span class="text" :style="{width:getWidth(bar)+'px'}"  v-for="(bar,index) in bars">{{bar.p}}</span>
-           <span class="bar" @mousedown="mousedown(index)" :style="{left:getLeft(index)+'px'}"
+           <span class="bar" @mousedown="mousedown($event,index)" :style="{left:getLeft(index)+'px'}"
                  v-for="(bar,index) in bars"></span>
        </div>
     </div>
@@ -16,13 +16,15 @@
                 bars:[],
                 barWrapWidth:0,
 
-                moveBarIndex:null
+                moveBarIndex:null,
+                barWrapLeft:0
             }
         },
         methods:{
             mouseup(){},
-            mousedown(index){
+            mousedown($event,index){
                 this.moveBarIndex = index;
+                this.barWrapLeft = $event.clientX-this.getLeft(index);
             },
             mousemove(){},
             getWidth(bar){
@@ -72,15 +74,17 @@
             document.body.addEventListener("mousemove",function (event) {
                 //处理鼠标移动
                 if(that.moveBarIndex!==null){
-                    let diff = event.clientX-that.getLeft(that.moveBarIndex);
+                    let diff = event.clientX-that.barWrapLeft-that.getLeft(that.moveBarIndex);
 
                     // 不能超过左右边界
                     const left = that.moveBarIndex===0?0:that.getLeft(that.moveBarIndex-1);
                     const right = that.getLeft(that.moveBarIndex+1)
                     const current = that.getLeft(that.moveBarIndex)
 
-                    if(diff>(right-current)||diff<(left-current)){
-                        return;
+                    if(diff>(right-current)){
+                        diff = (right-current);
+                    }else if(diff<(left-current)){
+                        diff = (left-current);
                     }
 
                     if(Math.abs(diff)>that.$refs.barWrap.offsetWidth*0.05){
