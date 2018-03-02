@@ -21,6 +21,7 @@
 </template>
 <script>
 import App from "light";
+import LightSDK from 'light-sdk';
 import LcTip from 'lighting-ui/packages/lc-tip';
     export default {
         components: { LcTip },
@@ -37,6 +38,9 @@ import LcTip from 'lighting-ui/packages/lc-tip';
                     console.log(1)
                 }
             }
+        },
+        mounted(){
+            LightSDK.native.setTitle({title:'资讯'})
         }
     }
 </script>

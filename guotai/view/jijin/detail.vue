@@ -94,6 +94,7 @@
 </template>
 <script>
 	import App from "light";
+	import LightSDK from 'light-sdk';
 	var modal = weex.requireModule('modal');
 	module.exports = {
 		
@@ -181,7 +182,10 @@
     				return "fallColor"
     			}
     		}
-    	}
+		},
+		mounted(){
+            LightSDK.native.setTitle({title:'基金详情'})
+        }
     }
 
 </script>

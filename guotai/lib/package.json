@@ -1,6 +1,7 @@
 {
 	"dependencies": {
 		"lighting-ui": "*",
-		"validator": "^6.2.1"
+		"validator": "^6.2.1",
+		"light-sdk": "^1.0.20"
 	}
 }
