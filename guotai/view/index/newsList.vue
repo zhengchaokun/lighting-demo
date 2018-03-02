@@ -29,10 +29,13 @@ import App from 'light';
 </script>
 <style scoped>
     .new-list{
-        padding: 0 35px 0 35px;
+        
     }
     .news-item{
-        padding: 30px 0 30px 0;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        padding-left: 35px;
+        padding-right: 35px;
         border-bottom-style: solid;
         border-bottom-color: #f1f1f1;
         border-bottom-width: 1px;
@@ -41,22 +44,26 @@ import App from 'light';
     .new-line-1{
         flex-direction: row;
         justify-content: flex-start;
+        align-items: center;
     }
     .news-bandage{
         font-size: 16px;
         color:#fff;
         background-color: #d70b30;
-        width: 45px;
+        width: 60px;
         height: 20px;
+        text-align: center;
+        margin-right: 10px;
     }
     .news-title{
         font-size: 30px;
         line-height: 30px;
         color:#333;
+        lines:2;
     }
     .new-line-2{
         color:#aaa;
         font-size: 26px;
-        margin-top: 5px;
+        margin-top: 10px;
     }
 </style>

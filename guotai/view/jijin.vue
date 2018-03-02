@@ -3,19 +3,19 @@
         <scroller>
             <div class="item-wrap flex-row justify-between align-center">
                 <div class="item-cont">
-                    <image src="images/item-1.png" class="item-pic"></image>
+                    <image src="images/item-5.png" class="item-pic"></image>
                     <text class="item-text">热销排行</text>
                 </div>
                 <div class="item-cont">
-                    <image src="images/item-2.png" class="item-pic"></image>
+                    <image src="images/item-6.png" class="item-pic"></image>
                     <text class="item-text">定投排行</text>
                 </div>
                 <div class="item-cont">
-                    <image src="images/item-3.png" class="item-pic"></image>
+                    <image src="images/item-7.png" class="item-pic"></image>
                     <text class="item-text">基金超市</text>
                 </div>
                 <div class="item-cont">
-                    <image src="images/item-4.png" class="item-pic"></image>
+                    <image src="images/item-8.png" class="item-pic"></image>
                     <text class="item-text">我的基金</text>
                 </div>
             </div>
@@ -139,9 +139,9 @@ import LcInfoList from "lighting-ui/packages/lc-info-list";
         data(){
             return {
                 imageList: [
-                    { src: "images/banner-1.png" },
-                    { src: "images/banner-2.png" },
-                    { src: "images/banner-3.png" }
+                    { src: "images/lb.png" },
+                    { src: "images/lb.png" },
+                    { src: "images/lb.png" }
                 ],
                 indicatorColor: {
                     "item-color": "#dcdcdc",
