@@ -61,7 +61,7 @@
     		<text style="color:#0a72c9" class="listDetailText">查看更多</text>
     	</div>
     	<div style="height:900;width:750;margin-top:40;background-color:#ffffff">
-    		<div v-for="(item,index) in detailMenus" style="height: 120;width: 750;">
+    		<div v-for="(item,index) in detailMenus" @click="jump(item.path)" style="height: 120;width: 750;">
     			<div class="menuListDiv" style="align-items:center;">
     				<image :src="item.icon" style="height: 40;width: 30;margin-left:16;margin-right:16;"></image>
     				<text style="flex:4;font-size:30;">{{item.title}}</text>
@@ -93,6 +93,7 @@
 
 </template>
 <script>
+	import App from "light";
 	var modal = weex.requireModule('modal');
 	module.exports = {
 		
@@ -111,7 +112,7 @@
         			["02-14","1.265","2.263","0.48%"],
         		],
         		detailMenus:[
-        			{icon:"images/menu_0.png",title:"基金概况",detail:"基本信息、投资目标、投资策略"},
+        			{icon:"images/menu_0.png",title:"基金概况",detail:"基本信息、投资目标、投资策略",path:"jijin/info"},
         			{icon:"images/menu_1.png",title:"费率",detail:"1.50%"},
         			{icon:"images/menu_2.png",title:"基金经理",detail:"程洲"},
         			{icon:"images/menu_3.png",title:"分红",detail:""},
@@ -145,6 +146,9 @@
     		this.loadDisPlayData();
     	},
     	methods:{
+			jump(view) {
+                App.navigate(view);
+            },
     		switchChangeValue:function(index){
     			for (var i = 0; i < this.tabs.length; i++) {
 					var item = this.tabs[i];

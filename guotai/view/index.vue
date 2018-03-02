@@ -101,9 +101,9 @@
                         <div class="shutiao"></div>
                         <text class="title">人气产品</text>
                     </div>
-                    <text class="more" @click="jump('jijin')">更多 ></text>
+                    <text class="more" @click="switchTab()">更多 ></text>
                 </div>
-                <div class="prod-box flex-row align-center" v-for="(prod,index) in product" :key="index" @click="jump('jijin')">
+                <div class="prod-box flex-row align-center" v-for="(prod,index) in product" :key="index" @click="switchTab()">
                     <div class="align-center justify-between" style="width:180px;">
                         <text class="prod-wrap-tit">{{prod.profit}}</text>
                         <text class="prod-wrap-tip">近一年收益率</text>                   
@@ -228,6 +228,10 @@ import LcInfoList from "lighting-ui/packages/lc-info-list";
             },
             infoClick(){
                 App.navigate('index/newsInfo');
+            },
+            switchTab(){
+                 var LightJSBridge = weex.requireModule('LightJSBridge');
+                 LightJSBridge.call("native.switchTab",{index:1});
             }
         }
     }
