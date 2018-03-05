@@ -14,6 +14,7 @@
 </template>
 <script>
 import App from 'light';
+import LightSDK from 'light-sdk';
     export default {
         data(){
             return {
@@ -24,6 +25,9 @@ import App from 'light';
             jump(view) {
                 App.navigate(view);
             }
+        },
+        mounted(){
+            LightSDK.native.setTitle({title:'资讯'})
         }
     }
 </script>

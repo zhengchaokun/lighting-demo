@@ -7,9 +7,13 @@
     </div>
 </template>
 <script>
+    import LightSDK from 'light-sdk';
     export default {
         data(){
             return {}
+        },
+        mounted(){
+            LightSDK.native.setTitle({title:'我的资产'})
         }
     }
 </script>
