@@ -1,42 +1,39 @@
 <template>
-	<div>
-		<div class="content" :style="{width:contentWidth}">
-		<div v-for="(item,index) in titles"  style="flex-direction:row;">
+	<div class="content" :style="{width:contentWidth}">
+		<div v-for="(item,index) in titles"  style="flex-direction:row;flex:1;">
 			<text @click="changeValue(index)" v-if="item.selected==false" class="textStyle" :style="btnStyleTextDefault">{{item.title}}</text>
 			<text @click="changeValue(index)" v-else class="textStyle" :style="btnStyleTextSelected">{{item.title}}</text>
 			<div v-if="index!=titles.length-1" class="lineStyle" style="background-color:#eeeeee;"></div>
 			<div v-else class="lineStyle" style="background-color:#ffffff;"></div>
 		</div>
 		
-	</div>
-	</div>
-	
+	</div>	
 </template>
 
 <style>
 	.content{
-		width: 400;
-		height: 60;
-		border-width: 1;
+		width: 400px;
+		height: 60px;
+		border-width: 1px;
 		border-color: #eeeeee;
 		align-items: center;
 		flex-direction:row;
 	}
 	.textStyle{
-	  	padding-left: 10;
+	  	padding-left: 10px;
 		text-align: center;
-		font-size: 25;
-		width:140;
-		height:60;
-		line-height: 60;
+		font-size: 25px;
+		width:140px;
+		height:60px;
+		line-height: 60px;
 	}
 	.lineStyle{
-		height:34;
-		width:2;
-		margin-top:15;
-		margin-bottom:10;
-		margin-left:10;
-		margin-right:10
+		height:34px;
+		width:2px;
+		margin-top:15px;
+		margin-bottom:10px;
+		margin-left:10px;
+		margin-right:10px;
 	}
 </style>
 
