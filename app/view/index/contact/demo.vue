@@ -4,7 +4,7 @@
        <div class="bar-wrap" ref="barWrap">
            <span class="text" :style="{width:getWidth(bar)+'px'}"  v-for="(bar,index) in bars">{{bar.p}}</span>
            <span class="bar" @mousedown="mousedown($event,index)" :style="{left:getLeft(index)+'px'}"
-                 v-for="(bar,index) in bars"></span>
+                 v-for="(bar,index) in  bars"></span>
        </div>
     </div>
 </template>
