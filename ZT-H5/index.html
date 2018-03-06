@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no,email=no" name="format-detection" />
+    <meta name="Keywords" content=""/>
+    <meta name="description" content=""/>
+    <title>ZT-H5-Just For Fun</title>
+</head>
+<body>
+<div id="main">
+    <view id="home" home="true" />
+    <view id="login"/>
+
+    <view id="lay"/>
+    <!--撤单-->
+    <view id="lay/order"  parent="lay"/>
+    <!--指令+持仓-->
+    <view id="lay/cmd"  parent="lay"/>
+
+    <!--境内期货指令-->
+    <view id="lay/inner"  parent="lay"/>
+    <view id="lay/inner/bs"  parent="lay/inner"/>
+
+    <!--外盘期货指令-->
+    <view id="lay/outer"  parent="lay"/>
+    <view id="lay/outer/bs"  parent="lay/outer"/>
+
+    <!--预合同管理-->
+    <view id="lay/contract"  parent="lay"/>
+    <view id="lay/contract/show"  parent="lay/contract"/>
+    <view id="lay/contract/add"  parent="lay/contract"/>
+    <view id="lay/contract/edit"  parent="lay/contract"/>
+    <view id="lay/contract/query"  parent="lay/contract"/>
+    <view id="lay/contract/cmd"  parent="lay/contract"/>
+    <view id="lay/contract/deal"  parent="lay/contract"/>
+
+    <!--合同成交确认-->
+    <view id="lay/deal"  parent="lay"/>
+    <view id="lay/deal/list"  parent="lay/deal"/>
+    <view id="lay/deal/query"  parent="lay/deal"/>
+</div>
+<!--<snippet id="footer"/>-->
+
+<script src="app.js"></script>
+</body>
+</html>
