@@ -75,7 +75,7 @@
             <input class="flex1">
         </div>
         <div class="cell pdr30 flex" style="height: 50px;">
-            <textarea placeholder="备注" wrap="physical"></textarea>
+            <textarea class="flex1" style="height: 50px;" placeholder="备注" wrap="physical"></textarea>
         </div>
         <div class="pd30 pdb40">
             <button class="btn-blue">下一步</button>

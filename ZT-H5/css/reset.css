@@ -8,15 +8,18 @@ li{ list-style:none}
 a{text-decoration:none; color: #4A4A4A;}
 a:hover{text-decoration:none;}
 img{border:0; vertical-align:middle;}
-input{vertical-align:middle; outline: none;}
-input{vertical-align:middle; outline: none;border:none;}
-textarea{resize:none}
-textarea{resize:none;border: none; outline: none;white-space: pre-wrap;}
+/* input{vertical-align:middle; outline: none;} */
+input{vertical-align:middle; outline: none;border:none;font-size: 17px;}
+/* textarea{resize:none} */
+textarea{
+    font-family: "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑","Arial","sans-serif";    
+    resize:none;border: none; outline: none;white-space: pre-wrap;font-size: 17px;word-break: break-all;}
 textarea::-webkit-input-placeholder {
     font-size: 15px;
     color: #7A7A7A;
     letter-spacing: 0.22px;
     line-height: 15px;
+    font-family: "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑","Arial","sans-serif";
 }
 form{display:inline-block;width:100%;}
 button{ border: none; background: none; text-align: center; cursor: pointer; display: block;}
