@@ -9,7 +9,15 @@ a{text-decoration:none; color: #4A4A4A;}
 a:hover{text-decoration:none;}
 img{border:0; vertical-align:middle;}
 input{vertical-align:middle; outline: none;}
+input{vertical-align:middle; outline: none;border:none;}
 textarea{resize:none}
+textarea{resize:none;border: none; outline: none;white-space: pre-wrap;}
+textarea::-webkit-input-placeholder {
+    font-size: 15px;
+    color: #7A7A7A;
+    letter-spacing: 0.22px;
+    line-height: 15px;
+}
 form{display:inline-block;width:100%;}
 button{ border: none; background: none; text-align: center; cursor: pointer; display: block;}
 s{ text-decoration:none;}
@@ -51,8 +59,9 @@ textarea:focus{border: none; }
 .bg-red{background-color:#DE3B24;}
 .bg-yellow{background-color:#F39C12;}
 .bg-gray{background-color:#D7D7D7;}
+.bg-gray-1{background-color:#EBEBF2;}
 .bg-blue{background-color:#399DE2;}
-
+.bg-white{background-color:#ffffff;}
 /*字体大小样式*/
 .fs-ita{font-style:italic;}
 .fs-bold{font-weight: bold;}
@@ -96,16 +105,27 @@ textarea:focus{border: none; }
 .mt75{ margin-top: 0.75rem;}
 .ml6{ margin-left: 0.06rem;}
 .ml10{ margin-left: 0.1rem;}
+.ml11{ margin-left: 0.11rem;}
 .ml15{ margin-left: 0.15rem;}
+.ml20{ margin-left: 0.2rem;}
 .mr15{ margin-right: 0.15rem;}
+.mr30{ margin-right: 0.3rem;}
 .mr4{ margin-right: 0.04rem;}
+.pd30{padding: 0.3rem;}
 .pd40{padding-bottom: 0.4rem;}
+.pdb40{padding-bottom: 0.3rem;}
+
+.pdr30{padding-right: 0.3rem;}
+
+.mb15{ margin-bottom: 0.15rem;}
+.mb20{ margin-bottom: 0.2rem;}
+.mb30{ margin-bottom: 0.3rem;}
 .mb40{ margin-bottom: 0.4rem;}
 .mb70{ margin-bottom: 0.7rem;}
 .mb105{ margin-bottom: 1.05rem;}
 
 /*line 分割线*/
-.line{-webkit-transform: scaleY(0.5);-webkit-transform-origin:0 0; height: 1px; width: 100%; background-color: #D7D7D7;}
+.line{-webkit-transform: scaleY(0.5);-webkit-transform-origin:0 0; height: 1px;  background-color: #D7D7D7;}
 .line-dashed{ height: 0.01rem; width: 100%; border-top: 0.01rem dashed #D7D7D7;}
 
 /*定位*/
