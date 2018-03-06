@@ -76,7 +76,7 @@
     		</div>
     		<div style="flex:1;width:750px;flex-direction:row;">
     			<div style="width:350px;">
-    				<canvas ref="canvas_percent" v-if="!isWeex" style="width:350px;height:400px;">
+    				<canvas ref="canvas_percent"  style="width:350px;height:300px;">
                 		
             		</canvas>
     			</div>
@@ -109,10 +109,10 @@
 	var modal = weex.requireModule('modal');
 	const dataCenter = require("../.././js/openApi.js");
     const utils =require("../.././js/utils.js");
-	const GCanvas =require("../.././js/canvas/gcanvas.js");
+	//const GCanvas =require("../.././js/canvas/gcanvas.js");
     var isWeex = typeof callNative === "function";
 
-    //import { enable, WeexBridge, Image as GImage } from "../.././js/src/index.js";
+    import { enable, WeexBridge, Image as GImage } from "../.././js/src/index.js";
 
 	module.exports = {
 		
@@ -229,15 +229,26 @@
                 this.realCanvas.height =this.realCanvas.width/750*400;
             }
             this.webScale =this.realCanvas.width/750;
-
             console.log("realCanvas deviceInfo ="+JSON.stringify(this.realCanvas) +"webScale="+this.webScale);
+
+            this.bottomCavans ={width:350,height:300};
+            var scale =weex.config.env.scale;
+            this.bottomCavans.width =350*(weex.config.env.deviceWidth/scale *2)/750;
+            this.bottomCavans.height =this.bottomCavans.width/350*300;
+            if(!isWeex){ //web会小于1
+                this.bottomCavans.width=weex.config.env.deviceWidth/weex.config.env.dpr;
+                this.bottomCavans.height =this.bottomCavans.width/750*300;
+            }
+             console.log("bottomCavans deviceInfo ="+JSON.stringify(this.bottomCavans) +"webScale="+this.webScale);
     	},
     	mounted:function(){
     		this.loadDisPlayData();
     		this.initCanvas();
     		LightSDK.native.setTitle({title:'基金详情'});
-             var ref = this.$refs.canvas_holder;
-             var size = isWeex
+    	},
+    	methods:{
+            getRealCanvasSize:function(ref){
+              var size = isWeex
               ? {
                   width: 750,
                   height: 400
@@ -246,47 +257,21 @@
                   width: parseInt(ref.clientWidth),
                   height: parseInt(ref.clientHeight)
                 };
-                if (!isWeex) {
-                    //canvas 在web上运行默认宽高是300*150大小 需要设置真实的宽高
-                  ref.width = size.width;
-                  ref.height = size.height;
-                }
-
-              console.log("realCanvas sizeInfo ="+JSON.stringify(size));
-              var percentref =this.$refs.canvas_percent;
-              var size = isWeex
-              ? {
-                  width: 750,
-                  height: 400
-                }
-              : {
-                  width: parseInt(percentref.clientWidth),
-                  height: parseInt(percentref.clientHeight)
-                };
-                 console.log("bottomCanvas sizeInfo ="+JSON.stringify(size));
-                if (!isWeex) {
-                    //canvas 在web上运行默认宽高是300*150大小 需要设置真实的宽高
-                  percentref.width = size.width;
-                  percentref.height = size.height;
-                  var that=this;
-                 
-                    var cacheContext = percentref.getContext('2d');
-                    that.bottomCavansContext=cacheContext;
-                    that.drawPieChart();
-                
-
-                  
-                   
-                }
-
-
-    	},
-    	methods:{
+                return size;
+            },
     		initCanvas:function(){
-					var ref = this.$refs.canvas_holder;
-		            var that=this;
-		         	GCanvas.start(ref, function () {
-		            var cacheContext = GCanvas.getContext('2d');
+                    var ref = this.$refs.canvas_holder;
+                    var size = this.getRealCanvasSize(ref);
+                    if (!isWeex) {
+                        //canvas 在web上运行默认宽高是300*150大小 需要设置真实的宽高
+                      ref.width = size.width;
+                      ref.height = size.height;
+                    }else{
+                        ref = enable(ref, {bridge: WeexBridge});
+                    }
+                    console.log("realCanvas sizeInfo ="+JSON.stringify(size));
+		            var that=this;                    
+		            var cacheContext = ref.getContext('2d');
 		            that.cacheContext=cacheContext;
 		            dataCenter.getRealtimeList({en_prod_code:that.cnstocks},function(res){
 		             //console.log("cnindexlist="+JSON.stringify(res));
@@ -318,21 +303,32 @@
 			                }
 			            }
 			            that.cnIndexList=newArr;
-			            //console.log("4545 cnIndexlist="+JSON.stringify(that.cnIndexList));
 			            that.getIndexChartData(0);
-		        	});
-	          	});
-				
+	          	    });
+
+                    //初始化底部canvas
+                    var percentref =this.$refs.canvas_percent;
+                    size = this.getRealCanvasSize(percentref);
+                    console.log("bottomCanvas sizeInfo ="+JSON.stringify(size));
+                    if (!isWeex) {
+                      //canvas 在web上运行默认宽高是300*150大小 直接设置style属性不起效 需要设置真实的宽高
+                      percentref.width = size.width;
+                      percentref.height = size.height;
+                      this.bottomCavans=size;
+                    }else{
+                        percentref = enable(percentref, {bridge: WeexBridge});
+                    }
+                    var cacheContext = percentref.getContext('2d');
+                    this.bottomCavansContext=cacheContext;
+                    this.drawPieChart();
     		},
 			drawPieChart:function(){
 
 
 				//画饼图
 				var ctx=this.bottomCavansContext;
-                //this.bottomCavansContext.fillText("test",0,0);
-
-				var c ={height:193,width:166};
-        		var radius = c.height / 2 - 40; //半径  
+				var c ={height: this.bottomCavans.height,width: this.bottomCavans.width};
+        		var radius = c.width / 2 - 40; //半径  
                 var ox = radius + 20, oy = radius + 20; //圆心  
   
                 var width = 30, height = 10; //图例宽和高  
