@@ -1,23 +1,20 @@
 <template>
-	<div>
-		<div class="content" >
-		<text class="text" :style="{fontSize:fontSize}">{{icon}}</text>
-	</div>
+	<div class="content" >
+			<text class="text" :style="{fontSize:fontSize}">{{icon}}</text>
 	</div>
 	
 </template>
 
 <style>
 	.content{
-		height: 40;
-		width: 120;
-		border-width: 1;
+		height: 40px;
+		border-width: 1px;
 		border-color: #272c64;
 		align-items: center;
 	}
 	.text{
 	  	color:#272c64;
-	  	padding-top: 6;
+	  	padding-top: 6px;
 		text-align: center;
 	}
 </style>
@@ -27,7 +24,7 @@
 	module.exports = {
 		props:{
 			icon:{default:'US'},
-			fontSize:{default:25},
+			fontSize:{default:'25px'},
 		},
 
 		data: function(){

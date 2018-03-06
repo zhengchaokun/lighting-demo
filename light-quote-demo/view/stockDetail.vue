@@ -533,6 +533,8 @@
         hsParamsData:{},
         netvaluedata:{},
 
+        preclose,
+
         newscolor : "#f75e61",
         fundcolor : "#666",
         noticecolor : "#666",
@@ -732,7 +734,7 @@
             }
             that.getSnapshotdata();
             var fields = that.snapshotdata.data.snapshot.fields;
-            var preclose =that.snapshotdata.data.snapshot[stockCode][fields.indexOf("preclose_px")];
+            that.preclose =that.snapshotdata.data.snapshot[stockCode][fields.indexOf("preclose_px")];
             console.log("昨日收盘价="+preclose);
             if(preclose>0){
               if(that.chartType.indexOf('TRENDLINE')!=-1){
@@ -1516,7 +1518,8 @@
           this.sortHq(type);
         },
         doSwitchChart: function (chartType) {
-          if(chartType.indexOf('TRENDLINE')!=-1){
+          if (that.preclose > 0) {
+            if(chartType.indexOf('TRENDLINE')!=-1){
             this.isShowNetValue=false;
             this.isShowKLine=false;
             this.isShowTrend =true;
@@ -1547,6 +1550,7 @@
               this.getKLine();
             }
          }
+          }
         },
         //切换快照底部视图状态
         showRealTimeBottom:function(){
