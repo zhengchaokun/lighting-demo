@@ -3,9 +3,9 @@
      <div style="background-color:#f0eff4; height: 1334px;">
         <scroller style="height: 1334px;">
            <div class="block flex-row align-center justify-between">
-                <text>行情颜色选择</text>
-                <div class="flex-row">
-                    <div class="flex-row ml20" v-for="(bgColor, index) in bgColors" :key="index">
+                <text class="fs30" style="color:#4e4e4e;">行情颜色选择</text>
+                <div class="flex-row align-center">
+                    <div class="flex-row ml20 align-center" v-for="(bgColor, index) in bgColors" :key="index">
                         <image :src="bgColor.checked ? checkedIcon : unCheckedIcon" style="width: 42px; height: 42px; margin-right: 10px;" @click="toggleSelect(bgColor)"></image>
                         <text :style="textStyle">{{ bgColor.label }}</text>
                     </div>

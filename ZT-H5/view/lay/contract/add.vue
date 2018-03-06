@@ -1,7 +1,17 @@
 
 <template>
     <div>
-       Hello,World !
+       <div>
+           <ul>
+               <li>
+                   <span class="label">机构</span>
+                   <span class="text">杭城善事</span>
+                   <span>选择</span>
+                   <img src="">
+                   
+                </li>
+           </ul>
+       </div>
     </div>
 </template>
 <script>
