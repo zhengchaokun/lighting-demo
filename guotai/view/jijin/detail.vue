@@ -76,9 +76,9 @@
     		</div>
     		<div style="flex:1;width:750px;flex-direction:row;">
     			<div style="width:350px;">
-    				<!-- <canvas ref="canvas_percent" style="width:350px;height:400px;">
+    				<canvas ref="canvas_percent" v-if="!isWeex" style="width:350px;height:400px;">
                 		
-            		</canvas> -->
+            		</canvas>
     			</div>
     			<div style="width:400px;">
     				<div class="distributeDataListDiv" v-for="(data,index) in distributeData">
@@ -177,6 +177,7 @@
                 trendpbasedata:[],
                 realCanvas:{},
                 bottomCavans:{},
+                bottomCavansContext:{},
                 fundLeftPercent:[
                 	[	
                 		"7.50%","5.00%","2.50%","0.00%","-2.50%","-5.00%","-7.50%"
@@ -208,8 +209,8 @@
 					]	
                 ],
                 tabIndex:0,
-				pie_data_list:[0.05, 0.25, 0.6, 0.1],
-				pie_color_list:["#00FF21", "#FFAA00", "#00AABB", "#FF4400"],
+				pie_data_list:[0.8738, 0.067, 0.045, 0.147],
+				pie_color_list:["#c3e6fa", "#5fbef6", "#0d7cd9", "#095fa6"],
 				isWeex: isWeex,
                 webScale:1
             }
@@ -250,7 +251,35 @@
                   ref.width = size.width;
                   ref.height = size.height;
                 }
+
               console.log("realCanvas sizeInfo ="+JSON.stringify(size));
+              var percentref =this.$refs.canvas_percent;
+              var size = isWeex
+              ? {
+                  width: 750,
+                  height: 400
+                }
+              : {
+                  width: parseInt(percentref.clientWidth),
+                  height: parseInt(percentref.clientHeight)
+                };
+                 console.log("bottomCanvas sizeInfo ="+JSON.stringify(size));
+                if (!isWeex) {
+                    //canvas 在web上运行默认宽高是300*150大小 需要设置真实的宽高
+                  percentref.width = size.width;
+                  percentref.height = size.height;
+                  var that=this;
+                 
+                    var cacheContext = percentref.getContext('2d');
+                    that.bottomCavansContext=cacheContext;
+                    that.drawPieChart();
+                
+
+                  
+                   
+                }
+
+
     	},
     	methods:{
     		initCanvas:function(){
@@ -296,9 +325,13 @@
 				
     		},
 			drawPieChart:function(){
+
+
 				//画饼图
-				var ctx=this.bottomCavans;
-				var c ={height:400,width:350};
+				var ctx=this.bottomCavansContext;
+                //this.bottomCavansContext.fillText("test",0,0);
+
+				var c ={height:193,width:166};
         		var radius = c.height / 2 - 40; //半径  
                 var ox = radius + 20, oy = radius + 20; //圆心  
   
@@ -359,7 +392,6 @@
     			}
     		},
     		getIndexChartData:function(index){
-
 				this.drawGrid();
                 var current_snapshotdata =this.snapshotdata_indexlist[index];
                 var item =this.cnIndexList[index];
