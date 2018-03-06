@@ -46,9 +46,7 @@
     			</div>
     		</div>
     		<div style="height:500px;width:750px;margin-top:60px">
-    			 <canvas ref="canvas_holder" style="width:750px;height:400px;">
-                	
-            	</canvas>
+                <canvas ref="canvas_holder" style="width:750px;height:400px;"></canvas>
             	<div class="trendTab">
     				<switchTab :titles="tabs" @test="switchChangeValue" style="flex:1;margin-left:60px;margin-right:60px;"></switchTab>
     			</div>
@@ -229,12 +227,30 @@
                 this.realCanvas.width=weex.config.env.deviceWidth/weex.config.env.dpr;
                 this.realCanvas.height =this.realCanvas.width/750*400;
             }
-            console.log("realCanvas deviceInfo ="+JSON.stringify(this.realCanvas));
+            this.webScale =this.realCanvas.width/750;
+
+            console.log("realCanvas deviceInfo ="+JSON.stringify(this.realCanvas) +"webScale="+this.webScale);
     	},
     	mounted:function(){
     		this.loadDisPlayData();
     		this.initCanvas();
-    		LightSDK.native.setTitle({title:'基金详情'})
+    		LightSDK.native.setTitle({title:'基金详情'});
+             var ref = this.$refs.canvas_holder;
+             var size = isWeex
+              ? {
+                  width: 750,
+                  height: 400
+                }
+              : {
+                  width: parseInt(ref.clientWidth),
+                  height: parseInt(ref.clientHeight)
+                };
+                if (!isWeex) {
+                    //canvas 在web上运行默认宽高是300*150大小 需要设置真实的宽高
+                  ref.width = size.width;
+                  ref.height = size.height;
+                }
+              console.log("realCanvas sizeInfo ="+JSON.stringify(size));
     	},
     	methods:{
     		initCanvas:function(){
@@ -421,10 +437,10 @@
                
                 var leftX,rightX,topY,bottomY,width,height;
                 var realCanvas=this.realCanvas;
-                leftX = 100;
-                rightX = realCanvas.width-40;
-                topY = 10;
-                bottomY = realCanvas.height-30;
+                leftX = 100*this.webScale;
+                rightX = realCanvas.width-40*this.webScale;
+                topY = 10*this.webScale;
+                bottomY = realCanvas.height-30*this.webScale;
                 width = rightX - leftX;
                 height = bottomY-topY;  
                 var middle =height/2;
@@ -461,7 +477,7 @@
 
                     var newPoint={lineX:lineX,lineY:lineY};
 
-                    newPoint.lineY=lineY+Math.random()*50-30-20;
+                    newPoint.lineY=lineY+(Math.random()*50-30-20)*this.webScale;
                     if(newPoint.lineY>bottomY)
                         newPoint.lineY=bottomY;
                     if(newPoint.lineY<topY)
@@ -472,12 +488,6 @@
                 this.trendpdata =data;
                 //画折线图
                 this.draw1Trend();
-            },
-            dealCanvasWebScale:function(x,type,realWidth,realHeight){
-                if(type=="width")
-                    x=x*realWidth/750;
-                else
-                    x=x*realHeight/400;
             },
             /*画分时图折线图 & 阴影图*/
             draw1Trend:function(){
@@ -524,10 +534,10 @@
             drawGrid:function(){
                 var leftX,rightX,topY,bottomY,width,height;
                 var realCanvas=this.realCanvas;
-                leftX = 100;
-                rightX = realCanvas.width-40;
-                topY = 10;
-                bottomY = realCanvas.height-30;
+                leftX = 100*this.webScale;
+                rightX = realCanvas.width-40*this.webScale;
+                topY = 10*this.webScale;
+                bottomY = realCanvas.height-30*this.webScale;
                 width = rightX - leftX;
                 height = bottomY-topY;
                 this.cacheContext.clearRect(0,0,realCanvas.width,realCanvas.height);
@@ -536,6 +546,7 @@
                 this.cacheContext.beginPath();
                 this.cacheContext.strokeStyle = this.gridColor;
                 this.cacheContext.lineWidth = 1;
+              
                 //绘制实线
                 this.cacheContext.moveTo(leftX, topY);
                 this.cacheContext.lineTo(rightX, topY);
@@ -543,7 +554,7 @@
                 this.cacheContext.lineTo(leftX, bottomY);
                 this.cacheContext.closePath();
                 this.cacheContext.stroke();
-
+ 
 				var percentArray =this.fundLeftPercent[this.tabIndex];
 				var count =percentArray.length;
                 //绘制实线
@@ -566,7 +577,7 @@
 	                this.cacheContext.fillStyle = 'black';
 	                this.cacheContext.textAlign = "right";
 	                this.cacheContext.textBaseline = "top";
-	                this.cacheContext.fillText(text,(100-20),topY + i * stepY);
+	                this.cacheContext.fillText(text,(100-20)*this.webScale,(topY+ i * stepY));
 	             }
 
 	            //绘制底部日期表
@@ -575,7 +586,7 @@
 				var stepX =width/2;
 				for (var i = 0; i < count; i++) {
                 	var text =dateArray[i];
-                	var leftX=50;
+                	var leftX=50*this.webScale;
                 	this.cacheContext.font="20px";
 	                this.cacheContext.fillStyle = 'black';
 	                this.cacheContext.textAlign = "left";
@@ -585,7 +596,7 @@
 	                	x=rightX;
 	                	this.cacheContext.textAlign = "right";
 	                }
-	                this.cacheContext.fillText(text,x,bottomY+10);
+	                this.cacheContext.fillText(text,x,bottomY+10*this.webScale);
 	             }
             },
             //数字为参数，返回奇数
