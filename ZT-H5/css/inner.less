@@ -1,0 +1,194 @@
+.buyCont{
+    color:#4a4a4a;
+    .itemList{
+        line-height:40px;
+        border-top:1px solid #d7d7d7;
+        border-bottom:1px solid #d7d7d7;
+        margin-bottom:16px;
+        background:#fff;
+        .subitem{
+                margin-left:15px;
+                border-bottom:1px solid #d7d7d7;
+                span{
+                    font-size:17px;
+                    margin-right:20px;
+                    color:#4a4a4a;
+                    vertical-align:middle;
+                }
+                em{
+                    font-size:15px;
+                    color:#7a7a7a;
+                    float:right;
+                    width:60px;
+                    margin-right:15px;
+                    background:url(../images/more.svg) no-repeat right;
+                }
+                em.unit{
+                    background:none;
+                    font-size:17px;
+                    color:#4a4a4a;
+                }
+                i{
+                    vertical-align:middle;
+                    font-style:normal;
+                    display:inline-block;
+                    text-align:center;
+                    line-height:42px;
+                    color:#c7c7c7;
+                    font-size:28px;
+                    width:40px;
+                    height:42px;
+                    border-left:1px solid #d7d7d7;
+                    border-right:1px solid #d7d7d7;
+                }
+                input{
+                    border:none;
+                    vertical-align:middle;
+                    text-indent:10px;
+                }
+        }
+        .itemselect{
+            background:url(../images/radio-selected.svg) no-repeat 90%;
+        }
+        .subitem:last-child{
+            border-bottom:none;
+        }
+    }
+    .tips{
+        font-size:15px;
+        span{
+            float:left;
+            margin:0 15px;
+        }
+        textarea{
+            line-height:24px;
+            border:none;
+            margin-top:10px;
+        }
+    }
+    .sureBut{
+        margin:15px;
+        button{
+            height:44px;
+            line-height:44px;
+            font-size:17px;
+            color:#fff;
+            width:100%;
+            border-radius:4px;
+            margin-bottom:15px;
+            letter-spacing:8px;
+        }
+    }
+    .upDown{
+        text-indent:15px;
+        font-size:15px;
+        margin-bottom:15px;
+        span{
+            margin-right:70px;
+            em{
+                margin-left:15px;
+            }
+            em.colorRed{
+                color:#f56778
+            }
+            em.colorGreen{
+                color:#55c683
+            }
+        }
+    }
+    .codeWrap{
+        margin-bottom:16px;
+        .codeSelect ul{
+            width:130px;
+            background:#fff;
+            line-height:43px;
+            font-size:17px;
+            text-indent:10px;
+            margin-bottom:15px;
+            border-bottom:1px solid #d7d7d7;
+            li{
+                border-bottom:1px solid #d7d7d7;
+                margin-left:5px;
+                
+            }
+            li.select{
+                    background:url(../images/radio-selected.svg) no-repeat 90px;
+            }
+            li:last-child{
+                border-bottom:none;
+            }
+            
+        }
+        .codeMarket{
+            border:1px solid #d7d7d7;
+            margin-right:10px;
+            background:#fff;
+            padding:10px;
+            p{
+                line-height:41px;
+                border-bottom:2px solid #d7d7d7;
+                span{
+                    font-size:17px;
+                    font-weight:900;
+                }
+                em{
+                    font-size:15px;
+                }
+                em.direc{
+                    margin-right:20px;
+                }
+                em.price{
+                    color:#f56778;
+                }
+                em.num{
+                    float:right;
+                    margin-right:20px;
+                    color:#f5b167
+                }
+            }
+            .marketDetail ul li{
+                font-size:13px;
+                line-height:24px;
+                span{
+                    margin-right:17px;
+                }
+                em{
+                    width:50px;
+                    display:inline-block;
+                    text-align:right;
+                    color:#f56778;
+                }
+                em.colorOrange{
+                    color:#f5b167
+                }
+                em.colorGreen{
+                    color:#55c683
+                }
+            }
+            .marketDetail ul:first-child{
+                border-right:1px solid #d7d7d7;
+                margin-right:10px;
+            }
+        }
+    }
+}
+.buyStyle .lineColor{
+    border-top:1px solid #ffb4bd;
+    border-bottom:1px solid #ffb4bd;
+}
+.sellStyle .lineColor{
+    border-top:1px solid #89d4fb;
+    border-bottom:1px solid #89d4fb;
+}
+.buyStyle .lineColor .subitem{
+    border-bottom:1px solid #ffb4bd;
+}
+.sellStyle .lineColor .subitem{
+    border-bottom:1px solid #89d4fb;
+}
+.buyStyle .sureBut button{
+    background:#f56778;
+}
+.sellStyle .sureBut button{
+    background:#399de2;
+}
