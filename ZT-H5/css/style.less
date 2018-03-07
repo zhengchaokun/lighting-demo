@@ -84,7 +84,43 @@
 .btn-wrap {
     padding: 0 17px;
 }
-.edit-bar {
 
+
+.mask{
+    position: fixed;
+    background: rgba(120,120,120,0.60);
+    left: 0;
+    top:0;
+    bottom:0;
+    right: 0;
+    z-index: 10;
 }
 
+@header-height:1.6rem;
+.top-header{
+    height: @header-height;
+    background-color: #efefef;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    line-height: @header-height;
+    .left,.right{
+        display: flex;
+    }
+    .left{
+        font-size: 0.34rem;
+        color: #787878;
+        img{
+            width: 0.65rem;
+            height:0.65rem;
+            background-color: #fff;
+            border-radius: 50%;
+            margin:@header-height/2-0.65rem/2 0.3rem auto 0.3rem;
+        }
+    }
+    .right{
+        font-size: 0.3rem;
+        color: #9B9B9B;
+        margin-right: 0.3rem;
+    }
+}
