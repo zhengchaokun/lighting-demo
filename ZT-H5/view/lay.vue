@@ -16,11 +16,11 @@
                    退出
                </span>
             </div>
-            <ul class="op-list">
-                <li @click="jump('lay/inner/bs',{type:1});panelShow=false" >境内期货指令</li>
-                <li @click="jump('lay/outer/bs',{type:1});panelShow=false">外盘&电子盘期货指令</li>
-                <li @click="jump('lay/contract/add');panelShow=false">预合同管理</li>
-                <li @click="jump('lay/deal/list',{type:1});panelShow=false">预合同成交确认</li>
+            <ul class="op-list" @click="panelShow=false">
+                <li @click="jump('lay/inner/bs',{type:1})" >境内期货指令</li>
+                <li @click="jump('lay/outer/bs',{type:1})">外盘&电子盘期货指令</li>
+                <li @click="jump('lay/contract/add')">预合同管理</li>
+                <li @click="jump('lay/deal/list',{type:1})">预合同成交确认</li>
                 <li class="line-top"></li>
                 <li>帮助中心</li>
                 <li>免责声明</li>
