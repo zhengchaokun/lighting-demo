@@ -1,7 +1,8 @@
 
 <template>
     <div>
-       Hello,World !
+     
+       <sub-view></sub-view>
     </div>
 </template>
 <script>
