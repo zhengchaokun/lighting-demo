@@ -1,13 +1,17 @@
 
 <template>
     <div>
-       Hello,World !
+       <cmd></cmd>
     </div>
 </template>
 <script>
+    import cmd from "../../../ui/cmd.vue"
     export default {
         data(){
             return {}
+        },
+        components:{
+            cmd
         }
     }
 </script>

@@ -24,12 +24,12 @@
                     params:{type:1},
                 },{
                     title:"指令",
-                    path:"lay/outer/cmd",
-                    params:{type:1},
+                    path:"lay/outer/order",
+                    params:{type:2},
                 },{
                     title:"持仓",
-                    path:"lay/outer/cmd",
-                    params:{type:2},
+                    path:"lay/outer/order",
+                    params:{type:3},
                 }]
             }
         },
