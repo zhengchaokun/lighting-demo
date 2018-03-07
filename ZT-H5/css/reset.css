@@ -151,3 +151,7 @@ textarea:focus{border: none; }
 .flex-item{display: flex; align-items: center;}
 
 html{font-size: 42.6px;height: 100%;}
+
+body{
+    background: #f9f9f9;
+}
