@@ -33,16 +33,16 @@
     			<text style="height:40px;width:180px;line-height:35px;padding-left:20px;">收益走势</text>
     			<text style="height:40px;width:300px;line-height:40px;font-size:24px;color:#999999;">(同类排名：1692/1831)</text>
     		</div>
-    		<div style="height:60px;width:750px;flex-direction:row;padding-top:25px;">
+    		<div style="height:85px;width:750px;flex-direction:row;">
     			<div class="fundHeadDataDiv">
     				<div class="fundHeadDataMark" style="background-color:#d70a30;"></div>
-    				<text style="font-size:26px" >本基金：</text>
-    				<text style="font-size:26px" :class="[getDisPlayDataColor(showTrendData.fund)]">{{showTrendData.fund}}</text>
+    				<text style="font-size:26px;" >本基金：</text>
+    				<text style="font-size:26px;" :class="[getDisPlayDataColor(showTrendData.fund)]">{{showTrendData.fund}}</text>
     			</div>
     			<div class="fundHeadDataDiv">
     				<div class="fundHeadDataMark" style="background-color:#252c63;"></div>
-    				<text style="font-size:26px">业绩基准：</text>
-    				<text class style="font-size:26px" :class="[getDisPlayDataColor(showTrendData.performance)]">{{showTrendData.performance}}</text>
+    				<text style="font-size:26px;">业绩基准：</text>
+    				<text class style="font-size:26px;" :class="[getDisPlayDataColor(showTrendData.performance)]">{{showTrendData.performance}}</text>
     			</div>
     		</div>
     		<div style="height:500px;width:750px;margin-top:60px">
@@ -723,7 +723,7 @@
 		width: 374px;
 	}
 	.fundHeadDataDiv{
-		height:60px;
+		height:85px;
 		width:375px;
 		flex-direction:row;
 		padding-top:25px;
@@ -734,6 +734,7 @@
 		height:20px;
 		width:20px;
 		margin-right:10px;
+        align-items: flex-start;
 	}
 	.fundText{
 		font-size:26px;
