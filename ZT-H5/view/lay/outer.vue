@@ -20,16 +20,16 @@
                     params:{type:2},
                 },{
                     title:"撤单",
-                    path:"lay/order",
-                    params:{type:1,from:"outer"},
+                    path:"lay/outer/order",
+                    params:{type:1},
                 },{
                     title:"指令",
-                    path:"lay/cmd",
-                    params:{type:1,from:"outer"},
+                    path:"lay/outer/cmd",
+                    params:{type:1},
                 },{
                     title:"持仓",
-                    path:"lay/cmd",
-                    params:{type:2,from:"outer"},
+                    path:"lay/outer/cmd",
+                    params:{type:2},
                 }]
             }
         },

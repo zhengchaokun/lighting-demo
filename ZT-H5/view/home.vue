@@ -20,19 +20,19 @@
             <p class="desc">登录之后查看相关数据</p>
         </div>
         <div class="menu-list">
-            <div @click="jump('lay/inner')" class="menu-item">
+            <div @click="jump('lay/inner/bs',{type:1})" class="menu-item">
                 <div class="menu-icon"></div>
                 <p class="menu-title">境内期货指令</p>
             </div>
-            <div @click="jump('lay/outer')" class="menu-item">
+            <div @click="jump('lay/outer/bs',{type:1})" class="menu-item">
                 <div class="menu-icon"></div>
                 <p class="menu-title">外盘&电子盘期货指令</p>
             </div>
-            <div @click="jump('lay/contract')" class="menu-item">
+            <div @click="jump('lay/contract/add')" class="menu-item">
                 <div class="menu-icon"></div>
                 <p class="menu-title">预合同管理</p>
             </div>
-            <div @click="jump('lay/deal')" class="menu-item">
+            <div @click="jump('lay/deal/list',{type:1})" class="menu-item">
                 <div class="menu-icon"></div>
                 <p class="menu-title">预合同成交确认</p>
             </div>
