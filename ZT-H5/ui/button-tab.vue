@@ -40,6 +40,7 @@
     .btn-wrap-1{
         display: flex;
         border-bottom: 1px solid #d7d7d7;
+        margin-bottom:0.3rem;
         li{
             flex:1;
             text-align: center;
