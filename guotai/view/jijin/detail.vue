@@ -35,7 +35,7 @@
     		</div>
     		<div style="height:85px;width:750px;flex-direction:row;">
     			<div class="fundHeadDataDiv">
-    				<div class="fundHeadDataMark" style="background-color:#d70a30;"></div>
+    				<div class="fundHeadDataMark" style="background-color:#d70a30;margin-left: 60px;"></div>
     				<text style="font-size:26px;" >本基金：</text>
     				<text style="font-size:26px;" :class="[getDisPlayDataColor(showTrendData.fund)]">{{showTrendData.fund}}</text>
     			</div>
@@ -45,10 +45,10 @@
     				<text class style="font-size:26px;" :class="[getDisPlayDataColor(showTrendData.performance)]">{{showTrendData.performance}}</text>
     			</div>
     		</div>
-    		<div style="height:500px;width:750px;margin-top:60px">
+    		<div style="height:500px;width:750px;">
                 <canvas ref="canvas_holder" style="width:750px;height:400px;"></canvas>
             	<div class="trendTab">
-    				<switchTab :titles="tabs" @test="switchChangeValue" style="flex:1;margin-left:60px;margin-right:60px;"></switchTab>
+    				<switchTab :titles="tabs" @test="switchChangeValue" style="width:750px;flex:1;margin-left:60px;margin-right:60px;margin-bottom: 20px;"></switchTab>
     			</div>
     		</div>
     		
@@ -724,7 +724,7 @@
 		width:375px;
 		flex-direction:row;
 		padding-top:25px;
-		justify-content:center;
+		justify-content:left;
 		align-items:center;
 	}
 	.fundHeadDataMark{
