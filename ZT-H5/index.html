@@ -16,25 +16,34 @@
     <view id="login"/>
 
     <view id="lay"/>
-    <!--撤单-->
-    <view id="lay/order"  parent="lay"/>
-    <!--指令+持仓-->
-    <view id="lay/cmd"  parent="lay"/>
 
     <!--境内期货指令-->
     <view id="lay/inner"  parent="lay"/>
     <view id="lay/inner/bs"  parent="lay/inner"/>
+    <view id="lay/inner/order"  parent="lay/inner"/>
+    <view id="lay/inner/cmd"  parent="lay/inner"/>
 
     <!--外盘期货指令-->
     <view id="lay/outer"  parent="lay"/>
     <view id="lay/outer/bs"  parent="lay/outer"/>
+    <view id="lay/outer/order"  parent="lay/outer"/>
+    <view id="lay/outer/cmd"  parent="lay/outer"/>
 
     <!--预合同管理-->
     <view id="lay/contract"  parent="lay"/>
     <view id="lay/contract/show"  parent="lay/contract"/>
     <view id="lay/contract/add"  parent="lay/contract"/>
+    <view id="lay/contract/add/step1" parent="lay/contract/add" />
+    <view id="lay/contract/add/step2" parent="lay/contract/add" /> 
+    <view id="lay/contract/add/step3" parent="lay/contract/add" />
+       
     <view id="lay/contract/edit"  parent="lay/contract"/>
+    <view id="lay/contract/edit/list" parent="lay/contract/edit" />
+    <view id="lay/contract/edit/detail" parent="lay/contract/edit" />
+    
     <view id="lay/contract/query"  parent="lay/contract"/>
+    <view id="lay/contract/query/list" parent="lay/contract/query" />
+    <view id="lay/contract/query/detail" parent="lay/contract/query" />
     <view id="lay/contract/cmd"  parent="lay/contract"/>
     <view id="lay/contract/deal"  parent="lay/contract"/>
 

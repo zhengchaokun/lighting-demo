@@ -3,6 +3,14 @@ import App from "light"
 require("./lib/px2rem");
 require("./app.less");
 
+App.Vue.mixin({
+    methods:{
+        jump(){
+            App.navigate.call(App,...arguments)
+        }
+    }
+})
+
 App.filter("start",function (next) {
     //启动拦截器
     App.log("app started...");

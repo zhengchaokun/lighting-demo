@@ -3,11 +3,11 @@
     <div>
         <scroller class="pd20">
             <div class="info-table">
-                <div class="flex-row">
+                <div class="flex-row flex-1">
                     <div class="info-table-head"><text class="info-table-head-text">基金名称</text></div>
                     <div class="info-table-data"><text class="info-table-data-text">国泰利是宝货币</text></div>
                 </div>
-                <div class="flex-row">
+                <div class="flex-row flex-1">
                     <div class="flex-row flex-1">
                         <div class="info-table-head"><text class="info-table-head-text">基金代码</text></div>
                         <div class="info-table-data"><text class="info-table-data-text">003515</text></div>
@@ -17,7 +17,7 @@
                         <div class="info-table-data"><text class="info-table-data-text">兴业银行</text></div>
                     </div>
                 </div>
-                <div class="flex-row">
+                <div class="flex-row flex-1">
                     <div class="flex-row flex-1">
                         <div class="info-table-head"><text class="info-table-head-text">基金经理</text></div>
                         <div class="info-table-data"><text class="info-table-data-text">韩哲昊</text></div>
@@ -27,7 +27,7 @@
                         <div class="info-table-data"><text class="info-table-data-text">2016年12月22日</text></div>
                     </div>
                 </div>
-                <div class="flex-row">
+                <div class="flex-row flex-1">
                     <div class="flex-row flex-1">
                         <div class="info-table-head"><text class="info-table-head-text">运作方式</text></div>
                         <div class="info-table-data"><text class="info-table-data-text">契约型开放式</text></div>
@@ -100,6 +100,7 @@
         border-color: #9a9a9a;
         border-left-width: 1px;
         border-top-width: 1px;
+        height:280px;
     }
     .info-table-head {
         border-color: #9a9a9a;
@@ -120,6 +121,8 @@
     .info-table-head-text {
         font-size: 28px;
         color: #3a3a3a;
+        lines:1;
+        text-overflow:ellipsis;
     }
     .info-table-data-text {
         font-size: 28px;
