@@ -1,7 +1,7 @@
 
 <template>
     <div>
-        <ul class="btn-wrap">
+        <ul class="btn-wrap-1">
             <li v-for="btn in buttons" :class="{selected:checkMatch(btn)}" @click="jump(btn.path,btn.params,{history:false})">{{btn.title}}</li>
         </ul>
     </div>
@@ -37,7 +37,7 @@
     }
 </script>
 <style lang="less" scoped>
-    .btn-wrap{
+    .btn-wrap-1{
         display: flex;
         border-bottom: 1px solid #d7d7d7;
         li{
