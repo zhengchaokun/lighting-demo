@@ -328,12 +328,9 @@
 				//画饼图
 				var ctx=this.bottomCavansContext;
 				var c ={height: this.bottomCavans.height,width: this.bottomCavans.width};
-        		var radius = c.width / 2 - 40; //半径  
-                var ox = radius + 20, oy = radius + 20; //圆心  
+        		var radius = c.height / 2 - 40*this.webScale; //半径  
+                var ox = radius + 20*this.webScale, oy = radius + 20*this.webScale; //圆心  
   
-                var width = 30, height = 10; //图例宽和高  
-                var posX = ox * 2 + 20, posY = 30;   //  
-
   
                 var startAngle = 0; //起始弧度  
                 var endAngle = 0;   //结束弧度  
