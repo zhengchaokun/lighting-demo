@@ -18,7 +18,7 @@
                 <p>
                     <span class="code">{{item.code}}</span>
                     <span class="colorRed">{{item.status}}</span>
-                    <span>{{type.type}}</span>
+                    <span>{{item.type}}</span>
                     <span>持仓均价<em>4448.0</em></span>
                 </p>
                 <p>
@@ -35,8 +35,6 @@
         data(){
             return {
                 currentFilterIdx:0,
-
-                type:3,
 
                 list:[{
                     code:'IF1806',
