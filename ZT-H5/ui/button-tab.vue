@@ -26,8 +26,6 @@
                 let match = true;
                 Object.keys(btn.params).forEach(function (key) {
                     if(btn.params[key] !== +that.$route.query[key]){
-                        console.log(that.$route.query[key])
-                        console.log(btn.params[key])
                         match = false;
                     }
                 });
