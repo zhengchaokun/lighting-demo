@@ -12,20 +12,24 @@
             return {
                 buttons:[{
                     title:"未确认",
-                    path:"",
+                    path:"lay/deal/list",
+                    params:{type:1},
                     selected:true
                 },{
                     title:"待处理",
-                    path:""
+                    params:{type:2},
+                    path:"lay/deal/list"
                 },{
                     title:"已确认",
-                    path:""
+                    params:{type:3},
+                    path:"lay/deal/list"
                 },{
                     title:"已作废",
-                    path:""
+                    params:{type:4},
+                    path:"lay/deal/list"
                 },{
                     title:"查询",
-                    path:""
+                    path:"lay/deal/query"
                 }]
             }
         },

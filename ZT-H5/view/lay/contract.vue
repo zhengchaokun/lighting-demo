@@ -12,17 +12,19 @@
             return {
                 buttons:[{
                     title:"新建",
-                    path:"",
+                    path:"lay/contract/add",
                     selected:true
                 },{
                     title:"查询",
-                    path:""
+                    path:"lay/contract/query",
                 },{
                     title:"匹配指令",
-                    path:""
+                    path:"lay/contract/cmd",
+                    params:{type:1},
                 },{
                     title:"匹配成交",
-                    path:""
+                    path:"lay/contract/cmd",
+                    params:{type:2},
                 }]
             }
         },

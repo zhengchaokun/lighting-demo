@@ -2,7 +2,7 @@
 <template>
     <div>
         <ul class="btn-wrap">
-            <li v-for="btn in buttons" :class="{selected:btn.selected}">{{btn.title}}</li>
+            <li v-for="btn in buttons" :class="{selected:$route.path==='/'+btn.path}" @click="jump(btn.path,btn.params)">{{btn.title}}</li>
         </ul>
     </div>
 </template>

@@ -17,10 +17,10 @@
                </span>
             </div>
             <ul class="op-list">
-                <li>境内期货指令</li>
-                <li>外盘&电子盘期货指令</li>
-                <li>预合同管理</li>
-                <li>预合同成交确认</li>
+                <li @click="jump('lay/inner')">境内期货指令</li>
+                <li @click="jump('lay/outer')">外盘&电子盘期货指令</li>
+                <li @click="jump('lay/contract')">预合同管理</li>
+                <li @click="jump('lay/deal')">预合同成交确认</li>
                 <li class="line-top"></li>
                 <li>帮助中心</li>
                 <li>免责声明</li>

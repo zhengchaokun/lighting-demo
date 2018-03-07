@@ -20,19 +20,19 @@
             <p class="desc">登录之后查看相关数据</p>
         </div>
         <div class="menu-list">
-            <div class="menu-item">
+            <div @click="jump('lay/inner')" class="menu-item">
                 <div class="menu-icon"></div>
                 <p class="menu-title">境内期货指令</p>
             </div>
-            <div class="menu-item">
+            <div @click="jump('lay/outer')" class="menu-item">
                 <div class="menu-icon"></div>
                 <p class="menu-title">外盘&电子盘期货指令</p>
             </div>
-            <div class="menu-item">
+            <div @click="jump('lay/contract')" class="menu-item">
                 <div class="menu-icon"></div>
                 <p class="menu-title">预合同管理</p>
             </div>
-            <div class="menu-item">
+            <div @click="jump('lay/deal')" class="menu-item">
                 <div class="menu-icon"></div>
                 <p class="menu-title">预合同成交确认</p>
             </div>
@@ -47,35 +47,6 @@
     }
 </script>
 <style lang="less">
-    @header-height:1.6rem;
-    .top-header{
-        height: @header-height;
-        background-color: #efefef;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        line-height: @header-height;
-        .left,.right{
-            display: flex;
-        }
-        .left{
-            font-size: 0.34rem;
-            color: #787878;
-            img{
-                width: 0.65rem;
-                height:0.65rem;
-                background-color: #fff;
-                border-radius: 50%;
-                margin:@header-height/2-0.65rem/2 0.3rem auto 0.3rem;
-            }
-        }
-        .right{
-            font-size: 0.3rem;
-            color: #9B9B9B;
-            margin-right: 0.3rem;
-        }
-    }
-
     .center-body{
         width: 4rem;
         height: 4rem;
@@ -107,18 +78,22 @@
 
     .menu-list{
         margin-top: 0.75rem;
+        display: flex;
+        flex-direction: row;
         .menu-item{
-            display: inline-block;
-            width: 1.2rem;
+            flex: 1;
             font-size: 0.26rem;
             color: #787878;
-            margin-left: 0.6rem;
+            padding: 0 0.3rem;
             .menu-icon{
+                margin-left: 50%;
+                transform: translateX(-50%);
                 background: #888;
                 width: 0.6rem;
                 height: 0.6rem;
             }
             .menu-title{
+                margin-top: 0.35rem;
                 text-align: center;
                 width: 100%;
             }
