@@ -1,7 +1,6 @@
 
 <template>
     <div>
-       <sub-view></sub-view>
        <div class="top-user-header">
            <div class="left-menu" @click="panelShow=true"></div>
            <div class="right-menu"></div>

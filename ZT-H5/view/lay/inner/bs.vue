@@ -7,7 +7,7 @@
                     <span>产品</span><span>301杭实善成</span><em>选择</em>
                 </div>
                 <div class="subitem">
-                    <span>产品</span><span>301杭实善成</span><em>选择</em>
+                    <span>组合</span><span>--</span><em>选择</em>
                 </div>
             </div>
             <div class="itemList lineColor">
@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="codeWrap flex">
-                <div class="codeSelect flex1">
+                <div class="codeSelect">
                     <ul>
                         <li class="select">开仓</li>
                         <li>平仓</li>

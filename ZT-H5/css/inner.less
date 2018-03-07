@@ -45,6 +45,7 @@
                     border:none;
                     vertical-align:middle;
                     text-indent:10px;
+                    width: 2rem;
                 }
         }
         .itemselect{
@@ -98,7 +99,9 @@
     }
     .codeWrap{
         margin-bottom:16px;
-        .codeSelect ul{
+        .codeSelect {
+            margin-right:15px;
+            ul{
             width:130px;
             background:#fff;
             line-height:43px;
@@ -106,19 +109,20 @@
             text-indent:10px;
             margin-bottom:15px;
             border-bottom:1px solid #d7d7d7;
-            li{
-                border-bottom:1px solid #d7d7d7;
-                margin-left:5px;
-                
+                li{
+                    border-bottom:1px solid #d7d7d7;
+                    margin-left:5px;
+                    
+                }
+                li.select{
+                        background:url(../images/radio-selected.svg) no-repeat 90px;
+                }
+                li:last-child{
+                    border-bottom:none;
+                }
             }
-            li.select{
-                    background:url(../images/radio-selected.svg) no-repeat 90px;
-            }
-            li:last-child{
-                border-bottom:none;
-            }
-            
         }
+            
         .codeMarket{
             border:1px solid #d7d7d7;
             margin-right:10px;
