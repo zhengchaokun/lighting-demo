@@ -13,7 +13,6 @@
                 buttons:[{
                     title:"新建",
                     path:"lay/contract/add",
-                    selected:true
                 },{
                     title:"查询",
                     path:"lay/contract/query",

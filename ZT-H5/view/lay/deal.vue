@@ -14,7 +14,6 @@
                     title:"未确认",
                     path:"lay/deal/list",
                     params:{type:1},
-                    selected:true
                 },{
                     title:"待处理",
                     params:{type:2},

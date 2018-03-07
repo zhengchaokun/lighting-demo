@@ -14,7 +14,6 @@
                     title:"买入",
                     path:"lay/outer/bs",
                     params:{type:1},
-                    selected:true
                 },{
                     title:"卖出",
                     path:"lay/outer/bs",
