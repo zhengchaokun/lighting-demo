@@ -1,7 +1,7 @@
 
 <template>
     <div>
-       <div class="buyCont buyStyle">  <!--卖出用sellStyle-->
+       <div class="buyCont" :class="{'buyStyle':type==1,'sellStyle':type==2}">  <!--卖出用sellStyle-->
             <div class="itemList lineColor">
                 <div class="subitem">
                     <span>产品</span><span>301杭实善成</span><em>选择</em>
@@ -56,7 +56,17 @@
 <script>
     export default {
         data(){
-            return {}
+            return {
+                type:""
+            }
+        },
+        watch:{
+            '$route.query.type':function(){
+                this.type =this.$route.query.type
+            }
+        },
+        mounted(){
+            this.type =this.$route.query.type
         }
     }
 </script>
