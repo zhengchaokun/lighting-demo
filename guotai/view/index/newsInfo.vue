@@ -2,7 +2,7 @@
 <template>
     <div>
        <scroller class="news-wrap">
-           <text class="title">美国国会参众两院通过临时法案 结束联邦政府“关门”僵局</text>
+            <text class="title">美国国会参众两院通过临时法案 结束联邦政府“关门”僵局</text>
            <div class="mt30 flex-row info-wrap">
                <div class="flex-row align-center">
                    <text class="info-tit">来源：人民日报</text>
