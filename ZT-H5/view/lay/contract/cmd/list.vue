@@ -55,8 +55,8 @@
         data(){
             return {
                 show_pick_modal: false,
-                tabs: ['未确认','待处理','已完成','已作废'],
-                activeIndex: 3,
+                tabs: ['未匹配','待处理','已匹配'],
+                activeIndex: 0,
                 allItems:[[{
                     name: '东南新材料',
                     brand: '品牌xxx',
@@ -84,7 +84,7 @@
                 this.show_pick_modal = true
             },
             goDetail(item) {
-                App.navigate("lay/contract/query/detail",item)
+                App.navigate("lay/contract/cmd/detail",item)
             }
         }
     }
@@ -154,4 +154,5 @@
         line-height: 0.42rem;
     }
 </style>
+
 

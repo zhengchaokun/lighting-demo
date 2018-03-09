@@ -28,7 +28,7 @@
                 <div class="menu-icon"></div>
                 <p class="menu-title">外盘&电子盘期货指令</p>
             </div>
-            <div @click="jump('lay/contract/add')" class="menu-item">
+            <div @click="jump('lay/contract/add/step1')" class="menu-item">
                 <div class="menu-icon"></div>
                 <p class="menu-title">预合同管理</p>
             </div>

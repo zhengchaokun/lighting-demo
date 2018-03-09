@@ -9,7 +9,7 @@ a{text-decoration:none; color: #4A4A4A;}
 a:hover{text-decoration:none;}
 img{border:0; vertical-align:middle;}
 /* input{vertical-align:middle; outline: none;} */
-input{vertical-align:middle; outline: none;border:none;font-size: 17px;}
+input{vertical-align:middle; outline: none;border:none;font-size: 0.34rem;}
 /* textarea{resize:none} */
 textarea{
     font-family: "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑","Arial","sans-serif";    
@@ -18,15 +18,15 @@ textarea{
     outline: none;
     white-space: pre-wrap;
     word-break: break-all;
-    font-size: 17px;
+    font-size: 0.34rem;
     color: #787878;
-    letter-spacing: -0.41px;
+    letter-spacing: -0.0082rem;
 }
 textarea::-webkit-input-placeholder {
-    font-size: 15px;
+    font-size: 0.3rem;
     color: #7A7A7A;
-    letter-spacing: 0.22px;
-    line-height: 15px;
+    letter-spacing: 0.0044rem;
+    line-height: 0.3rem;
     font-family: "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑","Arial","sans-serif";
 }
 form{display:inline-block;width:100%;}
@@ -88,7 +88,7 @@ textarea:focus{border: none; }
 .fs22{font-size:0.22rem;}
 .fs24{font-size:0.24rem;}
 .fs26{font-size:0.26rem;}
-
+.fs30{font-size:0.3rem;}
 /*百分比宽度*/
 .w10{width: 10%}
 .w15{width: 15%}

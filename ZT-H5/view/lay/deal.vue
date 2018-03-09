@@ -6,6 +6,7 @@
     </div>
 </template>
 <script>
+    // import ButtonTab from "../../ui/button-tab.vue"
     import ButtonTab from "../../ui/button-tab.vue"
     export default {
         data(){
