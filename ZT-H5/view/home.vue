@@ -4,9 +4,9 @@
        <div class="top-header">
            <span class="left">
                <img src="" alt="">
-               <span>李雷</span>
+               <span>{{loginInfo.userName}}</span>
            </span>
-           <span class="right">
+           <span class="right" @click="logout(loginInfo)">
                退出
            </span>
        </div>
@@ -40,9 +40,29 @@
     </div>
 </template>
 <script>
+    import Light from "light";
+    const API = require("api");
+    const Dialog = require("dialog");
     export default {
         data(){
-            return {}
+            return {
+                loginInfo:{}
+            }
+        },
+        methods:{
+            logout(loginInfo){
+                API.logout().then(function () {
+                    Light.navigate("login",{},{history:false})
+                })
+            }
+        },
+        mounted(){
+            const that = this;
+            API.localGet(API.LOCAL_USER_STORE).then(function (data) {
+                that.loginInfo = data;
+            }).catch(function () {
+                Light.navigate("login",{},{history:false})
+            })
         }
     }
 </script>
