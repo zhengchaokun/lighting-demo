@@ -21,15 +21,15 @@
                     params:{type:2},
                 },{
                     title:"撤单",
-                    path:"lay/inner/order",
+                    path:"lay/inner/cmd",
                     params:{type:1},
                 },{
                     title:"指令",
-                    path:"lay/inner/order",
+                    path:"lay/inner/cmd",
                     params:{type:2},
                 },{
                     title:"持仓",
-                    path:"lay/inner/order",
+                    path:"lay/inner/cmd",
                     params:{type:3},
                 }]
             }
