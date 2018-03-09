@@ -4,9 +4,9 @@
        <div class="top-header">
            <span class="left">
                <img src="" alt="">
-               <span>李雷</span>
+               <span>{{loginInfo.userName}}</span>
            </span>
-           <span class="right">
+           <span class="right" @click="logout(loginInfo)">
                退出
            </span>
        </div>
@@ -28,7 +28,7 @@
                 <div class="menu-icon"></div>
                 <p class="menu-title">外盘&电子盘期货指令</p>
             </div>
-            <div @click="jump('lay/contract/add')" class="menu-item">
+            <div @click="jump('lay/contract/add/step1')" class="menu-item">
                 <div class="menu-icon"></div>
                 <p class="menu-title">预合同管理</p>
             </div>
@@ -40,9 +40,29 @@
     </div>
 </template>
 <script>
+    import Light from "light";
+    const API = require("api");
+    const Dialog = require("dialog");
     export default {
         data(){
-            return {}
+            return {
+                loginInfo:{}
+            }
+        },
+        methods:{
+            logout(loginInfo){
+                API.logout().then(function () {
+                    Light.navigate("login",{},{history:false})
+                })
+            }
+        },
+        mounted(){
+            const that = this;
+            API.localGet(API.LOCAL_USER_STORE).then(function (data) {
+                that.loginInfo = data;
+            }).catch(function () {
+                Light.navigate("login",{},{history:false})
+            })
         }
     }
 </script>

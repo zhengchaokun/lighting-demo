@@ -1,0 +1,15 @@
+{
+  "code": 0,
+  "message": "string",
+  "token": "string",
+  "data": {
+    "userId": 0,
+    "userName": "string",
+    "menuList": [
+      {
+        "menuId": 0,
+        "menuName": "string"
+      }
+    ]
+  }
+}

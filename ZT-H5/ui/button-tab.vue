@@ -2,7 +2,7 @@
 <template>
     <div>
         <ul class="btn-wrap-1">
-            <li v-for="btn in buttons" :class="{selected:checkMatch(btn)}" @click="jump(btn.path,btn.params,{history:false})">{{btn.title}}</li>
+            <li v-for="(btn, index) in buttons" :key="index" :class="{selected:checkMatch(btn)}" @click="jump(btn.path,btn.params,{history:false})">{{btn.title}}</li>
         </ul>
     </div>
 </template>

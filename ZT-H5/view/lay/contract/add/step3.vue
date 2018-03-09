@@ -6,14 +6,14 @@
             <span @click="toNext('step1')">编辑</span>
         </div>
         <div class="line"></div>
-        <textarea readonly v-model="info_body" class="detail-textarea" style="height: 80px;"></textarea>
+        <textarea readonly v-model="info_body" class="detail-textarea" style="height: 1.6rem;"></textarea>
         <div class="line mb30"></div>
         <div class="edit-bar flex">
             <span class="flex1">物资明细</span>
             <span @click="toNext('step2')">编辑</span>
         </div>
         <div class="line"></div>
-        <textarea readonly v-model="info_detail" class="detail-textarea" style="height: 80px;"></textarea>
+        <textarea readonly v-model="info_detail" class="detail-textarea" style="height: 1.6rem;"></textarea>
         <div class="line"></div> 
         <div class="pd30 pdb40 flex btn-wrap-two">
             <button class="btn-normal flex1 mr30 bg-green" @click="toNext('step1')">继续添加</button>
@@ -38,16 +38,16 @@
         }
     }
 </script>
-<style lang="less" scoped>
+<style lang="less">
     .edit-bar {
-        padding: 5px 15px;
+        padding: 0.1rem 0.3rem;
         justify-content: space-between;
     }
     .edit-bar span {
-        font-size: 15px;
+        font-size: 0.3rem;
         color: #4A4A4A;
         letter-spacing: 0;
-        line-height: 21px;
+        line-height: 0.42rem;
     }
     .edit-bar span:last-child {
         color: #9B9B9B;
@@ -56,6 +56,6 @@
         position: absolute;
         width: 100%;
         bottom: 0;
-        padding: 0px 15px 20px 15px;
+        padding: 0 0.3rem 0.4rem 0.3rem;
     }
 </style>

@@ -85,8 +85,8 @@
         </div>
         <div class="line mb30"></div>
         <div class="line"></div>
-        <div class="cell pdr30 flex" style="height: 74px;">
-            <textarea class="flex1" style="height: 50px;" placeholder="备注" wrap="physical"></textarea>
+        <div class="cell pdr30 flex" style="height: 1.48rem;">
+            <textarea class="flex1" style="height: 1rem;" placeholder="备注" wrap="physical"></textarea>
         </div>
         <div class="line"></div>
         <div class="pd30 pdb40">
@@ -160,29 +160,29 @@ export default {
 </script>
 <style lang="less" scoped>
     .search-bar {
-        padding: 10px 15px 15px 15px;
+        padding: 0.2rem 0.3rem 0.3rem 0.3rem;
     }
     .search-bar input {
-        height: 42px;
+        height: 0.84rem;
         background: #FFFFFF;
-        border: 1px solid #D7D7D7;
-        border-radius: 2px;
-        padding: 3px 10px;
-        font-size: 0.17rem;
+        border: 0.02rem solid #D7D7D7;
+        border-radius: 0.04rem;
+        padding: 0.06rem 0.2rem;
+        font-size: 0.34rem;
         color: #4A4A4A;
-        letter-spacing: 0.25px;
-        line-height: 36px;
+        letter-spacing: 0.0.5rem;
+        line-height: 0.72rem;
         font-weight: bold;
     }
     .search-bar button {
-        width: 60px;
-        height: 42px;
+        width: 1.2rem;
+        height: 0.84rem;
     }
     .search-list {
-        font-size: 0.17rem;
+        font-size: 0.34rem;
         color: #787878;
-        letter-spacing: 0.25px;
-        line-height: 36px;
-        padding: 0 15px 15px 25px;
+        letter-spacing: 0.0.5rem;
+        line-height: 0.72rem;
+        padding: 0 0.3rem 0.3rem 0.5rem;
     }
 </style>
