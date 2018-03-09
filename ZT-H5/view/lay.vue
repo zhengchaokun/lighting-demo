@@ -45,7 +45,7 @@
         display: flex;
         justify-content: space-between;
         flex-direction: row;
-        >div{
+        div{
             display: flex;
             background: #fff;
             width: 0.44rem;

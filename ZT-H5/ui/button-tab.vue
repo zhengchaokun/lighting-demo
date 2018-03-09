@@ -1,8 +1,8 @@
 
 <template>
     <div>
-        <ul class="btn-wrap">
-            <li v-for="(btn,index) in buttons" :key="index" :class="{selected:checkMatch(btn)}" @click="jump(btn.path,btn.params,{history:false})">{{btn.title}}</li>
+        <ul class="btn-wrap-1">
+            <li v-for="(btn, index) in buttons" :key="index" :class="{selected:checkMatch(btn)}" @click="jump(btn.path,btn.params,{history:false})">{{btn.title}}</li>
         </ul>
     </div>
 </template>
@@ -25,7 +25,7 @@
 
                 let match = true;
                 Object.keys(btn.params).forEach(function (key) {
-                    if(btn.params[key] !== +that.$route.query[key]){
+                    if(btn.params[key]+'' !== that.$route.query[key]+''){
                         match = false;
                     }
                 });
@@ -37,9 +37,10 @@
     }
 </script>
 <style lang="less" scoped>
-    .btn-wrap{
+    .btn-wrap-1{
         display: flex;
         border-bottom: 1px solid #d7d7d7;
+        margin-bottom:0.3rem;
         li{
             flex:1;
             text-align: center;

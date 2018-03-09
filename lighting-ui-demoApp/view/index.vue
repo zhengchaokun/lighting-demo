@@ -165,7 +165,7 @@
             :background-color="bgc"      
             @LcMinibarRightButtonClicked="jump('#/nav')">
             <image class="navbar-img" src="images/msg.png" slot="left" @click="jump('#/msg')"></image>
-            <div slot="middle" class="navbar-search" @click="jump('#/market/search')">
+            <div slot="middle" class="navbar-search" @click="jumpHeadHidden('#/market/search')">
                 <image class="navbar-search-icon" src="images/search.png"></image>
                 <text class="navbar-search-text">股票代码或拼音简称</text>
             </div>
@@ -310,6 +310,9 @@ export default {
   methods: {
     jump(view) {
       App.navigate(view);
+    },
+    jumpHeadHidden(view) {
+      App.navigate(view,{},{headHidden:true});
     },
     lcImgClick(e) {
       console.log("clicked" + e.index);
