@@ -2,6 +2,7 @@
 <template>
     <div>
         <div class="buyCont" :class="{'buyStyle':type==1,'sellStyle':type==2}">  <!--卖出用sellStyle-->
+            <choose></choose>
             <div class="itemList lineColor">
                 <div class="subitem">
                     <span>产品</span><span>301杭实善成</span><em>选择</em>
@@ -82,6 +83,7 @@
     </div>
 </template>
 <script>
+    import choose from "../../../ui/select.vue"
     export default {
         data(){
             return {
@@ -92,6 +94,9 @@
             '$route.query.type':function(){
                 this.type =this.$route.query.type
             }
+        },
+        components:{
+            choose
         },
         mounted(){
             this.type =this.$route.query.type
