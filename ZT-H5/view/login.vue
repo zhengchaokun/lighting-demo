@@ -7,20 +7,37 @@
         <div class="form">
             <div class="input-control">
                 <span>账号</span>
-                <input type="text" placeholder="请输入账号">
+                <input type="text" v-model="user.userName" placeholder="请输入账号">
             </div>
             <div class="input-control">
                 <span>密码</span>
-                <input type="password" placeholder="请输入登录密码">
+                <input type="password" v-model="user.password" placeholder="请输入登录密码">
             </div>
         </div>
-        <div class="confirm-btn">登 录</div>
+        <div class="confirm-btn" @click="login(user)">登 录</div>
     </div>
 </template>
 <script>
+    const API = require("api");
+    const Dialog = require("dialog");
     export default {
         data(){
-            return {}
+            return {
+                user:{
+                    password:"",
+                    userName:""
+                }
+            }
+        },
+        methods:{
+            login(user){
+                if(!user.userName){
+                    return Dialog.alert("请输入用户名！");
+                }
+                API.login(user).then(function (data) {
+                    console.log(data)
+                })
+            }
         }
     }
 </script>
