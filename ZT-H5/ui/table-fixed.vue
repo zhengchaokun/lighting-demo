@@ -51,7 +51,7 @@
     }
     table {
         background: #FFFFFF;
-        border-top: solid 1px #D7D7D7;
+        border-top: solid 0.02rem #D7D7D7;
         font-size: 0.26rem;
         line-height: 0.36rem;
         letter-spacing: 0;
@@ -112,8 +112,8 @@
     /* 设置滚动条的样式 */
 
 ::-webkit-scrollbar {
-    width: 5px;
-    height: 4px;
+    width: 0.1rem;
+    height: 0.08rem;
 }
 
 ::-webkit-scrollbar-button {
@@ -129,7 +129,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    margin-right: 10px;
+    margin-right: 0.2rem;
     background-color: #d7d7d7
 }
 
@@ -146,7 +146,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    border-radius: 3px
+    border-radius: 0.06rem;
 }
    
 </style>
