@@ -2,8 +2,9 @@
 <template>
     <div>
         <div class="line"></div>
-        <textarea readonly v-model="formalInfo" class="detail-textarea" style="height: 80px;"></textarea>
-        <div class="line"></div>  
+        <textarea readonly v-model="formalInfo" class="detail-textarea" style="height: 1.6rem;"></textarea>
+        <div class="line mb30"></div>
+        <div class="line"></div>
         <div class="cell pdr20">
             <span class="text-label inline-b">币种</span>
             <div class="fright">
@@ -54,8 +55,8 @@
         </div> 
         <div class="line mb30"></div>
         <div class="line"></div>
-        <div class="cell pdr30 flex" style="height: 74px;">
-            <textarea class="flex1" style="height: 50px;" placeholder="备注" wrap="physical"></textarea>
+        <div class="cell pdr30 flex" style="height: 1.48rem;">
+            <textarea class="flex1" style="height: 1rem;" placeholder="备注" wrap="physical"></textarea>
         </div>
         <div class="line"></div>
         <div class="pd30 pdb40">

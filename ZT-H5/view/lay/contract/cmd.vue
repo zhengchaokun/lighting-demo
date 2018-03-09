@@ -1,7 +1,7 @@
 
 <template>
-    <div>
-       Hello,World !
+    <div style="margin-top: 0.34rem;">
+       <sub-view></sub-view>
     </div>
 </template>
 <script>

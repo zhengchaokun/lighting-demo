@@ -106,8 +106,10 @@
         
 
     </div> -->
-
+<div style="margin-top: 0.34rem;">
     <sub-view></sub-view>
+</div>
+    
 
     
 </template>
@@ -120,9 +122,9 @@ export default {
         };
     },
     methods: {
-        toNext() {
-            App.navigate("add/step1.vue");
-        }
+        // toNext() {
+        //     App.navigate("add/step1.vue");
+        // }
     }
 };
 </script>
