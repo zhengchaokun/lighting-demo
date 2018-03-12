@@ -3,8 +3,8 @@ import Light from "light";
 module.exports = {
     LOCAL_USER_STORE:"LOCAL_USER_STORE",
     login(params){
-        return this.userLogin(params).then(function (data) {
-            return API.localSet(module.exports.LOCAL_USER_STORE,data)
+        return module.exports.userLogin(params).then(function (data) {
+            return module.exports.localSet(module.exports.LOCAL_USER_STORE,data)
         });
     },
     logout(){
@@ -334,7 +334,7 @@ module.exports = {
 
 function execute(type,path,data) {
     return module.exports.localGet(module.exports.LOCAL_USER_STORE).then(function (info) {
-        if(path!==""){
+        if(path!=="/common/login"){
             data.token = info.TOKEN;
         }
         return new Promise(function (resolve, reject) {
