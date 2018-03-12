@@ -3,17 +3,15 @@ import Light from "light";
 module.exports = {
     LOCAL_USER_STORE:"LOCAL_USER_STORE",
     login(params){
-        return execute('post','/common/login',params);
+        return this.userLogin(params).then(function (data) {
+            return API.localSet(module.exports.LOCAL_USER_STORE,data)
+        });
     },
     logout(){
         const that = this;
-        return this.localGet(this.LOCAL_USER_STORE).then(function (info) {
-            return execute('post','/common/logout',{
-                token:info.TOKEN
-            }).then(function () {
-                return that.localSet(that.LOCAL_USER_STORE,null)
-            });
-        })
+        return this.userLogout().then(function () {
+            return that.localSet(that.LOCAL_USER_STORE,null)
+        });
     },
     localSet(key,value){
         if(value===null) localStorage.removeItem(key);
@@ -335,22 +333,27 @@ module.exports = {
 };
 
 function execute(type,path,data) {
-    return new Promise(function (resolve, reject) {
-        Light.ajax({
-            url:`mock${path}.json`,
-            type:"get",
-            // type,
-            data,
-            dataType:"json",
-            success(data){
-                if(data.token) {
-                    data.data.TOKEN = data.token;
-                }
-                if(data.code === 0){
-                    resolve(data.data||{});
-                }
+    return module.exports.localGet(module.exports.LOCAL_USER_STORE).then(function (info) {
+        if(path!==""){
+            data.token = info.TOKEN;
+        }
+        return new Promise(function (resolve, reject) {
+            Light.ajax({
+                url:`mock${path}.json`,
+                type:"get",
+                // type,
+                data,
+                dataType:"json",
+                success(data){
+                    if(data.token) {
+                        data.data.TOKEN = data.token;
+                    }
+                    if(data.code === 0){
+                        resolve(data.data||{});
+                    }
 
-            }
-        });
+                }
+            });
+        })
     })
 }

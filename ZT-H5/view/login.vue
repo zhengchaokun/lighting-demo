@@ -39,9 +39,7 @@
                     return Dialog.alert("请输入密码！");
                 }
                 API.login(user).then(function (data) {
-                    API.localSet(API.LOCAL_USER_STORE,data).then(function () {
-                        Light.navigate("home",{},{history:false})
-                    });
+                    Light.navigate("home",{},{history:false})
                 })
             }
         }
