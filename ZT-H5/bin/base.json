@@ -1,0 +1,3786 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "期现投资手机端接口",
+    "description": "期现投资手机端接口，指定手机端和后端通讯的接口。\n\n\n\n| 日期 | 修改人 | 说明 |\n| -------- | -------- | -------- |\n| 2018-03-07 | 甘龙 | 接口第一次正式版本。完成第一次接口评审。 |\n\n* 990001: 境内期货指令\n* 990002: 外盘&电子盘指令\n* 990003: 预合同管理\n* 990004: 预合同匹配确认\n\n* 3: 上期所\n* 4: 郑商所\n* 7: 中金所\n* 9: 大商所\n\n* 1: 化工\n* 2: 炉料\n* 3: 农产品\n* 4: 钢材\n* 5: 有色\n\n* 0: 未生效\n* 1: 待审批\n* 2: 待分发\n* 3: 已分发\n* 4: 审批拒绝\n* 5: 分发拒绝\n* 6: 已撤销\n* 7: 已完成\n* 8: 作废\n* 9: 已修改\n* A: 已过期\n\n* 32: 买入开仓\n* 33: 卖出平仓\n* 34: 卖出开仓\n* 35: 买入平仓\n\n* a: 投机\n* b: 套保\n* c: 套利\n\n* 1: 多仓\n* 2: 空仓\n\n* 0: 非长约预合同\n* 1: 是长约预合同\n\n* 1: 未匹配\n* 2: 已匹配\n* 3: 待处理\n* 4: 已确认\n* 5: 已作废\n* 6: 已删除\n* 7: 已修改\n\n* 1: 采购\n* 2: 销售\n\n* 0: 境内期货成交或指令\n* 1: 外盘期货成交或指令\n"
+  },
+  "host": "localhost:80",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "common",
+      "description": "公共接口"
+    },
+    {
+      "name": "basedata",
+      "description": "基础数据查询接口"
+    },
+    {
+      "name": "ins",
+      "description": "境内指令接口"
+    },
+    {
+      "name": "insout",
+      "description": "境外指令接口"
+    },
+    {
+      "name": "precont",
+      "description": "预合同"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/common/captcha": {
+      "get": {
+        "tags": [
+          "common"
+        ],
+        "summary": "获取验证码",
+        "description": "登录前，需要先获取验证码，调用登录接口时需要较验验证码。(现在登录时暂不使用验证码)",
+        "operationId": "getCaptcha",
+        "produces": [
+          "image/jpeg"
+        ],
+        "responses": {
+          "200": {
+            "description": "success"
+          }
+        }
+      }
+    },
+    "/common/login": {
+      "post": {
+        "tags": [
+          "common"
+        ],
+        "summary": "用户登录",
+        "description": "使用OPlus操作员登录，获取token，后面其它接口都需要传入token。",
+        "operationId": "userLogin",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/OUserLogin"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/OLoginResponse"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/OUser"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/common/logout": {
+      "post": {
+        "tags": [
+          "common"
+        ],
+        "summary": "用户退出",
+        "description": "用户退出。",
+        "operationId": "userLogout",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/OCommonRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/basedata/dept": {
+      "get": {
+        "tags": [
+          "basedata"
+        ],
+        "summary": "获取机构信息",
+        "description": "获取机构信息，只返回当前公司下的第一级的机构信息，若机构有父节点则不返回。",
+        "operationId": "deptQuery",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "令牌",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/ODept"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/basedata/strategy": {
+      "get": {
+        "tags": [
+          "basedata"
+        ],
+        "summary": "获取策略信息",
+        "description": "获取策略信息",
+        "operationId": "strategyQuery",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "令牌",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deptId",
+            "in": "query",
+            "description": "部门序号(若部门有子部门，则将子部门的策略也一起返回)",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/OStrategy"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/basedata/fund": {
+      "get": {
+        "tags": [
+          "basedata"
+        ],
+        "summary": "获取产品信息",
+        "description": "获取产品信息",
+        "operationId": "fundQuery",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "令牌",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataRight",
+            "in": "query",
+            "description": "操作权限，当前操作员对产品的权限，仅支持传入单个权限(1:查询 2:操作 4:审核)，默认为查询权限",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/OFund"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/basedata/combi": {
+      "get": {
+        "tags": [
+          "basedata"
+        ],
+        "summary": "获取组合信息",
+        "description": "获取组合信息",
+        "operationId": "combiGet",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "令牌",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataRight",
+            "in": "query",
+            "description": "操作权限，当前操作员对产品的权限，仅支持传入单个权限(1:查询 2:操作 4:审核)，默认为查询权限",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/OCombi"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/basedata/opTradeInfo": {
+      "get": {
+        "tags": [
+          "basedata"
+        ],
+        "summary": "获取交易员",
+        "description": "获取交易员",
+        "operationId": "opTradeInfoGet",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "令牌",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/OOpTradeInfo"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/basedata/spotCustomerInfo": {
+      "get": {
+        "tags": [
+          "basedata"
+        ],
+        "summary": "获取现货客户的信息",
+        "description": "获取现货客户的信息",
+        "operationId": "invoiceTitleQuery",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "令牌",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deptId",
+            "in": "query",
+            "description": "机构序号",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/OSpotCustomerInfo"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/basedata/currencyInfo": {
+      "get": {
+        "tags": [
+          "basedata"
+        ],
+        "summary": "获取币种信息",
+        "description": "获取币种信息",
+        "operationId": "currencyInfoQuery",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "令牌",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/OCurrencyInfo"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/basedata/futureKind": {
+      "get": {
+        "tags": [
+          "basedata"
+        ],
+        "summary": "获取期货品种信息",
+        "description": "获取期货品种信息",
+        "operationId": "futureKindQuery",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "令牌",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "futureKindIdStr",
+            "in": "query",
+            "description": "期货品种列表，支持传入多个期货品种，以','分隔",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/OFutureKind"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/basedata/futureInfo": {
+      "get": {
+        "tags": [
+          "basedata"
+        ],
+        "summary": "获取期货信息",
+        "description": "获取期货信息",
+        "operationId": "futureInfoGet",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "令牌",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "marketNo",
+            "in": "query",
+            "description": "市场",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "reportCode",
+            "in": "query",
+            "description": "证券代码",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/OFutureInfo"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/basedata/outMarketInfo": {
+      "get": {
+        "tags": [
+          "basedata"
+        ],
+        "summary": "获取外盘交易市场信息",
+        "description": "获取外盘交易市场信息",
+        "operationId": "outMarketInfoQuery",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "令牌",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/OOutMarketInfo"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/basedata/outFutureInfo": {
+      "get": {
+        "tags": [
+          "basedata"
+        ],
+        "summary": "获取境外期货信息",
+        "description": "获取境外期货信息",
+        "operationId": "outFutureInfoGet",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "令牌",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "outFutureMarketNo",
+            "in": "query",
+            "description": "外盘市场编号",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "reportCode",
+            "in": "query",
+            "description": "证券代码",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/OOutFutureInfo"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/basedata/futureQuote": {
+      "get": {
+        "tags": [
+          "basedata"
+        ],
+        "summary": "获取期货行情信息",
+        "description": "获取期货行情信息",
+        "operationId": "stockQuoteGet",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "令牌",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "marketNo",
+            "in": "query",
+            "description": "市场",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "reportCode",
+            "in": "query",
+            "description": "证券代码",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/OFutureQuote"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/basedata/futurtTypeVariety": {
+      "get": {
+        "tags": [
+          "basedata"
+        ],
+        "summary": "获取期货类型品种关系",
+        "description": "获取期货类型品种关系",
+        "operationId": "futurtTypeVarietyQuery",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "令牌",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/OFuturtTypeVariety"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/basedata/futureSpotWarehouseInfo": {
+      "get": {
+        "tags": [
+          "basedata"
+        ],
+        "summary": "获取期现仓库信息",
+        "description": "获取期现仓库信息",
+        "operationId": "futureSpotWarehouseInfoQuery",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "令牌",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/OSpotWarehouseInfo"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/basedata/futureSpotProductInfo": {
+      "get": {
+        "tags": [
+          "basedata"
+        ],
+        "summary": "获取期现品名信息表",
+        "description": "获取期现品名信息表",
+        "operationId": "futureSpotProductInfoQuery",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "令牌",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/OFutureSpotProductInfo"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/basedata/futureSpotBrandInfo": {
+      "get": {
+        "tags": [
+          "basedata"
+        ],
+        "summary": "获取期现品牌信息",
+        "description": "获取期现品牌信息",
+        "operationId": "futureSpotBrandInfoQuery",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "令牌",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/OFutureSpotBrandInfo"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/basedata/futureSpotUnitInfo": {
+      "get": {
+        "tags": [
+          "basedata"
+        ],
+        "summary": "获取期现计量单位信息",
+        "description": "获取期现计量单位信息",
+        "operationId": "futureSpotUnitInfoQuery",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "令牌",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/OFutureSpotUnitInfo"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/ins": {
+      "get": {
+        "tags": [
+          "ins"
+        ],
+        "summary": "境内指令查询",
+        "description": "境内指令查询，支持分页",
+        "operationId": "insQuery",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "令牌",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "分页大小，默认为1000，即一页1000条记录",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "currentPage",
+            "in": "query",
+            "description": "当前页，默认为1，即获取第一页",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "fundIdStr",
+            "in": "query",
+            "description": "产品序号，支持查询多个产品的信息，多个产品序号以,'分隔",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "insStatusStr",
+            "in": "query",
+            "description": "指令状态，支持查询多个状态，多个状态以’,’分隔",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "$ref": "#/definitions/OPaging"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/OInsStock"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "ins"
+        ],
+        "summary": "境内指令下达",
+        "description": "境内指令下达",
+        "operationId": "insAdd",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/OCommonRequest"
+                },
+                {
+                  "$ref": "#/definitions/OInsAdd"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/OInsAddResp"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "ins"
+        ],
+        "summary": "境内指令撤销",
+        "description": "境内指令撤销",
+        "operationId": "insDelete",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/OCommonRequest"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "insId": {
+                      "type": "integer",
+                      "description": "指令序号"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/OInsDelResp"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/ins/combiStock": {
+      "get": {
+        "tags": [
+          "ins"
+        ],
+        "summary": "持仓查询",
+        "description": "持仓查询，支持分页",
+        "operationId": "combiStockQuery",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "令牌",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "分页大小，默认为1000，即一页1000条记录",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "currentPage",
+            "in": "query",
+            "description": "当前页，默认为1，即获取第一页",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "fundIdStr",
+            "in": "query",
+            "description": "产品序号，支持查询多个产品的信息，多个产品序号以','分隔",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "$ref": "#/definitions/OPaging"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/OFutuCombiStock"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/ins/realdeal": {
+      "get": {
+        "tags": [
+          "ins"
+        ],
+        "summary": "境内成交查询",
+        "description": "境内成交查询，支持分页",
+        "operationId": "realdealQuery",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "令牌",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "分页大小，默认为1000，即一页1000条记录",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "currentPage",
+            "in": "query",
+            "description": "当前页，默认为1，即获取第一页",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "fundIdStr",
+            "in": "query",
+            "description": "产品序号，支持查询多个产品的信息，多个产品序号以','分隔",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "$ref": "#/definitions/OPaging"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/ORealdeal"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/ins/enableAmount": {
+      "get": {
+        "tags": [
+          "ins"
+        ],
+        "summary": "境内可用数量查询",
+        "description": "境内可用数量查询",
+        "operationId": "enableAmountGet",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "令牌",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "combiId",
+            "in": "query",
+            "description": "组合序号",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "marketNo",
+            "in": "query",
+            "description": "交易市场",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "reportCode",
+            "in": "query",
+            "description": "证券代码",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "investType",
+            "in": "query",
+            "description": "投资类型",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "positionType",
+            "in": "query",
+            "description": "多空类型",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/OEnableAmount"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/ins/enableBalance": {
+      "get": {
+        "tags": [
+          "ins"
+        ],
+        "summary": "境内可用金额查询",
+        "description": "境内可用金额查询",
+        "operationId": "enableBalanceGet",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "令牌",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "combiId",
+            "in": "query",
+            "description": "组合序号",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/OEnableBalance"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/insout": {
+      "get": {
+        "tags": [
+          "insout"
+        ],
+        "summary": "境外指令查询",
+        "description": "境外指令查询，支持分页",
+        "operationId": "insOutQuery",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "令牌",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "分页大小，默认为1000，即一页1000条记录",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "currentPage",
+            "in": "query",
+            "description": "当前页，默认为1，即获取第一页",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "fundIdStr",
+            "in": "query",
+            "description": "产品序号，支持查询多个产品的信息，多个产品序号以','分隔",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "insStatusStr",
+            "in": "query",
+            "description": "指令状态，支持查询多个状态，多个状态以’,’分隔",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "$ref": "#/definitions/OPaging"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/OInsStock"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "insout"
+        ],
+        "summary": "境外指令下达",
+        "description": "境外指令下达",
+        "operationId": "insOutAdd",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/OCommonRequest"
+                },
+                {
+                  "$ref": "#/definitions/OOutInsAdd"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/OOutInsAddResp"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "insout"
+        ],
+        "summary": "境外指令撤销",
+        "description": "境外指令撤销",
+        "operationId": "insOutDelete",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/OCommonRequest"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "insId": {
+                      "type": "integer",
+                      "description": "指令序号"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/OOutInsModResp"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/insout/combiStock": {
+      "get": {
+        "tags": [
+          "insout"
+        ],
+        "summary": "境外持仓查询",
+        "description": "境外持仓查询，支持分页",
+        "operationId": "combiStockOutQuery",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "令牌",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "分页大小，默认为1000，即一页1000条记录",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "currentPage",
+            "in": "query",
+            "description": "当前页，默认为1，即获取第一页",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "fundIdStr",
+            "in": "query",
+            "description": "产品序号，支持查询多个产品的信息，多个产品序号以,'分隔",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "$ref": "#/definitions/OPaging"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/OFutuCombiStock"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/insout/realdeal": {
+      "get": {
+        "tags": [
+          "insout"
+        ],
+        "summary": "境外成交查询",
+        "description": "境外成交查询，支持分页",
+        "operationId": "realdealOutQuery",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "令牌",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "分页大小，默认为1000，即一页1000条记录",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "currentPage",
+            "in": "query",
+            "description": "当前页，默认为1，即获取第一页",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "fundIdStr",
+            "in": "query",
+            "description": "产品序号，支持查询多个产品的信息，多个产品序号以','分隔",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "$ref": "#/definitions/OPaging"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/ORealdeal"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/precont/precont": {
+      "get": {
+        "tags": [
+          "precont"
+        ],
+        "summary": "预合同查询",
+        "description": "预合同查询",
+        "operationId": "contQuery",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "令牌",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deptIdStr",
+            "in": "query",
+            "description": "机构序号，支持查询多个机构序号的信息，多个产品序号以','分隔",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "precontStatusStr",
+            "in": "query",
+            "description": "预合同状态，支持查询多个状态，以','分隔",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/OContInfoDetail"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/precont/contId": {
+      "post": {
+        "tags": [
+          "precont"
+        ],
+        "summary": "生成预合同序号",
+        "description": "生成预合同序号，添加预合同时，先生成预合同序号，序号在系统不重复，后续添加预合同主体信息和预合同物资明细信息时，同一个预合同要传入相同的预合同序号。",
+        "operationId": "contIdGet",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "令牌",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/OPrecontIdGetResponse"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/precont/contMain": {
+      "post": {
+        "tags": [
+          "precont"
+        ],
+        "summary": "预合同信息添加-合同主体",
+        "description": "预合同信息添加-合同主体，预合同添加分步提交，合同主体。分批提交。",
+        "operationId": "contMainAdd",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/OCommonRequest"
+                },
+                {
+                  "$ref": "#/definitions/OPrecontMainRequest"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "precont"
+        ],
+        "summary": "预合同信息修改-合同主体",
+        "description": "预合同信息修改-合同主体。",
+        "operationId": "contMainModify",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/OCommonRequest"
+                },
+                {
+                  "$ref": "#/definitions/OPrecontMainModRequest"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "precont"
+        ],
+        "summary": "预合同信息删除",
+        "description": "预合同信息删除，会同步删除预合同主体和物资明细信息。",
+        "operationId": "contMainDelete",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/OCommonRequest"
+                },
+                {
+                  "$ref": "#/definitions/OPrecontMainDelRequest"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/precont/contDetail": {
+      "post": {
+        "tags": [
+          "precont"
+        ],
+        "summary": "预合同信息添加-物资明细信息。分批提交。",
+        "description": "预合同信息添加-物资明细信息，对于一个预合同可以调此接口多次添加多个物资明细。分批提交。",
+        "operationId": "contDetailAdd",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/OCommonRequest"
+                },
+                {
+                  "$ref": "#/definitions/OPrecontDetailRequest"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/OContDetailResponse"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "precont"
+        ],
+        "summary": "预合同信息修改-物资明细信息",
+        "description": "预合同信息修改-物资明细信息。",
+        "operationId": "contDetailModify",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/OCommonRequest"
+                },
+                {
+                  "$ref": "#/definitions/OPrecontDetailRequest"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/OContDetailResponse"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/precont/contComit": {
+      "post": {
+        "tags": [
+          "precont"
+        ],
+        "summary": "提交预合同添加信息",
+        "description": "提交预合同添加信息，提交指定预合同序号的预合同信息。",
+        "operationId": "contComit",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/OCommonRequest"
+                },
+                {
+                  "$ref": "#/definitions/OPrecontAddRequest"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/precont/insMatch": {
+      "post": {
+        "tags": [
+          "precont"
+        ],
+        "summary": "预合同指令匹配",
+        "description": "预合同指令匹配。",
+        "operationId": "contInsMatch",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/OCommonRequest"
+                },
+                {
+                  "$ref": "#/definitions/OContInsMatchRequest"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/precont/realdealMatch": {
+      "post": {
+        "tags": [
+          "precont"
+        ],
+        "summary": "预合同成交匹配",
+        "description": "预合同成交匹配。",
+        "operationId": "contRealdealMatch",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/OCommonRequest"
+                },
+                {
+                  "$ref": "#/definitions/OContRealdealMatchRequest"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/precont/confirm": {
+      "post": {
+        "tags": [
+          "precont"
+        ],
+        "summary": "预合同确认",
+        "description": "预合同确认。",
+        "operationId": "contConfirm",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/OCommonRequest"
+                },
+                {
+                  "$ref": "#/definitions/OContConfirmRequest"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/precont/matchInfo": {
+      "get": {
+        "tags": [
+          "precont"
+        ],
+        "summary": "预合同匹配信息查询",
+        "description": "预合同匹配信息查询。只支持查询单个预合同的匹配信息。返回预合同信息、预合同物资明细信息、匹配的指令信息、匹配的成交信息。",
+        "operationId": "contMatchInfoQuery",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "令牌",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "contId",
+            "in": "query",
+            "description": "预合同序号",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/CommonResponse"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/OContInfoMatch"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "OUserLogin": {
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "string",
+          "description": "用户名称(对应OPlus系统的操作员代码operator_code)"
+        },
+        "password": {
+          "type": "string",
+          "description": "用户密码，登录时使用(同OPlus客户端的登录密码)"
+        },
+        "captcha": {
+          "type": "string",
+          "description": "验证码(现在登录时暂不使用验证码)"
+        }
+      }
+    },
+    "OMenuItem": {
+      "type": "object",
+      "properties": {
+        "menuId": {
+          "type": "integer",
+          "description": "菜单序号(注意事项：手机端使用的菜单序号预先分配好，后续不能更改。)"
+        },
+        "menuName": {
+          "type": "string",
+          "description": "菜单名称"
+        }
+      }
+    },
+    "OUser": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "integer",
+          "description": "用户序号(对应OPlus系统的操作员序号operator_no)"
+        },
+        "userName": {
+          "type": "string",
+          "description": "用户名称(对应OPlus系统的操作员名称operator_name)"
+        },
+        "menuList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OMenuItem"
+          }
+        }
+      }
+    },
+    "OMarketInfo": {
+      "type": "object",
+      "properties": {
+        "marketNo": {
+          "type": "integer",
+          "description": "期货市场编号(对应OPlus系统的market_no或out_future_market_no)"
+        },
+        "marketName": {
+          "type": "string",
+          "description": "期货品种编号(对应OPlus系统的market_name)"
+        },
+        "settleCurrencyNo": {
+          "type": "string",
+          "description": "结算币种"
+        },
+        "currencyName": {
+          "type": "string",
+          "description": "币种名称"
+        },
+        "currencyUnit": {
+          "type": "string",
+          "description": "币种名称单位，如人民币为\"元\""
+        }
+      }
+    },
+    "OOutMarketInfo": {
+      "type": "object",
+      "properties": {
+        "outFutureMarketNo": {
+          "type": "integer",
+          "description": "外盘期货市场编号"
+        },
+        "marketName": {
+          "type": "string",
+          "description": "期货品种编号(对应OPlus系统的market_name)"
+        },
+        "settleCurrencyNo": {
+          "type": "string",
+          "description": "结算币种"
+        },
+        "currencyName": {
+          "type": "string",
+          "description": "币种名称"
+        },
+        "currencyUnit": {
+          "type": "string",
+          "description": "币种名称单位，如人民币为\"元\""
+        }
+      }
+    },
+    "OFutureKind": {
+      "type": "object",
+      "properties": {
+        "futureKindId": {
+          "type": "integer",
+          "description": "期货品种序号(对应OPlus系统的future_kind_id)"
+        },
+        "marketNo": {
+          "type": "integer",
+          "description": "期货市场编号(对应OPlus系统的market_no)"
+        },
+        "futureKindCode": {
+          "type": "string",
+          "description": "期货品种编号(对应OPlus系统的future_kind_code)"
+        },
+        "futureKindName": {
+          "type": "string",
+          "description": "期货品种名称(对应OPlus系统的future_kind_name)"
+        }
+      }
+    },
+    "ODept": {
+      "type": "object",
+      "properties": {
+        "deptId": {
+          "type": "integer",
+          "description": "机构序号"
+        },
+        "deptName": {
+          "type": "string",
+          "description": "机构名称"
+        }
+      }
+    },
+    "OStrategy": {
+      "type": "object",
+      "properties": {
+        "strategyId": {
+          "type": "integer",
+          "description": "策略序号"
+        },
+        "strategyName": {
+          "type": "string",
+          "description": "策略名称"
+        },
+        "deptId": {
+          "type": "integer",
+          "description": "部门序号"
+        },
+        "fundId": {
+          "type": "integer",
+          "description": "产品序号"
+        },
+        "assetId": {
+          "type": "integer",
+          "description": "单元序号"
+        },
+        "combiId": {
+          "type": "integer",
+          "description": "组合序号"
+        },
+        "futureKindIdList": {
+          "type": "string",
+          "description": "期货品种列表(以','分隔)"
+        }
+      }
+    },
+    "OCurrencyInfo": {
+      "type": "object",
+      "properties": {
+        "currencyNo": {
+          "type": "string",
+          "description": "币种代码"
+        },
+        "currencyName": {
+          "type": "string",
+          "description": "币种名称"
+        },
+        "currencyUnit": {
+          "type": "string",
+          "description": "币种名称单位，如人民币为\"元\""
+        }
+      }
+    },
+    "OFund": {
+      "type": "object",
+      "properties": {
+        "fundId": {
+          "type": "integer",
+          "description": "产品序号"
+        },
+        "fundName": {
+          "type": "string",
+          "description": "产品名称"
+        },
+        "fundCode": {
+          "type": "string",
+          "description": "产品编号"
+        },
+        "dataRight": {
+          "type": "string",
+          "description": "操作权限，当前操作员对产品的权限，以','分隔，(1:查询 2:操作 4:审核)"
+        }
+      }
+    },
+    "OCombi": {
+      "type": "object",
+      "properties": {
+        "fundId": {
+          "type": "integer",
+          "description": "产品序号"
+        },
+        "combiId": {
+          "type": "integer",
+          "description": "组合序号"
+        },
+        "combiName": {
+          "type": "string",
+          "description": "组合名称"
+        },
+        "combiCode": {
+          "type": "string",
+          "description": "组合编号"
+        },
+        "dataRight": {
+          "type": "string",
+          "description": "操作权限，当前操作员对组合的权限，以','分隔，(1:查询 2:操作 4:审核)"
+        }
+      }
+    },
+    "OSpotCustomerInfo": {
+      "type": "object",
+      "properties": {
+        "customerShortname": {
+          "type": "string",
+          "description": "客户简称"
+        },
+        "customerName": {
+          "type": "string",
+          "description": "客户名称"
+        },
+        "deptId": {
+          "type": "integer",
+          "description": "部门序号"
+        }
+      }
+    },
+    "OSpotWarehouseInfo": {
+      "type": "object",
+      "properties": {
+        "warehouseName": {
+          "type": "string",
+          "description": "仓库名称"
+        }
+      }
+    },
+    "OFutureSpotProductInfo": {
+      "type": "object",
+      "properties": {
+        "productName": {
+          "type": "string",
+          "description": "品名"
+        }
+      }
+    },
+    "OFutureSpotBrandInfo": {
+      "type": "object",
+      "properties": {
+        "brandName": {
+          "type": "string",
+          "description": "品牌"
+        }
+      }
+    },
+    "OFutureSpotUnitInfo": {
+      "type": "object",
+      "properties": {
+        "spotUnit": {
+          "type": "string",
+          "description": "现货单位"
+        }
+      }
+    },
+    "OFutureInfo": {
+      "type": "object",
+      "properties": {
+        "marketNo": {
+          "type": "integer",
+          "description": "交易市场"
+        },
+        "reportCode": {
+          "type": "string",
+          "description": "证券代码"
+        },
+        "stockName": {
+          "type": "string",
+          "description": "证券名称"
+        },
+        "uplimitedPrice": {
+          "type": "number",
+          "format": "double",
+          "description": "涨停价"
+        },
+        "downlimitedPrice": {
+          "type": "number",
+          "format": "double",
+          "description": "跌停价"
+        },
+        "buyUnit": {
+          "type": "integer",
+          "description": "买入最小单位"
+        },
+        "saleUnit": {
+          "type": "integer",
+          "description": "卖出最小单位"
+        },
+        "priceInterval": {
+          "type": "number",
+          "format": "double",
+          "description": "最小价差"
+        },
+        "multiple": {
+          "type": "integer",
+          "description": "合约乘数"
+        }
+      }
+    },
+    "OOutFutureInfo": {
+      "type": "object",
+      "properties": {
+        "outFutureMarketNo": {
+          "type": "integer",
+          "description": "境外期货交易市场"
+        },
+        "reportCode": {
+          "type": "string",
+          "description": "证券代码"
+        },
+        "stockName": {
+          "type": "string",
+          "description": "证券名称"
+        },
+        "buyUnit": {
+          "type": "integer",
+          "description": "买入最小单位"
+        },
+        "saleUnit": {
+          "type": "integer",
+          "description": "卖出最小单位"
+        },
+        "priceInterval": {
+          "type": "number",
+          "format": "double",
+          "description": "最小价差"
+        }
+      }
+    },
+    "OFutureQuote": {
+      "type": "object",
+      "properties": {
+        "marketNo": {
+          "type": "integer",
+          "description": "交易市场"
+        },
+        "reportCode": {
+          "type": "string",
+          "description": "证券代码"
+        },
+        "lastPrice": {
+          "type": "number",
+          "format": "double",
+          "description": "最新价"
+        },
+        "uplimitedPrice": {
+          "type": "number",
+          "format": "double",
+          "description": "涨停价"
+        },
+        "downlimitedPrice": {
+          "type": "number",
+          "format": "double",
+          "description": "跌停价"
+        },
+        "bidPrice1": {
+          "type": "number",
+          "format": "double",
+          "description": "买1价"
+        },
+        "bidVolume1": {
+          "type": "integer",
+          "description": "买1数量"
+        },
+        "askPrice1": {
+          "type": "number",
+          "format": "double",
+          "description": "卖1价"
+        },
+        "askVolume1": {
+          "type": "integer",
+          "description": "卖1数量"
+        },
+        "priceChange": {
+          "type": "number",
+          "format": "double",
+          "description": "涨跌幅"
+        },
+        "priceChangeRate": {
+          "type": "number",
+          "format": "double",
+          "description": "涨跌比例"
+        },
+        "preSettlePrice": {
+          "type": "number",
+          "format": "double",
+          "description": "昨结算价"
+        },
+        "openPrice": {
+          "type": "number",
+          "format": "double",
+          "description": "开盘价"
+        },
+        "lowPrice": {
+          "type": "number",
+          "format": "double",
+          "description": "最低价"
+        },
+        "highPrice": {
+          "type": "number",
+          "format": "double",
+          "description": "最高价"
+        },
+        "totalAmount": {
+          "type": "integer",
+          "description": "总手数"
+        },
+        "currentAmount": {
+          "type": "integer",
+          "description": "现手数"
+        },
+        "priceInterval": {
+          "type": "number",
+          "format": "double",
+          "description": "最小价差"
+        },
+        "preHoldAmount": {
+          "type": "integer",
+          "description": "昨持仓量"
+        },
+        "holdAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "持仓量"
+        }
+      }
+    },
+    "OFuturtTypeVariety": {
+      "type": "object",
+      "properties": {
+        "varietyId": {
+          "type": "integer",
+          "description": "期货大类品种编号"
+        },
+        "varietyName": {
+          "type": "string",
+          "description": "品种名称"
+        },
+        "futureKindId": {
+          "type": "integer",
+          "description": "期货品种序号"
+        }
+      }
+    },
+    "OInsAdd": {
+      "type": "object",
+      "properties": {
+        "fundId": {
+          "type": "integer",
+          "description": "产品序号"
+        },
+        "combiId": {
+          "type": "integer",
+          "description": "组合序号"
+        },
+        "marketNo": {
+          "type": "integer",
+          "description": "交易市场"
+        },
+        "reportCode": {
+          "type": "string",
+          "description": "证券代码"
+        },
+        "insAmount": {
+          "type": "integer",
+          "description": "指令数量"
+        },
+        "insPrice": {
+          "type": "number",
+          "format": "double",
+          "description": "指令价格"
+        },
+        "entrustDirection": {
+          "type": "integer",
+          "description": "委托方向"
+        },
+        "opTradeNo": {
+          "type": "integer",
+          "description": "交易员序号"
+        },
+        "investType": {
+          "type": "string",
+          "description": "投资类型"
+        },
+        "remark": {
+          "type": "string",
+          "description": "备注"
+        }
+      }
+    },
+    "OInsAddResp": {
+      "type": "object",
+      "properties": {
+        "insId": {
+          "type": "integer",
+          "description": "指令序号"
+        },
+        "insStockId": {
+          "type": "integer",
+          "description": "指令证券序号"
+        }
+      }
+    },
+    "OInsDelResp": {
+      "type": "object",
+      "properties": {
+        "insId": {
+          "type": "integer",
+          "description": "指令序号"
+        }
+      }
+    },
+    "OOutInsAdd": {
+      "type": "object",
+      "properties": {
+        "fundId": {
+          "type": "integer",
+          "description": "产品序号"
+        },
+        "combiId": {
+          "type": "integer",
+          "description": "组合序号"
+        },
+        "marketNo": {
+          "type": "integer",
+          "description": "交易市场"
+        },
+        "reportCode": {
+          "type": "string",
+          "description": "证券代码"
+        },
+        "insAmount": {
+          "type": "integer",
+          "description": "指令数量"
+        },
+        "insPrice": {
+          "type": "number",
+          "format": "double",
+          "description": "指令价格"
+        },
+        "limitPrice": {
+          "type": "number",
+          "format": "double",
+          "description": "限价价格"
+        },
+        "entrustDirection": {
+          "type": "integer",
+          "description": "委托方向"
+        },
+        "opTradeNo": {
+          "type": "integer",
+          "description": "交易员序号"
+        },
+        "investType": {
+          "type": "string",
+          "description": "投资类型"
+        },
+        "remark": {
+          "type": "string",
+          "description": "备注"
+        }
+      }
+    },
+    "OOutInsAddResp": {
+      "type": "object",
+      "properties": {
+        "insId": {
+          "type": "integer",
+          "description": "指令序号"
+        },
+        "insStockId": {
+          "type": "integer",
+          "description": "指令证券序号"
+        }
+      }
+    },
+    "OOutInsModResp": {
+      "type": "object",
+      "properties": {
+        "insId": {
+          "type": "integer",
+          "description": "指令序号"
+        }
+      }
+    },
+    "OInsStock": {
+      "type": "object",
+      "properties": {
+        "foreignmarketFlag": {
+          "type": "integer",
+          "description": "外盘标识"
+        },
+        "insId": {
+          "type": "integer",
+          "description": "指令序号"
+        },
+        "insStockId": {
+          "type": "integer",
+          "description": "指令证券序号"
+        },
+        "fundId": {
+          "type": "integer",
+          "description": "产品序号"
+        },
+        "fundName": {
+          "type": "string",
+          "description": "产品名称"
+        },
+        "combiId": {
+          "type": "integer",
+          "description": "组合序号"
+        },
+        "combiName": {
+          "type": "string",
+          "description": "组合名称"
+        },
+        "marketNo": {
+          "type": "integer",
+          "description": "交易市场"
+        },
+        "reportCode": {
+          "type": "string",
+          "description": "证券代码"
+        },
+        "stockName": {
+          "type": "string",
+          "description": "证券名称"
+        },
+        "insStatus": {
+          "type": "string",
+          "description": "指令状态"
+        },
+        "insAmount": {
+          "type": "integer",
+          "description": "指令数量"
+        },
+        "insPrice": {
+          "type": "number",
+          "format": "double",
+          "description": "指令价格"
+        },
+        "limitPrice": {
+          "type": "number",
+          "format": "double",
+          "description": "限价价格"
+        },
+        "entrustDirection": {
+          "type": "integer",
+          "description": "委托方向"
+        },
+        "entrustAmount": {
+          "type": "integer",
+          "description": "委托数量"
+        },
+        "dealAmount": {
+          "type": "integer",
+          "description": "成交数量"
+        }
+      }
+    },
+    "ORealdeal": {
+      "type": "object",
+      "properties": {
+        "foreignmarketFlag": {
+          "type": "integer",
+          "description": "外盘标识"
+        },
+        "realdealSerialNo": {
+          "type": "integer",
+          "description": "成交序号"
+        },
+        "insId": {
+          "type": "integer",
+          "description": "指令序号"
+        },
+        "insStockId": {
+          "type": "integer",
+          "description": "指令证券序号"
+        },
+        "fundId": {
+          "type": "integer",
+          "description": "产品序号"
+        },
+        "fundName": {
+          "type": "string",
+          "description": "产品名称"
+        },
+        "combiId": {
+          "type": "integer",
+          "description": "组合序号"
+        },
+        "combiName": {
+          "type": "string",
+          "description": "组合名称"
+        },
+        "marketNo": {
+          "type": "integer",
+          "description": "交易市场"
+        },
+        "reportCode": {
+          "type": "string",
+          "description": "证券代码"
+        },
+        "stockName": {
+          "type": "string",
+          "description": "证券名称"
+        },
+        "entrustDirection": {
+          "type": "integer",
+          "description": "委托方向"
+        },
+        "closeType": {
+          "type": "integer",
+          "description": "平仓类型"
+        },
+        "dealAmount": {
+          "type": "integer",
+          "description": "成交数量"
+        },
+        "dealPrice": {
+          "type": "number",
+          "format": "double",
+          "description": "成交价格"
+        },
+        "dealBalance": {
+          "type": "number",
+          "format": "double",
+          "description": "成交金额"
+        }
+      }
+    },
+    "OFutuCombiStock": {
+      "type": "object",
+      "properties": {
+        "fundId": {
+          "type": "integer",
+          "description": "产品序号"
+        },
+        "fundName": {
+          "type": "string",
+          "description": "产品名称"
+        },
+        "combiId": {
+          "type": "integer",
+          "description": "组合序号"
+        },
+        "combiName": {
+          "type": "string",
+          "description": "组合名称"
+        },
+        "marketNo": {
+          "type": "integer",
+          "description": "交易市场"
+        },
+        "reportCode": {
+          "type": "string",
+          "description": "证券代码"
+        },
+        "stockName": {
+          "type": "string",
+          "description": "证券名称"
+        },
+        "investType": {
+          "type": "string",
+          "description": "投资类型"
+        },
+        "positionType": {
+          "type": "string",
+          "description": "多空类型"
+        },
+        "currentAmount": {
+          "type": "integer",
+          "description": "当前数量"
+        },
+        "enableAmount": {
+          "type": "integer",
+          "description": "可用数量"
+        },
+        "currentCostPrice": {
+          "type": "number",
+          "format": "double",
+          "description": "成本价"
+        }
+      }
+    },
+    "OEnableAmount": {
+      "type": "object",
+      "properties": {
+        "enableAmount": {
+          "type": "integer",
+          "description": "可用数量"
+        }
+      }
+    },
+    "OEnableBalance": {
+      "type": "object",
+      "properties": {
+        "enableBalance": {
+          "type": "number",
+          "format": "double",
+          "description": "可用金额"
+        }
+      }
+    },
+    "OOpTradeInfo": {
+      "type": "object",
+      "properties": {
+        "operatorNo": {
+          "type": "integer",
+          "description": "交易员序号"
+        },
+        "operatorName": {
+          "type": "string",
+          "description": "交易员名称"
+        },
+        "operatorCode": {
+          "type": "integer",
+          "description": "交易员编号"
+        }
+      }
+    },
+    "OPagingRequest": {
+      "type": "object",
+      "properties": {
+        "pageSize": {
+          "type": "integer",
+          "description": "分页大小，默认为1000，即一页1000条记录"
+        },
+        "currentPage": {
+          "type": "integer",
+          "description": "当前页，默认为1，即获取第一页"
+        }
+      }
+    },
+    "OPaging": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "description": "记录总条数"
+        },
+        "pageSize": {
+          "type": "integer",
+          "description": "分页大小"
+        },
+        "currentPage": {
+          "type": "integer",
+          "description": "当前页"
+        }
+      }
+    },
+    "OCommonRequest": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "令牌"
+        }
+      }
+    },
+    "OPrecontMainRequest": {
+      "type": "object",
+      "properties": {
+        "precontId": {
+          "type": "integer",
+          "description": "预合同序号"
+        },
+        "deptId": {
+          "type": "integer",
+          "description": "机构序号"
+        },
+        "strategyId": {
+          "type": "integer",
+          "description": "策略序号"
+        },
+        "durationFlag": {
+          "type": "integer",
+          "description": "长约标识"
+        },
+        "customerShortname": {
+          "type": "string",
+          "description": "客户台头"
+        },
+        "futureKindId": {
+          "type": "integer",
+          "description": "期货品种序号"
+        },
+        "spotOpenDirection": {
+          "type": "integer",
+          "description": "现货开仓方向(1：采购；2：销售)"
+        },
+        "transactionMode": {
+          "type": "string",
+          "description": "成交方式"
+        },
+        "deliverMode": {
+          "type": "string",
+          "description": "提货方式"
+        },
+        "warehouseName": {
+          "type": "string",
+          "description": "仓库名称"
+        },
+        "deliverTime": {
+          "type": "string",
+          "description": "交付时间(客户手工输入，以字符串描述)"
+        },
+        "remark": {
+          "type": "string",
+          "description": "备注"
+        }
+      }
+    },
+    "OPrecontMainModRequest": {
+      "type": "object",
+      "properties": {
+        "precontId": {
+          "type": "integer",
+          "description": "预合同序号"
+        },
+        "durationFlag": {
+          "type": "integer",
+          "description": "长约标识"
+        },
+        "customerShortname": {
+          "type": "string",
+          "description": "客户台头"
+        },
+        "transactionMode": {
+          "type": "string",
+          "description": "成交方式"
+        },
+        "deliverMode": {
+          "type": "string",
+          "description": "提货方式"
+        },
+        "warehouseName": {
+          "type": "string",
+          "description": "仓库名称"
+        },
+        "deliverTime": {
+          "type": "string",
+          "description": "交付时间(客户手工输入，以字符串描述)"
+        },
+        "remark": {
+          "type": "string",
+          "description": "备注"
+        }
+      }
+    },
+    "OPrecontMainDelRequest": {
+      "type": "object",
+      "properties": {
+        "precontId": {
+          "type": "integer",
+          "description": "预合同序号"
+        }
+      }
+    },
+    "OPrecontDetailRequest": {
+      "type": "object",
+      "properties": {
+        "precontId": {
+          "type": "integer",
+          "description": "预合同序号"
+        },
+        "goodsId": {
+          "type": "integer",
+          "description": "物资序号"
+        },
+        "productName": {
+          "type": "string",
+          "description": "品名"
+        },
+        "brandName": {
+          "type": "string",
+          "description": "品牌"
+        },
+        "spotType": {
+          "type": "string",
+          "description": "现货分类"
+        },
+        "tradeAmount": {
+          "type": "integer",
+          "description": "交易数量"
+        },
+        "spotUnit": {
+          "type": "string",
+          "description": "现货单位"
+        },
+        "spotPrice": {
+          "type": "number",
+          "format": "double",
+          "description": "价格"
+        },
+        "tradeCurrencyNo": {
+          "type": "string",
+          "description": "交易币种"
+        },
+        "moreorlessProportion": {
+          "type": "string",
+          "description": "短溢装"
+        },
+        "standard": {
+          "type": "string",
+          "description": "规格"
+        },
+        "material": {
+          "type": "string",
+          "description": "材质"
+        },
+        "batchNumber": {
+          "type": "string",
+          "description": "公检批号"
+        },
+        "priceCategory": {
+          "type": "string",
+          "description": "价格类别"
+        },
+        "productionArea": {
+          "type": "string",
+          "description": "生产地区"
+        },
+        "deliveryPlace": {
+          "type": "string",
+          "description": "交货地"
+        },
+        "totalMoisture": {
+          "type": "string",
+          "description": "全水分"
+        },
+        "modelNumber": {
+          "type": "string",
+          "description": "型号"
+        },
+        "grade": {
+          "type": "string",
+          "description": "牌号"
+        },
+        "volatileMatter": {
+          "type": "string",
+          "description": "挥发分"
+        },
+        "ashContent": {
+          "type": "string",
+          "description": "灰分"
+        },
+        "charcoalHeat": {
+          "type": "string",
+          "description": "发热量"
+        },
+        "sulfurContent": {
+          "type": "string",
+          "description": "硫分"
+        },
+        "remark": {
+          "type": "string",
+          "description": "备注"
+        }
+      }
+    },
+    "OContDetailResponse": {
+      "type": "object",
+      "properties": {
+        "precontId": {
+          "type": "integer",
+          "description": "预合同序号"
+        },
+        "goodsId": {
+          "type": "integer",
+          "description": "物资序号"
+        }
+      }
+    },
+    "OPrecontAddRequest": {
+      "type": "object",
+      "properties": {
+        "precontId": {
+          "type": "integer",
+          "description": "预合同序号"
+        }
+      }
+    },
+    "OPrecontDetail": {
+      "type": "object",
+      "properties": {
+        "precontId": {
+          "type": "integer",
+          "description": "预合同序号"
+        },
+        "goodsId": {
+          "type": "integer",
+          "description": "物资序号"
+        },
+        "productName": {
+          "type": "string",
+          "description": "品名"
+        },
+        "brandName": {
+          "type": "string",
+          "description": "品牌"
+        },
+        "spotType": {
+          "type": "string",
+          "description": "现货分类"
+        },
+        "tradeAmount": {
+          "type": "integer",
+          "description": "交易数量"
+        },
+        "spotUnit": {
+          "type": "string",
+          "description": "现货单位"
+        },
+        "spotPrice": {
+          "type": "number",
+          "format": "double",
+          "description": "价格"
+        },
+        "tradeCurrencyNo": {
+          "type": "string",
+          "description": "交易币种"
+        },
+        "moreorlessProportion": {
+          "type": "string",
+          "description": "短溢装"
+        },
+        "standard": {
+          "type": "string",
+          "description": "规格"
+        },
+        "material": {
+          "type": "string",
+          "description": "材质"
+        },
+        "batchNumber": {
+          "type": "string",
+          "description": "公检批号"
+        },
+        "priceCategory": {
+          "type": "string",
+          "description": "价格类别"
+        },
+        "productionArea": {
+          "type": "string",
+          "description": "生产地区"
+        },
+        "deliveryPlace": {
+          "type": "string",
+          "description": "交货地"
+        },
+        "totalMoisture": {
+          "type": "string",
+          "description": "全水分"
+        },
+        "modelNumber": {
+          "type": "string",
+          "description": "型号"
+        },
+        "grade": {
+          "type": "string",
+          "description": "牌号"
+        },
+        "volatileMatter": {
+          "type": "string",
+          "description": "挥发分"
+        },
+        "ashContent": {
+          "type": "string",
+          "description": "灰分"
+        },
+        "charcoalHeat": {
+          "type": "string",
+          "description": "发热量"
+        },
+        "sulfurContent": {
+          "type": "string",
+          "description": "硫分"
+        },
+        "remark": {
+          "type": "string",
+          "description": "备注"
+        }
+      }
+    },
+    "OContInfoDetail": {
+      "type": "object",
+      "properties": {
+        "precontId": {
+          "type": "integer",
+          "description": "预合同序号"
+        },
+        "deptId": {
+          "type": "integer",
+          "description": "机构序号"
+        },
+        "customerShortname": {
+          "type": "string",
+          "description": "客户台头"
+        },
+        "futureKindId": {
+          "type": "integer",
+          "description": "期货品种序号"
+        },
+        "spotOpenDirection": {
+          "type": "integer",
+          "description": "现货开仓方向(1：采购；2：销售)"
+        },
+        "transactionMode": {
+          "type": "string",
+          "description": "成交方式"
+        },
+        "deliverMode": {
+          "type": "string",
+          "description": "提货方式"
+        },
+        "warehouseName": {
+          "type": "string",
+          "description": "仓库名称"
+        },
+        "deliverTime": {
+          "type": "string",
+          "description": "交付时间(客户手工输入，以字符串描述)"
+        },
+        "remark": {
+          "type": "string",
+          "description": "备注"
+        },
+        "precontractStatus": {
+          "type": "integer",
+          "description": "预合同状态"
+        },
+        "durationFlag": {
+          "type": "integer",
+          "description": "长约标识"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OPrecontDetail"
+          }
+        }
+      }
+    },
+    "OContInsMatchItem": {
+      "type": "object",
+      "properties": {
+        "f_外盘标识": {
+          "type": "integer",
+          "description": "外盘标识"
+        },
+        "insId": {
+          "type": "integer",
+          "description": "指令序号"
+        },
+        "insStockId": {
+          "type": "integer",
+          "description": "指令证券序号"
+        }
+      }
+    },
+    "OContRealdealMatchItem": {
+      "type": "object",
+      "properties": {
+        "f_外盘标识": {
+          "type": "integer",
+          "description": "外盘标识"
+        },
+        "realdealSerialNo": {
+          "type": "integer",
+          "description": "成交序号"
+        }
+      }
+    },
+    "OContInsMatchRequest": {
+      "type": "object",
+      "properties": {
+        "precontId": {
+          "type": "integer",
+          "description": "预合同序号"
+        },
+        "insList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OContInsMatchItem"
+          }
+        }
+      }
+    },
+    "OContRealdealMatchRequest": {
+      "type": "object",
+      "properties": {
+        "precontId": {
+          "type": "integer",
+          "description": "预合同序号"
+        },
+        "insList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OContRealdealMatchItem"
+          }
+        }
+      }
+    },
+    "OContConfirmRequest": {
+      "type": "object",
+      "properties": {
+        "precontId": {
+          "type": "integer",
+          "description": "预合同序号"
+        },
+        "contOperType": {
+          "type": "integer",
+          "description": "确认操作（1:确认  2:待定  3:作废）"
+        }
+      }
+    },
+    "OContInfoMatch": {
+      "type": "object",
+      "properties": {
+        "precontId": {
+          "type": "integer",
+          "description": "预合同序号"
+        },
+        "deptId": {
+          "type": "integer",
+          "description": "机构序号"
+        },
+        "customerShortname": {
+          "type": "string",
+          "description": "客户台头"
+        },
+        "futureKindId": {
+          "type": "integer",
+          "description": "期货品种序号"
+        },
+        "spotOpenDirection": {
+          "type": "integer",
+          "description": "现货开仓方向(1：采购；2：销售)"
+        },
+        "transactionMode": {
+          "type": "string",
+          "description": "成交方式"
+        },
+        "deliverMode": {
+          "type": "string",
+          "description": "提货方式"
+        },
+        "warehouseName": {
+          "type": "string",
+          "description": "仓库名称"
+        },
+        "deliverTime": {
+          "type": "string",
+          "description": "交付时间(客户手工输入，以字符串描述)"
+        },
+        "remark": {
+          "type": "string",
+          "description": "备注"
+        },
+        "detailList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OPrecontDetail"
+          }
+        },
+        "insList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OInsStock"
+          }
+        },
+        "realdealList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ORealdeal"
+          }
+        }
+      }
+    },
+    "OLoginResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回码，0表示成功，非0表示失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "返回消息"
+        },
+        "token": {
+          "type": "string",
+          "description": "令牌"
+        }
+      }
+    },
+    "OPrecontIdGetResponse": {
+      "type": "object",
+      "properties": {
+        "precontId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "预合同序号"
+        }
+      }
+    },
+    "CommonResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回码，0表示成功，非0表示失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "返回消息"
+        }
+      }
+    }
+  }
+}
