@@ -2,5 +2,5 @@
                         {
                           "code": 0,
                           "message": "string",
-                          "data": {"userId":"","userName":"","menuList":""}
+                          "data": {"warehouseName":""}
                         }

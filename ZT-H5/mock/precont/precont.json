@@ -1,0 +1,6 @@
+
+                        {
+                          "code": 0,
+                          "message": "string",
+                          "data": {"precontId":"","deptId":"","customerShortname":"","futureKindId":"","spotOpenDirection":"","transactionMode":"","deliverMode":"","warehouseName":"","deliverTime":"","remark":"","precontractStatus":"","durationFlag":"","details":""}
+                        }

@@ -1,0 +1,6 @@
+
+                        {
+                          "code": 0,
+                          "message": "string",
+                          "data": {"marketNo":"","reportCode":"","lastPrice":"","uplimitedPrice":"","downlimitedPrice":"","bidPrice1":"","bidVolume1":"","askPrice1":"","askVolume1":"","priceChange":"","priceChangeRate":"","preSettlePrice":"","openPrice":"","lowPrice":"","highPrice":"","totalAmount":"","currentAmount":"","priceInterval":"","preHoldAmount":"","holdAmount":""}
+                        }
