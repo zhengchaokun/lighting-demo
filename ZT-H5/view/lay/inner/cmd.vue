@@ -7,6 +7,7 @@
 <script>
     import cmd from "../../../ui/cmd.vue"
 
+    const Dialog = require("dialog")
     const processMap ={
         "1":{
             checkProd:null,
@@ -66,7 +67,14 @@
             }
         },
         mounted(){
-
+            Dialog.confirm({
+                msg:'是否确定？',
+                confirmText:"确定",
+                cancelText:"取消",
+                confirm(){
+                    return true;
+                }
+            })
         }
     }
 </script>
