@@ -22,7 +22,7 @@
                     params:{type:1},
                 },{
                     title:"匹配成交",
-                    path:"lay/contract/cmd",
+                    path:"lay/contract/cmd/list",
                     params:{type:2},
                 }]
             }

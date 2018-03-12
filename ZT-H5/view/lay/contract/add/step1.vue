@@ -94,21 +94,14 @@
         </div>
         <div class="modal" v-show="showModal">
             <div class="detail-list clear">
-                <span class="text-small">客户抬头</span>
-                <img class="ml10 mr20" v-show="selected===0" src="../../../../images/radio-selected.svg">
-                <span class="text-small">，成交方式</span>
-                <img class="ml10 mr20" v-show="selected===0" src="../../../../images/radio-selected.svg">
-                <span class="text-small">，提货方式</span>
-                <img class="ml10 mr20" v-show="selected===0" src="../../../../images/radio-selected.svg">
-                <span class="text-small">，仓库/码头</span>
-                <img class="ml10 mr20" v-show="selected===0" src="../../../../images/radio-selected.svg">
-                <span class="text-small">，交付时间</span>
-                <img class="ml10 mr20" v-show="selected===0" src="../../../../images/radio-selected.svg">
-                <span class="text-small">，合同备注</span>
-                <img class="ml10 mr20" v-show="selected===0" src="../../../../images/radio-selected.svg">
+                <template v-for="(item, index) in items">
+                    <span class="text-small" :class="{'fc-gray':input_items.indexOf(index)==-1}" >{{ item }}</span>
+                    <img class="ml10 mr20" v-show="input_items.indexOf(index)>-1" src="../../../../images/radio-selected.svg">
+                </template>
+                
             </div>
             <div class="line"></div>
-            <textarea class="detail-textarea"></textarea>
+            <textarea class="detail-textarea" v-model="input_text" @input="handleInput" @change="handleChange"></textarea>
             <div class="line"></div>            
             <div class="detail-tip">说明：以空格符分隔，当前项为空时请预留位置。</div>
             <div class="btn-wrap">
@@ -139,13 +132,29 @@ import App from "light"
 export default {
     data() {
         return {
+            input_text: '',
+            input_arr: [],
             selected: 0,
             showModal: false,
             show_pick_modal: false,
             pickList: [],
             keyValue: '',
+            items: ['客户抬头','，成交方式','，提货方式','，仓库/码头','，交付时间','，合同备注'],
+            input_items: [],
+            res: [],
             result: [{name:'301 杭实善成建信期货账户'},{name:'302 杭实善成建信期货账户'},{name:'303 杭实善成建信期货账户'},{name:'303 杭实善成建信期货账户'}]
         };
+    },
+    watch: {
+        res(val){
+            this.input_items = [];
+            var that = this;
+            val.forEach(function(i,idx) {
+                if(i!='') {
+                    that.input_items.push(idx);
+                }
+            })
+        }
     },
     methods: {
         toNext() {
@@ -154,11 +163,42 @@ export default {
         showPickModal() {
             this.pickList = [];
             this.show_pick_modal = true;
+        },
+        handleInput(e) {
+            var arr = e.target.value.split(' ');
+            var len = arr.length;
+            if(len > 0) {
+                if(arr[len-1]=='') {
+
+                    if(this.res.length < 6) {
+                        let idx = this.res.indexOf(arr[len-2]);
+                        if(idx == -1) {
+                            this.res.push(arr[len-2]);
+                        } else {
+                            this.res.splice(idx+1, 1);
+                        }
+                        
+                    }
+                }
+                if(len==1 && arr[0]=='' && this.res.length > 0) {
+                    this.res=[];
+                }
+            }
+            // console.log('res————',this.res.toString())
+        },
+        handleChange(val) {
+            // var arr = this.input_text.split(/\s+/);
         }
     }
 };
 </script>
 <style lang="less" scoped>
+    .detail-list {
+        line-height: 0.36rem;
+    }
+    .fc-gray {
+        color: #9B9B9B;
+    }
     .search-bar {
         padding: 0.2rem 0.3rem 0.3rem 0.3rem;
     }
