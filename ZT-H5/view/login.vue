@@ -7,20 +7,43 @@
         <div class="form">
             <div class="input-control">
                 <span>账号</span>
-                <input type="text" placeholder="请输入账号">
+                <input type="text" v-model="user.userName" placeholder="请输入账号">
             </div>
             <div class="input-control">
                 <span>密码</span>
-                <input type="password" placeholder="请输入登录密码">
+                <input type="password" v-model="user.password" placeholder="请输入登录密码">
             </div>
         </div>
-        <div class="confirm-btn">登 录</div>
+        <div class="confirm-btn" @click="login(user)">登 录</div>
     </div>
 </template>
 <script>
+    import Light from "light";
+    const API = require("api");
+    const Dialog = require("dialog");
     export default {
         data(){
-            return {}
+            return {
+                user:{
+                    password:"",
+                    userName:""
+                }
+            }
+        },
+        methods:{
+            login(user){
+                if(!user.userName){
+                    return Dialog.alert("请输入用户名！");
+                }
+                if(!user.password){
+                    return Dialog.alert("请输入密码！");
+                }
+                API.login(user).then(function (data) {
+                    API.localSet(API.LOCAL_USER_STORE,data).then(function () {
+                        Light.navigate("home",{},{history:false})
+                    });
+                })
+            }
         }
     }
 </script>
