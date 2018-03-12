@@ -1,6 +1,7 @@
-
-                        {
-                          "code": 0,
-                          "message": "string",
-                          "data": {"spotUnit":""}
-                        }
+{
+  "code": 0,
+  "message": "string",
+  "data": {
+    "spotUnit": ""
+  }
+}
