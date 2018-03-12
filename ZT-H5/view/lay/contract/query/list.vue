@@ -6,12 +6,12 @@
         <li class="cell pdr20">
             <span>
                 <span class="text-label inline-b">机构</span>
-                <span class="text-label ml20 inline-b">杭城善事</span>
+                <span class="text-label ml40 inline-b">杭城善事</span>
             </span>
             
             <div class="fright" @click="showPickModal">
                 <span class="text-sub inline-b">选择</span>
-                <img src="../../../../images/more.svg" class="icon-more fright ml11" />
+                <img src="../../../../images/more.svg" class="icon-more fright ml22" />
             </div>
         </li>
         <div class="line mb30"></div>
@@ -28,18 +28,18 @@
                     <div class="line"></div>
                     <div class="tab-page-title">{{item.name}}</div>
                     <div class="line line-left"></div>
-                    <div class="tab-page-content fs15">
+                    <div class="tab-page-content fs30">
                         <div class="clear">
                             <span class="text-muted fleft mr106">{{item.label}}</span>
                             <span class="text-muted fleft">{{item.brand}}</span>
                         </div>
                         <div class="clear">
-                            <span class="text-error fleft">采购</span>
+                            <span class="text-error fleft ls0">采购</span>
                             <span>
-                                <span class="text-muted fleft ml80 mr14">价格</span><span class="text-muted-bold fleft">{{item.price}}</span>
+                                <span class="text-muted fleft ml80 mr14 ls0">价格</span><span class="text-muted-bold fleft">{{item.price}}</span>
                             </span>
                             <span>
-                                <span class="text-muted fleft ml80 mr14">数量</span><span class="text-muted-bold fleft">{{item.amount}}</span>
+                                <span class="text-muted fleft ml80 mr14 ls0">数量</span><span class="text-muted-bold fleft">{{item.amount}}</span>
                             </span>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
             return {
                 show_pick_modal: false,
                 tabs: ['未确认','待处理','已完成','已作废'],
-                activeIndex: 3,
+                activeIndex: 0,
                 allItems:[[{
                     name: '东南新材料',
                     brand: '品牌xxx',
@@ -98,6 +98,9 @@
     }
     .mr14 {
         margin-right: 0.14rem;
+    }
+    .ls0 {
+        letter-spacing: 0 !important;
     }
     .tab-bar li {
         border-bottom: solid 0.02rem #D7D7D7;

@@ -20,7 +20,7 @@
             <span class="text-label inline-b">匹配指令</span>
             <div class="fright">
                 <span class="text-sub inline-b">选择</span>
-                <img src="../../../../images/more.svg" class="icon-more fright ml11" />
+                <img src="../../../../images/more.svg" class="icon-more fright ml22" />
             </div>
         </li>
         <div class="line mb30"></div>  
