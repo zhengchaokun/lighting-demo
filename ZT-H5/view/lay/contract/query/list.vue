@@ -18,8 +18,6 @@
 
         <div class="query-body">
             <ul class="tab-bar mb30 flex">
-                <!-- <li v-for="(tab,index) in tabs" :key="index" class="tab-item" :class="[{'is-active': activeIndex===index},{'flex1':index===tabs.length-1}]">{{tab}}</li> -->
-                
                 <li v-for="(tab,index) in tabs" :key="index" class="tab-item" :class="{'is-active': activeIndex===index}" v-on:click="switchTab(index)">{{tab}}</li>
                 <li class="flex1"></li>
             </ul>
@@ -70,8 +68,7 @@
                     label: '2017/2018年度棉花',
                     price: '1180.0',
                     amount: '3400'
-                }]
-                ],
+                }]],
                 items:[]
             }
         },
@@ -86,6 +83,9 @@
             goDetail(item) {
                 App.navigate("lay/contract/query/detail",item)
             }
+        },
+        mounted() {
+            this.items = this.allItems[0]
         }
     }
 </script>

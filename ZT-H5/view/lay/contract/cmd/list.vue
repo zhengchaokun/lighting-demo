@@ -86,6 +86,9 @@
             goDetail(item) {
                 App.navigate("lay/contract/cmd/detail",item)
             }
+        },
+        mounted() {
+            this.items = this.allItems[0]
         }
     }
 </script>

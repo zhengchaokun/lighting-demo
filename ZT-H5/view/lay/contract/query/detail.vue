@@ -3,7 +3,7 @@
     <div>
         <div class="edit-bar flex fs30">
             <span class="fs-bold">合同主体</span><span class="flex1 ml20"> /点击编辑</span>
-            <span @click="toNext('step1')" class="text-error">删除</span>
+            <span class="text-error">删除</span>
         </div>
         <div class="line"></div>
         <textarea readonly :value="body.info" class="detail-textarea" style="height: 1.2rem;"></textarea>
@@ -12,7 +12,7 @@
         <div v-for="(detail,index) in body.details" :key="index">
             <div class="edit-bar flex fs30">
                 <span>合同明细{{index+1}}</span><span class="flex1 ml20">/点击编辑</span>
-                <span @click="toNext('step2')" class="text-error">删除</span>
+                <span class="text-error">删除</span>
             </div>
             <div class="line"></div>
             <textarea readonly :value="detail" class="detail-textarea" style="height: 1.2rem;"></textarea>
@@ -21,7 +21,7 @@
 
         <div class="edit-bar flex fs30">
             <span>匹配指令</span><span class="flex1 ml20">/点击编辑</span>
-            <span @click="toNext('step1')" class="text-error">删除</span>
+            <span class="text-error">删除</span>
         </div>
         <div class="line"></div>
         <textarea readonly :value="body.info" class="detail-textarea" style="height: 1.2rem;"></textarea>

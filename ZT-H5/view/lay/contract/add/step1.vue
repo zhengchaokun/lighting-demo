@@ -34,21 +34,18 @@
         </ul>
         <ul class="mb30 bg-white">
             <div class="line"></div>
-            <li class="cell">
-                <span class="text-label">采购</span>
-                <img class="fright" v-show="selected===0" src="../../../../images/radio-selected.svg">
-            </li>
-            <div class="line line-left"></div>
-            <li class="cell">
-                <span class="text-label">销售</span>
-                <img class="fright" v-show="selected===1" src="../../../../images/radio-selected.svg">
-            </li>
-            <div class="line"></div>
+            <template v-for="(item,index) in select_items">
+                <li class="cell" :key="index" @click="handleSelect(item)">
+                    <span class="text-label">{{ item }}</span>
+                    <img class="fright" v-show="selected_item===item" src="../../../../images/radio-selected.svg">
+                </li>
+                <div class="line" :class="{'line-left':index===0}" :key="'-'+index"></div>
+            </template>
         </ul>
         <div class="line"></div>
-        <li class="cell bg-white">
+        <li class="cell bg-white" @click="handleCheck">
             <span class="text-label">长约</span>
-            <img class="fright" v-show="selected===2" src="../../../../images/radio-selected.svg">
+            <img class="fright" v-show="checked" src="../../../../images/radio-selected.svg">
         </li>
         <div class="line mb30"></div>
         <div class="mb20 tright pdr30 text-link" @click="showModal=true">
@@ -134,7 +131,9 @@ export default {
         return {
             input_text: '',
             input_arr: [],
-            selected: 0,
+            selected_item: '采购',
+            select_items: ['采购','销售'],
+            checked: true,
             showModal: false,
             show_pick_modal: false,
             pickList: [],
@@ -188,6 +187,12 @@ export default {
         },
         handleChange(val) {
             // var arr = this.input_text.split(/\s+/);
+        },
+        handleSelect(item) {
+            this.selected_item = item;
+        },
+        handleCheck() {
+            this.checked = !this.checked;
         }
     }
 };
