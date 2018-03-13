@@ -313,4 +313,50 @@ exports.common = {
             + seperator2 + date.getSeconds();
         return currentdate;
     },
+    //数据格式化
+    formatBigNumber:function(number,bit,flag){
+                //log.e("原始数据"+number);
+        var num = Number(number);
+        var preFix = "";
+        if(num < -0.00001){
+            preFix = '-';
+            num = Math.abs(num);
+        }
+        var amountStr="";
+        if ( num < 100000 ) {
+        //小于10万
+          if(!!flag){
+             amountStr = num.toFixed(0);
+          }
+          else{
+             amountStr = num.toFixed(bit);
+          }
+        }
+        else if ( num < 100000000 ) {
+        //小于1亿
+          amountStr = (num/10000).toFixed(bit) +"万";
+        }
+        else if( num < 100000000000){
+          amountStr = (num/100000000).toFixed(bit) +"亿";
+        }
+        else{
+          //千亿
+          amountStr = (num/100000000000).toFixed(bit)+"千亿";
+        }
+        return preFix+amountStr;
+    },
+    //根据类型决定保留小数位数
+    initFloatBit:function(productType,marketType,codeType){
+          //根据股票类型取小数位
+          if(productType == "PRODUCT_FUND" || marketType == "MARKET_US" || (marketType == "MARKET_HK" && productType != "PRODUCT_BLOCK") || (codeType.toUpperCase().indexOf("XHKG-I.MRI")>=0) || (marketType=="MARKET_FUTURE" && codeType.toUpperCase().indexOf("DEBT")>=0) || codeType.toUpperCase().indexOf("NEEQ.LWTS")>=0 || codeType.toUpperCase().indexOf("NEEQ.ER")>=0){
+              return 3;
+          }
+          else if(marketType=="MARKET_FUTURE" && codeType.indexOf('FC.')>=0){
+              return 0;
+          }
+          else if(marketType=="MARKET_FUTURE"){
+              return 1;
+          }
+          return 2;
+    },
 }

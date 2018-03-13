@@ -1,6 +1,9 @@
-
-                        {
-                          "code": 0,
-                          "message": "string",
-                          "data": {"varietyId":"","varietyName":"","futureKindId":""}
-                        }
+{
+  "code": 0,
+  "message": "string",
+  "data": {
+    "varietyId": "",
+    "varietyName": "",
+    "futureKindId": ""
+  }
+}

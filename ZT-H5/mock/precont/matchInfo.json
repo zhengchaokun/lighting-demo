@@ -1,6 +1,39 @@
-
                         {
                           "code": 0,
                           "message": "string",
-                          "data": {"precontId":"","deptId":"","customerShortname":"","futureKindId":"","spotOpenDirection":"","transactionMode":"","deliverMode":"","warehouseName":"","deliverTime":"","remark":"","detailList":"","insList":"","realdealList":""}
+                          "data": {
+                            "precontId": "0",
+                            "deptId": "",
+                            "customerShortname": "",
+                            "futureKindId": "",
+                            "spotOpenDirection": "",
+                            "transactionMode": "",
+                            "deliverMode": "",
+                            "warehouseName": "",
+                            "deliverTime": "",
+                            "remark": "匹配指令的备注",
+                            "detailList": "",
+                            "insList": [
+                              {
+                                "foreignmarketFlag": 0,
+                                "insId": 0,
+                                "insStockId": 0,
+                                "fundId": 0,
+                                "fundName": "string",
+                                "combiId": 0,
+                                "combiName": "string",
+                                "marketNo": 0,
+                                "reportCode": "string",
+                                "stockName": "string",
+                                "insStatus": "string",
+                                "insAmount": 0,
+                                "insPrice": 0,
+                                "limitPrice": 0,
+                                "entrustDirection": "32",
+                                "entrustAmount": 0,
+                                "dealAmount": 0
+                              }
+                            ],
+                            "realdealList": ""
+                          }
                         }

@@ -1,6 +1,7 @@
-
-                        {
-                          "code": 0,
-                          "message": "string",
-                          "data": {"brandName":""}
-                        }
+{
+  "code": 0,
+  "message": "string",
+  "data": {
+    "brandName": ""
+  }
+}

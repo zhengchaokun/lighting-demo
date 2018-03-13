@@ -1,7 +1,10 @@
-
-                        {
-                          "code": 0,
-                          "message": "string",
-                          "token":"1",
-                          "data": {"userId":"","userName":"","menuList":""}
-                        }
+{
+  "code": 0,
+  "message": "string",
+  "token": "1",
+  "data": {
+    "userId": "",
+    "userName": "",
+    "menuList": ""
+  }
+}
