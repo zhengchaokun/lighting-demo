@@ -1,0 +1,24 @@
+{
+  "code": 0,
+  "message": "string",
+  "data": [
+    {
+      "fundId": 0,
+      "fundName": "string1",
+      "fundCode": "string",
+      "dataRight": "string"
+    },
+    {
+      "fundId": 1,
+      "fundName": "string2",
+      "fundCode": "string",
+      "dataRight": "string"
+    },
+    {
+      "fundId": 2,
+      "fundName": "string3",
+      "fundCode": "string",
+      "dataRight": "string"
+    }
+  ]
+}
