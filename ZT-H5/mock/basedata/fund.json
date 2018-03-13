@@ -4,20 +4,32 @@
   "data": [
     {
       "fundId": 0,
-      "fundName": "string1",
-      "fundCode": "string",
+      "fundName": "夯实山城坚信期货账户",
+      "fundCode": "301",
       "dataRight": "string"
     },
     {
       "fundId": 1,
-      "fundName": "string2",
-      "fundCode": "string",
+      "fundName": "夯实山城坚信期货账户",
+      "fundCode": "301",
       "dataRight": "string"
     },
     {
       "fundId": 2,
-      "fundName": "string3",
-      "fundCode": "string",
+      "fundName": "夯实山城坚信期货账户",
+      "fundCode": "301",
+      "dataRight": "string"
+    },
+    {
+      "fundId": 2,
+      "fundName": "夯实山城坚信期货账户",
+      "fundCode": "301",
+      "dataRight": "string"
+    },
+    {
+      "fundId": 2,
+      "fundName": "夯实山城坚信期货账户",
+      "fundCode": "301",
       "dataRight": "string"
     }
   ]
