@@ -131,6 +131,7 @@
             }
         },
         methods:{
+            //可买可卖数量变动
             amountChange(){
                 var that = this;
                 if(that.type==1){
@@ -140,6 +141,8 @@
                     that.enableNum = that.enableAmount
                 }
             },
+
+            //选择弹框内容选中
             getParam(item){
                 var that = this;
                 if(item.combiName){
@@ -151,12 +154,16 @@
                 }
                 that.ifSelect = false;
             },
+
+            //选择弹框显示
             toSelect(name,list){
                 var that = this;
                 that.ifSelect = true;
                 that.select = list;
                 that.selectName = name;
             },
+
+            //输入合约代码
             filterCode(){
                 var that =this;
                 API.stockQuoteGet({
@@ -167,6 +174,8 @@
                 that.enableNum = parseInt(Number(that.enableBalance)/Number(that.codePrice))
 
             },
+
+            //价格数量加减
             changePrice(type){
                 var that =this;
                 if(type==0){
@@ -192,12 +201,21 @@
                 }
             },
             buy(){
+                
                 Dialog.confirm({
                     msg:'是否确定下单？',
                     confirmText:"确定",
                     cancelText:"取消",
                     confirm(){
-                        return true;
+                        API.insAdd({
+                            combiId:1,
+                            marketNo:1,
+                            reportCode:1,
+                            investType:1,
+                            positionType:1
+                        }).then(function (data) {
+                            
+                        })
                     }
                 })
             }
@@ -217,12 +235,22 @@
             API.opTradeInfoGet({}).then(function (data) {
                 that.operator = data;
             })
+
+            //获取可用金额
             API.enableBalanceGet({
                 combiId:1
             }).then(function (data) {
                 that.enableBalance = data.enableBalance;
             })
 
+            //获取合约乘数、价格加减步长
+            API.futureInfoGet({
+                marketNo:1,
+                reportCode
+            }).then(function (data) {
+
+            })
+            //获取可用数量
             API.enableAmountGet({
                 combiId:1,
                 marketNo:1,
