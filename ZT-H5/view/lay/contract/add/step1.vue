@@ -45,7 +45,7 @@
         <div class="line"></div>
         <li class="cell bg-white" @click="handleCheck">
             <span class="text-label">长约</span>
-            <img class="fright" v-show="checked" src="../../../../images/radio-selected.svg">
+            <img class="fright" v-show="durationFlag=='1'" src="../../../../images/radio-selected.svg">
         </li>
         <div class="line mb30"></div>
         <div class="mb20 tright pdr30 text-link" @click="showModal=true">
@@ -133,7 +133,7 @@ export default {
             input_arr: [],
             selected_item: '采购',
             select_items: ['采购','销售'],
-            checked: true,
+            durationFlag: "0",
             showModal: false,
             show_pick_modal: false,
             pickList: [],
@@ -166,6 +166,7 @@ export default {
         handleInput(e) {
             var arr = e.target.value.split(' ');
             var len = arr.length;
+            console.log(len,arr);            
             if(len > 0) {
                 if(arr[len-1]=='') {
 
@@ -183,7 +184,7 @@ export default {
                     this.res=[];
                 }
             }
-            // console.log('res————',this.res.toString())
+            console.log('res————',this.res.toString())
         },
         handleChange(val) {
             // var arr = this.input_text.split(/\s+/);
@@ -192,7 +193,7 @@ export default {
             this.selected_item = item;
         },
         handleCheck() {
-            this.checked = !this.checked;
+            this.durationFlag = this.durationFlag == "0" ? "1" : "0";
         }
     }
 };

@@ -24,20 +24,20 @@
             <div class="tab-page">
                 <div v-for="(item, index) in items" :key="index" class="tab-page-item bg-white mb30" v-on:click="goDetail(item)">
                     <div class="line"></div>
-                    <div class="tab-page-title">{{item.name}}</div>
+                    <div class="tab-page-title">{{item.customerShortname}}</div>
                     <div class="line line-left"></div>
                     <div class="tab-page-content fs30">
                         <div class="clear">
-                            <span class="text-muted fleft mr106">{{item.label}}</span>
-                            <span class="text-muted fleft">{{item.brand}}</span>
+                            <span class="text-muted fleft mr106">{{item.details[0].productName}}</span>
+                            <span class="text-muted fleft">{{item.details[0].brandName}}</span>
                         </div>
                         <div class="clear">
-                            <span class="text-error fleft ls0">采购</span>
+                            <span class="text-error fleft ls0">{{item.spotOpenDirection=='1'?'采购':'销售'}}</span>
                             <span>
-                                <span class="text-muted fleft ml80 mr14 ls0">价格</span><span class="text-muted-bold fleft">{{item.price}}</span>
+                                <span class="text-muted fleft ml80 mr14 ls0">价格</span><span class="text-muted-bold fleft">{{item.details[0].spotPrice}}</span>
                             </span>
                             <span>
-                                <span class="text-muted fleft ml80 mr14 ls0">数量</span><span class="text-muted-bold fleft">{{item.amount}}</span>
+                                <span class="text-muted fleft ml80 mr14 ls0">数量</span><span class="text-muted-bold fleft">{{item.details[0].tradeAmount}}</span>
                             </span>
                         </div>
                     </div>
@@ -49,27 +49,15 @@
 </template>
 <script>
     import App from "light"
+    import API from "../../../../lib/api"
     export default {
         data(){
             return {
                 show_pick_modal: false,
                 tabs: ['未确认','待处理','已完成','已作废'],
                 activeIndex: 0,
-                allItems:[[{
-                    name: '东南新材料',
-                    brand: '品牌xxx',
-                    label: '2017/2018年度棉花',
-                    price: '4480.0',
-                    amount: '1200'
-                }],
-                [{
-                    name: '西北新材料',
-                    brand: '品牌xxx',
-                    label: '2017/2018年度棉花',
-                    price: '1180.0',
-                    amount: '3400'
-                }]],
-                items:[]
+                allItems: [[], [], [], []],
+                items:{}
             }
         },
         methods: {
@@ -81,11 +69,25 @@
                 this.show_pick_modal = true
             },
             goDetail(item) {
-                App.navigate("lay/contract/query/detail",item)
+                console.log(item)
+                App.navigate("lay/contract/query/detail",{item:item})
             }
         },
         mounted() {
-            this.items = this.allItems[0]
+            var that = this;
+            API.contQuery({}).then(function(data){
+                    var allItems = data;
+                    allItems.forEach(function(item) {
+                        if(item.precontractStatus==='3') {
+                            that.allItems[1].push(item)
+                        } else if (item.precontractStatus==='4') {
+                            that.allItems[2].push(item)
+                        } else if(item.precontractStatus==='5') {
+                            that.allItems[3].push(item)
+                        }
+                    })
+                    that.items = that.allItems[that.activeIndex];
+                });
         }
     }
 </script>
