@@ -1,0 +1,56 @@
+
+                        {
+                          "code": 0,
+                          "message": "string",
+                          "data": [
+                              {
+                                "fundId": 0,
+                                "combiId": 0,
+                                "combiName": "组合1的名字",
+                                "combiCode": "string",
+                                "dataRight": "string"
+                              },
+                              {
+                                "fundId": 1,
+                                "combiId": 1,
+                                "combiName": "组合2的名字",
+                                "combiCode": "string",
+                                "dataRight": "string"
+                              },
+                              {
+                                "fundId": 2,
+                                "combiId": 2,
+                                "combiName": "组合3的名字",
+                                "combiCode": "string",
+                                "dataRight": "string"
+                              },
+                              {
+                                "fundId": 3,
+                                "combiId": 3,
+                                "combiName": "组合4的名字",
+                                "combiCode": "string",
+                                "dataRight": "string"
+                              },
+                              {
+                                "fundId": 4,
+                                "combiId": 4,
+                                "combiName": "组合5的名字",
+                                "combiCode": "string",
+                                "dataRight": "string"
+                              },
+                              {
+                                "fundId": 5,
+                                "combiId": 5,
+                                "combiName": "组合6的名字",
+                                "combiCode": "string",
+                                "dataRight": "string"
+                              },
+                              {
+                                "fundId": 6,
+                                "combiId": 6,
+                                "combiName": "组合7的名字",
+                                "combiCode": "string",
+                                "dataRight": "string"
+                              }
+                            ]
+                        }
