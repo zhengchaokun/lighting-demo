@@ -246,7 +246,7 @@
             //获取合约乘数、价格加减步长
             API.futureInfoGet({
                 marketNo:1,
-                reportCode
+                reportCode:1
             }).then(function (data) {
 
             })
