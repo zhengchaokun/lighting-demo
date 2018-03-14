@@ -1,0 +1,37 @@
+{
+  "code": 0,
+  "message": "string",
+  "total": 0,
+  "pageSize": 0,
+  "currentPage": 0,
+  "data": [
+    {
+      "fundId": 0,
+      "fundName": "string",
+      "combiId": 0,
+      "combiName": "string",
+      "marketNo": 0,
+      "reportCode": "string",
+      "stockName": "string",
+      "investType": "string",
+      "positionType": "string",
+      "currentAmount": 0,
+      "enableAmount": 0,
+      "currentCostPrice": 0
+    },
+    {
+      "fundId": 0,
+      "fundName": "string",
+      "combiId": 0,
+      "combiName": "string",
+      "marketNo": 0,
+      "reportCode": "string",
+      "stockName": "string",
+      "investType": "string",
+      "positionType": "string",
+      "currentAmount": 0,
+      "enableAmount": 0,
+      "currentCostPrice": 0
+    }
+  ]
+}

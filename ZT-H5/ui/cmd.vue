@@ -20,8 +20,8 @@
                     <h2>{{item.fundId}} {{item.combiName}}/{{item.fundName}}</h2>
                     <p>
                         <span class="code">{{item.insId}}</span>
-                        <span class="colorRed">{{dictByValue('entrustDirection',item.entrustDirection).substring(0,2)}}</span>
-                        <span>{{dictByValue('entrustDirection',item.entrustDirection).substring(2,4)}}</span>
+                        <!--<span class="colorRed">{{dictByValue('entrustDirection',item.entrustDirection).substring(0,2)}}</span>-->
+                        <!--<span>{{dictByValue('entrustDirection',item.entrustDirection).substring(2,4)}}</span>-->
                         <span>持仓均价<em>{{item.insPrice}}</em></span>
                     </p>
                     <p>
