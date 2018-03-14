@@ -115,7 +115,9 @@
                 enableAmount:0,//可用数量
                 enableBalance:0, //可用金额
                 priceInterval:0, //价格加减步长
-                multiple:0 //合约乘数
+                multiple:0, //合约乘数
+                marketNo:"", //交易市场
+                reportCode:"" //证券代码
             }
         },
         watch:{
@@ -130,6 +132,12 @@
             },
             'codePrice':function(){
                 this.amountChange();
+            },
+            'marketNo':function(){
+                this.filterCode();
+            },
+            'reportCode':function(){
+                this.filterCode();
             }
         },
         methods:{
@@ -173,7 +181,7 @@
                 }).then(function (data) {
                     that.quote = data;
                 })
-                that.enableNum = parseInt(Number(that.enableBalance)/Number(that.codePrice))
+                that.amountChange();
 
             },
 
@@ -273,8 +281,20 @@
                 that.multiple = data[0].multiple;
             })
             
-            
-
+            var transParam = that.$route.query;
+            console.log(transParam);
+            if(transParam.fundName){
+                that.type = transParam.type;
+                that.curFund.fundName = transParam.fundName;
+                that.curFund.fundId = transParam.fundId;
+                that.curCombi.combiId = transParam.combiId;
+                that.curCombi.combiName = transParam.combiName;
+                that.marketNo = transParam.marketNo;
+                that.reportCode = transParam.reportCode;
+                that.codePrice = transParam.insPrice;
+                that.codeNum = transParam.insAmount;
+                that.searKey = transParam.reportCode
+            }
 
             
         }
