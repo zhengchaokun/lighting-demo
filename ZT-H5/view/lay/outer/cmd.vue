@@ -109,8 +109,8 @@
                                 fundList:data
                             }
                         }).then(function () {
-                            API.insQuery({
-                                insStatusStr:require("dict").insStatus['待审批']
+                            API.combiStockQuery({
+                                fundIdStr:that.comData.prodData.fundList[0].fundId
                             }).then(function (list) {
                                 that.comData.listData = {
                                     "default":list
