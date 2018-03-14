@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "message": "string",
+  "data": [
+    {
+      "marketNo": 0,
+      "reportCode": "string",
+      "stockName": "string",
+      "uplimitedPrice": 0,
+      "downlimitedPrice": 0,
+      "buyUnit": 0,
+      "saleUnit": 0,
+      "priceInterval": 0.1,
+      "multiple": 100
+    }
+  ]
+}

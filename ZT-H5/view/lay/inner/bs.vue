@@ -111,9 +111,13 @@
                 tips:"", //备注
                 direc:0, //平仓开仓
                 investType:"a", //投资类型
-                enableNum:0,//可买可卖数量，买时enableNum=可用金额/指令价格，卖时enableNum = 可用数量
+                enableNum:0,//可买可卖数量，买时enableNum=可用金额/(指令价格*合约乘数），卖时enableNum = 可用数量
                 enableAmount:0,//可用数量
-                enableBalance:0 //可用金额
+                enableBalance:0, //可用金额
+                priceInterval:0, //价格加减步长
+                multiple:0, //合约乘数
+                marketNo:"", //交易市场
+                reportCode:"" //证券代码
             }
         },
         watch:{
@@ -128,6 +132,12 @@
             },
             'codePrice':function(){
                 this.amountChange();
+            },
+            'marketNo':function(){
+                this.filterCode();
+            },
+            'reportCode':function(){
+                this.filterCode();
             }
         },
         methods:{
@@ -135,7 +145,7 @@
             amountChange(){
                 var that = this;
                 if(that.type==1){
-                    that.enableNum = parseInt(Number(that.enableBalance)/Number(that.codePrice))
+                    that.enableNum = parseInt(Number(that.enableBalance)/(Number(that.codePrice)*that.multiple))
                 }else{
                     console.log(that.enableAmount);
                     that.enableNum = that.enableAmount
@@ -171,7 +181,7 @@
                 }).then(function (data) {
                     that.quote = data;
                 })
-                that.enableNum = parseInt(Number(that.enableBalance)/Number(that.codePrice))
+                that.amountChange();
 
             },
 
@@ -179,12 +189,12 @@
             changePrice(type){
                 var that =this;
                 if(type==0){
-                    that.codePrice=Number(that.codePrice)-1;
+                    that.codePrice=Number(that.codePrice)-that.priceInterval;
                     if(that.codePrice<0){
                         that.codePrice=0
                     }
                 }else if(type==1){
-                    that.codePrice=Number(that.codePrice)+1;
+                    that.codePrice=Number(that.codePrice)+that.priceInterval;
                     if(that.codeNum>that.enableNum){
                         that.codeNum=that.enableNum
                     }
@@ -226,43 +236,65 @@
         mounted(){
             this.type =this.$route.query.type;
             var that = this;
-            API.fundQuery({}).then(function (data) {
+            //查询产品
+            API.fundQuery({
+                dataRight:""
+            }).then(function (data) {
                 that.fund = data;
+                //查询组合
+                API.combiGet({
+                    dataRight:""
+                }).then(function (data) {
+                    that.combi = data;
+                    //获取可用金额
+                    API.enableBalanceGet({
+                        combiId:that.curCombi.combiId
+                    }).then(function (data) {
+                        that.enableBalance = data.enableBalance;
+                    })
+                    //获取可用数量
+                    API.enableAmountGet({
+                        combiId:that.curCombi.combiId,
+                        marketNo:that.quote.marketNo,
+                        reportCode:that.quote.reportCode,
+                        investType:that.investType,
+                        positionType:1
+                    }).then(function (data) {
+                        that.enableAmount = data.enableAmount;
+                    })
+                })
             })
-            API.combiGet({}).then(function (data) {
-                that.combi = data;
-            })
+            
+            //查询交易员
             API.opTradeInfoGet({}).then(function (data) {
                 that.operator = data;
             })
 
-            //获取可用金额
-            API.enableBalanceGet({
-                combiId:1
-            }).then(function (data) {
-                that.enableBalance = data.enableBalance;
-            })
+            
 
             //获取合约乘数、价格加减步长
             API.futureInfoGet({
-                marketNo:1,
-                reportCode:1
+                marketNo:that.quote.marketNo,
+                reportCode:that.quote.reportCode
             }).then(function (data) {
-
-            })
-            //获取可用数量
-            API.enableAmountGet({
-                combiId:1,
-                marketNo:1,
-                reportCode:1,
-                investType:1,
-                positionType:1
-            }).then(function (data) {
-                that.enableAmount = data.enableAmount;
-                console.log(data.enableAmount);
+                that.priceInterval = data[0].priceInterval;
+                that.multiple = data[0].multiple;
             })
             
-
+            var transParam = that.$route.query;
+            console.log(transParam);
+            if(transParam.fundName){
+                that.type = transParam.type;
+                that.curFund.fundName = transParam.fundName;
+                that.curFund.fundId = transParam.fundId;
+                that.curCombi.combiId = transParam.combiId;
+                that.curCombi.combiName = transParam.combiName;
+                that.marketNo = transParam.marketNo;
+                that.reportCode = transParam.reportCode;
+                that.codePrice = transParam.insPrice;
+                that.codeNum = transParam.insAmount;
+                that.searKey = transParam.reportCode
+            }
 
             
         }
