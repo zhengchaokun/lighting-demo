@@ -6,7 +6,7 @@
 </template>
 <script>
     import cmd from "../../../ui/cmd.vue"
-
+    import Light from "light";
     const API = require("api");
     const Dialog = require("dialog");
     export default {
@@ -126,6 +126,10 @@
                                     confirmText:"确认",
                                     cancelText:"取消",
                                     confirm(){
+                                        that.jump('lay/inner/bs',{
+                                            type:1,
+                                            ...item
+                                        });
                                         return true;
                                     }
                                 })
