@@ -99,6 +99,7 @@
                 .right-side{
                     width: 0.34rem;
                     height: 0.34rem;
+                    margin-top: 0.36rem-0.17rem;
                     display: inline-block;
                     background-image: url("../images/correct.png");
                     background-size: 100%
