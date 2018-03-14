@@ -15,7 +15,7 @@
                 <div class="subitem flex">
                     <span>合约代码</span>
                     <form class="flex1" action="javascript:void(0)" submit="filterCode()">
-                        <input type="search" v-model="searKey" placeholder="">
+                        <input type="search" v-model="reportCode" placeholder="">
                     </form>
                 </div>
             </div>
@@ -98,13 +98,12 @@
                 ifSelect:false,//
                 selectName:"",//选择组件中要展示的字段名字
                 select:[],//选择组件中的列表信息
-                curFund:{},//当前选中的产品
+                curFund:[],//当前选中的产品
                 curCombi:[],//当前选中组合
                 curOperator:[],//当前选中操作员
                 fund:[],//产品列表
                 combi:[],//组合列表
                 operator:[],//操作员
-                searKey:"",//合约代码
                 quote:{},//行情信息
                 codePrice:0,//指令价格
                 codeNum:0, //指令数量
@@ -114,7 +113,7 @@
                 enableNum:0,//可买可卖数量，买时enableNum=可用金额/(指令价格*合约乘数），卖时enableNum = 可用数量
                 enableAmount:0,//可用数量
                 enableBalance:0, //可用金额
-                priceInterval:0, //价格加减步长
+                priceInterval:0.1, //价格加减步长
                 multiple:0, //合约乘数
                 marketNo:"", //交易市场
                 reportCode:"" //证券代码
@@ -124,7 +123,7 @@
             '$route.query.type':function(){
                 this.type =this.$route.query.type
             },
-            'searKey':function(){
+            'reportCode':function(){
                 this.filterCode();
             },
             'type':function(){
@@ -133,11 +132,8 @@
             'codePrice':function(){
                 this.amountChange();
             },
-            'marketNo':function(){
-                this.filterCode();
-            },
-            'reportCode':function(){
-                this.filterCode();
+            'curCombi':function(){
+                this.enableBalanceGet();
             }
         },
         methods:{
@@ -159,6 +155,14 @@
                     that.curCombi=item;
                 }else if(item.fundName){
                     that.curFund=item;
+                    //查询组合
+                    API.combiGet({
+                        fundId:that.curFund.fundId,
+                        dataRight:""
+                    }).then(function (data) {
+                        that.combi = data;
+                        
+                    })
                 }else if(item.operatorName){
                     that.curOperator=item
                 }
@@ -168,6 +172,10 @@
             //选择弹框显示
             toSelect(name,list){
                 var that = this;
+                if(name=='combiName'&&that.curFund.length==0){
+                    Dialog.alert("请先选择一个产品");
+                    return false;
+                }
                 that.ifSelect = true;
                 that.select = list;
                 that.selectName = name;
@@ -176,13 +184,22 @@
             //输入合约代码
             filterCode(){
                 var that =this;
-                API.stockQuoteGet({
-                    reportCode:that.searKey
-                }).then(function (data) {
-                    that.quote = data;
-                })
-                that.amountChange();
 
+                //校验合约代码、获取合约乘数、价格加减步长
+                API.futureInfoGet({
+                    reportCode:that.quote.reportCode
+                }).then(function (data) {
+                    that.priceInterval = data[0].priceInterval;
+                    that.multiple = data[0].multiple;
+                    API.stockQuoteGet({
+                        marketNo:data[0].marketNo,
+                        reportCode:that.reportCode
+                    }).then(function (data) {
+                        that.quote = data;
+                    })
+                })
+                
+                that.amountChange();
             },
 
             //价格数量加减
@@ -210,19 +227,46 @@
                     }
                 }
             },
+            //获取可用金额
+            enableBalanceGet(){
+                var that = this;
+                API.enableBalanceGet({
+                    combiId:that.curCombi.combiId
+                }).then(function (data) {
+                    that.enableBalance = data.enableBalance;
+                })
+            },
+            //获取可用数量
+            enableAmountGet(){
+                var that = this;
+                API.enableAmountGet({
+                    combiId:that.curCombi.combiId,
+                    marketNo:that.quote.marketNo,
+                    reportCode:that.quote.reportCode,
+                    investType:that.investType,
+                    positionType:1
+                }).then(function (data) {
+                    that.enableAmount = data.enableAmount;
+                })
+            },
             buy(){
-                
+                var that = this;
                 Dialog.confirm({
                     msg:'是否确定下单？',
                     confirmText:"确定",
                     cancelText:"取消",
                     confirm(){
                         API.insAdd({
-                            combiId:1,
-                            marketNo:1,
-                            reportCode:1,
-                            investType:1,
-                            positionType:1
+                            "fundId": that.curFund.fundId,
+                            "combiId":that.curCombi.combiId,
+                            "marketNo": that.marketNo,
+                            "reportCode": that.reportCode,
+                            "insAmount": that.codeNum,
+                            "insPrice": that.codePrice,
+                            "entrustDirection": 0,
+                            "opTradeNo": that.curOperator.operatorNo,
+                            "investType": that.investType,
+                            "remark": that.tips
                         }).then(function (data) {
                             
                         })
@@ -241,28 +285,7 @@
                 dataRight:""
             }).then(function (data) {
                 that.fund = data;
-                //查询组合
-                API.combiGet({
-                    dataRight:""
-                }).then(function (data) {
-                    that.combi = data;
-                    //获取可用金额
-                    API.enableBalanceGet({
-                        combiId:that.curCombi.combiId
-                    }).then(function (data) {
-                        that.enableBalance = data.enableBalance;
-                    })
-                    //获取可用数量
-                    API.enableAmountGet({
-                        combiId:that.curCombi.combiId,
-                        marketNo:that.quote.marketNo,
-                        reportCode:that.quote.reportCode,
-                        investType:that.investType,
-                        positionType:1
-                    }).then(function (data) {
-                        that.enableAmount = data.enableAmount;
-                    })
-                })
+                
             })
             
             //查询交易员
@@ -270,19 +293,7 @@
                 that.operator = data;
             })
 
-            
-
-            //获取合约乘数、价格加减步长
-            API.futureInfoGet({
-                marketNo:that.quote.marketNo,
-                reportCode:that.quote.reportCode
-            }).then(function (data) {
-                that.priceInterval = data[0].priceInterval;
-                that.multiple = data[0].multiple;
-            })
-            
             var transParam = that.$route.query;
-            console.log(transParam);
             if(transParam.fundName){
                 that.type = transParam.type;
                 that.curFund.fundName = transParam.fundName;
@@ -293,7 +304,7 @@
                 that.reportCode = transParam.reportCode;
                 that.codePrice = transParam.insPrice;
                 that.codeNum = transParam.insAmount;
-                that.searKey = transParam.reportCode
+                that.reportCode = transParam.reportCode
             }
 
             
