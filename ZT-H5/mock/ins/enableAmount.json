@@ -1,7 +1,6 @@
-{
-  "code": 0,
-  "message": "string",
-  "data": {
-    "enableAmount": ""
-  }
-}
+
+                        {
+                          "code": 0,
+                          "message": "string",
+                          "data": {"enableAmount":"2"}
+                        }

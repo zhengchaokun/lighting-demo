@@ -1,0 +1,44 @@
+
+                        {
+                          "code": 0,
+                          "message": "string",
+                          "data": [
+                              {
+                                "operatorNo": 0,
+                                "operatorName": "交易员111111",
+                                "operatorCode": 0
+                              },
+                              {
+                                "operatorNo": 1,
+                                "operatorName": "交易员22222222222",
+                                "operatorCode": 0
+                              },
+                              {
+                                "operatorNo": 2,
+                                "operatorName": "交易员333",
+                                "operatorCode": 0
+                              },
+                              {
+                                "operatorNo": 3,
+                                "operatorName": "交易员44",
+                                "operatorCode": 0
+                              },
+                              {
+                                "operatorNo": 4,
+                                "operatorName": "交易员5",
+                                "operatorCode": 0
+                              },
+                              {
+                                "operatorNo": 5,
+                                "operatorName": "交易员6",
+                                "operatorCode": 0
+                              },
+                              {
+                                "operatorNo": 6,
+                                "operatorName": "交易员7",
+                                "operatorCode": 0
+                              }
+
+                              
+                            ]
+                        }

@@ -201,14 +201,14 @@ module.exports = {
      * 境内可用数量查询
      */
     enableAmountGet(params){
-        return execute('get','/ins/enableAmount',params);
+        return execute('get','/basedata/enableAmount',params);
     },
 
     /**
      * 境内可用金额查询
      */
     enableBalanceGet(params){
-        return execute('get','/ins/enableBalance',params);
+        return execute('get','/basedata/enableBalance',params);
     },
 
     /**

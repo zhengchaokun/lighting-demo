@@ -2,6 +2,5 @@
                         {
                           "code": 0,
                           "message": "string",
-                          "data": {"enableBalance":111}
+                          "data": {"enableAmount":"2"}
                         }
-
