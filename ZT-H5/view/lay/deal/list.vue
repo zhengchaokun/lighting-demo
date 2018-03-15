@@ -6,54 +6,20 @@
 </template>
 <script>
     import cmd from "../../../ui/cmd.vue"
-
-    const processMap ={
-        "1":{
-            checkProd(){
-            },
-            checkFilter:null,
-            clickBtn:{
-                title:"撤销",
-                cls:"bgRed",
-                handler(){
-                }
-            }
-        },"2":{
-            checkProd(){
-            },
-            checkFilter:null,
-            clickBtn:{
-                title:"撤销",
-                cls:"bgRed",
-                handler(){
-                }
-            }
-        },"3":{
-            checkProd(){
-            },
-            checkFilter:null,
-            clickBtn:{
-                title:"平仓",
-                cls:"bgBlue",
-                handler(){
-                }
-            }
-        },"4":{
-            checkProd(){
-            },
-            checkFilter:null,
-            clickBtn:{
-                title:"平仓",
-                cls:"bgBlue",
-                handler(){
-                }
-            }
-        }
-    };
+    const API = require("api");
+    const Dialog = require("dialog");
     export default {
         data(){
             return {
-                comData:processMap[this.$route.query.type+'']
+                comData:{
+                    prodData:null,
+                    listData:null,
+                    clickBtn:{
+                        title:null,
+                        cls:null,
+                        handler:null
+                    }
+                }
             }
         },
         components:{
@@ -61,14 +27,89 @@
         },
         watch:{
             "$route.query.type":function () {
-                this.comData = processMap[this.$route.query.type+''];
+                this.initData();
+            }
+        },
+        methods:{
+            initData(){
+                this.comData = {
+                    prodData:null,
+                    listData:null,
+                    clickBtn:{
+                        title:null,
+                        cls:null,
+                        handler:null
+                    }
+                };
+                const that = this;
+                switch (''+this.$route.query.type){
+                    default:
+                        //查询产品
+                        API.deptQuery({}).then(function (data) {
+                            let deptData = [];
+                            data.forEach(function (d) {
+                                deptData.push({
+                                    id:d.deptId,
+                                    code:'',
+                                    name:d.deptName,
+                                })
+                            });
+                            that.comData.topData = {
+                                current:0,
+                                title:"机构",
+                                list:deptData
+                            }
+                        }).then(function () {
+                            API.contQuery({
+                                deptIdStr:that.comData.topData.list[0].id
+                            }).then(function (list) {
+                                let contData = [];
+                                list.forEach(function (l) {
+                                    let item = {
+                                        name:l.customerShortname,
+                                        list:[]
+                                    };
+                                    l.details.forEach(function (d) {
+                                        item.list.push([{
+                                            '':d.goodsId,
+                                            '品名':d.productName,
+                                            '品牌':d.brandName,
+                                        },{
+                                            '':'采购',
+                                            '价格':d.spotPrice,
+                                            '数量':d.tradeAmount,
+                                        }])
+                                    });
+                                    contData.push(item);
+                                });
+                                that.comData.listData = {
+                                    'default':contData
+                                };
+                            });
+                        });
+                        that.comData.clickBtn = {
+                            title:"撤销",
+                            cls:"bgRed",
+                            handler:function (item) {
+                                Dialog.confirm({
+                                    msg:"确认撤销此条目吗？",
+                                    confirmText:"确认",
+                                    cancelText:"取消",
+                                    confirm(){
+                                        return true;
+                                    }
+                                })
+                            }
+                        };
+                        break;
+                }
             }
         },
         mounted(){
-
+            //查询可以撤销的订单
+            this.initData();
         }
     }
 </script>
 <style lang="less">
-
 </style>

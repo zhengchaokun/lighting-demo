@@ -1,10 +1,10 @@
 <template>
     <div>
         <div class="operateWrap">
-            <div v-if="com.prodData" class="buyCont buyStyle">
+            <div v-if="com.topData" class="buyCont buyStyle">
                 <div class="itemList">
                     <div class="subitem" @click="letsChooseProd=true">
-                        <span>产品</span><span>{{com.prodData.fundList[com.prodData.current].fundCode}}{{com.prodData.fundList[com.prodData.current].fundName}}</span><em>选择</em>
+                        <span>{{com.topData.title}}</span><span>{{com.topData.list[com.topData.current].code}}{{com.topData.list[com.topData.current].name}}</span><em>选择</em>
                     </div>
                 </div>
             </div>
@@ -17,27 +17,21 @@
                      @click="currentItemChecked=index">
                     <span class="operateBut" :class="com.clickBtn.cls" @click="com.clickBtn.handler(item)"
                           v-show="currentItemChecked==index"><em>{{com.clickBtn.title}}</em></span>
-                    <h2>{{item.fundId}} {{item.combiName}}/{{item.fundName}}</h2>
-                    <p>
-                        <span class="code">{{item.insId}}</span>
-                        <!--<span class="colorRed">{{dictByValue('entrustDirection',item.entrustDirection).substring(0,2)}}</span>-->
-                        <!--<span>{{dictByValue('entrustDirection',item.entrustDirection).substring(2,4)}}</span>-->
-                        <span>持仓均价<em>{{item.insPrice}}</em></span>
-                    </p>
-                    <p>
-                        <span>指令数量<em>{{item.entrustAmount}}</em></span>
-                        <span>已委托<em>{{item.insAmount}}</em></span>
-                        <span>已成交<em>{{item.dealAmount}}</em></span>
-                    </p>
+                    <h2><em v-if="item.code">{{item.code}} </em>{{item.name}}<em v-if="item.pName">/{{item.pName}}</em></h2>
+                    <div v-for="list in item.list">
+                        <p v-for="it in list">
+                            <span v-for="(itv,itk) in it">{{itk}}<em>{{itv}}</em></span>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="prod-choose" v-show="letsChooseProd">
-            <ul v-if="com.prodData">
-                <li @click="checkOrNot(prod)" v-for="prod in com.prodData.fundList">
+            <ul v-if="com.topData">
+                <li @click="checkOrNot(prod)" v-for="prod in com.topData.list">
                     <div class="left-side">
-                        <span class="prod-id">{{prod.fundCode}}</span>
-                        <span class="prod-name">{{prod.fundName}}</span>
+                        <span class="prod-id">{{prod.code}}</span>
+                        <span class="prod-name">{{prod.name}}</span>
                     </div>
                     <span class="right-side" v-show="prod.checked"></span>
                 </li>

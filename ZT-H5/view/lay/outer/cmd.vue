@@ -48,8 +48,28 @@
                         API.insQuery({
                             insStatusStr:require("dict").insStatus['待审批']
                         }).then(function (list) {
+                            let listData = [];
+                            list.forEach(function (l) {
+                                listData.push({
+                                    pName:l.fundName,
+                                    name:l.combiName,
+                                    code:l.fundId,
+                                    list:[
+                                        [{
+                                            '':l.insId,
+                                            ' ':'买入',
+                                            '  ':'开仓',
+                                            '价格':l.insPrice,
+                                        },{
+                                            '指令数量':l.insAmount,
+                                            '已委托':l.insAmount,
+                                            '已成交':l.insAmount,
+                                        }]
+                                    ]
+                                })
+                            });
                             that.comData.listData = {
-                                "default":list
+                                "default":listData
                             };
                         });
                         that.comData.clickBtn = {
@@ -70,19 +90,47 @@
                     case "2":
                         //查询产品
                         API.fundQuery({}).then(function (data) {
-                            that.comData.prodData = {
+                            let deptData = [];
+                            data.forEach(function (d) {
+                                deptData.push({
+                                    id:d.fundId,
+                                    code:d.fundCode,
+                                    name:d.fundName,
+                                })
+                            });
+                            that.comData.topData = {
                                 current:0,
-                                fundList:data
+                                title:"产品",
+                                list:deptData
                             }
                         }).then(function () {
                             API.insQuery({
                                 insStatusStr:require("dict").insStatus['待审批']
-                            }).then(function (list) {
+                            }).then(function (list) {let listData = [];
+                                list.forEach(function (l) {
+                                    listData.push({
+                                        pName:l.fundName,
+                                        name:l.combiName,
+                                        code:l.fundId,
+                                        list:[
+                                            [{
+                                                '':l.insId,
+                                                ' ':'买入',
+                                                '  ':'开仓',
+                                                '价格':l.insPrice,
+                                            },{
+                                                '指令数量':l.insAmount,
+                                                '已委托':l.insAmount,
+                                                '已成交':l.insAmount,
+                                            }]
+                                        ]
+                                    })
+                                });
                                 that.comData.listData = {
-                                    '未执行':list,
-                                    '执行中':list,
-                                    '已完成':list,
-                                    '已取消':list
+                                    '未执行':listData,
+                                    '执行中':listData,
+                                    '已完成':listData,
+                                    '已取消':listData
                                 };
                             });
                         });
@@ -104,16 +152,44 @@
                     case "3":
                         //查询产品
                         API.fundQuery({}).then(function (data) {
-                            that.comData.prodData = {
+                            let deptData = [];
+                            data.forEach(function (d) {
+                                deptData.push({
+                                    id:d.fundId,
+                                    code:d.fundCode,
+                                    name:d.fundName,
+                                })
+                            });
+                            that.comData.topData = {
                                 current:0,
-                                fundList:data
+                                title:"产品",
+                                list:deptData
                             }
                         }).then(function () {
-                            API.combiStockQuery({
-                                fundIdStr:that.comData.prodData.fundList[0].fundId
+                            API.insQuery({
+                                insStatusStr:require("dict").insStatus['待审批']
                             }).then(function (list) {
+                                let listData = [];
+                                list.forEach(function (l) {
+                                    listData.push({
+                                        pName:l.fundName,
+                                        name:l.combiName,
+                                        code:l.fundId,
+                                        list:[
+                                            [{
+                                                '':l.insId,
+                                                ' ':'买入',
+                                                '  ':'开仓',
+                                                '持仓均价':l.insPrice,
+                                            },{
+                                                '持仓':l.insAmount,
+                                                '可平':l.insAmount,
+                                            }]
+                                        ]
+                                    })
+                                });
                                 that.comData.listData = {
-                                    "default":list
+                                    default:listData
                                 };
                             });
                         });
