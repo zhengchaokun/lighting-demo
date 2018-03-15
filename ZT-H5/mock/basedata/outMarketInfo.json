@@ -1,0 +1,41 @@
+{
+  "code": 0,
+  "message": "string",
+  "data": [
+    {
+      "outFutureMarketNo": 0,
+      "marketName": "string111",
+      "settleCurrencyNo": "string",
+      "currencyName": "string",
+      "currencyUnit": "string"
+    },
+    {
+      "outFutureMarketNo": 1,
+      "marketName": "string2222",
+      "settleCurrencyNo": "string",
+      "currencyName": "string",
+      "currencyUnit": "string"
+    },
+    {
+      "outFutureMarketNo": 2,
+      "marketName": "string3333",
+      "settleCurrencyNo": "string",
+      "currencyName": "string",
+      "currencyUnit": "string"
+    },
+    {
+      "outFutureMarketNo": 3,
+      "marketName": "string44444",
+      "settleCurrencyNo": "string",
+      "currencyName": "string",
+      "currencyUnit": "string"
+    },
+    {
+      "outFutureMarketNo": 4,
+      "marketName": "string555555",
+      "settleCurrencyNo": "string",
+      "currencyName": "string",
+      "currencyUnit": "string"
+    }
+  ]
+}
