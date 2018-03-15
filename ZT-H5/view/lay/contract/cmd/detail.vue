@@ -29,6 +29,13 @@
             <table-fixed :value="tableData" :checked="checked" :columns="columns" :height="height"></table-fixed> 
         </div> 
 
+        <!-- <div class="btn-wrap">
+            <button class="btn-normal btn-blue">确 定</button>
+        </div> -->
+        <div class="pd30 pdb40">
+            <button class="btn-normal bg-blue" @click="toNext">确 定</button>
+        </div>
+
         
         
        
@@ -84,7 +91,7 @@
     
 
     .edit-bar {
-        padding: 0 0.3rem;
+        padding: 0 0.3rem 0.1rem 0.3rem;
         line-height: 0.42rem;
         letter-spacing: 0;
         color: #F56778;

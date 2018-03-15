@@ -1,7 +1,11 @@
 {
   "code": 0,
   "message": "string",
-  "data": {
-    "spotUnit": ""
-  }
+  "data": [{
+    "spotUnit": "吨"
+  }, {
+    "spotUnit": "克"
+  }, {
+    "spotUnit": "斤"
+  }]
 }

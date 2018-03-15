@@ -30,10 +30,12 @@
             columns: Array,
             value: Array,
             height: String,
-            checked: Array
+            checked: Array,
+            readonly: false
         },
         methods: {
             toggleChecked(index) {
+                if(this.readonly) return;
                 var idx = this.checked.indexOf(index);
                 if(idx > -1) {
                     this.checked.splice(idx,1);

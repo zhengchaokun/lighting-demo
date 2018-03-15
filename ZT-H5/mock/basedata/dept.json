@@ -1,0 +1,18 @@
+{
+    "code": 0,
+    "message": "string",
+    "data": [
+        {
+            "deptId": 0,
+            "deptName": "杭实善成"
+        },
+        {
+            "deptId": 0,
+            "deptName": "杭实善成1"
+        },
+        {
+            "deptId": 0,
+            "deptName": "杭实善成2"
+        }
+    ]
+}

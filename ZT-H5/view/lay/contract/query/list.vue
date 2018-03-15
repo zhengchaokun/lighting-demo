@@ -3,13 +3,13 @@
 <template>
     <div>
         <div class="line"></div>            
-        <li class="cell pdr20">
+        <li class="cell pdr20" @click="showPickModal">
             <span>
                 <span class="text-label inline-b">机构</span>
                 <span class="text-label ml40 inline-b">杭城善事</span>
             </span>
             
-            <div class="fright" @click="showPickModal">
+            <div class="fright">
                 <span class="text-sub inline-b">选择</span>
                 <img src="../../../../images/more.svg" class="icon-more fright ml22" />
             </div>
@@ -70,7 +70,7 @@
             },
             goDetail(item) {
                 console.log(item)
-                App.navigate("lay/contract/query/detail",{item:item})
+                App.navigate("lay/contract/query/detail",{precontId:item.precontId})
             }
         },
         mounted() {

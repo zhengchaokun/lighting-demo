@@ -25,6 +25,7 @@
 </script>
 <style lang="less" scoped>
     .alert-box{
+        padding: 0.8rem 0.4rem;
         width: 5.9rem;
         position: fixed;
         top:2.9rem;
@@ -38,15 +39,16 @@
         font-size: 0.34rem;
         color: #4A4A4A;
         text-align: center;
-        line-height: 2.5rem;
+        line-height: 0.48rem;
 
 
         .btn-confirmbox-wrap{
             flex-direction: row;
             display: flex;
-            justify-content: space-around;
-            padding-bottom:0.8rem;
+            justify-content: space-between;
+            padding-top: 0.8rem;
             .btn-confirmbox{
+                // flex: 1;
                 border: 1px solid #1DB0FC;
                 border-radius: 4px;
                 font-size: 0.34rem;
