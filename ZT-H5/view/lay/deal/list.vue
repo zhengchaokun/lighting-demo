@@ -8,12 +8,32 @@
     import cmd from "../../../ui/cmd.vue"
     const API = require("api");
     const Dialog = require("dialog");
+
+    const typeMap = {
+        "1":{
+            title:'未确认',
+            value:'1,2'
+        },
+        "2":{
+            title:'待处理',
+            value:'3'
+        },
+        "3":{
+            title:'已确认',
+            value:'4'
+        },
+        "4":{
+            title:'已作废',
+            value:'5'
+        }
+    };
     export default {
         data(){
             return {
                 comData:{
                     topData:null,
                     listData:null,
+                    tabsData:null,
                     clickBtn:{
                         title:null,
                         cls:null,
@@ -39,12 +59,20 @@
                 this.comData = {
                     topData:null,
                     listData:null,
+                    tabsData:null,
                     clickBtn:{
                         title:null,
                         cls:null,
                         handler:null
                     }
                 };
+                if(''+this.$route.query.type==='5'){
+                    let tabs = [];
+                    for(let key in typeMap){
+                        tabs.push(typeMap[key]);
+                    }
+                    this.comData.tabsData = tabs
+                }
                 this.queryStart()
             },
             queryCont(){
@@ -53,11 +81,12 @@
                 let deptId = [];
                 this.comData.topData.list.forEach(function (top) {
                     if(top.checked) deptId.push(top.id);
-                })
+                });
 
                 //查询合约
                 return API.contQuery({
-                    deptIdStr:deptId.join(",")
+                    deptIdStr:deptId.join(","),
+                    precontStatusStr:typeMap[that.$route.query.type+'']?typeMap[that.$route.query.type+''].value:typeMap['1'].value
                 }).then(function (list) {
                     let contData = [];
                     list.forEach(function (l) {
@@ -78,9 +107,7 @@
                         });
                         contData.push(item);
                     });
-                    that.comData.listData = {
-                        'default':contData
-                    };
+                    that.comData.listData = contData;
                 });
             },
             queryDept(){
