@@ -230,7 +230,9 @@
         </div>
         <div class="line"></div>
         <div class="pd30 pdb40">
-            <button class="btn-normal bg-blue" @click="addStep2">下一步</button>
+            <button class="btn-normal bg-blue" @click="addStep2">{{detail.goodsId == undefined ? '下一步' : '确 定' }}</button>
+            <!-- <button v-if="detail.goodsId == undefined" class="btn-normal bg-blue" @click="checkValid('add')">下一步</button>
+            <button v-else class="btn-normal bg-blue" @click="checkValid('edit')">确 定</button> -->
         </div>
         <div class="modal" v-show="showModal">
             <div class="detail-list clear">
@@ -307,10 +309,7 @@
                 showModal: false,
                 selected: 0,
                 show_pick_currency: false,
-                show_pick_unit: false,
-                
-
-
+                show_pick_unit: false
             }
         },
         computed: {
@@ -337,6 +336,7 @@
             addStep2() {
                 //必填项
                 var that = this;
+                console.log(this.precont)
                 if(this.precont.precontId == undefined) {
                     return Dialog.alert("请添加预合同主体！");                    
                 } else {
@@ -440,7 +440,7 @@
                         App.navigate("lay/contract/add/step3", {
                             precont: JSON.stringify(that.precont),
                             detail: JSON.stringify(that.detail),
-                            formalInfo: JSON.stringify(that.formalInfo)
+                            formalInfo: that.formalInfo
                         });   
                     }).catch(function(data) {
                         Dialog.alert('添加明细失败！');
@@ -465,21 +465,25 @@
         },
         mounted(){
             var that = this;
-
-            
-            if(this.$route.query.detail) {
-                that.detail = JSON.parse(this.$route.query.detail);
-            } else  if(this.$route.query.precont){
-                var precont = JSON.parse(this.$route.query.precont);                        
+            var precont = {};
+             
+            if(this.$route.query.precont){
+                precont = JSON.parse(this.$route.query.precont);  
+                console.log(precont)                      
                 that.precont = precont;
-                if(precont.detailList.length>0) {
-                    that.detail = precont.detailList[0];
+                if(!this.$route.query.add) {
+                    if(precont.detailList && precont.detailList.length>0) {
+                        that.detail = precont.detailList[0];
+                    }
                 }
                 
             }
-            console.log(that.detail)
+            if(this.$route.query.detail) {
+                that.detail = JSON.parse(this.$route.query.detail);
+            }
+            // console.log(that.detail)
             //获todo取类别id
-            API.futurtTypeVarietyQuery({futureKindId: precont.futureKindId}).then(function(data) {
+            API.futurtTypeVarietyQuery({futureKindId: that.precont.futureKindId}).then(function(data) {
                 that.vid = data[0].varietyId;
                 console.log(that.vid)
             })
@@ -510,18 +514,22 @@
                 })
             })
 
-
-            var deptName = this.$route.query.deptName;                        
-            var strategyName = this.$route.query.strategyName;                        
-            var futureKindName = this.$route.query.futureKindName;  
+            if(this.$route.query.formalInfo) {
+                this.formalInfo = this.$route.query.formalInfo;
+            } else {
+                var deptName = this.$route.query.deptName;                        
+                var strategyName = this.$route.query.strategyName;                        
+                var futureKindName = this.$route.query.futureKindName;  
                
-            this.formalInfo = deptName + "，" + strategyName + "，" + futureKindName + "，" + (precont.spotOpenDirection==1?'采购':'销售') + "，" + (precont.durationFlag==0?'非长约':'长约') + "，" + precont.customerShortname
-                + (!this.checkSpace(precont.transactionMode) ? ('，'+precont.transactionMode) : '')
-                + (!this.checkSpace(precont.deliverMode) ? ('，'+precont.deliverMode) : '')
-                + (!this.checkSpace(precont.warehouseName) ? ('，'+precont.warehouseName) : '')
-                + (!this.checkSpace(precont.deliverTime) ? ('，'+precont.deliverTime) : '')
-                + (!this.checkSpace(precont.remark) ? ('，'+precont.remark) : '');
-            console.log(this.formalInfo)
+                this.formalInfo = deptName + "，" + strategyName + "，" + futureKindName + "，" + (precont.spotOpenDirection==1?'采购':'销售') + "，" + (precont.durationFlag==0?'非长约':'长约') + "，" + precont.customerShortname
+                    + (!this.checkSpace(precont.transactionMode) ? ('，'+precont.transactionMode) : '')
+                    + (!this.checkSpace(precont.deliverMode) ? ('，'+precont.deliverMode) : '')
+                    + (!this.checkSpace(precont.warehouseName) ? ('，'+precont.warehouseName) : '')
+                    + (!this.checkSpace(precont.deliverTime) ? ('，'+precont.deliverTime) : '')
+                    + (!this.checkSpace(precont.remark) ? ('，'+precont.remark) : '');
+            }
+            
+            console.log('ooooo',this.precont)
         }
     }
     
