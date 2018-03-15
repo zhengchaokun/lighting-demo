@@ -94,7 +94,7 @@
     export default {
         data(){
             return {
-                type:"",//买卖方向
+                type:0,//买卖方向
                 ifSelect:false,//
                 selectName:"",//选择组件中要展示的字段名字
                 select:[],//选择组件中的列表信息
@@ -108,12 +108,16 @@
                 codePrice:0,//指令价格
                 codeNum:0, //指令数量
                 tips:"", //备注
-                direc:0, //平仓开仓
+                direc:'0', //平仓开仓
                 investType:"a", //投资类型
                 enableNum:0,//可买可卖数量，买时enableNum=可用金额/(指令价格*合约乘数），卖时enableNum = 可用数量
                 enableAmount:0,//可用数量
                 enableBalance:0, //可用金额
-                priceInterval:0.1, //价格加减步长
+                priceInterval:0.2, //价格加减步长
+                numInterval:{
+                        buyUnit:1,
+                        saleUnit:2
+                    },
                 multiple:0, //合约乘数
                 marketNo:"", //交易市场
                 reportCode:"" //证券代码
@@ -142,7 +146,7 @@
                 var that = this;
                 if(that.type==1){
                     that.enableNum = parseInt(Number(that.enableBalance)/(Number(that.codePrice)*that.multiple))
-                }else{
+                }else if(that.type==2){
                     console.log(that.enableAmount);
                     that.enableNum = that.enableAmount
                 }
@@ -185,12 +189,16 @@
             filterCode(){
                 var that =this;
 
-                //校验合约代码、获取合约乘数、价格加减步长
+                //校验合约代码、获取合约乘数、价格加减步长、数量加减步长
                 API.futureInfoGet({
                     reportCode:that.quote.reportCode
                 }).then(function (data) {
                     that.priceInterval = data[0].priceInterval;
                     that.multiple = data[0].multiple;
+                    that.numInterval = {
+                        buyUnit:data[0].buyUnit,
+                        saleUnit:data[0].saleUnit
+                    };
                     API.stockQuoteGet({
                         marketNo:data[0].marketNo,
                         reportCode:that.reportCode
@@ -203,25 +211,31 @@
             },
 
             //价格数量加减
-            changePrice(type){
+            changePrice(changetype){
                 var that =this;
-                if(type==0){
-                    that.codePrice=Number(that.codePrice)-that.priceInterval;
+                var numUnit = 0;
+                if(that.type==1){
+                    numUnit=that.numInterval.buyUnit
+                }else if(that.type==2){
+                    numUnit=that.numInterval.saleUnit
+                }
+                if(changetype==0){
+                    that.codePrice=(Number(that.codePrice)-that.priceInterval).toFixed(3);
                     if(that.codePrice<0){
                         that.codePrice=0
                     }
-                }else if(type==1){
-                    that.codePrice=Number(that.codePrice)+that.priceInterval;
+                }else if(changetype==1){
+                    that.codePrice=(Number(that.codePrice)+that.priceInterval).toFixed(3);
                     if(that.codeNum>that.enableNum){
                         that.codeNum=that.enableNum
                     }
-                }else if(type==2){
-                    that.codeNum=Number(that.codeNum)-1;
+                }else if(changetype==2){
+                    that.codeNum=Number(that.codeNum)-numUnit;
                     if(that.codeNum<0){
                         that.codeNum=0
                     }
-                }else if(type==3){
-                    that.codeNum=Number(that.codeNum)+1;
+                }else if(changetype==3){
+                    that.codeNum=Number(that.codeNum)+numUnit;
                     if(that.codeNum>that.enableNum){
                         that.codeNum=that.enableNum
                     }
@@ -249,8 +263,53 @@
                     that.enableAmount = data.enableAmount;
                 })
             },
+            //获取买卖方向
+            getEntrustDirection(type,direc){
+                var that = this;
+                switch (type){
+                    case 1 : 
+                    if(direc=='0'){
+                        return '32'
+                    }
+                    if(direc=='1'){
+                        return '35'
+                    }
+                    case 2:
+                    if(direc=='0'){
+                        return '33'
+                    }
+                    if(direc=='1'){
+                        return '34'
+                    }
+                }
+            },
             buy(){
                 var that = this;
+                if(that.curFund.length==0){
+                    Dialog.alert("请先选择一个产品");
+                    return false;
+                }
+                if(that.curCombi.length==0){
+                    Dialog.alert("请先选择一个组合");
+                    return false;
+                }
+                if(!that.reportCode){
+                    Dialog.alert("请输入合约代码");
+                    return false;
+                }
+                if(!that.codePrice||that.codePrice==0){
+                    Dialog.alert("请输入指令价格");
+                    return false;
+                }
+                if(!that.codeNum||that.codeNum==0){
+                    Dialog.alert("请输入指令数量");
+                    return false;
+                }
+                var re = /^[0-9]*[1-9][0-9]*$/;
+                if(!(re.test(that.codeNum))){
+                    Dialog.alert("指令数量必须为正整数");
+                    return false;
+                }
                 Dialog.confirm({
                     msg:'是否确定下单？',
                     confirmText:"确定",
@@ -263,7 +322,7 @@
                             "reportCode": that.reportCode,
                             "insAmount": that.codeNum,
                             "insPrice": that.codePrice,
-                            "entrustDirection": 0,
+                            "entrustDirection": that.getEntrustDirection(that.type,that.direc),
                             "opTradeNo": that.curOperator.operatorNo,
                             "investType": that.investType,
                             "remark": that.tips

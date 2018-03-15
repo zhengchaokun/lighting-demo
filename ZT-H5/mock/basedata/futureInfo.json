@@ -8,8 +8,8 @@
       "stockName": "string",
       "uplimitedPrice": 0,
       "downlimitedPrice": 0,
-      "buyUnit": 0,
-      "saleUnit": 0,
+      "buyUnit": 2,
+      "saleUnit": 3,
       "priceInterval": 0.1,
       "multiple": 100
     }
