@@ -29,7 +29,8 @@
                     path:"lay/deal/list"
                 },{
                     title:"查询",
-                    path:"lay/deal/query"
+                    params:{type:5},
+                    path:"lay/deal/list"
                 }]
             }
         },

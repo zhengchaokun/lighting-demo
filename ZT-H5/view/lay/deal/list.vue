@@ -1,7 +1,7 @@
 
 <template>
     <div>
-        <cmd :com="comData"></cmd>
+        <cmd :com="comData" @checkedTop="checkedItem"></cmd>
     </div>
 </template>
 <script>
@@ -12,7 +12,7 @@
         data(){
             return {
                 comData:{
-                    prodData:null,
+                    topData:null,
                     listData:null,
                     clickBtn:{
                         title:null,
@@ -31,9 +31,13 @@
             }
         },
         methods:{
+            checkedItem(item){
+                item.checked = !item.checked;
+                this.queryCont()
+            },
             initData(){
                 this.comData = {
-                    prodData:null,
+                    topData:null,
                     listData:null,
                     clickBtn:{
                         title:null,
@@ -41,68 +45,84 @@
                         handler:null
                     }
                 };
+                this.queryStart()
+            },
+            queryCont(){
                 const that = this;
-                switch (''+this.$route.query.type){
-                    default:
-                        //查询产品
-                        API.deptQuery({}).then(function (data) {
-                            let deptData = [];
-                            data.forEach(function (d) {
-                                deptData.push({
-                                    id:d.deptId,
-                                    code:'',
-                                    name:d.deptName,
-                                })
-                            });
-                            that.comData.topData = {
-                                current:0,
-                                title:"机构",
-                                list:deptData
-                            }
-                        }).then(function () {
-                            API.contQuery({
-                                deptIdStr:that.comData.topData.list[0].id
-                            }).then(function (list) {
-                                let contData = [];
-                                list.forEach(function (l) {
-                                    let item = {
-                                        name:l.customerShortname,
-                                        list:[]
-                                    };
-                                    l.details.forEach(function (d) {
-                                        item.list.push([{
-                                            '':d.goodsId,
-                                            '品名':d.productName,
-                                            '品牌':d.brandName,
-                                        },{
-                                            '':'采购',
-                                            '价格':d.spotPrice,
-                                            '数量':d.tradeAmount,
-                                        }])
-                                    });
-                                    contData.push(item);
-                                });
-                                that.comData.listData = {
-                                    'default':contData
-                                };
-                            });
-                        });
-                        that.comData.clickBtn = {
-                            title:"撤销",
-                            cls:"bgRed",
-                            handler:function (item) {
-                                Dialog.confirm({
-                                    msg:"确认撤销此条目吗？",
-                                    confirmText:"确认",
-                                    cancelText:"取消",
-                                    confirm(){
-                                        return true;
-                                    }
-                                })
-                            }
+
+                let deptId = [];
+                this.comData.topData.list.forEach(function (top) {
+                    if(top.checked) deptId.push(top.id);
+                })
+
+                //查询合约
+                return API.contQuery({
+                    deptIdStr:deptId.join(",")
+                }).then(function (list) {
+                    let contData = [];
+                    list.forEach(function (l) {
+                        let item = {
+                            name:l.customerShortname,
+                            list:[]
                         };
-                        break;
-                }
+                        l.details.forEach(function (d) {
+                            item.list.push([{
+                                '':d.goodsId,
+                                '品名':d.productName,
+                                '品牌':d.brandName,
+                            },{
+                                '':'采购',
+                                '价格':d.spotPrice,
+                                '数量':d.tradeAmount,
+                            }])
+                        });
+                        contData.push(item);
+                    });
+                    that.comData.listData = {
+                        'default':contData
+                    };
+                });
+            },
+            queryDept(){
+                const that = this;
+
+                //查询产品
+                return API.deptQuery({}).then(function (data) {
+                    let deptData = [];
+                    data.forEach(function (d,index) {
+                        deptData.push({
+                            id:d.deptId,
+                            code:'',
+                            name:d.deptName,
+                            checked:index===0
+                        })
+                    });
+                    that.comData.topData = {
+                        title:"机构",
+                        list:deptData
+                    };
+                }).then(function () {
+
+                });
+            },
+            queryStart(){
+                const that = this;
+                this.queryDept().then(this.queryCont);
+
+                that.comData.clickBtn = {
+                    title:"撤销",
+                    cls:"bgRed",
+                    handler:function (item) {
+                        Dialog.confirm({
+                            msg:"确认撤销此条目吗？",
+                            confirmText:"确认",
+                            cancelText:"取消",
+                            confirm(){
+                                return true;
+                            }
+                        })
+                    }
+                };
             }
         },
         mounted(){

@@ -4,7 +4,7 @@
             <div v-if="com.topData" class="buyCont buyStyle">
                 <div class="itemList">
                     <div class="subitem" @click="letsChooseProd=true">
-                        <span>{{com.topData.title}}</span><span>{{com.topData.list[com.topData.current].code}}{{com.topData.list[com.topData.current].name}}</span><em>选择</em>
+                        <span>{{com.topData.title}}</span><span>{{getTitleString()}}</span><em>选择</em>
                     </div>
                 </div>
             </div>
@@ -52,11 +52,26 @@
         methods: {
             itemClicked(item) {
             },
-            checkOrNot(item){
-                this.$set(item,'checked',!item.checked);
+            checkOrNot(item,index){
+                this.$emit('checkedTop',item)
             },
             chooseProd(){
                 this.letsChooseProd = false;
+            },
+            getTitleString(){
+                let str = '';
+                if(this.com && this.com.topData){
+                    this.com.topData.list.forEach(function (top) {
+                        if(top.checked){
+                            if(top.code){
+                                str+=`,${top.code}`
+                            }else{
+                                str+=`,${top.name}`
+                            }
+                        }
+                    })
+                }
+                return str.substring(1);
             }
         },
         mounted() {
