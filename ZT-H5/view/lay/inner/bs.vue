@@ -34,26 +34,26 @@
                 </div>
                 <div class="codeMarket flex1">
                     <p><span>沪深1806</span><span class="fright">IF1806</span></p>
-                    <p @click="codePrice=quote.bidPrice1"><em class="direc">卖出</em><em class="price">{{quote.bidPrice1}}</em><em class="num">{{quote.bidVolume1}}</em></p>
-                    <p @click="codePrice=quote.askPrice1"><em class="direc">买入</em><em class="price">{{quote.askPrice1}}</em><em class="num">{{quote.askVolume1}}</em></p>
+                    <p @click="codePrice=quote.bidPrice1"><em class="direc">卖出</em><em class="price">{{quote.bidPrice1?quote.bidPrice1:'-'}}</em><em class="num">{{quote.bidVolume1?quote.bidVolume1:'-'}}</em></p>
+                    <p @click="codePrice=quote.askPrice1"><em class="direc">买入</em><em class="price">{{quote.askPrice1?quote.askPrice1:'-'}}</em><em class="num">{{quote.askVolume1?quote.askVolume1:'-'}}</em></p>
                     <div class="marketDetail flex">
                         <ul class="flex1">
-                            <li><span>最新</span><em>{{quote.lastPrice}}</em></li>
-                            <li><span>涨跌</span><em>{{quote.priceChange}}</em></li>
-                            <li><span>幅度</span><em>{{quote.priceChangeRate}}</em></li>
-                            <li><span>总手</span><em class="colorOrange">{{quote.totalAmount}}</em></li>
-                            <li><span>现手</span><em class="colorOrange">{{quote.currentAmount}}</em></li>
-                            <li><span>涨停</span><em>{{quote.uplimitedPrice}}</em></li>
-                            <li><span>跌停</span><em class="colorGreen">{{quote.downlimitedPrice}}</em></li>
+                            <li><span>最新</span><em>{{quote.lastPrice?quote.lastPrice:'-'}}</em></li>
+                            <li><span>涨跌</span><em>{{quote.priceChange?quote.priceChange:'-'}}</em></li>
+                            <li><span>幅度</span><em>{{quote.priceChangeRate?quote.priceChangeRate:'-'}}</em></li>
+                            <li><span>总手</span><em class="colorOrange">{{quote.totalAmount?quote.totalAmount:'-'}}</em></li>
+                            <li><span>现手</span><em class="colorOrange">{{quote.currentAmount?quote.currentAmount:'-'}}</em></li>
+                            <li><span>涨停</span><em>{{quote.uplimitedPrice?quote.uplimitedPrice:'-'}}</em></li>
+                            <li><span>跌停</span><em class="colorGreen">{{quote.downlimitedPrice?quote.downlimitedPrice:'-'}}</em></li>
                         </ul>
                         <ul class="flex1">
-                            <li><span>结算</span><em class="colorGreen">{{quote.preSettlePrice}}</em></li>
-                            <li><span>昨结</span><em>{{quote.preHoldAmount}}</em></li>
-                            <li><span>今开</span><em class="colorGreen">{{quote.openPrice}}</em></li>
-                            <li><span>最高</span><em>{{quote.highPrice}}</em></li>
-                            <li><span>最低</span><em class="colorGreen">{{quote.lowPrice}}</em></li>
-                            <li><span>持仓</span><em class="colorOrange">{{quote.holdAmount}}</em></li>
-                            <li><span>日增</span><em class="colorOrange">{{quote.priceInterval}}</em></li>
+                            <li><span>结算</span><em class="colorGreen">{{quote.preSettlePrice?quote.preSettlePrice:'-'}}</em></li>
+                            <li><span>昨结</span><em>{{quote.preHoldAmount?quote.preHoldAmount:'-'}}</em></li>
+                            <li><span>今开</span><em class="colorGreen">{{quote.openPrice?quote.openPrice:'-'}}</em></li>
+                            <li><span>最高</span><em>{{quote.highPrice?quote.highPrice:'-'}}</em></li>
+                            <li><span>最低</span><em class="colorGreen">{{quote.lowPrice?quote.lowPrice:'-'}}</em></li>
+                            <li><span>持仓</span><em class="colorOrange">{{quote.holdAmount?quote.holdAmount:'-'}}</em></li>
+                            <li><span>日增</span><em class="colorOrange">{{quote.priceInterval?quote.priceInterval:'-'}}</em></li>
                         </ul>
                     </div>
                 </div>
@@ -64,8 +64,8 @@
                 </div>
             </div>
             <div class="upDown">
-                <span>涨停<em class="colorRed">{{quote.uplimitedPrice}}</em></span> 
-                <span>跌停<em class="colorGreen">{{quote.downlimitedPrice}}</em></span>
+                <span>涨停<em class="colorRed">{{quote.uplimitedPrice?quote.uplimitedPrice:'-'}}</em></span> 
+                <span>跌停<em class="colorGreen">{{quote.downlimitedPrice?quote.downlimitedPrice:'-'}}</em></span>
             </div>
             <div class="itemList lineColor">
                 <div class="subitem">
@@ -115,8 +115,8 @@
                 enableBalance:0, //可用金额
                 priceInterval:0.2, //价格加减步长
                 numInterval:{
-                        buyUnit:1,
-                        saleUnit:2
+                        buyUnit:0,
+                        saleUnit:0
                     },
                 multiple:0, //合约乘数
                 marketNo:"", //交易市场
@@ -138,6 +138,9 @@
             },
             'curCombi':function(){
                 this.enableBalanceGet();
+            },
+            'curFund':function(){
+                this.queryCombi();
             }
         },
         methods:{
@@ -159,20 +162,23 @@
                     that.curCombi=item;
                 }else if(item.fundName){
                     that.curFund=item;
-                    //查询组合
-                    API.combiGet({
-                        fundId:that.curFund.fundId,
-                        dataRight:""
-                    }).then(function (data) {
-                        that.combi = data;
-                        
-                    })
+                    
                 }else if(item.operatorName){
                     that.curOperator=item
                 }
                 that.ifSelect = false;
             },
-
+            queryCombi(){
+                var that = this;
+                //查询组合
+                API.combiGet({
+                    fundId:that.curFund.fundId,
+                    dataRight:""
+                }).then(function (data) {
+                    that.combi = data;
+                    that.curCombi = data[0]
+                })
+            },
             //选择弹框显示
             toSelect(name,list){
                 var that = this;
@@ -285,14 +291,14 @@
             },
             buy(){
                 var that = this;
-                if(that.curFund.length==0){
-                    Dialog.alert("请先选择一个产品");
-                    return false;
-                }
-                if(that.curCombi.length==0){
-                    Dialog.alert("请先选择一个组合");
-                    return false;
-                }
+                // if(that.curFund.length==0){
+                //     Dialog.alert("请先选择一个产品");
+                //     return false;
+                // }
+                // if(that.curCombi.length==0){
+                //     Dialog.alert("请先选择一个组合");
+                //     return false;
+                // }
                 if(!that.reportCode){
                     Dialog.alert("请输入合约代码");
                     return false;
@@ -344,12 +350,12 @@
                 dataRight:""
             }).then(function (data) {
                 that.fund = data;
-                
+                that.curFund = data[0]
             })
-            
             //查询交易员
             API.opTradeInfoGet({}).then(function (data) {
                 that.operator = data;
+                that.curOperator=data[0]
             })
 
             var transParam = that.$route.query;

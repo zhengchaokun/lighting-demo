@@ -86,7 +86,13 @@
         watch:{
             '$route.query.type':function(){
                 this.type =this.$route.query.type
-            }
+            },
+            'curFund':function(){
+                this.queryCombi()
+            },
+            'curMarket':function(){
+                this.queryCode();
+            },
         },
         methods:{
             //选择弹框内容选中
@@ -96,28 +102,36 @@
                     that.curCombi=item;
                 }else if(item.fundName){
                     that.curFund=item;
-                    //查询组合
-                    API.combiGet({
-                        fundId:that.curFund.fundId,
-                        dataRight:""
-                    }).then(function (data) {
-                        that.combi = data;
-                        
-                    })
+                    
                 }else if(item.operatorName){
                     that.curOperator=item
                 }else if(item.marketName){
                     that.curMarket=item;
-                    //查询合约代码
-                    API.outFutureInfoGet({}).then(function (data) {
-                        that.code = data;
-                    })
+                    that.queryCode();
                 }else if(item.stockName){
                     that.curCode=item;
                 }
                 that.ifSelect = false;
             },
-
+            queryCode(){
+                var that = this;
+                //查询合约代码
+                API.outFutureInfoGet({}).then(function (data) {
+                    that.code = data;
+                    that.curCode=data[0]
+                })
+            },
+            queryCombi(){
+                var that = this;
+                //查询组合
+                API.combiGet({
+                    fundId:that.curFund.fundId,
+                    dataRight:""
+                }).then(function (data) {
+                    that.combi = data;
+                    that.curCombi = data[0]
+                })
+            },
             //选择弹框显示
             toSelect(name,list){
                 var that = this;
@@ -154,22 +168,22 @@
             },
             buy(){
                 var that = this;
-                if(that.curFund.length==0){
-                    Dialog.alert("请先选择一个产品");
-                    return false;
-                }
-                if(that.curCombi.length==0){
-                    Dialog.alert("请先选择一个组合");
-                    return false;
-                }
-                if(that.curMarket.length==0){
-                    Dialog.alert("请先选择一个市场");
-                    return false;
-                }
-                if(that.curCode.length==0){
-                    Dialog.alert("请先选择一个合约代码");
-                    return false;
-                }
+                // if(that.curFund.length==0){
+                //     Dialog.alert("请先选择一个产品");
+                //     return false;
+                // }
+                // if(that.curCombi.length==0){
+                //     Dialog.alert("请先选择一个组合");
+                //     return false;
+                // }
+                // if(that.curMarket.length==0){
+                //     Dialog.alert("请先选择一个市场");
+                //     return false;
+                // }
+                // if(that.curCode.length==0){
+                //     Dialog.alert("请先选择一个合约代码");
+                //     return false;
+                // }
                 if(!that.codePrice||that.codePrice==0){
                     Dialog.alert("请输入指令价格");
                     return false;
@@ -219,16 +233,18 @@
                 dataRight:""
             }).then(function (data) {
                 that.fund = data;
-                
+                that.curFund = data[0]
             })
             
             //查询交易员
             API.opTradeInfoGet({}).then(function (data) {
                 that.operator = data;
+                that.curOperator=data[0]
             })
             //查询市场
             API.outMarketInfoQuery({}).then(function (data) {
                 that.market = data;
+                that.curMarket = data[0]
             })
 
             
