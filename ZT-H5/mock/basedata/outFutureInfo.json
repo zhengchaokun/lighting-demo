@@ -1,0 +1,46 @@
+{
+  "code": 0,
+  "message": "string",
+  "data": [
+    {
+      "outFutureMarketNo": 0,
+      "reportCode": "string",
+      "stockName": "string代码1",
+      "buyUnit": 0,
+      "saleUnit": 0,
+      "priceInterval": 0
+    },
+    {
+      "outFutureMarketNo": 1,
+      "reportCode": "string",
+      "stockName": "string代码2",
+      "buyUnit": 0,
+      "saleUnit": 0,
+      "priceInterval": 0
+    },
+    {
+      "outFutureMarketNo": 2,
+      "reportCode": "string",
+      "stockName": "string代码3",
+      "buyUnit": 0,
+      "saleUnit": 0,
+      "priceInterval": 0
+    },
+    {
+      "outFutureMarketNo": 3,
+      "reportCode": "string",
+      "stockName": "string代码1444",
+      "buyUnit": 0,
+      "saleUnit": 0,
+      "priceInterval": 0
+    },
+    {
+      "outFutureMarketNo": 4,
+      "reportCode": "string",
+      "stockName": "string代码15555",
+      "buyUnit": 0,
+      "saleUnit": 0,
+      "priceInterval": 0
+    }
+  ]
+}
