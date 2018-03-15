@@ -201,14 +201,14 @@ module.exports = {
      * 境内可用数量查询
      */
     enableAmountGet(params){
-        return execute('get','/ins/enableAmount',params);
+        return execute('get','/basedata/enableAmount',params);
     },
 
     /**
      * 境内可用金额查询
      */
     enableBalanceGet(params){
-        return execute('get','/ins/enableBalance',params);
+        return execute('get','/basedata/enableBalance',params);
     },
 
     /**
@@ -335,6 +335,9 @@ module.exports = {
 function execute(type,path,data) {
     return module.exports.localGet(module.exports.LOCAL_USER_STORE).then(function (info) {
         if(path!=="/common/login"){
+            if(!info||!info.TOKEN){
+                return Promise.reject({})
+            }
             data.token = info.TOKEN;
         }
         return new Promise(function (resolve, reject) {
@@ -355,5 +358,7 @@ function execute(type,path,data) {
                 }
             });
         })
+    }).catch(function (err) {
+        Light.navigate("login",{},{history:false})
     })
 }

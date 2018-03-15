@@ -2,12 +2,15 @@
     <div>
         <div class="blackBg"></div>
         <div class="scrollBox" id="scrollBox">
+            <div class="whiteShadow">
+
+            </div>
             <span></span>
-            <button>确定</button>
+            <button @click="sureSelect(select[num])">确定</button>
             <ul id="scrollWrap">
                 <li></li>
                 <li></li>
-                <li v-for="(item,index) in items" :class="{'selected':num==(index)}">{{item.name}}</li>
+                <li v-for="(item,index) in select" :class="{'selected':num==index}">{{getName(item,name)}}</li>
             </ul>
         </div>
     </div>
@@ -16,37 +19,23 @@
     export default {
         data(){
             return {
-                num:2,
-                items:[{
-                    name:"3000杭州善成建新奇账户"
-                },{
-                    name:"301杭州善成建新奇账户"
-                },{
-                    name:"302杭州善成建新奇账户"
-                },{
-                    name:"303杭州善成建新奇账户"
-                },{
-                    name:"304杭州善成建新奇账户"
-                },{
-                    name:"305杭州善成建新奇账户"
-                },{
-                    name:"306杭州善成建新奇账户"
-                },{
-                    name:"307杭州善成建新奇账户"
-                },{
-                    name:"308杭州善成建新奇账户"
-                },{
-                    name:"309杭州善成建新奇账户"
-                },{
-                    name:"310杭州善成建新奇账户"
-                },{
-                    name:"311杭州善成建新奇账户"
-                },{
-                    name:"312杭州善成建新奇账户"
-                }]
+                num:2
             };
         },
-        props:[],
+        methods:{
+            sureSelect(obj){
+                this.$emit("getParam",obj)
+            },
+            getName(obj,name){
+                for( var list in obj){
+                    if(list==name){
+                        return (obj[list])
+                    }
+                }
+                
+            }
+        },
+        props:['select','name'],
         mounted(){
             var that = this;
             var lastXForMobile, lastYForMobile,wh = document.getElementById("scrollWrap");
@@ -78,7 +67,7 @@
         background:rgba(120,120,120,0.6)
     }
     .scrollBox{
-        height:200px;
+        height:4rem;
         overflow-y:auto;
         width:100%;
         position:fixed;
@@ -86,6 +75,14 @@
         left:0;
         right:0;
         background:#eee;
+        .whiteShadow{
+            position:fixed;
+            height:4rem;
+            bottom:0;
+            left:0;
+            right:0;
+            box-shadow:30rem 10rem 2rem #fff;
+        }
         span{
             height:0.84rem;
             width:72%;
@@ -106,7 +103,8 @@
             background:#55c683;
             border-radius:4px;
             color:#fff;
-            font-size:17px;
+            font-size:0.34rem;
+            z-index: 9;
         }
         ul{
             position:relative;

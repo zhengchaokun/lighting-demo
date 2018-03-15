@@ -7,6 +7,9 @@ App.Vue.mixin({
     methods:{
         jump(){
             App.navigate.call(App,...arguments)
+        },
+        dictByValue(dict,value){
+            return require("./lib/dict").getByValue(dict,value)
         }
     }
 })

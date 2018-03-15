@@ -67,4 +67,12 @@ module.exports = {
         '境内期货成交或指令':'0',
         '外盘期货成交或指令':'1'
     }
-}
+};
+
+module.exports.getByValue = function (dict, value) {
+    for(let key in module.exports[dict]){
+        if(module.exports[dict][key]===value+''){
+            return key;
+        }
+    }
+};

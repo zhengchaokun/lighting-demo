@@ -1,18 +1,16 @@
 {
-    "code": 0,
-    "message": "string",
-    "data": [
-        {
-            "deptId": 0,
-            "deptName": "杭实善成"
-        },
-        {
-            "deptId": 0,
-            "deptName": "杭实善成1"
-        },
-        {
-            "deptId": 0,
-            "deptName": "杭实善成2"
-        }
-    ]
+  "code": 0,
+  "message": "string",
+  "data": [
+    {
+      "deptId": 0,
+      "deptName": "机构1"
+    },{
+      "deptId": 1,
+      "deptName": "机构2"
+    },{
+      "deptId": 2,
+      "deptName": "机构3"
+    }
+  ]
 }

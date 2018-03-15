@@ -59,9 +59,11 @@
         mounted(){
             const that = this;
             API.localGet(API.LOCAL_USER_STORE).then(function (data) {
-                that.loginInfo = data;
-            }).catch(function () {
-                Light.navigate("login",{},{history:false})
+                if(!data){
+                    Light.navigate("login",{},{history:false})
+                }else{
+                    that.loginInfo = data;
+                }
             })
         }
     }

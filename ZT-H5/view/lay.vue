@@ -8,7 +8,7 @@
         <div class="mask" v-show="panelShow" @click="panelShow=false"></div>
         <div class="left-panel" v-show="panelShow" >
             <div class="top-header">
-               <span class="left">
+               <span class="left" @click="jump('home')">
                    <img src="" alt="">
                    <span>李雷</span>
                </span>

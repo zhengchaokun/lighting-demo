@@ -1,7 +1,64 @@
 {
   "code": 0,
   "message": "string",
-  "data": {
-    "insId": ""
-  }
+  "total": 0,
+  "pageSize": 0,
+  "currentPage": 0,
+  "data": [
+    {
+      "foreignmarketFlag": 0,
+      "insId": 0,
+      "insStockId": 0,
+      "fundId": 300101,
+      "fundName": "产品名1",
+      "combiId": 0,
+      "combiName": "焦煤投资策略组合1",
+      "marketNo": 0,
+      "reportCode": "string",
+      "stockName": "",
+      "insStatus": "string",
+      "insAmount": 0,
+      "insPrice": 4456.1,
+      "limitPrice": 0,
+      "entrustDirection": 32,
+      "entrustAmount": 0,
+      "dealAmount": 0
+    },{
+      "foreignmarketFlag": 0,
+      "insId": 0,
+      "insStockId": 0,
+      "fundId": 300102,
+      "fundName": "产品名2",
+      "combiId": 0,
+      "combiName": "焦煤投资策略组合2",
+      "marketNo": 0,
+      "reportCode": "string",
+      "stockName": "",
+      "insStatus": "string",
+      "insAmount": 0,
+      "insPrice": 4456.1,
+      "limitPrice": 4456.1,
+      "entrustDirection": 33,
+      "entrustAmount": 0,
+      "dealAmount": 0
+    },{
+      "foreignmarketFlag": 0,
+      "insId": 0,
+      "insStockId": 0,
+      "fundId": 300103,
+      "fundName": "产品名3",
+      "combiId": 0,
+      "combiName": "焦煤投资策略组合3",
+      "marketNo": 0,
+      "reportCode": "string",
+      "stockName": "",
+      "insStatus": "string",
+      "insAmount": 0,
+      "insPrice": 4456.1,
+      "limitPrice": 0,
+      "entrustDirection": 33,
+      "entrustAmount": 0,
+      "dealAmount": 0
+    }
+  ]
 }
