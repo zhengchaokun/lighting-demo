@@ -8,12 +8,12 @@
                     </div>
                 </div>
             </div>
-            <div v-if="com.listData">
-                <div class="codeMenu flex" v-if="currentFilter!=='default'">
-                    <span class="flex1" :class="{current:currentFilter==key}" @click="currentFilter=key"
-                          v-for="(item,key) in com.listData">{{key}}</span>
+            <div>
+                <div class="codeMenu flex" v-if="com.tabsData">
+                    <span class="flex1" :class="{current:currentTab==key}" @click="currentTab=key"
+                          v-for="(item,key) in com.tabsData">{{item.title}}</span>
                 </div>
-                <div class="operateList" v-for="(item,index) in com.listData[currentFilter]"
+                <div class="operateList" v-for="(item,index) in com.listData"
                      @click="currentItemChecked=index">
                     <span class="operateBut" :class="com.clickBtn.cls" @click="com.clickBtn.handler(item)"
                           v-show="currentItemChecked==index"><em>{{com.clickBtn.title}}</em></span>
@@ -44,8 +44,8 @@
     export default {
         data() {
             return {
-                currentFilter: 'default',
-                currentItemChecked: null,
+                currentTab: 0,
+                currentItemChecked: 0,
                 letsChooseProd:false
             }
         },
@@ -81,7 +81,6 @@
             'com.listData': function () {
                 if (this.com.listData) {
                     this.currentItemChecked = null;
-                    this.currentFilter = Object.keys(this.com.listData)[0]
                 }
             }
         }
