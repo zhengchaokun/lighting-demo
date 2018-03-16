@@ -17,7 +17,7 @@
 <style lang="less" scoped>
     .alert-box{
         width: 5.9rem;
-        height: 2.5rem;
+        padding:0.6rem;
         position: fixed;
         top:2.9rem;
         left:50%;
@@ -30,6 +30,6 @@
         font-size: 0.34rem;
         color: #4A4A4A;
         text-align: center;
-        line-height: 2.5rem;
+        line-height: 0.6rem;
     }
 </style>

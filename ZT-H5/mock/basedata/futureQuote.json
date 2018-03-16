@@ -2,5 +2,5 @@
                         {
                           "code": 0,
                           "message": "string",
-                          "data": {"marketNo":"7","reportCode":"54","lastPrice":"55","uplimitedPrice":"55","downlimitedPrice":"66","bidPrice1":"54","bidVolume1":"88","askPrice1":"2","askVolume1":"8","priceChange":"6","priceChangeRate":"8","preSettlePrice":"5","openPrice":"123","lowPrice":"44","highPrice":"","totalAmount":"123","currentAmount":"12","priceInterval":"22","preHoldAmount":"22","holdAmount":"1"}
+                          "data": {"marketNo":"7","reportCode":"54","lastPrice":"55","uplimitedPrice":"66","downlimitedPrice":"21","bidPrice1":"54","bidVolume1":"88","askPrice1":"2","askVolume1":"8","priceChange":"6","priceChangeRate":"8","preSettlePrice":"5","openPrice":"123","lowPrice":"44","highPrice":"","totalAmount":"123","currentAmount":"12","priceInterval":"22","preHoldAmount":"22","holdAmount":"1"}
                         }

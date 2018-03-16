@@ -22,8 +22,8 @@
             <div class="codeWrap flex">
                 <div class="codeSelect">
                     <ul>
-                        <li :class="{'select':direc==0}" @click="direc=0">开仓</li>
-                        <li :class="{'select':direc==1}" @click="direc=1">平仓</li>
+                        <li :class="{'select':direc=='0'}" @click="direc='0'">开仓</li>
+                        <li :class="{'select':direc=='1'}" @click="direc='1'">平仓</li>
                     </ul>
                     <ul>
                         <li :class="{'select':investType=='a'}" @click="investType='a'">投机</li>
@@ -108,7 +108,7 @@
                 codePrice:0,//指令价格
                 codeNum:0, //指令数量
                 tips:"", //备注
-                direc:'0', //平仓开仓
+                direc:'1', //平仓开仓
                 investType:"a", //投资类型
                 enableNum:0,//可买可卖数量，买时enableNum=可用金额/(指令价格*合约乘数），卖时enableNum = 可用数量
                 enableAmount:0,//可用数量
@@ -129,32 +129,44 @@
             },
             'reportCode':function(){
                 this.filterCode();
+                
+            },
+            'quote':function(){
+                this.enableAmountGet();
             },
             'type':function(){
-                this.amountChange();
+                this.enableAmountGet();
             },
             'codePrice':function(){
                 this.amountChange();
             },
             'curCombi':function(){
                 this.enableBalanceGet();
+                this.enableAmountGet();
             },
             'curFund':function(){
                 this.queryCombi();
+            },
+            'direc':function(){
+                this.amountChange();
             }
         },
         methods:{
             //可买可卖数量变动
             amountChange(){
                 var that = this;
-                if(that.type==1){
-                    that.enableNum = parseInt(Number(that.enableBalance)/(Number(that.codePrice)*that.multiple))
-                }else if(that.type==2){
-                    console.log(that.enableAmount);
-                    that.enableNum = that.enableAmount
+                
+                switch(that.direc){
+                    //开仓
+                    case '0':
+                        that.enableNum = parseInt(Number(that.enableBalance)/(Number(that.codePrice)*that.multiple));
+                        break;
+                    //平仓
+                    case '1':
+                        that.enableNum = that.enableAmount;
+                        break;
                 }
             },
-
             //选择弹框内容选中
             getParam(item){
                 var that = this;
@@ -254,6 +266,7 @@
                     combiId:that.curCombi.combiId
                 }).then(function (data) {
                     that.enableBalance = data.enableBalance;
+                    that.amountChange();
                 })
             },
             //获取可用数量
@@ -264,9 +277,10 @@
                     marketNo:that.quote.marketNo,
                     reportCode:that.quote.reportCode,
                     investType:that.investType,
-                    positionType:1
+                    positionType:that.type==1?'2':'1'
                 }).then(function (data) {
                     that.enableAmount = data.enableAmount;
+                    that.amountChange();
                 })
             },
             //获取买卖方向
@@ -274,19 +288,21 @@
                 var that = this;
                 switch (type){
                     case 1 : 
-                    if(direc=='0'){
-                        return '32'
-                    }
-                    if(direc=='1'){
-                        return '35'
-                    }
+                        if(direc=='0'){
+                            return '32'
+                        };
+                        if(direc=='1'){
+                            return '35'
+                        };
+                        break;
                     case 2:
-                    if(direc=='0'){
-                        return '33'
-                    }
-                    if(direc=='1'){
-                        return '34'
-                    }
+                        if(direc=='0'){
+                            return '33'
+                        }
+                        if(direc=='1'){
+                            return '34'
+                        };
+                        break;
                 }
             },
             buy(){
@@ -303,8 +319,11 @@
                     Dialog.alert("请输入合约代码");
                     return false;
                 }
-                if(!that.codePrice||that.codePrice==0){
+                if(!that.codePrice&&that.codePrice!=0){
                     Dialog.alert("请输入指令价格");
+                    return false;
+                }else if(that.codePrice>that.quote.uplimitedPrice||(that.codePrice<that.quote.downlimitedPrice&&that.codePrice!=0)){
+                    Dialog.alert("指令价格不能超过涨停价或低于跌停价，请重新输入");
                     return false;
                 }
                 if(!that.codeNum||that.codeNum==0){
