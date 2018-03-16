@@ -1,0 +1,19 @@
+{
+    "code": 0,
+    "message": "string",
+    "data": [
+        {
+            "currencyNo": 111,
+            "currencyName": "日元",
+            "currencyUnit": "丹"
+        },{
+            "currencyNo": 112,
+            "currencyName": "人民币",
+            "currencyUnit": "元"
+        },{
+            "currencyNo": 113,
+            "currencyName": "美元",
+            "currencyUnit": "刀"
+        }
+    ]
+}

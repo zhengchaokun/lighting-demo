@@ -16,6 +16,7 @@
 </script>
 <style lang="less" scoped>
     .alert-box{
+        padding: 0.8rem 0.4rem;
         width: 5.9rem;
         padding:0.6rem;
         position: fixed;
@@ -26,10 +27,9 @@
         border: 1px solid #DDF3FF;
         border-radius: 2px;
         z-index: 11;
-
         font-size: 0.34rem;
         color: #4A4A4A;
         text-align: center;
-        line-height: 0.6rem;
+        line-height: 0.48rem;
     }
 </style>

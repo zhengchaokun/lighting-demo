@@ -2,7 +2,7 @@
 <template>
     <div>
         <div class="edit-bar flex fs30">
-            <span class="fs-bold">合同主体</span><span class="flex1 ml20"> /点击编辑</span>
+            <span class="fs-bold">合同主体</span><span class="flex1 ml20" @click="toEdit('main')"> /点击编辑</span>
             <span class="text-error" @click="deleteMain">删除</span>
         </div>
         <div class="line"></div>
@@ -11,7 +11,7 @@
 
         <div v-for="(detail,index) in details" :key="index">
             <div class="edit-bar flex fs30">
-                <span>合同明细{{index+1}}</span><span class="flex1 ml20">/点击编辑</span>
+                <span>合同明细{{index+1}}</span><span class="flex1 ml20" @click="toEdit('detail')">/点击编辑</span>
                 <span class="text-error" @click="deleteDetail(detail)">删除</span>
             </div>
             <div class="line"></div>
@@ -20,12 +20,20 @@
         </div>
 
         <div class="edit-bar flex fs30">
-            <span>匹配指令</span><span class="flex1 ml20">/点击编辑</span>
-            <!-- <span class="text-error" @click="deleteMatch">删除</span> -->
+            <span>匹配指令</span><span class="flex1 ml20" @click="toEdit('match')">/点击编辑</span>
         </div>
-        <div class="line"></div>
-        <textarea readonly :value="matchInfo.remark" class="detail-textarea" style="height: 1.2rem;"></textarea>
-        <div class="line mb30"></div>
+
+        <template v-if="matchInfo=={}">
+            <div class="line"></div>
+            <textarea readonly value="没有匹配指令" class="detail-textarea" style="height: 1.2rem;"></textarea>
+            <div class="line mb30"></div>
+        </template>
+        <template v-else>
+            <div>
+                <table-fixed :readonly="true" :value="matchInfo" :checked="checked" :columns="columns"></table-fixed> 
+            </div> 
+        </template>
+        
 
         <div class="pd30 pdb40" style="margin-top: 1.06rem">
             <button class="btn-normal bg-blue" @click="back">返 回</button>
@@ -36,8 +44,12 @@
 <script>
     import App from "light"
     import API from "../../../../lib/api"
+    import TableFixed from '../../../../ui/table-fixed.vue'
+
     const Dialog = require("dialog")
+    const Dict = require('dict')
     export default {
+        components: {TableFixed},  
         data(){
             return {
                 // body: {
@@ -49,12 +61,23 @@
                 // },
                 main: '',
                 details: [],
-                matchInfo: {}
+                matchInfo: [],
+                columns: ['合约', '委托方向', '价格', '数量', '指令状态', '成交数量', '市场','下达人', '交易员'],
+                checked: [0,1]
             }
         },
         methods: {
             back() {
                 App.navigate("lay/contract/query/list")
+            },
+            toEdit(type) {
+                if(type=='main') {
+                    App.navigate("lay/contract/add/step1")
+                } else if(type=='detail') {
+                    App.navigate("lay/contract/add/step2")
+                } else {
+                    App.navigate("lay/contract/cmd/detail")
+                }
             },
             deleteMain() {
                 var that = this;
@@ -66,6 +89,7 @@
                         console.log('success')
                         API.contMainDelete({precontId:that.main.contId}).then(function(data){
                             Dialog.alert("删除成功！");
+                            App.navigate("lay/contract/query/list")
                         })
                     },
                     confirm() {
@@ -82,21 +106,58 @@
         },
         beforeRender(params) {
             var that = this;
-            console.log(params.item);
-            //查询策略
-            var strategy = {};
-            API.strategyQuery({deptId:params.item.deptId}).then(function(data) {
-                strategy = data[0];
-                let direction = params.item.spotOpenDirection=='1' ? '采购' : '销售';
-                that.main = '杭城善时' + '，' + strategy.strategyName + '，' + strategy.strategyId + '，' + direction;
-                var details = params.item.details;
-                details.forEach(function(d) {
-                    that.details.push(d.brandName + '，' + d.grade + '，' + d.spotType + '，' + d.tradeAmount + '，' + d.tradeCurrencyNo + '，' + d.moreorlessProportion + '，' + d.remark)
+            //查询预合同匹配信息
+            API.contMatchInfoQuery({contId:params.preContId}).then(function(data) {
+
+                if(data && data.insList) {
+                    data.insList.forEach(function(d, i) {
+                        let item = {};
+                        item.reportCode = d.reportCode;
+                        Object.keys(Dict.entrustDirection).forEach(function(key){
+                            if(d.entrustDirection == Dict.entrustDirection[key]) {
+                                item.entrustDirection = key;
+                            }
+                        });
+                        item.insPrice = d.insPrice;
+                        item.insAmount = d.insAmount;
+                        Object.keys(Dict.insStatus).forEach(function(key){
+                            if(d.insStatus == Dict.insStatus[key]) {
+                                item.insStatus = key;
+                            }
+                        });
+                        item.dealAmount = d.dealAmount;
+                        Object.keys(Dict.marketNo).forEach(function(key){
+                            if(d.marketNo == Dict.marketNo[key]) {
+                                item.marketNo = key;
+                            }
+                        });
+                        item.directOperatorName = d.directOperatorName;
+                        item.tradeOperatorName = d.tradeOperatorName;
+
+                        that.matchInfo.push(item);
+                       
+                    })
+                } else {
+                    that.matchInfo = {};
+                }
+                //查询策略
+                API.strategyQuery({deptId:params.precontId}).then(function(data1) {
+                    let strategy = '';
+                    data1.forEach(function(d) {
+                        strategy += d.strategyName+'，';
+                    })
+                    console.log(data)
+                    let direction = data1.spotOpenDirection=='1' ? '采购' : '销售';
+                    that.main = '杭城善时' + '，' + strategy + direction;
+                    var details = data.detailList;
+                    details.forEach(function(d) {
+                        that.details.push(d.brandName + '，' + d.grade + '，' + d.spotType + '，' + d.tradeAmount + '，' + d.tradeCurrencyNo + '，' + d.moreorlessProportion + '，' + d.remark)
+                    })
                 })
             })
-            API.contMatchInfoQuery({contId:params.item.preContId}).then(function(data) {
-               that.matchInfo = data;
-            })
+            
+
+            
             
         }
     }

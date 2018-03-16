@@ -3,13 +3,22 @@
     "message": "string",
     "data": [
         {
-            "strategyId": 0,
+            "strategyId": 1111,
             "strategyName": "PE策略1号",
             "deptId": 0,
             "fundId": 0,
             "assetId": 0,
             "combiId": 0,
-            "futureKindIdList": "string"
+            "futureKindIdList": "0,1,2"
+        },
+        {
+            "strategyId": 1112,
+            "strategyName": "PE策略2号",
+            "deptId": 0,
+            "fundId": 0,
+            "assetId": 0,
+            "combiId": 0,
+            "futureKindIdList": "0,1"
         }
     ]
 }
