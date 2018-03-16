@@ -142,7 +142,7 @@
                                     title:'已完成',
                                     value:''
                                 },{
-                                    title:'已取消',
+                                    title:'已撤销',
                                     value:''
                                 }]
                             });
