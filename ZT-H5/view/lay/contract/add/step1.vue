@@ -102,7 +102,7 @@
             <button v-if="!precont.detailList||precont.detailList.length==0" class="btn-normal bg-blue" @click="checkValid('add')">下一步</button>
             <button v-else class="btn-normal bg-blue" @click="checkValid('edit')">确 定</button>
         </div>
-        <div class="modal" v-show="showModal">
+        <div class="modal" v-show="true">
             <div class="detail-list clear">
                 <template v-for="(item, index) in items">
                     <span :key="index" class="text-small" :class="{'fc-gray':input_items.indexOf(index)==-1}" >{{ item }}</span>
@@ -277,26 +277,29 @@ export default {
             
         },
         handleInput(e) {
-            var arr = e.target.value.split(' ');
-            var len = arr.length;
-            console.log(len,arr);            
-            if(len > 0) {
-                if(arr[len-1]=='') {
+            var that = this;
+            that.res = that.input_text.split(" ");
+            
+            // var arr = e.target.value.split(' ');
+            // var len = arr.length;
+            // console.log(len,arr);            
+            // if(len > 0) {
+            //     if(arr[len-1]=='') {
 
-                    if(this.res.length < 6) {
-                        let idx = this.res.indexOf(arr[len-2]);
-                        if(idx == -1) {
-                            this.res.push(arr[len-2]);
-                        } else {
-                            this.res.splice(idx+1, 1);
-                        }
+            //         if(this.res.length < 6) {
+            //             let idx = this.res.indexOf(arr[len-2]);
+            //             if(idx == -1) {
+            //                 this.res.push(arr[len-2]);
+            //             } else {
+            //                 this.res.splice(idx+1, 1);
+            //             }
                         
-                    }
-                }
-                if(len==1 && arr[0]=='' && this.res.length > 0) {
-                    this.res=[];
-                }
-            }
+            //         }
+            //     }
+            //     if(len==1 && arr[0]=='' && this.res.length > 0) {
+            //         this.res=[];
+            //     }
+            // }
             console.log('res————',this.res.toString())
         },
         handleChange(val) {
