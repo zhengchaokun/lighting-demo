@@ -1,0 +1,27 @@
+{
+    "code": 0,
+    "message": "string",
+    "total": 0,
+    "pageSize": 0,
+    "currentPage": 0,
+    "data": [
+        {
+            "foreignmarketFlag": 0,
+            "realdealSerialNo": 0,
+            "insId": 0,
+            "insStockId": 0,
+            "fundId": 0,
+            "fundName": "string",
+            "combiId": 0,
+            "combiName": "string",
+            "marketNo": 0,
+            "reportCode": "string",
+            "stockName": "string",
+            "entrustDirection": 0,
+            "closeType": 0,
+            "dealAmount": 0,
+            "dealPrice": 0,
+            "dealBalance": 0
+        }
+    ]
+}
