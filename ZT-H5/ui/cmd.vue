@@ -16,7 +16,7 @@
                 <div class="operateList" v-for="(item,index) in com.listData"
                      @click="currentItemChecked=index">
                     <span class="operateBut" :class="com.clickBtn.cls" @click="com.clickBtn.handler(item)"
-                          v-show="currentItemChecked==index"><em>{{com.clickBtn.title}}</em></span>
+                          v-show="currentItemChecked==index&&currentTab!=2&&currentTab!=3"><em>{{com.clickBtn.title}}</em></span>
                     <h2><em v-if="item.code">{{item.code}} </em>{{item.name}}<em v-if="item.pName">/{{item.pName}}</em></h2>
                     <div v-for="list in item.list">
                         <p v-for="it in list">

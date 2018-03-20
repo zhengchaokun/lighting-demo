@@ -18,7 +18,7 @@
     .alert-box{
         padding: 0.8rem 0.4rem;
         width: 5.9rem;
-        height: 2.5rem;
+        padding:0.6rem;
         position: fixed;
         top:2.9rem;
         left:50%;
@@ -27,7 +27,6 @@
         border: 1px solid #DDF3FF;
         border-radius: 2px;
         z-index: 11;
-
         font-size: 0.34rem;
         color: #4A4A4A;
         text-align: center;

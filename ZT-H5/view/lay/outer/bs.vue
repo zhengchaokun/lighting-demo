@@ -75,7 +75,6 @@
                 combi:[],//组合列表
                 operator:[],//操作员
                 market:[],//市场
-                investType:"a",
                 direc:0,
                 codeNum:0,
                 codePrice:0,
@@ -102,12 +101,10 @@
                     that.curCombi=item;
                 }else if(item.fundName){
                     that.curFund=item;
-                    
                 }else if(item.operatorName){
                     that.curOperator=item
                 }else if(item.marketName){
                     that.curMarket=item;
-                    that.queryCode();
                 }else if(item.stockName){
                     that.curCode=item;
                 }
@@ -147,6 +144,7 @@
                 that.select = list;
                 that.selectName = name;
             },
+            //获取委托方向
             getEntrustDirection(type,direc){
                 var that = this;
                 switch (type){
@@ -203,7 +201,7 @@
                     confirmText:"确定",
                     cancelText:"取消",
                     confirm(){
-                        API.insAdd({
+                        API.insOutAdd({
                             "fundId": that.curFund.fundId,
                             "combiId":that.curCombi.combiId,
                             "marketNo": that.curMarket.outFutureMarketNo,
@@ -213,7 +211,6 @@
                             "limitPrice": that.limitPrice,
                             "entrustDirection": that.getEntrustDirection(that.type,that.direc),
                             "opTradeNo": that.curOperator.operatorNo,
-                            "investType": that.investType,
                             "remark": that.tips
                         }).then(function (data) {
                             
