@@ -285,6 +285,7 @@
         },
         computed: {
             sumPrice() {
+                debugger
                 if(this.checkSpace(this.currencyInfo.currencyUnit) || this.checkSpace(this.detail.spotPrice) || this.checkSpace(this.detail.tradeAmount)) return;
                 let sum = parseInt(this.detail.tradeAmount) * (this.detail.spotPrice*1);
                 return sum.toFixed(2) + this.currencyInfo.currencyUnit;
@@ -470,7 +471,7 @@
                 keys.forEach(function(key) {
                     str += that.getValueStr(that.detail[key]);
                 })
-                return str;
+                return str.replace(/\s*$/g,'');
             },
             openQuickInput() {
                 var precont = this.precont;
