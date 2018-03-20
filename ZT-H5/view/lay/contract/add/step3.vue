@@ -21,7 +21,7 @@
         </template>
         
 
-        <div class="pd30 pdb40 flex btn-wrap-two">
+        <div class="pd30 pdb40 flex">
             <button class="btn-normal flex1 mr30 bg-green" @click="continueAdd">继续添加</button>
             <button class="btn-normal flex1 bg-blue" @click="finishAdd">完成</button>
         </div>

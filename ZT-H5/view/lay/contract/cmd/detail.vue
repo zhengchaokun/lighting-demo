@@ -32,7 +32,7 @@
                 <table-fixed v-if="tableData_all && tableData_all.length>0" :value="tableData_all" :checked="checked_cmd" :columns="columns"></table-fixed> 
                 <div v-else>暂无数据</div>
             </div> 
-            <div class="btn-wrap-two">
+            <div class="pd30 pdb40">
                 <button class="btn-normal bg-blue" @click="confirmCmd">确 定</button>
             </div>
         </div>
@@ -42,7 +42,7 @@
             <div v-else>暂无数据</div>
         </div> 
 
-        <div class="btn-wrap-two">
+        <div class="pd30 pdb40">
             <button v-if="!nextFlag" class="btn-normal bg-blue" @click="confirmCmd">确 定</button>
             <button v-else :disabled="disabled" class="btn-normal btn-plain" @click="toNext">下一条</button>            
         </div>

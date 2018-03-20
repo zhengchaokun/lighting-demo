@@ -35,7 +35,7 @@
         </template>
         
 
-        <div class="btn-wrap-two" style="margin-top: 1.06rem">
+        <div class="pd30 pdb40">
             <button class="btn-normal bg-blue" @click="back">返 回</button>
         </div>
         
