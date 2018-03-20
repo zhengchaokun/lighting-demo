@@ -12,25 +12,33 @@
             return {};
         },
         methods:{
+            // checkMatch(btn){
+            //     console.log(this.$route)
+            //     const that = this;
+            //     const pathMatch = this.$route.path==='/'+btn.path;
+            //     if(!pathMatch){
+            //         return false;
+            //     }
+
+            //     if(!btn.params){
+            //         return pathMatch;
+            //     }
+
+            //     let match = true;
+            //     Object.keys(btn.params).forEach(function (key) {
+            //         if(btn.params[key]+'' !== that.$route.query[key]+''){
+            //             match = false;
+            //         }
+            //     });
+
+            //     return pathMatch && match;
+            // }
             checkMatch(btn){
-                const that = this;
-                const pathMatch = this.$route.path==='/'+btn.path;
-                if(!pathMatch){
-                    return false;
-                }
-
-                if(!btn.params){
-                    return pathMatch;
-                }
-
-                let match = true;
-                Object.keys(btn.params).forEach(function (key) {
-                    if(btn.params[key]+'' !== that.$route.query[key]+''){
-                        match = false;
-                    }
-                });
-
-                return pathMatch && match;
+                const path = btn.path;
+                var index = path.lastIndexOf("\/");
+                var str = path.substring(0, index);
+                const pathMatch = this.$route.path.indexOf(str)>-1;
+                return pathMatch;
             }
         },
         props:['buttons']

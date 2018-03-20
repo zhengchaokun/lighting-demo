@@ -6,7 +6,7 @@
         <li class="cell pdr20" @click="showPickModal">
             <span>
                 <span class="text-label inline-b">机构</span>
-                <span class="text-label ml40 inline-b">杭城善事</span>
+                <span class="text-label ml40 inline-b">{{ dept.deptName }}</span>
             </span>
             
             <div class="fright">
@@ -16,33 +16,41 @@
         </li>
         <div class="line mb30"></div>
 
+        <radio-list v-model="dept" :list="depts" type="deptName" :visible.sync="show_pick_dept" @visible-change="handleVisibleChange"></radio-list>
+
         <div class="query-body">
-            <ul class="tab-bar mb30 flex">
+            <!-- <ul class="tab-bar mb30 flex">
                 <li v-for="(tab,index) in tabs" :key="index" class="tab-item" :class="{'is-active': activeIndex===index}" v-on:click="switchTab(index)">{{tab}}</li>
                 <li class="flex1"></li>
-            </ul>
+            </ul> -->
             <div class="tab-page">
-                <div v-for="(item, index) in items" :key="index" class="tab-page-item bg-white mb30" v-on:click="goDetail(item)">
-                    <div class="line"></div>
-                    <div class="tab-page-title">{{item.customerShortname}}</div>
-                    <div class="line line-left"></div>
-                    <div class="tab-page-content fs30">
-                        <div class="clear">
-                            <span class="text-muted fleft mr106">{{item.details[0].productName}}</span>
-                            <span class="text-muted fleft">{{item.details[0].brandName}}</span>
+                <div v-if="preconts.length>0" v-for="(precont, index) in preconts" :key="index">
+                    <div  v-for="(detail, idx) in precont.details" :key="idx" class="tab-page-item bg-white mb30" @click="goDetail(precont)">
+                        <div class="line"></div>
+                        <div class="tab-page-title">
+                            <span class="fleft mr30">{{ precont.customerShortname }}</span>
+                            <span class="fleft fs30" :class="setColor(precont.precontractStatus)">{{ getByValue('precontractStatus', precont.precontractStatus) }}</span>                        
                         </div>
-                        <div class="clear">
-                            <span class="text-error fleft ls0">{{item.spotOpenDirection=='1'?'采购':'销售'}}</span>
-                            <span>
-                                <span class="text-muted fleft ml80 mr14 ls0">价格</span><span class="text-muted-bold fleft">{{item.details[0].spotPrice}}</span>
-                            </span>
-                            <span>
-                                <span class="text-muted fleft ml80 mr14 ls0">数量</span><span class="text-muted-bold fleft">{{item.details[0].tradeAmount}}</span>
-                            </span>
+                        <div class="line line-left"></div>
+                        <div class="tab-page-content fs30">
+                            <div class="clear">
+                                <span class="text-muted fleft mr106">{{ detail.productName }}</span>
+                                <span class="text-muted fleft">{{ detail.brandName }}</span>
+                            </div>
+                            <div class="clear">
+                                <span class="text-error fleft ls0">{{ getByValue('spotOpenDirection', precont.spotOpenDirection) }}</span>
+                                <span>
+                                    <span class="text-muted fleft ml80 mr14 ls0">价格</span><span class="text-muted-bold fleft">{{ detail.spotPrice }}</span>
+                                </span>
+                                <span>
+                                    <span class="text-muted fleft ml80 mr14 ls0">数量</span><span class="text-muted-bold fleft">{{ detail.tradeAmount }}</span>
+                                </span>
+                            </div>
                         </div>
+                        <div class="line"></div>
                     </div>
-                    <div class="line"></div>
                 </div>
+                <div v-else>暂无预合同</div>
             </div>
         </div>
     </div>
@@ -50,44 +58,89 @@
 <script>
     import App from "light"
     import API from "../../../../lib/api"
+    import RadioList from "../../../../ui/radio-list"
+    const Dict = require('dict');
     export default {
+        components: { RadioList },
+
         data(){
             return {
-                show_pick_modal: false,
-                tabs: ['未确认','待处理','已完成','已作废'],
-                activeIndex: 0,
-                allItems: [[], [], [], []],
-                items:{}
+                dept: {},
+                depts: [],
+                show_pick_dept: false,
+                // tabs: ['未确认','待处理','已完成','已作废'],
+                // activeIndex: 0,
+                // preconts: [[], [], [], []],
+                // items:{},
+                preconts: []
             }
         },
         methods: {
-            switchTab(index) {
-                this.activeIndex = index;
-                this.items = this.allItems[index];
+            getByValue(dict, value) {
+                if(dict=='precontractStatus' && [1,2].indexOf(value)>-1) {
+                    return '未确认';
+                }
+                return Dict.getByValue(dict, value);
+            },
+            setColor(value) {
+                if(value==4) return 'text-green';
+                return 'text-red'
+            },
+            handleVisibleChange(val) {
+                this.show_pick_dept = val;
             },
             showPickModal() {
-                this.show_pick_modal = true
+                this.show_pick_dept = true
             },
-            goDetail(item) {
-                console.log(item)
-                App.navigate("lay/contract/query/detail",{precontId:item.precontId})
+            goDetail(precont) {
+                console.log(precont)
+                App.navigate("lay/contract/query/detail",{ precontId: precont.precontId })
+            }
+        },
+        watch: {
+            dept: {
+                deep: true,
+                handler(val) {
+                    var that = this;
+                    API.contQuery({
+                        deptIdStr: JSON.stringify(val.deptId),
+                        precontStatusStr: '1,2,3,4,5'
+                    }).then(function(data){
+                        var preconts = that.preconts = data;
+                        
+                        // preconts.forEach(function(item) {
+                        //     if(item.precontractStatus==='3') {
+                        //         that.preconts[1].push(item)
+                        //     } else if (item.precontractStatus==='4') {
+                        //         that.preconts[2].push(item)
+                        //     } else if(item.precontractStatus==='5') {
+                        //         that.preconts[3].push(item)
+                        //     }
+                        // })
+                        // that.items = that.preconts[that.activeIndex];
+                    });
+
+                }
             }
         },
         mounted() {
             var that = this;
-            API.contQuery({}).then(function(data){
-                    var allItems = data;
-                    allItems.forEach(function(item) {
-                        if(item.precontractStatus==='3') {
-                            that.allItems[1].push(item)
-                        } else if (item.precontractStatus==='4') {
-                            that.allItems[2].push(item)
-                        } else if(item.precontractStatus==='5') {
-                            that.allItems[3].push(item)
-                        }
-                    })
-                    that.items = that.allItems[that.activeIndex];
-                });
+
+            //查询结构列表 
+            API.deptQuery({}).then(function(data) {
+                // if(that.$route.query.precont) {
+                //     that.precont = JSON.parse(that.$route.query.precont);
+                // }
+                that.depts = data;
+                that.dept = that.depts[0];
+                that.depts.forEach(function(dept) {
+                    // if(dept.deptId = that.precont.deptId) {
+                    //     that.dept = dept;
+                    // }
+                })
+            })
+
+            
         }
     }
 </script>
@@ -139,6 +192,9 @@
         height: 0.7rem;
         padding: 0.2rem 0.3rem;
     }
+    // .text-status {
+    //     font-size: 
+    // }
     .tab-page-content {
         height: 1.36rem;
         padding: 0.16rem 0.3rem 0.2rem 0.3rem;

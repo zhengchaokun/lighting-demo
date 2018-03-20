@@ -6,7 +6,7 @@
         <li class="cell pdr20" @click="showPickModal">
             <span>
                 <span class="text-label inline-b">机构</span>
-                <span class="text-label ml20 inline-b">杭城善事</span>
+                <span class="text-label ml20 inline-b">{{ dept.deptName }}</span>
             </span>
             
             <div class="fright">
@@ -16,34 +16,39 @@
         </li>
         <div class="line mb30"></div>
 
+        <radio-list v-model="dept" :list="depts" type="deptName" :visible.sync="show_pick_dept" @visible-change="handleVisibleChange"></radio-list>
+
+
         <div class="query-body">
             <ul class="tab-bar mb30 flex">
                 <!-- <li v-for="(tab,index) in tabs" :key="index" class="tab-item" :class="[{'is-active': activeIndex===index},{'flex1':index===tabs.length-1}]">{{tab}}</li> -->
                 
-                <li v-for="(tab,index) in tabs" :key="index" class="tab-item" :class="{'is-active': activeIndex===index}" v-on:click="switchTab(index)">{{tab}}</li>
+                <li v-for="(tab,index) in tabs" :key="index" class="tab-item" :class="{'is-active': activeIndex===index}" @click="switchTab(index)">{{tab}}</li>
                 <li class="flex1"></li>
             </ul>
             <div class="tab-page">
-                <div v-for="(item, index) in items" :key="index" class="tab-page-item bg-white mb30" v-on:click="goDetail(item)">
-                    <div class="line"></div>
-                    <div class="tab-page-title">{{item.name}}</div>
-                    <div class="line line-left"></div>
-                    <div class="tab-page-content fs30">
-                        <div class="clear">
-                            <span class="text-muted fleft mr106">{{item.label}}</span>
-                            <span class="text-muted fleft">{{item.brand}}</span>
+                <div v-if="items.length>0" v-for="(item, index) in items" :key="index">
+                    <div v-for="(detail, idx) in item.details" :key="idx" class="tab-page-item bg-white mb30" @click="goDetail(item, index)">
+                        <div class="line"></div>
+                        <div class="tab-page-title">{{item.customerShortname}}</div>
+                        <div class="line line-left"></div>
+                        <div class="tab-page-content fs30">
+                            <div class="clear">
+                                <span class="text-muted fleft mr106">{{detail.productName}}</span>
+                                <span class="text-muted fleft">{{detail.brandName}}</span>
+                            </div>
+                            <div class="clear">
+                                <span class="text-error fleft ls0">{{ getByValue('spotOpenDirection', item.spotOpenDirection) }}</span>
+                                <span>
+                                    <span class="text-muted fleft ml80 mr14 ls0">价格</span><span class="text-muted-bold fleft">{{ detail.spotPrice }}</span>
+                                </span>
+                                <span>
+                                    <span class="text-muted fleft ml80 mr14 ls0">数量</span><span class="text-muted-bold fleft">{{ detail.tradeAmount }}</span>
+                                </span>
+                            </div>
                         </div>
-                        <div class="clear">
-                            <span class="text-error fleft ls0">采购</span>
-                            <span>
-                                <span class="text-muted fleft ml80 mr14 ls0">价格</span><span class="text-muted-bold fleft">{{item.price}}</span>
-                            </span>
-                            <span>
-                                <span class="text-muted fleft ml80 mr14 ls0">数量</span><span class="text-muted-bold fleft">{{item.amount}}</span>
-                            </span>
-                        </div>
+                        <div class="line"></div>
                     </div>
-                    <div class="line"></div>
                 </div>
             </div>
         </div>
@@ -51,44 +56,99 @@
 </template>
 <script>
     import App from "light"
+    const API = require('api')
+    const Dict = require('dict');
+    import RadioList from "../../../../ui/radio-list"
+
     export default {
+        components: { RadioList },
         data(){
             return {
-                show_pick_modal: false,
+                dept: {},
+                depts: [],
+                matchInfo: {},
+                preconts: [[],[],[]],
+                show_pick_dept: false,
                 tabs: ['未匹配','待处理','已匹配'],
                 activeIndex: 0,
-                allItems:[[{
-                    name: '东南新材料',
-                    brand: '品牌xxx',
-                    label: '2017/2018年度棉花',
-                    price: '4480.0',
-                    amount: '1200'
-                }],
-                [{
-                    name: '西北新材料',
-                    brand: '品牌xxx',
-                    label: '2017/2018年度棉花',
-                    price: '1180.0',
-                    amount: '3400'
-                }]
-                ],
                 items:[]
             }
         },
+        watch: {
+            dept: {
+                deep: true,
+                handler(val) {
+                    var that = this;
+                    API.contQuery({
+                        deptIdStr: JSON.stringify(val.deptId),
+                        precontStatusStr: '1,2,3'
+                    }).then(function(data){
+                        var preconts = data;
+                        
+                        preconts.forEach(function(item) {
+                            if(item.precontractStatus==='1') {
+                                that.preconts[0].push(item)
+                            } else if (item.precontractStatus==='3') {
+                                that.preconts[1].push(item)
+                            } else if(item.precontractStatus==='2') {
+                                that.preconts[2].push(item)
+                            }
+                        })
+                        that.items = that.preconts[that.activeIndex];
+                    });
+
+                }
+            }
+        },
         methods: {
+            getByValue(dict, value) {
+                // if(dict=='precontractStatus' && [1,2].indexOf(value)>-1) {
+                //     return '未确认';
+                // }
+                return Dict.getByValue(dict, value);
+            },
             switchTab(index) {
                 this.activeIndex = index;
-                this.items = this.allItems[index];
+                this.items = this.preconts[index];
             },
             showPickModal() {
-                this.show_pick_modal = true
+                this.show_pick_dept = true
             },
-            goDetail(item) {
-                App.navigate("lay/contract/cmd/detail",item)
+            handleVisibleChange(val) {
+                this.show_pick_dept = val;
+            },
+            goDetail(item, index) {
+                App.navigate("lay/contract/cmd/detail", { 
+                    precontId: item.precontId,
+                    preconts: JSON.stringify(this.preconts[this.activeIndex]),
+                    index: index
+                })
             }
         },
         mounted() {
-            this.items = this.allItems[0]
+            var that = this;
+            // this.items = this.allItems[0];
+            API.deptQuery({}).then(function(data) {
+                //新建后立即匹配指令
+                that.depts = data;
+                if(that.$route.query.precontId) {
+                    var precontId = that.$route.query.precontId;
+                    API.contMatchInfoQuery({ contId: precontId}).then(function(data1) {
+                        that.matchInfo = data1;
+                        
+                        data.forEach(function(dept) {
+                            if(dept.deptId = that.matchInfo.deptId) {
+                                that.dept = dept;
+                            }
+                        })
+                    })
+                } else {
+                    // that.depts = data;
+                    that.dept = that.depts[0];
+                }
+                
+                
+            })
         }
     }
 </script>

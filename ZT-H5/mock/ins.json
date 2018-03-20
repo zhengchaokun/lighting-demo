@@ -13,16 +13,20 @@
       "fundName": "产品名1",
       "combiId": 0,
       "combiName": "焦煤投资策略组合1",
-      "marketNo": 0,
+      "marketNo": 3,
       "reportCode": "string",
       "stockName": "",
-      "insStatus": "string",
+      "insStatus": "4",
       "insAmount": 0,
       "insPrice": 4456.1,
       "limitPrice": 0,
       "entrustDirection": 32,
       "entrustAmount": 0,
-      "dealAmount": 0
+      "dealAmount": 0,
+      "directOperator": 0,
+      "directOperatorName": "李雷",
+      "tradeOperator": 0,
+      "tradeOperatorName": "韩梅梅"
     },{
       "foreignmarketFlag": 0,
       "insId": 0,
@@ -31,16 +35,20 @@
       "fundName": "产品名2",
       "combiId": 0,
       "combiName": "焦煤投资策略组合2",
-      "marketNo": 0,
+      "marketNo": 4,
       "reportCode": "string",
       "stockName": "",
-      "insStatus": "string",
+      "insStatus": "1",
       "insAmount": 0,
       "insPrice": 4456.1,
       "limitPrice": 4456.1,
       "entrustDirection": 33,
       "entrustAmount": 0,
-      "dealAmount": 0
+      "dealAmount": 0,
+      "directOperator": 0,
+      "directOperatorName": "李雷",
+      "tradeOperator": 0,
+      "tradeOperatorName": "韩梅梅"
     },{
       "foreignmarketFlag": 0,
       "insId": 0,
@@ -49,16 +57,20 @@
       "fundName": "产品名3",
       "combiId": 0,
       "combiName": "焦煤投资策略组合3",
-      "marketNo": 0,
+      "marketNo": 7,
       "reportCode": "string",
       "stockName": "",
-      "insStatus": "string",
+      "insStatus": "2",
       "insAmount": 0,
       "insPrice": 4456.1,
       "limitPrice": 0,
       "entrustDirection": 33,
       "entrustAmount": 0,
-      "dealAmount": 0
+      "dealAmount": 0,
+      "directOperator": 0,
+      "directOperatorName": "李雷",
+      "tradeOperator": 0,
+      "tradeOperatorName": "韩梅梅"
     }
   ]
 }

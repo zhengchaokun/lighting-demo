@@ -47,9 +47,8 @@
             edit(type, detail) {
                 // console.log(type, detail)
                 if(type=='step1') {
-                    App.navigate("lay/contract/add/step1",{ precont: JSON.stringify(this.precont) });
+                    App.navigate("lay/contract/add/step1", { precont: JSON.stringify(this.precont) });
                 } else {
-                    // console.log(this.precont)
                     App.navigate("lay/contract/add/step2", { 
                         precont: JSON.stringify(this.precont),
                         detail:  JSON.stringify(detail),
@@ -80,7 +79,7 @@
                         App.navigate("lay/contract/query/detail",{})                        
                     },
                     confirm() {
-                        App.navigate("lay/contract/cmd/list?type=1")
+                        App.navigate("lay/contract/cmd/detail",{ precontId: that.precont.precontId })
                         return true
                     }
                 })

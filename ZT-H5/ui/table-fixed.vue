@@ -10,9 +10,11 @@
             <tbody>
                 <tr v-for="(row,index) in value" :key="index">
                     <td class="fixed-radio" :class="{'pdt20':index==0}" @click="toggleChecked(index)">
+                        
                         <img v-if="checked.indexOf(index)>-1" src="../images/radio-selected.svg" class="check-icon">
                     </td>
                     <td v-for="(item,key,idx) in row" :key="idx" :class="[{'fixed':idx<1},{'pdl225':idx==1},{'pdt20':index==0}]">{{item}}</td>
+                    
                 </tr>
             </tbody>
         </table>
@@ -23,7 +25,7 @@
     export default{
         data(){
             return{
-                // currentValue
+                
             }
         },
         props: {
@@ -43,7 +45,30 @@
                     this.checked.push(index);
                 }
             }
-        }
+        },
+        // mounted () {
+        //     var that = this;
+        //     document.addEventListener('scroll', function(event) {
+        //         console.log(that.$el)
+        //         var table = that.$el;
+        //         var se = document.documentElement.clientHeight;
+        //         var top = table.getBoundingClientRect().top;
+        //         that.tops = [];
+        //         that.tops.push(top/50 + 'rem');
+        //         for(var i = 1; i < that.value.length+2; i++) {
+        //             if(i==1){
+        //                 that.tops.push((top + 31 * i)/50 +0.08+ 'rem');
+        //             } else if(i==2) {
+        //                 that.tops.push((top + 31 + 43)/50 +0.08+ 'rem');
+        //             } else {
+        //                 that.tops.push((top + 31 + 43 + 33 * (i-2))/50 +0.08+ 'rem');
+        //             }
+                                            
+        //         }
+        //         console.log(se,top)
+
+        //     })
+        // }
     }
 </script>
 
@@ -81,19 +106,19 @@
     }
     .fixed-th {
         width: 0.8rem;
-        position: fixed;
+        position: absolute;
         left: 0;
         background: #F8FAFB;
     }
     td.fixed-radio {
-        position: fixed;
+        position: absolute;
         left: 0;
         width: 0.8rem;
         padding-left: 0.2rem;
         background: #fff;
     }
     .fixed {
-        position: fixed;
+        position: absolute;
         left: 0.8rem;
         background: #fff;
         min-width: 1.2rem;
@@ -107,9 +132,7 @@
     .pdt20 {
         padding-top: 0.2rem;
     }
-    .check-icon {
-        // background: url("../../images/radio-selected.svg")
-    }
+   
 
     /* 设置滚动条的样式 */
 

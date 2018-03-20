@@ -135,7 +135,7 @@ const API = require('api')
 const Dialog = require('dialog')
 
 export default {
-    components: {RadioList},
+    components: { RadioList },
     data() {
         return {
             dept: {},//机构
@@ -237,14 +237,23 @@ export default {
                 + (!this.checkSpace(precont.warehouseName) ? ('，'+precont.warehouseName) : '')
                 + (!this.checkSpace(precont.deliverTime) ? ('，'+precont.deliverTime) : '')
                 + (!this.checkSpace(precont.remark) ? ('，'+precont.remark) : '');
-
-            App.navigate("lay/contract/add/step3", { 
-                precont: JSON.stringify(that.precont),
-                formalInfo: formalInfo
-            });
+            //TODO:编辑接口！
+            API.contMainModify({data: that.precont}).then(function(data) {
+                Dialog.alert('编辑主体成功！');
+                if(that.$route.query.page=='detail') {
+                    App.navigate("lay/contract/query/detail", { 
+                        precontId: that.precont.precontId
+                    });
+                } else {
+                    App.navigate("lay/contract/add/step3", { 
+                        precont: JSON.stringify(that.precont),
+                        formalInfo: formalInfo
+                    });
+                }
+            })
+            
         },
         addStep1() {
-            // this.checkValid();
 
             var that = this;
             API.contIdGet({}).then(function(data) {
@@ -321,7 +330,7 @@ export default {
     mounted () { 
         var that = this; 
 
-        //查询结构列表 
+        //查询机构列表 
         API.deptQuery({}).then(function(data) {
             if(that.$route.query.precont) {
                 that.precont = JSON.parse(that.$route.query.precont);
@@ -355,29 +364,29 @@ export default {
         })
         
 
-        API.deptQuery({}).then(function(data) {
-            if(that.$route.query.precont) {
-                that.precont = JSON.parse(that.$route.query.precont);
-            }
-            that.depts = data;
-            that.depts.forEach(function(dept) {
-                if(dept.deptId = that.precont.deptId) {
-                    that.dept = dept;
-                }
-            })
-        })
+        // API.deptQuery({}).then(function(data) {
+        //     if(that.$route.query.precont) {
+        //         that.precont = JSON.parse(that.$route.query.precont);
+        //     }
+        //     that.depts = data;
+        //     that.depts.forEach(function(dept) {
+        //         if(dept.deptId = that.precont.deptId) {
+        //             that.dept = dept;
+        //         }
+        //     })
+        // })
         //查询结构列表 
-        API.deptQuery({}).then(function(data) {
-            if(that.$route.query.precont) {
-                that.precont = JSON.parse(that.$route.query.precont);
-            }
-            that.depts = data;
-            that.depts.forEach(function(dept) {
-                if(dept.deptId = that.precont.deptId) {
-                    that.dept = dept;
-                }
-            })
-        })
+        // API.deptQuery({}).then(function(data) {
+        //     if(that.$route.query.precont) {
+        //         that.precont = JSON.parse(that.$route.query.precont);
+        //     }
+        //     that.depts = data;
+        //     that.depts.forEach(function(dept) {
+        //         if(dept.deptId = that.precont.deptId) {
+        //             that.dept = dept;
+        //         }
+        //     })
+        // })
         
     }
 };

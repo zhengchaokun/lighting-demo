@@ -3,16 +3,16 @@
     <div>
         <div class="edit-bar flex fs30">
             <span class="fs-bold">合同主体</span><span class="flex1 ml20" @click="toEdit('main')"> /点击编辑</span>
-            <span class="text-error" @click="deleteMain">删除</span>
+            <span class="text-error" @click="deleteInfo('main')">删除</span>
         </div>
         <div class="line"></div>
-        <textarea readonly :value="main" class="detail-textarea" style="height: 1.2rem;"></textarea>
+        <textarea readonly :value="info_main" class="detail-textarea" style="height: 1.2rem;"></textarea>
         <div class="line mb30"></div>
 
-        <div v-for="(detail,index) in details" :key="index">
+        <div v-for="(detail,index) in info_details" :key="index">
             <div class="edit-bar flex fs30">
-                <span>合同明细{{index+1}}</span><span class="flex1 ml20" @click="toEdit('detail')">/点击编辑</span>
-                <span class="text-error" @click="deleteDetail(detail)">删除</span>
+                <span>合同明细{{index+1}}</span><span class="flex1 ml20" @click="toEdit('detail', details[index])">/点击编辑</span>
+                <span class="text-error" @click="deleteInfo('detail', detail)">删除</span>
             </div>
             <div class="line"></div>
             <textarea readonly :value="detail" class="detail-textarea" style="height: 1.2rem;"></textarea>
@@ -20,18 +20,18 @@
         </div>
 
         <div class="edit-bar flex fs30">
-            <span>匹配指令</span><span class="flex1 ml20" @click="toEdit('match')">/点击编辑</span>
+            <span class="fs-bold">匹配指令</span><span class="flex1 ml20" @click="toEdit('cmd')"> /点击编辑</span>
         </div>
+        
 
         <template v-if="matchInfo=={}">
             <div class="line"></div>
-            <textarea readonly value="没有匹配指令" class="detail-textarea" style="height: 1.2rem;"></textarea>
+            <textarea readonly value="暂无匹配指令" class="detail-textarea" style="height: 1.2rem;"></textarea>
             <div class="line mb30"></div>
         </template>
         <template v-else>
-            <div>
-                <table-fixed :readonly="true" :value="matchInfo" :checked="checked" :columns="columns"></table-fixed> 
-            </div> 
+            <table-fixed :readonly="true" :value="cmds" :checked="checked" :columns="columns"></table-fixed> 
+            <div class="line mb30"></div>
         </template>
         
 
@@ -48,117 +48,182 @@
 
     const Dialog = require("dialog")
     const Dict = require('dict')
+
     export default {
         components: {TableFixed},  
         data(){
             return {
-                // body: {
-                //     main:'杭实善成，PE策略1号，PE，采购',
-                //     details: [
-                //         '品牌，牌号，分类，数量，币种，短溢装，备注',
-                //         '品牌，牌号，分类，数量，币种，短溢装，备注'
-                //     ]
-                // },
-                main: '',
+                info_main: '',
+                info_details: [],
+                info_cmds: [],
                 details: [],
-                matchInfo: [],
+                cmds: [],
+                matchInfo: {},
                 columns: ['合约', '委托方向', '价格', '数量', '指令状态', '成交数量', '市场','下达人', '交易员'],
                 checked: [0,1]
             }
         },
         methods: {
+            getByValue(dict, value) {
+                return Dict.getByValue(dict, value);
+            },
+            checkValid(str) {
+                if((!str && typeof str!=='number') || new RegExp("^[]+$").test(str)) {
+                    return false
+                } else {
+                    return true
+                }
+            },
+            setInfoStr(obj) {
+                var str = '';
+                for(var key in obj) {
+                    if(typeof obj[key] !== 'object') {
+                        if(this.checkValid(obj[key])) {
+                            str += obj[key] + '，';
+                        }
+                    }
+                }
+                str = str.substring(0, str.length-1)
+                return str;
+
+            },
             back() {
                 App.navigate("lay/contract/query/list")
             },
-            toEdit(type) {
-                if(type=='main') {
-                    App.navigate("lay/contract/add/step1")
-                } else if(type=='detail') {
-                    App.navigate("lay/contract/add/step2")
+            toEdit(type, detail) {
+                console.log(type, detail)
+                if(type == 'main') {
+                    App.navigate("lay/contract/add/step1", { 
+                        precont: JSON.stringify(this.matchInfo),
+                        page: 'detail' 
+                    })
+                } else if(type == 'detail') {
+                    App.navigate("lay/contract/add/step2", {
+                        precont: JSON.stringify(this.matchInfo),
+                        detail:  JSON.stringify(detail),
+                        formalInfo: this.info_main,
+                        page: 'detail'
+                    })
                 } else {
-                    App.navigate("lay/contract/cmd/detail")
+                    App.navigate("lay/contract/cmd/detail", { precont: JSON.stringify(this.matchInfo)})
                 }
             },
-            deleteMain() {
+            deleteInfo(type, detail) {
                 var that = this;
                 Dialog.confirm({
                     msg:'确定删除？',
                     confirmText:"取消",
                     cancelText:"删除",
                     cancel(){
-                        console.log('success')
-                        API.contMainDelete({precontId:that.main.contId}).then(function(data){
-                            Dialog.alert("删除成功！");
-                            App.navigate("lay/contract/query/list")
-                        })
+                        if(type=='main') {
+                            API.contMainDelete({ precontId: that.matchInfo.precontId}).then(function(data){
+                                Dialog.alert("删除成功！");
+                                App.navigate("lay/contract/query/list");
+                            })
+                        } else {
+                            API.contDetailDelete({ 
+                                precontId: that.matchInfo.precontId,
+                                goodsId: detail.goodsId
+                            }).then(function(data){
+                                Dialog.alert("删除成功！");
+                                //更新预合同信息
+                                API.contMatchInfoQuery({ contId: that.precontId}).then(function(data) {
+                                    that.matchInfo = data;
+                                });
+
+                            })
+                        }
+                        
                     },
                     confirm() {
                         return true
                     }
                 })
-            },
-            deleteDetail(d) {
-
-            },
-            deleteMatch() {
-
             }
         },
-        beforeRender(params) {
-            var that = this;
-            //查询预合同匹配信息
-            API.contMatchInfoQuery({contId:params.preContId}).then(function(data) {
+        watch: {
+            matchInfo: {
+                deep: true,
+                handler(val) {
+                    var data = val;
+                    var that = this;
+                    that.info_main = that.setInfoStr(data);
 
-                if(data && data.insList) {
-                    data.insList.forEach(function(d, i) {
-                        let item = {};
-                        item.reportCode = d.reportCode;
-                        Object.keys(Dict.entrustDirection).forEach(function(key){
-                            if(d.entrustDirection == Dict.entrustDirection[key]) {
-                                item.entrustDirection = key;
-                            }
-                        });
-                        item.insPrice = d.insPrice;
-                        item.insAmount = d.insAmount;
-                        Object.keys(Dict.insStatus).forEach(function(key){
-                            if(d.insStatus == Dict.insStatus[key]) {
-                                item.insStatus = key;
-                            }
-                        });
-                        item.dealAmount = d.dealAmount;
-                        Object.keys(Dict.marketNo).forEach(function(key){
-                            if(d.marketNo == Dict.marketNo[key]) {
-                                item.marketNo = key;
-                            }
-                        });
-                        item.directOperatorName = d.directOperatorName;
-                        item.tradeOperatorName = d.tradeOperatorName;
-
-                        that.matchInfo.push(item);
-                       
+                    that.details = data.detailList;
+                    that.info_details = [];
+                    that.details.forEach(function(d) {
+                        that.info_details.push(that.setInfoStr(d));
                     })
-                } else {
-                    that.matchInfo = {};
+
+                    if(data.insList && data.insList.length>0) {
+                        that.cmds = [];
+                        data.insList.forEach(function(d, i) {
+                            let item = {};
+
+                            item.reportCode = d.reportCode;
+                            item.entrustDirection = that.getByValue('entrustDirection', d.entrustDirection);
+                            item.insPrice = d.insPrice;
+                            item.insAmount = d.insAmount;
+                            item.insStatus = that.getByValue('insStatus', d.insStatus);
+                            item.dealAmount = d.dealAmount;
+                            item.marketNo = that.getByValue('marketNo', d.marketNo);
+                            item.directOperatorName = d.directOperatorName;
+                            item.tradeOperatorName = d.tradeOperatorName;
+                            that.cmds.push(item);
+                        })
+                    }
                 }
-                //查询策略
-                API.strategyQuery({deptId:params.precontId}).then(function(data1) {
-                    let strategy = '';
-                    data1.forEach(function(d) {
-                        strategy += d.strategyName+'，';
-                    })
-                    console.log(data)
-                    let direction = data1.spotOpenDirection=='1' ? '采购' : '销售';
-                    that.main = '杭城善时' + '，' + strategy + direction;
-                    var details = data.detailList;
-                    details.forEach(function(d) {
-                        that.details.push(d.brandName + '，' + d.grade + '，' + d.spotType + '，' + d.tradeAmount + '，' + d.tradeCurrencyNo + '，' + d.moreorlessProportion + '，' + d.remark)
-                    })
-                })
-            })
-            
+            }
+        },
+        mounted() {
+            if(this.$route.query.precontId) {
+                var that = this;
+                that.precontId = this.$route.query.precontId;
+                //查询预合同匹配信息
+                API.contMatchInfoQuery({ contId: that.precontId}).then(function(data) {
+                    that.matchInfo = data;
+                    // that.info_main = that.setInfoStr(data);
 
-            
-            
+                    // that.details = data.detailList;
+                    // that.details.forEach(function(d) {
+                    //     that.info_details.push(that.setInfoStr(d));
+                    // })
+
+                    // if(data.insList) {
+                    //     data.insList.forEach(function(d, i) {
+                    //         let item = {};
+
+                    //         item.reportCode = d.reportCode;
+                    //         item.entrustDirection = that.getByValue('entrustDirection', d.entrustDirection);
+                    //         item.insPrice = d.insPrice;
+                    //         item.insAmount = d.insAmount;
+                    //         item.insStatus = that.getByValue('insStatus', d.insStatus);
+                    //         item.dealAmount = d.dealAmount;
+                    //         item.marketNo = that.getByValue('marketNo', d.marketNo);
+                    //         item.directOperatorName = d.directOperatorName;
+                    //         item.tradeOperatorName = d.tradeOperatorName;
+
+                    //         that.cmds.push(item);
+                    //     })
+                    // }
+                        
+                    
+                    //查询策略
+                    // API.strategyQuery({deptId:params.precontId}).then(function(data1) {
+                    //     let strategy = '';
+                    //     data1.forEach(function(d) {
+                    //         strategy += d.strategyName+'，';
+                    //     })
+                    //     console.log(data)
+                    //     let direction = data1.spotOpenDirection=='1' ? '采购' : '销售';
+                    //     that.main = '杭城善时' + '，' + strategy + direction;
+                    //     var details = data.detailList;
+                    //     details.forEach(function(d) {
+                    //         that.details.push(d.brandName + '，' + d.grade + '，' + d.spotType + '，' + d.tradeAmount + '，' + d.tradeCurrencyNo + '，' + d.moreorlessProportion + '，' + d.remark)
+                    //     })
+                    // })
+                })
+            }
         }
     }
 </script>

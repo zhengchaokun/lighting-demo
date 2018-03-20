@@ -14,7 +14,7 @@
 </template>
 <script>
     export default {
-        data(){
+        data() {
             return {
                 currentValue: this.value[this.type],
                 currentVisible: this.visible
@@ -29,6 +29,7 @@
         },
         methods: {
             handleClick() {
+                if(!this.currentValue)return;
                 this.$emit('btnClick', this.currentValue);
                 this.currentVisible = false;
             },

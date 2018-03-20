@@ -279,31 +279,7 @@
                 spotUnitInfo: {},
                 coinTypes: [],//币种                
                 spotUnits: [],//计量单位
-                detail: {
-                    precontId: 0,
-                    productName: '',
-                    brandName: '',
-                    spotType: '',
-                    tradeAmount: '',
-                    spotUnit: '',
-                    spotPrice: '',
-                    tradeCurrencyNo: '',
-                    moreorlessProportion: '',
-                    standard: '',
-                    material: '',
-                    batchNumber: '',
-                    priceCategory: '',
-                    productionArea: '',
-                    deliveryPlace: '',
-                    totalMoisture: '',
-                    modelNumber: '',
-                    grade: '',
-                    volatileMatter: '',
-                    ashContent: '',
-                    charcoalHeat: '',
-                    sulfurContent: '',
-                    remark: ''
-                },
+                detail: {},
                 items:[{}],
                 formalInfo: '',
                 showModal: false,
@@ -423,13 +399,20 @@
                 //判断是新建还是编辑
                 console.log(that.detail.goodsId)
                 if(that.detail.goodsId !== undefined) {
-                    API.contDetailModify({data: that.detail}).then(function(data) {
+                    API.contDetailModify({detail: that.detail}).then(function(data) {
                         Dialog.alert('编辑明细成功！');
-                        App.navigate("lay/contract/add/step3", {
-                            precont: JSON.stringify(that.precont),
-                            detail: JSON.stringify(that.detail),
-                            formalInfo: that.formalInfo
-                        });   
+                        console.log(that.$route.query.page)
+                        if(that.$route.query.page=='detail') {
+                            App.navigate("lay/contract/query/detail", { 
+                                precontId: that.precont.precontId
+                            });
+                        } else {
+                            App.navigate("lay/contract/add/step3", {
+                                precont: JSON.stringify(that.precont),
+                                detail: JSON.stringify(that.detail),
+                                formalInfo: that.formalInfo
+                            });   
+                        }
                     }).catch(function(data) {
                         Dialog.alert('编辑明细失败！');
                     })
@@ -466,22 +449,20 @@
         mounted(){
             var that = this;
             var precont = {};
-             
             if(this.$route.query.precont){
                 precont = JSON.parse(this.$route.query.precont);  
-                console.log(precont)                      
                 that.precont = precont;
-                if(!this.$route.query.add) {
-                    if(precont.detailList && precont.detailList.length>0) {
-                        that.detail = precont.detailList[0];
-                    }
-                }
+                // if(!this.$route.query.add) {
+                //     if(precont.detailList && precont.detailList.length>0) {
+                //         that.detail = precont.detailList[0];
+                //     }
+                // }
                 
             }
             if(this.$route.query.detail) {
                 that.detail = JSON.parse(this.$route.query.detail);
             }
-            // console.log(that.detail)
+            console.log(that.detail)
             //获todo取类别id
             API.futurtTypeVarietyQuery({futureKindId: that.precont.futureKindId}).then(function(data) {
                 that.vid = data[0].varietyId;
@@ -529,7 +510,6 @@
                     + (!this.checkSpace(precont.remark) ? ('，'+precont.remark) : '');
             }
             
-            console.log('ooooo',this.precont)
         }
     }
     

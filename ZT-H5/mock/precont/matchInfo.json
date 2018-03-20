@@ -14,6 +14,7 @@
                             "warehouseName": "仓库1",
                             "deliverTime": "",
                             "remark": "匹配指令的备注",
+                            "precontractStatus": "2",
                             "detailList": [
                               {"precontId": 123,
                                 "goodsId": 999,
@@ -114,6 +115,43 @@
                                 "tradeOperatorName": "Lily"
                               }
                             ],
-                            "realdealList": ""
+                            "realdealList": [
+                              {
+                                "foreignmarketFlag": 0,
+                                "realdealSerialNo": 0,
+                                "insId": 0,
+                                "insStockId": 0,
+                                "fundId": 0,
+                                "fundName": "string",
+                                "combiId": 0,
+                                "combiName": "string",
+                                "marketNo": 0,
+                                "reportCode": "string",
+                                "stockName": "string",
+                                "entrustDirection": 0,
+                                "closeType": 0,
+                                "dealAmount": 0,
+                                "dealPrice": 0,
+                                "dealBalance": 0
+                              },
+                              {
+                                "foreignmarketFlag": 0,
+                                "realdealSerialNo": 0,
+                                "insId": 0,
+                                "insStockId": 0,
+                                "fundId": 0,
+                                "fundName": "string",
+                                "combiId": 0,
+                                "combiName": "string",
+                                "marketNo": 0,
+                                "reportCode": "string",
+                                "stockName": "string",
+                                "entrustDirection": 0,
+                                "closeType": 0,
+                                "dealAmount": 0,
+                                "dealPrice": 0,
+                                "dealBalance": 0
+                              }
+                            ]
                           }
                         }

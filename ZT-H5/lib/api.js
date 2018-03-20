@@ -282,6 +282,13 @@ module.exports = {
     },
 
     /**
+     * 预合同信息删除 - 物资明细信息。
+     */
+    contDetailDelete(params) {
+        return execute('delete', '/precont/contDetail', params);
+    },
+
+    /**
      * 预合同信息添加-物资明细信息，对于一个预合同可以调此接口多次添加多个物资明细。分批提交。
      */
     contDetailAdd(params){
