@@ -93,7 +93,6 @@
                 this.show_pick_dept = true
             },
             goDetail(precont) {
-                console.log(precont)
                 App.navigate("lay/contract/query/detail",{ precontId: precont.precontId })
             }
         },

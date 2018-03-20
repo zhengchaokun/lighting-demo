@@ -45,7 +45,6 @@
         },
         methods: {
             edit(type, detail) {
-                // console.log(type, detail)
                 if(type=='step1') {
                     App.navigate("lay/contract/add/step1", { precont: JSON.stringify(this.precont) });
                 } else {
@@ -61,7 +60,6 @@
                 App.navigate("lay/contract/add/"+view);
             },
             continueAdd() {
-                console.log(this.precont)
                 App.navigate("lay/contract/add/step2", {
                     precont: JSON.stringify(this.precont),
                     formalInfo: this.info_body,
@@ -74,6 +72,8 @@
                     msg:'预合同创建成功，是否立即匹配期货指令？',
                     confirmText:"匹配期货指令",
                     cancelText:"取消",
+                    textLeft:true,
+                    vertical:true,
                     cancel(){
                         //跳转
                         App.navigate("lay/contract/query/detail",{})                        
@@ -95,8 +95,6 @@
         mounted () {
             var that = this;
             var precont = JSON.parse(this.$route.query.precont);
-            // this.precont_copy = precont;
-            // console.log(this.precont_copy)
             if(this.$route.query.formalInfo) {
                 this.info_body = this.$route.query.formalInfo;
             } else {
@@ -106,7 +104,6 @@
 
             //查询单个预合同的信息
             API.contMatchInfoQuery({ contId: precont.precontId }).then(function(data) {
-                console.log(data);
                 that.precont = data;
                 that.details = data.detailList;
                 that.details.forEach(function(detail,index) {
@@ -137,14 +134,5 @@
     .edit-bar span:last-child {
         color: #9B9B9B;
     }
-    .btn-wrap-two {
-        position: absolute;
-        width: 100%;
-        bottom: 0;
-        padding: 0 0.3rem 0.4rem 0.3rem;
-    }
-    .alert-box p{
-        background: pink;
-        text-align: left !important;
-    }
+  
 </style>

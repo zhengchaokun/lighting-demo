@@ -3,14 +3,17 @@
     font-size: 0.34rem;
     color: #4A4A4A;
     letter-spacing: 0.005rem;
-    line-height: 0.34rem;
+    line-height: 0.4rem;
     float: left;
 }
 .text-sub {
     font-size: 0.3rem;
     color: #7A7A7A;
     letter-spacing: 0.0044rem;
-    line-height: 0.3rem;
+    line-height: 0.4rem;
+}
+.icon-more {
+    margin-top: 0.02rem;
 }
 .text-link {
     font-size: 0.3rem;
@@ -46,8 +49,19 @@
     letter-spacing: 0;
     line-height:0.48rem;
 }
-.modal {
+.btn-plain {
+    background: #FFFFFF;
+    border: 1px solid #399DE2;
+    color: #399DE2;
+}
+.btn-wrap-two {
     position: absolute;
+    width: 100%;
+    bottom: 0;
+    padding: 0 0.3rem 0.4rem 0.3rem;
+}
+.modal {
+    position: fixed;
     top: 0;
     bottom: 0;
     width: 100%;
@@ -55,10 +69,16 @@
     background: #F9F9F9;
 }
 .modal > .detail-list {
-    padding: 0.4rem 0.3rem 0.2rem 0.3rem;
-    height: 1.48rem;
+    display: inline-block;
+    padding: 0.4rem 0.3rem 0.12rem 0.3rem;
+    // min-height: 1.48rem;
 }
-
+.detail-list * {
+    float: left;
+}
+.detail-list img {
+    margin: 0 0.2rem 0 0.1rem;
+}
 .detail-textarea {
     padding: 0.2rem 0.3rem;
     font-size: 0.34rem;

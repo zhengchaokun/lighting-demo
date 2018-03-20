@@ -21,7 +21,7 @@
         <radio-list v-model="currencyInfo" :top="top" :list="coinTypes" type="currencyName" :visible.sync="show_pick_currency" @visible-change="handleVisibleChange1"></radio-list>
         <radio-list v-model="spotUnitInfo" :top="top" :list="spotUnits" type="spotUnit" :visible.sync="show_pick_unit" @visible-change="handleVisibleChange2"></radio-list>
 
-        <div class="mb20 tright pdr30 text-link" @click="showModal=true">
+        <div class="mb20 tright pdr30 text-link" @click="openQuickInput">
             快捷输入
         </div>
 
@@ -72,6 +72,7 @@
         </template>
 
         <template>
+            <div class="line"></div>            
             <div class="cell pdr20" @click="showPickModal('spotUnit')">
                 <span>
                     <span class="text-label inline-b"><span class="text-red">*</span>单位</span>
@@ -231,30 +232,23 @@
         <div class="line"></div>
         <div class="pd30 pdb40">
             <button class="btn-normal bg-blue" @click="addStep2">{{detail.goodsId == undefined ? '下一步' : '确 定' }}</button>
-            <!-- <button v-if="detail.goodsId == undefined" class="btn-normal bg-blue" @click="checkValid('add')">下一步</button>
-            <button v-else class="btn-normal bg-blue" @click="checkValid('edit')">确 定</button> -->
         </div>
-        <div class="modal" v-show="showModal">
+       
+        <div class="modal" v-show="show_pick_quick">
             <div class="detail-list clear">
-                <span class="text-small">品牌</span>
-                <img class="ml10 mr20" v-show="selected===0" src="../../../../images/radio-selected.svg">
-                <span class="text-small">，牌号</span>
-                <img class="ml10 mr20" v-show="selected===0" src="../../../../images/radio-selected.svg">
-                <span class="text-small">，分类</span>
-                <img class="ml10 mr20" v-show="selected===0" src="../../../../images/radio-selected.svg">
-                <span class="text-small">，数量</span>
-                <img class="ml10 mr20" v-show="selected===0" src="../../../../images/radio-selected.svg">
-                <span class="text-small">，价格</span>
-                <img class="ml10 mr20" v-show="selected===0" src="../../../../images/radio-selected.svg">
-                <span class="text-small">，短溢装</span>
-                <img class="ml10 mr20" v-show="selected===0" src="../../../../images/radio-selected.svg">
+                <span v-for="(item, index) in items" :key="index" class="text-small" :class="{'fc-gray':input_items.indexOf(index)==-1}">
+                    <span class="text-red" v-if="required.indexOf(item)>-1">*</span>
+                    <span>{{ item }}</span>
+                    <img :key="'img'+index" v-show="input_items.indexOf(index)>-1" src="../../../../images/radio-selected.svg">
+                    <span v-if="index<items.length-1"  :key="'text'+index">，</span>
+                </span>
             </div>
             <div class="line"></div>
-            <textarea class="detail-textarea"></textarea>
+            <textarea class="detail-textarea" v-model="input_text" @input="handleInput"></textarea>
             <div class="line"></div>            
             <div class="detail-tip">说明：以空格符分隔，当前项为空时请预留位置。</div>
             <div class="btn-wrap">
-                <button class="btn-normal bg-blue" @click="showModal=false;">确 定</button>
+                <button class="btn-normal bg-blue" @click="closeQuickInput">确 定</button>
             </div>
         </div>
     </div>
@@ -271,21 +265,22 @@
         data(){
             return {
                 top: 0.8,
-                vid: 5,
-                precont: {
-
-                },
+                vid: 1,
+                precont: {},
                 currencyInfo: {},
                 spotUnitInfo: {},
                 coinTypes: [],//币种                
                 spotUnits: [],//计量单位
                 detail: {},
-                items:[{}],
                 formalInfo: '',
-                showModal: false,
+                show_pick_quick: false,
                 selected: 0,
                 show_pick_currency: false,
-                show_pick_unit: false
+                show_pick_unit: false,
+                input_text: '',
+                input_items: [],
+                res: [],
+                keys: []
             }
         },
         computed: {
@@ -293,6 +288,64 @@
                 if(this.checkSpace(this.currencyInfo.currencyUnit) || this.checkSpace(this.detail.spotPrice) || this.checkSpace(this.detail.tradeAmount)) return;
                 let sum = parseInt(this.detail.tradeAmount) * (this.detail.spotPrice*1);
                 return sum.toFixed(2) + this.currencyInfo.currencyUnit;
+            },
+            //快捷输入不用管必填或选填，只要把值取到，赋给相应的input即可；
+            //快捷输入完成后，把值赋给input，每种情况的值不一样
+            items() {
+                var items = [];
+                switch (this.vid) {
+                    case 1:
+                        items = ['品牌','牌号','分类','数量','价格','短溢装'];
+                        break;
+                    case 2:
+                        items = ['品名','品牌','数量','价格','短溢装','价格类别','全水分','挥发分','灰分','发热量','硫分'];
+                        break;
+                    case 3:
+                        items = ['品名','数量','价格','短溢装','公检批号','交货地'];
+                        break;
+                    case 4:
+                        items = ['品名','品牌','数量','价格','规格','材质','生产地区'];
+                        break;
+                    case 5:
+                        items = ['品牌','分类','数量','价格','短溢装','型号'];
+                        break;
+                    default:
+                        break;
+                }
+                items.push('明细备注');
+                return items;
+            },
+            required() {
+                var required = [];
+                required = ['数量','价格','金额'];
+                switch (this.vid) {
+                    case 2:
+                        required.push('品名','价格类别');
+                        break;
+                    case 3:
+                        required.push('品名');
+                        break;
+                    case 4:
+                        required.push('品名','生产地区');
+                        break;
+                    case 5:
+                        required.push('品牌','分类');
+                        break;
+                    default:
+                        break;
+                }
+                return required;
+            }
+        },
+        watch: {
+            res(val){
+                this.input_items = [];
+                var that = this;
+                val.forEach(function(i,idx) {
+                    if(i!='') {
+                        that.input_items.push(idx);
+                    }
+                })
             }
         },
         methods: {
@@ -304,7 +357,6 @@
                 }
             },
             checkInteger(str,name) {
-                console.log(str);
                 if(!/^\d+$/.test(str)) { 
                     Dialog.alert(name,"不是整数！");  
                 }  
@@ -312,7 +364,6 @@
             addStep2() {
                 //必填项
                 var that = this;
-                console.log(this.precont)
                 if(this.precont.precontId == undefined) {
                     return Dialog.alert("请添加预合同主体！");                    
                 } else {
@@ -320,7 +371,6 @@
                 }
 
                 this.detail.tradeCurrencyNo = this.currencyInfo.currencyNo; 
-                console.log(this.detail.tradeCurrencyNo)
                 if(this.checkSpace(this.detail.tradeCurrencyNo)) {
                     return Dialog.alert("请选择币种！");
                 }
@@ -331,9 +381,7 @@
                 if(this.vid==5 && this.checkSpace(this.detail.brandName)) {
                     return Dialog.alert("请填写品牌！");
                 }
-                // if(this.vid==1 && this.checkSpace(this.detail.grade)) {
-                //     return Dialog.alert("请填写牌号！");
-                // }
+                
                 if(this.vid==5 && this.checkSpace(this.detail.spotType)) {
                     return Dialog.alert("请填写分类！");
                 }
@@ -351,57 +399,17 @@
                     return Dialog.alert("请填写价格！");
                 }
 
-                
-                // if([1,2,3,5].indexOf(this.vid)>-1 && this.checkSpace(this.detail.moreorlessProportion)) {
-                //     return Dialog.alert("请填写短溢装！");
-                // }
-
-
-                // if(this.vid==4 && this.checkSpace(this.detail.standard)) {
-                //     return Dialog.alert("请填写规格！");
-                // }
-                // if(this.vid==4 && this.checkSpace(this.detail.material)) {
-                //     return Dialog.alert("请填写材质！");
-                // }
-                // if(this.vid==5 && this.checkSpace(this.detail.modelNumber)) {
-                //     return Dialog.alert("请填写型号！");
-                // }
-               
-                // if(this.vid==3 && this.checkSpace(this.detail.batchNumber)) {
-                //     return Dialog.alert("请填写公检批号！");
-                // }
-                
                 if(this.vid==2 && this.checkSpace(this.detail.priceCategory)) {
                     return Dialog.alert("请填写价格类别！");
                 }
                 if(this.vid==4 && this.checkSpace(this.detail.productionArea)) {
                     return Dialog.alert("请填写生产地区！");
                 }
-                // if(this.vid==3 && this.checkSpace(this.detail.deliveryPlace)) {
-                //     return Dialog.alert("请填写交货地！");
-                // }
-                // if(this.vid==2 && this.checkSpace(this.detail.totalMoisture)) {
-                //     return Dialog.alert("请填写全水分！");
-                // }
-                // if(this.vid==2 && this.checkSpace(this.detail.volatileMatter)) {
-                //     return Dialog.alert("请填写挥发分！");
-                // }
-                //  if(this.vid==2 && this.checkSpace(this.detail.ashContent)) {
-                //     return Dialog.alert("请填写灰分！");
-                // }
-                // if(this.vid==2 && this.checkSpace(this.detail.charcoalHeat)) {
-                //     return Dialog.alert("请填写发热量！");
-                // }
-                //  if(this.vid==2 && this.checkSpace(this.detail.sulfurContent)) {
-                //     return Dialog.alert("请填写硫分！");
-                // }
-
+               
                 //判断是新建还是编辑
-                console.log(that.detail.goodsId)
                 if(that.detail.goodsId !== undefined) {
                     API.contDetailModify({detail: that.detail}).then(function(data) {
                         Dialog.alert('编辑明细成功！');
-                        console.log(that.$route.query.page)
                         if(that.$route.query.page=='detail') {
                             App.navigate("lay/contract/query/detail", { 
                                 precontId: that.precont.precontId
@@ -444,6 +452,61 @@
             },
             handleVisibleChange2(val) {
                 this.show_pick_unit = val;
+            },
+            handleInput() {
+                var that = this;
+                that.res = that.input_text.split(" ");
+            },
+            getValueStr(val) {
+                if(!val || val == undefined) {
+                    return ' ';
+                } else {
+                    return val.replace(/\s/g, "") + ' ';
+                }
+            },
+            convertArrayToStr(keys) {
+                var that = this;
+                var str = '';
+                keys.forEach(function(key) {
+                    str += that.getValueStr(that.detail[key]);
+                })
+                return str;
+            },
+            openQuickInput() {
+                var precont = this.precont;
+                this.keys = [];
+                switch (this.vid) {
+                    case 1:
+                        this.keys = ['brandName','grade','spotType','tradeAmount','spotPrice','moreorlessProportion'];
+                        break;
+                    case 2:                    
+                        this.keys = ['productName','brandName','tradeAmount','spotPrice','moreorlessProportion','priceCategory','totalMoisture','ashContent','charcoalHeat','sulfurContent'];
+                        break;
+                    case 3:
+                        this.keys = ['productName','tradeAmount','spotPrice','moreorlessProportion','batchNumber','deliveryPlace'];
+                        break;
+                    case 4:
+                        this.keys = ['productName','brandName','tradeAmount','spotPrice','standard','material','productionArea'];
+                        break;
+                    case 5:
+                        this.keys = ['brandName','spotType','tradeAmount','spotPrice','moreorlessProportion','modelNumber'];
+                        break;
+                
+                    default:
+                        break;
+                }
+                this.keys.push('remark');
+                this.input_text = this.convertArrayToStr(this.keys);
+                this.res = this.input_text.split(" ");
+                this.show_pick_quick = true;
+            },
+            closeQuickInput() {
+                var that = this;
+                this.keys.forEach(function(r,i) {
+                    that.detail[r] = that.res[i];
+                })
+                this.show_pick_quick = false;
+                
             }
         },
         mounted(){
@@ -452,21 +515,13 @@
             if(this.$route.query.precont){
                 precont = JSON.parse(this.$route.query.precont);  
                 that.precont = precont;
-                // if(!this.$route.query.add) {
-                //     if(precont.detailList && precont.detailList.length>0) {
-                //         that.detail = precont.detailList[0];
-                //     }
-                // }
-                
             }
             if(this.$route.query.detail) {
                 that.detail = JSON.parse(this.$route.query.detail);
             }
-            console.log(that.detail)
             //获todo取类别id
             API.futurtTypeVarietyQuery({futureKindId: that.precont.futureKindId}).then(function(data) {
                 that.vid = data[0].varietyId;
-                console.log(that.vid)
             })
             
             //获取币种和单位列表
@@ -514,6 +569,18 @@
     }
     
 </script>
-<style lang="less">
-
+<style lang="less" scoped>
+    .fc-gray {
+        color: #9B9B9B;
+    }
+    // .detail-list * {
+    //     float: left;
+    // }
+    // .detail-list img {
+    //     margin: 0 0.2rem 0 0.1rem;
+    // }
+    .text-small {
+        line-height: 0.36rem;
+        margin-bottom: 0.08rem;
+    }
 </style>

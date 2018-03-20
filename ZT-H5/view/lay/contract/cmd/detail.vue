@@ -32,7 +32,7 @@
                 <table-fixed v-if="tableData_all && tableData_all.length>0" :value="tableData_all" :checked="checked_cmd" :columns="columns"></table-fixed> 
                 <div v-else>暂无数据</div>
             </div> 
-            <div class="pd30 pdb40">
+            <div class="btn-wrap-two">
                 <button class="btn-normal bg-blue" @click="confirmCmd">确 定</button>
             </div>
         </div>
@@ -42,9 +42,9 @@
             <div v-else>暂无数据</div>
         </div> 
 
-        <div class="pd30 pdb40">
+        <div class="btn-wrap-two">
             <button v-if="!nextFlag" class="btn-normal bg-blue" @click="confirmCmd">确 定</button>
-            <button v-else :disabled="disabled" class="btn-normal bg-plain" @click="toNext">下一步</button>            
+            <button v-else :disabled="disabled" class="btn-normal btn-plain" @click="toNext">下一条</button>            
         </div>
 
         
@@ -135,7 +135,6 @@
 
                 array.forEach(function(d, i) {
                     let item = {};
-                    console.log(d)
 
                     item.reportCode = d.reportCode;
                     item.entrustDirection = that.getByValue('entrustDirection', d.entrustDirection);
@@ -171,11 +170,9 @@
                     precontId: that.matchInfo.precontId
                 }).then(function(data) {
                     that.cmdList = data;//注意选择状态，顺序变了
-                    console.log(that.cmdList)
                     //选中状态
                     that.cmdList.forEach(function(cmd, idx) {
                         that.cmds.forEach(function(c,i) {
-                            console.log(cmd.insId,c.insId)
                             if(cmd.insId === c.insId) {
                                 that.checked_cmd.push(idx);
                             }
@@ -227,7 +224,6 @@
                         that.details.push(that.setInfoStr(detail));
                     })
                     if(data.insList && data.insList.length > 0) {
-                        console.log(data.insList)
                         that.cmds = data.insList;
                         that.tableData_cmd = that.setTableData(data.insList);
                     }

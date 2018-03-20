@@ -58,7 +58,7 @@
             <img class="fright" v-show="precont.durationFlag==1" src="../../../../images/radio-selected.svg">
         </li>
         <div class="line mb30"></div>
-        <div class="mb20 tright pdr30 text-link" @click="showModal=true">
+        <div class="mb20 tright pdr30 text-link" @click="openQuickInput">
             快捷输入
         </div>
         
@@ -102,10 +102,12 @@
             <button v-if="!precont.detailList||precont.detailList.length==0" class="btn-normal bg-blue" @click="checkValid('add')">下一步</button>
             <button v-else class="btn-normal bg-blue" @click="checkValid('edit')">确 定</button>
         </div>
-        <div class="modal" v-show="true">
+        <div class="modal" v-show="show_pick_quick">
             <div class="detail-list clear">
                 <template v-for="(item, index) in items">
-                    <span :key="index" class="text-small" :class="{'fc-gray':input_items.indexOf(index)==-1}" >{{ item }}</span>
+                    <span :key="index" class="text-small" :class="{'fc-gray':input_items.indexOf(index)==-1}">
+                        <span class="text-red" v-if="index==0">*</span>{{ item }}
+                    </span>
                     <img :key="'img'+index" class="ml10 mr20" v-show="input_items.indexOf(index)>-1" src="../../../../images/radio-selected.svg">
                 </template>
                 
@@ -115,7 +117,7 @@
             <div class="line"></div>            
             <div class="detail-tip">说明：以空格符分隔，当前项为空时请预留位置。</div>
             <div class="btn-wrap">
-                <button class="btn-normal bg-blue" @click="showModal=false;">确 定</button>
+                <button class="btn-normal bg-blue" @click="closeQuickInput">确 定</button>
             </div>
         </div>
        
@@ -171,7 +173,7 @@ export default {
                 value: 2
             }],
             
-            showModal: false,
+            show_pick_quick: false,
             show_pick_dept: false,
             show_pick_strategy: false,
             show_pick_futureKind: false,
@@ -259,7 +261,6 @@ export default {
             API.contIdGet({}).then(function(data) {
                 that.precont.precontId = data.precontId;
                 API.contMainAdd({data: that.precont}).then(function(data) {
-                    console.log(that.precont)
                     App.navigate("lay/contract/add/step2",{ 
                         precont: JSON.stringify(that.precont),
                         deptName: that.dept.deptName,
@@ -309,7 +310,36 @@ export default {
             //         this.res=[];
             //     }
             // }
-            console.log('res————',this.res.toString())
+            // console.log('res————',this.res.toString())
+        },
+        getValueStr(val) {
+            if(!val || val == undefined) {
+                return ' ';
+            } else {
+                return val.replace(/\s/g, "") + ' '
+            }
+        },
+        openQuickInput() {
+           
+            var precont = this.precont;
+            this.input_text = 
+                this.getValueStr(precont.customerShortname) 
+                + this.getValueStr(precont.transactionMode) 
+                + this.getValueStr(precont.deliverMode) 
+                + this.getValueStr(precont.warehouseName)  
+                + this.getValueStr(precont.deliverTime)
+                + this.getValueStr(precont.remark); 
+            this.res = this.input_text.split(" ");
+            this.show_pick_quick = true;
+        },
+        closeQuickInput() {
+            this.precont.customerShortname = this.res[0];
+            this.precont.transactionMode = this.res[1];
+            this.precont.deliverMode = this.res[2];
+            this.precont.warehouseName = this.res[3];
+            this.precont.deliverTime = this.res[4];
+            this.precont.remark = this.res[5];
+            this.show_pick_quick = false;
         },
         handleChange(val) {
             // var arr = this.input_text.split(/\s+/);

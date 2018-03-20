@@ -35,7 +35,7 @@
         </template>
         
 
-        <div class="pd30 pdb40" style="margin-top: 1.06rem">
+        <div class="btn-wrap-two" style="margin-top: 1.06rem">
             <button class="btn-normal bg-blue" @click="back">返 回</button>
         </div>
         
@@ -91,7 +91,6 @@
                 App.navigate("lay/contract/query/list")
             },
             toEdit(type, detail) {
-                console.log(type, detail)
                 if(type == 'main') {
                     App.navigate("lay/contract/add/step1", { 
                         precont: JSON.stringify(this.matchInfo),

@@ -58,9 +58,6 @@
             visible(val) {
                 this.currentVisible = val;
             }
-        },
-        mounted () {
-            // console.log(this.list,this.type)
         }
     }
 </script>

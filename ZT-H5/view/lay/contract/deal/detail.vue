@@ -32,7 +32,7 @@
                 <table-fixed v-if="tableData_all && tableData_all.length>0" :value="tableData_all" :checked="checked_deal" :columns="columns"></table-fixed> 
                 <div v-else>暂无数据</div>
             </div> 
-            <div class="pd30 pdb40">
+            <div class="btn-wrap-two">
                 <button class="btn-normal bg-blue" @click="confirmDeal">确 定</button>
             </div>
         </div>
@@ -42,9 +42,9 @@
             <div v-else>暂无数据</div>
         </div> 
 
-        <div class="pd30 pdb40">
+        <div class="btn-wrap-two">
             <button v-if="!nextFlag" class="btn-normal bg-blue" @click="confirmDeal">确 定</button>
-            <button v-else :disabled="disabled" class="btn-normal bg-plain" @click="toNext">下一步</button>            
+            <button v-else :disabled="disabled" class="btn-normal btn-plain" @click="toNext">下一条</button>            
         </div>
 
         
@@ -169,7 +169,6 @@
                     precontId: that.matchInfo.precontId
                 }).then(function(data) {
                     that.dealList = data;
-                    console.log(that.dealList)
                     //选中状态
                     that.dealList.forEach(function(deal, idx) {
                         that.deals.forEach(function(c,i) {
@@ -224,7 +223,6 @@
                         that.details.push(that.setInfoStr(detail));
                     })
                     if(data.realdealList && data.realdealList.length > 0) {
-                        console.log(data.realdealList)
                         that.deals = data.realdealList;
                         that.tableData_deal = that.setTableData(data.realdealList);
                     }
