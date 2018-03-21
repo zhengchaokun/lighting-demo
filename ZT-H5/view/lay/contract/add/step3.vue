@@ -114,7 +114,6 @@
             //查询单个预合同的信息
             API.contMatchInfoQuery({ contId: precont.precontId }).then(function(data) {
                 that.precont = data;
-                console.log(that.precont)
                 that.details = data.detailList;
                 that.details.forEach(function(detail,index) {
                     let str = '';
