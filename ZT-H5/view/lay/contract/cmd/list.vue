@@ -16,7 +16,7 @@
         </li>
         <div class="line mb30"></div>
 
-        <radio-list v-model="dept" :list="depts" type="deptName" :visible.sync="show_pick_dept" @visible-change="handleVisibleChange"></radio-list>
+        <radio-list :top="0.8" v-model="dept" :list="depts" type="deptName" :visible.sync="show_pick_dept" @visible-change="handleVisibleChange"></radio-list>
 
 
         <div class="query-body">
@@ -127,7 +127,6 @@
         },
         mounted() {
             var that = this;
-            // this.items = this.allItems[0];
             API.deptQuery({}).then(function(data) {
                 //新建后立即匹配指令
                 that.depts = data;
@@ -143,7 +142,6 @@
                         })
                     })
                 } else {
-                    // that.depts = data;
                     that.dept = that.depts[0];
                 }
                 

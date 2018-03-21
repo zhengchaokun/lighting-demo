@@ -36,7 +36,6 @@
         data(){
             return {
                 precont: {},
-                precont_copy: {},
                 details: [],
                 info_body: '',
                 info_details: [],
@@ -60,6 +59,9 @@
                 App.navigate("lay/contract/add/"+view);
             },
             continueAdd() {
+                if(this.precont.precontId == undefined) {
+                    return Dialog.alert("请添加预合同主体！");
+                } 
                 App.navigate("lay/contract/add/step2", {
                     precont: JSON.stringify(this.precont),
                     formalInfo: this.info_body,
@@ -67,6 +69,10 @@
                 });                
             },
             finishAdd() {
+                var that = this;
+                if(this.precont.precontId == undefined) {
+                    return Dialog.alert("请添加预合同主体！");
+                } 
                 //添加预合同
                 Dialog.confirm({
                     msg:'预合同创建成功，是否立即匹配期货指令？',
@@ -75,8 +81,7 @@
                     textLeft:true,
                     vertical:true,
                     cancel(){
-                        //跳转
-                        App.navigate("lay/contract/query/detail",{})                        
+                        App.navigate("lay/contract/query/list")                        
                     },
                     confirm() {
                         App.navigate("lay/contract/cmd/detail",{ precontId: that.precont.precontId })
@@ -93,18 +98,23 @@
             }
         },
         mounted () {
+            debugger
             var that = this;
-            var precont = JSON.parse(this.$route.query.precont);
-            if(this.$route.query.formalInfo) {
-                this.info_body = this.$route.query.formalInfo;
+            var precont = {};
+            if(this.$route.query.precont) {
+                precont = JSON.parse(this.$route.query.precont);
             } else {
-
+                return Dialog.alert('请输入预合同主体！');
             }
             
+            if(this.$route.query.formalInfo) {
+                this.info_body = this.$route.query.formalInfo;
+            }
 
             //查询单个预合同的信息
             API.contMatchInfoQuery({ contId: precont.precontId }).then(function(data) {
                 that.precont = data;
+                console.log(that.precont)
                 that.details = data.detailList;
                 that.details.forEach(function(detail,index) {
                     let str = '';

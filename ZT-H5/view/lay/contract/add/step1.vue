@@ -121,9 +121,9 @@
             </div>
         </div>
        
-        <radio-list v-model="dept" :list="depts" type="deptName" :visible.sync="show_pick_dept" @visible-change="handleVisibleChange1"></radio-list>
-        <radio-list v-model="strategy" :list="strategies" type="strategyName" :visible.sync="show_pick_strategy" @visible-change="handleVisibleChange2"></radio-list>
-        <radio-list v-model="futureKind" :list="futureKinds" type="futureKindName" :visible.sync="show_pick_futureKind" @visible-change="handleVisibleChange3"></radio-list>
+        <radio-list :top="top" v-model="dept" :list="depts" type="deptName" :visible.sync="show_pick_dept" @visible-change="handleVisibleChange1"></radio-list>
+        <radio-list :top="top" v-model="strategy" :list="strategies" type="strategyName" :visible.sync="show_pick_strategy" @visible-change="handleVisibleChange2"></radio-list>
+        <radio-list :top="top" v-model="futureKind" :list="futureKinds" type="futureKindName" :visible.sync="show_pick_futureKind" @visible-change="handleVisibleChange3"></radio-list>
     </div>
 
     
@@ -140,6 +140,7 @@ export default {
     components: { RadioList },
     data() {
         return {
+            top: 0.8,
             dept: {},//机构
             strategy: {},//策略
             futureKind: {},//品种
@@ -425,6 +426,9 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+    .modal {
+        top: 0.8rem;
+    }
     .detail-list {
         line-height: 0.36rem;
     }

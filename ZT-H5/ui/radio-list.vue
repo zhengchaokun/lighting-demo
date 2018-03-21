@@ -45,15 +45,6 @@
             },
             currentVisible(val) {
                 this.$emit('visible-change',val)
-                // if(val) {
-                //     document.ontouchmove = function(e){
-                //         e.preventDefault();
-                //     }
-                // } else {
-                //     document.ontouchmove = function(e){
-                //         // e.preventDefault();
-                //     }
-                // }
             },
             visible(val) {
                 this.currentVisible = val;

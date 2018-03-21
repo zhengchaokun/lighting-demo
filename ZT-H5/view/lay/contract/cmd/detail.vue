@@ -44,7 +44,8 @@
 
         <div class="pd30 pdb40">
             <button v-if="!nextFlag" class="btn-normal bg-blue" @click="confirmCmd">确 定</button>
-            <button v-else :disabled="disabled" class="btn-normal btn-plain" @click="toNext">下一条</button>            
+            <button v-else-if="!isBack" :disabled="disabled" class="btn-normal btn-plain" @click="toNext">下一条</button>
+            <!-- <button v-else class="btn-normal bg-blue" @click="back">返 回</button>                                    -->
         </div>
 
         
@@ -56,6 +57,7 @@
     import TableFixed from '../../../../ui/table-fixed.vue'
     const API = require('api')
     const Dict = require('dict')
+    import App from "light"
     
 
     export default {
@@ -107,6 +109,7 @@
                 cmdList: [],
                 // insStatus: ['1','3','2'],
                 nextFlag: false,
+                isBack: false,
                 disabled: false,
                 preconts: [],
                 index: 0,
@@ -201,13 +204,16 @@
                 }).then(function(data) {
                     that.show_pick_modal = false;
                     that.nextFlag = true;
+                    if(that.isBack) {
+                        App.navigate('lay/contract/query/list')
+                    }
                 })
             },
             getByValue(dict, value) {
                 return Dict.getByValue(dict, value);
             },
-            commit() {
-
+            back() {
+                App.navigate('lay/contract/query/list');
             },
             toNext() {
                 var precontId = this.preconts[this.index+1].precontId;
@@ -229,13 +235,6 @@
                     }
                 })
             },
-            // checkValid(str) {
-            //     if(str == null || !str || new RegExp("^[ ]+$").test(str)) {
-            //         return true
-            //     } else {
-            //         return false
-            //     }
-            // },
             checkValid(str) {
                 if((!str && typeof str!=='number') || new RegExp("^[]+$").test(str)) {
                     return false
@@ -256,23 +255,33 @@
                 return str;
             }
         },
-        mounted () {
+        mounted() {
             // debugger
             var that = this;
-            that.preconts = JSON.parse(this.$route.query.preconts);
-            var preconts = that.preconts;
-            that.index = this.$route.query.index;
-            var index = that.index;
-            if(index == preconts.length - 1) {
-                this.disabled = true;
-            } else {
-                this.disabled = false;
-            }
             
             if(that.$route.query.precontId) {
                 var precontId = that.$route.query.precontId;
                 this.getMatchInfo(precontId);
             }
+
+            if(this.$route.query.preconts) {
+                that.preconts = JSON.parse(this.$route.query.preconts);
+                var preconts = that.preconts;
+                that.index = this.$route.query.index;
+                var index = that.index;
+                if(index == preconts.length - 1) {
+                    this.disabled = true;
+                } else {
+                    this.disabled = false;
+                }
+                this.isBack = false;
+            } else {
+                this.isBack = true;
+            }
+            
+            
+            
+            
         }
     }
 </script>

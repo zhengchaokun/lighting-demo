@@ -16,7 +16,7 @@
         </li>
         <div class="line mb30"></div>
 
-        <radio-list v-model="dept" :list="depts" type="deptName" :visible.sync="show_pick_dept" @visible-change="handleVisibleChange"></radio-list>
+        <radio-list :top="0.8" v-model="dept" :list="depts" type="deptName" :visible.sync="show_pick_dept" @visible-change="handleVisibleChange"></radio-list>
 
 
         <div class="query-body">

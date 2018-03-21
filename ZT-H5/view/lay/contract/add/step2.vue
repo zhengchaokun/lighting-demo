@@ -285,7 +285,6 @@
         },
         computed: {
             sumPrice() {
-                debugger
                 if(this.checkSpace(this.currencyInfo.currencyUnit) || this.checkSpace(this.detail.spotPrice) || this.checkSpace(this.detail.tradeAmount)) return;
                 let sum = parseInt(this.detail.tradeAmount) * (this.detail.spotPrice*1);
                 return sum.toFixed(2) + this.currencyInfo.currencyUnit;
@@ -351,17 +350,18 @@
         },
         methods: {
             checkSpace(str) {
-                if((!str && typeof str!=='number') || new RegExp("^[]+$").test(str)) {
+                var flag = (!str && typeof str!=='number') || new RegExp("^[]+$").test(str);
+                if(flag) {
                     return true
                 } else {
                     return false
                 }
             },
-            checkInteger(str,name) {
-                if(!/^\d+$/.test(str)) { 
-                    Dialog.alert(name,"不是整数！");  
-                }  
-            },
+            // checkInteger(str,name) {
+            //     if(!/^\d+$/.test(str)) { 
+            //         Dialog.alert(name,"不是整数！");  
+            //     }  
+            // },
             addStep2() {
                 //必填项
                 var that = this;
@@ -574,12 +574,9 @@
     .fc-gray {
         color: #9B9B9B;
     }
-    // .detail-list * {
-    //     float: left;
-    // }
-    // .detail-list img {
-    //     margin: 0 0.2rem 0 0.1rem;
-    // }
+    .modal {
+        top: 0.8rem;
+    }
     .text-small {
         line-height: 0.36rem;
         margin-bottom: 0.08rem;

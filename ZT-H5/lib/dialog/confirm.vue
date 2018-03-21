@@ -20,9 +20,6 @@
             clicked(type){
                 this.$emit(type)
             }
-        },
-        mounted () {
-            console.log(this.textLeft, this.confirmText)
         }
     }
 </script>
