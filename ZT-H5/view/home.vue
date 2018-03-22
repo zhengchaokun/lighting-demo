@@ -21,19 +21,19 @@
         </div>
         <div class="menu-list">
             <div @click="jump('lay/inner/bs',{type:1})" class="menu-item">
-                <div class="menu-icon"></div>
+                <div class="menu-icon icon-a"></div>
                 <p class="menu-title">境内期货指令</p>
             </div>
             <div @click="jump('lay/outer/bs',{type:1})" class="menu-item">
-                <div class="menu-icon"></div>
+                <div class="menu-icon icon-b"></div>
                 <p class="menu-title">外盘&电子盘期货指令</p>
             </div>
             <div @click="jump('lay/contract/add/step1')" class="menu-item">
-                <div class="menu-icon"></div>
+                <div class="menu-icon icon-c"></div>
                 <p class="menu-title">预合同管理</p>
             </div>
             <div @click="jump('lay/deal/list',{type:1})" class="menu-item">
-                <div class="menu-icon"></div>
+                <div class="menu-icon icon-d"></div>
                 <p class="menu-title">预合同成交确认</p>
             </div>
         </div>
@@ -110,9 +110,23 @@
             .menu-icon{
                 margin-left: 50%;
                 transform: translateX(-50%);
-                background: #888;
+                /*background: #888;*/
+                background-size: 100%;
                 width: 0.6rem;
                 height: 0.6rem;
+
+                &.icon-a{
+                     background-image: url("../images/2.svg");
+                  }
+                &.icon-b{
+                     background-image: url("../images/3.svg");
+                 }
+                &.icon-c{
+                     background-image: url("../images/4.svg");
+                 }
+                &.icon-d{
+                     background-image: url("../images/6.svg");
+                 }
             }
             .menu-title{
                 margin-top: 0.35rem;
