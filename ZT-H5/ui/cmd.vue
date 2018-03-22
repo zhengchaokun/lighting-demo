@@ -15,8 +15,10 @@
                 </div>
                 <div class="operateList" v-for="(item,index) in com.listData"
                      @click="currentItemChecked=index">
-                    <span class="operateBut" :class="com.clickBtn.cls" @click="com.clickBtn.handler(item)"
+                    <transition name="slide-right">
+                        <span class="operateBut" :class="com.clickBtn.cls" @click="com.clickBtn.handler(item)"
                           v-show="currentItemChecked==index&&currentTab!=2&&currentTab!=3"><em>{{com.clickBtn.title}}</em></span>
+                    </transition>
                     <h2><em v-if="item.code">{{item.code}} </em>{{item.name}}<em v-if="item.pName">/{{item.pName}}</em></h2>
                     <div v-for="list in item.list">
                         <p v-for="it in list">
@@ -87,6 +89,13 @@
     }
 </script>
 <style lang="less">
+
+    .slide-right-enter-active, .slide-right-leave-active {
+        transition: transform .5s;
+    }
+    .slide-right-enter, .slide-right-leave-to {
+        transform: translate3d(100%, 0, 0);
+    }
     .prod-choose{
         position: fixed;
         top:0.8rem;
