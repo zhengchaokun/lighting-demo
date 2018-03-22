@@ -30,7 +30,7 @@
         </div>
         <div class="prod-choose" v-show="letsChooseProd">
             <ul v-if="com.topData">
-                <li @click="checkOrNot(prod)" v-for="prod in com.topData.list">
+                <li :class="{'prod-checked':prod.checked}" @click="checkOrNot(prod)" v-for="prod in com.topData.list">
                     <div class="left-side">
                         <span class="prod-id">{{prod.code}}</span>
                         <span class="prod-name">{{prod.name}}</span>
@@ -89,7 +89,9 @@
     }
 </script>
 <style lang="less">
-
+    .prod-checked{
+        background-color: #ebebf2;
+    }
     .slide-right-enter-active, .slide-right-leave-active {
         transition: transform .5s;
     }
@@ -104,8 +106,9 @@
         right: 0;
         bottom: 0;
         ul{
-            padding: 0.6rem 0.2rem 0 0.5rem;
+            padding-top: 0.4rem;
             li{
+                padding: 0 0.2rem 0 0.5rem;
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
