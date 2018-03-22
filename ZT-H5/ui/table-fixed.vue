@@ -14,7 +14,7 @@
                         <img v-if="checked.indexOf(index)>-1" src="../images/radio-selected.svg" class="check-icon">
                     </td>
                     <td v-for="(item,key,idx) in row" :key="idx" :class="[{'fixed':idx<1},{'pdl225':idx==1},{'pdt20':index==0}]">{{item}}</td>
-                    
+
                 </tr>
             </tbody>
         </table>

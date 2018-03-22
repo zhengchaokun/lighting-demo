@@ -63,10 +63,17 @@
         flex-direction: row;
         div{
             display: flex;
-            background: #fff;
+            /*background: #fff;*/
             width: 0.44rem;
             height: 0.44rem;
             margin: 0.18rem;
+            background-size: 100%;
+        }
+        .left-menu{
+            background-image: url("../images/5.svg");
+        }
+        .right-menu{
+            background-image: url("../images/1.svg");
         }
     }
     .left-panel{
