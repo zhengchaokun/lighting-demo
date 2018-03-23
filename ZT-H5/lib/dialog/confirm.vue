@@ -57,7 +57,6 @@
                 border-radius: 4px;
                 font-size: 0.34rem;
                 color: #399DE2;
-                letter-spacing: 0;
                 width: 2.4rem;
                 height: 0.8rem;
                 line-height: 0.8rem;

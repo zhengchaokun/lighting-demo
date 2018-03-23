@@ -3,7 +3,7 @@
     <div class="bg-gray-2">
         <ul class="mb30 bg-white">
             <div class="line"></div>            
-            <li class="cell pdr20" @click="showPickModal('dept')">
+            <li class="cell pick pdr20" @click="showPickModal('dept')">
                 <span>
                     <span class="text-label inline-b"><span class="text-red">*</span>机构</span>
                     <span class="text-label ml40 inline-b">{{ dept.deptName }}</span>
@@ -16,7 +16,7 @@
             </li>
 
             <div class="line line-left"></div>
-            <li class="cell pdr20" @click="showPickModal('strategy')">
+            <li class="cell pick pdr20" @click="showPickModal('strategy')">
                 <span>
                     <span class="text-label inline-b"><span class="text-red">*</span>策略</span>
                     <span class="text-label ml40 inline-b">{{ strategy.strategyName }}</span>
@@ -28,7 +28,7 @@
                 </div>
             </li>
             <div class="line line-left"></div>
-            <li class="cell pdr20" @click="showPickModal('futureKind')">
+            <li class="cell pick pdr20" @click="showPickModal('futureKind')">
                 <span>
                     <span class="text-label inline-b"><span class="text-red">*</span>品种</span>
                     <span class="text-label ml40 inline-b">{{ futureKind.futureKindName }}</span>                    
@@ -45,7 +45,7 @@
         <ul class="mb30 bg-white">
             <div class="line"></div>
             <template v-for="(item,index) in select_items">
-                <li class="cell" :key="index" @click="handleSelect(item)">
+                <li class="cell pick" :key="index" @click="handleSelect(item)">
                     <span class="text-label">{{ item.label }}</span>
                     <img class="fright" v-show="precont.spotOpenDirection===item.value" src="../../../../images/radio-selected.svg">
                 </li>
@@ -53,7 +53,7 @@
             </template>
         </ul>
         <div class="line"></div>
-        <li class="cell bg-white" @click="handleCheck">
+        <li class="cell bg-white pick" @click="handleCheck">
             <span class="text-label">长约</span>
             <img class="fright" v-show="precont.durationFlag==1" src="../../../../images/radio-selected.svg">
         </li>
@@ -94,7 +94,7 @@
         </div>
         <div class="line mb30"></div>
         <div class="line"></div>
-        <div class="cell pdr30 flex" style="height: 1.48rem;">
+        <div class="cell pick pdr30 flex" style="height: 1.48rem;">
             <textarea  v-model="precont.remark" class="flex1" style="height: 1rem;" placeholder="备注" wrap="physical"></textarea>
         </div>
         <div class="line"></div>
@@ -173,7 +173,7 @@ export default {
                 label:'销售',
                 value: 2
             }],
-            
+            scrollTop:0,
             show_pick_quick: false,
             show_pick_dept: false,
             show_pick_strategy: false,
@@ -193,9 +193,43 @@ export default {
                     that.input_items.push(idx);
                 }
             })
+        },
+        show_pick_dept(val) {
+            // if(val) {
+            //     Dialog.alert('true')
+            //     that.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            //     document.body.scrollTop = document.documentElement.scrollTop = 0;
+            //     document.body.classList.add('noscroll');
+            //     document.addEventListener('touchmove', that.preventScroll, false)
+            // } else {
+            //     Dialog.alert('false')
+            //     document.body.classList.remove('noscroll');
+            //     document.body.scrollTop = document.documentElement.scrollTop = that.scrollTop;
+            //     document.removeEventListener('touchmove', that.preventScroll, false)
+            // }
+            if(!val) {
+                this.$nextTick(function() {
+                    this.permitScroll();
+                })
+                // this.permitScroll();
+            }
+        },
+        show_pick_strategy(val) {
+             if(!val) {
+                this.permitScroll();
+            }
+        },
+        show_pick_futureKind(val) {
+            if(!val) {
+                this.permitScroll();
+            }
         }
     },
     methods: {
+        permitScroll() {
+            API.permitScroll()
+            window.scrollTo(0,this.scrollTop);
+        },
         checkSpace(str) {
             if((!str && typeof str!=='number') || new RegExp("^[]+$").test(str)) {
                 return true
@@ -280,11 +314,12 @@ export default {
                 that.show_pick_dept = true;
             } else if (type=='strategy') {
                 that.show_pick_strategy = true;
-               
             } else {
                 that.show_pick_futureKind = true;
-               
             }
+            //记录页面滚动距离
+            that.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            API.forbidScroll();
             
         },
         handleInput(e) {
@@ -330,8 +365,11 @@ export default {
                 + this.getValueStr(precont.warehouseName)  
                 + this.getValueStr(precont.deliverTime)
                 + this.getValueStr(precont.remark); 
+            this.input_text = this.input_text.replace(/\s*$/g,'');
             this.res = this.input_text.split(" ");
             this.show_pick_quick = true;
+            this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            API.forbidScroll();            
         },
         closeQuickInput() {
             this.precont.customerShortname = this.res[0];
@@ -341,6 +379,7 @@ export default {
             this.precont.deliverTime = this.res[4];
             this.precont.remark = this.res[5];
             this.show_pick_quick = false;
+            this.permitScroll();
         },
         handleChange(val) {
             // var arr = this.input_text.split(/\s+/);
@@ -361,7 +400,8 @@ export default {
             this.show_pick_futureKind = val;
         }
     },
-    mounted () { 
+    mounted () {
+        document.body.addEventListener('touchstart', function () { });
         var that = this; 
 
         //查询机构列表 
@@ -422,6 +462,9 @@ export default {
         //     })
         // })
         
+    },
+    afterHide () {
+        API.permitScroll();
     }
 };
 </script>
@@ -446,7 +489,6 @@ export default {
         padding: 0.06rem 0.2rem;
         font-size: 0.34rem;
         color: #4A4A4A;
-        letter-spacing: 0.0.5rem;
         line-height: 0.72rem;
         font-weight: bold;
     }
@@ -457,7 +499,6 @@ export default {
     .search-list {
         font-size: 0.34rem;
         color: #787878;
-        letter-spacing: 0.0.5rem;
         line-height: 0.72rem;
         padding: 0 0.3rem 0.3rem 0.5rem;
     }

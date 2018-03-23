@@ -3,7 +3,7 @@
 <template>
     <div>
         <div class="line"></div>            
-        <li class="cell pdr20" @click="showPickModal">
+        <li class="cell pdr20 pick" @click="showPickModal">
             <span>
                 <span class="text-label inline-b">机构</span>
                 <span class="text-label ml40 inline-b">{{ dept.deptName }}</span>
@@ -72,10 +72,15 @@
                 // activeIndex: 0,
                 // preconts: [[], [], [], []],
                 // items:{},
-                preconts: []
+                preconts: [],
+                scrollTop: 0
             }
         },
         methods: {
+            permitScroll() {
+                API.permitScroll()
+                window.scrollTo(0, this.scrollTop);
+            },
             getByValue(dict, value) {
                 if(dict=='precontractStatus' && [1,2].indexOf(value)>-1) {
                     return '未确认';
@@ -90,7 +95,9 @@
                 this.show_pick_dept = val;
             },
             showPickModal() {
-                this.show_pick_dept = true
+                this.show_pick_dept = true;
+                this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                API.forbidScroll();
             },
             goDetail(precont) {
                 App.navigate("lay/contract/query/detail",{ precontId: precont.precontId })
@@ -120,9 +127,15 @@
                     });
 
                 }
+            },
+            show_pick_dept(val) {
+                if(!val) {
+                    this.permitScroll();
+                }
             }
         },
         mounted() {
+            document.body.addEventListener('touchstart', function () { });
             var that = this;
 
             //查询结构列表 
@@ -140,6 +153,9 @@
             })
 
             
+        },
+        afterHide () {
+            API.permitScroll();
         }
     }
 </script>
@@ -153,9 +169,6 @@
     .mr14 {
         margin-right: 0.14rem;
     }
-    .ls0 {
-        letter-spacing: 0 !important;
-    }
     .tab-bar li {
         border-bottom: solid 0.02rem #D7D7D7;
     }
@@ -167,7 +180,6 @@
         padding: 0.18rem 0.4rem;
         font-size: 0.3rem;
         color: #999999;
-        letter-spacing: 0;
         line-height: 0.42rem;
         border-bottom: solid 0.02rem #D7D7D7;
     }
@@ -185,7 +197,6 @@
     .tab-page-title {
         font-size: 0.34rem;
         color: #4A4A4A;
-        letter-spacing: 0.005rem;
         line-height: 0.3rem;
         font-weight: bold;
         height: 0.7rem;
@@ -200,17 +211,14 @@
     }
     .text-muted {
         color: #9B9B9B;
-        letter-spacing: 0.0044rem;
         line-height: 0.42rem;
     }
     .text-muted-bold {
         color: #787878;
-        letter-spacing: 0;
         line-height: 0.42rem;
     }
     .text-error {
         color: #F56778;
-        letter-spacing: 0;
         line-height: 0.42rem;
     }
 </style>

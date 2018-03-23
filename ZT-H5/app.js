@@ -23,3 +23,4 @@ App.filter("start",function (next) {
     App.log(`view changed:${from.path}--${to.path}`);
     next()
 }).start();
+
