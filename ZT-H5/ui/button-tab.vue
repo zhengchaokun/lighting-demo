@@ -14,7 +14,10 @@
         methods:{
             checkMatch(btn){
                 const that = this;
-                const pathMatch = this.$route.path==='/'+btn.path;
+                const path = btn.path;
+                var index = path.lastIndexOf("\/");
+                var str = path.substring(0, index);
+                const pathMatch = this.$route.path==='/'+btn.path || this.$route.path.indexOf(str)>-1&&!this.$route.query.type;
                 if(!pathMatch){
                     return false;
                 }

@@ -21,6 +21,19 @@ module.exports = {
     localGet(key){
         return Promise.resolve(JSON.parse(decodeURIComponent(localStorage.getItem(key))));
     },
+   
+    // 允许页面滚动
+    permitScroll() {
+        document.body.classList.remove('noscroll');
+        document.removeEventListener('touchmove', preventScroll, false)
+    },
+    //阻止页面滚动
+    forbidScroll() {
+        document.body.classList.add('noscroll');
+        document.addEventListener('touchmove', preventScroll, false)
+    },
+
+
     //AUTO-GEN
     /**
      * 登录前，需要先获取验证码，调用登录接口时需要较验验证码。(现在登录时暂不使用验证码)
@@ -282,6 +295,13 @@ module.exports = {
     },
 
     /**
+     * 预合同信息删除 - 物资明细信息。
+     */
+    contDetailDelete(params) {
+        return execute('delete', '/precont/contDetail', params);
+    },
+
+    /**
      * 预合同信息添加-物资明细信息，对于一个预合同可以调此接口多次添加多个物资明细。分批提交。
      */
     contDetailAdd(params){
@@ -361,4 +381,14 @@ function execute(type,path,data) {
     }).catch(function (err) {
         Light.navigate("login",{},{history:false})
     })
+}
+
+function preventScroll(event) {
+    if (event.cancelable) {
+        // 判断默认行为是否已经被禁用
+        if (!event.defaultPrevented) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+    }
 }

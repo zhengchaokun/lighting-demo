@@ -21,8 +21,6 @@
 
         <div class="query-body">
             <ul class="tab-bar mb30 flex">
-                <!-- <li v-for="(tab,index) in tabs" :key="index" class="tab-item" :class="[{'is-active': activeIndex===index},{'flex1':index===tabs.length-1}]">{{tab}}</li> -->
-                
                 <li v-for="(tab,index) in tabs" :key="index" class="tab-item" :class="{'is-active': activeIndex===index}" @click="switchTab(index)">{{tab}}</li>
                 <li class="flex1"></li>
             </ul>
@@ -112,9 +110,6 @@
                 window.scrollTo(0, this.scrollTop);
             },
             getByValue(dict, value) {
-                // if(dict=='precontractStatus' && [1,2].indexOf(value)>-1) {
-                //     return '未确认';
-                // }
                 return Dict.getByValue(dict, value);
             },
             switchTab(index) {
@@ -130,7 +125,7 @@
                 this.show_pick_dept = val;
             },
             goDetail(item, index) {
-                App.navigate("lay/contract/cmd/detail", { 
+                App.navigate("lay/contract/deal/detail", { 
                     precontId: item.precontId,
                     preconts: JSON.stringify(this.preconts[this.activeIndex]),
                     index: index
@@ -144,16 +139,16 @@
                 //新建后立即匹配指令
                 that.depts = data;
                 if(that.$route.query.precontId) {
-                    var precontId = that.$route.query.precontId;
-                    API.contMatchInfoQuery({ contId: precontId}).then(function(data1) {
-                        that.matchInfo = data1;
+                    // var precontId = that.$route.query.precontId;
+                    // API.contMatchInfoQuery({ contId: precontId}).then(function(data1) {
+                    //     that.matchInfo = data1;
                         
-                        data.forEach(function(dept) {
-                            if(dept.deptId = that.matchInfo.deptId) {
-                                that.dept = dept;
-                            }
-                        })
-                    })
+                    //     data.forEach(function(dept) {
+                    //         if(dept.deptId = that.matchInfo.deptId) {
+                    //             that.dept = dept;
+                    //         }
+                    //     })
+                    // })
                 } else {
                     that.dept = that.depts[0];
                 }

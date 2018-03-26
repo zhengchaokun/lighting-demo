@@ -19,11 +19,9 @@
                 },{
                     title:"匹配指令",
                     path:"lay/contract/cmd/list",
-                    params:{type:1},
                 },{
                     title:"匹配成交",
-                    path:"lay/contract/cmd/list",
-                    params:{type:2},
+                    path:"lay/contract/deal/list",
                 }]
             }
         },

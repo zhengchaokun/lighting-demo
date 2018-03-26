@@ -3,7 +3,7 @@
     <div class="modal" v-show="currentVisible" :style="{top:top+'rem'}">
         <div class="search-bar flex">
             <input v-model="currentValue" class="search-input mr30 flex1">
-            <button class="btn-normal bg-green" @click="handleClick">确定</button>
+            <button class="btn-normal" @click="handleClick">确定</button>
         </div>
         <div class="search-list">
             <ul>
@@ -14,7 +14,7 @@
 </template>
 <script>
     export default {
-        data(){
+        data() {
             return {
                 currentValue: this.value[this.type],
                 currentVisible: this.visible
@@ -29,6 +29,7 @@
         },
         methods: {
             handleClick() {
+                if(!this.currentValue) return;
                 this.$emit('btnClick', this.currentValue);
                 this.currentVisible = false;
             },
@@ -36,6 +37,15 @@
                 this.currentValue = item[this.type];
                 this.$emit('input', item);
                 this.$emit('change', item);
+            },
+            preventScroll(event) {
+                if (event.cancelable) {
+                // 判断默认行为是否已经被禁用
+                    if (!event.defaultPrevented) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                }
             }
         },
         watch: {
@@ -43,24 +53,27 @@
                 this.currentValue = val[this.type]
             },
             currentVisible(val) {
-                this.$emit('visible-change',val)
+                // console.log(val)
                 // if(val) {
-                //     document.ontouchmove = function(e){
-                //         e.preventDefault();
-                //     }
+                //     document.body.scrollTop = document.documentElement.scrollTop = 0;
+                //     document.body.classList.add('noscroll');
+                //     document.addEventListener('touchmove', this.preventScroll ,false)
                 // } else {
-                //     document.ontouchmove = function(e){
-                //         // e.preventDefault();
-                //     }
+                //     document.body.classList.remove('noscroll');
+                //     document.removeEventListener('touchmove', this.preventScroll ,false)
                 // }
+                this.$emit('visible-change',val);                
             },
             visible(val) {
                 this.currentVisible = val;
             }
-        },
-        mounted () {
-            // console.log(this.list,this.type)
         }
+        // ,
+        // beforeHide() {
+        //     console.log('9999')
+        //     document.body.classList.remove('noscroll');
+        //     document.removeEventListener('touchmove', this.preventScroll ,false)
+        // }
     }
 </script>
 
@@ -75,6 +88,7 @@
         width: 100%;
         z-index: 1;
         background: #F9F9F9;
+        -webkit-transform: translateZ(0);//防抖
     }
     .modal > .detail-list {
         padding: 0.4rem 0.3rem 0.2rem 0.3rem;
@@ -91,7 +105,6 @@
         padding: 0.06rem 0.2rem;
         font-size: 0.34rem;
         color: #4A4A4A;
-        letter-spacing: 0.0.5rem;
         line-height: 0.72rem;
         font-weight: bold;
     }
@@ -102,7 +115,6 @@
     .search-list {
         font-size: 0.34rem;
         color: #787878;
-        letter-spacing: 0.0.5rem;
         line-height: 0.72rem;
         padding: 0 0.3rem 0.3rem 0.3rem;
     }
@@ -111,5 +123,11 @@
     }
     li:nth-child(odd) {
         background: #EBEBF2;
+    }
+    button {
+        background: #55C683; 
+    }
+    button:active {
+        background: #3EB36D;
     }
 </style>

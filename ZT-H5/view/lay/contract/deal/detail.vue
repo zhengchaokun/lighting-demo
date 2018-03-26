@@ -29,23 +29,22 @@
 
         <div v-show="show_pick_modal" class="modal">
             <div>
-                <table-fixed v-if="tableData_all && tableData_all.length>0" :value="tableData_all" :checked="checked_cmd" :columns="columns"></table-fixed> 
+                <table-fixed v-if="tableData_all && tableData_all.length>0" :value="tableData_all" :checked="checked_deal" :columns="columns"></table-fixed> 
                 <div v-else>暂无数据</div>
             </div> 
             <div class="pd30 pdb40">
-                <button class="btn-normal bg-blue" @click="confirmCmd">确 定</button>
+                <button class="btn-normal bg-blue" @click="confirmDeal">确 定</button>
             </div>
         </div>
 
         <div>
-            <table-fixed v-if="tableData_cmd && tableData_cmd.length>0" :readonly="true" :value="tableData_cmd" :checked="checked" :columns="columns"></table-fixed> 
+            <table-fixed v-if="tableData_deal && tableData_deal.length>0" :readonly="true" :value="tableData_deal" :checked="checked" :columns="columns"></table-fixed> 
             <div v-else>暂无数据</div>
         </div> 
 
         <div class="pd30 pdb40">
-            <button v-if="!nextFlag" class="btn-normal bg-blue" @click="confirmCmd">确 定</button>
-            <button v-else-if="!isBack" class="btn-normal btn-plain" @click="toNext">下一条</button>
-            <!-- <button v-else class="btn-normal bg-blue" @click="back">返 回</button>                                    -->
+            <button v-if="!nextFlag" class="btn-normal bg-blue" @click="confirmDeal">确 定</button>
+            <button v-else :disabled="disabled" class="btn-normal btn-plain" @click="toNext">下一条</button>            
         </div>
 
         
@@ -57,7 +56,6 @@
     import TableFixed from '../../../../ui/table-fixed.vue'
     const API = require('api')
     const Dict = require('dict')
-    import App from "light"
     
 
     export default {
@@ -100,34 +98,32 @@
                     operator: '李雷',
                     dealer: '韩梅梅'
                 }],
-                cmds: [],
+                deals: [],
                 checked: [],
-                checked_cmd: [],                
+                checked_deal: [],                
                 show_pick_modal: false,
                 pageSize: 10,
                 currentPage: 1,
-                cmdList: [],
-                // insStatus: ['1','3','2'],
+                dealList: [],
                 nextFlag: false,
-                isBack: false,
                 disabled: false,
                 preconts: [],
                 index: 0,
                 tableData_all: [],
-                tableData_cmd: [],
+                tableData_deal: [],
                 scrollTop: 0
 
             }
         },
         watch: {
-            cmdList: {
+            dealList: {
                 deep: true,
                 handler(val) {
                     var that = this;
                     that.tableData_all = that.setTableData(val);
-                    that.cmds = [];
-                    that.checked_cmd.forEach(function(cmd) {
-                        that.cmds.push(that.cmdList[cmd])
+                    that.deals = [];
+                    that.checked_deal.forEach(function(deal) {
+                        that.deals.push(that.dealList[deal])
                     })
                 }
             },
@@ -163,34 +159,35 @@
                 })
                 return result;
             },
-            getFundIdStr(array) {
-                var that = this;
-                let str = '';
-                array.forEach(function(item, index) {
-                    if(that.checkValid(item.fundId)) {
-                        str += item.fundId + ',';
-                    }
-                })
-                str = str.substring(0,str.length-2);
-                return str;
-            },
+            // getFundIdStr(array) {
+            //     var that = this;
+            //     let str = '';
+            //     array.forEach(function(item, index) {
+            //         if(that.checkValid(item.fundId)) {
+            //             str += item.fundId + ',';
+            //         }
+            //     })
+            //     str = str.substring(0,str.length-2);
+            //     return str;
+            // },
             showPickModal() {
                 var that = this;
-                var fundIdStr = that.matchInfo.insList && that.matchInfo.insList.length > 0 ? that.getFundIdStr(that.matchInfo.insList) : '';
-                API.insQuery({
+                // var fundIdStr = that.matchInfo.realdealList && that.matchInfo.realdealList.length > 0 ? that.getFundIdStr(that.matchInfo.realdealList) : '';
+                API.realdealQuery({
                     pageSize: that.pageSize,
                     currentPage: that.currentPage,
                     precontId: that.matchInfo.precontId
                 }).then(function(data) {
-                    that.cmdList = data;//注意选择状态，顺序变了
+                    that.dealList = data;
                     //选中状态
-                    that.cmdList.forEach(function(cmd, idx) {
-                        that.cmds.forEach(function(c,i) {
-                            if(cmd.insId === c.insId) {
-                                if(that.checked_cmd.indexOf(idx)==-1) {
-                                    that.checked_cmd.push(idx);
+                    that.dealList.forEach(function(deal, idx) {
+                        that.deals.forEach(function(c,i) {
+                            if(deal.insId === c.insId) {
+                                if(that.checked_deal.indexOf(idx)==-1) {
+                                    that.checked_deal.push(idx);
                                 }
                                 
+                                console.log(that.checked_deal)
                             }
                         })
                     })
@@ -200,35 +197,32 @@
                 this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
                 // API.forbidScroll();
             },
-            confirmCmd() {
+            confirmDeal() {
                 var that = this;
 
                 //提交编辑的匹配信息
-                var insList = [];
-                that.checked_cmd.forEach(function(cmd) {
+                var realdealList = [];
+                that.checked_deal.forEach(function(deal) {
                     let item = {}
-                    item.foreignmarketFlag = that.cmdList[cmd].foreignmarketFlag;
-                    item.insId = that.cmdList[cmd].insId;
-                    item.insStockId = that.cmdList[cmd].insStockId;
-                    insList.push(item); 
+                    item.foreignmarketFlag = that.dealList[deal].foreignmarketFlag;
+                    item.insId = that.dealList[deal].insId;
+                    item.insStockId = that.dealList[deal].insStockId;
+                    realdealList.push(item); 
                 })
 
                 API.contInsMatch({ 
                     precontId: that.matchInfo.precontId,
-                    insList: insList 
+                    realdealList: realdealList 
                 }).then(function(data) {
                     that.show_pick_modal = false;
                     that.nextFlag = true;
-                    if(that.isBack) {
-                        App.navigate('lay/contract/query/list')
-                    }
                 })
             },
             getByValue(dict, value) {
                 return Dict.getByValue(dict, value);
             },
-            back() {
-                App.navigate('lay/contract/query/list');
+            commit() {
+
             },
             toNext() {
                 var precontId = this.preconts[this.index+1].precontId;
@@ -244,12 +238,19 @@
                     details.forEach(function(detail,index) {
                         that.details.push(that.setInfoStr(detail));
                     })
-                    if(data.insList && data.insList.length > 0) {
-                        that.cmds = data.insList;
-                        that.tableData_cmd = that.setTableData(data.insList);
+                    if(data.realdealList && data.realdealList.length > 0) {
+                        that.deals = data.realdealList;
+                        that.tableData_deal = that.setTableData(data.realdealList);
                     }
                 })
             },
+            // checkValid(str) {
+            //     if(str == null || !str || new RegExp("^[ ]+$").test(str)) {
+            //         return true
+            //     } else {
+            //         return false
+            //     }
+            // },
             checkValid(str) {
                 if((!str && typeof str!=='number') || new RegExp("^[]+$").test(str)) {
                     return false
@@ -270,33 +271,23 @@
                 return str;
             }
         },
-        mounted() {
+        mounted () {
             document.body.addEventListener('touchstart', function () { });
             var that = this;
+            that.preconts = JSON.parse(this.$route.query.preconts);
+            var preconts = that.preconts;
+            that.index = this.$route.query.index;
+            var index = that.index;
+            if(index == preconts.length - 1) {
+                this.disabled = true;
+            } else {
+                this.disabled = false;
+            }
             
             if(that.$route.query.precontId) {
                 var precontId = that.$route.query.precontId;
                 this.getMatchInfo(precontId);
             }
-
-            if(this.$route.query.preconts) {
-                that.preconts = JSON.parse(this.$route.query.preconts);
-                var preconts = that.preconts;
-                that.index = this.$route.query.index;
-                var index = that.index;
-                if(index == preconts.length - 1) {
-                    this.disabled = true;
-                } else {
-                    this.disabled = false;
-                }
-                this.isBack = false;
-            } else {
-                this.isBack = true;
-            }
-            
-            
-            
-            
         },
         afterHide () {
             API.permitScroll();

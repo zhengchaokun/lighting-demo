@@ -21,7 +21,7 @@
         </template>
         
 
-        <div class="pd30 pdb40 flex btn-wrap-two">
+        <div class="pd30 pdb40 flex">
             <button class="btn-normal flex1 mr30 bg-green" @click="continueAdd">继续添加</button>
             <button class="btn-normal flex1 bg-blue" @click="finishAdd">完成</button>
         </div>
@@ -36,7 +36,6 @@
         data(){
             return {
                 precont: {},
-                precont_copy: {},
                 details: [],
                 info_body: '',
                 info_details: [],
@@ -45,11 +44,9 @@
         },
         methods: {
             edit(type, detail) {
-                // console.log(type, detail)
                 if(type=='step1') {
-                    App.navigate("lay/contract/add/step1",{ precont: JSON.stringify(this.precont) });
+                    App.navigate("lay/contract/add/step1", { precont: JSON.stringify(this.precont) });
                 } else {
-                    // console.log(this.precont)
                     App.navigate("lay/contract/add/step2", { 
                         precont: JSON.stringify(this.precont),
                         detail:  JSON.stringify(detail),
@@ -62,7 +59,9 @@
                 App.navigate("lay/contract/add/"+view);
             },
             continueAdd() {
-                console.log(this.precont)
+                if(this.precont.precontId == undefined) {
+                    return Dialog.alert("请添加预合同主体！");
+                } 
                 App.navigate("lay/contract/add/step2", {
                     precont: JSON.stringify(this.precont),
                     formalInfo: this.info_body,
@@ -70,17 +69,22 @@
                 });                
             },
             finishAdd() {
+                var that = this;
+                if(this.precont.precontId == undefined) {
+                    return Dialog.alert("请添加预合同主体！");
+                } 
                 //添加预合同
                 Dialog.confirm({
                     msg:'预合同创建成功，是否立即匹配期货指令？',
                     confirmText:"匹配期货指令",
                     cancelText:"取消",
+                    textLeft:true,
+                    vertical:true,
                     cancel(){
-                        //跳转
-                        App.navigate("lay/contract/query/detail",{})                        
+                        App.navigate("lay/contract/query/list")                        
                     },
                     confirm() {
-                        App.navigate("lay/contract/cmd/list?type=1")
+                        App.navigate("lay/contract/cmd/detail",{ precontId: that.precont.precontId })
                         return true
                     }
                 })
@@ -93,21 +97,22 @@
                 }
             }
         },
-        mounted () {
+        mounted () {            
+            document.body.addEventListener('touchstart', function () { });
             var that = this;
-            var precont = JSON.parse(this.$route.query.precont);
-            // this.precont_copy = precont;
-            // console.log(this.precont_copy)
-            if(this.$route.query.formalInfo) {
-                this.info_body = this.$route.query.formalInfo;
+            var precont = {};
+            if(this.$route.query.precont) {
+                precont = JSON.parse(this.$route.query.precont);
             } else {
-
+                return Dialog.alert('请输入预合同主体！');
             }
             
+            if(this.$route.query.formalInfo) {
+                this.info_body = this.$route.query.formalInfo;
+            }
 
             //查询单个预合同的信息
             API.contMatchInfoQuery({ contId: precont.precontId }).then(function(data) {
-                console.log(data);
                 that.precont = data;
                 that.details = data.detailList;
                 that.details.forEach(function(detail,index) {
@@ -132,20 +137,10 @@
     .edit-bar span {
         font-size: 0.3rem;
         color: #4A4A4A;
-        letter-spacing: 0;
         line-height: 0.42rem;
     }
     .edit-bar span:last-child {
         color: #9B9B9B;
     }
-    .btn-wrap-two {
-        position: absolute;
-        width: 100%;
-        bottom: 0;
-        padding: 0 0.3rem 0.4rem 0.3rem;
-    }
-    .alert-box p{
-        background: pink;
-        text-align: left !important;
-    }
+  
 </style>

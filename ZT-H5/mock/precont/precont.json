@@ -1,9 +1,9 @@
 
-                        {
-                          "code": 0,
-                          "message": "string",
-                          "data": [
-                            {
+                      {
+                        "code": 0,
+                        "message": "string",
+                        "data": [
+                          {
                             "precontId": "001",
                             "deptId": "301",
                             "customerShortname": "东南新材料",
@@ -45,7 +45,7 @@
                               },{
                                 "precontId": "001",
                                 "goodsId": "099",
-                                "productName": "2017/2018年度棉花",
+                                "productName": "2015/2016年度棉花",
                                 "brandName": "品牌2",
                                 "spotType": "分类1-2",
                                 "tradeAmount": 2356,
@@ -80,13 +80,13 @@
                             "warehouseName": "",
                             "deliverTime": "45天后",
                             "remark": "备注2",
-                            "precontractStatus": "4",
+                            "precontractStatus": "2",
                             "durationFlag": "1",
                             "details": [
                               {
                                 "precontId": 0,
                                 "goodsId": 0,
-                                "productName": "2016/2017年度棉花",
+                                "productName": "2016年煤炭",
                                 "brandName": "品牌2",
                                 "spotType": "分类2",
                                 "tradeAmount": 1256,
@@ -112,4 +112,4 @@
                             ]
                           }
                         ]
-                        }
+                      }
