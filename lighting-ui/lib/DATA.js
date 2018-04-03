@@ -104,6 +104,14 @@ let datas = [
         path: "#/progress"
     },
     {
+        label: "process 流程条",
+        path: "#/process"
+    },
+    {
+        label: "process-row 横向流程条",
+        path: "#/process-row"
+    },
+    {
         label: "radio 单选",
         path: "#/radio"
     },
@@ -134,6 +142,14 @@ let datas = [
     {
         label: "stepper 步进器",
         path: "#/stepper"
+    },
+    {
+        label: "switch 开关",
+        path: "#/switch"
+    },
+    {
+        label: "tab-group 页签组",
+        path: "#/tab-group"
     },
     {
         label: "tab-bar 底部标签页",
