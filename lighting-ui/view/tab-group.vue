@@ -4,7 +4,7 @@
     <scroller class="scroller">
       <title title="lc-fold-list"></title>
       <category title="默认按钮组"></category>
-      <lc-tab-group :groups="groups"></lc-tab-group>
+      <lc-tab-group :groups="groups" @clickTab="clickGroup"></lc-tab-group>
       <category title="自定义按钮组"></category>
       <lc-tab-group :groups="groups" :tabStyles="tabStyles"></lc-tab-group>
 
@@ -35,6 +35,11 @@
                     activeColor:'red',//默认背景色 选中颜色
                     borderColor:'yellow',//边框颜色 选中背景色
                 }        
+            }
+        },
+        methods:{
+            clickGroup(index){
+                console.log(index)
             }
         }
     }

@@ -37,7 +37,7 @@
 <script>
   import Title from 'lighting-ui/packages/_mods/title.vue';
   import Category from 'lighting-ui/packages/_mods/category.vue';
-  import LcInfoList from 'lighting-ui/packages/lc-info-list';
+  import LcInfoList from 'lighting-ui/packages/index';
 
   export default {
     data(){
@@ -62,8 +62,8 @@
     },
     components: { Title, Category, LcInfoList},
     methods:{
-      infoClick(e) {
-        console.log("clicked" + e.index);
+      infoClick(index) {
+        console.log("clicked" + index);
       }
     }
   }
