@@ -1,9 +1,14 @@
 {
   "code": 0,
   "message": "string",
-  "data": {
-    "varietyId": "",
-    "varietyName": "",
-    "futureKindId": ""
-  }
+  "data": [{
+      "varietyId": 2,
+      "varietyName": "化工",
+      "futureKindId": 13
+    }, {
+      "varietyId": 2,
+      "varietyName": "炉料",
+      "futureKindId": 23
+    }
+  ]
 }

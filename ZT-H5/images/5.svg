@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>边栏按钮</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="境内期货指令" transform="translate(-10.000000, -74.000000)">
+            <g id="Group-8" transform="translate(0.000000, 65.000000)">
+                <g id="Group-3" transform="translate(10.000000, 9.000000)">
+                    <rect id="Rectangle-13-Copy" x="0" y="0" width="22" height="22"></rect>
+                    <path d="M3.8,7.1 L18.2,7.1 C18.6418,7.1 19,6.7418 19,6.3 C19,5.8582 18.6418,5.5 18.2,5.5 L3.8,5.5 C3.3582,5.5 3,5.8582 3,6.3 C3,6.7418 3.3582,7.1 3.8,7.1 Z M18.2,10.3 L3.8,10.3 C3.3582,10.3 3,10.6582 3,11.1 C3,11.5418 3.3582,11.9 3.8,11.9 L18.2,11.9 C18.6418,11.9 19,11.5418 19,11.1 C19,10.6582 18.6418,10.3 18.2,10.3 Z M18.2,15.1 L3.8,15.1 C3.3582,15.1 3,15.4582 3,15.9 C3,16.3418 3.3582,16.7 3.8,16.7 L18.2,16.7 C18.6418,16.7 19,16.3418 19,15.9 C19,15.4582 18.6418,15.1 18.2,15.1 Z" id="Shape" fill="#4A4A4A" fill-rule="nonzero"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,7 +1,7 @@
 
 <template>
     <div>
-        <cmd :com="comData"></cmd>
+        <cmd :com="comData" @checkedTop="checkedItem"></cmd>
     </div>
 </template>
 <script>
@@ -13,8 +13,9 @@
         data(){
             return {
                 comData:{
-                    prodData:null,
+                    topData:null,
                     listData:null,
+                    tabsData:null,
                     clickBtn:{
                         title:null,
                         cls:null,
@@ -32,10 +33,15 @@
             }
         },
         methods:{
+            checkedItem(item){
+                item.checked = !item.checked;
+            },
             initData(){
                 this.comData = {
-                    prodData:null,
+                    topData:null,
+
                     listData:null,
+                    tabsData:null,
                     clickBtn:{
                         title:null,
                         cls:null,
@@ -48,9 +54,27 @@
                         API.insQuery({
                             insStatusStr:require("dict").insStatus['待审批']
                         }).then(function (list) {
-                            that.comData.listData = {
-                                "default":list
-                            };
+                            let listData = [];
+                            list.forEach(function (l) {
+                                listData.push({
+                                    pName:l.fundName,
+                                    name:l.combiName,
+                                    code:l.fundId,
+                                    list:[
+                                        [{
+                                            '':l.insId,
+                                            ' ':'买入',
+                                            '  ':'开仓',
+                                            '价格':l.insPrice,
+                                        },{
+                                            '指令数量':l.insAmount,
+                                            '已委托':l.insAmount,
+                                            '已成交':l.insAmount,
+                                        }]
+                                    ]
+                                })
+                            });
+                            that.comData.listData =listData
                         });
                         that.comData.clickBtn = {
                             title:"撤销",
@@ -70,20 +94,57 @@
                     case "2":
                         //查询产品
                         API.fundQuery({}).then(function (data) {
-                            that.comData.prodData = {
-                                current:0,
-                                fundList:data
+                            let deptData = [];
+                            data.forEach(function (d,index) {
+                                deptData.push({
+                                    id:d.fundId,
+                                    code:d.fundCode,
+                                    name:d.fundName,
+                                    checked:index===0
+                                })
+                            });
+                            that.comData.topData = {
+                                title:"产品",
+                                list:deptData
                             }
                         }).then(function () {
                             API.insQuery({
                                 insStatusStr:require("dict").insStatus['待审批']
                             }).then(function (list) {
-                                that.comData.listData = {
-                                    '未执行':list,
-                                    '执行中':list,
-                                    '已完成':list,
-                                    '已取消':list
-                                };
+                                let listData = [];
+                                list.forEach(function (l) {
+                                    listData.push({
+                                        pName:l.fundName,
+                                        name:l.combiName,
+                                        code:l.fundId,
+                                        list:[
+                                            [{
+                                                '':l.insId,
+                                                ' ':'买入',
+                                                '  ':'开仓',
+                                                '价格':l.insPrice,
+                                            },{
+                                                '指令数量':l.insAmount,
+                                                '已委托':l.insAmount,
+                                                '已成交':l.insAmount,
+                                            }]
+                                        ]
+                                    })
+                                });
+                                that.comData.listData = listData
+                                that.comData.tabsData = [{
+                                    title:'未执行',
+                                    value:''
+                                },{
+                                    title:'执行中',
+                                    value:''
+                                },{
+                                    title:'已完成',
+                                    value:''
+                                },{
+                                    title:'已取消',
+                                    value:''
+                                }]
                             });
                         });
                         that.comData.clickBtn = {
@@ -104,17 +165,44 @@
                     case "3":
                         //查询产品
                         API.fundQuery({}).then(function (data) {
-                            that.comData.prodData = {
+                            let deptData = [];
+                            data.forEach(function (d,index) {
+                                deptData.push({
+                                    id:d.fundId,
+                                    code:d.fundCode,
+                                    name:d.fundName,
+                                    checked:index===0
+                                })
+                            });
+                            that.comData.topData = {
                                 current:0,
-                                fundList:data
+                                title:"产品",
+                                list:deptData
                             }
                         }).then(function () {
-                            API.combiStockQuery({
-                                fundIdStr:that.comData.prodData.fundList[0].fundId
+                            API.insQuery({
+                                insStatusStr:require("dict").insStatus['待审批']
                             }).then(function (list) {
-                                that.comData.listData = {
-                                    "default":list
-                                };
+                                let listData = [];
+                                list.forEach(function (l) {
+                                    listData.push({
+                                        pName:l.fundName,
+                                        name:l.combiName,
+                                        code:l.fundId,
+                                        list:[
+                                            [{
+                                                '':l.insId,
+                                                ' ':'买入',
+                                                '  ':'开仓',
+                                                '持仓均价':l.insPrice,
+                                            },{
+                                                '持仓':l.insAmount,
+                                                '可平':l.insAmount,
+                                            }]
+                                        ]
+                                    })
+                                });
+                                that.comData.listData = listData
                             });
                         });
                         that.comData.clickBtn = {

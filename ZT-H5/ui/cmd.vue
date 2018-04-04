@@ -1,43 +1,39 @@
 <template>
     <div>
         <div class="operateWrap">
-            <div v-if="com.prodData" class="buyCont buyStyle">
+            <div v-if="com.topData" class="buyCont buyStyle">
                 <div class="itemList">
                     <div class="subitem" @click="letsChooseProd=true">
-                        <span>产品</span><span>{{com.prodData.fundList[com.prodData.current].fundCode}}{{com.prodData.fundList[com.prodData.current].fundName}}</span><em>选择</em>
+                        <span>{{com.topData.title}}</span><span>{{getTitleString()}}</span><em>选择</em>
                     </div>
                 </div>
             </div>
-            <div v-if="com.listData">
-                <div class="codeMenu flex" v-if="currentFilter!=='default'">
-                    <span class="flex1" :class="{current:currentFilter==key}" @click="currentFilter=key"
-                          v-for="(item,key) in com.listData">{{key}}</span>
+            <div>
+                <div class="codeMenu flex" v-if="com.tabsData">
+                    <span class="flex1" :class="{current:currentTab==key}" @click="currentTab=key"
+                          v-for="(item,key) in com.tabsData">{{item.title}}</span>
                 </div>
-                <div class="operateList" v-for="(item,index) in com.listData[currentFilter]"
+                <div class="operateList" v-for="(item,index) in com.listData"
                      @click="currentItemChecked=index">
-                    <span class="operateBut" :class="com.clickBtn.cls" @click="com.clickBtn.handler(item)"
-                          v-show="currentItemChecked==index"><em>{{com.clickBtn.title}}</em></span>
-                    <h2>{{item.fundId}} {{item.combiName}}/{{item.fundName}}</h2>
-                    <p>
-                        <span class="code">{{item.insId}}</span>
-                        <!--<span class="colorRed">{{dictByValue('entrustDirection',item.entrustDirection).substring(0,2)}}</span>-->
-                        <!--<span>{{dictByValue('entrustDirection',item.entrustDirection).substring(2,4)}}</span>-->
-                        <span>持仓均价<em>{{item.insPrice}}</em></span>
-                    </p>
-                    <p>
-                        <span>指令数量<em>{{item.entrustAmount}}</em></span>
-                        <span>已委托<em>{{item.insAmount}}</em></span>
-                        <span>已成交<em>{{item.dealAmount}}</em></span>
-                    </p>
+                    <transition name="slide-right">
+                        <span class="operateBut" :class="com.clickBtn.cls" @click="com.clickBtn.handler(item)"
+                          v-show="currentItemChecked==index&&currentTab!=2&&currentTab!=3"><em>{{com.clickBtn.title}}</em></span>
+                    </transition>
+                    <h2><em v-if="item.code">{{item.code}} </em>{{item.name}}<em v-if="item.pName">/{{item.pName}}</em></h2>
+                    <div v-for="list in item.list">
+                        <p v-for="it in list">
+                            <span v-for="(itv,itk) in it">{{itk}}<em>{{itv}}</em></span>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="prod-choose" v-show="letsChooseProd">
-            <ul v-if="com.prodData">
-                <li @click="checkOrNot(prod)" v-for="prod in com.prodData.fundList">
+            <ul v-if="com.topData">
+                <li :class="{'prod-checked':prod.checked}" @click="checkOrNot(prod)" v-for="prod in com.topData.list">
                     <div class="left-side">
-                        <span class="prod-id">{{prod.fundCode}}</span>
-                        <span class="prod-name">{{prod.fundName}}</span>
+                        <span class="prod-id">{{prod.code}}</span>
+                        <span class="prod-name">{{prod.name}}</span>
                     </div>
                     <span class="right-side" v-show="prod.checked"></span>
                 </li>
@@ -50,19 +46,34 @@
     export default {
         data() {
             return {
-                currentFilter: 'default',
-                currentItemChecked: null,
+                currentTab: 0,
+                currentItemChecked: 0,
                 letsChooseProd:false
             }
         },
         methods: {
             itemClicked(item) {
             },
-            checkOrNot(item){
-                this.$set(item,'checked',!item.checked);
+            checkOrNot(item,index){
+                this.$emit('checkedTop',item)
             },
             chooseProd(){
                 this.letsChooseProd = false;
+            },
+            getTitleString(){
+                let str = '';
+                if(this.com && this.com.topData){
+                    this.com.topData.list.forEach(function (top) {
+                        if(top.checked){
+                            if(top.code){
+                                str+=`,${top.code}`
+                            }else{
+                                str+=`,${top.name}`
+                            }
+                        }
+                    })
+                }
+                return str.substring(1);
             }
         },
         mounted() {
@@ -72,13 +83,21 @@
             'com.listData': function () {
                 if (this.com.listData) {
                     this.currentItemChecked = null;
-                    this.currentFilter = Object.keys(this.com.listData)[0]
                 }
             }
         }
     }
 </script>
 <style lang="less">
+    .prod-checked{
+        background-color: #ebebf2;
+    }
+    .slide-right-enter-active, .slide-right-leave-active {
+        transition: transform .5s;
+    }
+    .slide-right-enter, .slide-right-leave-to {
+        transform: translate3d(100%, 0, 0);
+    }
     .prod-choose{
         position: fixed;
         top:0.8rem;
@@ -87,8 +106,9 @@
         right: 0;
         bottom: 0;
         ul{
-            padding: 0.6rem 0.2rem 0 0.5rem;
+            padding-top: 0.4rem;
             li{
+                padding: 0 0.2rem 0 0.5rem;
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;

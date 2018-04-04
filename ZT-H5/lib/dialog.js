@@ -27,7 +27,7 @@ module.exports = {
     confirm:function (options) {
         const dom = `
             <div>
-                <ui-confirm :msg="'${options.msg}'" :confirm-text="'${options.confirmText}'" :cancel-text="'${options.cancelText}'"  @confirm="confirm" @cancel="cancel"></ui-confirm>
+                <ui-confirm :msg="'${options.msg}'" :vertical="'${options.vertical}'" :text-left="'${options.textLeft}'" :confirm-text="'${options.confirmText}'" :cancel-text="'${options.cancelText}'"  @confirm="confirm" @cancel="cancel"></ui-confirm>
             </div>
         `;
         const wrap = document.createElement("div");

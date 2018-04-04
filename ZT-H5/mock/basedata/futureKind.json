@@ -1,0 +1,22 @@
+{
+    "code": 0,
+    "message": "string",
+    "data": [
+        {
+            "futureKindId": 13,
+            "marketNo": 0,
+            "futureKindCode": "string",
+            "futureKindName": "钢铁"
+        }, {
+            "futureKindId": 1,
+            "marketNo": 0,
+            "futureKindCode": "string",
+            "futureKindName": "棉花"
+        }, {
+            "futureKindId": 2,
+            "marketNo": 0,
+            "futureKindCode": "string",
+            "futureKindName": "石油"
+        }
+    ]
+}

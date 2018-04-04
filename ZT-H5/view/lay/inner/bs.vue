@@ -2,7 +2,7 @@
 <template>
     <div>
         <div class="buyCont" :class="{'buyStyle':type==1,'sellStyle':type==2}">  <!--卖出用sellStyle-->
-            <choose :select="select" :name="selectName" @getParam="getParam" v-if="ifSelect"></choose>
+            <picker :data='select' v-model='year1'  ref="picker1" @getParam="getParam" @on-change='change' v-if="ifSelect"></picker>
             <div class="itemList lineColor">
                 <div class="subitem" @click="toSelect('fundName',fund)">
                     <span>产品</span><span>{{curFund?curFund.fundName:'--'}}</span><em>选择</em>
@@ -15,15 +15,15 @@
                 <div class="subitem flex">
                     <span>合约代码</span>
                     <form class="flex1" action="javascript:void(0)" submit="filterCode()">
-                        <input type="search" v-model="searKey" placeholder="">
+                        <input type="search" v-model="reportCode" placeholder="">
                     </form>
                 </div>
             </div>
             <div class="codeWrap flex">
                 <div class="codeSelect">
                     <ul>
-                        <li :class="{'select':direc==0}" @click="direc=0">开仓</li>
-                        <li :class="{'select':direc==1}" @click="direc=1">平仓</li>
+                        <li :class="{'select':direc=='0'}" @click="direc='0'">开仓</li>
+                        <li :class="{'select':direc=='1'}" @click="direc='1'">平仓</li>
                     </ul>
                     <ul>
                         <li :class="{'select':investType=='a'}" @click="investType='a'">投机</li>
@@ -34,26 +34,26 @@
                 </div>
                 <div class="codeMarket flex1">
                     <p><span>沪深1806</span><span class="fright">IF1806</span></p>
-                    <p @click="codePrice=quote.bidPrice1"><em class="direc">卖出</em><em class="price">{{quote.bidPrice1}}</em><em class="num">{{quote.bidVolume1}}</em></p>
-                    <p @click="codePrice=quote.askPrice1"><em class="direc">买入</em><em class="price">{{quote.askPrice1}}</em><em class="num">{{quote.askVolume1}}</em></p>
+                    <p @click="codePrice=quote.bidPrice1"><em class="direc">卖出</em><em class="price">{{quote.bidPrice1?quote.bidPrice1:'-'}}</em><em class="num">{{quote.bidVolume1?quote.bidVolume1:'-'}}</em></p>
+                    <p @click="codePrice=quote.askPrice1"><em class="direc">买入</em><em class="price">{{quote.askPrice1?quote.askPrice1:'-'}}</em><em class="num">{{quote.askVolume1?quote.askVolume1:'-'}}</em></p>
                     <div class="marketDetail flex">
                         <ul class="flex1">
-                            <li><span>最新</span><em>{{quote.lastPrice}}</em></li>
-                            <li><span>涨跌</span><em>{{quote.priceChange}}</em></li>
-                            <li><span>幅度</span><em>{{quote.priceChangeRate}}</em></li>
-                            <li><span>总手</span><em class="colorOrange">{{quote.totalAmount}}</em></li>
-                            <li><span>现手</span><em class="colorOrange">{{quote.currentAmount}}</em></li>
-                            <li><span>涨停</span><em>{{quote.uplimitedPrice}}</em></li>
-                            <li><span>跌停</span><em class="colorGreen">{{quote.downlimitedPrice}}</em></li>
+                            <li><span>最新</span><em>{{quote.lastPrice?quote.lastPrice:'-'}}</em></li>
+                            <li><span>涨跌</span><em>{{quote.priceChange?quote.priceChange:'-'}}</em></li>
+                            <li><span>幅度</span><em>{{quote.priceChangeRate?quote.priceChangeRate:'-'}}</em></li>
+                            <li><span>总手</span><em class="colorOrange">{{quote.totalAmount?quote.totalAmount:'-'}}</em></li>
+                            <li><span>现手</span><em class="colorOrange">{{quote.currentAmount?quote.currentAmount:'-'}}</em></li>
+                            <li><span>涨停</span><em>{{quote.uplimitedPrice?quote.uplimitedPrice:'-'}}</em></li>
+                            <li><span>跌停</span><em class="colorGreen">{{quote.downlimitedPrice?quote.downlimitedPrice:'-'}}</em></li>
                         </ul>
                         <ul class="flex1">
-                            <li><span>结算</span><em class="colorGreen">{{quote.preSettlePrice}}</em></li>
-                            <li><span>昨结</span><em>{{quote.preHoldAmount}}</em></li>
-                            <li><span>今开</span><em class="colorGreen">{{quote.openPrice}}</em></li>
-                            <li><span>最高</span><em>{{quote.highPrice}}</em></li>
-                            <li><span>最低</span><em class="colorGreen">{{quote.lowPrice}}</em></li>
-                            <li><span>持仓</span><em class="colorOrange">{{quote.holdAmount}}</em></li>
-                            <li><span>日增</span><em class="colorOrange">{{quote.priceInterval}}</em></li>
+                            <li><span>结算</span><em class="colorGreen">{{quote.preSettlePrice?quote.preSettlePrice:'-'}}</em></li>
+                            <li><span>昨结</span><em>{{quote.preHoldAmount?quote.preHoldAmount:'-'}}</em></li>
+                            <li><span>今开</span><em class="colorGreen">{{quote.openPrice?quote.openPrice:'-'}}</em></li>
+                            <li><span>最高</span><em>{{quote.highPrice?quote.highPrice:'-'}}</em></li>
+                            <li><span>最低</span><em class="colorGreen">{{quote.lowPrice?quote.lowPrice:'-'}}</em></li>
+                            <li><span>持仓</span><em class="colorOrange">{{quote.holdAmount?quote.holdAmount:'-'}}</em></li>
+                            <li><span>日增</span><em class="colorOrange">{{quote.priceInterval?quote.priceInterval:'-'}}</em></li>
                         </ul>
                     </div>
                 </div>
@@ -64,8 +64,8 @@
                 </div>
             </div>
             <div class="upDown">
-                <span>涨停<em class="colorRed">{{quote.uplimitedPrice}}</em></span> 
-                <span>跌停<em class="colorGreen">{{quote.downlimitedPrice}}</em></span>
+                <span>涨停<em class="colorRed">{{quote.uplimitedPrice?quote.uplimitedPrice:'-'}}</em></span> 
+                <span>跌停<em class="colorGreen">{{quote.downlimitedPrice?quote.downlimitedPrice:'-'}}</em></span>
             </div>
             <div class="itemList lineColor">
                 <div class="subitem">
@@ -88,33 +88,36 @@
     </div>
 </template>
 <script>
-    import choose from "../../../ui/select.vue";
+    import picker from "../../../ui/picker/index.vue";
     const API = require("api");
     const Dialog = require("dialog")
     export default {
         data(){
             return {
-                type:"",//买卖方向
+                year1: [''],
+                type:0,//买卖方向
                 ifSelect:false,//
-                selectName:"",//选择组件中要展示的字段名字
                 select:[],//选择组件中的列表信息
-                curFund:{},//当前选中的产品
+                curFund:[],//当前选中的产品
                 curCombi:[],//当前选中组合
                 curOperator:[],//当前选中操作员
                 fund:[],//产品列表
                 combi:[],//组合列表
                 operator:[],//操作员
-                searKey:"",//合约代码
                 quote:{},//行情信息
                 codePrice:0,//指令价格
                 codeNum:0, //指令数量
                 tips:"", //备注
-                direc:0, //平仓开仓
+                direc:'1', //平仓开仓
                 investType:"a", //投资类型
                 enableNum:0,//可买可卖数量，买时enableNum=可用金额/(指令价格*合约乘数），卖时enableNum = 可用数量
                 enableAmount:0,//可用数量
                 enableBalance:0, //可用金额
-                priceInterval:0, //价格加减步长
+                priceInterval:0.2, //价格加减步长
+                numInterval:{
+                        buyUnit:0,
+                        saleUnit:0
+                    },
                 multiple:0, //合约乘数
                 marketNo:"", //交易市场
                 reportCode:"" //证券代码
@@ -124,37 +127,52 @@
             '$route.query.type':function(){
                 this.type =this.$route.query.type
             },
-            'searKey':function(){
+            'reportCode':function(){
                 this.filterCode();
+                
+            },
+            'quote':function(){
+                this.enableAmountGet();
             },
             'type':function(){
-                this.amountChange();
+                this.enableAmountGet();
             },
             'codePrice':function(){
                 this.amountChange();
             },
-            'marketNo':function(){
-                this.filterCode();
+            'curCombi':function(){
+                this.enableBalanceGet();
+                this.enableAmountGet();
             },
-            'reportCode':function(){
-                this.filterCode();
+            'curFund':function(){
+                this.queryCombi();
+            },
+            'direc':function(){
+                this.amountChange();
             }
         },
         methods:{
+            change (value) {
+            },
             //可买可卖数量变动
             amountChange(){
                 var that = this;
-                if(that.type==1){
-                    that.enableNum = parseInt(Number(that.enableBalance)/(Number(that.codePrice)*that.multiple))
-                }else{
-                    console.log(that.enableAmount);
-                    that.enableNum = that.enableAmount
+                
+                switch(that.direc){
+                    //开仓
+                    case '0':
+                        that.enableNum = parseInt(Number(that.enableBalance)/(Number(that.codePrice)*that.multiple));
+                        break;
+                    //平仓
+                    case '1':
+                        that.enableNum = that.enableAmount;
+                        break;
                 }
             },
-
             //选择弹框内容选中
             getParam(item){
                 var that = this;
+                console.log(item);
                 if(item.combiName){
                     that.curCombi=item;
                 }else if(item.fundName){
@@ -164,65 +182,192 @@
                 }
                 that.ifSelect = false;
             },
-
+            queryCombi(){
+                var that = this;
+                //查询组合
+                API.combiGet({
+                    fundId:that.curFund.fundId,
+                    dataRight:""
+                }).then(function (data) {
+                    that.combi = data;
+                    that.curCombi = data[0]
+                })
+            },
             //选择弹框显示
             toSelect(name,list){
                 var that = this;
+                if(name=='combiName'&&that.curFund.length==0){
+                    Dialog.alert("请先选择一个产品");
+                    return false;
+                }
                 that.ifSelect = true;
-                that.select = list;
-                that.selectName = name;
+                var select = [];
+                list.forEach(function(obj){
+                    var name = "";
+                    if(obj.combiName){
+                        name = obj.combiName;
+                        
+                    }else if(obj.fundName){
+                        name = obj.fundName;
+                    }else if(obj.operatorName){
+                        name = obj.operatorName;
+                    }
+                    select.push({
+                        name:name,
+                        value:obj
+                    });
+                })
+                that.select = [select];
             },
 
             //输入合约代码
             filterCode(){
                 var that =this;
-                API.stockQuoteGet({
-                    reportCode:that.searKey
-                }).then(function (data) {
-                    that.quote = data;
-                })
-                that.amountChange();
 
+                //校验合约代码、获取合约乘数、价格加减步长、数量加减步长
+                API.futureInfoGet({
+                    reportCode:that.quote.reportCode
+                }).then(function (data) {
+                    that.priceInterval = data[0].priceInterval;
+                    that.multiple = data[0].multiple;
+                    that.numInterval = {
+                        buyUnit:data[0].buyUnit,
+                        saleUnit:data[0].saleUnit
+                    };
+                    API.stockQuoteGet({
+                        marketNo:data[0].marketNo,
+                        reportCode:that.reportCode
+                    }).then(function (data) {
+                        that.quote = data;
+                    })
+                })
+                
+                that.amountChange();
             },
 
             //价格数量加减
-            changePrice(type){
+            changePrice(changetype){
                 var that =this;
-                if(type==0){
-                    that.codePrice=Number(that.codePrice)-that.priceInterval;
+                var numUnit = 0;
+                if(that.type==1){
+                    numUnit=that.numInterval.buyUnit
+                }else if(that.type==2){
+                    numUnit=that.numInterval.saleUnit
+                }
+                if(changetype==0){
+                    that.codePrice=(Number(that.codePrice)-that.priceInterval).toFixed(3);
                     if(that.codePrice<0){
                         that.codePrice=0
                     }
-                }else if(type==1){
-                    that.codePrice=Number(that.codePrice)+that.priceInterval;
+                }else if(changetype==1){
+                    that.codePrice=(Number(that.codePrice)+that.priceInterval).toFixed(3);
                     if(that.codeNum>that.enableNum){
                         that.codeNum=that.enableNum
                     }
-                }else if(type==2){
-                    that.codeNum=Number(that.codeNum)-1;
+                }else if(changetype==2){
+                    that.codeNum=Number(that.codeNum)-numUnit;
                     if(that.codeNum<0){
                         that.codeNum=0
                     }
-                }else if(type==3){
-                    that.codeNum=Number(that.codeNum)+1;
+                }else if(changetype==3){
+                    that.codeNum=Number(that.codeNum)+numUnit;
                     if(that.codeNum>that.enableNum){
                         that.codeNum=that.enableNum
                     }
                 }
             },
+            //获取可用金额
+            enableBalanceGet(){
+                var that = this;
+                API.enableBalanceGet({
+                    combiId:that.curCombi.combiId
+                }).then(function (data) {
+                    that.enableBalance = data.enableBalance;
+                    that.amountChange();
+                })
+            },
+            //获取可用数量
+            enableAmountGet(){
+                var that = this;
+                API.enableAmountGet({
+                    combiId:that.curCombi.combiId,
+                    marketNo:that.quote.marketNo,
+                    reportCode:that.quote.reportCode,
+                    investType:that.investType,
+                    positionType:that.type==1?'2':'1'
+                }).then(function (data) {
+                    that.enableAmount = data.enableAmount;
+                    that.amountChange();
+                })
+            },
+            //获取买卖方向
+            getEntrustDirection(type,direc){
+                var that = this;
+                switch (type){
+                    case 1 : 
+                        if(direc=='0'){
+                            return '32'
+                        };
+                        if(direc=='1'){
+                            return '35'
+                        };
+                        break;
+                    case 2:
+                        if(direc=='0'){
+                            return '33'
+                        }
+                        if(direc=='1'){
+                            return '34'
+                        };
+                        break;
+                }
+            },
             buy(){
-                
+                var that = this;
+                // if(that.curFund.length==0){
+                //     Dialog.alert("请先选择一个产品");
+                //     return false;
+                // }
+                // if(that.curCombi.length==0){
+                //     Dialog.alert("请先选择一个组合");
+                //     return false;
+                // }
+                if(!that.reportCode){
+                    Dialog.alert("请输入合约代码");
+                    return false;
+                }
+                if(!that.codePrice&&that.codePrice!=0){
+                    Dialog.alert("请输入指令价格");
+                    return false;
+                }else if(that.codePrice>that.quote.uplimitedPrice||(that.codePrice<that.quote.downlimitedPrice&&that.codePrice!=0)){
+                    Dialog.alert("指令价格不能超过涨停价或低于跌停价，请重新输入");
+                    return false;
+                }
+                if(!that.codeNum||that.codeNum==0){
+                    Dialog.alert("请输入指令数量");
+                    return false;
+                }
+                var re = /^[0-9]*[1-9][0-9]*$/;
+                if(!(re.test(that.codeNum))){
+                    Dialog.alert("指令数量必须为正整数");
+                    return false;
+                }
                 Dialog.confirm({
                     msg:'是否确定下单？',
                     confirmText:"确定",
                     cancelText:"取消",
                     confirm(){
                         API.insAdd({
-                            combiId:1,
-                            marketNo:1,
-                            reportCode:1,
-                            investType:1,
-                            positionType:1
+                            "fundId": that.curFund.fundId,
+                            "combiId":that.curCombi.combiId,
+                            "marketNo": that.marketNo,
+                            "reportCode": that.reportCode,
+                            "insAmount": that.codeNum,
+                            "insPrice": that.codePrice,
+                            "entrustDirection": that.getEntrustDirection(that.type,that.direc),
+                            "opTradeNo": that.curOperator.operatorNo,
+                            "investType": that.investType,
+                            "remark": that.tips
                         }).then(function (data) {
                             
                         })
@@ -231,7 +376,7 @@
             }
         },
         components:{
-            choose
+            picker
         },
         mounted(){
             this.type =this.$route.query.type;
@@ -241,48 +386,15 @@
                 dataRight:""
             }).then(function (data) {
                 that.fund = data;
-                //查询组合
-                API.combiGet({
-                    dataRight:""
-                }).then(function (data) {
-                    that.combi = data;
-                    //获取可用金额
-                    API.enableBalanceGet({
-                        combiId:that.curCombi.combiId
-                    }).then(function (data) {
-                        that.enableBalance = data.enableBalance;
-                    })
-                    //获取可用数量
-                    API.enableAmountGet({
-                        combiId:that.curCombi.combiId,
-                        marketNo:that.quote.marketNo,
-                        reportCode:that.quote.reportCode,
-                        investType:that.investType,
-                        positionType:1
-                    }).then(function (data) {
-                        that.enableAmount = data.enableAmount;
-                    })
-                })
+                that.curFund = data[0]
             })
-            
             //查询交易员
             API.opTradeInfoGet({}).then(function (data) {
                 that.operator = data;
+                that.curOperator=data[0]
             })
 
-            
-
-            //获取合约乘数、价格加减步长
-            API.futureInfoGet({
-                marketNo:that.quote.marketNo,
-                reportCode:that.quote.reportCode
-            }).then(function (data) {
-                that.priceInterval = data[0].priceInterval;
-                that.multiple = data[0].multiple;
-            })
-            
             var transParam = that.$route.query;
-            console.log(transParam);
             if(transParam.fundName){
                 that.type = transParam.type;
                 that.curFund.fundName = transParam.fundName;
@@ -293,7 +405,7 @@
                 that.reportCode = transParam.reportCode;
                 that.codePrice = transParam.insPrice;
                 that.codeNum = transParam.insAmount;
-                that.searKey = transParam.reportCode
+                that.reportCode = transParam.reportCode
             }
 
             

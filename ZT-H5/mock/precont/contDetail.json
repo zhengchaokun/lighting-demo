@@ -1,0 +1,10 @@
+{
+    "code": 0,
+    "message": "string",
+    "data": [
+        {
+            "precontId": 1,
+            "goodsId": 3456
+        }
+    ]
+}

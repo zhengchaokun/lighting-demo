@@ -6,7 +6,7 @@
 
             </div>
             <span></span>
-            <button @click="sureSelect(select[num])">确定</button>
+            <button @click="sureSelect(select[num])">确1定</button>
             <ul id="scrollWrap">
                 <li></li>
                 <li></li>

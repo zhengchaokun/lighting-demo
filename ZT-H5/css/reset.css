@@ -20,12 +20,10 @@ textarea{
     word-break: break-all;
     font-size: 0.34rem;
     color: #787878;
-    letter-spacing: -0.0082rem;
 }
 textarea::-webkit-input-placeholder {
     font-size: 0.3rem;
     color: #7A7A7A;
-    letter-spacing: 0.0044rem;
     line-height: 0.3rem;
     font-family: "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑","Arial","sans-serif";
 }
@@ -128,8 +126,7 @@ textarea:focus{border: none; }
 .mr30{ margin-right: 0.3rem;}
 .mr4{ margin-right: 0.04rem;}
 .pd30{padding: 0.3rem;}
-.pd40{padding-bottom: 0.4rem;}
-.pdb40{padding-bottom: 0.3rem;}
+.pdb40{padding-bottom: 0.4rem;}
 
 .pdr30{padding-right: 0.3rem;}
 
