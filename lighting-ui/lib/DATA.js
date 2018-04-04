@@ -4,12 +4,20 @@ let datas = [
         path: "#/badge"
     },
     {
+        label: "bank 银行列表",
+        path: "#/bank"
+    },
+    {
         label: "button-group 按钮组",
         path: "#/button-group"
     },
     {
         label: "button 按钮",
         path: "#/button"
+    },
+    {
+        label: "captchafield 验证码",
+        path: "#/captchafield"
     },
     {
         label: "cell 单元格",
@@ -64,6 +72,10 @@ let datas = [
         path: "#/input"
     },
     {
+        label: "keyboard 密码键盘",
+        path: "#/keyboard"
+    },
+    {
         label: "lightbox 轮播图",
         path: "#/lightbox"
     },
@@ -88,12 +100,20 @@ let datas = [
         path: "#/noticebar"
     },
     {
+        label: "numberfield 数字/货币输入框",
+        path: "#/numberfield"
+    },
+    {
         label: "overlay 蒙层",
         path: "#/overlay"
     },
     {
         label: "page-calendar 日历",
         path: "#/page-calendar"
+    },
+    {
+        label: "passwordfield 密码输入框",
+        path: "#/passwordfield"
     },
     {
         label: "popup 弹层",
@@ -150,6 +170,10 @@ let datas = [
     {
         label: "textarea 文本域",
         path: "#/textarea"
+    },
+    {
+        label: "textfield 普通输入框",
+        path: "#/textfield"
     },
     {
         label: "tip 提示",
