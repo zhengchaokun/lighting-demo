@@ -2,9 +2,9 @@
 <template>
   <div class="demo">
     <scroller class="scroller">
-      <title title="lc-fold-list"></title>
+      <title title="lc-tab-group"></title>
       <category title="默认按钮组"></category>
-      <lc-tab-group :groups="groups" @clickTab="clickGroup"></lc-tab-group>
+      <lc-tab-group :groups="groups" @changeTab="clickGroup" :tabIndex="2"></lc-tab-group>
       <category title="自定义按钮组"></category>
       <lc-tab-group :groups="groups" :tabStyles="tabStyles"></lc-tab-group>
 
@@ -31,9 +31,9 @@
                     width: 580,
                     height: 80,
                     fontSize:28,
-                    titleColor:'#999', //默认文字颜色
-                    activeColor:'red',//默认背景色 选中颜色
-                    borderColor:'yellow',//边框颜色 选中背景色
+                    titleColor:'#f32e2e', //默认文字颜色
+                    activeColor:'#f3e62e',//默认背景色 选中颜色
+                    borderColor:'#f37d2e',//边框颜色 选中背景色
                 }        
             }
         },
@@ -45,5 +45,4 @@
     }
 </script>
 <style scoped>
-
 </style>

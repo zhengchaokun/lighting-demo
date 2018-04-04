@@ -37,7 +37,7 @@
 <script>
   import Title from 'lighting-ui/packages/_mods/title.vue';
   import Category from 'lighting-ui/packages/_mods/category.vue';
-  import LcInfoList from 'lighting-ui/packages/Lc-info-list';
+  import LcInfoList from 'lighting-ui/packages/lc-info-list';
 
   export default {
     data(){
