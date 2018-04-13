@@ -1,0 +1,16 @@
+{
+  "menus": [
+    {
+      "title": "JSN自选股",
+      "action": "gmu://jsnative#stock"
+    }
+  ],
+  "style": {
+    "navigationbar": {
+      "backgroundColor": "#0AA9F1",
+      "titleColor": "#ffffff",
+      "buttonColor": "#ffffff",
+      "useDarkStatusBarStyle": true
+    }
+  }
+}

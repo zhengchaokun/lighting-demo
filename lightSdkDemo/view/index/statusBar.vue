@@ -1,0 +1,38 @@
+
+<template>
+    <div class="apiContent">
+        <div><text class="detailHead">说明：</text></div>
+        <div><text class="detailDesc">通过js控制是否隐藏状态栏</text></div>
+        <div><text class="detailHead">示例：</text></div>
+        <div class="normalList"><text class="buttonStyle" @click="statusBar(true)">隐藏</text><text class="buttonStyle" @click="statusBar(false)">显示</text></div>
+        <div><text class="detailHead">文档：</text></div>
+        <div class="flex-row" @click="toOnlineApi()">
+            <text class="onlineLink">查看在线文档</text>
+        </div>
+     </div>
+</template>
+<script>
+    import LightSDK from "light-sdk";
+    export default {
+        data(){
+            return {}
+        },
+        methods:{
+            toOnlineApi:function(){
+                var event = weex.requireModule('event'); 
+                event.openNative('web',{startPage:'https://document.lightyy.com/app_jssdk_ref/content/native_setsystemstatusbar.html'})
+            },
+            statusBar:function(bool){
+                LightSDK.native.setSystemStatusBar({
+                    hidden:bool
+                })
+            }
+        }
+    }
+</script>
+<style scoped src="../../css/ui.css"></style> <style scoped>
+.normalList{
+    justify-content:space-between;
+    width:160px;
+}
+</style>
