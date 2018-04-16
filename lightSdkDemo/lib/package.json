@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "light-sdk": "^1.0.23"
+    "light-sdk": "^1.0.23",
+    "weex-ui": "*"
   }
 }

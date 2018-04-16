@@ -4,9 +4,15 @@
             <image src="images/open.png"  class="showList" @click="show()"></image>
         </div>
         <sub-view></sub-view>
-        <div @click="hide()" class="bgWrap" :class="[getClass()]"></div>
-        <div class="content flex-row" ref="wrap"> 
-            <list  class="itemWrap" isOpenMove=true scrollDisabled=true>
+        <!--<div @click="hide()" class="bgWrap" v-if="leftShow==true"></div>-->
+        <wxc-popup
+               :show="leftShow"
+               @wxcPopupOverlayClicked="leftShow=false"
+               pos="left"
+               width="500"
+               height="1150">
+        <div class="content"> 
+            <list  class="itemWrap">
                 <cell class="listItem" @click="jump('index/chooseImage','图片选择')"><div class="wrapRow"><text class="itemName">图片选择</text><image class="arrow" src="images/go.png" ></image></div></cell>
                 <cell class="listItem" @click="jump('index/setClipboardText','复制内容到剪切板')"><div class="wrapRow"><text class="itemName">复制内容到剪切板</text><image class="arrow" src="images/go.png" ></image></div></cell>
                 <cell class="listItem" @click="jump('index/getClipboardText','获取剪切板内容')"><div class="wrapRow"><text class="itemName">获取剪切板内容</text><image class="arrow" src="images/go.png" ></image></div></cell>
@@ -68,12 +74,14 @@
                 <cell class="listItem" @click="jump('index/getLocation','获取经纬度')"><div class="wrapRow"><text class="itemName">获取经纬度</text><image class="arrow" src="images/go.png" ></image></div></cell>
                 <cell class="listItem" @click="jump('index/stopLocation','关闭定位服务')"><div class="wrapRow"><text class="itemName">关闭定位服务</text><image class="arrow" src="images/go.png" ></image></div></cell>
             </list>
-            <image src="images/close.png" class="hideList" @click="hide()"></image>
+            <!--<image src="images/close.png" class="hideList" @click="hide()"></image>-->
         </div>
+        </wxc-popup>
     </div>
 
 </template>
 <script>
+    import WxcPopup from 'weex-ui/packages/wxc-popup';
     import LightSDK from "light-sdk";
     import App from "light"
     const animation = weex.requireModule('animation')
@@ -82,8 +90,11 @@
         data(){
             return {
                 leftShow:false,
-                title:"首页"
+                title:"图片选择"
             };
+        },
+        components:{
+            WxcPopup
         },
         methods:{
             getClass(){
@@ -106,33 +117,9 @@
             },
             show () {
                 this.leftShow=true;
-                var testEl = this.$refs.wrap;
-                animation.transition(testEl, {
-                styles: {
-                    color: '#FF0000',
-                    transform: 'translate(520px, 0)',
-                    transformOrigin: 'center center'
-                },
-                duration: 800, //ms
-                timingFunction: 'ease',
-                delay: 0 //ms
-                }, function () {
-                })
             },
             hide(){
                 this.leftShow=false;
-                var testEl = this.$refs.wrap;
-                animation.transition(testEl, {
-                styles: {
-                    color: '#FF0000',
-                    transform: 'translate(-20px, 0)',
-                    transformOrigin: 'center center'
-                },
-                duration: 800, //ms
-                timingFunction: 'ease',
-                delay: 0 //ms
-                }, function () {
-                })
             }
         },
         mounted(){
@@ -144,10 +131,10 @@
         }
     }
 </script>
-<style scoped src="../css/ui.css"></style> <style scoped>
+<style scoped src="../css/ui.css"></style> 
+<style scoped>
 .wrapRow{ 
-    flex-direction: row;
-    justify-content:space-between;
+    flex-direction: row;justify-content:space-between;
  }
 
 .show{
@@ -160,47 +147,25 @@
     height:50px;
     margin-top:18px;
 }
-.bgWrap{
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    background-color:#000;
-    opacity:0;
-}
 .title{
     color:#fff;
     font-size: 30px;
 }
-.listHeader{
-    padding: 15px;
-    background-color: #0AA9F1;
-    font-size: 30px;
-    align-items: center;
-    color: #fff;
-    text-align: center; 
-}
+
 .content{
     width:500px;
-    position:fixed;
-    top:0;
-    left:-520px;
-    bottom:0px;
     box-shadow: -3px 3px 12px black;
     background-color:#fff;
+    
 }
 .itemWrap{
     width:500px;
+    height:1150px;
     border-right-width:1px;
     border-right-color: #d7d7d7;
     border-right-style: solid;
     padding-left:20px;
-    position:absolute;
-    top:0px;
-    bottom:0;
-    left:0;
-    flex-direction: row;
+    
 }
 .showList{
     width:50px;
@@ -222,10 +187,13 @@
     border-bottom-color: #d7d7d7;
     border-bottom-style: solid;
     font-size: 26px;
-    
 }
 .arrow{
     width:32px;
     height:32px;
+}
+.itemName{
+    margin-left:10px;
+    font-size:28px;
 }
 </style>

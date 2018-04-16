@@ -14,7 +14,7 @@ module.exports = {
         }]
     },
     navBar:{
-        title:"选择图片",
+        title:"图片选择",
         backgroundColor:"#0AA9F1",
         titleColor:"#ffffff",
         buttonColor:"#ffffff",
@@ -23,7 +23,7 @@ module.exports = {
         "index":{
             url:"app.native.js#/index/chooseImage",
             navBar:{
-                title:"拍照选图功能"
+                title:"图片选择"
             }
         }
     },
