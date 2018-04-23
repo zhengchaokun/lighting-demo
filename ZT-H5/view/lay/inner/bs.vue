@@ -2,7 +2,7 @@
 <template>
     <div>
         <div class="buyCont" :class="{'buyStyle':type==1,'sellStyle':type==2}">  <!--卖出用sellStyle-->
-            <choose :select="select" :name="selectName" @getParam="getParam" v-if="ifSelect"></choose>
+            <picker :data='select' v-model='year1'  ref="picker1" @getParam="getParam" @on-change='change' v-if="ifSelect"></picker>
             <div class="itemList lineColor">
                 <div class="subitem" @click="toSelect('fundName',fund)">
                     <span>产品</span><span>{{curFund?curFund.fundName:'--'}}</span><em>选择</em>
@@ -88,15 +88,15 @@
     </div>
 </template>
 <script>
-    import choose from "../../../ui/select.vue";
+    import picker from "../../../ui/picker/index.vue";
     const API = require("api");
     const Dialog = require("dialog")
     export default {
         data(){
             return {
+                year1: [''],
                 type:0,//买卖方向
                 ifSelect:false,//
-                selectName:"",//选择组件中要展示的字段名字
                 select:[],//选择组件中的列表信息
                 curFund:[],//当前选中的产品
                 curCombi:[],//当前选中组合
@@ -152,6 +152,8 @@
             }
         },
         methods:{
+            change (value) {
+            },
             //可买可卖数量变动
             amountChange(){
                 var that = this;
@@ -170,11 +172,11 @@
             //选择弹框内容选中
             getParam(item){
                 var that = this;
+                console.log(item);
                 if(item.combiName){
                     that.curCombi=item;
                 }else if(item.fundName){
                     that.curFund=item;
-                    
                 }else if(item.operatorName){
                     that.curOperator=item
                 }
@@ -199,8 +201,23 @@
                     return false;
                 }
                 that.ifSelect = true;
-                that.select = list;
-                that.selectName = name;
+                var select = [];
+                list.forEach(function(obj){
+                    var name = "";
+                    if(obj.combiName){
+                        name = obj.combiName;
+                        
+                    }else if(obj.fundName){
+                        name = obj.fundName;
+                    }else if(obj.operatorName){
+                        name = obj.operatorName;
+                    }
+                    select.push({
+                        name:name,
+                        value:obj
+                    });
+                })
+                that.select = [select];
             },
 
             //输入合约代码
@@ -359,7 +376,7 @@
             }
         },
         components:{
-            choose
+            picker
         },
         mounted(){
             this.type =this.$route.query.type;

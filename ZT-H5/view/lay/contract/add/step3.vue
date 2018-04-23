@@ -97,8 +97,8 @@
                 }
             }
         },
-        mounted () {
-            debugger
+        mounted () {            
+            document.body.addEventListener('touchstart', function () { });
             var that = this;
             var precont = {};
             if(this.$route.query.precont) {
@@ -137,7 +137,6 @@
     .edit-bar span {
         font-size: 0.3rem;
         color: #4A4A4A;
-        letter-spacing: 0;
         line-height: 0.42rem;
     }
     .edit-bar span:last-child {

@@ -18,7 +18,7 @@
         
 
         <div class="line"></div>
-        <li class="cell pdr20" @click="showPickModal">
+        <li class="cell pdr20 pick" @click="showPickModal">
             <span class="text-label inline-b">匹配指令</span>
             <div class="fright">
                 <span class="text-sub inline-b">选择</span>
@@ -44,7 +44,7 @@
 
         <div class="pd30 pdb40">
             <button v-if="!nextFlag" class="btn-normal bg-blue" @click="confirmCmd">确 定</button>
-            <button v-else-if="!isBack" :disabled="disabled" class="btn-normal btn-plain" @click="toNext">下一条</button>
+            <button v-else-if="!isBack" class="btn-normal btn-plain" @click="toNext">下一条</button>
             <!-- <button v-else class="btn-normal bg-blue" @click="back">返 回</button>                                    -->
         </div>
 
@@ -114,7 +114,8 @@
                 preconts: [],
                 index: 0,
                 tableData_all: [],
-                tableData_cmd: []
+                tableData_cmd: [],
+                scrollTop: 0
 
             }
         },
@@ -129,9 +130,18 @@
                         that.cmds.push(that.cmdList[cmd])
                     })
                 }
+            },
+            show_pick_modal(val) {
+                if(!val) {
+                    this.permitScroll();
+                }
             }
         },
         methods: {
+            permitScroll() {
+                API.permitScroll()
+                window.scrollTo(0, this.scrollTop);
+            },
             setTableData(array) {
                 var result = [];
                 var that = this;
@@ -177,13 +187,18 @@
                     that.cmdList.forEach(function(cmd, idx) {
                         that.cmds.forEach(function(c,i) {
                             if(cmd.insId === c.insId) {
-                                that.checked_cmd.push(idx);
+                                if(that.checked_cmd.indexOf(idx)==-1) {
+                                    that.checked_cmd.push(idx);
+                                }
+                                
                             }
                         })
                     })
                 })
                 
                 this.show_pick_modal = true;
+                this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                // API.forbidScroll();
             },
             confirmCmd() {
                 var that = this;
@@ -256,7 +271,7 @@
             }
         },
         mounted() {
-            // debugger
+            document.body.addEventListener('touchstart', function () { });
             var that = this;
             
             if(that.$route.query.precontId) {
@@ -282,6 +297,9 @@
             
             
             
+        },
+        afterHide () {
+            API.permitScroll();
         }
     }
 </script>
@@ -301,7 +319,6 @@
     .edit-bar {
         padding: 0 0.3rem 0.1rem 0.3rem;
         line-height: 0.42rem;
-        letter-spacing: 0;
         color: #F56778;
     }
     .edit-bar span {

@@ -230,7 +230,6 @@
     .edit-bar {
         padding: 0 0.3rem 0.1rem 0.3rem;
         line-height: 0.42rem;
-        letter-spacing: 0;
         color: #F56778;
     }
     .edit-bar span:first-child {
@@ -244,7 +243,6 @@
     .detail-textarea {
         font-size: 0.3rem;
         color: #787878;
-        letter-spacing: -0.0072rem;
         line-height: 0.42rem;
     }
 </style>

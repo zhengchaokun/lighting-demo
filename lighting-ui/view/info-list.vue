@@ -62,8 +62,8 @@
     },
     components: { Title, Category, LcInfoList},
     methods:{
-      infoClick(e) {
-        console.log("clicked" + e.index);
+      infoClick(index) {
+        console.log("clicked" + index);
       }
     }
   }

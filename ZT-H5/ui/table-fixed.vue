@@ -3,21 +3,40 @@
         <table cellpadding="0" cellspacing="0">
             <thead>
                 <tr>
-                    <th class="fixed-th"></th>
-                    <th v-for="(item,index) in columns" :key="index" :class="[{'fixed':index<1},{'pdl225':index==1}]">{{item}}</th>
+                    <th></th>
+                    <th>{{columns[0]}}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="(row,index) in value" :key="index">
-                    <td class="fixed-radio" :class="{'pdt20':index==0}" @click="toggleChecked(index)">
-                        
-                        <img v-if="checked.indexOf(index)>-1" src="../images/radio-selected.svg" class="check-icon">
+                    <td :class="{'pdt20':index==0}" @click="toggleChecked(index)">
+                        <div class="td-cell">
+                            <img v-if="checked.indexOf(index)>-1" src="../images/radio-selected.svg" class="check-icon">
+                        </div>
                     </td>
-                    <td v-for="(item,key,idx) in row" :key="idx" :class="[{'fixed':idx<1},{'pdl225':idx==1},{'pdt20':index==0}]">{{item}}</td>
+                    <td :class="{'pdt20':index==0}" v-for="(item,key,idx) in row" :key="idx" v-if="idx==0">{{ item }}</td>                    
 
                 </tr>
             </tbody>
         </table>
+        <div style="overflow-x:scroll;">
+            <table cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th v-if="index>0" v-for="(item,index) in columns" :key="index">{{item}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(row,index) in value" :key="index">
+                        <td v-if="idx>0" v-for="(item,key,idx) in row" :key="idx" :class="{'pdt20':index==0}">{{item}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="bg">
+            <div class="bg-gray"></div>
+            <div class="bg-white"></div>
+        </div>
     </div>
 </template>
 
@@ -45,46 +64,57 @@
                     this.checked.push(index);
                 }
             }
-        },
-        // mounted () {
-        //     var that = this;
-        //     document.addEventListener('scroll', function(event) {
-        //         console.log(that.$el)
-        //         var table = that.$el;
-        //         var se = document.documentElement.clientHeight;
-        //         var top = table.getBoundingClientRect().top;
-        //         that.tops = [];
-        //         that.tops.push(top/50 + 'rem');
-        //         for(var i = 1; i < that.value.length+2; i++) {
-        //             if(i==1){
-        //                 that.tops.push((top + 31 * i)/50 +0.08+ 'rem');
-        //             } else if(i==2) {
-        //                 that.tops.push((top + 31 + 43)/50 +0.08+ 'rem');
-        //             } else {
-        //                 that.tops.push((top + 31 + 43 + 33 * (i-2))/50 +0.08+ 'rem');
-        //             }
-                                            
-        //         }
-        //         console.log(se,top)
-
-        //     })
-        // }
+        }
     }
 </script>
 
 <style lang="less" scoped>
     .table-fixed {
-        overflow-x: scroll;
+        width: 100%;
+        display: flex;
+        border-top: solid 0.02rem #D7D7D7;
+        position: relative;
+    }
+    .bg {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        z-index: -1;
+    }
+    .bg-gray {
+        height: 0.6rem;
+        background: #F8FAFB;
+    }
+    .bg-white {
+        flex: 1;
+        background: #fff;
+    }
+    .td-cell {
+        width: 0.28rem; 
+        display: inline-block;
     }
     table {
         background: #FFFFFF;
-        border-top: solid 0.02rem #D7D7D7;
+        // border-top: solid 0.02rem #D7D7D7;
         font-size: 0.26rem;
         line-height: 0.36rem;
-        letter-spacing: 0;
         color: #787878;
-        min-width: 12.4rem;
+        // min-width: 12.4rem;
         text-align: left;
+        // position: relative;
+    }
+    table:first-child {
+        // width: 100px;
+    //     display: inline-block;
+    // position: absolute;
+    // left: 0;
+    }
+    table:last-child {
+        flex: 1;
+        min-width: 10.4rem;
     }
     thead {
         background: #F8FAFB;
@@ -105,9 +135,9 @@
         padding-bottom: 0.3rem;
     }
     .fixed-th {
-        width: 0.8rem;
         position: absolute;
         left: 0;
+        width: 0.8rem;
         background: #F8FAFB;
     }
     td.fixed-radio {
@@ -125,9 +155,6 @@
     }
     th.fixed {
         background: #F8FAFB;
-    }
-    .pdl225 {
-        padding-left: 2.25rem;
     }
     .pdt20 {
         padding-top: 0.2rem;

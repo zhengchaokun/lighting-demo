@@ -1,0 +1,28 @@
+{
+  "inputParams": {
+  },
+  "navigationbar": {
+    "show": true
+  },
+  "menu": {
+    "show": false
+  },
+  "config": {
+    "injectHybridJs": true,
+    "enablePulldownRefresh": false
+  },
+  "pages": [
+    {
+      "pageid": "app",
+      "inputParams": {
+        "startPage": "index.html"
+      },
+      "navigationbar": {
+        "show": true
+      },
+      "config": {
+        "showCloseButton": false
+      }
+    }
+  ]
+}

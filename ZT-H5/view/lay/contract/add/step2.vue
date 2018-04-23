@@ -5,7 +5,7 @@
         <textarea readonly v-model="formalInfo" class="detail-textarea" style="height: 1.6rem;"></textarea>
         <div class="line mb30"></div>
         <div class="line"></div>
-        <div class="cell pdr20" @click="showPickModal('currency')">
+        <div class="cell pick pdr20" @click="showPickModal('currency')">
             <span>
                 <span class="text-label inline-b"><span class="text-red">*</span>币种</span>
                 <span class="text-label ml40 inline-b">{{ currencyInfo.currencyName }}</span>
@@ -73,7 +73,7 @@
 
         <template>
             <div class="line"></div>            
-            <div class="cell pdr20" @click="showPickModal('spotUnit')">
+            <div class="cell pdr20 pick" @click="showPickModal('spotUnit')">
                 <span>
                     <span class="text-label inline-b"><span class="text-red">*</span>单位</span>
                     <span class="text-label ml40 inline-b">{{ spotUnitInfo.spotUnit }}</span>
@@ -280,7 +280,8 @@
                 input_text: '',
                 input_items: [],
                 res: [],
-                keys: []
+                keys: [],
+                scrollTop: 0
             }
         },
         computed: {
@@ -346,9 +347,23 @@
                         that.input_items.push(idx);
                     }
                 })
+            },
+            show_pick_currency(val) {
+                if(!val) {
+                    this.permitScroll();
+                }
+            },
+            show_pick_unit(val) {
+                if(!val) {
+                    this.permitScroll();
+                }
             }
         },
         methods: {
+            permitScroll() {
+                API.permitScroll()
+                window.scrollTo(0,this.scrollTop);
+            },
             checkSpace(str) {
                 var flag = (!str && typeof str!=='number') || new RegExp("^[]+$").test(str);
                 if(flag) {
@@ -447,6 +462,8 @@
                 } else {
                     that.show_pick_unit = true;
                 }
+                that.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                API.forbidScroll();
             },
             handleVisibleChange1(val) {
                 this.show_pick_currency = val;
@@ -500,6 +517,8 @@
                 this.input_text = this.convertArrayToStr(this.keys);
                 this.res = this.input_text.split(" ");
                 this.show_pick_quick = true;
+                this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                API.forbidScroll(); 
             },
             closeQuickInput() {
                 var that = this;
@@ -507,10 +526,12 @@
                     that.detail[r] = that.res[i];
                 })
                 this.show_pick_quick = false;
-                
+                this.permitScroll();
+
             }
         },
-        mounted(){
+        mounted() {
+            document.body.addEventListener('touchstart', function () { });
             var that = this;
             var precont = {};
             if(this.$route.query.precont){
@@ -566,6 +587,9 @@
                     + (!this.checkSpace(precont.remark) ? ('，'+precont.remark) : '');
             }
             
+        },
+        afterHide () {
+            API.permitScroll();
         }
     }
     

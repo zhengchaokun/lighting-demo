@@ -8,7 +8,7 @@ module.exports = {
                 url: 'https://open.hscloud.cn/quote/v1/real?'+require("./utils").parse2query({
                     en_prod_code:options.en_prod_code,
                     fields:options.fields,
-                    access_token:"3D861398FC8E40FA96E79F284FD3809B20170929092052B7E451A8"
+                    access_token:"6DE871E921E640729B9C04E0B38CAC6D20180319081554B7E451A8"
                 })
             }, function (data) {
                 if(data.ok){

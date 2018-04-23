@@ -1,0 +1,10 @@
+{
+  "pages": [
+    {
+      "pageid": "stock",
+      "inputParams": {
+        "startPage": "app.native.js"
+      }
+    }
+  ]
+}

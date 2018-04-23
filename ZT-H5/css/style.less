@@ -2,14 +2,12 @@
 .text-label {
     font-size: 0.34rem;
     color: #4A4A4A;
-    letter-spacing: 0.005rem;
     line-height: 0.4rem;
     float: left;
 }
 .text-sub {
     font-size: 0.3rem;
     color: #7A7A7A;
-    letter-spacing: 0.0044rem;
     line-height: 0.4rem;
 }
 .icon-more {
@@ -46,14 +44,27 @@
     text-align: center;
     font-size: 0.34rem;
     color: #FFFFFF;
-    letter-spacing: 0;
     line-height:0.48rem;
 }
+
+.btn-normal.bg-blue:active {
+    background: #2786C8;
+}
+.btn-normal.bg-green:active {
+    background: #3EB36D;
+}
+
+
 .btn-plain {
     background: #FFFFFF;
     border: 1px solid #399DE2;
     color: #399DE2;
 }
+.btn-normal.btn-plain:active {
+        background: #0FABFC;
+        border: 1px solid #1DB0FC;
+        color: #fff;
+    }
 .btn-wrap-two {
     position: absolute;
     width: 100%;
@@ -71,7 +82,6 @@
 .modal > .detail-list {
     display: inline-block;
     padding: 0.4rem 0.3rem 0.12rem 0.3rem;
-    // min-height: 1.48rem;
 }
 .detail-list * {
     float: left;
@@ -82,7 +92,6 @@
 .detail-textarea {
     padding: 0.2rem 0.3rem;
     font-size: 0.34rem;
-    letter-spacing: -0.0082rem;
     line-height: 0.42rem;
     width: 100%;
     height: 2rem;
@@ -90,38 +99,21 @@
 .detail-input {
     font-size: 0.3rem;
     color: #787878;
-    letter-spacing: -0.0072rem;
     line-height: 0.42rem;
 }
 .text-small {
     font-size: 0.26rem;
     color: #4A4A4A;
     line-height: 0.36rem;
-    letter-spacing: 0;
 }
 .detail-tip {
     padding: 0.18rem 0.3rem 0.8rem 0.3rem;
     font-size: 0.26rem;
     color: #9B9B9B;
-    letter-spacing: 0;
 }
 .btn-wrap {
     padding: 0 0.34rem;
 }
-
-// .edit-bar {
-//         padding: 0.1rem 0.3rem;
-//         justify-content: space-between;
-//     }
-//     .edit-bar span {
-//         font-size: 0.3rem;
-//         color: #4A4A4A;
-//         letter-spacing: 0;
-//         line-height: 0.42rem;
-//     }
-//     .edit-bar span:last-child {
-//         color: #9B9B9B;
-//     }
 
 .mask{
     position: fixed;
@@ -167,4 +159,20 @@
 }
 .text-green {
     color: #55C683;
+}
+
+// 弹框出现时页面禁止滚动
+.noscroll {
+    overflow: hidden;
+}
+.noscroll {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.cell.pick:active {
+    background: #F7F7F7;
 }

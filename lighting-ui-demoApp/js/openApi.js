@@ -1,13 +1,33 @@
-var config = {
-	token: '82B0FFC7148144A0BF83FA69BA1AE0AF20180305183422B7E451A8',
-	openApiUrl: 'https://open.hscloud.cn'
-};
+
 var stream;
 const util = require("./utils");
 
 stream = (typeof weex !== 'undefined' && weex.requireModule) ? (weex.requireModule('stream')) : (__weex_require__('weex-module/stream'));
 
+
+
+function getToken(cb){
+	stream.fetch({
+	method: 'GET',
+	url: "https://light.hscloud.cn/data/flatservice/openapi/token?compId=8112734868602963",
+	type:'json'
+	},function(res) {
+		if (res.ok) {
+			dataCenter.config.token = res.data.data.access_token;
+			console.log(dataCenter.config.token)
+			cb()
+		}
+	});
+}
+
+
 var dataCenter = {
+	getToken,
+	config :{
+		token: '',
+		openApiUrl: 'https://open.hscloud.cn'
+	},
+
 	/*获取快照列表数据*/
 	getRealtimeList: function(params, callback) {
 		/*
@@ -21,13 +41,14 @@ var dataCenter = {
 		params.fields = allfields;
 
 		var queryString = "?" + util.parse2query(params);
+		console.log(dataCenter.config.token)
 		return stream.fetch({
 			method: 'GET',
 			type: 'json',
-			url: config.openApiUrl + '/quote/v1/real' + queryString,
+			url: this.config.openApiUrl + '/quote/v1/real' + queryString,
 			// data: params,GET不支持data形式，只能url拼接参数
 			headers: {
-				Authorization: "Bearer " + config.token,
+				Authorization: "Bearer " + this.config.token,
 			},
 		}, function(res) {
 			//console.log("getRealtimeList" + JSON.stringify(res));
@@ -48,9 +69,9 @@ var dataCenter = {
 		return stream.fetch({
 			method: 'GET',
 			type: 'json',
-			url: config.openApiUrl + '/quote/v1/sort' + queryString,
+			url: this.config.openApiUrl + '/quote/v1/sort' + queryString,
 			headers: {
-				Authorization: "Bearer " + config.token,
+				Authorization: "Bearer " + this.config.token,
 			},
 		}, callback);
 	},
@@ -66,9 +87,9 @@ var dataCenter = {
 		return stream.fetch({
 			method: 'GET',
 			type: 'json',
-			url: config.openApiUrl + '/quote/v1/block/sort' + queryString,
+			url: this.config.openApiUrl + '/quote/v1/block/sort' + queryString,
 			headers: {
-				Authorization: "Bearer " + config.token,
+				Authorization: "Bearer " + this.config.token,
 			},
 		}, callback);
 	},
@@ -88,9 +109,9 @@ var dataCenter = {
 		return stream.fetch({
 			method: 'GET',
 			type: 'json',
-			url: config.openApiUrl + '/quote/v1/trend' + queryString,
+			url: this.config.openApiUrl + '/quote/v1/trend' + queryString,
 			headers: {
-				Authorization: "Bearer " + config.token,
+				Authorization: "Bearer " + this.config.token,
 			},
 		}, function(res) {
 			//console.log("getTrend" + JSON.stringify(res));
@@ -108,10 +129,10 @@ var dataCenter = {
 		return stream.fetch({
 			method: 'GET',
 			type: 'json',
-			url: config.openApiUrl + '/quote/v1/trend5day' + queryString,
+			url: this.config.openApiUrl + '/quote/v1/trend5day' + queryString,
 
 			headers: {
-				Authorization: "Bearer " + config.token,
+				Authorization: "Bearer " + this.config.token,
 			},
 		}, callback);
 	},
@@ -126,9 +147,9 @@ var dataCenter = {
 		return stream.fetch({
 			method: 'GET',
 			type: 'json',
-			url: config.openApiUrl + '/quote/v1/kline' + queryString,
+			url: this.config.openApiUrl + '/quote/v1/kline' + queryString,
 			headers: {
-				Authorization: "Bearer " + config.token,
+				Authorization: "Bearer " + this.config.token,
 			},
 		}, callback);
 	},
@@ -142,9 +163,9 @@ var dataCenter = {
 		return stream.fetch({
 			method: 'GET',
 			type: 'json',
-			url: config.openApiUrl + '/gildatafund/v1/performance_new/daily_quote' + queryString,
+			url: this.config.openApiUrl + '/gildatafund/v1/performance_new/daily_quote' + queryString,
 			headers: {
-				Authorization: "Bearer " + config.token,
+				Authorization: "Bearer " + this.config.token,
 			},
 		}, callback);
 	},
@@ -157,12 +178,13 @@ var dataCenter = {
 		return stream.fetch({
 			method: 'GET',
 			type: 'json',
-			url: config.openApiUrl + '/quote/v1/wizard' + queryString,
+			url: this.config.openApiUrl + '/quote/v1/wizard' + queryString,
 			data: params,
 			headers: {
-				Authorization: "Bearer " + config.token,
+				Authorization: "Bearer " + this.config.token,
 			},
 		}, callback);
 	}
 };
+
 module.exports = dataCenter;

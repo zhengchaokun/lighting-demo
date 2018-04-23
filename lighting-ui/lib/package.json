@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "lighting-ui": "*",
+    "lighting-ui": "^0.3.48",
     "validator": "^6.2.1"
   }
 }

@@ -2,7 +2,7 @@
 <template>
     <div>
        <div class="buyCont " :class="{buyStyle:$route.query.type==1,sellStyle:$route.query.type==2}">  <!--卖出用sellStyle-->
-            <choose :select="select" :name="selectName" @getParam="getParam" v-if="ifSelect"></choose>
+            <picker :data='select' v-model='year1'  ref="picker1" @getParam="getParam"  @on-change='change' v-if="ifSelect"></picker>
             <div class="itemList lineColor">
                 <div class="subitem"  @click="toSelect('fundName',fund)">
                     <span>产品</span><span>{{curFund?curFund.fundName:'--'}}</span><em>选择</em>
@@ -55,7 +55,7 @@
     </div>
 </template>
 <script>
-    import choose from "../../../ui/select.vue";
+    import picker from "../../../ui/picker/index.vue";
     const API = require("api");
     const Dialog = require("dialog")
     export default {
@@ -65,6 +65,7 @@
                 ifSelect:false,//
                 selectName:"",//选择组件中要展示的字段名字
                 select:[],//选择组件中的列表信息
+                year1: [''],
                 curFund:[],//当前选中的产品
                 curCombi:[],//当前选中组合
                 curOperator:[],//当前选中操作员
@@ -94,6 +95,8 @@
             },
         },
         methods:{
+            change (value) {
+            },
             //选择弹框内容选中
             getParam(item){
                 var that = this;
@@ -132,17 +135,24 @@
             //选择弹框显示
             toSelect(name,list){
                 var that = this;
-                if(name=='combiName'&&that.curFund.length==0){
-                    Dialog.alert("请先选择一个产品");
-                    return false;
-                }
-                if(name=='stockName'&&that.curMarket.length==0){
-                    Dialog.alert("请先选择一个市场");
-                    return false;
-                }
                 that.ifSelect = true;
-                that.select = list;
-                that.selectName = name;
+                var select = [];
+                list.forEach(function(obj){
+                    var name = "";
+                    if(obj.combiName){
+                        name = obj.combiName;
+                        
+                    }else if(obj.fundName){
+                        name = obj.fundName;
+                    }else if(obj.operatorName){
+                        name = obj.operatorName;
+                    }
+                    select.push({
+                        name:name,
+                        value:obj
+                    });
+                })
+                that.select = [select];
             },
             //获取委托方向
             getEntrustDirection(type,direc){
@@ -219,8 +229,8 @@
                 })
             }
         },
-        components:{
-            choose
+         components:{
+            picker
         },
         mounted(){
             this.type =this.$route.query.type;

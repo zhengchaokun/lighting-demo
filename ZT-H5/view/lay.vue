@@ -88,7 +88,6 @@
     .op-list{
         font-size: 0.34rem;
         color: #787878;
-        letter-spacing: 0.25px;
         line-height: 0.34rem;
         padding-left: 0.5rem;
         padding-right: 0.25rem;
