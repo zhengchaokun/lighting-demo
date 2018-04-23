@@ -924,6 +924,7 @@
             that.cacheContext=cacheContext;
             //填充canvas表格线
             that.drawGrid();
+            console.log(dataCenter)
             dataCenter.getRealtimeList({en_prod_code:that.cnstocks},function(res){
              //console.log("cnindexlist="+JSON.stringify(res));
              that.cnIndexList=[];
