@@ -578,12 +578,12 @@
                 if (index == this.btnIndex) {
                     return {
                     color: "#fe6a6b",
-                    "font-size": "32px"
+                    "font-size": "16px"
                     };
                 } else {
                     return {
                     color: "#9a9a9a",
-                    "font-size": "30px"
+                    "font-size": "15px"
                     };
                 }
             },
