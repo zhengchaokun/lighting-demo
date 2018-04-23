@@ -10,7 +10,7 @@ App.filter("start",function (next) {
     //视图拦截器
     // App.log(`view changed:${from.path}--${to.path}`);
     next()
-})
+});
 
 if(navigator.userAgent.indexOf("fwv")!=-1){
     document.addEventListener("deviceready",function(){
