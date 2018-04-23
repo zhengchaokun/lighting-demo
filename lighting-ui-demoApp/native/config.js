@@ -15,7 +15,7 @@ module.exports = {
         },{
             text:'行情',
             icon:'0xe6d2',
-            view:"market/hushen",
+            view:"market",
         },{
             text:'交易',
             icon:'0xe6a7',
