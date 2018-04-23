@@ -75,13 +75,13 @@
     align-items:center;
     text-align:center;
     height:64px;
+    line-height:64px;
     color: #686e71;
     width:300px;
     border-width:1px;
     border-color:#686e71;
     border-style: solid;
     background-color: #fff;
-    padding:10px;
     font-size: 28px;
     border-radius: 8px;
 }
