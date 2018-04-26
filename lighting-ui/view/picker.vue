@@ -5,23 +5,49 @@
     <category title="使用案例"></category>
 
     <div class="button-list">
-      <lc-button text="打开三级选择" class="btn-margin"
+      <text>已选择的是: {{val}}</text>
+      <lc-button text="打开一级选择" class="btn-margin"
                     type="normal"
-                    @LcButtonClicked="openPicker"></lc-button>
+                    @LcButtonClicked="openPicker1"></lc-button>
       <lc-button text="打开二级选择" class="btn-margin"
                     type="normal"
-                    @LcButtonClicked="openPicker"></lc-button>
+                    @LcButtonClicked="openPicker2"></lc-button>
+      <lc-button text="打开三级选择" class="btn-margin"
+                    type="normal"
+                    @LcButtonClicked="openPicker3"></lc-button>
     </div>
 
     <lc-popup width="750"
-                :show="show"
+                :show="show1"
                 pos="bottom"
                 height="470"
                 ref="LcPopup"
                 @LcPopupOverlayClicked="closePicker">
+        <text class="text" @click="selectPicker1">完成</text>                
+        <lc-picker ref="picker1" :pickerData="pickerData1" class="date-picker"></lc-picker>
+        
+    </lc-popup>
 
-      <lc-picker ref="picker" :pickerData="pickerData" class="date-picker"></lc-picker>
+    <lc-popup width="750"
+                :show="show2"
+                pos="bottom"
+                height="470"
+                ref="LcPopup"
+                @LcPopupOverlayClicked="closePicker">
+        <text class="text" @click="selectPicker2">完成</text>                
+                
+        <lc-picker ref="picker2" :pickerData="pickerData2" class="date-picker"></lc-picker>
+    </lc-popup>
 
+    <lc-popup width="750"
+                :show="show3"
+                pos="bottom"
+                height="470"
+                ref="LcPopup"
+                @LcPopupOverlayClicked="closePicker">
+        <text class="text" @click="selectPicker3">完成</text>                
+                
+        <lc-picker ref="picker3" :pickerData="pickerData3" class="date-picker"></lc-picker>
     </lc-popup>
 
   </div>
@@ -46,7 +72,9 @@
   .btn-margin {
     margin-top: 40px;
   }
-
+  .text{
+    width: 750px; height: 80px; color: #333; font-size: 30px; text-align: right; padding: 10px;
+  }
 </style>
 
 <script>
@@ -60,19 +88,66 @@
   export default {
     components: { Title, Category, LcPopup, LcPicker,LcButton },
     data: () => ({
-      show:false,
-      pickerData: {
+      val:'',
+      show1:false,
+      show2:false,
+      show3:false, 
+      pickerData1: {
+        columns: 1,
+        data: [{key: "1"},{key: "2"},{key: "3"},{key: "4"}]
+      },
+      pickerData2: {
+        columns: 2,
+        data: [
+            {
+                key: "浙江省",
+                values: ["杭州", "宁波", "温州", "金华", "台州"]
+            },
+            {
+                key: "江苏省",
+                values: ["南京", "镇江", "扬州", "苏州", "无锡"]
+            }
+        ]
+      },
+      pickerData3: {
         columns: 3,
         data: Date.data
-      }
+      },
     }),
     methods:{
-      openPicker () {
-        this.show = true;
+      openPicker1 () {
+        this.show1 = true;
+      },
+      openPicker2 () {
+        this.show2 = true;
+      },
+      openPicker3 () {
+        this.show3 = true;
       },
       closePicker (){
-        this.show = false;
+        this.show1 = false;
+        this.show2 = false;
+        this.show3 = false;
+      },
+      selectPicker1 (){
+          this.$refs.picker1.getSelectedItem((result) => {
+              this.val = this.pickerData1.data[result[0]].key;              
+          })    
+          this.show1 = false;
+      },
+      selectPicker2 (){
+          this.$refs.picker2.getSelectedItem((result) => {
+              this.val = this.pickerData2.data[result[0]].key + this.pickerData2.data[result[0]].values[result[1]];             
+          })    
+          this.show2 = false;
+      },
+      selectPicker3 (){
+          this.$refs.picker3.getSelectedItem((result) => {
+              this.val = this.pickerData3.data[result[0]].key + this.pickerData3.data[result[0]].values[result[1]].key + this.pickerData3.data[result[0]].values[result[1]].values[result[2]];
+          })    
+          this.show3 = false;
       }
+
     }
   };
 </script>
