@@ -80,6 +80,10 @@ let datas = [
         path: "#/lightbox"
     },
     {
+        label: "lightbox-full 幻灯片",
+        path: "#/lightbox-full"
+    },
+    {
         label: "loading 加载",
         path: "#/loading"
     },
