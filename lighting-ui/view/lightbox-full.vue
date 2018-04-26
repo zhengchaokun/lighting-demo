@@ -1,7 +1,7 @@
 <template>
-  <div class="wxc-demo">
+  <div class="lc-demo">
     <scroller class="scroller">
-      <title title="wxc-lightbox"></title>
+      <title title="lc-lightbox-full"></title>
       <category title="使用案例"></category>
       <div class="wrapper">
         <image class="demo-image"
@@ -28,7 +28,7 @@
 </template>
 
 <style scoped>
-  .wxc-demo {
+  .lc-demo {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -72,7 +72,7 @@
 <script>
   import Title from 'lighting-ui/packages/_mods/title.vue';
   import Category from 'lighting-ui/packages/_mods/category.vue';
-  import LcLightboxFull from '../res/index';
+  import LcLightboxFull from 'lighting-ui/packages/lc-lightbox-full';
   export default {
     components: { Title, Category, LcLightboxFull },
     data: function () {

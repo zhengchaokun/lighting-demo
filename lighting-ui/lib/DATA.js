@@ -124,6 +124,10 @@ let datas = [
         path: "#/popup"
     },
     {
+        label: "picker 选择器",
+        path: "#/picker"
+    },
+    {
         label: "progress 进度条",
         path: "#/progress"
     },
