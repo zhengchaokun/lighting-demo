@@ -32,6 +32,7 @@
     import {todoStorage} from "../lib/store"
 
     import TodoItem from "../ui/item.vue";
+    import Light from "light"
 
     let filters = {
         all: function (todos) {
@@ -112,6 +113,15 @@
             setTimeout(function () {
                 that.time = 10;
             },3000);
+
+            Light.ajax({
+                url:"mock/test.json",
+                async:false,
+                success:function () {
+                    console.log(1)
+                }
+            });
+            console.log(2)
         }
     };
 </script>
