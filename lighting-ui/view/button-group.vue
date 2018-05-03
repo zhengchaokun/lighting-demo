@@ -2,7 +2,7 @@
 <template>
   <div class="demo">
     <scroller class="scroller">
-      <title title="lc-fold-list"></title>
+      <title title="lc-button-group"></title>
       <category title="默认按钮组"></category>
       <lc-button-group :buttons="buttons"></lc-button-group>
 
