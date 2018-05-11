@@ -8,6 +8,7 @@
       <lc-lightbox
         autoPlay="true"
         ref="lc-lightbox"
+        borderRadius="20"
         height="400"
         interval="5000"
         showIndicator="true"

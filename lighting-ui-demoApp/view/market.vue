@@ -8,12 +8,17 @@
               <router-view></router-view>
             </keep-alive>     
           </div>
+            <text v-if="mgs===1">hello1</text>
+            <text v-if="mgs===3">hello3</text>
+            <text v-if="mgs===2">hello2</text>
+            <text v-if="mgs===4">hello4</text>
 
         </scroller>
         <!-- tab -->
         <div class="tabBar">
             <text v-for="(item, index) in tabTitles" :key="index" :class="['tabBar-text', index==tabIndex?'f-red':'f-black']" @click="changeTab(item, index)">{{item.title}}</text>
         </div>
+
     </div>
 </template>
 
@@ -30,7 +35,8 @@ export default {
         { title: "港股", path: "#/market/hk" },
         { title: "全球", path: "#/market/global" },
         { title: "更多", path: "#/market/more" }
-      ]
+      ],
+        mgs:null
     };
   },
   methods: {
@@ -40,7 +46,12 @@ export default {
         replace: true
       });
     }
-  }
+  },
+    mounted(){
+      Light.on("error",function(data){
+          console.log(data)
+      })
+    }
 };
 </script>
 

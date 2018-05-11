@@ -80,6 +80,10 @@ let datas = [
         path: "#/lightbox"
     },
     {
+        label: "lightbox-full 幻灯片",
+        path: "#/lightbox-full"
+    },
+    {
         label: "loading 加载",
         path: "#/loading"
     },
@@ -118,6 +122,10 @@ let datas = [
     {
         label: "popup 弹层",
         path: "#/popup"
+    },
+    {
+        label: "picker 选择器",
+        path: "#/picker"
     },
     {
         label: "progress 进度条",

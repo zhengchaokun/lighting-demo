@@ -2,7 +2,7 @@
     <section class="todoapp" v-cloak>
         <header class="header">
             <h1>todos</h1>
-            <img src="../images/test.png" alt=""/>
+            <img src="../images/test.png" alt="" class="mymove testimg" v-if="time" :style="{animation:'mymove '+time+'s infinite'}"/>
             <input class="new-todo" autofocus autocomplete="off" placeholder="有什么要做的吗?" v-model="newTodo"
                    @keyup.enter="addTodo">
         </header>
@@ -32,6 +32,7 @@
     import {todoStorage} from "../lib/store"
 
     import TodoItem from "../ui/item.vue";
+    import Light from "light"
 
     let filters = {
         all: function (todos) {
@@ -54,7 +55,8 @@
             return {
                 todos: todoStorage.fetch(),
                 newTodo: '',
-                visibility: 'all'
+                visibility: 'all',
+                time:0
             }
         },
         components:{
@@ -107,6 +109,19 @@
             }
         },
         afterShow:function (params) {
+            const that = this;
+            setTimeout(function () {
+                that.time = 10;
+            },3000);
+
+            Light.ajax({
+                url:"mock/test.json",
+                async:false,
+                success:function () {
+                    console.log(1)
+                }
+            });
+            console.log(2)
         }
     };
 </script>
