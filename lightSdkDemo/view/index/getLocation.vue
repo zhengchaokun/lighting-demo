@@ -21,10 +21,14 @@
                 event.openNative('web',{startPage:'https://document.lightyy.com/termAPI/chooseImage.html'})
             },
             getLocation:function(){
+                var that = this;
                 LightSDK.native.getLocation({
                     "scanSpan":1000
                 },function(data){
-                    alert(JSON.stringify(data));
+                    that.Dialog.toast({
+                        message: JSON.stringify(data),
+                        duration: 2
+                    });
                 })
             }
         }

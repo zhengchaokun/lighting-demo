@@ -25,7 +25,11 @@
             getRegistrationID:function(){
                 var that = this;
                 LightSDK.native.getRegistrationID({},function(data){
-                    alert(JSON.stringify(data));
+                    
+                    that.Dialog.toast({
+                        message: JSON.stringify(data),
+                        duration: 2
+                    });
                 })
             }
         }

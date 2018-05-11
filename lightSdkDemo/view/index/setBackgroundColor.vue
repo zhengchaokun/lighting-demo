@@ -4,8 +4,15 @@
         <div><text class="detailHead">说明：</text></div>
         <div><text class="detailDesc">通过js修改导航栏背景色</text></div>
         <div><text class="detailHead">示例：</text></div>
-        <div class="normalList"><text class="mr10 fs14 width70">背景色：</text><input v-model="bgColor" class="inputStyle" type="text" placeholder=""/></div>
-        <div class="normalList"><text class="buttonStyle" @click="setBackgroundColor()">设置</text></div>
+        <div class="operateWrap">
+            <lc-input label="背景色" v-model="bgColor" placeholder="" :has-top-border="false" :has-bottom-border="false"></lc-input>
+             <div class="listWidth">
+                <lc-button text="修改"
+                    type="normal" 
+                    @LcButtonClicked="setBackgroundColor"></lc-button>
+             </div>
+        </div>
+        <div class="normalList"><text class="tipStyle">tips:{{tipsCont}}</text></div>
         <div><text class="detailHead">文档：</text></div>
         <div class="flex-row" @click="toOnlineApi()">
             <text class="onlineLink">查看在线文档</text>
@@ -14,6 +21,8 @@
 </template>
 <script>
     import LightSDK from "light-sdk";
+    import LcInput  from 'lighting-ui/packages/lc-input';
+    import LcButton from 'lighting-ui/packages/lc-button';
     export default {
         data(){
             return {
@@ -21,6 +30,7 @@
                 tipsCont:"点击修改按钮后请注意导航栏背景色"
             }
         },
+        components:{LcInput,LcButton},
         methods:{
             toOnlineApi:function(){
                 var event = weex.requireModule('event'); 

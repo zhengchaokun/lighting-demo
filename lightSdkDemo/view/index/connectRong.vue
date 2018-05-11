@@ -21,6 +21,7 @@
                 event.openNative('web',{startPage:'https://document.lightyy.com/termAPI/chooseImage.html'})
             },
             connectRong:function(){
+                var that = this;
                 LightSDK.native.connectRong({
                     "userId":"123123",
                     "userName":"321321",
@@ -28,7 +29,10 @@
                     "RY_AppKey":"RY_AppKey",
                     "RY_AppSecret":"RY_AppSecret"
                 },function(data){
-                    alert(JSON.stringify(data));
+                    that.Dialog.toast({
+                        message: JSON.stringify(data),
+                        duration: 2
+                    });
                 })
             }
         }

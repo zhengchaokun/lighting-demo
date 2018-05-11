@@ -33,7 +33,10 @@
             mystockList:function(){
                 var that = this;
                 LightSDK.native.mystockList({},function(data){
-                    alert(JSON.stringify(data));
+                    that.Dialog.toast({
+                        message: JSON.stringify(data),
+                        duration: 2
+                    });
                     that.stock = data.data.result;
                     
                 })

@@ -4,12 +4,18 @@
         <div><text class="detailHead">说明：</text></div>
         <div><text class="detailDesc">通过js获取登录用户信息</text></div>
         <div><text class="detailHead">示例：</text></div>
-        <div class="normalList"><text class="buttonStyle" @click="getUserInfo()">获取</text></div>
-        <div class="normalList"><text class="mr10 fs14 width70">用户ID：</text><input v-model="userInfo.uid" class="inputStyle" type="text" placeholder=""/></div>
-        <div class="normalList"><text class="mr10 fs14 width70">手机：</text><input v-model="userInfo.mobile" class="inputStyle" type="text" placeholder=""/></div>
-        <div class="normalList"><text class="mr10 fs14 width70">token：</text><input v-model="userInfo.token" class="inputStyle" type="text" placeholder=""/></div>
-        <div class="normalList"><text class="mr10 fs14 width70">昵称：</text><input v-model="userInfo.nickname" class="inputStyle" type="text" placeholder=""/></div>
-        <div class="normalList"><text class="mr10 fs14 width70">头像：</text><input v-model="userInfo.photoURL" class="inputStyle" type="text" placeholder=""/></div>
+        <div class="operateWrap">
+            <lc-input label="用户ID" v-model="userInfo.uid" placeholder="" :has-top-border="false" :has-bottom-border="false"></lc-input>
+            <lc-input label="手机" v-model="userInfo.mobile" placeholder="" :has-top-border="false" :has-bottom-border="false"></lc-input>
+            <lc-input label="token" v-model="userInfo.token" placeholder="" :has-top-border="false" :has-bottom-border="false"></lc-input>
+            <lc-input label="昵称" v-model="userInfo.nickname" placeholder="" :has-top-border="false" :has-bottom-border="false"></lc-input>
+            <lc-input label="头像" v-model="userInfo.photoURL" placeholder="" :has-top-border="false" :has-bottom-border="false"></lc-input>
+             <div class="listWidth">
+                <lc-button text="获取登录信息"
+                    type="normal" 
+                    @LcButtonClicked="getUserInfo"></lc-button>
+             </div>
+        </div>
         <div><text class="detailHead">文档：</text></div>
         <div class="flex-row" @click="toOnlineApi()">
             <text class="onlineLink">查看在线文档</text>
@@ -18,12 +24,15 @@
 </template>
 <script>
     import LightSDK from "light-sdk";
+    import LcInput  from 'lighting-ui/packages/lc-input';
+    import LcButton from 'lighting-ui/packages/lc-button';
     export default {
         data(){
             return {
                 userInfo:{}
             }
         },
+        components:{LcInput,LcButton},
         methods:{
             toOnlineApi:function(){
                 var event = weex.requireModule('event'); 

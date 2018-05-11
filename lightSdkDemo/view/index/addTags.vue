@@ -30,7 +30,10 @@
                 LightSDK.native.addTags({
                     alias:that.alias
                 },function(data){
-                    alert(JSON.stringify(data));
+                    that.Dialog.toast({
+                        message: JSON.stringify(data),
+                        duration: 2
+                    });
                 })
             }
         }

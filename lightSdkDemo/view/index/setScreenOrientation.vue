@@ -4,10 +4,23 @@
         <div><text class="detailHead">说明：</text></div>
         <div><text class="detailDesc">通过js控制屏幕方向</text></div>
         <div><text class="detailHead">示例：</text></div>
-        <div class="normalList">
-            <text class="buttonStyle" @click="setScreenOrientation('landscape_left')">左横屏</text>
-            <text class="buttonStyle" @click="setScreenOrientation('landscape_right')">右横屏</text>
-            <text class="buttonStyle" @click="setScreenOrientation('portrait')">竖屏</text>
+        <div class="operateWrap">
+             <div class="listWidth mb30">
+                <lc-button text="左横屏"
+                    type="normal" 
+                    @LcButtonClicked="setScreenOrientation('landscape_left')"></lc-button>
+                    
+             </div>
+             <div class="listWidth mb30">
+                <lc-button text="右横屏"
+                    type="normal" 
+                    @LcButtonClicked="setScreenOrientation('landscape_right')"></lc-button>
+             </div>
+             <div class="listWidth">
+                <lc-button text="竖屏"
+                    type="normal" 
+                    @LcButtonClicked="setScreenOrientation('portrait')"></lc-button>
+             </div>
         </div>
         <div><text class="detailHead">文档：</text></div>
         <div class="flex-row" @click="toOnlineApi()">
@@ -17,10 +30,12 @@
 </template>
 <script>
     import LightSDK from "light-sdk";
+    import LcButton from 'lighting-ui/packages/lc-button';
     export default {
         data(){
             return {}
         },
+        components:{LcButton},
         methods:{
             toOnlineApi:function(){
                 var event = weex.requireModule('event'); 

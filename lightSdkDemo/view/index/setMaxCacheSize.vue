@@ -28,7 +28,10 @@
                 LightSDK.native.setMaxCacheSize({
                     maxCacheSize:that.maxSize
                 },function(data){
-                    alert(JSON.stringify(data.data.result));
+                    that.Dialog.toast({
+                        message: JSON.stringify(data),
+                        duration: 2
+                    });
                 })
             }
         }

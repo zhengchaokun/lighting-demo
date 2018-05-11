@@ -5,7 +5,9 @@
         <div><text class="detailDesc">获取设备唯一标识码。由native生成的来唯一标识设备的标志码。</text></div>
         <div><text class="detailHead">示例：</text></div>
         <div class="normalList"><text class="tipStyle">tips:点击'查询'按钮显示设备的唯一标识码UDID</text></div>
-        <div class="normalList"><text class="buttonStyle" @click="getUDID()">查询</text></div>
+        <div class="listWidth"><lc-button text="查询"
+                    type="normal" 
+                    @LcButtonClicked="getUDID"></lc-button></div>
         <div class="normalList">{{udid}}</div>
         <div><text class="detailHead">文档：</text></div>
         <div class="flex-row" @click="toOnlineApi()">
@@ -15,12 +17,14 @@
 </template>
 <script>
     import LightSDK from "light-sdk";
+    import LcButton from 'lighting-ui/packages/lc-button';
     export default {
         data(){
             return {
                 udid:""
             }
         },
+        components:{LcButton},
         methods:{
             getUDID:function(){
                 var that = this;

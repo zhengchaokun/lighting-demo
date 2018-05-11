@@ -19,7 +19,10 @@
             getLocationStatus:function(){
                 var that = this;
                 LightSDK.native.getLocationStatus({},function(data){
-                    alert(JSON.stringify(data));
+                    that.Dialog.toast({
+                        message: JSON.stringify(data),
+                        duration: 2
+                    });
                 });
             },
             toOnlineApi:function(){

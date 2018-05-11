@@ -23,8 +23,12 @@
                 event.openNative('web',{startPage:'https://document.lightyy.com/app_jssdk_ref/content/native_getperformanceinfo.html'})
             },
             getPerformanceInfo:function(){
+                var that = this;
                 LightSDK.native.getPerformanceInfo(function(data){
-                    alert(JSON.stringify(data));
+                    that.Dialog.toast({
+                        message: JSON.stringify(data),
+                        duration: 2
+                    });
                 })
             }
         }

@@ -4,9 +4,15 @@
         <div><text class="detailHead">说明：</text></div>
         <div><text class="detailDesc">通过js判断各个平台app在设备上是否已安装。</text></div>
         <div><text class="detailHead">示例：</text></div>
-        <div class="normalList"><text class="mr10 fs14">平台类型：</text><input v-model="type" class="inputStyle" type="text" placeholder=""/></div>
-        <div class="normalList"><text class="buttonStyle" @click="isAppInstalled()">查询</text></div>
-        <div class="normalList"><text>是否安装：{{ifInstall}}</text></div>
+        <div class="operateWrap">
+            <lc-input label="平台类型" v-model="type" placeholder="qq、weixin、weibo（任填一个）" :has-top-border="false" :has-bottom-border="false"></lc-input>
+            <lc-input label="是否安装" v-model="ifInstall" placeholder="--" :has-top-border="false" :has-bottom-border="false"></lc-input>
+             <div class="listWidth">
+                <lc-button text="查询"
+                    type="normal" 
+                    @LcButtonClicked="isAppInstalled"></lc-button>
+             </div>
+        </div>
         <div class="normalList"><text class="tipStyle">tips:{{tipsCont}}</text></div>
         <div><text class="detailHead">文档：</text></div>
         <div class="flex-row" @click="toOnlineApi()">
@@ -16,14 +22,17 @@
 </template>
 <script>
     import LightSDK from "light-sdk";
+    import LcInput  from 'lighting-ui/packages/lc-input';
+    import LcButton from 'lighting-ui/packages/lc-button';
     export default {
         data(){
             return {
-                ifInstall:"--",
+                ifInstall:"",
                 type:"",
                 tipsCont:"根据平台类型查询app是否已安装，true表示已安装 false表示没安装，目前类型只支持qq，weibo，weixin三个"
             }
         },
+        components:{LcInput,LcButton},
         methods:{
             toOnlineApi:function(){
                 var event = weex.requireModule('event'); 

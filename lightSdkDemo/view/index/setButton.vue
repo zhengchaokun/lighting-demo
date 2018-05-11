@@ -4,10 +4,15 @@
         <div><text class="detailHead">说明：</text></div>
         <div><text class="detailDesc">通过js添加导航栏按钮，有时候我们需要在导航栏添加一些操作按钮，比如扫一扫、搜索等。就可以使用此方法。</text></div>
         <div><text class="detailHead">示例：</text></div>
-        
-        <div class="normalList"><text class="mr10 fs14 width70">按钮名称：</text><input v-model="title" class="inputStyle" type="text" placeholder=""/></div>
-        <div class="normalList"><text class="mr10 fs14 width70">icon地址：</text><input v-model="iconsrc" class="inputStyle" type="text" placeholder=""/></div>
-        <div class="normalList"><text class="buttonStyle" @click="setButton()">添加</text></div>
+        <div class="operateWrap">
+            <lc-input label="按钮名称" v-model="title" placeholder="" :has-top-border="false" :has-bottom-border="false"></lc-input>
+            <lc-input label="icon地址" v-model="iconsrc" placeholder="" :has-top-border="false" :has-bottom-border="false"></lc-input>
+             <div class="listWidth">
+                <lc-button text="添加"
+                    type="normal" 
+                    @LcButtonClicked="setButton"></lc-button>
+             </div>
+        </div>
         <div class="normalList"><text class="tipStyle">tips:{{tipsCont}}</text></div>
         <div><text class="detailHead">文档：</text></div>
         <div class="flex-row" @click="toOnlineApi()">
@@ -17,6 +22,8 @@
 </template>
 <script>
     import LightSDK from "light-sdk";
+    import LcInput  from 'lighting-ui/packages/lc-input';
+    import LcButton from 'lighting-ui/packages/lc-button';
     export default {
         data(){
             return {
@@ -25,13 +32,14 @@
                 tipsCont:"点击'添加'按钮后，请注意导航栏新添了按钮，点击试试吧"
             }
         },
+        components:{LcInput,LcButton},
         methods:{
             toOnlineApi:function(){
                 var event = weex.requireModule('event'); 
                 event.openNative('web',{startPage:'https://document.lightyy.com/app_jssdk_ref/content/native_addbutton.html'})
             },
             a:function(){
-                alert(444);
+               
             },
             setButton:function(){
                 var that = this;

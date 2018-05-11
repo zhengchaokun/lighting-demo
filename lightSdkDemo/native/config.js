@@ -21,7 +21,7 @@ module.exports = {
     },
     views:{
         "index":{
-            url:"app.native.js#/index/chooseImage",
+            url:"app.native.js#/index",
             navBar:{
                 title:"图片选择"
             }

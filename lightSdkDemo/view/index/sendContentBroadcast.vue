@@ -29,7 +29,10 @@
                     content:that.content,
                     action:""
                 },function(data){
-                    alert(JSON.stringify(data));
+                    that.Dialog.toast({
+                        message: JSON.stringify(data),
+                        duration: 2
+                    });
                 })
             }
         }

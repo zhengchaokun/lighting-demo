@@ -4,8 +4,15 @@
         <div><text class="detailHead">说明：</text></div>
         <div><text class="detailDesc">在某些情况下需要删除已存储在本地的属性，比如个人中心已登录状态下击退出登录按钮的时候，需要删除登录的时候已经写在本地的数据。</text></div>
         <div><text class="detailHead">示例：</text></div>
-        <div class="normalList"><text class="mr10 fs14">属性名：</text><input v-model="jsonName" class="inputStyle" type="text" placeholder=""/></div>
-        <div class="normalList"><text class="buttonStyle" @click="deleteData()">删除</text></div>
+            <div class="operateWrap">
+            <lc-input label="属性名" v-model="jsonName" placeholder="请先输入一个存储在本地的属性" :has-top-border="false" :has-bottom-border="false"></lc-input>
+            
+             <div class="listWidth">
+                <lc-button text="删除"
+                    type="normal" 
+                    @LcButtonClicked="deleteData"></lc-button>
+             </div>
+        </div>
         <div class="normalList"><text class="tipStyle">tips:{{tipsCont}}</text></div>
         <div><text class="detailHead">文档：</text></div>
         <div class="flex-row" @click="toOnlineApi()">
@@ -15,13 +22,16 @@
 </template>
 <script>
     import LightSDK from "light-sdk";
+    import LcInput  from 'lighting-ui/packages/lc-input';
+    import LcButton from 'lighting-ui/packages/lc-button';
     export default {
         data(){
             return {
                 jsonName:"",
-                tipsCont:"请输入要删除的属性的名称"
+                tipsCont:"点击删除按钮，存储在本地的该属性将被删除"
             }
         },
+        components:{LcInput,LcButton},
         methods:{
             toOnlineApi:function(){
                  var event = weex.requireModule('event'); 

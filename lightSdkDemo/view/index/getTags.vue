@@ -28,7 +28,10 @@
             getTags:function(){
                 var that = this;
                 LightSDK.native.getTags({},function(data){
-                    alert(JSON.stringify(data));
+                    that.Dialog.toast({
+                        message: JSON.stringify(data),
+                        duration: 2
+                    });
                     that.alias = (data.data.tags).join(",");
                     
                 })

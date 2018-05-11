@@ -4,8 +4,14 @@
         <div><text class="detailHead">说明：</text></div>
         <div><text class="detailDesc">有时候为了方便我们需要把一些信息编辑成二维码，这样其他人就可以通过扫描该二维码来查看这些信息（该接口最终返回的是生成的二维码的base64编码，不包含头）</text></div>
         <div><text class="detailHead">示例：</text></div>
-        <div class="normalList"><text class="mr10 fs14">内容：</text><input v-model="ewmCont" class="inputStyle" type="text" placeholder=""/><text class="buttonStyle" @click="genCode()">生成</text></div>
-        <div class="normalList"><text class="mr10 fs14">二维码：</text><image class="imgSize" :src="imgsrc"></image></div>
+        <div class="operateWrap flex-column">
+            <div class="listWidth mb5"><lc-input placeholder="这里输入二维码内容"  v-model="ewmCont"></lc-input></div>
+            
+        </div>
+        <div class="normalList"><text class="mr10 fs14">二维码图片：</text><image class="imgSize" :src="imgsrc"></image></div>
+        <div class="listWidth"><lc-button text="生成"
+                    type="normal" 
+                    @LcButtonClicked="genCode"></lc-button></div>
         <div class="ml20"><text class="tipStyle">tips:{{tipsCont}}</text></div>
         <div><text class="detailHead">说明：</text></div>
         <div class="flex-row" @click="toOnlineApi()">
@@ -15,14 +21,17 @@
 </template>
 <script>
     import LightSDK from "light-sdk";
+    import LcInput  from 'lighting-ui/packages/lc-input';
+    import LcButton from 'lighting-ui/packages/lc-button';
     export default {
         data(){
             return {
                 ewmCont:"",
-                imgsrc:"",
+                imgsrc:"https://light.hscloud.cn/data/file/5ad552622193f668f0fc2227?type=image",
                 tipsCont:"点击生成按钮，将会生成对应内容的二维码图片"
             }
         },
+        components:{LcInput,LcButton},
         methods:{
             toOnlineApi:function(){
                  var event = weex.requireModule('event'); 
