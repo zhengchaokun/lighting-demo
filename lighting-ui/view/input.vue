@@ -8,7 +8,7 @@
       <category title="基本用法"></category>
       
       <text class="hint">无标题输入框{{password1}}</text>
-      <lc-input placeholder="预设内容"  @on-change="onEvent('change')" v-model="password1"></lc-input>
+      <lc-input placeholder="预设内容" :has-top-border="false" :has-bottom-border="false" cell-index="last"  @on-change="onEvent('change')" v-model="password1"></lc-input>
       
       <text class="hint">有标题输入框</text>
       <lc-input label="单项输入" placeholder="预设内容"></lc-input>
