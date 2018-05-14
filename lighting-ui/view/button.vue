@@ -215,6 +215,24 @@
           message: disabled ? `disabled=${disabled}` : `type=${type}`
         })
       }
+    },
+    mounted () {
+      // console.log(window);
+      // setTimeout(function() {
+      //   console.log(this.$el.querySelector("article"));
+      //   var el = this.$el.querySelector("article");
+      //   var elt = document.createElement("div");
+      //   elt.appendChild(el);
+      //   console.log(elt.toString());
+      //   window.parent.postMessage(el.outerHTML,'*');
+      // // },3000)
+      //  window.addEventListener('message',function(e){
+      //   console.log(arguments);
+      //       console.log(e.data);        //hello world
+      //       console.log(e.origin);      //http://127.0.0.1:8020 所传来数据的域
+
+      //   })
+       
     }
   }
 </script>
