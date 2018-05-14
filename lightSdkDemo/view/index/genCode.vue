@@ -9,10 +9,18 @@
             
         </div>
         <div class="normalList"><text class="mr10 fs14">二维码图片：</text><image class="imgSize" :src="imgsrc"></image></div>
-        <div class="listWidth"><lc-button text="生成"
+        <div class="listWidth">
+            <lc-button text="生成二维码"
                     type="normal" 
-                    @LcButtonClicked="genCode"></lc-button></div>
-        <div class="ml20"><text class="tipStyle">tips:{{tipsCont}}</text></div>
+                    @LcButtonClicked="genCode"></lc-button>
+        </div>
+        <div class="ml20 mb30"><text class="tipStyle">tips:{{tipsCont}}</text></div>
+        <div class="listWidth">
+            <lc-button text="扫一扫"
+            type="normal" 
+            @LcButtonClicked="scanCode"></lc-button>
+        </div>
+        
         <div><text class="detailHead">说明：</text></div>
         <div class="flex-row" @click="toOnlineApi()">
             <text class="onlineLink">查看在线文档</text>
@@ -36,6 +44,13 @@
             toOnlineApi:function(){
                  var event = weex.requireModule('event'); 
                 event.openNative('web',{startPage:'https://document.lightyy.com/app_jssdk_ref/content/native_gencode.html'})
+            },
+            scanCode:function(){
+                LightSDK.native.scanCode({},function(data){
+                    JSON.stringify(data);
+                    var event = weex.requireModule('event');
+                    event.openNative('web',{startPage:encodeURIComponent(data.data.result)});      //your code
+                })
             },
             genCode:function(){
                 var that = this;

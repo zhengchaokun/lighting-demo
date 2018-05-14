@@ -4,13 +4,17 @@
         <div><text class="detailHead">说明：</text></div>
         <div><text class="detailDesc">通过js调用手势或指纹验证</text></div>
         <div><text class="detailHead">示例：</text></div>
-        <div class="normalList"><text class="tipStyle">tips:点击'确定'按钮调用手势或指纹验证</text></div>
         <lc-radio :list="list" :config="config"
                  @LcRadioListChecked="LcRadioListChecked"></lc-radio>
-        <div class="listWidth">
-            <lc-button text="确定"
+        <div class="listWidth mb30">
+            <lc-button text="点击调用"
             type="normal" 
-            @LcButtonClicked="verifyOpeation()"></lc-button>
+            @LcButtonClicked="verifyOpeation()"></lc-button></div>
+          
+        <div class="listWidth">
+            <lc-button text="点击判断是否含有"
+            type="normal" 
+            @LcButtonClicked="preVerifyOpeation()"></lc-button>  
         </div>
         <div><text class="detailHead">文档：</text></div>
         <div class="flex-row" @click="toOnlineApi()">
@@ -48,6 +52,19 @@
                 var event = weex.requireModule('event'); 
                 event.openNative('web',{startPage:'https://document.lightyy.com/termAPI/genAndScan.html'})
             },
+            //是否含有指纹手势
+            preVerifyOpeation:function(){
+                var that = this;
+                LightSDK.native.preVerifyOpeation({
+                    verifyType:that.checkedInfo.value
+                },function(data){
+                    that.Dialog.toast({
+                        message: JSON.stringify(data),
+                        duration: 2
+                    });
+                })
+            },
+            //调用指纹手势
             verifyOpeation:function(){
                 var that = this;
                 LightSDK.native.verifyOpeation({

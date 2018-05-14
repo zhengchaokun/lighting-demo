@@ -5,7 +5,19 @@
         <div><text class="detailDesc">通过js控制屏幕方向</text></div>
         <div><text class="detailHead">示例：</text></div>
         <div class="operateWrap">
-             <div class="listWidth mb30">
+             
+
+             <text class="checked-text">选中项 {{checkedList.toString()}}</text>        
+            <div class="operateWrap">
+                <lc-checkbox-list :list="list" :config="config"
+            @LcCheckboxListChecked="LcCheckboxListChecked"></lc-checkbox-list>
+            </div>
+            <div class="listWidth mb30">
+                <lc-button text="设置可旋转的屏幕方向"
+                type="normal" 
+                @LcButtonClicked="setSupportScreenOrientation()"></lc-button>
+            </div>
+            <div class="listWidth mb30">
                 <lc-button text="左横屏"
                     type="normal" 
                     @LcButtonClicked="setScreenOrientation('landscape_left')"></lc-button>
@@ -31,11 +43,28 @@
 <script>
     import LightSDK from "light-sdk";
     import LcButton from 'lighting-ui/packages/lc-button';
+    import LcCheckboxList from 'lighting-ui/packages/lc-checkbox-list';
     export default {
         data(){
-            return {}
+            return {
+                normalsrc:"images/normal.jpg",
+                selectsrc:"images/select.jpg",
+                left:0,
+                right:0,
+                vertical:0,
+                list:[
+                    {label:"左横屏",value:"landscape_left"},
+                    {label:"右横屏",value:"landscape_right"},
+                    {label:"竖屏",value:"portrait",checked:true}
+                ],
+                checkedList: ["portrait"],
+                config: {
+                    checkedColor: '#f63031',
+                    checkedIcon: ''
+                }
+            }
         },
-        components:{LcButton},
+        components: { LcCheckboxList,LcButton },
         methods:{
             toOnlineApi:function(){
                 var event = weex.requireModule('event'); 
@@ -45,6 +74,20 @@
                 LightSDK.native.setScreenOrientation({
                     screenOrientation:style
                 })
+            },
+            setSupportScreenOrientation:function(){
+                var that = this;
+                LightSDK.native.setSupportScreenOrientation({
+                    supportScreenOrientation:that.checkedList
+                },function(data){
+                    that.Dialog.toast({
+                        message: "设置成功",
+                        duration: 2
+                    });
+                })
+            },
+            LcCheckboxListChecked:function(e){
+                this.checkedList = e.checkedList;
             }
         }
     }

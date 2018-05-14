@@ -62,6 +62,10 @@
                     }else {
                         that.title=that.url;
                     }
+                    that.Dialog.toast({
+                        message: "内容获取成功！",
+                        duration: 2
+                    });
                 })
             }
         }
