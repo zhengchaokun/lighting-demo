@@ -27,7 +27,10 @@
                 LightSDK.native.setMutipleLanguages({
                     language:"en"
                 },function(data){
-                    JSON.stringify(data);
+                    weex.requireModule('modal').alert({
+                        message: JSON.stringify(data),
+                        duration: 2
+                    });
                 })
             }
         }

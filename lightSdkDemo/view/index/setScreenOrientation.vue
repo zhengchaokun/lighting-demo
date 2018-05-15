@@ -1,6 +1,7 @@
 
 <template>
     <div class="apiContent">
+    <scroller> 
         <div><text class="detailHead">说明：</text></div>
         <div><text class="detailDesc">通过js控制屏幕方向</text></div>
         <div><text class="detailHead">示例：</text></div>
@@ -38,6 +39,7 @@
         <div class="flex-row" @click="toOnlineApi()">
             <text class="onlineLink">查看在线文档</text>
         </div>
+     </scroller>
      </div>
 </template>
 <script>
@@ -73,6 +75,14 @@
             setScreenOrientation:function(style){
                 LightSDK.native.setScreenOrientation({
                     screenOrientation:style
+                },function(data){
+                    if(data.info.error_code!='0'){
+                        that.Dialog.toast({
+                            message: data.info.error_message,
+                            duration: 2
+                        });
+                        return false;
+                    }
                 })
             },
             setSupportScreenOrientation:function(){
@@ -80,6 +90,13 @@
                 LightSDK.native.setSupportScreenOrientation({
                     supportScreenOrientation:that.checkedList
                 },function(data){
+                    if(data.info.error_code!='0'){
+                        that.Dialog.toast({
+                            message: data.info.error_message,
+                            duration: 2
+                        });
+                        return false;
+                    }
                     that.Dialog.toast({
                         message: "设置成功",
                         duration: 2

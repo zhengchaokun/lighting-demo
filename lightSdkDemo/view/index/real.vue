@@ -49,6 +49,10 @@
                     "en_prod_code":that.prodCodeList,
                     "fields":["prod_name","issue_date"]
                 },function(data){
+                    weex.requireModule('modal').alert({
+                        message: JSON.stringify(data),
+                        duration: 2
+                    });
                     var Data = data.data.data;
                     var fields = data.data.fields;
                     that.newdata=[];

@@ -28,7 +28,7 @@
                 LightSDK.native.setMaxCacheSize({
                     maxCacheSize:that.maxSize
                 },function(data){
-                    that.Dialog.toast({
+                    weex.requireModule('modal').alert({
                         message: JSON.stringify(data),
                         duration: 2
                     });

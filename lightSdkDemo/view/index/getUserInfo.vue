@@ -41,6 +41,10 @@
             getUserInfo:function(){
                 var that = this;
                 LightSDK.native.getUserInfo(function(data){
+                    weex.requireModule('modal').alert({
+                        message: JSON.stringify(data),
+                        duration: 2
+                    });
                     that.userInfo=data;
                 })
             }

@@ -67,8 +67,11 @@
                 var event = weex.requireModule('event'); 
                 event.openNative('web',{startPage:'https://document.lightyy.com/app_jssdk_ref/content/native_addbutton.html'})
             },
-            a:function(){
-               
+            butAction:function(){
+               this.Dialog.toast({
+                    message: "我被点击啦",
+                    duration: 2
+                });
             },
             removeButton:function(){
                 LightSDK.native.removeButton();
@@ -76,15 +79,16 @@
             setButton:function(){
                 var that = this;
                 if(!that.title&&!that.iconsrc){
-                    that.tipsCont="名称和icon图标地址必须选填一个";
+                    that.Dialog.toast({
+                        message: "名称和icon图标地址必须选填一个",
+                        duration: 2
+                    });
                     return false;
                 }
-                var actionFunction = 'actionFunction_' + Math.floor(Math.random() * 1000);
-                window[actionFunction] = that.a;
                 LightSDK.native.addButton({
                     title:that.title,
                     icon:that.iconsrc,
-                    action: "javascript:" + actionFunction + "();",
+                    action: "javascript:that.butAction();",
                     position:"right"
                 },function(){
                     that.Dialog.toast({
@@ -96,6 +100,13 @@
             //修改导航栏透明度
             setAlpha:function(){
                 var that = this;
+                if(!that.opacity){
+                    that.Dialog.toast({
+                        message: "透明度必填",
+                        duration: 2
+                    });
+                    return false;
+                }
                 LightSDK.native.setAlpha({
                     alpha:that.opacity
                 },function(data){

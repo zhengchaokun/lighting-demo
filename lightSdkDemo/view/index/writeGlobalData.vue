@@ -76,6 +76,13 @@
                     key:that.jsonName,
                     value:that.jsonvalue
                 },function(data){
+                    if(data.info.error_code!='0'){
+                        that.Dialog.toast({
+                            message: data.info.error_message,
+                            duration: 2
+                        });
+                        return false;
+                    }
                     that.Dialog.toast({
                         message: "保存成功，读取数据试试吧！",
                         duration: 2
@@ -96,6 +103,13 @@
                 LightSDK.native.readData({
                     key:that.gotjsonName,
                 },function(data){
+                    // if(data.info.error_code!='0'){
+                    //     that.Dialog.toast({
+                    //         message: data.info.error_message,
+                    //         duration: 2
+                    //     });
+                    //     return false;
+                    // }
                     that.Dialog.toast({
                         message: "数据读取成功",
                         duration: 2
@@ -115,6 +129,13 @@
                 LightSDK.native.deleteData({
                     key:that.deletejsonName
                 },function(data){
+                    if(data.info.error_code!='0'){
+                        that.Dialog.toast({
+                            message: data.info.error_message,
+                            duration: 2
+                        });
+                        return false;
+                    }
                     that.Dialog.toast({
                         message: "删除成功！",
                         duration: 2

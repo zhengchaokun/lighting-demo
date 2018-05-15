@@ -16,7 +16,7 @@
                 <cell class="listItem" @click="jump('index/getVersion','获取客户端版本信息')"><div class="wrapRow"><text class="itemName">获取客户端版本信息</text></div></cell>
                 <cell class="listItem" @click="jump('index/getUDID','获取设备唯一标识码')"><div class="wrapRow"><text class="itemName">获取设备唯一标识码</text></div></cell>
                 <!--<cell class="listItem" @click="jump('index/switchTab','')"><div class="wrapRow"><text class="itemName">切换tab......todo</text></div></cell>-->
-                <cell class="listItem" @click="jump('index/genCode','生成二维码')"><div class="wrapRow"><text class="itemName">生成二维码</text></div></cell>
+                <cell class="listItem" @click="jump('index/genCode','二维码')"><div class="wrapRow"><text class="itemName">二维码</text></div></cell>
                 <cell class="listItem" @click="jump('index/share','分享')"><div class="wrapRow"><text class="itemName">分享</text></div></cell>
                 <cell class="listItem" @click="jump('index/socialLogin','第三方登录')"><div class="wrapRow"><text class="itemName">第三方登录</text></div></cell>
                 <cell class="listItem" @click="jump('index/isAppInstalled','判断app是否已安装')"><div class="wrapRow"><text class="itemName">判断app是否已安装</text></div></cell>

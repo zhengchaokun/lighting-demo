@@ -58,10 +58,17 @@
                 LightSDK.native.preVerifyOpeation({
                     verifyType:that.checkedInfo.value
                 },function(data){
-                    that.Dialog.toast({
-                        message: JSON.stringify(data),
-                        duration: 2
-                    });
+                    if(data.info.error_code!='0'){
+                        that.Dialog.toast({
+                            message: data.info.error_message,
+                            duration: 2
+                        });
+                    }else{
+                        that.Dialog.toast({
+                            message:data.data.result,
+                            duration: 2
+                        });
+                    }
                 })
             },
             //调用指纹手势
@@ -70,10 +77,18 @@
                 LightSDK.native.verifyOpeation({
                     verifyType:that.checkedInfo.value
                 },function(data){
-                    that.Dialog.toast({
-                        message: JSON.stringify(data),
-                        duration: 2
-                    });
+                    if(data.info.error_code!='0'){
+                        that.Dialog.toast({
+                            message: data.info.error_message,
+                            duration: 2
+                        });
+                    }else{
+                        that.Dialog.toast({
+                            message:data.data.result,
+                            duration: 2
+                        });
+                    }
+                    
                 })
             }
         }

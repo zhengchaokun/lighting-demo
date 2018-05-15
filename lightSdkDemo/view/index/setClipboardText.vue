@@ -49,6 +49,13 @@
             getClipBoardText:function(){
                 var that = this;
                 LightSDK.native.getClipBoardContent({},function(data){
+                        if(data.info.error_code!='0'){
+                            that.Dialog.toast({
+                                message: data.info.error_message,
+                                duration: 2
+                            });
+                            return false;
+                        }
                         that.pasteValue = data.data.result;
                         that.Dialog.toast({
                             message: "粘贴成功",
@@ -68,7 +75,14 @@
                 
                 LightSDK.native.setClipBoardContent({
                     value:that.copyValue
-                },function(){
+                },function(data){
+                    if(data.info.error_code!='0'){
+                        that.Dialog.toast({
+                            message: data.info.error_message,
+                            duration: 2
+                        });
+                        return false;
+                    }
                    that.Dialog.toast({
                         message: "复制成功，去粘贴试试吧！",
                         duration: 2

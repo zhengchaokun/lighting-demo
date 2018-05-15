@@ -26,7 +26,7 @@
                 var that = this;
                 LightSDK.native.getRegistrationID({},function(data){
                     
-                    that.Dialog.toast({
+                    weex.requireModule('modal').alert({
                         message: JSON.stringify(data),
                         duration: 2
                     });
