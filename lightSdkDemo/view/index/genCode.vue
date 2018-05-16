@@ -52,10 +52,10 @@
                         });
                         return false;
                     }
-                    weex.requireModule('modal').alert({
-                        message: data,
-                        duration: 2
-                    });
+                    // weex.requireModule('modal').alert({
+                    //     message: data,
+                    //     duration: 2
+                    // });
                     var event = weex.requireModule('event');
                     event.openNative('web',{startPage:data.data.result});      //your code
                 })

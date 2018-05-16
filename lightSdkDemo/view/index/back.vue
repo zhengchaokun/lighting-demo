@@ -24,7 +24,9 @@
                 event.openNative('web',{startPage:'https://document.lightyy.com/app_jssdk_ref/content/native_back.html'})
             },
             close:function(){
-                LightSDK.native.close()
+                var that = this;
+                LightSDK.native.close();
+                
             },
             back:function(){
                 LightSDK.native.back()
