@@ -1,9 +1,9 @@
 {
-  "project":"jsn-create-ele",
+  "project":"lighting1.5-demo",
   "version":"0.0.1",
   "desc":"Just For Fun",
   "type":"vue",
-  "plugins":["jsnative","native"],
+  "plugins":["jsnative"],
   "link_id":"",
 
   "env":{

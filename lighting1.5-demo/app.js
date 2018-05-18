@@ -1,6 +1,6 @@
 import App from "light"
 
-require("./app.less");
+// require('./app.less');
 
 App.filter("start",function (next) {
     //启动拦截器
