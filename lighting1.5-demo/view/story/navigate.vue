@@ -22,7 +22,9 @@
         },
         methods: {
             jump() {
+                // this.$light.navigate('https:192.168.191.1:5444/lib/test.js')
                 this.$light.navigate('https://jzzuag2o3.lightyy.com/quote.js')
+                
             }
         }
         
