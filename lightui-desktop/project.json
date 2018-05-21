@@ -1,9 +1,8 @@
 {
-  "project":"jsn-create-ele",
+  "project":"lightui-desktop",
   "version":"0.0.1",
   "desc":"Just For Fun",
   "type":"vue",
-  "plugins":["jsnative","native"],
   "link_id":"",
 
   "env":{

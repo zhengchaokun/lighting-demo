@@ -1,7 +1,8 @@
 import App from "light"
 
 require("./app.less");
-
+const ligui = require('ligui/lib/index.js');
+App.Vue.use(ligui);
 App.filter("start",function (next) {
     //启动拦截器
     App.log("app started...");
