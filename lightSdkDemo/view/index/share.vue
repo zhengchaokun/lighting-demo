@@ -23,7 +23,7 @@
         methods:{
             toOnlineApi:function(){
                 var event = weex.requireModule('event'); 
-                event.openNative('web',{startPage:'https://document.lightyy.com/termAPI/share.html'})
+                event.openNative('web',{startPage:'https://document.lightyy.com/app_jssdk_ref/content/native_socialshare.html'})
             },
             share:function(){
                 var that = this;
