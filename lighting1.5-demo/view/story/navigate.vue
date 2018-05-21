@@ -3,7 +3,7 @@
     <div style="width:750px;height: 1334px;">
         <div class="doc" style="margin-top: 40px;margin-bottom: 40px;">
             <text class="title" style="margin-bottom: 30px;">需求：jsn访问js资源</text>
-            <text class="desc" style="margin-top:20px;">验收标准：跳转成功，控制台打印出信息。</text>
+            <text class="desc" style="margin-top:20px;">验收标准：访问成功，显示行情信息。</text>
         </div>
         <div class="demo">
             <lc-button class="button" type="normal" text="访问js资源" @LcButtonClicked="jump"></lc-button>
@@ -22,11 +22,7 @@
         },
         methods: {
             jump() {
-                this.$light.navigate('http://dotwe.org/raw/dist/519962541fcf6acd911986357ad9c2ed.js', {},{
-                    callback: function(){
-                        console.log('访问成功！')
-                    }
-                })
+                this.$light.navigate('https://jzzuag2o3.lightyy.com/quote.js')
             }
         }
         
@@ -48,5 +44,8 @@
 }
 .demo {
     align-items: center;
+}
+.button {
+    margin-top: 50px;
 }
 </style>
