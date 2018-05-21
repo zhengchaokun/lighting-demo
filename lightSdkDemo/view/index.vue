@@ -23,14 +23,14 @@
                 <cell class="listItem" @click="jump('index/setButton','导航栏设置')"><div class="wrapRow"><text class="itemName">导航栏设置</text></div></cell>
                 <cell class="listItem" @click="jump('index/statusBar','状态栏隐藏显示')"><div class="wrapRow"><text class="itemName">状态栏隐藏显示</text></div></cell>
                 <cell class="listItem" @click="jump('index/getNetworkStatus','获取当前网络状态')"><div class="wrapRow"><text class="itemName">获取当前网络状态</text></div></cell>
-                <cell class="listItem" @click="jump('index/getLocationStatu','获取当前定位状态')"><div class="wrapRow"><text class="itemName">获取当前定位状态</text></div></cell>
+                
                 <cell class="listItem" @click="jump('index/setScreenOrientation','设置屏幕方向')"><div class="wrapRow"><text class="itemName">设置屏幕方向</text></div></cell>
                 <cell class="listItem" @click="jump('index/showKeyboard','显示隐藏交易键盘')"><div class="wrapRow"><text class="itemName">显示隐藏交易键盘</text></div></cell>
                 <cell class="listItem" @click="jump('index/verifyOpeation','调用手势或指纹验证')"><div class="wrapRow"><text class="itemName">调用手势或指纹验证</text></div></cell>
                 <cell class="listItem" @click="jump('index/call','打电话')"><div class="wrapRow"><text class="itemName">打电话</text></div></cell>
                 <cell class="listItem" @click="jump('index/showDialog','dialog对话框')"><div class="wrapRow"><text class="itemName">dialog对话框</text></div></cell>
                 <!--<cell class="listItem" @click="jump('index/orcCheck','')"><div class="wrapRow"><text class="itemName">身份识别......todo</text></div></cell>-->
-                
+                <cell v-if="ifAll" class="listItem" @click="jump('index/getLocationStatu','是否可获取当前定位状态')"><div class="wrapRow"><text class="itemName">是否可获取当前定位状态</text></div></cell>
                 <cell v-if="ifAll" class="listItem" @click="jump('index/wizard','按键精灵数据查询')"><div class="wrapRow"><text class="itemName">按键精灵数据查询</text></div></cell>
                 <cell v-if="ifAll" class="listItem" @click="jump('index/real','行情报价数据查询')"><div class="wrapRow"><text class="itemName">行情报价数据查询</text></div></cell>
                 <cell v-if="ifAll" class="listItem" @click="jump('index/sort','行情股票排序')"><div class="wrapRow"><text class="itemName">行情股票排序</text></div></cell>

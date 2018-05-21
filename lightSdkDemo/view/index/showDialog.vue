@@ -29,8 +29,10 @@
                 var that = this;
                 LightSDK.native.showDialog({
                     title:"提醒框",
-                    buttons:"确定",
+                    buttons:["确定","取消"],
                     message:"确定删除吗",
+                    height:200,
+                    width:300,
                     image:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1502080755380&di=038b685eaf4c6b40f50994cbc2a01a42&imgtype=0&src=http%3A%2F%2Fimg01.taopic.com%2F150704%2F240499-150F40QS335.jpg"
                 },function(data){
                     that.Dialog.toast({
@@ -38,6 +40,10 @@
                         duration: 2
                     });
                 })
+            },
+            toOnlineApi:function(){
+                var event = weex.requireModule('event'); 
+                event.openNative('web',{startPage:'https://document.lightyy.com/app_jssdk_ref/content/native_showdialog.html'})
             }
         }
     }
