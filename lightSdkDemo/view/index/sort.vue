@@ -56,7 +56,10 @@
                         "sort_type":that.sort_type,
                         "fields":"open_px,high_px,low_px,last_px"
                 },function(data){
-                    JSON.stringify(data);
+                    weex.requireModule('modal').alert({
+                        message: JSON.stringify(data),
+                        duration: 2
+                    });
                     var a = {}
                     data.data.sort.forEach(function(obj){
                         for(var i in obj){

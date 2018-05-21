@@ -55,6 +55,13 @@
                 LightSDK.native.fetchURL({
                     url:that.url
                 },function(data){
+                    if(data.info.error_code!='0'){
+                        that.Dialog.toast({
+                            message: data.info.error_message,
+                            duration: 2
+                        });
+                        return false;
+                    }
                     var content = data.data.result;
                     var outTit = content.substring(content.indexOf("<title>")+7,content.indexOf("</title>"))
                     if(outTit){
@@ -62,6 +69,10 @@
                     }else {
                         that.title=that.url;
                     }
+                    that.Dialog.toast({
+                        message: "内容获取成功！",
+                        duration: 2
+                    });
                 })
             }
         }

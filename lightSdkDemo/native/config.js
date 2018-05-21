@@ -14,7 +14,7 @@ module.exports = {
         }]
     },
     navBar:{
-        title:"图片选择",
+        title:"端JS-SDK",
         backgroundColor:"#0AA9F1",
         titleColor:"#ffffff",
         buttonColor:"#ffffff",
@@ -23,7 +23,7 @@ module.exports = {
         "index":{
             url:"app.native.js#/index",
             navBar:{
-                title:"图片选择"
+                title:"端JS-SDK"
             }
         }
     },

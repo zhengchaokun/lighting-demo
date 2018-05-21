@@ -33,7 +33,7 @@
                     stockCode:that.stockCode,
                     codeType:that.codeType
                 },function(data){
-                    that.Dialog.toast({
+                    weex.requireModule('modal').alert({
                         message: JSON.stringify(data),
                         duration: 2
                     });

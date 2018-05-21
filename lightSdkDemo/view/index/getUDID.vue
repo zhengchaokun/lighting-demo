@@ -8,7 +8,6 @@
         <div class="listWidth"><lc-button text="查询"
                     type="normal" 
                     @LcButtonClicked="getUDID"></lc-button></div>
-        <div class="normalList">{{udid}}</div>
         <div><text class="detailHead">文档：</text></div>
         <div class="flex-row" @click="toOnlineApi()">
             <text class="onlineLink">查看在线文档</text>
@@ -29,7 +28,17 @@
             getUDID:function(){
                 var that = this;
                 LightSDK.native.getUDID({},function(data){
-                    that.udid = data.data.UDID;
+                    if(data.info.error_code!='0'){
+                        that.Dialog.toast({
+                            message: data.info.error_message,
+                            duration: 2
+                        });
+                        return false;
+                    }
+                    weex.requireModule('modal').alert({
+                        message: data.data.UDID,
+                        duration: 2
+                    });
                 })
             },
             toOnlineApi:function(){

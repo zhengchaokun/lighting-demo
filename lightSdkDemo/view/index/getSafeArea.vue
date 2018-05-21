@@ -24,7 +24,10 @@
             },
             getSafeArea:function(){
                 LightSDK.native.getSafeArea({},function(data){
-                    JSON.stringify(data);
+                    weex.requireModule('modal').alert({
+                        message: JSON.stringify(data),
+                        duration: 2
+                    });
                 })
             }
         }

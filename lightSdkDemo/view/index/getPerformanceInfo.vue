@@ -25,7 +25,7 @@
             getPerformanceInfo:function(){
                 var that = this;
                 LightSDK.native.getPerformanceInfo(function(data){
-                    that.Dialog.toast({
+                    weex.requireModule('modal').alert({
                         message: JSON.stringify(data),
                         duration: 2
                     });

@@ -2,13 +2,17 @@
 <template>
       <div class="apiContent">
         <div><text class="detailHead">说明：</text></div>
-        <div><text class="detailDesc">有时候在特定的环境下，为了方便，我们需要对页面中的内容进行复制到剪贴板，这样我们可以在其他的地方根据需要使用，比如我们经常在淘宝上复制订单编号来查询快递</text></div>
+        <div><text class="detailDesc">有时候在特定的环境下，为了方便，我们需要对页面中的内容进行复制到剪贴板，这样我们可以在其他的地方根据需要使用</text></div>
         <div><text class="detailHead">示例：</text></div>
         <div class="operateWrap flex-column">
-            <div class="listWidth mb5"><lc-input placeholder="请输入要复制的内容"  v-model="copyValue"></lc-input></div>
-            <div class="listWidth"><lc-button text="复制"
-                    type="normal" 
-                    @LcButtonClicked="setClipboardText"></lc-button></div>
+            <div class="listWidth mb5" style="position:relative">
+                <lc-input placeholder="请输入要复制的内容"  v-model="copyValue"></lc-input>
+                <text class="miniBut" @click="setClipboardText()">复制</text>
+            </div>
+            <div class="listWidth mb5" style="position:relative">
+                <lc-input placeholder="点击粘贴按钮试试吧"  v-model="pasteValue"></lc-input>
+                <text class="miniBut" @click="getClipBoardText()">粘贴</text>
+            </div>
         </div>
         <div><text class="detailHead">文档：</text></div>
         <div class="flex-row" @click="toOnlineApi()">
@@ -26,6 +30,7 @@
         data(){
             return {
                 copyValue:"",
+                pasteValue:"",
                 ifError:false,
                 jumpShow:false
             }
@@ -41,6 +46,23 @@
                 var event = weex.requireModule('event'); 
                 event.openNative('web',{startPage:'https://document.lightyy.com/app_jssdk_ref/content/native_setclipboardcontent.html'})
             },
+            getClipBoardText:function(){
+                var that = this;
+                LightSDK.native.getClipBoardContent({},function(data){
+                        if(data.info.error_code!='0'){
+                            that.Dialog.toast({
+                                message: data.info.error_message,
+                                duration: 2
+                            });
+                            return false;
+                        }
+                        that.pasteValue = data.data.result;
+                        that.Dialog.toast({
+                            message: "粘贴成功",
+                            duration: 2
+                        });
+                })
+            },
             setClipboardText:function(){
                 var that = this;
                 if(!that.copyValue){
@@ -53,7 +75,14 @@
                 
                 LightSDK.native.setClipBoardContent({
                     value:that.copyValue
-                },function(){
+                },function(data){
+                    if(data.info.error_code!='0'){
+                        that.Dialog.toast({
+                            message: data.info.error_message,
+                            duration: 2
+                        });
+                        return false;
+                    }
                    that.Dialog.toast({
                         message: "复制成功，去粘贴试试吧！",
                         duration: 2
@@ -64,5 +93,17 @@
     }
 </script>
 <style scoped src="../../css/ui.css"></style> <style scoped>
-
+.miniBut{
+    position:absolute;
+    right:0px;
+    top:0px;
+    background-color:#399DE2;
+    width:200px;
+    text-align:center;
+    height:85px;
+    line-height:85px;
+    display:block;
+    color:#fff;
+    font-size:30px;
+}
 </style>

@@ -26,7 +26,14 @@
             getNetworkStatus:function(){
                 var that = this;
                 LightSDK.native.getNetworkStatus({},function(data){
-                    that.Dialog.toast({
+                    if(data.info.error_code!='0'){
+                        that.Dialog.toast({
+                            message: data.info.error_message,
+                            duration: 2
+                        });
+                        return false;
+                    }
+                    weex.requireModule('modal').alert({
                         message: data.data.result,
                         duration: 2
                     });

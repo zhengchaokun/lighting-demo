@@ -33,7 +33,7 @@
             mystockList:function(){
                 var that = this;
                 LightSDK.native.mystockList({},function(data){
-                    that.Dialog.toast({
+                    weex.requireModule('modal').alert({
                         message: JSON.stringify(data),
                         duration: 2
                     });

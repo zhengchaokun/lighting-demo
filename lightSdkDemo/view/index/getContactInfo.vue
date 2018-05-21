@@ -34,6 +34,13 @@
             getContactInfo:function(){
                 var that = this;
                 LightSDK.native.getContactInfo({},function(data){
+                    if(data.info.error_code!='0'){
+                        that.Dialog.toast({
+                            message: data.info.error_message,
+                            duration: 2
+                        });
+                        return false;
+                    }
                     that.contactInfoList = data.data;
                 })
             },

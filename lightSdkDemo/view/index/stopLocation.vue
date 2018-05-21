@@ -23,7 +23,7 @@
             stopLocation:function(){
                 var that = this;
                 LightSDK.native.stopLocation({},function(data){
-                    that.Dialog.toast({
+                    weex.requireModule('modal').alert({
                         message: JSON.stringify(data),
                         duration: 2
                     });

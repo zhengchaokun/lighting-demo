@@ -8,7 +8,6 @@
         <div class="listWidth"><lc-button text="查询"
                     type="normal" 
                     @LcButtonClicked="getVersion"></lc-button></div>
-        <div class="normalList">{{version}}</div>
         <div><text class="detailHead">文档：</text></div>
         <div class="flex-row" @click="toOnlineApi()">
             <text class="onlineLink">查看在线文档</text>
@@ -29,7 +28,17 @@
             getVersion:function(){
                 var that = this;
                 LightSDK.native.version({},function(data){
-                    that.version = data.data.version;
+                    if(data.info.error_code!='0'){
+                        that.Dialog.toast({
+                            message: data.info.error_message,
+                            duration: 2
+                        });
+                        return false;
+                    }
+                    weex.requireModule('modal').alert({
+                        message: data.data.version,
+                        duration: 2
+                    });
                 })
             },
             toOnlineApi:function(){

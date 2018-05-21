@@ -9,10 +9,17 @@
             
         </div>
         <div class="normalList"><text class="mr10 fs14">二维码图片：</text><image class="imgSize" :src="imgsrc"></image></div>
-        <div class="listWidth"><lc-button text="生成"
+        <div class="listWidth mb30">
+            <lc-button text="生成二维码"
                     type="normal" 
-                    @LcButtonClicked="genCode"></lc-button></div>
-        <div class="ml20"><text class="tipStyle">tips:{{tipsCont}}</text></div>
+                    @LcButtonClicked="genCode"></lc-button>
+        </div>
+        <div class="listWidth">
+            <lc-button text="扫一扫"
+            type="normal" 
+            @LcButtonClicked="scanCode"></lc-button>
+        </div>
+        
         <div><text class="detailHead">说明：</text></div>
         <div class="flex-row" @click="toOnlineApi()">
             <text class="onlineLink">查看在线文档</text>
@@ -27,8 +34,7 @@
         data(){
             return {
                 ewmCont:"",
-                imgsrc:"https://light.hscloud.cn/data/file/5ad552622193f668f0fc2227?type=image",
-                tipsCont:"点击生成按钮，将会生成对应内容的二维码图片"
+                imgsrc:"https://light.hscloud.cn/data/file/5ad552622193f668f0fc2227?type=image"
             }
         },
         components:{LcInput,LcButton},
@@ -37,17 +43,47 @@
                  var event = weex.requireModule('event'); 
                 event.openNative('web',{startPage:'https://document.lightyy.com/app_jssdk_ref/content/native_gencode.html'})
             },
+            scanCode:function(){
+                LightSDK.native.scanCode({},function(data){
+                    if(data.info.error_code!='0'){
+                        that.Dialog.toast({
+                            message: data.info.error_message,
+                            duration: 2
+                        });
+                        return false;
+                    }
+                    // weex.requireModule('modal').alert({
+                    //     message: data,
+                    //     duration: 2
+                    // });
+                    var event = weex.requireModule('event');
+                    event.openNative('web',{startPage:data.data.result});      //your code
+                })
+            },
             genCode:function(){
                 var that = this;
                 if(!that.ewmCont){
-                    that.tipsCont="需要生成的二维码的内容不能为空";
+                    that.Dialog.toast({
+                        message:"需要生成的二维码的内容不能为空",
+                        duration: 2
+                    });
                     return false;
                 }
                 LightSDK.native.genCode({
                     desc:that.ewmCont, //需要被编码成二维码的内容
                     size:"200"   //二维码尺寸,默认为300x300
                 },function(data){
-                    that.tipsCont="二维码生成成功";
+                    if(data.info.error_code!='0'){
+                        that.Dialog.toast({
+                            message: data.info.error_message,
+                            duration: 2
+                        });
+                        return false;
+                    }
+                    that.Dialog.toast({
+                        message:"二维码生成成功",
+                        duration: 2
+                    });
                     that.imgsrc = "data:image/png;base64,"+data.data.result; 
                 })
             }

@@ -30,7 +30,10 @@
                 LightSDK.native.pushSetAlias({
                     alias:that.alias
                 },function(data){
-                    JSON.stringify(data);
+                    weex.requireModule('modal').alert({
+                        message: JSON.stringify(data),
+                        duration: 2
+                    });
                 })
             }
         }

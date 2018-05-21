@@ -32,7 +32,7 @@
                     "RY_AppKey":"RY_AppKey",
                     "RY_AppSecret":"RY_AppSecret"
                 },function(data){
-                    that.Dialog.toast({
+                    weex.requireModule('modal').alert({
                         message: JSON.stringify(data),
                         duration: 2
                     });
