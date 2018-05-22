@@ -27,7 +27,7 @@
             },
             deleteTags:function(){
                 var that = this;
-                LightSDK.native.deleteTags({
+                LightSDK.native.pushDeleteTags({
                     alias:that.alias
                 },function(data){
                     weex.requireModule('modal').alert({

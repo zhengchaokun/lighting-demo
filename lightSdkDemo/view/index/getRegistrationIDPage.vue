@@ -24,7 +24,7 @@
             },
             getRegistrationID:function(){
                 var that = this;
-                LightSDK.native.getRegistrationID({},function(data){
+                LightSDK.native.pushGetRegistrationID({},function(data){
                     
                     weex.requireModule('modal').alert({
                         message: JSON.stringify(data),

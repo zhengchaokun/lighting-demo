@@ -107,7 +107,7 @@
                     });
                     return false;
                 }
-                LightSDK.native.setAlpha({
+                LightSDK.native.headSetAlpha({
                     alpha:that.opacity
                 },function(data){
                     that.Dialog.toast({
@@ -133,7 +133,7 @@
             //设置导航栏搜索视图
             setSearchView:function(){
                 var that = this;
-                LightSDK.native.setSearchView({
+                LightSDK.native.headSetSearchView({
                     "backgroundColor":that.searBgColor,
                     "placeholderText":that.textDesc,
                     "placeholderTextColor":that.textColor

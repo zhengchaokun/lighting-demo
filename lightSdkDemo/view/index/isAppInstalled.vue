@@ -53,7 +53,7 @@
             },
             isAppInstalled:function(){
                 var that = this;
-                LightSDK.native.isAppInstalled({type:that.checkedInfo.value},function(data){
+                LightSDK.native.socialAppInstalled({type:that.checkedInfo.value},function(data){
                     if(data.info.error_code!='0'){
                         that.Dialog.toast({
                             message: data.info.error_message,

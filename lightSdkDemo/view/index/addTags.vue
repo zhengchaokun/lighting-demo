@@ -27,7 +27,7 @@
             },
             addTags:function(){
                 var that = this;
-                LightSDK.native.addTags({
+                LightSDK.native.pushAddTags({
                     alias:that.alias
                 },function(data){
                     weex.requireModule('modal').alert({

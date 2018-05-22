@@ -22,7 +22,7 @@
             },
             disconnectRong:function(){
                 var that = this;
-                LightSDK.native.disconnectRong({},function(data){
+                LightSDK.native.chatDisconnectRong({},function(data){
                 
                     weex.requireModule('modal').alert({
                         message: JSON.stringify(data),

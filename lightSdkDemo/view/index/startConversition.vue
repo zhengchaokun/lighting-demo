@@ -22,7 +22,7 @@
             },
             startConversition:function(){
                 var that = this;
-                LightSDK.native.startConversition({
+                LightSDK.native.chatStartConversition({
                     "userId":"123123",
                     "userName":"测试321321",
                     "imgUrl":"http://xxxxx_imgUrl.png",

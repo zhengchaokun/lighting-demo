@@ -22,7 +22,7 @@
             },
             getConverationRecords:function(){
                 var that = this;
-                LightSDK.native.getConverationRecords({
+                LightSDK.native.chatGetConverationRecords({
                     "userId":"123123",
                     "userName":"321321",
                     "imgUrl":"http://xxxxx_imgUrl.png",

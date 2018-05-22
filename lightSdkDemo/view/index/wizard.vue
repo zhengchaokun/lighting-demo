@@ -51,7 +51,7 @@
                         that.financeList.push(obj);
                     })
                 }
-                LightSDK.native.wizard({
+                LightSDK.native.quoteWizard({
                     "prod_code":that.prod_code,
                     "en_finance_mic":that.financeList,
                     "data_count":that.data_count

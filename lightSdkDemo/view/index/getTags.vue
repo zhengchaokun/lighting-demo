@@ -27,7 +27,7 @@
             },
             getTags:function(){
                 var that = this;
-                LightSDK.native.getTags({},function(data){
+                LightSDK.native.pushGetTags({},function(data){
                     weex.requireModule('modal').alert({
                         message: JSON.stringify(data),
                         duration: 2

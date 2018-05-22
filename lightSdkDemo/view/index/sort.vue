@@ -48,7 +48,7 @@
                     that.tipsCont="请输入排序方式";
                     return false;
                 }
-                LightSDK.native.sort({
+                LightSDK.native.quoteSort({
                         "en_hq_type_code":that.en_hq_type_code,
                         "sort_field_name":"last_px",
                         "data_count":that.data_count,

@@ -22,7 +22,7 @@
             },
             connectRong:function(){
                 var that = this;
-                LightSDK.native.connectRong({
+                LightSDK.native.chatConnectRong({
                     "userId":"123123",
                     "userName":"321321",
                     "imgUrl":"http://xxxxx_imgUrl.png",
