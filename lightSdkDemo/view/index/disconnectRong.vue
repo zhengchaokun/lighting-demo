@@ -21,8 +21,13 @@
                 event.openNative('web',{startPage:'https://document.lightyy.com/termAPI/chooseImage.html'})
             },
             disconnectRong:function(){
+                var that = this;
                 LightSDK.native.disconnectRong({},function(data){
-                    alert(JSON.stringify(data));
+                
+                    weex.requireModule('modal').alert({
+                        message: JSON.stringify(data),
+                        duration: 2
+                    });
                 })
             }
         }

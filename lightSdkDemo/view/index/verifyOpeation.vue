@@ -4,10 +4,18 @@
         <div><text class="detailHead">说明：</text></div>
         <div><text class="detailDesc">通过js调用手势或指纹验证</text></div>
         <div><text class="detailHead">示例：</text></div>
-        <div class="normalList"><text class="tipStyle">tips:点击'确定'按钮调用手势或指纹验证</text></div>
-        <div class="normalList"><image class="imageStyle" @click="type=0" :src="type==0?selectsrc:normalsrc"></image><text>手势</text></div>
-        <div class="normalList"><image class="imageStyle" @click="type=1" :src="type==1?selectsrc:normalsrc"></image><text>指纹</text></div>
-        <div class="normalList"><text class="buttonStyle" @click="verifyOpeation()">确定</text></div>
+        <lc-radio :list="list" :config="config"
+                 @LcRadioListChecked="LcRadioListChecked"></lc-radio>
+        <div class="listWidth mb30">
+            <lc-button text="点击调用"
+            type="normal" 
+            @LcButtonClicked="verifyOpeation()"></lc-button></div>
+          
+        <div class="listWidth">
+            <lc-button text="点击判断是否含有"
+            type="normal" 
+            @LcButtonClicked="preVerifyOpeation()"></lc-button>  
+        </div>
         <div><text class="detailHead">文档：</text></div>
         <div class="flex-row" @click="toOnlineApi()">
             <text class="onlineLink">查看在线文档</text>
@@ -16,25 +24,71 @@
 </template>
 <script>
     import LightSDK from "light-sdk";
+    import LcButton from 'lighting-ui/packages/lc-button';
+    import LcRadio from 'lighting-ui/packages/lc-radio';
     export default {
         data(){
             return {
                 type:0,
                 normalsrc:"images/normal.jpg",
+                list:[
+                    { title: '指纹', value: "FP", checked: true},
+                    { title: '手势', value:"GL" }
+                ],
                 selectsrc:"images/select.jpg",
+                config: {
+                    checkedColor: '#f63031',
+                    checkedIcon: ''
+                },
+                checkedInfo:{ title: '指纹', value:"FP", oldIndex: -1, index: 1 }
             }
         },
+        components: {LcButton,LcRadio },
         methods:{
+            LcRadioListChecked (e) {
+                this.checkedInfo = e;
+            },
             toOnlineApi:function(){
                 var event = weex.requireModule('event'); 
                 event.openNative('web',{startPage:'https://document.lightyy.com/termAPI/genAndScan.html'})
             },
+            //是否含有指纹手势
+            preVerifyOpeation:function(){
+                var that = this;
+                LightSDK.native.preVerifyOpeation({
+                    verifyType:that.checkedInfo.value
+                },function(data){
+                    if(data.info.error_code!='0'){
+                        that.Dialog.toast({
+                            message: data.info.error_message,
+                            duration: 2
+                        });
+                    }else{
+                        that.Dialog.toast({
+                            message:data.data.result,
+                            duration: 2
+                        });
+                    }
+                })
+            },
+            //调用指纹手势
             verifyOpeation:function(){
                 var that = this;
                 LightSDK.native.verifyOpeation({
-                    verifyType:that.type==0?'GL':'FP'
+                    verifyType:that.checkedInfo.value
                 },function(data){
-                    alert(JSON.stringify(data));
+                    if(data.info.error_code!='0'){
+                        that.Dialog.toast({
+                            message: data.info.error_message,
+                            duration: 2
+                        });
+                    }else{
+                        that.Dialog.toast({
+                            message:data.data.result,
+                            duration: 2
+                        });
+                    }
+                    
                 })
             }
         }

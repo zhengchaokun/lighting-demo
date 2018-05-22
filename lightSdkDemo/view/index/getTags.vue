@@ -17,7 +17,7 @@
     export default {
         data(){
             return {
-                alias:["tag1","tag2"]
+                alias:[]
             }
         },
         methods:{
@@ -28,7 +28,10 @@
             getTags:function(){
                 var that = this;
                 LightSDK.native.getTags({},function(data){
-                    alert(JSON.stringify(data));
+                    weex.requireModule('modal').alert({
+                        message: JSON.stringify(data),
+                        duration: 2
+                    });
                     that.alias = (data.data.tags).join(",");
                     
                 })

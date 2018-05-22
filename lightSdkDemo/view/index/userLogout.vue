@@ -23,8 +23,12 @@
                 event.openNative('web',{startPage:'https://document.lightyy.com/termAPI/userLogout.html'})
             },
             userLogout:function(){
+                var that = this;
                 LightSDK.native.logout(function(data){
-                    alert("注销成功");
+                    that.Dialog.toast({
+                        message: "注销成功",
+                        duration: 2
+                    });
                 })
             }
         }

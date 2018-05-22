@@ -26,7 +26,6 @@
             hideKeyboard:function(){
                 var that = this;
                 LightSDK.native.hideKeyboard({},function(data){
-                    alert(JSON.stringify(data));
                 })
             },
             showKeyboard:function(){
@@ -40,7 +39,13 @@
                     "encryptMode" :"MD5",
                     "titleText" :"adasdasd"
                 },function(data){
-                    alert(JSON.stringify(data));
+                    if(data.info.error_code!='0'){
+                        that.Dialog.toast({
+                            message: data.info.error_message,
+                            duration: 2
+                        });
+                        return false;
+                    }
                 })
             }
         }

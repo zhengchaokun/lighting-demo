@@ -29,7 +29,10 @@
                     content:that.content,
                     action:""
                 },function(data){
-                    alert(JSON.stringify(data));
+                    weex.requireModule('modal').alert({
+                        message: JSON.stringify(data),
+                        duration: 2
+                    });
                 })
             }
         }
