@@ -65,7 +65,7 @@ var menus = [
         title: '提示页',
         options: [
             {
-                title: '基础表格',
+                title: '提醒',
                 path: '/index/notice/tip'
             },
             {

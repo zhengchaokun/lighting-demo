@@ -1,7 +1,7 @@
 <template>
     <div style="height:100%">
         <div class="sidebar folded">
-            <a class="sidebar-top" href="https://light.hscloud.cn/portal/" target="_blank">
+            <a class="sidebar-top" href="http://ui.lightyy.com/#/index">
                 <div class="logo">
                 </div>
             </a>
@@ -24,7 +24,7 @@
             <div class="nav">
                 <span class="nav-icon"><img src="images/bread-icon-20.svg"/></span>
                 <el-breadcrumb separator="/">
-                    <el-breadcrumb-item class="nav-text text-gray" :to="{ path: '/' }">后台</el-breadcrumb-item>
+                    <el-breadcrumb-item class="nav-text text-gray" :to="{ path: '/' }">桌面</el-breadcrumb-item>
                     <el-breadcrumb-item class="nav-text text-gray" v-for="(nav, index) in navList" :key="index" :to="{ path: nav.path }">{{nav.title}}</el-breadcrumb-item>
                 </el-breadcrumb>
 
@@ -73,6 +73,15 @@
                 if(value == 2){
                     this.navList[0] = {title:'表格页', path:'/index/table/basic'}
                 }
+                 if(value == 3){
+                    this.navList[0] = {title:'弹框页', path:'/index/dialog/basic'}
+                }
+                if(value == 4){
+                    this.navList[0] = {title:'提示页', path:'/index/notice/tip'}
+                }
+                if(value == 5){
+                    this.navList[0] = {title:'异常页', path:'/index/error/403'}
+                }
             }
         },
         methods: {
@@ -87,6 +96,15 @@
                 }
                 if(menu.index === 2){
                     App.navigate("#/index/table/basic",{});
+                }
+                if(menu.index === 3){
+                    App.navigate("#/index/dialog/basic",{});
+                }
+                if(menu.index === 4){
+                    App.navigate("#/index/notice/tip",{});
+                }
+                if(menu.index === 5){
+                    App.navigate("#/index/error/404",{});
                 }
                 
             },
