@@ -3,7 +3,7 @@
     <div>
         <div class="main">
             <h1>LIGHT，致力于降低金融移动终端产品的开发门槛，提升产品交付效率，帮助产品以更小的试错成本快速迭代</h1>
-            <a href="#/index/contact/demo">跳转</a>
+            <a href="javascript:void(0)" @click="jump">跳转</a>
         </div>
 
         <ul>
@@ -29,6 +29,11 @@
                 },{
                     open:false
                 }]
+            }
+        },
+        methods:{
+            jump(){
+                this.$light.navigate('index/contact/demo',{},{replace:false})
             }
         },
         mounted(){
