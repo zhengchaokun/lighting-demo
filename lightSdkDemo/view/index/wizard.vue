@@ -42,6 +42,7 @@
                 var that = this;
                 if(!that.prod_code){
                     that.tipsCont="产品代码为必填";
+                    
                     return false;
                 }
                 that.financeList = [];

@@ -6,7 +6,7 @@
         <!--<div @click="hide()" class="bgWrap" v-if="leftShow==true"></div>-->
         <div class="content"> 
             <list  class="itemWrap">
-                <cell class="listItem" @click="jump('index/chooseImage','图片选择')"><div class="wrapRow"><text class="itemName">图片选择</text></div></cell>
+                <cell class="listItem" @click="jump('index/chooseImage','图片选择')"><div class="wrapRow"><text class="itemName">拍照与图片选择</text></div></cell>
                 <cell class="listItem" @click="jump('index/setClipboardText','剪切板内容')"><div class="wrapRow"><text class="itemName">剪切板内容</text></div></cell>
                 <cell class="listItem" @click="jump('index/fetchURL','抓取网页内容')"><div class="wrapRow"><text class="itemName">抓取网页内容</text></div></cell>
                 <cell class="listItem" @click="jump('index/writeGlobalData','本地数据处理')"><div class="wrapRow"><text class="itemName">本地数据处理</text></div></cell>
@@ -58,6 +58,8 @@
                 <cell v-if="ifAll" class="listItem" @click="jump('index/disconnectRong','断开聊天服务')"><div class="wrapRow"><text class="itemName">断开聊天服务</text></div></cell>
                 <cell v-if="ifAll" class="listItem" @click="jump('index/getLocation','获取经纬度')"><div class="wrapRow"><text class="itemName">获取经纬度</text></div></cell>
                 <cell v-if="ifAll" class="listItem" @click="jump('index/stopLocation','关闭定位服务')"><div class="wrapRow"><text class="itemName">关闭定位服务</text></div></cell>
+                <cell v-if="ifAll" class="listItem" @click="jump('index/getParams','获取配置参数')"><div class="wrapRow"><text class="itemName">获取配置参数</text></div></cell>
+                <cell v-if="ifAll" class="listItem" @click="jump('index/getOpenApiToken','获取openApiToken')"><div class="wrapRow"><text class="itemName">获取openApiToken</text></div></cell>
             </list>
             <!--<image src="images/close.png" class="hideList" @click="hide()"></image>-->
         </div>

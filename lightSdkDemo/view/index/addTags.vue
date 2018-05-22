@@ -31,7 +31,7 @@
                     alias:that.alias
                 },function(data){
                     weex.requireModule('modal').alert({
-                        message: JSON.stringify(data),
+                        message: JSON.stringify(data?data:"没有数据返回"),
                         duration: 2
                     });
                 })

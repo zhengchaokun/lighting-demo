@@ -60,6 +60,7 @@ module.exports = {
         "stock_list":require("./stock_list.js"),
         "stock_rank":require("./stock_rank.js"),
         "trade":require("./trade.js"),
-        "web_light":require("./web_light.js")
+        "web_light":require("./web_light.js"),
+        "pay":require("./pay.js")
     }
 };
