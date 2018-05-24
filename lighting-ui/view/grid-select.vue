@@ -244,7 +244,7 @@
     }),
     methods: {
       onSelect (res, { selectIndex, checked, checkedList }) {
-        Vue.set(this, res, `本次选择的index：${selectIndex}\n是否选中：${checked
+        Light.Vue.set(this, res, `本次选择的index：${selectIndex}\n是否选中：${checked
           ? '是'
           : '否'}\n选中列表：${checkedList.map(item => item.title).join(',')}`);
       },
