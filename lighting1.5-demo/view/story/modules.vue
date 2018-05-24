@@ -6,19 +6,17 @@
             <text class="desc" style="margin-top:20px;">验收标准：项目成功编译，按钮正常显示</text>
         </div>
         <div class="demo">
-            <wxc-button style="margin-bottom:30px;" class="button" text="引用 根目录/node_modules"></wxc-button>
+            <lc-button style="margin-bottom:30px;" class="button" text="引用 根目录/node_modules"></lc-button>
             <lc-button class="button" type="normal" text="引用 lib/node_modules"></lc-button>
         </div>
         
     </div>
 </template>
 <script>
-    import WxcButton from 'weex-ui/packages/wxc-button';
     import LcButton from "lighting-ui/packages/lc-button";
 
     export default {
         components: {
-            WxcButton,
             LcButton
         },
         data(){
