@@ -21,14 +21,18 @@
                 event.openNative('web',{startPage:'https://document.lightyy.com/termAPI/chooseImage.html'})
             },
             getConverationRecords:function(){
-                LightSDK.native.getConverationRecords({
+                var that = this;
+                LightSDK.native.chatGetConverationRecords({
                     "userId":"123123",
                     "userName":"321321",
                     "imgUrl":"http://xxxxx_imgUrl.png",
                     "RY_AppKey":"RY_AppKey",
                     "RY_AppSecret":"RY_AppSecret"
                 },function(data){
-                    alert(JSON.stringify(data));
+                    weex.requireModule('modal').alert({
+                        message: JSON.stringify(data),
+                        duration: 2
+                    });
                 })
             }
         }

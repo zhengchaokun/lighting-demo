@@ -48,7 +48,7 @@
                     that.tipsCont="请输入排序方式";
                     return false;
                 }
-                LightSDK.native.sort({
+                LightSDK.native.quoteSort({
                         "en_hq_type_code":that.en_hq_type_code,
                         "sort_field_name":"last_px",
                         "data_count":that.data_count,
@@ -56,7 +56,10 @@
                         "sort_type":that.sort_type,
                         "fields":"open_px,high_px,low_px,last_px"
                 },function(data){
-                    JSON.stringify(data);
+                    weex.requireModule('modal').alert({
+                        message: JSON.stringify(data),
+                        duration: 2
+                    });
                     var a = {}
                     data.data.sort.forEach(function(obj){
                         for(var i in obj){

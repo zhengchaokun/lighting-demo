@@ -14,16 +14,16 @@ module.exports = {
         }]
     },
     navBar:{
-        title:"图片选择",
+        title:"端JS-SDK",
         backgroundColor:"#0AA9F1",
         titleColor:"#ffffff",
         buttonColor:"#ffffff",
     },
     views:{
         "index":{
-            url:"app.native.js#/index/chooseImage",
+            url:"app.native.js#/index",
             navBar:{
-                title:"图片选择"
+                title:"端JS-SDK"
             }
         }
     },
@@ -60,6 +60,7 @@ module.exports = {
         "stock_list":require("./stock_list.js"),
         "stock_rank":require("./stock_rank.js"),
         "trade":require("./trade.js"),
-        "web_light":require("./web_light.js")
+        "web_light":require("./web_light.js"),
+        "pay":require("./pay.js")
     }
 };

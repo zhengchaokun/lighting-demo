@@ -52,20 +52,25 @@
 
 .lins1{ lins:1;}
 .apiContent{
-    padding:20px;
-    padding-top:0;
+    padding-left:15px;
 }
 .detailHead{
     font-size: 32px;
     line-height: 48px;
     font-weight: 900;
-    margin-top:30px;
     margin-bottom:30px;
-    color: #696666;
+    margin-top:30px;
+    padding-left: 25px;
+    border-left-style:solid;
+    border-left-width:5px;
+    border-left-color: #0785db;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
 }
 .detailDesc{
     color: #9e9b9b;
-    font-size: 28px;
+    font-size: 32px;
     text-indent: 48px;
 }
 .viewOnlineApi{
@@ -89,6 +94,7 @@
     color:#0AA9F1;
     text-decoration:underline;
     text-indent:48px;
+    font-size:30px;
 }
 .inputStyle{
     margin-right:40px;
@@ -117,8 +123,7 @@
 }
 .tipStyle{
     color: #f3bd6a;
-    font-size:24px;
-     margin-left:40px;
+    font-size:26px;
      word-break:break-all;
      width:600px;
 }
@@ -139,4 +144,9 @@
 }
 .width70{
     width:140px;
+}
+.operateWrap{
+    justify-content:center;
+}
+.listWidth{
 }

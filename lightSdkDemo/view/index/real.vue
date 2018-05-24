@@ -45,10 +45,14 @@
                 prodCodes.forEach(function(obj){
                     that.prodCodeList.push(obj);   //拼接股票代码成数组格式
                 })
-                LightSDK.native.real({
+                LightSDK.native.quoteReal({
                     "en_prod_code":that.prodCodeList,
                     "fields":["prod_name","issue_date"]
                 },function(data){
+                    weex.requireModule('modal').alert({
+                        message: JSON.stringify(data),
+                        duration: 2
+                    });
                     var Data = data.data.data;
                     var fields = data.data.fields;
                     that.newdata=[];

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no,email=no" name="format-detection" />
+    <meta name="Keywords" content=""/>
+    <meta name="description" content=""/>
+    <title>lightui-desktop-桌面端解决方案</title>
+</head>
+<body>
+<div id="main">
+    <view id="index" home="true" />
+    <!-- 控制台 -->
+    <view id="index/dashboard" parent="index" />
+    <view id="index/dashboard/analysis" parent="index/dashboard"/>
+    
+    <!-- 表单页 -->
+    <view id="index/form" parent="index" />
+    <view id="index/form/basic" parent="index/form" />
+    <view id="index/form/dialog" parent="index/form" />
+    
+    <!-- 表格页 -->
+    <view id="index/table" parent="index" />
+    <view id="index/table/basic" parent="index/table" />
+    <view id="index/table/operable" parent="index/table" />
+    <view id="index/table/search" parent="index/table" />
+    
+    <!-- 弹框页 -->
+    <view id="index/dialog" parent="index" />
+    <view id="index/dialog/basic" parent="index/dialog" />
+    <view id="index/dialog/warning" parent="index/dialog" />
+    
+    
+    <!-- 异常页 -->
+    <view id="index/error" parent="index" />
+    <view id="index/error/404" parent="index/error" />
+    
+    <!-- 结果页 -->
+    <view id="index/notice" parent="index" />
+    <view id="index/notice/tip" parent="index/notice" />
+    <view id="index/notice/popover" parent="index/notice" />
+    
+    
+    
+    <!-- <view id="dashboard/analysis" parent="dashboard" />
+    <view id="dashboard/analysis" parent="dashboard" /> -->
+    
+</div>
+<!--<snippet id="footer"/>-->
+
+<script src="app.js"></script>
+</body>
+</html>

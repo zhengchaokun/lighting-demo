@@ -27,10 +27,13 @@
             },
             deleteTags:function(){
                 var that = this;
-                LightSDK.native.deleteTags({
+                LightSDK.native.pushDeleteTags({
                     alias:that.alias
                 },function(data){
-                    alert(JSON.stringify(data));
+                    weex.requireModule('modal').alert({
+                        message: JSON.stringify(data),
+                        duration: 2
+                    });
                 })
             }
         }

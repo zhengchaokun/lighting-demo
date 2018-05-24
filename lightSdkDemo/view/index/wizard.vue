@@ -42,6 +42,7 @@
                 var that = this;
                 if(!that.prod_code){
                     that.tipsCont="产品代码为必填";
+                    
                     return false;
                 }
                 that.financeList = [];
@@ -51,11 +52,15 @@
                         that.financeList.push(obj);
                     })
                 }
-                LightSDK.native.wizard({
+                LightSDK.native.quoteWizard({
                     "prod_code":that.prod_code,
                     "en_finance_mic":that.financeList,
                     "data_count":that.data_count
                 },function(data){
+                    weex.requireModule('modal').alert({
+                        message: JSON.stringify(data),
+                        duration: 2
+                    });
                     that.tipsCont="点击查询按钮后将会返回符合条件的证券代码";
                     that.prodList = data.data;
                 })

@@ -27,10 +27,13 @@
             },
             addTags:function(){
                 var that = this;
-                LightSDK.native.addTags({
+                LightSDK.native.pushAddTags({
                     alias:that.alias
                 },function(data){
-                    alert(JSON.stringify(data));
+                    weex.requireModule('modal').alert({
+                        message: JSON.stringify(data?data:"没有数据返回"),
+                        duration: 2
+                    });
                 })
             }
         }

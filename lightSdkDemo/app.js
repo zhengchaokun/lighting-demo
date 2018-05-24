@@ -1,5 +1,6 @@
 import App from "light"
 import LightSDK from "light-sdk";
+App.Vue.prototype.Dialog = weex.requireModule('modal');
 App.filter("start",function (next) {
     //启动拦截器
     App.log("app started...");

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>收拢</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="外框" transform="translate(-44.000000, -738.000000)">
+            <g id="Group" transform="translate(44.000000, 738.000000)">
+                <rect id="收拢" x="0" y="0" width="20" height="20"></rect>
+                <path d="M9.29069767,3.5 L10.8023256,3.88972163 L6.22093023,10 L10.7325581,16.1102784 L9.29069767,16.5 L4.5,10 L9.29069767,3.5 Z M13.0581395,3.5 L14.5,3.88972163 L9.98837209,10 L14.5,16.1102784 L13.0581395,16.5 L8.26744186,10 L13.0581395,3.5 Z" id="《" fill="#B5C1D4"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -21,7 +21,8 @@
                 event.openNative('web',{startPage:'https://document.lightyy.com/termAPI/chooseImage.html'})
             },
             startConversition:function(){
-                LightSDK.native.startConversition({
+                var that = this;
+                LightSDK.native.chatStartConversition({
                     "userId":"123123",
                     "userName":"测试321321",
                     "imgUrl":"http://xxxxx_imgUrl.png",
@@ -31,7 +32,10 @@
                     "RY_AppKey":"RY_AppKey",
                     "RY_AppSecret":"RY_AppSecret"
                 },function(data){
-                    alert(JSON.stringify(data));
+                    weex.requireModule('modal').alert({
+                        message: JSON.stringify(data),
+                        duration: 2
+                    });
                 })
             }
         }

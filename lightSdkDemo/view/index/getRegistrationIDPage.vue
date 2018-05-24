@@ -24,8 +24,12 @@
             },
             getRegistrationID:function(){
                 var that = this;
-                LightSDK.native.getRegistrationID({},function(data){
-                    alert(JSON.stringify(data));
+                LightSDK.native.pushGetRegistrationID({},function(data){
+                    
+                    weex.requireModule('modal').alert({
+                        message: JSON.stringify(data),
+                        duration: 2
+                    });
                 })
             }
         }

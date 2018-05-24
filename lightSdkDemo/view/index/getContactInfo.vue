@@ -5,7 +5,9 @@
         <div><text class="detailDesc">通过js获取通讯录信息，有时候再某种特定情况下需要获取手机的通讯录信息，这时候可以使用这个方法获取，接口将会返回手机通讯录中的所有联系人的名字和电话。</text></div>
         <div><text class="detailHead">示例：</text></div>
         <div class="normalList"><text class="tipStyle">tips:点击'查询'按钮获取通讯录信息</text></div>
-        <div class="normalList"><text class="buttonStyle" @click="getContactInfo()">查询</text></div>
+        <div class="listWidth"><lc-button text="查询"
+                    type="normal" 
+                    @LcButtonClicked="getContactInfo"></lc-button></div>
         <list class="contactWrap">
             <cell class="contactList" v-for="info in contactInfoList">
                 <div class="wrapRow"><text class="contactName">{{info.contactName}}</text><text>{{info.contactTelphone}}</text></div>
@@ -19,16 +21,26 @@
 </template>
 <script>
     import LightSDK from "light-sdk";
+    import LcButton from 'lighting-ui/packages/lc-button';
+    const modal = weex.requireModule('modal')
     export default {
         data(){
             return {
                 contactInfoList:[]
             }
         },
+        components:{LcButton},
         methods:{
             getContactInfo:function(){
                 var that = this;
                 LightSDK.native.getContactInfo({},function(data){
+                    if(data.info.error_code!='0'){
+                        that.Dialog.toast({
+                            message: data.info.error_message,
+                            duration: 2
+                        });
+                        return false;
+                    }
                     that.contactInfoList = data.data;
                 })
             },

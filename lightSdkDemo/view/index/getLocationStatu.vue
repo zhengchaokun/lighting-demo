@@ -19,7 +19,17 @@
             getLocationStatus:function(){
                 var that = this;
                 LightSDK.native.getLocationStatus({},function(data){
-                    alert(JSON.stringify(data));
+                    if(data.info.error_code!='0'){
+                        that.Dialog.toast({
+                            message: data.info.error_message,
+                            duration: 2
+                        });
+                        return false;
+                    }
+                    weex.requireModule('modal').alert({
+                        message: JSON.stringify(data),
+                        duration: 2
+                    });
                 });
             },
             toOnlineApi:function(){

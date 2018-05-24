@@ -13,6 +13,7 @@
 </template>
 <script>
     import LightSDK from "light-sdk";
+    var modal = weex.requireModule('modal')
     export default {
         data(){
             return {}
@@ -23,8 +24,20 @@
                 event.openNative('web',{startPage:'https://document.lightyy.com/app_jssdk_ref/content/native_getnetworkstatus.html'})
             },
             getNetworkStatus:function(){
+                var that = this;
                 LightSDK.native.getNetworkStatus({},function(data){
-                    alert(data.data.result);
+                    if(data.info.error_code!='0'){
+                        that.Dialog.toast({
+                            message: data.info.error_message,
+                            duration: 2
+                        });
+                        return false;
+                    }
+                    weex.requireModule('modal').alert({
+                        message: data.data.result,
+                        duration: 2
+                    });
+                    
                 })
             }
         }
