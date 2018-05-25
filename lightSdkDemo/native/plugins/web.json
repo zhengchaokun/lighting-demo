@@ -1,0 +1,8 @@
+{
+  "config": {
+    "showShareButton": true
+  },
+  "navigationbar": {
+    "show": true
+  }
+}

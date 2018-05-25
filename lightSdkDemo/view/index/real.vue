@@ -56,7 +56,7 @@
                     var Data = data.data.data;
                     var fields = data.data.fields;
                     that.newdata=[];
-                    Data.forEach(function(el,index){
+                    Data&&Data.forEach(function(el,index){
                         for(var n in el){
                             var newobj={};
                             for(var i=0;i<fields.length;i++){

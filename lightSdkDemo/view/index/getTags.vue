@@ -32,7 +32,7 @@
                         message: JSON.stringify(data),
                         duration: 2
                     });
-                    that.alias = (data.data.tags).join(",");
+                    that.alias = data&&(data.data.tags).join(",");
                     
                 })
             }

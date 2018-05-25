@@ -37,7 +37,7 @@
                         message: JSON.stringify(data),
                         duration: 2
                     });
-                    that.stock = data.data.result;
+                    that.stock =data&& data.data.result;
                     
                 })
             }

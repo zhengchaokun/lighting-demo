@@ -58,7 +58,7 @@
                     //     return false;
                     // }
                     that.Dialog.toast({
-                        message: JSON.stringify(data),
+                        message: data.data.result.userName+"，您已成功登录"+that.checkedInfo.value,
                         duration: 2
                     });
                 })

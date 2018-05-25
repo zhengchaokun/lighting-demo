@@ -74,7 +74,13 @@
                 });
             },
             removeButton:function(){
-                LightSDK.native.removeButton();
+                var that = this;
+                LightSDK.native.removeButton({},function(){
+                    that.Dialog.toast({
+                        message: "删除成功",
+                        duration: 2
+                    });
+                });
             },
             setButton:function(){
                 var that = this;
@@ -110,6 +116,13 @@
                 LightSDK.native.headSetAlpha({
                     alpha:that.opacity
                 },function(data){
+                     if(data.info.error_code!='0'){
+                        that.Dialog.toast({
+                            message: data.info.error_message,
+                            duration: 2
+                        });
+                        return false;
+                    }
                     that.Dialog.toast({
                         message: "修改成功",
                         duration: 2
@@ -128,6 +141,11 @@
                 }
                 LightSDK.native.setBackgroundColor({
                     color:that.bgColor
+                },function(data){
+                    that.Dialog.toast({
+                        message: "修改成功",
+                        duration: 2
+                    });
                 })
             },
             //设置导航栏搜索视图
@@ -139,7 +157,7 @@
                     "placeholderTextColor":that.textColor
                 },function(data){
                     that.Dialog.toast({
-                        message: "我被点击啦",
+                        message: "设置成功",
                         duration: 2
                     });
                 })
