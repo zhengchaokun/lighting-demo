@@ -52,15 +52,14 @@ export default {
         this.$light.ajax({
             type: 'get',
             url: 'https://www.toutiao.com/stream/widget/local_weather/data/',
-            dataType: 'jsonp',
+            dataType: 'json',
             headers: {
                 'Access-Control-Allow-Origin': 'http://www.toutiao.com'
             },
             data: {
                 city: '%E5%8C%97%E4%BA%AC'
             },
-            success: function(data) {
-                console.log(data);
+            success: function(data,status,xhr) {
                 if(data.message=='success') {
                     that.info = data.data.weather;
                 }

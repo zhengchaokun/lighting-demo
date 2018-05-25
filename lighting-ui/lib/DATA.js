@@ -92,7 +92,7 @@ let datas = [
         path: "#/marquee"
     },
     {
-        label: "mask 遮罩",
+        label: "mask 遮罩弹层",
         path: "#/mask"
     },
     {

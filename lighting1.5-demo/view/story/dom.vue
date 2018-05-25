@@ -6,17 +6,17 @@
             <text class="desc" style="margin-bottom: 20px;">验收标准：（在手机上）点击按钮后在页面添加一个弹框，3秒后移除</text>
         </div>
         <div class="demo">
-            <wxc-button class="button" text="添加弹框" @wxcButtonClicked="showWin($event)"></wxc-button>
+            <lc-button class="button" text="添加弹框" @wxcButtonClicked="showWin($event)"></lc-button>
         </div>
     </div>
    
 </template>
 <script>
-    import WxcButton from 'weex-ui/packages/wxc-button';
+    import LcButton from 'lighting-ui/packages/lc-button';
     import App from "light";
     export default {
         components: {
-            WxcButton
+            LcButton
         },
         data(){
             return {
