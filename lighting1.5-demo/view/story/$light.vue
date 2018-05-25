@@ -7,15 +7,15 @@
             <text class="desc" style="margin-top:20px;">成功跳转至首页(this.$light调用navigate方法)</text>   
         </div>
         <div class="demo">
-            <wxc-button class="button" text="返回首页" @wxcButtonClicked="back"></wxc-button>    
+            <lc-button class="button" text="返回首页" @wxcButtonClicked="back"></lc-button>
         </div>
     </div>
 </template>
 <script>
-    import WxcButton from 'weex-ui/packages/wxc-button';
+    import LcButton from 'lighting-ui/packages/lc-button';
     export default {
         components: {
-            WxcButton
+            LcButton
         },
         data(){
             return {}
