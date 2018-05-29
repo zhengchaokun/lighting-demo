@@ -17,13 +17,18 @@ var menus = [
         title: '表单页',
         options: [
             {
-                title: '基本表单',
+                title: '基础表单',
                 path: '/index/form/basic'
             },
             {
-                title: '弹框表单',
-                path: '/index/form/dialog'
-            }]
+                title: '行内表单',
+                path: '/index/form/inline'
+            },
+            {
+                title: '校验表单',
+                path: '/index/form/validate'
+            }
+        ]
     },
     {
         index: 2,

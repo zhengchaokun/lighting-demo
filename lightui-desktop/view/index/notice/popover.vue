@@ -1,17 +1,16 @@
 
 <template>
     <div>
-        Hello,World !
+       Hello,World !
     </div>
 </template>
 <script>
     export default {
         data(){
-            return {};
-        },
-        props:[]
+            return {}
+        }
     }
 </script>
 <style lang="less">
-    
+
 </style>

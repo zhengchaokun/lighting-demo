@@ -30,17 +30,28 @@
 
                 <el-dropdown class="fright" @command="handleNavigate">
                     <span class="el-dropdown-link">
-                            <a class="user-menu">
-                                <img src="images/user-icon.png" />
-                            </a>
+                        <a class="user-menu">
+                            <img src="images/user-icon.png" />
+                        </a>
                     </span>
                     <el-dropdown-menu slot="dropdown" class="userinfo-dropdown">
-                        <el-dropdown-item class="dropdown-menu-top">{{userName}}</el-dropdown-item>
-                        <el-dropdown-item command="logout"><a href="#"><span class="menu-icon icon-exit"></span>退出</a></el-dropdown-item>
+                        <el-dropdown-item class="dropdown-menu-top">{{user.nickName}}</el-dropdown-item>
+                        <div class="line line-menu"></div>
+                        <el-dropdown-item><a><span class="menu-icon icon-order"></span>我的订单<el-badge :value="user.un_process_orders>99?'…':user.un_process_orders"></el-badge></a></el-dropdown-item>
+                        <el-dropdown-item><a><span class="menu-icon icon-message"></span>我的消息<el-badge :value="user.un_read_message>99?'…':user.un_read_message"></el-badge></a></el-dropdown-item>
+                        <div class="line line-menu"></div>
+                        <el-dropdown-item><a><span class="menu-icon icon-setting"></span>个人设置</a></el-dropdown-item>
+                        <el-dropdown-item><a><span class="menu-icon icon-openapi"></span>OPENAPI接入</a></el-dropdown-item>
+                        <el-dropdown-item><a><span class="menu-icon icon-label"></span>标签管理</a></el-dropdown-item>
+                        <div class="line line-menu"></div>
+                        <el-dropdown-item><a><span class="menu-icon icon-exit"></span>退出</a></el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
             </div>
-            <router-view></router-view>
+            <div style="height:calc(100% - 34px);">
+                <router-view></router-view>
+            </div>
+            
         </div>
     </div>
 </template>
@@ -56,7 +67,12 @@
                 activeTab: '',
                 menus: menus,
                 navList:[{title:'',path:''},{title:'',path:''}],
-                isSessionTimeout: false
+                isSessionTimeout: false,
+                user: {
+                    nickName: 'Light',
+                    un_process_orders: 2,
+                    un_read_message: 8
+                },
             }
         },
         watch: {
