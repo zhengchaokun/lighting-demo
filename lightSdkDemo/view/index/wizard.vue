@@ -11,7 +11,7 @@
         <div class="normalList"><text class="tipStyle">tips:{{tipsCont}}</text></div>
         <list class="contactWrap">
             <cell class="contactList"  v-for="info in prodList">
-                <div class="wrapRow"><text class="contactName">{{info.prod_code}}</text><text>{{info.prod_name}}</text></div>
+                <div class="flex-row justify-space-between"><text class="contactName">{{info.prod_code}}</text><text>{{info.prod_name}}</text></div>
             </cell>
         </list>
         <div><text class="detailHead">文档：</text></div>

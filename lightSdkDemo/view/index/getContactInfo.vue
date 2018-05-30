@@ -10,7 +10,7 @@
                     @LcButtonClicked="getContactInfo"></lc-button></div>
         <list class="contactWrap">
             <cell class="contactList" v-for="info in contactInfoList">
-                <div class="wrapRow"><text class="contactName">{{info.contactName}}</text><text>{{info.contactTelphone}}</text></div>
+                <div class="flex-row justify-space-between"><text class="contactName">{{info.contactName}}</text><text class="mr20">{{info.contactTelphone}}</text></div>
             </cell>
         </list>
         <div><text class="detailHead">文档：</text></div>

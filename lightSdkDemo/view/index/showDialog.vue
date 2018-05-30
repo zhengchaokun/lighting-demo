@@ -36,7 +36,7 @@
                     image:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1502080755380&di=038b685eaf4c6b40f50994cbc2a01a42&imgtype=0&src=http%3A%2F%2Fimg01.taopic.com%2F150704%2F240499-150F40QS335.jpg"
                 },function(data){
                     that.Dialog.toast({
-                        message: JSON.stringify(data),
+                        message: JSON.stringify(data?data:"弹框跳出"),
                         duration: 2
                     });
                 })

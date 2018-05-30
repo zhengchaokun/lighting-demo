@@ -61,7 +61,7 @@
                         duration: 2
                     });
                     var a = {}
-                    data.data.sort.forEach(function(obj){
+                    data&&data.data.sort.forEach(function(obj){
                         for(var i in obj){
                             a[i]=i;
                         }

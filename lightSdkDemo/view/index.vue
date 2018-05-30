@@ -105,10 +105,10 @@
         mounted(){
             this.ifAll = this.$route.query.ifAll==1?true:false;
             var that = this;
-            LightSDK.native.setTitle({
-                title:that.title
-            },function(data){
-            })
+            // LightSDK.native.setTitle({
+            //     title:that.title
+            // },function(data){
+            // })
         }
     }
 </script>

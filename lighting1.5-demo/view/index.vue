@@ -1,6 +1,7 @@
 
 <template>
-    <div style="width:750px;height: 1334px;">
+  <scroller>
+    <div style="width:750px;height: 1500px;">
         <title title="lighting1.5-demo" style="margin-bottom:30px;"></title>
         <lc-cell label="vue中注入light变量"
           @LcCellClicked="jump('$light')"
@@ -71,8 +72,15 @@
           @LcCellClicked="jump('autoprefix')"          
           :has-arrow="true"
           :has-top-border="false"
+          :has-bottom-border="false"></lc-cell>
+
+        <lc-cell label="支持jsn工程的自定义build.js"
+          @LcCellClicked="jump('build')"          
+          :has-arrow="true"
+          :has-top-border="false"
           :has-bottom-border="true"></lc-cell>
     </div>
+  </scroller>
 </template>
 <script>
     import Title from 'lighting-ui/packages/_mods/title.vue';

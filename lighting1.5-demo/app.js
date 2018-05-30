@@ -1,7 +1,7 @@
 import App from "light"
 
-// require('./app.less');
 
+console.log('------------APP_CONFIG:', APP_CONFIG);
 App.filter("start",function (next) {
     //启动拦截器
     App.log("app started...");

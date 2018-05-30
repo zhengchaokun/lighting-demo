@@ -20,7 +20,7 @@ html,body,#app,.main {
     overflow: auto;
 }
 body {
-    background: #FDFDFD;
+    background: #F9F9F9;
     font-family: "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
     overflow: hidden;
     position: fixed;
@@ -33,7 +33,7 @@ body {
     top:0;
     bottom:0;
     background: #F5F7FA;
-    border-right: solid 1px #D2D9E3;
+    border-right: solid 1px #eee;
     transition: width 0.15s ease;
     -webkit-transition: all 0.15s;
     -moz-transition: all 0.15s ease;
@@ -254,7 +254,7 @@ li.li-app.open+.line {
     bottom: 0;
     left: 0;
     height: 40px;
-    border-top: solid 1px #D2D9E3;
+    border-top: solid 1px #eee;
     text-align: center;
     background: #F5F7FA;
 }
@@ -307,7 +307,7 @@ li.li-app.open+.line {
     top: 34px;
     left:1px;
     bottom: 0;
-    border-right: solid 1px #D2D9E3;
+    border-right: solid 1px #eee;
     background: #fff;
     z-index: 1;
     position: fixed;
@@ -433,7 +433,7 @@ p.toggle-menu.close .icon-toggle:before {
 }
 .main {
     position: relative;
-    height:100%;
+    height: 100%;
     margin-left:362px;
     margin-top: 34px;    
     -webkit-transition: margin-left 0.15s;
@@ -445,10 +445,13 @@ p.toggle-menu.close .icon-toggle:before {
 .sidebar.folded + .main .nav {
     left: 73px;
 }
+#main {
+    height: calc(100% - 35px);
+}
 .main .nav {
     height:33px;
     line-height:33px;
-    border-bottom: solid 1px #DCE0E7;
+    border-bottom: solid 1px #eee;
     padding:0 20px;
     clear: both;
     position: fixed;
@@ -503,7 +506,6 @@ p.toggle-menu.close .icon-toggle:before {
     display: inline-block;
     width:31px;
     height:32px;
-    border: solid 1px  #DCE0E7;
     border-bottom: none;
     cursor: pointer;
 }
@@ -515,7 +517,7 @@ p.toggle-menu.close .icon-toggle:before {
     display: block;
     width:170px;
     height:276px;
-    border: solid 1px #D2D9E3;
+    border: solid 1px #eee;
     border-radius: 2px;
     box-shadow: 0 2px 4px 0 #B5C1D4;
     padding:14px 4px 6px;
@@ -644,7 +646,7 @@ p.toggle-menu.close .icon-toggle:before {
     left: 254px;
     bottom: 0;
     right: 0; */
-    padding: 40px 20px 20px;
+    /* padding: 0px 20px 20px; */
     /* margin-left: 181px; */
     /* margin-top: 34px; */
 }

@@ -44,6 +44,7 @@
                 event.openNative('web',{startPage:'https://document.lightyy.com/app_jssdk_ref/content/native_gencode.html'})
             },
             scanCode:function(){
+                var that = this;
                 LightSDK.native.scanCode({},function(data){
                     if(data.info.error_code!='0'){
                         that.Dialog.toast({
@@ -57,7 +58,16 @@
                     //     duration: 2
                     // });
                     var event = weex.requireModule('event');
-                    event.openNative('web',{startPage:data.data.result});      //your code
+                    if(event.openNative){
+                        event.openNative('web',{startPage:data.data.result});      //your code
+                    }else{
+                        that.Dialog.toast({
+                            message: data.data.result,
+                            duration: 2
+                        });
+                        window.location.href=data.data.result
+                    }
+                    
                 })
             },
             genCode:function(){
