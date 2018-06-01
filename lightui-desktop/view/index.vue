@@ -48,7 +48,7 @@
                     </el-dropdown-menu>
                 </el-dropdown>
             </div>
-            <div style="height:calc(100% - 34px);">
+            <div style="height: 100%;">
                 <router-view></router-view>
             </div>
             
@@ -84,16 +84,16 @@
                     this.navList[0] = {title:'控制台', path:'/index/dashboard/analysis'}
                 }
                 if(value == 1){
-                    this.navList[0] = {title:'表单页', path:'/index/form/basic'}
+                    this.navList[0] = {title:'导航页', path:'/index/nav/menu'}
                 }
                 if(value == 2){
+                    this.navList[0] = {title:'表单页', path:'/index/form/basic'}
+                }
+                if(value == 3){
                     this.navList[0] = {title:'表格页', path:'/index/table/basic'}
                 }
-                 if(value == 3){
-                    this.navList[0] = {title:'弹框页', path:'/index/dialog/basic'}
-                }
-                if(value == 4){
-                    this.navList[0] = {title:'提示页', path:'/index/notice/tip'}
+                 if(value == 4){
+                    this.navList[0] = {title:'弹框页', path:'/index/dialog/message'}
                 }
                 if(value == 5){
                     this.navList[0] = {title:'异常页', path:'/index/error/403'}
@@ -103,25 +103,9 @@
         methods: {
             /* 点击一级菜单 */
             toggleActive(menu, event){
+                console.log(menu);
                 this.currentSystem = menu.index;
-                if(menu.index === 0){
-                    App.navigate("#/index/dashboard/analysis",{});
-                }
-                if(menu.index === 1){
-                    App.navigate("#/index/form/basic",{});
-                }
-                if(menu.index === 2){
-                    App.navigate("#/index/table/basic",{});
-                }
-                if(menu.index === 3){
-                    App.navigate("#/index/dialog/basic",{});
-                }
-                if(menu.index === 4){
-                    App.navigate("#/index/notice/tip",{});
-                }
-                if(menu.index === 5){
-                    App.navigate("#/index/error/404",{});
-                }
+                App.navigate('#'+menu.options[0].path, {});
                 
             },
             /* 展开侧边栏 */

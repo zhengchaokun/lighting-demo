@@ -1,11 +1,11 @@
 
 <template>
-    <div>
+    <div style="height: 100%;">
         <div class="sub-sidebar">
             <div class="sub-sidebar-title">{{ currentMenu.title }}</div>
             <ul class="sub-sidebar-menu">
                 <template  v-for="(item,index) in currentMenu.options">
-                    <li class="sub-sidebar-li" @click="selectOption(item)" :class="{'selected':currentPath.indexOf(item.path) > -1}" :key="index">
+                    <li class="sub-sidebar-li" @click="selectOption(item)" :class="{'selected':currentPath==item.path}" :key="index">
                         {{ item.title }}
                     </li>
                 </template>
