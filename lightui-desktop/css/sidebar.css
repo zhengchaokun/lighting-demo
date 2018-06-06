@@ -25,6 +25,7 @@ body {
     overflow: hidden;
     position: fixed;
     width: 100%;
+    color: #606060;
 }
 .sidebar {
     position: fixed;
@@ -189,7 +190,6 @@ li.actived .icon-yunying {
     background-image: url("../images/operations-active.svg");
 }
 .icon {
-    display: inline-block;
     float: left;
     width: 22px;
     height: 22px;
@@ -641,14 +641,7 @@ p.toggle-menu.close .icon-toggle:before {
     background: #F77181;
 }
 .main .content {
-    /* position: fixed; */
-    /* top: 34px;
-    left: 254px;
-    bottom: 0;
-    right: 0; */
-    /* padding: 0px 20px 20px; */
-    /* margin-left: 181px; */
-    /* margin-top: 34px; */
+   height: 100%;
 }
 
 .userinfo-dropdown {

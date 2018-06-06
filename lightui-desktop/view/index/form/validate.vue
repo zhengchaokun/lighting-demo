@@ -1,6 +1,6 @@
 
 <template>
-    <div>
+    <div style="height: 100%;">
         <top :title="title" :desc="desc"></top>    
         <div class="demo">
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
