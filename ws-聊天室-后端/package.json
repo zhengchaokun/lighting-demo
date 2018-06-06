@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "light-api": "^1.0.17",
+    "socket.io": "^2.0.3"
+  }
+}

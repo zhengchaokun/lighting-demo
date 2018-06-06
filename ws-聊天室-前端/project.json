@@ -1,0 +1,15 @@
+{
+  "project":"websocket",
+  "version":"0.0.1",
+  "desc":"Just For Fun",
+  "type":"vue",
+
+  "env":{
+    "default":{
+      "log_level":"debug"
+    },
+    "product":{
+      "log_level":"error"
+    }
+  }
+}
