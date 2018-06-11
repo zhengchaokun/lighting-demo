@@ -1,7 +1,9 @@
 <template>
     <div style="">
         <text>hello,world</text>
-        <sub-view @help="help"></sub-view>
+        <keep-alive>
+            <sub-view @help="help"></sub-view>
+        </keep-alive>
     </div>
 </template>
 <script>

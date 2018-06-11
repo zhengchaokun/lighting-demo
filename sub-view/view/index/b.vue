@@ -1,7 +1,7 @@
 
 <template>
     <div>
-       <text @click="jump()">helpa</text>
+       <text @click="jump()">helpb</text>
     </div>
 </template>
 <script>
@@ -14,11 +14,11 @@
                 this.$emit("help")
             },
             jump(){
-                this.$light.navigate('index/b',{},{replace:true})
+                this.$light.navigate('index/a',{},{replace:true})
             }
         },
         mounted(){
-            console.log(123)
+            console.log(456)
         }
     }
 </script>

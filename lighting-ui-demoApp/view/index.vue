@@ -333,16 +333,6 @@ export default {
         App.navigate('#/index/concept')
     },
     scrollHandler(e){
-        /* var LightJSBridge = weex.requireModule('LightJSBridge');
-        this.offsetY = e.contentOffset.y;
-       
-        var percent = Math.abs(this.offsetY) / 500.0;
-        if(percent>1){
-            percent=1;
-        }
-        this.hint = '滚动了'+ this.offsetY + '百分比'+percent;
-        var params={ "alpha":percent};
-        LightJSBridge.call("head.setAlpha",params,null); */
         this.offsetY = e.contentOffset.y;
         var percent = Math.abs(this.offsetY) / 500.0;
         if(percent>1){
@@ -353,27 +343,6 @@ export default {
     }
   },
   mounted(){
-      /* 调native导航 */
-       /* var LightJSBridge = weex.requireModule('LightJSBridge');
-       var head = weex.requireModule('head');
-       var event = weex.requireModule('event'); 
-       LightJSBridge.call('head.setSearchView',{
-           'icon':'search',
-           'placeholderText':'股票代码或拼音简称',
-           'placeholderTextColor':'#f3c4ce',
-           'backgroundColor':'transparent'
-        },function(res){
-            console.log(res);
-            App.navigate('#')
-        })
-
-        head.setRightItem({'title':'导航'},function(){ 
-            App.navigate('#/nav')
-        });
-        head.setLeftItem({"icon":"msg"},function(){
-            App.navigate('#/msg')
-            // event.openNative('web',{startPage:'https://www.baidu.com'})
-        }); */
   }
 };
 </script>
