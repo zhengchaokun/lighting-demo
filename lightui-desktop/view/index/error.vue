@@ -23,7 +23,7 @@
     export default {
         data(){
             return {
-                currentMenu: menus[5],
+                currentMenu: menus[7],
                 currentPath: '',
                 navList:['异常页','403']
             }

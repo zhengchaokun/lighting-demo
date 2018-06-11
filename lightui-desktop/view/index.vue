@@ -84,18 +84,24 @@
                     this.navList[0] = {title:'控制台', path:'/index/dashboard/analysis'}
                 }
                 if(value == 1){
-                    this.navList[0] = {title:'导航页', path:'/index/nav/menu'}
+                    this.navList[0] = {title:'全局用法', path:'/index/basic/layout'}
                 }
                 if(value == 2){
-                    this.navList[0] = {title:'表单页', path:'/index/form/basic'}
+                    this.navList[0] = {title:'导航页', path:'/index/nav/menu'}
                 }
                 if(value == 3){
+                    this.navList[0] = {title:'表单页', path:'/index/form/basic'}
+                }
+                if(value == 4){
                     this.navList[0] = {title:'表格页', path:'/index/table/basic'}
                 }
-                 if(value == 4){
+                 if(value == 5){
                     this.navList[0] = {title:'弹框页', path:'/index/dialog/message'}
                 }
-                if(value == 5){
+                if(value == 6){
+                    this.navList[0] = {title:'卡片页', path:'/index/card/basic'}
+                }
+                if(value == 7){
                     this.navList[0] = {title:'异常页', path:'/index/error/403'}
                 }
             }
@@ -103,7 +109,6 @@
         methods: {
             /* 点击一级菜单 */
             toggleActive(menu, event){
-                console.log(menu);
                 this.currentSystem = menu.index;
                 App.navigate('#'+menu.options[0].path, {});
                 
@@ -117,11 +122,26 @@
                 if(router.path.indexOf('/index/dashboard') > -1){
                     this.currentSystem = 0;
                 }
-                if(router.path.indexOf('/index/form') > -1){
+                if(router.path.indexOf('/index/basic') > -1){
                     this.currentSystem = 1;
                 }
-                if(router.path.indexOf('/index/table') > -1){
+                if(router.path.indexOf('/index/nav') > -1){
                     this.currentSystem = 2;
+                }
+                if(router.path.indexOf('/index/form') > -1){
+                    this.currentSystem = 3;
+                }
+                if(router.path.indexOf('/index/table') > -1){
+                    this.currentSystem = 4;
+                }
+                if(router.path.indexOf('/index/dialog') > -1){
+                    this.currentSystem = 5;
+                }
+                if(router.path.indexOf('/index/card') > -1){
+                    this.currentSystem = 6;
+                }
+                if(router.path.indexOf('/index/error') > -1){
+                    this.currentSystem = 7;
                 }
             },
             handleNavigate(value){

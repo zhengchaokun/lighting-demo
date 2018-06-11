@@ -5,7 +5,7 @@
         <div class="demo">
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
                 <el-form-item label="需求名称" prop="name">
-                    <el-input v-model="ruleForm.name"></el-input>
+                    <el-input v-model="ruleForm.name" placeholder="请输入3-15个字符"></el-input>
                 </el-form-item>
                 <el-form-item label="需求来源" prop="region">
                     <el-select v-model="ruleForm.region" placeholder="请选择需求来源" class="demo-form-select">
@@ -15,11 +15,19 @@
                         <el-option label="bug" value="4"></el-option>                                                                        
                     </el-select>
                 </el-form-item>
-                <el-form-item label="结束时间" required prop="date1">
-                    <el-date-picker type="datetime" placeholder="选择今天及以后的时间" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
+                <el-form-item label="截止时间" required prop="date1">
+                    <el-date-picker type="datetime" placeholder="选择今天及以后的时间" v-model="ruleForm.date1" :pickerOptions="pickerOptions" style="width: 100%;"></el-date-picker>
                 </el-form-item>
-                <el-form-item label="是否需要评审" prop="delivery">
-                    <el-switch on-text="" off-text="" v-model="ruleForm.delivery"></el-switch>
+                <el-form-item label="是否需要评审" prop="needReview">
+                    <el-switch on-text="" off-text="" v-model="ruleForm.needReview"></el-switch>
+                </el-form-item>
+                <el-form-item label="评审人" prop="syndic" v-show="ruleForm.needReview">
+                    <el-select v-model="ruleForm.syndic" placeholder="请选择评审人" class="demo-form-select">
+                        <el-option label="张三" value="1"></el-option>
+                        <el-option label="李四" value="2"></el-option>
+                        <el-option label="王五" value="3"></el-option>
+                        <el-option label="赵六" value="4"></el-option>                                                                        
+                    </el-select>
                 </el-form-item>
                 <el-form-item label="影响的项目" prop="type">
                     <el-checkbox-group v-model="ruleForm.type">
@@ -52,7 +60,7 @@
                     </el-radio-group>
                 </el-form-item>
                 <el-form-item label="需求描述" prop="desc">
-                    <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+                    <el-input type="textarea" v-model="ruleForm.desc" placeholder="请输入10-100个字符"></el-input>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="submitForm('ruleForm')">创建</el-button>
@@ -77,10 +85,16 @@ export default {
                 region: '',
                 date1: '',
                 date2: '',
-                delivery: false,
+                needReview: false,
+                syndic: '',
                 type: [],
                 resource: '',
                 desc: ''
+            },
+            pickerOptions: {
+                disabledDate(time) {
+                    return time.getTime() < Date.now() - 8.64e7;
+                }
             },
             rules: {
                 name: [
@@ -91,19 +105,20 @@ export default {
                     { required: true, message: '请选择需求来源', trigger: 'visible-change' }
                 ],
                 date1: [
-                    { type: 'date', required: true, message: '请选择日期', trigger: 'change,blur' }
-                ],
-                date2: [
-                    { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
+                    { type: 'date', required: true, message: '请选择截止时间', trigger: 'change,blur' }
                 ],
                 type: [
                     { type: 'array', required: true, message: '请至少选择一个影响的项目', trigger: 'change' }
+                ],
+                syndic: [
+                    { required: true, message: '请选择评审人姓名', trigger: 'visible-change' }
                 ],
                 resource: [
                     { required: true, message: '请选择关联版本', trigger: 'change' }
                 ],
                 desc: [
-                    { required: true, message: '请填写需求描述', trigger: 'blur' }
+                    { required: true, message: '请填写需求描述', trigger: 'blur' },
+                    { min: 10, max: 100, message: '长度在 10 到 100 个字符', trigger: 'blur' }                    
                 ]
             }
 		};

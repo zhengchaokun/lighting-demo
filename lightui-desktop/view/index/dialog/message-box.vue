@@ -155,9 +155,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.demo {
-    // flex-direction: row;
-    // justify-content: center;
-    // align-items: flex-start;
-}
+
 </style>

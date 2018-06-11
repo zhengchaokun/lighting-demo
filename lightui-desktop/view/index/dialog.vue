@@ -23,7 +23,7 @@
     export default {
         data(){
             return {
-                currentMenu: menus[3],
+                currentMenu: menus[5],
                 currentPath: '',
                 navList:['弹框页','基础弹框']
             }

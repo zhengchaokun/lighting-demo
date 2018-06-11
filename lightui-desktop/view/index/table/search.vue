@@ -13,9 +13,9 @@
                         on-color=""
                         off-color="">
                     </el-switch>
-                    <img class="tooltip-img" src="../../../images/add.svg" v-popover:popover>
+                    <img class="tooltip-img" src="../../../images/add.svg" v-popover:popover1>
                     <el-popover
-                        ref="popover"
+                        ref="popover1"
                         placement="bottom-start"
                         title="标题"
                         width="200"
