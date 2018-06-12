@@ -93,21 +93,39 @@ var menus = [
         title: '弹框页',
         options: [
             {
-                title: '消息提示',
-                path: '/index/dialog/message'
-            },
-            {
-                title: '消息弹框',
+                title: '提示弹框',
                 path: '/index/dialog/message-box'
             },
             {
-                title: '对话框',
+                title: '编辑弹框',
                 path: '/index/dialog/confirm'
+            },
+            {
+                title: '查看弹框',
+                path: '/index/dialog/preview'
             }
         ]
     },
     {
         index: 6,
+        title: '通知页',
+        options: [
+            {
+                title: '操作反馈',
+                path: '/index/notice/message'
+            },
+            {
+                title: '重要提示',
+                path: '/index/notice/alert'
+            },
+            {
+                title: '通知',
+                path: '/index/notice/notification'
+            }
+        ]
+    },
+    {
+        index: 7,
         title: '卡片页',
         options: [
             {
@@ -121,7 +139,7 @@ var menus = [
         ]
     },
     {
-        index: 7,
+        index: 8,
         title: '异常页',
         options: [
             {

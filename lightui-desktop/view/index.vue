@@ -96,12 +96,15 @@
                     this.navList[0] = {title:'表格页', path:'/index/table/basic'}
                 }
                  if(value == 5){
-                    this.navList[0] = {title:'弹框页', path:'/index/dialog/message'}
+                    this.navList[0] = {title:'弹框页', path:'/index/dialog/message-box'}
                 }
                 if(value == 6){
-                    this.navList[0] = {title:'卡片页', path:'/index/card/basic'}
+                    this.navList[0] = {title:'通知页', path:'/index/notice/message'}
                 }
                 if(value == 7){
+                    this.navList[0] = {title:'卡片页', path:'/index/card/basic'}
+                }
+                if(value == 8){
                     this.navList[0] = {title:'异常页', path:'/index/error/403'}
                 }
             }
@@ -137,11 +140,14 @@
                 if(router.path.indexOf('/index/dialog') > -1){
                     this.currentSystem = 5;
                 }
-                if(router.path.indexOf('/index/card') > -1){
+                if(router.path.indexOf('/index/notice') > -1){
                     this.currentSystem = 6;
                 }
-                if(router.path.indexOf('/index/error') > -1){
+                if(router.path.indexOf('/index/card') > -1){
                     this.currentSystem = 7;
+                }
+                if(router.path.indexOf('/index/error') > -1){
+                    this.currentSystem = 8;
                 }
             },
             handleNavigate(value){

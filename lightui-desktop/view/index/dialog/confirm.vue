@@ -92,9 +92,9 @@ export default {
 	},
   	data() {
 		return {
-			title: "对话框",
+			title: "编辑弹框",
 			desc: "在保留当前页面状态的情况下，告知用户并承载相关操作。",
-            create_dialog: true,
+            create_dialog: false,
             is_quickcreate: false,
             nickName: '李华',
             types: [{

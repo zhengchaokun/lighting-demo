@@ -67,7 +67,7 @@ export default {
 	},
   	data() {
 		return {
-			title: "消息弹框",
+			title: "提示弹框",
             desc: "常用于主动操作前的提示。",
             dialog_title: '',
             dialog_content: '',

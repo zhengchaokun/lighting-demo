@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "ligui": "*"
+    "ligui": "^1.5.5"
   }
 }
