@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>开关-icon-关闭</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="5" width="24" height="14" rx="7"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="24" height="14" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="实例列表-sm" transform="translate(-584.000000, -231.000000)">
+            <g id="Group-3" transform="translate(400.000000, 91.000000)">
+                <g id="Group-4" transform="translate(1.000000, 82.000000)">
+                    <g id="开关-icon" transform="translate(183.000000, 58.000000)">
+                        <use id="Rectangle-35" stroke="#85C0E9" mask="url(#mask-2)" stroke-width="2" fill="#FFFFFF" xlink:href="#path-1"></use>
+                        <rect id="Rectangle-2" fill="#85C0E9" x="2" y="7" width="10" height="10" rx="5"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

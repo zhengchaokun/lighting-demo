@@ -25,7 +25,7 @@
             return {
                 currentMenu: menus[0],
                 currentPath: '',
-                navList:['控制台','分析页']
+                navList:['控制台','个人中心']
             }
         },
         methods:{

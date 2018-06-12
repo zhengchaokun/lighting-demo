@@ -4,12 +4,12 @@ var menus = [
         title: 'dashboard',
         options: [
             {
-                title: '分析页',
-                path: '/index/dashboard/analysis'
+                title: '个人中心',
+                path: '/index/dashboard/index'
             },
             {
-                title: '关于',
-                path: '/index/dashboard/about'
+                title: '图表',
+                path: '/index/dashboard/analysis'
             }]
     },
     {

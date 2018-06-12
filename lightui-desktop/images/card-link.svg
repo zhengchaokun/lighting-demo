@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>链接-icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="实例列表-sm" transform="translate(-528.000000, -231.000000)">
+            <g id="Group-3" transform="translate(400.000000, 91.000000)">
+                <g id="Group-4" transform="translate(1.000000, 82.000000)">
+                    <g id="链接-icon" transform="translate(127.000000, 58.000000)">
+                        <rect id="Rectangle-33-Copy-3" x="0" y="0" width="24" height="24"></rect>
+                        <path d="M12.0012366,4 C4.1435638,4 1,12 1,12 C1,12 4.1435638,20 12.0012366,20 C19.8589095,20 23,12 23,12 C23,12 19.8589095,4 12.0012366,4 L12.0012366,4 Z M12.0012366,16.7994964 C9.39932546,16.7994964 7.2871276,14.6515581 7.2871276,12 C7.2871276,9.34844193 9.39932546,7.20050362 12.0012366,7.20050362 C14.6031478,7.20050362 16.7153457,9.34844193 16.7153457,12 C16.7153457,14.6515581 14.6031478,16.7994964 12.0012366,16.7994964 Z M14.3582912,12 C14.3582912,13.32452 13.3021922,14.3997482 12.0012366,14.3997482 C10.7002811,14.3997482 9.64418212,13.32452 9.64418212,12 C9.64418212,10.67548 10.7002811,9.60025181 12.0012366,9.60025181 C13.3021922,9.60025181 14.3582912,10.67548 14.3582912,12 Z" id="Shape" fill="#85C0E9" fill-rule="nonzero"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

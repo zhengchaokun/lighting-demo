@@ -81,7 +81,7 @@
             },
             'currentSystem': function(value){
                 if(value == 0){
-                    this.navList[0] = {title:'控制台', path:'/index/dashboard/analysis'}
+                    this.navList[0] = {title:'控制台', path:'/index/dashboard/index'}
                 }
                 if(value == 1){
                     this.navList[0] = {title:'全局用法', path:'/index/basic/layout'}
