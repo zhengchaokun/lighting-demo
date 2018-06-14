@@ -56,7 +56,7 @@ var API = {
             prod_code: code,
             candle_period: type,
             fields: "open_px,high_px,low_px,close_px,business_amount,business_balance",
-            data_count: 200
+            data_count: 110
         });
     },
     company_news: function (params) {

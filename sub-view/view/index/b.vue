@@ -1,7 +1,7 @@
 
 <template>
     <div ref="test">
-        <canvas ref="canvas_holder" style="width:750px;height:500px;background-color:rgba(0, 0, 0, 0.1)"></canvas>
+        <canvas ref="canvas_holder" style="width:750px;height:1000px;"></canvas>
     </div>
 </template>
 <script>
