@@ -70,7 +70,7 @@
             </div>                        
             </div>
 
-            <div v-for="(item, index) in geguData" :key="index" class="gegu-list">
+            <div v-for="(item, index) in geguData" :key="index" class="gegu-list" @click="jump('gegu')">
                 <div class="flex-column justify-center align-start flex-5">
                     <text class="fs32 f-black">{{item.title}}</text>
                     <text class="fs24 f-dark mt10">{{item.code}}</text>
@@ -517,6 +517,9 @@
             }
         },
         methods: {
+            jump:function () {
+                this.$light.navigate(...arguments)
+            },
             changePart(index) {
                 this.chartIndex = index;
                 this.getIndexChartData(index);

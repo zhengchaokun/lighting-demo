@@ -4,8 +4,6 @@ const util = require("./utils");
 
 stream = (typeof weex !== 'undefined' && weex.requireModule) ? (weex.requireModule('stream')) : (__weex_require__('weex-module/stream'));
 
-
-
 function getToken(cb){
 	stream.fetch({
 	method: 'GET',
@@ -22,9 +20,8 @@ function getToken(cb){
 
 
 var dataCenter = {
-	getToken,
 	config :{
-		token: '',
+		token: '3F09EE8610194D17863BE37BCCDAA8FF201712260918320A3D84AC',
 		openApiUrl: 'https://open.hscloud.cn'
 	},
 

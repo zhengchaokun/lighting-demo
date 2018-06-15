@@ -64,9 +64,9 @@
                 <div class="tab" @click="changeTab(4)">
                     <text>月K</text>
                 </div>
-                <div class="chart">
-
-                </div>
+            </div>
+            <div class="chart">
+                <canvas ref="canvas" style="width: 750px;height: 500px"></canvas>
             </div>
             <!-- 登陆查看 -->
             <div class="bgc-white" v-if="false">
@@ -935,6 +935,10 @@
             }
         },
         methods:{
+            drawChart(){
+                var ctx2 =require("../js/src").getContext(this.$refs.canvas);
+                require("../lib/stockChart").drawTimeline("600570.SS",false,ctx2)
+            },
             changeTab(index){
                 this.tabIndex = index;
             },
@@ -1101,6 +1105,9 @@
             bgStyle(){
                 return this.change>=0?{'background-color':'#f35151'}:{'background-color':'#20ac6d'};
             }
+        },
+        mounted(){
+            this.drawChart()
         }
     }
 </script>

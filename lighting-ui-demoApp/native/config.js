@@ -37,31 +37,31 @@ module.exports = {
     },
     views:{
         "index":{
-            url:"app.native.js#/index",
+            url:"http://192.168.120.98:3000/app.native.js#/index",
             navBar:{
                 type:"0"
             }
         },
         "market":{
-            url:"app.native.js#/market/hushen",
+            url:"http://192.168.120.98:3000/app.native.js#/market/hushen",
             navBar:{
                 title:"行情"
             }
         },
         "trade":{
-            url:"app.native.js#/trade",
+            url:"http://192.168.120.98:3000/app.native.js#/trade",
             navBar:{
                 title:"交易"
             }
         },
         "financing":{
-            url:"app.native.js#/financing",
+            url:"http://192.168.120.98:3000/app.native.js#/financing",
             navBar:{
                 type:"0"
             }
         },
         "account":{
-            url:"app.native.js#/account",
+            url:"http://192.168.120.98:3000/app.native.js#/account",
             navBar:{
                 type:"0"               
             }

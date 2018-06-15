@@ -39,3 +39,11 @@ export function enable(el, { bridge, debug, disableAutoSwap, disableComboCommand
 
     return canvas;
 };
+
+export function getContext(el) {
+    if(process.env.RUNTIME==="native"){
+        return enable(el, {bridge: WeexBridge}).getContext('2d');
+    }else{
+        return el.getContext('2d')
+    }
+}
