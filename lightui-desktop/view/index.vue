@@ -30,17 +30,28 @@
 
                 <el-dropdown class="fright" @command="handleNavigate">
                     <span class="el-dropdown-link">
-                            <a class="user-menu">
-                                <img src="images/user-icon.png" />
-                            </a>
+                        <a class="user-menu">
+                            <img src="images/user-icon.png" />
+                        </a>
                     </span>
                     <el-dropdown-menu slot="dropdown" class="userinfo-dropdown">
-                        <el-dropdown-item class="dropdown-menu-top">{{userName}}</el-dropdown-item>
-                        <el-dropdown-item command="logout"><a href="#"><span class="menu-icon icon-exit"></span>退出</a></el-dropdown-item>
+                        <el-dropdown-item class="dropdown-menu-top">{{user.nickName}}</el-dropdown-item>
+                        <div class="line line-menu"></div>
+                        <el-dropdown-item><a><span class="menu-icon icon-order"></span>我的订单<el-badge :value="user.un_process_orders>99?'…':user.un_process_orders"></el-badge></a></el-dropdown-item>
+                        <el-dropdown-item><a><span class="menu-icon icon-message"></span>我的消息<el-badge :value="user.un_read_message>99?'…':user.un_read_message"></el-badge></a></el-dropdown-item>
+                        <div class="line line-menu"></div>
+                        <el-dropdown-item><a><span class="menu-icon icon-setting"></span>个人设置</a></el-dropdown-item>
+                        <el-dropdown-item><a><span class="menu-icon icon-openapi"></span>OPENAPI接入</a></el-dropdown-item>
+                        <el-dropdown-item><a><span class="menu-icon icon-label"></span>标签管理</a></el-dropdown-item>
+                        <div class="line line-menu"></div>
+                        <el-dropdown-item><a><span class="menu-icon icon-exit"></span>退出</a></el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
             </div>
-            <router-view></router-view>
+            <div style="height: 100%;">
+                <router-view></router-view>
+            </div>
+            
         </div>
     </div>
 </template>
@@ -56,7 +67,12 @@
                 activeTab: '',
                 menus: menus,
                 navList:[{title:'',path:''},{title:'',path:''}],
-                isSessionTimeout: false
+                isSessionTimeout: false,
+                user: {
+                    nickName: 'Light',
+                    un_process_orders: 2,
+                    un_read_message: 8
+                },
             }
         },
         watch: {
@@ -65,21 +81,30 @@
             },
             'currentSystem': function(value){
                 if(value == 0){
-                    this.navList[0] = {title:'控制台', path:'/index/dashboard/analysis'}
+                    this.navList[0] = {title:'控制台', path:'/index/dashboard/index'}
                 }
                 if(value == 1){
-                    this.navList[0] = {title:'表单页', path:'/index/form/basic'}
+                    this.navList[0] = {title:'全局用法', path:'/index/basic/layout'}
                 }
                 if(value == 2){
-                    this.navList[0] = {title:'表格页', path:'/index/table/basic'}
+                    this.navList[0] = {title:'导航页', path:'/index/nav/menu'}
                 }
-                 if(value == 3){
-                    this.navList[0] = {title:'弹框页', path:'/index/dialog/basic'}
+                if(value == 3){
+                    this.navList[0] = {title:'表单页', path:'/index/form/basic'}
                 }
                 if(value == 4){
-                    this.navList[0] = {title:'提示页', path:'/index/notice/tip'}
+                    this.navList[0] = {title:'表格页', path:'/index/table/basic'}
                 }
-                if(value == 5){
+                 if(value == 5){
+                    this.navList[0] = {title:'弹框页', path:'/index/dialog/message-box'}
+                }
+                if(value == 6){
+                    this.navList[0] = {title:'通知页', path:'/index/notice/message'}
+                }
+                if(value == 7){
+                    this.navList[0] = {title:'卡片页', path:'/index/card/basic'}
+                }
+                if(value == 8){
                     this.navList[0] = {title:'异常页', path:'/index/error/403'}
                 }
             }
@@ -88,24 +113,7 @@
             /* 点击一级菜单 */
             toggleActive(menu, event){
                 this.currentSystem = menu.index;
-                if(menu.index === 0){
-                    App.navigate("#/index/dashboard/analysis",{});
-                }
-                if(menu.index === 1){
-                    App.navigate("#/index/form/basic",{});
-                }
-                if(menu.index === 2){
-                    App.navigate("#/index/table/basic",{});
-                }
-                if(menu.index === 3){
-                    App.navigate("#/index/dialog/basic",{});
-                }
-                if(menu.index === 4){
-                    App.navigate("#/index/notice/tip",{});
-                }
-                if(menu.index === 5){
-                    App.navigate("#/index/error/404",{});
-                }
+                App.navigate('#'+menu.options[0].path, {});
                 
             },
             /* 展开侧边栏 */
@@ -117,11 +125,29 @@
                 if(router.path.indexOf('/index/dashboard') > -1){
                     this.currentSystem = 0;
                 }
-                if(router.path.indexOf('/index/form') > -1){
+                if(router.path.indexOf('/index/basic') > -1){
                     this.currentSystem = 1;
                 }
-                if(router.path.indexOf('/index/table') > -1){
+                if(router.path.indexOf('/index/nav') > -1){
                     this.currentSystem = 2;
+                }
+                if(router.path.indexOf('/index/form') > -1){
+                    this.currentSystem = 3;
+                }
+                if(router.path.indexOf('/index/table') > -1){
+                    this.currentSystem = 4;
+                }
+                if(router.path.indexOf('/index/dialog') > -1){
+                    this.currentSystem = 5;
+                }
+                if(router.path.indexOf('/index/notice') > -1){
+                    this.currentSystem = 6;
+                }
+                if(router.path.indexOf('/index/card') > -1){
+                    this.currentSystem = 7;
+                }
+                if(router.path.indexOf('/index/error') > -1){
+                    this.currentSystem = 8;
                 }
             },
             handleNavigate(value){

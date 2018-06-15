@@ -1,11 +1,11 @@
 
 <template>
-    <div>
+    <div style="height: 100%;">
         <div class="sub-sidebar">
             <div class="sub-sidebar-title">{{ currentMenu.title }}</div>
             <ul class="sub-sidebar-menu">
                 <template  v-for="(item,index) in currentMenu.options">
-                    <li class="sub-sidebar-li" @click="selectOption(item)" :class="{'selected':currentPath.indexOf(item.path) > -1}" :key="index">
+                    <li class="sub-sidebar-li" @click="selectOption(item)" :class="{'selected':currentPath==item.path}" :key="index">
                         {{ item.title }}
                     </li>
                 </template>
@@ -19,11 +19,10 @@
 <script>
     import menus from "menus"
     import App from "light"
-    // import API from 'api'
     export default {
         data(){
             return {
-                currentMenu: menus[1],
+                currentMenu: menus[3],
                 currentPath: '',
                 navList:['表单页','基础表单']
             }
@@ -38,9 +37,6 @@
             "$route":function(val){
                 this.currentPath = this.$route.path;
             }
-        },
-        created(){
-            App.trigger('navChange', '')
         },
         mounted(){
             this.currentPath = this.$route.path;

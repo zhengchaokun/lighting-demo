@@ -9,3 +9,4 @@
 7. nativeSDK(gmu-sdk)使用实例-[sdkExample](./sdkExample)
 8. 三方组件使用实例-[starrating](./starrating)
 9. 行情&自选组件-[light-quote-demo](./light-quote-demo)
+10. lighting1.5&1.6演示demo-[lighting1.5-demo](./lighting1.5-demo) 

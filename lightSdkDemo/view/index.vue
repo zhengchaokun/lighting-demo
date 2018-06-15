@@ -8,6 +8,7 @@
             <list  class="itemWrap">
                 <cell class="listItem" @click="jump('index/chooseImage','拍照功能')"><div class="wrapRow"><text class="itemName">拍照功能</text></div></cell>
                 <cell class="listItem" @click="jump('index/imageAction','保存图片及预览功能')"><div class="wrapRow"><text class="itemName">保存图片及预览功能</text></div></cell>
+            <list  class="itemWrap" :style="{height:height+'px'}" >
                 <cell class="listItem" @click="jump('index/setClipboardText','剪切板内容')"><div class="wrapRow"><text class="itemName">剪切板内容</text></div></cell>
                 <cell class="listItem" @click="jump('index/fetchURL','抓取网页内容')"><div class="wrapRow"><text class="itemName">抓取网页内容</text></div></cell>
                 <cell class="listItem" @click="jump('index/writeGlobalData','本地数据处理')"><div class="wrapRow"><text class="itemName">本地数据处理</text></div></cell>
@@ -73,6 +74,7 @@
 </template>
 <script>
     import WxcPopup from 'weex-ui/packages/wxc-popup';
+    import Utils from 'weex-ui/packages/utils';
     import LightSDK from "light-sdk";
     import App from "light"
     const modal = weex.requireModule('modal')
@@ -81,7 +83,8 @@
             return {
                 leftShow:false,
                 title:"端JS-SDK",
-                ifAll:false
+                ifAll:false,
+                height:Utils.env.getPageHeight()
             };
         },
         components:{

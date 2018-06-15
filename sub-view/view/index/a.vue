@@ -1,7 +1,7 @@
 
 <template>
     <div>
-       <text @click="help()">help</text>
+       <text @click="jump()">helpa</text>
     </div>
 </template>
 <script>
@@ -12,7 +12,13 @@
         methods:{
             help(){
                 this.$emit("help")
+            },
+            jump(){
+                this.$light.navigate('index/b',{},{replace:true})
             }
+        },
+        mounted(){
+            console.log(123)
         }
     }
 </script>

@@ -22,6 +22,7 @@
                 interval="5000"
                 showIndicator="false"
                 :image-list="imageList1"
+                :imgInfoTextStyle="imgInfoTextStyle"
                 @lcImgClick="lcImgClick">
             </lc-lightbox>
     </scroller>
@@ -63,9 +64,16 @@
           { src: 'https://gd3.alicdn.com/bao/uploaded/i3/TB1x6hYLXXXXXazXVXXXXXXXXXX_!!0-item_pic.jpg' }
         ],
         imageList1: [
-            { src: "https://gd2.alicdn.com/bao/uploaded/i2/T14H1LFwBcXXXXXXXX_!!0-item_pic.jpg",imgInfo:"'黑色星期一'后美股强力反弹" },
+            { 
+              src: "https://gd2.alicdn.com/bao/uploaded/i2/T14H1LFwBcXXXXXXXX_!!0-item_pic.jpg",
+              imgInfo:"'黑色星期一'后美股强力反弹'\n黑色星期一'后美股强力反弹'\n黑色星期一'后美股强力反弹'\n黑色星期一'后美股强力反弹" },
             { src: "https://gd1.alicdn.com/bao/uploaded/i1/TB1PXJCJFXXXXciXFXXXXXXXXXX_!!0-item_pic.jpg",imgInfo:"中国瘟鸡股市持续暴跌"  }
         ],
+        imgInfoTextStyle: {
+          height: '200px',
+          lines: 4,
+          color: 'red'
+        },
       };
     },
     methods: {
