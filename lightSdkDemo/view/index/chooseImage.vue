@@ -5,7 +5,7 @@
         <div><text class="detailDesc">此方法可以调用手机的拍照和从相册中选取照片功能，拍照或者选图成功后会返回此图片的编码信息供开发者使用，返回的图片编码格式是base64编码</text></div>
         <div><text class="detailHead">示例：</text></div>
         <div class="viewOnlineApi flex-row mb30">
-            <lc-button text="上传图片"
+            <lc-button text="拍照"
                     type="normal" 
                     @LcButtonClicked="chooseImage"></lc-button>
             
@@ -42,7 +42,9 @@
             },
             chooseImage:function(){
                 var that = this;
-                LightSDK.native.chooseImage({},function(data){
+                LightSDK.native.chooseImage({
+                    "imagePickType":"CAMERA_MUTIL-ALBUM"
+                },function(data){
                     if(data.info.error_code!='0'){
                         that.Dialog.toast({
                             message: data.info.error_message,

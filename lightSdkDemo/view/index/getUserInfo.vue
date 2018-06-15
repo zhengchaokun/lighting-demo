@@ -40,7 +40,7 @@
             },
             getUserInfo:function(){
                 var that = this;
-                LightSDK.native.getUserInfo(function(data){
+                LightSDK.native.userGetInfo(function(data){
                     weex.requireModule('modal').alert({
                         message: JSON.stringify(data),
                         duration: 2

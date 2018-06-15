@@ -1,5 +1,5 @@
 module.exports = {
     "config": {
-        "jpush_appKey": "b061314719ab8463db7cc551"
+        "jpush_appKey": "41769d6b75d872195297640c"
     }
 }
