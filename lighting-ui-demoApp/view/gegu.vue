@@ -66,7 +66,7 @@
                 </div>
             </div>
             <div class="chart">
-                <canvas ref="canvas" style="width: 750px;height: 500px"></canvas>
+                <canvas ref="canvas" style="width: 750px;height: 1000px"></canvas>
             </div>
             <!-- 登陆查看 -->
             <div class="bgc-white" v-if="false">
@@ -935,12 +935,34 @@
             }
         },
         methods:{
-            drawChart(){
+            drawChart(type){
+                let Draw = require("../lib/stockChart");
                 var ctx2 =require("../js/src").getContext(this.$refs.canvas);
-                require("../lib/stockChart").drawTimeline("600570.SS",false,ctx2)
+                ctx2.clearRect(0,0,750,1000)
+                switch (type){
+                    case 0:
+                        Draw.drawTimeline(this.$route.query.code,false,ctx2)
+                        break;
+                    case 1:
+                        Draw.drawTimeline(this.$route.query.code,true,ctx2)
+                        break;
+                    case 2:
+                        Draw.drawKLine(this.$route.query.code,6,ctx2)
+                        break;
+                    case 3:
+                        Draw.drawKLine(this.$route.query.code,7,ctx2)
+                        break;
+                    case 4:
+                        Draw.drawKLine(this.$route.query.code,8,ctx2)
+                        break;
+                    case 5:
+                        Draw.drawKLine(this.$route.query.code,9,ctx2)
+                        break;
+                }
             },
             changeTab(index){
                 this.tabIndex = index;
+                this.drawChart(index)
             },
             changeNews(index){
                 this.newsIndex = index;
@@ -1107,7 +1129,7 @@
             }
         },
         mounted(){
-            this.drawChart()
+            this.drawChart(0)
         }
     }
 </script>

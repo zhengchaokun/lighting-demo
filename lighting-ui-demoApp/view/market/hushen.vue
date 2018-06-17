@@ -17,7 +17,6 @@
             <!-- <chartview :stockcode='stockCode' :codetype='codeType' :chartType='chartType'  :snapshotdata='snapshotdata' :trenddata='trenddata' style="width:750px;height:260px;">
             </chartview> -->
             <canvas ref="canvas_holder" style="width:750px;height:260px;">
-                
             </canvas>
         </div>
 
@@ -70,7 +69,7 @@
             </div>                        
             </div>
 
-            <div v-for="(item, index) in geguData" :key="index" class="gegu-list" @click="jump('gegu')">
+            <div v-for="(item, index) in geguData" :key="index" class="gegu-list" @click="jump('gegu',{code:'600570.SS'})">
                 <div class="flex-column justify-center align-start flex-5">
                     <text class="fs32 f-black">{{item.title}}</text>
                     <text class="fs24 f-dark mt10">{{item.code}}</text>

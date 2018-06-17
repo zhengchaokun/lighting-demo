@@ -124,7 +124,7 @@ var chartDrawer = {
                         mins:data_mins
                     },
                     options:{
-                        width:info.windowWidth-((day)?5:120),
+                        width:info.windowWidth,
                         font:'8px Arial',
                         chart:{
                             points:data_mins.length>241?data_mins.length:241,
