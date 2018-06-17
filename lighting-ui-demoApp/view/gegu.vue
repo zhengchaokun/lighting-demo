@@ -61,7 +61,7 @@
                 <div :class="['tab', tabIndex==index?'tab-active':'']" @click="changeTab(index)" v-for="(item, index) in timeTab" :key="index">
                     <text :class="['fs26', tabIndex==index?'f-red':'f-black']">{{item}}</text>
                 </div>
-                <div class="tab" @click="changeTab(4)">
+                <div class="tab" :class="['tab', tabIndex==4?'tab-active':'']" @click="changeTab(4)">
                     <text>月K</text>
                 </div>
             </div>

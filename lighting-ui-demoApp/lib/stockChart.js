@@ -46,7 +46,7 @@ var chartDrawer = {
                     },
                     data: kdata,
                     options: {
-                        width:info.windowWidth-5,
+                        width:info.windowWidth-10,
                         font: "normal 10px monospace",
                         animation: 0,
                         chart: {
