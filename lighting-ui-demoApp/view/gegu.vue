@@ -52,9 +52,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="detail-flag">
-                    <text class="f-white fs24 t-center mt10s">超级盘口</text>
-                </div>
+                <!--<div class="detail-flag">-->
+                    <!--<text class="f-white fs24 t-center mt10s">超级盘口</text>-->
+                <!--</div>-->
             </div>
             <!-- 图v表 -->
             <div class="flex-row bottom-line">
@@ -66,7 +66,7 @@
                 </div>
             </div>
             <div class="chart">
-                <canvas ref="canvas" style="width: 750px;height: 1000px"></canvas>
+                <canvas ref="canvas" width="750" height="600" style="width: 750px;height: 600px"></canvas>
             </div>
             <!-- 登陆查看 -->
             <div class="bgc-white" v-if="false">

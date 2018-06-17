@@ -71,8 +71,8 @@ var chartDrawer = {
                             gridLine: themes['theme-White'].gridLine
                         },
                         size: {
-                            chart: 130*2*info.windowWidth/750,
-                            volume: 40*2*info.windowWidth/750
+                            chart: 200*2,
+                            volume: 80*2
                         }
                     }
                 });
@@ -145,8 +145,8 @@ var chartDrawer = {
                             gridLine: themes['theme-White'].gridLine
                         },
                         size:{
-                            chart:125*2*info.windowWidth/750,
-                            volume:35*2*info.windowWidth/750
+                            chart:200*2,
+                            volume:80*2
                         }
                     }
                 });
