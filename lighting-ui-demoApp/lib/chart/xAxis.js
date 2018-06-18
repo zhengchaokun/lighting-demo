@@ -10,7 +10,7 @@ xAxis.prototype = {
         ctx.fillStyle = this.options.color;
         ctx.font = this.options.font;
         if (this.options.textBaseline) ctx.textBaseline = this.options.textBaseline;
-        ctx.translate(this.options.region.x, this.options.region.y);
+        // ctx.translate(this.options.region.x, this.options.region.y);
     },
     getY: function () { return 0; },
     getX: function (i) {
@@ -21,7 +21,7 @@ xAxis.prototype = {
         return (this.options.region.width * i / (this.data.length - 1)) - w / 2;
     },
     paintItem: function (i, x, y) {
-        this.ctx.fillText(this.data[i], x, y);
+        this.ctx.fillText(this.data[i], x+this.options.region.x, y+this.options.region.y);
     },
     end: function () {
         this.ctx.restore();

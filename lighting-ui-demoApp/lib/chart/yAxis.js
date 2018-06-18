@@ -12,7 +12,7 @@ yAxis.prototype = {
         ctx.save();
         if (typeof this.scalerOptions.color == 'string') ctx.fillStyle = this.scalerOptions.color;
         ctx.font = this.scalerOptions.font;
-        ctx.translate(this.scalerOptions.region.x, this.scalerOptions.region.y);
+        // ctx.translate(this.scalerOptions.region.x, this.scalerOptions.region.y);
         if (this.scalerOptions.textBaseline) ctx.textBaseline = this.scalerOptions.textBaseline;
     },
     end: function () { this.ctx.restore(); },
@@ -31,7 +31,9 @@ yAxis.prototype = {
     paintItem: function (i, x, y) {
         if (typeof this.scalerOptions.color == 'function')
             this.ctx.fillStyle = this.scalerOptions.color(this.data[i]);
-        this.ctx.fillText(this.data[i], x, y);
+        console.log('xxxxx',this.scalerOptions.region.y)
+        console.log('xxxxx',this.data[i],'-', x+this.scalerOptions.region.x,'-', y+this.scalerOptions.region.y)
+        this.ctx.fillText(this.data[i], x+this.scalerOptions.region.x, y+this.scalerOptions.region.y);
     }
 };
 

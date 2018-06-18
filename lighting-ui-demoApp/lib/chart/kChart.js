@@ -464,8 +464,8 @@ kLine.prototype = {
         volumeScalers.push(volumeUnit);
         var volumeScalerOptions = volumeOptions.yAxis;
         volumeScalerOptions.region = volumeScalerOptions.region || {
-                x: 2,
-                y: -3,
+                x: 2+volumeRegion.x,
+                y: -3+volumeRegion.y,
                 width: volumeRegion.x - 3,
                 height: volumeRegion.height
             };

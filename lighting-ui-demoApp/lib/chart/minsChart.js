@@ -381,7 +381,7 @@ var MinsChart=function (options) {
             borderColor: options.options.colors.gridLine, splitLineColor: options.options.colors.gridLine,
             yScaler: {
                 font: options.options.font||'12px Arial',
-                region: {x: .5, y: options.options.size.volume+options.options.size.volume, width: 50.5, height: options.options.size.volume},
+                region: {x: .5, y: options.options.size.chart+options.options.size.volume, width: 50.5, height: options.options.size.volume},
                 color: 'rgba(0,0,0,0)',
                 align: 'left',
                 fontHeight: 12,

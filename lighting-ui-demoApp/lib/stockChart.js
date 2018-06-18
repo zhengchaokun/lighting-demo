@@ -47,7 +47,7 @@ var chartDrawer = {
                     data: kdata,
                     options: {
                         width:info.windowWidth-10,
-                        font: "normal 10px monospace",
+                        font: "normal 12px monospace",
                         animation: 0,
                         chart: {
                             ma5line: {
@@ -125,7 +125,7 @@ var chartDrawer = {
                     },
                     options:{
                         width:info.windowWidth,
-                        font:'8px Arial',
+                        font:'16px Arial',
                         chart:{
                             points:data_mins.length>241?data_mins.length:241,
                             maline:{
