@@ -102,20 +102,9 @@ var dataCenter = {
 		/*
 			prod_code, fields, crc, date, min_time
 		*/
-		var queryString = "?" + util.parse2query(params);
-		return stream.fetch({
-			method: 'GET',
-			type: 'json',
-			url: this.config.openApiUrl + '/quote/v1/trend' + queryString,
-			headers: {
-				Authorization: "Bearer " + this.config.token,
-			},
-		}, function(res) {
-			//console.log("getTrend" + JSON.stringify(res));
-			if (res.ok) {
-				callback(res.data);
-			}
-		});
+		require("../lib/api").trend(params.prod_code).then(function (data) {
+            callback({data})
+        })
 	},
 	/*获取5日分时*/
 	getTrend5day: function(params, callback) {

@@ -12,6 +12,9 @@ var API = {
             fields: "last_px,business_amount,business_balance,avg_px"
         });
     },
+    trend2: function (params) {
+        return execute("quote/v1/trend", params);
+    },
     trend5day: function (code) {
         return execute("quote/v1/trend5day", {
             prod_code: code,
