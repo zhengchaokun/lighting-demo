@@ -29,7 +29,9 @@
                 
             },
             back:function(){
-                LightSDK.native.back()
+                LightSDK.native.back({
+                    number:1
+                })
             }
         }
     }

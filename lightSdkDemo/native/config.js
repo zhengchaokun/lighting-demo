@@ -3,64 +3,73 @@ module.exports = {
         logo:"/native/res/icon.png",
         launch:"/native/res/launch.png"
     },
+    //菜单栏设置,若不需要菜单栏只配置一个菜单项即可
     menuBar:{
         backgroundColor:"",//背景色
         defaultColor:"",//默认菜单颜色
         selectedColor:"",//菜单选中颜色
-        //使用字体图标自动生成图片，省去了开发者自己制作多张图的问题
-        iconFontFrom:"",
+        iconFontFrom:"",//使用字体图标自动生成图片
          menus:[{
+            text:'',//菜单的文本
             view:"index",//当前菜单对应的视图名称，视图必须在views属性中定义
+            icon:""//菜单图标在字体中的码点,格式为0xabcd
         }]
     },
+    statusBar:{
+        type:"1"
+    },
+    //标题栏设置
     navBar:{
         title:"端JS-SDK",
         backgroundColor:"#0AA9F1",
         titleColor:"#ffffff",
         buttonColor:"#ffffff",
+        type:"0"
     },
     views:{
         "index":{
-            url:"app.native.js#/index",
+            url:"app.native.js#/index", //视图地址
             navBar:{
-                title:"端JS-SDK"
+                title:"端JS-SDK",       //当前视图的导航栏文本
+                backgroundColor:"",     //当前视图的标题栏背景色
+                titleColor:"",          //当前视图的标题栏文本颜色
+                type:"" //当前视图的标题栏类型，可选项：0-不使用标题栏状态栏，1-默认使用标题栏状态栏，2-仅使用状态栏
+            }
+        },
+        "chooseImage":{
+            url:"app.native.js#/index/chooseImage", //视图地址
+            navBar:{
+                title:"图片",       //当前视图的导航栏文本
+                backgroundColor:"",     //当前视图的标题栏背景色
+                titleColor:"",          //当前视图的标题栏文本颜色
+                type:"" //当前视图的标题栏类型，可选项：0-不使用标题栏状态栏，1-默认使用标题栏状态栏，2-仅使用状态栏
+            }
+        },
+        "setClipboardText":{
+            url:"app.native.js#/index/setClipboardText", //视图地址
+            navBar:{
+                title:"复制内容",       //当前视图的导航栏文本
+                backgroundColor:"",     //当前视图的标题栏背景色
+                titleColor:"",          //当前视图的标题栏文本颜色
+                type:"" //当前视图的标题栏类型，可选项：0-不使用标题栏状态栏，1-默认使用标题栏状态栏，2-仅使用状态栏
             }
         }
+
     },
     plugins:{
-        "about_us":require("./about_us.js"),
-        "analytics":require("./analytics.js"),
-        "block_rank":require("./block_rank.js"),
-        "block_stocks":require("./block_stocks.js"),
-        "discovery":require("./discovery.js"),
-        "face":require("./face.js"),
-        "feedback":require("./feedback.js"),
-        "gesture_password":require("./gesture_password.js"),
-        "globalquote":require("./globalquote.js"),
-        "globalquote_components":require("./globalquote_components.js"),
-        "insert_tab":require("./insert_tab.js"),
-        "jsnative":require("./jsnative.js"),
-        "kline_settings":require("./kline_settings.js"),
-        "lightIn_personal_edit":require("./lightIn_personal_edit.js"),
-        "lock":require("./lock.js"),
+        "pay":{},
+        "safekeyboard":{},
+        "tradekeyboard":require("./tradekeyboard.js"),
+        "scanning":{},
+        "feedback":{},//反馈组件
+        "analytics":require("./analytics.js"), //统计分析
+        "lock":require("./lock.js"), //手势指纹
         "login":require("./login.js"),
         "menu_tab":require("./menu_tab.js"),
-        "mystock":require("./mystock.js"),
-        "nav_menu":require("./nav_menu.js"),
-        "navi_tab":require("./navi_tab.js"),
+        "navi_tab":require("./navi_tab.js"),//...
         "push":require("./push.js"),
-        "quote_settings":require("./quote_settings.js"),
-        "safekeyboard":require("./safekeyboard.js"),
-        "scanning":require("./scanning.js"),
-        "sct":require("./sct.js"),
-        "search":require("./search.js"),
-        "settings":require("./settings.js"),
         "share":require("./share.js"),
-        "stock_detail":require("./stock_detail.js"),
-        "stock_list":require("./stock_list.js"),
-        "stock_rank":require("./stock_rank.js"),
-        "trade":require("./trade.js"),
-        "web_light":require("./web_light.js"),
-        "pay":require("./pay.js")
+        "imageacquisition":require("./imageacquisition.js"), //图片相关功能
+        "file":{}
     }
 };

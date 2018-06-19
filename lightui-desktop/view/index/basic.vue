@@ -23,9 +23,9 @@
     export default {
         data(){
             return {
-                currentMenu: menus[0],
+                currentMenu: menus[1],
                 currentPath: '',
-                navList:['结果页','分析页']
+                navList:['基础页','布局']
             }
         },
         methods:{

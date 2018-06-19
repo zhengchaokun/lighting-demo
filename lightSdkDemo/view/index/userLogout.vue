@@ -24,11 +24,13 @@
             },
             userLogout:function(){
                 var that = this;
-                LightSDK.native.logout(function(data){
+                LightSDK.native.userlogout(function(data){
                     that.Dialog.toast({
                         message: "注销成功",
                         duration: 2
                     });
+                     var event = weex.requireModule('event'); 
+                event.openNative("login")
                 })
             }
         }

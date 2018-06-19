@@ -23,7 +23,7 @@
     export default {
         data(){
             return {
-                currentMenu: menus[2],
+                currentMenu: menus[4],
                 currentPath: '',
                 navList:['表格页','基础表格']
             }

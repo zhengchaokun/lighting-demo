@@ -23,9 +23,9 @@
     export default {
         data(){
             return {
-                currentMenu: menus[4],
+                currentMenu: menus[7],
                 currentPath: '',
-                navList:['提示页','信息']
+                navList:['卡片页','基础用法']
             }
         },
         methods:{

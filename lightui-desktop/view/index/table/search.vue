@@ -13,24 +13,25 @@
                         on-color=""
                         off-color="">
                     </el-switch>
-                    <img class="tooltip-img" src="../../../images/add.svg" v-popover:popover>
                     <el-popover
-                        ref="popover"
+                        ref="popover1"
                         placement="bottom-start"
-                        title="标题"
-                        width="200"
+                        title="合并"
+                        width="270"
                         trigger="hover"
-                        content="从元素起始位置开始的提示框">
+                        content="将查询条件合并成一项，使用户操作更简便">
                     </el-popover>
+                    <img class="tooltip-img" src="../../../images/tooltip.svg" v-popover:popover1>
+                    
                 </div>
                 
                 <el-form :inline="true" :model="formInline" class="demo-search-form-inline">
                     <template v-if="!isMerged">
                         <el-form-item label="App名称" label-width="70px">
-                            <el-input v-model="formInline.name" class="w150"></el-input>
+                            <el-input v-model="formInline.name" class="w150" placeholder="输入App名称查询"></el-input>
                         </el-form-item>
                         <el-form-item label="版本号" label-width="70px">
-                            <el-input v-model="formInline.version" class="w150"></el-input>  
+                            <el-input v-model="formInline.version" class="w150" placeholder="输入版本号查询"></el-input>  
                         </el-form-item>
                         <el-form-item>
                             <el-button type="primary" @click="search">查询</el-button>
@@ -43,11 +44,15 @@
                             </el-input>
                         </el-form-item>
                     </template>
+                    <el-form-item>
+                        <el-button type="plain" @click="reset">重置</el-button>                        
+                    </el-form-item>
                 </el-form>
             </div>
             
 
             <el-table
+                empty-text="查询结果为空"
                 :data="tableData"
                 stripe
                 style="width: 80%">
@@ -77,7 +82,7 @@
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
                 :current-page="currentPage"
-                :page-sizes="[2, 4, 5, 10]"
+                :page-sizes="[5, 10, 15, 20]"
                 :page-size="pageSize"
                 layout="total, sizes, prev, pager, next, jumper"
                 :total="total">
@@ -87,6 +92,8 @@
 </template>
 <script>
     import top from "../../../ui/top.vue";
+    const API = require("../../../lib/api");
+
     export default {
         components: {
             top
@@ -104,58 +111,7 @@
                     version: ""
                 },
                 tableData: [],
-                totalData: [{
-                    date: '2017-05-02 09:23:23',
-                    version: 'v1.0.0',
-                    name: 'lighting-ui',
-                    weight: '10%'
-                }, {
-                    date: '2017-05-24 16:55:11',
-                    version: 'v1.1.0',
-                    name: 'lighting-ui',
-                    weight: '20%'
-                }, {
-                    date: '2017-06-02 14:23:11',
-                    version: 'v1.2.0',
-                    name: 'lighting-ui',
-                    weight: '30%'
-                }, {
-                    date: '2017-07-26 18:03:10',
-                    version: 'v1.2.1',
-                    name: 'lighting-ui',
-                    weight: '40%'
-                }, {
-                    date: '2017-11-20 14:23:11',
-                    version: 'v1.5.0',
-                    name: 'ligui',
-                    weight: '50%'
-                }, {
-                    date: '2018-01-28 18:03:10',
-                    version: 'v1.5.4',
-                    name: 'ligui',
-                    weight: '50%'
-                }, {
-                    date: '2017-06-02 14:23:11',
-                    version: 'v1.2.0',
-                    name: 'lighting-plugin-jsnative',
-                    weight: '30%'
-                }, {
-                    date: '2017-07-26 18:03:10',
-                    version: 'v1.2.1',
-                    name: 'lighting-tool',
-                    weight: '100%'
-                }, {
-                    date: '2017-06-02 14:23:11',
-                    version: 'v1.2.0',
-                    name: 'lighting-plugin-native',
-                    weight: '50%'
-                }, {
-                    date: '2018-05-26 18:03:10',
-                    version: 'v1.0.76',
-                    name: 'lighting-plugin-type-vue',
-                    weight: '100%'
-                }
-                ]
+                totalData: [],
             }
         },
         methods: {
@@ -177,30 +133,29 @@
             },
             searchInData(obj) {
                 var that = this;
-                var index = null;
+                this.totalData = [];
                 this.tableData = [];
                 for (var key in obj) {
                     if(key=='keyword') {
-                        that.totalData.forEach(function(item, idx) {
+                        API.totalData.forEach(function(item, idx) {
                             if(item.name.indexOf(obj[key]) > -1 || item.version.indexOf(obj[key]) > -1) {
-                                index = idx;
-                                that.tableData.push(item);
+                                that.totalData.push(item);
                             }
                         })
                     } else {
-                        that.totalData.forEach(function(item, idx) {
-                            if(item[key].indexOf(obj[key]) > -1) {
-                                index = idx;
-                                that.tableData.push(item);
+                        API.totalData.forEach(function(item, idx) {
+                            if(item['name'].indexOf(obj['name']) > -1 && item['version'].indexOf(obj['version']) > -1) {
+                                if(that.totalData.indexOf(item)==-1) {
+                                    that.totalData.push(item);
+                                }
+                                
                             }
                         })
                     }
+                    
                 }
-                if(index!=null) {
-                    that.totalData = that.tableData;
-                }
-                
-                console.log(that.tableData.length);
+               
+                this.tableData = this.totalData.slice(0, this.pageSize);
 
             },
             search() {
@@ -214,10 +169,21 @@
                         version: this.formInline.version
                     })
                 }
+            },
+            reset() {
+                this.totalData = API.totalData;
+                this.tableData = this.totalData.slice(0, this.pageSize);
+                this.formInline = {
+                    name: '',
+                    version: ''
+                };
+                this.keyword = '';
             }
         },
         created () {
-            this.tableData = this.totalData.slice(0, this.pageSize);
+            this.reset();
+            // this.totalData = API.totalData;
+            // this.tableData = this.totalData.slice(0, this.pageSize);
         },
         computed: {
             total() {
@@ -264,5 +230,7 @@
     margin-left: 10px;
     vertical-align: middle;
 }
-
+.demo-popover {
+    width: 270px;
+}
 </style>

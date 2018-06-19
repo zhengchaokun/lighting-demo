@@ -3,29 +3,41 @@
     <div style="height: 100%;">
         <top :title="title" :desc="desc"></top>
         <div class="demo">
+            <div class="w80">
+                <el-button type="primary" @click="set_weight=true">设置权重</el-button>
+            </div>
             <el-table
+                class="mgt20"
                 :data="tableData"
                 stripe
                 style="width: 80%">
                 <el-table-column
                     prop="name"
                     label="App名称"
-                    min-width="150">
+                    min-width="130">
                 </el-table-column>
                 <el-table-column
+                    sortable
                     prop="version"
                     label="版本号"
+                    min-width="60">
+                </el-table-column>
+                <el-table-column
+                    prop="developer"
+                    label="开发者"
                     min-width="80">
                 </el-table-column>
                 <el-table-column
+                    sortable
                     prop="date"
                     label="发布日期"
-                    min-width="140">
+                    min-width="120">
                 </el-table-column>
                 <el-table-column
+                    sortable
                     prop="weight"
                     label="权重"
-                    min-width="80">
+                    min-width="50">
                 </el-table-column>
             </el-table>
             <el-pagination
@@ -33,16 +45,27 @@
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
                 :current-page="currentPage"
-                :page-sizes="[2, 4, 5, 10]"
+                :page-sizes="[5, 10, 15, 20]"
                 :page-size="pageSize"
                 layout="total, sizes, prev, pager, next, jumper"
                 :total="total">
             </el-pagination>
+
+            <el-dialog title="权重设置" :visible.sync="set_weight" class="dialog-weights">
+                <el-ratio-controller :ratios="weights" v-model="value_weights" :step="10"></el-ratio-controller>
+                <div class="updateBox" style="padding:10px; margin-top:50px;width: 390px;text-align:left;height:17px;line-height:17px;">
+                    <font style="text-align:left;color: #E99E24;font-size:12px;line-height:17px;letter-spacing: 0px;">权重，即该版本发布的有效用户与总用户的比例。</font>
+                </div>
+                <div slot="footer" class="dialog-footer">
+                    <el-button v-on:click="setWeight" style="width:200px">确 定</el-button>
+                </div>
+            </el-dialog>
        </div>
     </div>
 </template>
 <script>
     import top from "../../../ui/top.vue";
+    const API = require("../../../lib/api");
     export default {
         components: {
             top
@@ -54,58 +77,21 @@
                 currentPage: 1,
                 pageSize: 5,
                 tableData: [],
-                totalData: [{
-                    date: '2017-05-02 09:23:23',
-                    version: 'v1.0.0',
-                    name: 'lighting-ui',
-                    weight: '10%'
+                totalData: API.totalData,
+                set_weight: false, 
+                weights: [{
+                    percent: 10,
+                    desc: '默认版本'
                 }, {
-                    date: '2017-05-24 16:55:11',
-                    version: 'v1.1.0',
-                    name: 'lighting-ui',
-                    weight: '20%'
+                    percent: 20
                 }, {
-                    date: '2017-06-02 14:23:11',
-                    version: 'v1.2.0',
-                    name: 'lighting-ui',
-                    weight: '30%'
+                    percent: 30
                 }, {
-                    date: '2017-07-26 18:03:10',
-                    version: 'v1.2.1',
-                    name: 'lighting-ui',
-                    weight: '40%'
+                    percent: 10,
                 }, {
-                    date: '2017-11-20 14:23:11',
-                    version: 'v1.5.0',
-                    name: 'ligui',
-                    weight: '50%'
-                }, {
-                    date: '2018-01-28 18:03:10',
-                    version: 'v1.5.4',
-                    name: 'ligui',
-                    weight: '50%'
-                }, {
-                    date: '2017-06-02 14:23:11',
-                    version: 'v1.2.0',
-                    name: 'lighting-plugin-jsnative',
-                    weight: '30%'
-                }, {
-                    date: '2017-07-26 18:03:10',
-                    version: 'v1.2.1',
-                    name: 'lighting-tool',
-                    weight: '100%'
-                }, {
-                    date: '2017-06-02 14:23:11',
-                    version: 'v1.2.0',
-                    name: 'lighting-plugin-native',
-                    weight: '50%'
-                }, {
-                    date: '2018-05-26 18:03:10',
-                    version: 'v1.0.76',
-                    name: 'lighting-plugin-type-vue',
-                    weight: '100%'
-                }
-                ]
+                    percent: 30,
+                }],
+                value_weights: []
             }
         },
         methods: {
@@ -118,6 +104,10 @@
                 console.log(`当前页: ${val}`);
                 this.currentPage = val;
                 this.tableData = this.totalData.slice(this.pageSize*(val-1), this.pageSize*val);
+            },
+            setWeight() {
+                this.set_weight = false;
+                API.success(this, "权重设置成功！");
             }
         },
         created () {
