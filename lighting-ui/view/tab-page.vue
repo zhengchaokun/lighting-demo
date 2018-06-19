@@ -164,11 +164,6 @@
     height: 320px;
     background-color: #F9F9F9;
   }
-  div.weex-div.weex-ct.price-num {
-    display: none;
-  }
-
-
   .border-cell {
     background-color: #F9F9F9;
     width: 750px;
