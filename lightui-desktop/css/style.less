@@ -45,12 +45,9 @@
 .demo {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 50px 20px 30px;
-    background: #fff;
-    // box-shadow: 0px -2px 8px 0px #eee;
-    // margin-top: 40px;
-    min-height: calc(100% - 212px);
+    padding-left: 20px;
+    min-height: calc(100% - 242px);
+    padding-bottom: 80px;
 }
 .text-error {
     color: #ff4949;
@@ -69,6 +66,31 @@
 }
 .demo-form-inline .el-form-item {
 	margin-bottom: 0;
+}
+.demo-form {
+    & .el-form-item {
+        margin-bottom: 40px;
+        & .el-form-item__content{
+            width: 460px;
+            & .el-input {
+                width: 460px;
+            }
+            & .el-textarea {
+                width: 460px;
+            }
+            & .el-select {
+                width: 460px;
+                .el-input, .el-input .el-input__inner {
+                    width: 460px;
+                }
+            }
+        }
+    }
+}
+.form-right {
+    .el-form-item__content {
+        text-align: right;
+    }
 }
 .w300 {
     width: 300px;
@@ -138,4 +160,147 @@ h4 {
     }
 }
 
+.el-pagination {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    min-width: 450px;
+}
+
+
+.dialog-feeddetail .el-dialog__body {
+    text-align: left;
+}
+
+.dialog-feeddetail .el-form-item {
+    line-height: 20px;
+}
+
+.dialog-feeddetail .el-form-item__label {
+    padding: 0;
+    line-height: 20px;
+}
+
+.dialog-feeddetail .el-form-item__content {
+    width: 300px;
+    color: #808080;
+    letter-spacing: 0.21px;
+    word-break: break-word;
+    line-height: 20px;
+}
+
+.link {
+    color: #0AA9F1;
+    :hover {
+        color: #46C5FF;
+        text-decoration: underline;
+    }
+    :active {
+        color: #0997D8;
+        text-decoration: underline;        
+    }
+}
+
+.nav-text {
+    font-size: 13px;
+}
+.el-breadcrumb__item:last-child .el-breadcrumb__item__inner, .el-breadcrumb__item:last-child .el-breadcrumb__item__inner a, .el-breadcrumb__item:last-child .el-breadcrumb__item__inner a:hover, .el-breadcrumb__item:last-child .el-breadcrumb__item__inner:hover {
+    color: #909090;
+    cursor: text;
+    text-decoration: none;
+}
+
+.el-message-box__btns button:nth-child(2) {
+    margin-left: 0px;
+}
+.el-breadcrumb__item__inner, .el-breadcrumb__item__inner a {
+    color:#0AA9F1;
+}
+.page-head {
+    min-width: 760px;
+    height: 150px;
+    padding: 15px 30px;
+    border-bottom: 1px solid #D2D9E3;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+
+    .page-head-left {
+        display: flex;
+        align-items: center;
+        width: 60%;
+        .page-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+        .page-hello {
+            .hello {
+                font-size: 18px;
+                line-height: 28px;
+                font-weight: 500;
+                color: #303030;
+                margin-bottom: 12px;
+            }
+            .info {
+                color: #606060;
+                line-height: 24px;
+            }
+            
+        }
+    }
+    .page-head-right {
+        width: 40%;
+        display: flex;
+        align-items: center;
+        .page-head-right-item {
+            padding: 0 15px;
+            .title {
+                color: #909090;
+                font-size: 14px;
+                line-height: 22px;
+                margin-bottom: 4px;
+            }
+            .num {
+                color: #303030;
+                font-size: 24px;
+                line-height: 38px;
+                .ranking {
+                    font-size: 20px;
+                    color: #909090;
+                }
+            }
+            &:nth-child(2) .num {
+                display: flex;
+            }
+        }
+    }
+}
+.page-body {
+    .block {
+        margin: 20px;
+        background: #fff;
+        border: solid 1px #D2D9E3;
+        border-radius: 2px;
+        .block-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+            border-bottom: solid 1px #D2D9E3;
+            padding: 0 15px;
+            font-size: 16px;
+            .block-title {
+                font-weight: 500;
+            }
+            .block-head-btn {
+                font-size: 14px;
+                color: #0AA9F1;
+            }
+        }
+    }
+}
 

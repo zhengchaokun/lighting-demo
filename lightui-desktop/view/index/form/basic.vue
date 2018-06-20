@@ -3,9 +3,9 @@
     <div style="height: 100%;">
         <top :title="title" :desc="desc"></top>
         <div class="demo">
-            <el-form ref="form" :model="form" label-width="80px">
+            <el-form class="demo-form" ref="form" :model="form" label-width="110px">
                 <el-form-item label="标题">
-                    <el-input v-model="form.name">输入标题</el-input>
+                    <el-input v-model="form.name" placeholder="输入标题">输入标题</el-input>
                 </el-form-item>
                 <el-form-item label="时间选择器">
                     <el-col :span="11">
@@ -57,11 +57,12 @@
                 <el-form-item label="文本框">
                     <el-input type="textarea" v-model="form.desc" placeholder="输入文本"></el-input>
                 </el-form-item>
-                <el-form-item>
+                <div class="form-line"></div>
+                <el-form-item class="form-right">
                     同意<a></a><el-button type="text" style="margin-right: 20px;">《开发者协议》</el-button><el-checkbox></el-checkbox>
                 </el-form-item>
-                <el-form-item>
-                    <el-button :loading="loading" @click="onSubmit">提交</el-button>
+                <el-form-item class="form-right">
+                    <el-button type="primary" :loading="loading" @click="onSubmit">提交</el-button>
                 </el-form-item>
                 </el-form>
        </div>
@@ -115,4 +116,11 @@
 .el-radio-group {
     width: 100%;
 }
+.form-line {
+    width: 590px;
+    height: 1px;
+    background: #DCE0E7;
+    margin-bottom: 30px;
+}
 </style>
+

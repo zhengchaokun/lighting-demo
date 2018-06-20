@@ -1,7 +1,7 @@
 
 <template>
     <div style="height: 100%;">
-        <div class="sub-sidebar">
+        <!-- <div class="sub-sidebar">
             <div class="sub-sidebar-title">{{ currentMenu.title }}</div>
             <ul class="sub-sidebar-menu">
                 <template  v-for="(item,index) in currentMenu.options">
@@ -10,7 +10,7 @@
                     </li>
                 </template>
             </ul>
-        </div>
+        </div> -->
         <div class="content">
             <router-view></router-view>
         </div>  
@@ -19,7 +19,8 @@
 <script>
     import menus from "menus"
     import App from "light"
-    // import API from 'api'
+    const API = require('../../lib/api');
+    
     export default {
         data(){
             return {
@@ -32,6 +33,8 @@
             selectOption(item){
                 App.navigate('#' + item.path,{});
                 this.currentPath = item.path;
+                API.navList[1].title = item.title;
+                API.navList[1].path = item.path;
             }
         },
         watch:{
@@ -47,6 +50,9 @@
         }
     }
 </script>
-<style lang="less">
+<style lang="less" scoped>
+.main .content {
+    padding: 0;
+}
 
 </style>

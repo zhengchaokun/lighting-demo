@@ -2,7 +2,7 @@
 <template>
     <div style="height: 100%;">
         <div class="sub-sidebar">
-            <div class="sub-sidebar-title">{{ currentMenu.title }}</div>
+            <div class="sub-sidebar-title" :title="currentMenu.title">{{ currentMenu.title }}</div>
             <ul class="sub-sidebar-menu">
                 <template  v-for="(item,index) in currentMenu.options">
                     <li class="sub-sidebar-li" @click="selectOption(item)" :class="{'selected':currentPath==item.path}" :key="index">
@@ -19,11 +19,11 @@
 <script>
     import menus from "menus"
     import App from "light"
-    // import API from 'api'
+    const API = require('../../lib/api');
     export default {
         data(){
             return {
-                currentMenu: menus[1],
+                currentMenu: menus[3],
                 currentPath: '',
                 navList:['基础页','布局']
             }
@@ -32,6 +32,8 @@
             selectOption(item){
                 App.navigate('#' + item.path,{});
                 this.currentPath = item.path;
+                API.navList[1].title = item.title;
+                API.navList[1].path = item.path;
             }
         },
         watch:{

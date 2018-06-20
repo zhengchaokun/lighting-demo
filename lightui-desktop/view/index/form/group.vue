@@ -3,7 +3,7 @@
     <div style="height: 100%;">
         <top :title="title" :desc="desc"></top>
         <div class="demo">
-            <el-form ref="ruleForm" :model="form" :rules="rules" label-width="90px">
+            <el-form class="demo-form" ref="ruleForm" :model="form" :rules="rules" label-width="110px">
                 <div class="form-item-wrap">
                     <div class="form-item-top" @click="showItem=!showItem" :class="{'active':showItem}">
                         基本信息
@@ -131,8 +131,8 @@
                         </div>
                     </el-collapse-transition>
                 </div>
-                <el-form-item class="mgt40">
-                    <el-button @click="onSubmit" :loading="loading">申请职位</el-button>
+                <el-form-item class="mgt40 form-right">
+                    <el-button type="primary" @click="onSubmit" :loading="loading">申请职位</el-button>
                 </el-form-item>
             </el-form>
         </div>
@@ -256,7 +256,7 @@
 </script>
 <style lang="less" scoped>
 .el-form {
-    width: 410px;
+    width: 590px;
 }
 .el-radio-group {
     width: 100%;

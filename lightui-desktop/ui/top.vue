@@ -20,19 +20,16 @@
 <style lang="less" scoped>
 
 .wrap {
-    background: #fff;
-    padding: 20px;
-    border-bottom: solid 1px #eee;
-    box-shadow: 0px 2px 8px 0px #eee;  
+    margin-bottom: 80px;
 }
 
 .title {
     color: #303030;
-    font-size: 20px;
+    font-size: 24px;
 }
 
 .desc {
-    margin-top: 20px;
+    margin-top: 18px;
     color: #606060;
     font-size: 14px;
 }

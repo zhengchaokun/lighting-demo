@@ -92,7 +92,7 @@ export default {
 
 <style lang="less" scoped>
 .el-row {
-    width: 80%;
+    width: 100%;
     margin-bottom: 20px;
     &:last-child {
       margin-bottom: 0;

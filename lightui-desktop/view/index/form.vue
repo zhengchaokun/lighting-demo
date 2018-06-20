@@ -19,10 +19,12 @@
 <script>
     import menus from "menus"
     import App from "light"
+    const API = require('../../lib/api');
+    
     export default {
         data(){
             return {
-                currentMenu: menus[3],
+                currentMenu: menus[4],
                 currentPath: '',
                 navList:['表单页','基础表单']
             }
@@ -31,6 +33,8 @@
             selectOption(item){
                 App.navigate('#' + item.path,{});
                 this.currentPath = item.path;
+                API.navList[1].title = item.title;
+                API.navList[1].path = item.path;
             }
         },
         watch:{

@@ -3,7 +3,7 @@
     <div style="height: 100%;">
         <top :title="title" :desc="desc"></top>    
         <div class="demo">
-            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+            <el-form class="demo-form demo-ruleForm" :model="ruleForm" :rules="rules" ref="ruleForm" label-width="110px">
                 <el-form-item label="需求名称" prop="name">
                     <el-input v-model="ruleForm.name" placeholder="请输入3-15个字符"></el-input>
                 </el-form-item>
@@ -32,16 +32,16 @@
                 <el-form-item label="影响的项目" prop="type">
                     <el-checkbox-group v-model="ruleForm.type">
                         <el-row :gutter="40">
-                            <el-col :span="12">
+                            <el-col :span="6">
                                 <el-checkbox label="项目1" name="type"></el-checkbox>
                             </el-col>
-                            <el-col :span="12">
+                            <el-col :span="6">
                                 <el-checkbox label="项目2" name="type"></el-checkbox>     
                             </el-col>
-                            <el-col :span="12">
+                            <el-col :span="6">
                                 <el-checkbox label="项目3" name="type"></el-checkbox>                               
                             </el-col>
-                            <el-col :span="12">
+                            <el-col :span="6">
                                 <el-checkbox label="项目4" name="type"></el-checkbox>
                             </el-col>
                         </el-row>
@@ -62,7 +62,7 @@
                 <el-form-item label="需求描述" prop="desc">
                     <el-input type="textarea" v-model="ruleForm.desc" placeholder="请输入10-100个字符"></el-input>
                 </el-form-item>
-                <el-form-item>
+                <el-form-item class="form-right">
                     <el-button type="primary" @click="submitForm('ruleForm')">创建</el-button>
                     <el-button type="plain" @click="resetForm('ruleForm')">重置</el-button>
                 </el-form-item>

@@ -9,7 +9,7 @@
                 :data="tableData"
                 stripe
                 @filter-change="handleFilterChange"
-                style="width: 80%">
+                style="width: 100%">
                 <el-table-column
                     type="selection"
                     width="60">
@@ -45,14 +45,14 @@
                     :filters="[{text: '全部', value: '全部'},{ text: '测试', value: '0' }, { text: '正式', value: '1' }]"
                     :filter-reset="true"
                     :filter-method="filterTag">
-                    <template scope="scope">
+                    <template slot-scope="scope">
                         <span :class="[{'text-error' : scope.row.type=='0'},{'text-success': scope.row.type=='1'}]">{{ scope.row.type=='0' ? '测试' : '正式' }}</span>
                     </template>
                 </el-table-column>
                 <el-table-column
                     label="操作"
                     min-width="60">
-                    <template scope="scope">
+                    <template slot-scope="scope">
                         <el-dropdown>
                             <span class="el-dropdown-link">
                                 <i class="el-icon-more"></i>

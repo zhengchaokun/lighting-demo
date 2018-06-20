@@ -10,7 +10,7 @@
                 <el-step title="期望工作"></el-step>
             </el-steps>
 
-            <el-form v-if="activeIndex==0" class="mgt40" ref="ruleForm1" :model="form" :rules="rules" label-width="90px">
+            <el-form v-if="activeIndex==0" class="demo-form mgt40" ref="ruleForm1" :model="form" :rules="rules" label-width="110px">
                 <el-form-item label="姓名" prop="name">
                     <el-input v-model="form.name" placeholder="请填写姓名" :minlength="2" :maxlength="15"></el-input>
                 </el-form-item>
@@ -38,12 +38,12 @@
                 <el-form-item label="联系地址" prop="region">
                     <el-input v-model="form.region" placeholder="请填写正确地址以接收邮件"></el-input>
                 </el-form-item>
-                <el-form-item class="mgt40">
+                <el-form-item class="mgt40 form-right">
                     <el-button type="primary" @click="check(1)">下一步</el-button>                    
                 </el-form-item>
             </el-form>
 
-            <el-form v-if="activeIndex==1" class="mgt40" ref="ruleForm2" :model="form" :rules="rules" label-width="90px">
+            <el-form v-if="activeIndex==1" class="mgt40 demo-form" ref="ruleForm2" :model="form" :rules="rules" label-width="110px">
                 <el-form-item label="最高学历">
                     <el-radio-group v-model="form.diploma">
                         <el-row>
@@ -68,13 +68,13 @@
                 <el-form-item label="毕业时间" prop="graduate_date">
                     <el-date-picker type="date" placeholder="请选择毕业时间" v-model="form.graduate_date" style="width: 100%;"></el-date-picker>
                 </el-form-item>
-                <el-form-item class="mgt40">
-                    <el-button type="primary" @click="back">上一步</el-button>                                        
+                <el-form-item class="mgt40 form-right">
+                    <el-button type="plain" @click="back">上一步</el-button>                                        
                     <el-button type="primary" @click="check(2)">下一步</el-button>                    
                 </el-form-item>
             </el-form>
             
-            <el-form v-if="activeIndex==2" class="mgt40" ref="ruleForm3" :model="form" :rules="rules" label-width="90px">
+            <el-form v-if="activeIndex==2" class="mgt40 demo-form" ref="ruleForm3" :model="form" :rules="rules" label-width="110px">
                 <el-form-item label="公司名称" prop="formal_company">
                     <el-input v-model="form.formal_company" placeholder="请填写公司名称"></el-input>
                 </el-form-item>
@@ -87,13 +87,13 @@
                 <el-form-item label="离职原因" prop="quit_reason">
                     <el-input type="textarea" v-model="form.quit_reason" placeholder="请填写离职原因"></el-input>
                 </el-form-item>
-                <el-form-item class="mgt40">
-                    <el-button type="primary" @click="back">上一步</el-button>                                        
+                <el-form-item class="mgt40 form-right">
+                    <el-button type="plain" @click="back">上一步</el-button>                                        
                     <el-button type="primary" @click="check(3)">下一步</el-button>                    
                 </el-form-item>
             </el-form>
             
-            <el-form v-if="activeIndex==3||activeIndex==4" class="mgt40" ref="ruleForm4" :model="form" :rules="rules" label-width="90px">
+            <el-form v-if="activeIndex==3||activeIndex==4" class="mgt40 demo-form" ref="ruleForm4" :model="form" :rules="rules" label-width="110px">
                 <el-form-item label="岗位" prop="wanted_job">
                     <el-input v-model="form.wanted_job" placeholder="请填写要应聘的岗位"></el-input>
                 </el-form-item>
@@ -114,8 +114,8 @@
                 <el-form-item label="其他期望">
                     <el-input type="textarea" v-model="form.needs" placeholder="其他要求或问题"></el-input>
                 </el-form-item>
-                <el-form-item class="mgt40">
-                    <el-button type="primary" @click="back" v-if="activeIndex>0">上一步</el-button>                                        
+                <el-form-item class="mgt40 form-right">
+                    <el-button type="plain" @click="back" v-if="activeIndex>0">上一步</el-button>                                        
                     <el-button type="primary" @click="check(4)" :loading="loading">申请职位</el-button>
                 </el-form-item>
             </el-form>
@@ -259,10 +259,10 @@
 </script>
 <style lang="less" scoped>
 .el-steps.is-horizontal {
-    width: 410px;
+    width: 590px;
 }
 .el-form {
-    width: 410px;
+    // width: 410px;
 }
 .el-radio-group {
     width: 100%;

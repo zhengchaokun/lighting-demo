@@ -55,7 +55,7 @@
                 empty-text="查询结果为空"
                 :data="tableData"
                 stripe
-                style="width: 80%">
+                style="width: 100%">
                 <el-table-column
                     prop="name"
                     label="App名称"
@@ -200,7 +200,8 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 80%;
+    width: 100%;
+    min-width: 600px;
     line-height: 32px;
     margin-bottom: 30px;
 }

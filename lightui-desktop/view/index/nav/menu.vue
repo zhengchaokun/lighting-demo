@@ -4,7 +4,7 @@
         <top :title="title" :desc="desc"></top>    
         <div class="demo">
             <el-row class="w100">
-                <el-col :span="18">
+                <el-col :span="24">
                     <el-menu :theme="theme" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
                         <el-menu-item index="1">组件案例</el-menu-item>
                         <el-submenu index="2">
@@ -176,9 +176,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.demo {
-    // flex-direction: row;
-    // justify-content: center;
-    // align-items: flex-start;
-}
+
 </style>

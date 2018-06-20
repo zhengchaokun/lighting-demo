@@ -12,11 +12,14 @@
 </head>
 <body>
 <div id="main">
-    <view id="index" home="true" />
+    <view id="index"/>
+    <view id="login" home="true"/>
+    <view id="dashboard" />
+
     <!-- 控制台 -->
-    <view id="index/dashboard" parent="index" />
-    <view id="index/dashboard/analysis" parent="index/dashboard"/>
-    <view id="index/dashboard/index" parent="index/dashboard" />    
+    <view id="dashboard/analysis" parent="dashboard"/>
+    <view id="dashboard/monitor" parent="dashboard" />    
+    <view id="dashboard/index" parent="dashboard" />    
     
     <!-- 基础页 -->
     <view id="index/basic" parent="index" />
@@ -78,5 +81,12 @@
 <!--<snippet id="footer"/>-->
 
 <script src="app.js"></script>
+<script src="lib/mlight.js"></script>
+<script>
+    window.onload = function() {
+       console.log(window.Light) 
+    }
+    
+</script>
 </body>
 </html>

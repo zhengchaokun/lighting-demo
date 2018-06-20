@@ -10,7 +10,7 @@
                 class="mgt20"
                 :data="tableData"
                 stripe
-                style="width: 80%">
+                style="width: 100%">
                 <el-table-column
                     prop="name"
                     label="App名称"

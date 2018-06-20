@@ -1,9 +1,12 @@
 let API = {
+    navList: [
+        {},{}
+    ],
     totalData: [
         {
             id: 1100,
             type: '1',
-            address: 'https://light.hscloud.cn/portal/index.html',
+            address: 'https://light.hscloud.cn/portal/lighting-ui/index.html',
             date: '2017-05-02 09:23:23',
             amount_preview: 233,
             amount_download: 98,
@@ -230,7 +233,132 @@ let API = {
             developer: 'light研发团队'
         }
     ],
+    certList: [
+        {
+            id: 2001,
+            name: '安卓测试证书for评分组件',
+            type: '0',
+            date: 1528858487817,
+            platform: 'android'
+        }, {
+            id: 2002,
+            name: 'iOS测试证书for评分组件',
+            type: '0',
+            date: 1503858487817,
+            platform: 'ios'
+        }, {
+            id: 2003,
+            name: '安卓测试证书for分时k线',
+            type: '0',
+            date: 1520858456555,
+            platform: 'android'
+        }, {
+            id: 2004,
+            name: 'iOS测试证书for分时k线',
+            type: '0',
+            date: 1492185848112,
+            platform: 'ios'
+        }, {
+            id: 2005,
+            name: '安卓正式证书for登录组件',
+            type: '1',
+            date: 1520858456555,
+            platform: 'android'
+        }, {
+            id: 2006,
+            name: 'iOS正式证书for登录组件',
+            type: '1',
+            date: 1492185848112,
+            platform: 'ios'
+        }, {
+            id: 2007,
+            name: '安卓测试证书for行情组件',
+            type: '0',
+            date: 1520858456555,
+            platform: 'android'
+        }, {
+            id: 2008,
+            name: 'iOS测试证书for行情组件',
+            type: '0',
+            date: 1492185848112,
+            platform: 'ios'
+        }, {
+            id: 2009,
+            name: '安卓测试证书for一指点金',
+            type: '0',
+            date: 1520858456555,
+            platform: 'android'
+        }, {
+            id: 2010,
+            name: 'iOS测试证书for亲戚关系计算器',
+            type: '0',
+            date: 1492185848112,
+            platform: 'ios'
+        }, {
+            id: 2011,
+            name: '安卓正式证书for亲戚关系计算器',
+            type: '1',
+            date: 1520858456555,
+            platform: 'android'
+        }, {
+            id: 2012,
+            name: 'iOS正式证书for仿真交易',
+            type: '1',
+            date: 1492185848112,
+            platform: 'ios'
+        }, {
+            id: 2013,
+            name: '安卓正式证书for登录组件',
+            type: '1',
+            date: 1520858456555,
+            platform: 'android'
+        }, {
+            id: 2014,
+            name: 'iOS正式证书for用户评论组件',
+            type: '1',
+            date: 1492185848112,
+            platform: 'ios'
+        }, {
+            id: 2015,
+            name: '安卓测试证书for滑动组件',
+            type: '0',
+            date: 1520858456555,
+            platform: 'android'
+        }, {
+            id: 2016,
+            name: 'iOS测试证书for滑动组件',
+            type: '0',
+            date: 1492185848112,
+            platform: 'ios'
+        }, {
+            id: 2017,
+            name: '安卓测试证书for股游记',
+            type: '0',
+            date: 1520858456555,
+            platform: 'android'
+        }, {
+            id: 2018,
+            name: 'iOS测试证书for股游记',
+            type: '0',
+            date: 1492185848112,
+            platform: 'ios'
+        },
+        {
+            id: 2019,
+            name: '安卓正式证书for股游记',
+            type: '1',
+            date: 1520858456555,
+            platform: 'android'
+        }, {
+            id: 2020,
+            name: 'iOS正式证书for股游记',
+            type: '1',
+            date: 1492185848112,
+            platform: 'ios'
+        },
+        
 
+    ],
     groupList: [
         {
             create_date: 1514272460443,
@@ -370,7 +498,56 @@ let API = {
         var second = date.getSeconds();
         second = second < 10 ? ('0' + second) : second;
         return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
+    },
+    parseTypeColor(type) {
+        if(type=='0') {
+            return 'text-error'
+        } else {
+            return 'text-success'
+        }
+    },
+    parseTypeText(type) {
+        if (type == '0') {
+            return '测试'
+        } else {
+            return '正式'
+        }
+    },
+    parsePlatform(platform) {
+        if (platform == 'ios') {
+            return 'iOS'
+        } else {
+            return 'Android'
+        }
+    },
+    parseNav(index, menu) {
+        this.navList[0] = { title: menu[index].title, path: menu[index].options[0].path };
+        this.navList[1] = { title: menu[index].options[0].title, path: menu[index].options[0].path };
+    },
+    deepCopy(source) {
+        var that = this;
+        var result = {};
+        for (var key in source) {
+            result[key] = typeof source[key] === 'object' ? this.deepCopy(source[key]) : source[key];
+        }
+        return result; 
     }
 }
-
+Date.prototype.Format = function (fmt) { //author: meizz
+    var o = {
+        "M+": this.getMonth() + 1, //月份
+        "d+": this.getDate(), //日
+        "h+": this.getHours(), //小时
+        "m+": this.getMinutes(), //分
+        "s+": this.getSeconds(), //秒
+        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+        "S": this.getMilliseconds() //毫秒
+    };
+    if (/(y+)/.test(fmt))
+        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt))
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    return fmt;
+};
 module.exports = API;

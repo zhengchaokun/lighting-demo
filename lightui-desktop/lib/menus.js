@@ -2,19 +2,25 @@ var menus = [
     {
         index: 0,
         title: 'dashboard',
-        options: [
-            {
-                title: '个人中心',
-                path: '/index/dashboard/index'
-            },
-            {
-                title: '图表',
-                path: '/index/dashboard/analysis'
-            }]
+        icon:'dashboard',
+        path: '/dashboard/index'
     },
     {
         index: 1,
+        title: '分析页',
+        icon: 'dashboard',
+        path: '/dashboard/analysis'
+    },
+    {
+        index: 2,
+        title: '监控页',
+        icon: 'dashboard',
+        path: '/dashboard/monitor'        
+    },
+    {
+        index: 3,
         title: '全局页',
+        icon: 'basic',        
         options: [
             {
                 title: '布局',
@@ -33,22 +39,24 @@ var menus = [
             }
         ]
     },
+    // {
+    //     index: 2,
+    //     title: '导航页',
+    //     icon: 'nav',        
+    //     options: [
+    //         {
+    //             title: '导航菜单',
+    //             path: '/index/nav/menu'
+    //         },
+    //         {
+    //             title: '标签页',
+    //             path: '/index/nav/tabs'
+    //         }]
+    // },
     {
-        index: 2,
-        title: '导航页',
-        options: [
-            {
-                title: '导航菜单',
-                path: '/index/nav/menu'
-            },
-            {
-                title: '标签页',
-                path: '/index/nav/tabs'
-            }]
-    },
-    {
-        index: 3,
+        index: 4,
         title: '表单页',
+        icon: 'form',        
         options: [
             {
                 title: '基础表单',
@@ -69,8 +77,9 @@ var menus = [
         ]
     },
     {
-        index: 4,
+        index: 5,
         title: '表格页',
+        icon: 'table',
         options: [
             {
                 title: '基础表格',
@@ -89,8 +98,9 @@ var menus = [
             }]
     },
     {
-        index: 5,
+        index: 6,
         title: '弹框页',
+        icon: 'dialog',        
         options: [
             {
                 title: '提示弹框',
@@ -106,27 +116,29 @@ var menus = [
             }
         ]
     },
-    {
-        index: 6,
-        title: '通知页',
-        options: [
-            {
-                title: '操作反馈',
-                path: '/index/notice/message'
-            },
-            {
-                title: '重要提示',
-                path: '/index/notice/alert'
-            },
-            {
-                title: '通知',
-                path: '/index/notice/notification'
-            }
-        ]
-    },
+    // {
+    //     index: 6,
+    //     title: '通知页',
+    //     icon: 'notice',        
+    //     options: [
+    //         {
+    //             title: '操作反馈',
+    //             path: '/index/notice/message'
+    //         },
+    //         {
+    //             title: '重要提示',
+    //             path: '/index/notice/alert'
+    //         },
+    //         {
+    //             title: '通知',
+    //             path: '/index/notice/notification'
+    //         }
+    //     ]
+    // },
     {
         index: 7,
         title: '卡片页',
+        icon: 'card',        
         options: [
             {
                 title: '基础卡片',
@@ -141,6 +153,7 @@ var menus = [
     {
         index: 8,
         title: '异常页',
+        icon: 'error',        
         options: [
             {
                 title: '403',

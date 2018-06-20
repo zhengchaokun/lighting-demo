@@ -6,7 +6,7 @@
             <el-table
                 :data="tableData"
                 stripe
-                style="width: 80%">
+                style="width: 100%">
                 <el-table-column
                     prop="name"
                     label="App名称"
@@ -24,7 +24,7 @@
                 </el-table-column>
                
                 <el-table-column type="expand">
-                    <template scope="props">
+                    <template slot-scope="props">
                         <el-form label-position="left" inline class="demo-table-expand">
                             <el-form-item label="发布日期">
                                 <span>{{ props.row.date }}</span>
@@ -113,7 +113,7 @@
 
     .el-form-item__content {
         width: auto;
-        max-width: 249px;
+        max-width: 290px;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
