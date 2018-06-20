@@ -70,9 +70,7 @@
             { src: "https://gd1.alicdn.com/bao/uploaded/i1/TB1PXJCJFXXXXciXFXXXXXXXXXX_!!0-item_pic.jpg",imgInfo:"中国瘟鸡股市持续暴跌"  }
         ],
         imgInfoTextStyle: {
-          height: '200px',
-          lines: 4,
-          color: 'red'
+           color: '#b9f4ec'
         },
       };
     },

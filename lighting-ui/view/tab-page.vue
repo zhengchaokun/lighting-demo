@@ -24,9 +24,7 @@
               :key="key"
               :accessible="true"
               aria-label="招商公路华能水电何以成为资金“新宠”">
-              <lc-pan-item :ext-id="'1-' + (v) + '-' + (key)"
-                url="https://h5.m.taobao.com/trip/ticket/detail/index.html?scenicId=2675"
-                @LcPanItemPan="LcPanItemPan">
+
                 <lc-item image="http://img5.imgtn.bdimg.com/it/u=2306629954,650632153&fm=27&gp=0.jpg"
                   :image-text="tabTitles[index].title"
                   title="2018港股投资：不仅看“大而美”，中小市值公司“颜值”也不低"
@@ -34,7 +32,7 @@
                   :tags="tags"
                   price-desc="每日经济新闻 12-29 08:23">
                 </lc-item>
-              </lc-pan-item>
+ 
             </cell>
           </list>
         </lc-tab-page>
@@ -60,9 +58,7 @@
               :key="key"
               :accessible="true"
               aria-label="招商公路华能水电何以成为资金“新宠”">
-              <lc-pan-item :ext-id="'1-' + (v) + '-' + (key)"
-                url="https://h5.m.taobao.com/trip/ticket/detail/index.html?scenicId=2675"
-                @LcPanItemPan="LcPanItemPan">
+
                 <lc-item image="http://img5.imgtn.bdimg.com/it/u=2306629954,650632153&fm=27&gp=0.jpg"
                   :image-text="tabTitles1[index].title"
                   title="2018港股投资：不仅看“大而美”，中小市值公司“颜值”也不低"
@@ -70,7 +66,7 @@
                   :tags="tags"
                   price-desc="每日经济新闻 12-29 08:23">
                 </lc-item>
-              </lc-pan-item>
+
             </cell>
           </list>
         </lc-tab-page>
@@ -94,9 +90,7 @@
               :key="key"
               :accessible="true"
               aria-label="招商公路华能水电何以成为资金“新宠”">
-              <lc-pan-item :ext-id="'1-' + (v) + '-' + (key)"
-                url="https://h5.m.taobao.com/trip/ticket/detail/index.html?scenicId=2675"
-                @LcPanItemPan="LcPanItemPan">
+
                 <lc-item image="http://img5.imgtn.bdimg.com/it/u=2306629954,650632153&fm=27&gp=0.jpg"
                   :image-text="tabTitles2[index].title"
                   title="2018港股投资：不仅看“大而美”，中小市值公司“颜值”也不低"
@@ -104,7 +98,7 @@
                   :tags="tags"
                   price-desc="每日经济新闻 12-29 08:23">
                 </lc-item>
-              </lc-pan-item>
+
             </cell>
           </list>
         </lc-tab-page>
@@ -129,9 +123,7 @@
               :key="key"
               :accessible="true"
               aria-label="招商公路华能水电何以成为资金“新宠”">
-              <lc-pan-item :ext-id="'1-' + (v) + '-' + (key)"
-                url="https://h5.m.taobao.com/trip/ticket/detail/index.html?scenicId=2675"
-                @LcPanItemPan="LcPanItemPan">
+
                 <lc-item image="http://img5.imgtn.bdimg.com/it/u=2306629954,650632153&fm=27&gp=0.jpg"
                   :image-text="tabTitles2[index].title"
                   title="2018港股投资：不仅看“大而美”，中小市值公司“颜值”也不低"
@@ -139,7 +131,7 @@
                   :tags="tags"
                   price-desc="每日经济新闻 12-29 08:23">
                 </lc-item>
-              </lc-pan-item>
+
             </cell>
           </list>
         </lc-tab-page>
@@ -169,13 +161,9 @@
   }
   .item-container {
     width: 750px;
+    height: 320px;
     background-color: #F9F9F9;
   }
-  div.weex-div.weex-ct.price-num {
-    display: none;
-  }
-
-
   .border-cell {
     background-color: #F9F9F9;
     width: 750px;
@@ -201,7 +189,6 @@
   import Category from 'lighting-ui/packages/_mods/category.vue';
   import Config from './tools/tabpage-config.js'
   import LcItem from './tools/lc-item.vue';
-  import LcPanItem from './tools/pan-item.vue';
   import Utils from './tools/utils.js';
   
   import LcTabPage from 'lighting-ui/packages/lc-tab-page';
@@ -211,7 +198,7 @@
 
 
   export default {
-    components: { LcTabPage, LcPanItem, LcItem, Title, Category },
+    components: { LcTabPage, LcItem, Title, Category },
     data: () => ({
       tabTitles: Config.tabTitles,
       tabTitles1: Config.tabTitles1,

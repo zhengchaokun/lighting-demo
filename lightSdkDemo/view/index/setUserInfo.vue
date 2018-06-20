@@ -50,7 +50,7 @@
                     that.tipsCont="请填写登录信息";
                     return false;
                 }
-                LightSDK.native.setInfo({
+                LightSDK.native.userSetInfo({
                     "uid":that.uid,
                     "mobile":that.mobile,
                     "token":that.token,

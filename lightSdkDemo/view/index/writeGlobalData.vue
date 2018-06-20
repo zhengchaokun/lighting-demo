@@ -54,15 +54,16 @@
                 }
                 LightSDK.native.writeData({
                     key:that.jsonName,
-                    value:that.jsonvalue
+                    value:that.jsonvalue,
+                    domain:'memory'
                 },function(data){
-                    // if(data.info.error_code!='0'){
-                    //     that.Dialog.toast({
-                    //         message: data.info.error_message,
-                    //         duration: 2
-                    //     });
-                    //     return false;
-                    // }
+                    if(data.info.error_code!='0'){
+                        that.Dialog.toast({
+                            message: data.info.error_message,
+                            duration: 2
+                        });
+                        return false;
+                    }
                     that.Dialog.toast({
                         message: "保存成功，读取数据试试吧！",
                         duration: 2
@@ -81,18 +82,15 @@
                 
                 LightSDK.native.readData({
                     key:that.jsonName,
+                    domain:'memory'
                 },function(data){
-                    // if(data.info.error_code!='0'){
-                    //     that.Dialog.toast({
-                    //         message: data.info.error_message,
-                    //         duration: 2
-                    //     });
-                    //     return false;
-                    // }
-                    that.Dialog.toast({
-                        message: "数据读取成功",
-                        duration: 2
-                    });
+                    if(data.info.error_code!='0'){
+                        that.Dialog.toast({
+                            message: data.info.error_message,
+                            duration: 2
+                        });
+                        return false;
+                    }
                     that.jsonvalue = data.data.result;
                 })
             },
@@ -106,7 +104,8 @@
                     return false;
                 }
                 LightSDK.native.deleteData({
-                    key:that.jsonName
+                    key:that.jsonName,
+                    domain:'memory'
                 },function(data){
                     // if(data.info.error_code!='0'){
                     //     that.Dialog.toast({

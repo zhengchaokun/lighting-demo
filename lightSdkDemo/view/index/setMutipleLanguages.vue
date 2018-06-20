@@ -4,8 +4,7 @@
         <div><text class="detailHead">说明：</text></div>
         <div><text class="detailDesc">通过js接口设置多国语言</text></div>
         <div><text class="detailHead">示例：</text></div>
-        <div class="normalList"><text>测试</text><input class="inputStyle" type="text"/></div>
-        <div class="normalList"><text class="buttonStyle" @click="setMutipleLanguages()">设置</text></div>
+        <div class="normalList"><text class="buttonStyle" @click="setMutipleLanguages()">设置英文</text></div>
         <div><text class="detailHead">文档：</text></div>
         <div class="flex-row" @click="toOnlineApi()">
             <text class="onlineLink">查看在线文档</text>

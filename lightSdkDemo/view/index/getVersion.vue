@@ -27,7 +27,7 @@
         methods:{
             getVersion:function(){
                 var that = this;
-                LightSDK.native.version({},function(data){
+                LightSDK.native.getVersion({},function(data){
                     if(data.info.error_code!='0'){
                         that.Dialog.toast({
                             message: data.info.error_message,

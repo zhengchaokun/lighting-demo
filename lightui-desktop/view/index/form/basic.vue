@@ -3,17 +3,17 @@
     <div style="height: 100%;">
         <top :title="title" :desc="desc"></top>
         <div class="demo">
-            <el-form ref="form" :model="form" label-width="80px">
+            <el-form class="demo-form" ref="form" :model="form" label-width="110px">
                 <el-form-item label="标题">
-                    <el-input v-model="form.name">输入标题</el-input>
+                    <el-input v-model="form.name" placeholder="输入标题">输入标题</el-input>
                 </el-form-item>
                 <el-form-item label="时间选择器">
                     <el-col :span="11">
-                    <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
+                        <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" :pickerOptions="pickerOptions" style="width: 100%;"></el-date-picker>
                     </el-col>
                     <el-col class="keb-line" :span="2">—</el-col>
                     <el-col :span="11">
-                    <el-time-picker type="fixed-time" placeholder="选择时间" v-model="form.time1" style="width: 100%;"></el-time-picker>
+                        <el-time-picker type="fixed-time" placeholder="选择时间" v-model="form.time1" style="width: 100%;"></el-time-picker>
                     </el-col>
                 </el-form-item>
                 <el-form-item label="单选框">
@@ -57,12 +57,12 @@
                 <el-form-item label="文本框">
                     <el-input type="textarea" v-model="form.desc" placeholder="输入文本"></el-input>
                 </el-form-item>
-                <el-form-item>
-                    同意<a></a><el-button type="text" @click="onSubmit" style="margin-right: 20px;">《开发者协议》</el-button><el-checkbox></el-checkbox>
+                <div class="form-line"></div>
+                <el-form-item class="form-right">
+                    同意<a></a><el-button type="text" style="margin-right: 20px;">《开发者协议》</el-button><el-checkbox></el-checkbox>
                 </el-form-item>
-                <el-form-item>
-                    <el-button @click="onSubmit">提交</el-button>
-
+                <el-form-item class="form-right">
+                    <el-button type="primary" :loading="loading" @click="onSubmit">提交</el-button>
                 </el-form-item>
                 </el-form>
        </div>
@@ -87,25 +87,40 @@
                     type: [],
                     resource: '',
                     desc: ''
+                },
+                loading: false,
+                pickerOptions: {
+                    disabledDate(time) {
+                        return;
+                    }
                 }
             }
         },
         methods: {
             onSubmit() {
-                this.$message({
-                    message: '提交成功！',
-                    type: 'success'
-                });
+                var that = this;
+                that.loading = true;
+                setTimeout(() => {
+                    that.loading = false;
+                    this.$message({
+                        message: '提交成功！',
+                        type: 'success'
+                    });
+                }, 1000);
+                
             }
         }
     }
 </script>
 <style lang="less" scoped>
-.keb-line {
-    text-align: center;
-    color: #d2d9e3;
-}
 .el-radio-group {
     width: 100%;
 }
+.form-line {
+    width: 590px;
+    height: 1px;
+    background: #DCE0E7;
+    margin-bottom: 30px;
+}
 </style>
+

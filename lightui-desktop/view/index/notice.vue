@@ -19,19 +19,22 @@
 <script>
     import menus from "menus"
     import App from "light"
-    // import API from 'api'
+    const API = require('../../lib/api');
+    
     export default {
         data(){
             return {
-                currentMenu: menus[4],
+                currentMenu: menus[6],
                 currentPath: '',
-                navList:['提示页','信息']
+                navList:['通知页','操作反馈']
             }
         },
         methods:{
             selectOption(item){
                 App.navigate('#' + item.path,{});
                 this.currentPath = item.path;
+                API.navList[1].title = item.title;
+                API.navList[1].path = item.path;
             }
         },
         watch:{

@@ -1,7 +1,7 @@
 
 <template>
     <div class="apiContent">
-        <scroller class="operateWrap">   
+        <scroller>   
         <div><text class="detailHead">说明：</text></div>
         <div><text class="detailDesc">有时候我们需要对导航栏做修改，比如添加导航栏按钮，修改透明度，设置导航栏背景色等。</text></div>
         <div><text class="detailHead">示例：</text></div>
@@ -10,6 +10,14 @@
              <div class="listWidth mb5" style="position:relative">
                 <lc-input placeholder="请输入透明度"  v-model="opacity"></lc-input>
                 <text class="miniBut" @click="setAlpha()">修改透明度</text>
+            </div>
+            <div class="listWidth mb5" style="position:relative">
+                <lc-input placeholder="请输入标题"  v-model="navTitle"></lc-input>
+                <text class="miniBut" @click="setNavTitle()">设置标题</text>
+            </div>
+            <div class="listWidth mb5" style="position:relative">
+                <lc-input placeholder="请输入副标题"  v-model="subnavTitle"></lc-input>
+                <text class="miniBut" @click="setNavTitle()">设置副标题</text>
             </div>
             <div class="listWidth mb5" style="position:relative">
                 <lc-input placeholder="请输入背景色"  v-model="bgColor"></lc-input>
@@ -56,8 +64,10 @@
                 searBgColor:"",
                 textDesc:"",
                 textColor:"",
+                navTitle:"",
+                subnavTitle:"",
                 iconsrc:"https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3754198828,1208184486&fm=173&app=25&f=JPEG?w=218&h=146&s=C0A5925640B2CC795636C4C3020030BB",
-                title:"",
+                title:"百度",
                 tipsCont:"点击'添加'按钮后，请注意导航栏新添了按钮，点击试试吧"
             }
         },
@@ -67,10 +77,32 @@
                 var event = weex.requireModule('event'); 
                 event.openNative('web',{startPage:'https://document.lightyy.com/app_jssdk_ref/content/native_addbutton.html'})
             },
-            butAction:function(){
-               this.Dialog.toast({
-                    message: "我被点击啦",
-                    duration: 2
+            setNavTitle:function(){
+                var that = this;
+                LightSDK.native.setTitle({
+                    title:that.navTitle,
+                    subTitleData:{
+                        title:that.subnavTitle
+                    }
+                },function(){
+                    that.Dialog.toast({
+                        message: "修改成功",
+                        duration: 2
+                    });
+                });
+            },
+            setSubNavTitle:function(){
+                var that = this;
+                LightSDK.native.setSubtitle({
+                    title:that.navTitle,
+                    subTitleData:{
+                        title:that.subnavTitle
+                    }
+                },function(){
+                    that.Dialog.toast({
+                        message: "修改成功",
+                        duration: 2
+                    });
                 });
             },
             removeButton:function(){
@@ -94,7 +126,7 @@
                 LightSDK.native.addButton({
                     title:that.title,
                     icon:that.iconsrc,
-                    action: "javascript:that.butAction();",
+                    action: "https://www.baidu.com/",
                     position:"right"
                 },function(){
                     that.Dialog.toast({

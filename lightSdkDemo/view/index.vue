@@ -5,12 +5,14 @@
         </div>-->
         <!--<div @click="hide()" class="bgWrap" v-if="leftShow==true"></div>-->
         <div class="content"> 
+            <list  class="itemWrap">
+                <cell class="listItem" @click="jump('index/chooseImage','拍照功能')"><div class="wrapRow"><text class="itemName">拍照功能</text></div></cell>
+                <cell class="listItem" @click="jump('index/imageAction','保存图片及预览功能')"><div class="wrapRow"><text class="itemName">保存图片及预览功能</text></div></cell>
             <list  class="itemWrap" :style="{height:height+'px'}" >
-                <cell class="listItem" @click="jump('index/chooseImage','图片选择')"><div class="wrapRow"><text class="itemName">拍照与图片选择</text></div></cell>
                 <cell class="listItem" @click="jump('index/setClipboardText','剪切板内容')"><div class="wrapRow"><text class="itemName">剪切板内容</text></div></cell>
                 <cell class="listItem" @click="jump('index/fetchURL','抓取网页内容')"><div class="wrapRow"><text class="itemName">抓取网页内容</text></div></cell>
                 <cell class="listItem" @click="jump('index/writeGlobalData','本地数据处理')"><div class="wrapRow"><text class="itemName">本地数据处理</text></div></cell>
-                <cell class="listItem" @click="jump('index/imageAction','保存图片到本地')"><div class="wrapRow"><text class="itemName">保存图片到本地</text></div></cell>
+                
                 <cell class="listItem" @click="jump('index/back','webview返回')"><div class="wrapRow"><text class="itemName">webview返回关闭</text></div></cell>
                 <cell class="listItem" @click="jump('index/getContactInfo','获取通讯录信息')"><div class="wrapRow"><text class="itemName">获取通讯录信息</text></div></cell>
                 <cell class="listItem" @click="jump('index/getVersion','获取客户端版本信息')"><div class="wrapRow"><text class="itemName">获取客户端版本信息</text></div></cell>
@@ -25,10 +27,13 @@
                 <cell class="listItem" @click="jump('index/getNetworkStatus','获取当前网络状态')"><div class="wrapRow"><text class="itemName">获取当前网络状态</text></div></cell>
                 
                 <cell class="listItem" @click="jump('index/setScreenOrientation','设置屏幕方向')"><div class="wrapRow"><text class="itemName">设置屏幕方向</text></div></cell>
-                <cell class="listItem" @click="jump('index/showKeyboard','显示隐藏交易键盘')"><div class="wrapRow"><text class="itemName">显示隐藏交易键盘</text></div></cell>
+                <cell class="listItem" @click="jump('index/showKeyboard','显示隐藏键盘')"><div class="wrapRow"><text class="itemName">显示隐藏键盘</text></div></cell>
                 <cell class="listItem" @click="jump('index/verifyOpeation','调用手势或指纹验证')"><div class="wrapRow"><text class="itemName">调用手势或指纹验证</text></div></cell>
-                <cell class="listItem" @click="jump('index/call','打电话')"><div class="wrapRow"><text class="itemName">打电话</text></div></cell>
-                <cell class="listItem" @click="jump('index/showDialog','dialog对话框')"><div class="wrapRow"><text class="itemName">dialog对话框</text></div></cell>
+                <cell class="listItem" @click="jump('index/call','打开外部链接')"><div class="wrapRow"><text class="itemName">打开外部链接</text></div></cell>
+                <!--<cell class="listItem" @click="jump('index/showDialog','dialog对话框')"><div class="wrapRow"><text class="itemName">dialog对话框</text></div></cell>-->
+                <cell class="listItem" @click="loginComp('feedback')"><div class="wrapRow"><text class="itemName">反馈组件</text></div></cell>
+                <cell class="listItem" @click="menuTab()"><div class="wrapRow"><text class="itemName">菜单栏tab组件</text></div></cell>
+                <cell class="listItem" @click="navTab()"><div class="wrapRow"><text class="itemName">标题栏tab组件</text></div></cell>
                 <!--<cell class="listItem" @click="jump('index/orcCheck','')"><div class="wrapRow"><text class="itemName">身份识别......todo</text></div></cell>-->
                 <cell v-if="ifAll" class="listItem" @click="jump('index/getLocationStatu','是否可获取当前定位状态')"><div class="wrapRow"><text class="itemName">是否可获取当前定位状态</text></div></cell>
                 <cell v-if="ifAll" class="listItem" @click="jump('index/wizard','按键精灵数据查询')"><div class="wrapRow"><text class="itemName">按键精灵数据查询</text></div></cell>
@@ -51,7 +56,7 @@
                 <cell v-if="ifAll" class="listItem" @click="jump('index/userLogin','用户登录')"><div class="wrapRow"><text class="itemName">用户登录</text></div></cell>
                 <cell v-if="ifAll" class="listItem" @click="jump('index/setUserInfo','设置用户信息')"><div class="wrapRow"><text class="itemName">设置用户信息</text></div></cell>
                 <cell v-if="ifAll" class="listItem" @click="jump('index/getUserInfo','获取用户信息')"><div class="wrapRow"><text class="itemName">获取用户信息</text></div></cell>
-                <cell v-if="ifAll" class="listItem" @click="jump('index/userLogout','注销登录用户')"><div class="wrapRow"><text class="itemName">注销登录用户</text></div></cell>
+                <cell class="listItem" @click="jump('index/userLogout','注销登录用户')"><div class="wrapRow"><text class="itemName">注销登录用户</text></div></cell>
                 <cell v-if="ifAll" class="listItem" @click="jump('index/connectRong','连接聊天服务')"><div class="wrapRow"><text class="itemName">连接聊天服务</text></div></cell>
                 <cell v-if="ifAll" class="listItem" @click="jump('index/getConverationRecords','获取聊天记录')"><div class="wrapRow"><text class="itemName">获取聊天记录</text></div></cell>
                 <cell v-if="ifAll" class="listItem" @click="jump('index/startConversition','打开聊天界面')"><div class="wrapRow"><text class="itemName">打开聊天界面</text></div></cell>
@@ -61,6 +66,7 @@
                 <cell v-if="ifAll" class="listItem" @click="jump('index/getParams','获取配置参数')"><div class="wrapRow"><text class="itemName">获取配置参数</text></div></cell>
                 <cell v-if="ifAll" class="listItem" @click="jump('index/getOpenApiToken','获取openApiToken')"><div class="wrapRow"><text class="itemName">获取openApiToken</text></div></cell>
             </list>
+       
             <!--<image src="images/close.png" class="hideList" @click="hide()"></image>-->
         </div>
     </div>
@@ -85,12 +91,24 @@
             WxcPopup
         },
         methods:{
+            loginComp(comp){
+                var event = weex.requireModule('event'); 
+                event.openNative(comp)
+            },
             getClass(){
                 if(this.leftShow==true){
                     return "show"
                 }else{
                     return "hide"
                 }
+            },
+            menuTab(){
+                var event = weex.requireModule('event'); 
+                event.openNative("menu_tab#sub")
+            },
+            navTab(){
+                var event = weex.requireModule('event'); 
+                event.openNative("navi_tab#nav")
             },
             jump(view,title){
                 this.title=title;
@@ -144,6 +162,7 @@
 }
 .itemWrap{
     width:750px;
+    height:1500px;
     border-bottom-width: 1px;
     border-bottom-color: #d7d7d7;
     border-bottom-style: solid;

@@ -7,7 +7,7 @@
                 @selection-change="handleSelect"
                 :data="tableData"
                 stripe
-                style="width: 80%">
+                style="width: 100%">
                 <el-table-column
                     type="selection"
                     width="80">
@@ -35,7 +35,7 @@
                 <el-table-column
                     label="操作"
                     min-width="100">
-                    <template scope="scope">
+                    <template slot-scope="scope">
                         <el-button type="text" @click="operate('stop')">停用</el-button>
                         <el-button type="text" @click="operate('reset')">重置</el-button>  
                     </template>
@@ -67,7 +67,7 @@ export default {
 	},
   	data() {
 		return {
-			title: "消息弹框",
+			title: "提示弹框",
             desc: "常用于主动操作前的提示。",
             dialog_title: '',
             dialog_content: '',
@@ -155,9 +155,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.demo {
-    // flex-direction: row;
-    // justify-content: center;
-    // align-items: flex-start;
-}
+
 </style>

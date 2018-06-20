@@ -50,16 +50,5 @@ export default {
 </script>
 
 <style lang="less">
-.demo-form-inline {
-	min-width: 610px;
-}
-.demo-form-inline .el-form-item__content {
-	width: auto;
-}
-.demo-form-inline .el-form-item {
-	margin-bottom: 0;
-}
-.w200 {
-	width: 200px;
-}
+
 </style>
